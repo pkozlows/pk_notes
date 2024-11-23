@@ -1,0 +1,36 @@
+\contentsline {section}{\numberline {1}$G_0W_0$ with k-points: 11/9}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Fully analytic}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Analytic continuation}{5}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Screened Coulomb Interaction}{6}{subsubsection.1.2.1}%
+\contentsline {section}{\numberline {2}$G_0W_0$ Derivation: 11/16}{8}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Just the formulas}{8}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}From scratch}{9}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Occupied index $k$}{10}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Virtual index $c$}{10}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Equivalence to previous form}{11}{subsubsection.2.2.3}%
+\contentsline {section}{\numberline {3}Deriving linear response: 11/22}{11}{section.3}%
+\contentsline {subsection}{\numberline {3.1}The Fundamentals}{11}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Introduction to TDKS}{12}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Density Matrix Formulation in TDKS Theory}{13}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}$G_0W_0$ AC at $\Gamma $ point}{15}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Proving $\chi _{RPA}=\frac {\chi _0}{1-v\chi _0}$: 11/29}{15}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Trying direct evaluation}{15}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}How to determine the excitations?}{16}{subsection.4.2}%
+\contentsline {section}{\numberline {A}Derivations}{18}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Density matrix idempotency}{18}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Density matrix time evolution}{19}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Fourier Transform Symmetry for Real Functions}{19}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}First-Order Response of an Observable to External Perturbations}{21}{subsection.A.4}%
+\contentsline {subsection}{\numberline {A.5}Taylor Expansion of Idempotency Constraint in Perturbation Strength $\lambda $ to first order}{22}{subsection.A.5}%
+\contentsline {paragraph}{Step 1: Taylor Expansion of the Density Matrix and Hamiltonian}{22}{section*.17}%
+\contentsline {paragraph}{Step 2: Applying the Idempotency Condition}{23}{section*.18}%
+\contentsline {paragraph}{Step 3: Equating Terms Order by Order}{23}{section*.19}%
+\contentsline {paragraph}{Step 4: Expanding the Equation of Motion Up to First Order}{23}{section*.20}%
+\contentsline {paragraph}{Step 5: Equating First-Order Terms}{24}{section*.21}%
+\contentsline {paragraph}{Step 6: Frequency Domain Representation}{24}{section*.22}%
+\contentsline {paragraph}{Step 7: Substituting into the Equation of Motion}{24}{section*.23}%
+\contentsline {paragraph}{Step 8: Matching Frequency Components}{24}{section*.24}%
+\contentsline {paragraph}{Step 9: Rearranging to Obtain Equation (20)}{25}{section*.25}%
+\contentsline {paragraph}{Summary of the Derivation}{25}{section*.26}%
+\contentsline {paragraph}{Implications}{25}{section*.27}%
+\contentsline {paragraph}{Conclusion}{25}{section*.28}%
