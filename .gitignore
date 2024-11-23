@@ -16,8 +16,6 @@
 *.snm
 *.vrb
 
-# PDF files (if you don't want to track them)
-*.pdf
 
 # Keep only these files
 !*.tex
