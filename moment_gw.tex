@@ -1,0 +1,728 @@
+\section{Löwdin Downfolding: 2/2/2025}
+
+We know that the definition of a Green's function associated with some Hamiltonian $\bm{H}$ is given by:
+\begin{equation}
+    \left(\omega - \bm{H}\right)\bm{G} = \bm{I}
+    \label{eqn:resolvent}
+\end{equation}
+
+where we can consider both cases to be fully interacting. The downfolding tells us to separate into a system $\mathcal{S}$ and auxiliary space $\mathcal{L}$, so we have:
+\[
+\left(\omega - \begin{pmatrix}
+\bm{H}_{\mathcal{SS}} & \bm{H}_{\mathcal{SL}} \\
+\bm{H}_{\mathcal{LS}} & \bm{H}_{\mathcal{LL}}
+\end{pmatrix}\right)
+\begin{pmatrix}
+\bm{G}_{\mathcal{SS}} & \bm{G}_{\mathcal{SL}} \\
+\bm{G}_{\mathcal{LS}} & \bm{G}_{\mathcal{LL}}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\bm{I}_{\mathcal{SS}} & \bm{0} \\
+\bm{0} & \bm{I}_{\mathcal{LL}}
+\end{pmatrix}\,.
+\]
+
+or:
+\[
+\begin{pmatrix}
+\omega - \bm{H}_{\mathcal{SS}} & -\bm{H}_{\mathcal{SL}} \\
+-\bm{H}_{\mathcal{LS}} & \omega - \bm{H}_{\mathcal{LL}}
+\end{pmatrix}
+\begin{pmatrix}
+\bm{G}_{\mathcal{SS}} & \bm{G}_{\mathcal{SL}} \\
+\bm{G}_{\mathcal{LS}} & \bm{G}_{\mathcal{LL}}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\bm{I}_{\mathcal{SS}} & \bm{0} \\
+\bm{0} & \bm{I}_{\mathcal{LL}}
+\end{pmatrix}\,.
+\]
+
+Multiplying out the matrices, the $\mathcal{S}$ block gives:
+\begin{equation}
+(\omega - \bm{H}_{\mathcal{SS}})\,\bm{G}_{\mathcal{SS}} - \bm{H}_{\mathcal{SL}}\,\bm{G}_{\mathcal{LS}} = \bm{I}_{\mathcal{SS}}\,.
+\end{equation}
+
+Similarly, the $\mathcal{L}$ block gives:
+\begin{equation}
+-\bm{H}_{\mathcal{LS}}\,\bm{G}_{\mathcal{SS}} + (\omega - \bm{H}_{\mathcal{LL}})\,\bm{G}_{\mathcal{LS}} = \bm{0}\,.
+\end{equation}
+
+Assuming $(\omega - \bm{H}_{\mathcal{LL}})$ is invertible, from the second equation we obtain:
+\[
+\bm{G}_{\mathcal{LS}} = (\omega - \bm{H}_{\mathcal{LL}})^{-1}\,\bm{H}_{\mathcal{LS}}\,\bm{G}_{\mathcal{SS}}\,.
+\]
+Substituting this into the first equation:
+\[
+(\omega - \bm{H}_{\mathcal{SS}})\,\bm{G}_{\mathcal{SS}} - \bm{H}_{\mathcal{SL}}\,(\omega - \bm{H}_{\mathcal{LL}})^{-1}\,\bm{H}_{\mathcal{LS}}\,\bm{G}_{\mathcal{SS}} = \bm{I}_{\mathcal{SS}}\,.
+\]
+Factorizing $\bm{G}_{\mathcal{SS}}$:
+\[
+\left[(\omega - \bm{H}_{\mathcal{SS}}) - \bm{H}_{\mathcal{SL}}\,(\omega - \bm{H}_{\mathcal{LL}})^{-1}\,\bm{H}_{\mathcal{LS}}\right]\,\bm{G}_{\mathcal{SS}} = \bm{I}_{\mathcal{SS}}\,.
+\]
+Thus:
+\[
+\bm{G}_{\mathcal{SS}} = \left[(\omega - \bm{H}_{\mathcal{SS}}) - \bm{H}_{\mathcal{SL}}\,(\omega - \bm{H}_{\mathcal{LL}})^{-1}\,\bm{H}_{\mathcal{LS}}\right]^{-1}\,.
+\]
+Now, notice that:
+\[
+[\bm{G}_{\mathcal{SS}}^0(\omega)]^{-1} \equiv \omega - \bm{H}_{\mathcal{SS}} = \omega - (\bm{F} + \bm{\Sigma}(\infty)),
+\implies \bm{H}_{\mathcal{SS}} = \bm{F} + \bm{\Sigma}(\infty).
+\]
+where $\bm{\Sigma}(\infty)$ is the static self-energy (0 for a HF mean-field reference), and $\bm{F}$ is the Fock matrix.
+Identifying the coupling matrices:
+\[
+\bm{H}_{\mathcal{SL}} = \bm{W}, \quad \bm{H}_{\mathcal{LS}} = \bm{W}^{\dagger}\,.
+\]
+and
+\[
+\bm{H}_{\mathcal{LL}} = \bm{d},
+\]
+Now let us make an ansatz for the upfolded Hamiltonian:
+\[
+\bm{H}_{\text{Upfolded}} = \begin{pmatrix}
+\bm{F} + \bm{\Sigma}(\infty) & \bm{W}\\
+\bm{W}^{\dagger} & \bm{d}
+\end{pmatrix}.
+\]
+Then, the resolvent is given by:
+\begin{equation}
+    \left(\omega - \bm{H}_{\text{Upfolded}}\right) = \begin{pmatrix}
+    \omega - \bm{F} - \bm{\Sigma}(\infty) & -\bm{W}\\
+    -\bm{W}^{\dagger} & \omega - \bm{d}
+    \end{pmatrix}
+\end{equation}
+Because we are interested in $\bm{G}_{\mathcal{SS}}(\omega)$, we care about $\left(\omega - \bm{H}_{\text{Upfolded}}\right)^{-1}$ in the upper left block, which is the Schur complement of $\left(\omega - \bm{H}_{\text{Upfolded}}\right)$ with respect to $\omega - \bm{d}$, defined as:
+\begin{equation}
+\bm{G}_{\mathcal{SS}}(\omega) = \left(\frac{\left(\omega - \bm{H}_{\text{Upfolded}}\right)}{\omega - \bm{d}}\right)^{-1}_{\mathcal{SS}} = \left(\omega - \left(\bm{F} + \bm{\Sigma}(\infty)\right) - \bm{W}\,[\omega - \bm{d}]^{-1}\,\bm{W}^{\dagger}\right)^{-1}
+\end{equation}
+so the ansatz is correct.
+\section{Cumulant Idea}
+The definition of the cumulant ansatz for the Green's function is given by:
+\begin{equation}
+    \bm{G}_{\mathcal{SS}}(t) = \bm{G}_{\mathcal{SS}}^0(t)e^{\bm{C}(t)}
+\end{equation}
+where $\bm{C}(t)$ is the cumulant and $\bm{G}_{\mathcal{SS}}^0(t)$ is the HF Green's function. By relating the Dyson equation to the Taylor series expansion of the exponential, we can write:
+\begin{equation}
+    \bm{G}_{\mathcal{SS}}^0(t) \bm{C}(t) = \iint \dd t_1 \dd t_2 \bm{G}_{\mathcal{SS}}^0(t-t_1) \bm{\Sigma}^c(t_1 - t_2) \bm{G}_{\mathcal{SS}}^0(t_2)
+\end{equation}
+Projecting to the spin-orbital basis and inserting the resolution of the identity, we get:
+\begin{align}
+    \sum_{r}\bra{p}\bm{G}_{\mathcal{SS}}^0(t) \ket{r}\bra{r}\bm{C}(t)\ket{q} &= \sum_{rs}\iint \dd t_1 \dd t_2 \bra{p}\bm{G}_{\mathcal{SS}}^0(t-t_1)\ket{r} \bra{r}\bm{\Sigma}^c(t_1 - t_2)\ket{s} \bra{s}\bm{G}_{\mathcal{SS}}^0(t_2)\ket{q} \\
+    \sum_{r}\bm{G}_{pr}^0(t) \bm{C}_{rq}(t) &= \sum_{rs}\iint \dd t_1 \dd t_2 \bm{G}_{ps}^0(t-t_1) \bm{\Sigma}_{sr}^c(t_1 - t_2) \bm{G}_{rq}^0(t_2)\\
+    \bm{G}_{pp}^{0}(t) \bm{C}_{pq}(t) &= \underbrace{\iint \dd t_1 \dd t_2 \bm{G}_{pp}^{0}(t-t_1) \bm{\Sigma}_{pq}^c(t_1 - t_2) \bm{G}_{qq}^{0}(t_2)}_{*}
+    \label{eqn:cumulant_connection}
+\end{align}
+where $\bm{G}_{\mathcal{SS}}^0(t)\equiv \bm{G}^0(t)$ and in the last step we used the fact that the HF Green's function is diagonal in the spin-orbital basis, specifically $\bm{G}_{pp}^{0}(t) = -i\Theta(t)e^{-i\epsilon_p t}$, where $\epsilon_p$ is the HF energy of the $p$-th spin-orbital.
+% \begin{align}
+%     \bm{C}_{pq}(t) &= -i \Theta(t-t_1)\Theta(t_2)e^{i\epsilon_p t}\iint \dd t_1 \dd t_2 \left( e^{-i\epsilon_p \left(t-t_1\right)} \bm{\Sigma}_{pq}^c(t_1 - t_2) e^{-i\epsilon_q t_2}\right) \\
+%     &= -i \Theta(t-t_1)\Theta(t_2)\iint \dd t_1 \dd t_2 \left( e^{i\epsilon_p \left(t_1\right)} \bm{\Sigma}_{pq}^c(t_1 - t_2) e^{-i\epsilon_q t_2}\right) \\
+%     &= -i \Theta(t-t_1)\Theta(t_2)\iint \dd t_1 \dd t_2 \left( e^{i\epsilon_p \left(t_1\right)} \left( \int \frac{\dd \omega}{2\pi} e^{-i\omega (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega)\right) e^{-i\epsilon_q t_2}\right) \\
+%     &= -\frac{i}{2\pi} \Theta(t-t_1)\Theta(t_2)\int \dd \omega \bm{\Sigma}_{pq}^c(\omega)\int \dd t_1 e^{-it_1\left(\omega - \epsilon_p\right)}\dd t_2 \left( e^{i\epsilon_q t_2} e^{-i\omega t_2}\right) \\
+%     &= -\frac{i}{2\pi} \Theta(t-t_1)\Theta(t_2)\int \dd \omega \bm{\Sigma}_{pq}^c(\omega) \underbrace{\int \dd t_1 e^{-it_1\left(\omega - \epsilon_p\right)} \int \dd t_2 e^{-i t_2\left(\omega - \epsilon_q\right)}}_{4\pi^2 \delta(\omega - \epsilon_p)\delta(\omega - \epsilon_q)} \\
+%     &= -2\pi i \Theta(t-t_1)\Theta(t_2)\int \dd \omega \bm{\Sigma}_{pq}^c(\omega) \delta(\omega - \epsilon_p)\delta(\omega - \epsilon_q) \\
+%     &= -2\pi i \Theta(t-t_1)\Theta(t_2)\bm{\Sigma}_{pp}^c(\epsilon_p)\delta_{pq}
+% \end{align}
+The formula for the inverse Fourier transform is given by:
+\begin{equation}
+    f(t) = \int \frac{\dd \omega}{2\pi} e^{-i\omega t} f(\omega)
+\end{equation}
+which implies that
+\begin{align}
+    \bm{G}_{pp}^{0}(t-t_1) = \int \frac{\dd \omega}{2\pi} e^{-i\omega (t-t_1)} \bm{G}_{pp}^{0}(\omega)\\
+    \bm{\Sigma}_{pq}^c(t_1 - t_2) = \int \frac{\dd \omega'}{2\pi} e^{-i\omega' (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega')\\
+    \bm{G}_{qq}^{0}(t_2) = \int \frac{\dd \omega''}{2\pi} e^{-i\omega'' t_2} \bm{G}_{qq}^{0}(\omega'')
+\end{align}
+and plugging into the double time integral *, we get:
+\begin{align}
+    * &= \iint \dd t_1 \dd t_2 \left[\int \frac{\dd \omega}{2\pi} e^{-i\omega (t-t_1)} \bm{G}_{pp}^{0}(\omega)\right] \left[\int \frac{\dd \omega'}{2\pi} e^{-i\omega' (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega')\right] \left[\int \frac{\dd \omega''}{2\pi} e^{-i\omega'' t_2} \bm{G}_{qq}^{0}(\omega'')\right]\\
+    &= \underbrace{\int \dd t_1 e^{-i \left(\omega' -\omega\right)t_1} \int \dd t_2 e^{-i \left(\omega'' -\omega'\right)t_2}}_{4\pi^2 \delta(\omega' -\omega)\delta(\omega'' -\omega')} \iiint \dd \omega \dd \omega' \dd \omega'' \frac{e^{-i\omega t}}{8\pi^3} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega')\bm{G}_{qq}^{0}(\omega'')\\
+    &= \int \frac{\dd \omega}{2\pi} e^{-i\omega t} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega)\bm{G}_{qq}^{0}(\omega)
+\end{align}
+But now note that from the left hand side of eqn.~\ref{eqn:cumulant_connection}, we can divide out the HF Green's function to get:
+\begin{equation}
+    \bm{C}_{pq}(t) = i \int \frac{\dd \omega}{2\pi} e^{-i\left(\omega - \epsilon_p\right)t} \bm{G}_{pp}^{0}(\omega) \bm{\Sigma}_{pq}^c(\omega)\bm{G}_{qq}^{0}(\omega)
+\end{equation}
+Now, we insert the upfolded form for the self-energy, which is frequency independent as $\bm{\Sigma}_{pq}^c(\omega) \equiv \bm{\Sigma}_{pq}^c = \begin{pmatrix} \bm{\Sigma}(\infty) & \bm{W}^< & \bm{W}^> \\ \bm{W}^{\dagger<} & \bm{d}^< & \bm{0} \\ \bm{W}^{\dagger>} & \bm{0} & \bm{d}^> \end{pmatrix}_{pq}$. \emph{Customarily this is the point where the diagonal approximation for the self-energy is introduced instead}. We also  know that $\bm{G}_{pp}^{0}(\omega) = \frac{\bm{I}}{\omega - \epsilon_p}$. We can then write:
+\begin{align}
+    \bm{C}_{pq}(t) &= i \bm{\Sigma}_{pq}^c \int \frac{\dd \omega}{2\pi} \frac{e^{-i\left(\omega - \epsilon_p\right)t}}{\left(\omega-\epsilon_p\right)\left(\omega-\epsilon_q\right)} \\
+    &= i \frac{\bm{\Sigma}_{pq}^c}{\epsilon_q - \epsilon_p} \left[ \underbrace{\int \frac{\dd \omega}{2\pi} \frac{e^{-i\left(\omega - \epsilon_p\right)t}}{\omega - \epsilon_p}}_{-i\Theta(t)} - \underbrace{\int \frac{\dd \omega}{2\pi} \frac{e^{-i\left(\omega - \epsilon_q\right)t}}{\omega - \epsilon_q}}_{e^{-i\left(\epsilon_q - \epsilon_p\right)t}\left(-i\Theta(t)\right)} \right] \\
+    &= \frac{\bm{\Sigma}_{pq}^c}{\epsilon_q - \epsilon_p} \Theta(t) \left[1-e^{-i\left(\epsilon_q - \epsilon_p\right)t}\right] \\
+\end{align}
+So now we insert this expression into our original ansatz for the cumulant, and we get:
+\begin{equation}
+    G(t) = G^0(t)e^{\frac{\bm{\Sigma}_{pq}^c}{\epsilon_q - \epsilon_p} \Theta(t) \left[1-e^{-i\left(\epsilon_q - \epsilon_p\right)t}\right]}
+\end{equation}
+\section{Lanczos Iteration}
+The block tridiagonal form can be expressed as:
+
+\begin{align}
+\tilde{\mathbf{H}}_{\text {tri }} & =\tilde{\mathbf{q}}^{(j),\dagger}\left[\begin{array}{cc}
+\mathbf{f}+\boldsymbol{\Sigma}_{\infty} & \mathbf{W} \\
+\mathbf{W}^{\dagger} & \mathbf{d}
+\end{array}\right] \tilde{\mathbf{q}}^{(j)} \\
+& =\left[\begin{array}{cccccc}
+\mathbf{f}+\boldsymbol{\Sigma}_{\infty} & \mathbf{L} & & & & \mathbf{0} \\
+\mathbf{L}^{\dagger} & \mathbf{H}_{1} & \mathbf{C}_{1} & & & \\
+& \mathbf{C}_{1}^{\dagger} & \mathbf{H}_{2} & \mathbf{C}_{2} & & \\
+& & \mathbf{C}_{2}^{\dagger} & \mathbf{H}_{3} & \ddots & \\
+& & & \ddots & \ddots & \mathbf{C}_{j-1} \\
+\mathbf{0} & & & & \mathbf{C}_{j-1}^{\dagger} & \mathbf{H}_{j}
+\end{array}\right]
+\label{eq:tridiagonal}
+\end{align}
+where we define $\tilde{\mathbf{q}}^{(j)}$ as
+\begin{equation}
+    \tilde{\mathbf{q}}^{(j)}=\left[\begin{array}{cc}
+\mathbf{I} & \mathbf{0} \\
+\mathbf{0} & \mathbf{q}^{(j)}
+\end{array}\right]
+\end{equation}
+This formulation becomes exact when the level $j$ equals $N$, the dimension of the original hamiltonian; this corresponds to considering up to the highest moment of the self-energy, i.e. $n$ france from $1,\ldots,N$. in practice, however, we always truncate the Krylov subspace to some $j<N$. Note that the tridiagonal form never actually forces us to compute $\mathbf{W}$ or $\mathbf{d}$, as desired.
+
+\subsection{Creation of Krylov Subspace}
+Formally, the Krylov subspace of level $j$ is given as $\mathbf{q}^{(j)}=\left[\mathbf{q}_1, \mathbf{q}_2, \cdots, \mathbf{q}_j\right]$, where the projection of the full Hamiltonian onto this subspace gives the tridiagonal form of equation \ref{eq:tridiagonal}. To start building up the subspace, we need to determine $\mathbf{q}_1$ via QR decomposition of the exact $GW$ couplings as $\mathbf{W}^\dag = \mathbf{q}_1 \mathbf{L}^\dag \rightarrow \mathbf{q}_1 = \mathbf{W}^\dag \mathbf{L}^{\dag, -1}$. $\mathbf{L}$ is defined in terms of just the 0th order self-energy moment as $\mathbf{L}^\dag = \left(\boldsymbol{\Sigma}^{(0)}\right)^{\frac{1}{2}}$. We build up the subsequent $q_i$ vectors through a three-term recurrence
+\begin{equation}
+    \mathbf{q}_{i+1} \mathbf{C}_i^{\dagger}=\left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_{i} \mathbf{H}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right],
+\end{equation}
+where the on-diagonal blocks are defined as
+\begin{equation}
+    \mathbf{H}_i=\mathbf{q}_i^{\dagger} \mathbf{d} \mathbf{q}_i
+\end{equation}
+Notice that to form the initial vector $\mathbf{q}_1$ we would need $\mathbf{W}^\dag$ and to continue building the subspace, we would need $\mathbf{d}$, so to avoid this, we introduce the self-energy moments.
+\subsection{A sketch of the implicit Lanczos method}
+Due to Garnet's paper on the quasi-boson $G_0W_0$ method, we know that we have a form for an upfolded $G_0W_0$ Hamiltonian as 
+\begin{equation}
+    \bm{H}_{\text{Upfolded}}^{G_0W_0} = \begin{pmatrix} \bm{F} +\bm{\Sigma}(\infty) & \bm{W}^< & \bm{W}^> \\ \bm{W}^{<,\dagger} & \bm{d}^< & 0 \\ \bm{W}^{>, \dagger} & 0 & \bm{d}^> \end{pmatrix}
+\end{equation}
+with quantities defined separately for lesser and greater parts. But we will just focus on the lesser part for now, where matrix elements of the screened interaction $\bm{W}^<$ are given by 
+\begin{equation}
+    W_{pkv}^{<} = \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right)
+\end{equation}
+and 
+\begin{equation}
+    d_{kv,lv'}^{<} = \left(\epsilon_k - \Omega_v\right) \delta_{k,l} \delta_{v,v'}
+\end{equation}
+Note that we get the factor of $\sqrt{2}$ accompanying all ERIs in RHF because we are considering the expectation value of the form
+\begin{equation}
+    \frac{1}{2}\sum_{pqrs} \langle pq||rs\rangle \bra{\Psi_0}\left(\hat{T}_i^{a, \alpha} + \hat{T}_i^{a, \beta} \right)^{\dag} \left(a_p^{\dag}a_q^{\dag}a_s a_r \left(\hat{T}_i^{a, \alpha} + \hat{T}_i^{a, \beta} \right)\right)\ket{\Psi_0}
+\end{equation}
+where we have the excitation operator for a given spin channel as $\hat{T}_i^{a, \sigma} = a_a^{\dag, \sigma} a_i^{\sigma}$ and a singlet state for the RHF ground state carrying a factor of $\frac{1}{\sqrt{2}}$. If we apply Wick's theorem to this string, we get a contribution from both the $\alpha $ and $\beta $ channels, so $\frac{1}{\sqrt{2}} +\frac{1}{\sqrt{2}}= \sqrt{2}$.\\
+Through the introduction of a Krylov subspace as 
+\begin{equation}
+    \bm{\tilde{H}}_{\text{Upfolded}}^{G_0W_0} = \bm{\tilde{Q}}^{(n,\dagger)} \bm{H}_{\text{Upfolded}}^{G_0W_0} \bm{\tilde{Q}}^{(n)}
+\end{equation}
+where $\bm{Q}^{(n)} \equiv \begin{pmatrix} \bm{q}_1 \quad \bm{q}_2 \quad \cdots \quad \bm{q}_n \end{pmatrix}$ is the block Krylov subspace spanned by the Lanczos vectors, but we want to preserve the physical space of $\bm{F} + \bm{\Sigma}(\infty)$ so we are really interested in the projection matrix
+\begin{equation}
+    \bm{\tilde{Q}}^{(n)} = \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & \bm{Q}^{(n)}
+    \end{pmatrix}
+\end{equation}
+To get a gist of what the block Lanczos will do, let's just consider the case where we have two Lanczos vectors, so that we have a projection matrix of the form
+\begin{equation}
+    \bm{\tilde{Q}}^{(2)} = \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & \bm{Q}^{(2)}
+    \end{pmatrix}
+\end{equation}
+So
+\begin{align}
+    \bm{\tilde{H}}_{\text{upfolded}}^{\text{Lanczos Iter 2}} &= \bm{\tilde{Q}}^{(2,\dagger)} \bm{H}_{\text{Upfolded}}^{G_0W_0} \bm{\tilde{Q}}^{(2)}\\
+    &= \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & \bm{Q}^{(2)\dagger}
+    \end{pmatrix}
+    \begin{pmatrix}
+         \bm{F} + \bm{\Sigma}(\infty) & \bm{W}\\
+        \bm{W}^{\dagger} & \bm{d}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & \bm{Q}^{(2)}
+    \end{pmatrix}\\
+    &= \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & [\bm{q}_1^{\dag}\quad \bm{q}_2^{\dag}]
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{F} + \bm{\Sigma}(\infty) & \bm{W}\\
+        \bm{W}^{\dagger} & \bm{d}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & [\bm{q}_1\quad \bm{q}_2]
+    \end{pmatrix}\\
+    &= \begin{pmatrix}
+        \bm{F} + \bm{\Sigma}(\infty) & \bm{W} \\
+        [\bm{q}_1^{\dag} \quad \bm{q}_2^{\dag}]\bm{W}^{\dagger} & [\bm{q}_1^{\dag} \quad \bm{q}_2^{\dag}]\bm{d}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & [\bm{q}_1\quad \bm{q}_2]
+    \end{pmatrix}\\
+    &= \begin{pmatrix}
+        \bm{F} + \bm{\Sigma}(\infty) & [\underbrace{\bm{W}\bm{q}_1}_{\bm{\mathcal{R}}\bm{\mathcal{Q}}^{\dag}\bm{\mathcal{Q}}=\bm{\mathcal{R}}} \quad \underbrace{\bm{W}\bm{q}_2}_{\bm{0}}]\\
+        [\underbrace{\bm{q}_1^{\dag}\bm{W}^{\dagger}}_{\bm{\mathcal{Q}}^{\dagger}\bm{\mathcal{Q}}\bm{\mathcal{R}}^{\dagger}= \bm{\mathcal{R}}^{\dagger}}\quad \underbrace{\bm{q}_2^{\dag}\bm{W}^{\dagger}}_{\bm{0}}] & \begin{pmatrix}
+            \underbrace{\bm{q}_1^{\dag}\bm{d}\bm{q}_1}_{\bm{M}_1} & \underbrace{\bm{q}_1^{\dag}\bm{d}\bm{q}_2}_{\bm{C}_1}\\
+            \underbrace{\bm{q}_2^{\dag}\bm{d}\bm{q}_1}_{\bm{C}_1^{\dagger}} & \underbrace{\bm{q}_2^{\dag}\bm{d}\bm{q}_2}_{\bm{M}_2}
+        \end{pmatrix}
+    \end{pmatrix}
+    \label{eqn:lanczos_projection}
+\end{align}
+where in the last line we used the fact that we are free to choose our $\bm{q}_1 \equiv \bm{\mathcal{Q}}$ as the same orthogonal matrix employed in constructing the QR decomposition of $\bm{W}^{\dagger}$ as 
+\begin{equation}
+    \bm{W}^{\dagger} = \bm{\mathcal{Q}}\bm{\mathcal{R}}^{\dagger} \implies \bm{q}_1 = \bm{W}^{\dagger}\bm{\mathcal{R}}^{-1, \dagger}
+\end{equation}
+\subsection{Physical-auxiliary coupling W}
+Now consider $\bm{W}\bm{W}^{\dagger} = \bm{\mathcal{R}}\bm{\mathcal{Q}}\bm{\mathcal{Q}}^{\dagger}\bm{\mathcal{R}}^{\dagger} = \bm{\mathcal{R}}\bm{\mathcal{R}}^{\dagger}$. So if we can do a Cholesky decomposition of $\bm{W}\bm{W}^{\dagger}$ we would get access to $\bm{\mathcal{R}}$. But consider that
+\begin{equation}
+    \Sigma_{p q}^{(n, <)} = \sum_{ia,jb,k}\sum_{\mu}  (pk|ia)\left(X_{ia}^{\mu } + Y_{ia}^{\mu }\right)\left(X_{jb}^{\mu } + Y_{jb}^{\mu }\right)(qk|jb) [\left(\epsilon_k-\Omega_{\mu }\right)]^n
+ \end{equation}
+so it becomes clear that $\bm{W}\bm{W}^{\dagger}=\bm{\Sigma}^0 \implies \bm{\mathcal{R}}=\left(\bm{W}\bm{W}^{\dagger}\right)^{1/2} = \left(\bm{\Sigma}^0\right)^{1/2}$, which we hope to be able to accomplish with the Cholesky decomposition. 
+\subsection{Auxiliary-auxiliary space d: the working equations}
+From above, notice that
+\begin{equation}
+    \bm{M}_i = \bm{q}_i^{\dag}\bm{d}\bm{q}_i \quad \text{and} \quad \bm{C}_i = \bm{q}_i^{\dag}\bm{d}\bm{q}_{i+1}
+\end{equation}
+To get these, define
+\begin{equation}
+    \bm{S}_{i,j}^{(n)} = \bm{q}_i^{\dag}\bm{d}^n\bm{q}_j
+\end{equation}
+So it must be that $\bm{S}_{0,j}^{(n)} = \bm{S}_{i,0}^{(n)} = 0$ for all $i,j$, $\bm{S}_{i,j}^{(0)} = \delta_{ij}\bm{I}$, and we can demand Hermiticity, so that $\bm{S}_{i,j}^{(n)} = \bm{S}_{j,i}^{(n)\dag}$. We are able to initialize $\bm{S}$ using 
+\begin{equation}
+    \bm{S}_{1,1}^{(n)} = \bm{q}_1^{\dag}\bm{d}^n\bm{q}_1 = \bm{R}^{-1}\bm{W}\bm{d}^n\bm{W}^{\dagger}\bm{R}^{-1, \dag} = \bm{R}^{-1}\bm{\Sigma}^{(n)}\bm{R}^{-1, \dag}
+\end{equation}
+So looking at eqn.~\ref{eqn:lanczos_projection}, we see that the on-diagonal elements are $\bm{M}_i=\bm{S}_{i,i}^{(1)}$ while the off-diagonal elements are $\bm{C}_i=\bm{S}_{i,i+1}^{(1)}$. The familiar three-term Lanczos recurrence is
+\begin{equation}
+    \mathbf{q}_{i+1} \mathbf{C}_i^{\dagger}=\left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_i \mathbf{M}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right] \implies \mathbf{q}_{i+1} = \left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_i \mathbf{M}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right] \bm{C}_i^{\dag, -1}
+\label{eqn:lanczos_recurrence}
+    \end{equation}
+where the participants are block vectors and we have assumed that $\bm{C}_i$ is invertible. Let us start by considering the form of
+\begin{align}
+    \bm{S}_{i+1,i}^{n}\equiv\bm{q}_{i+1}^{\dag}\bm{d}^n\bm{q}_{i} &= \left[\left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_i \mathbf{M}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right]\bm{C}_i^{\dag, -1}\right]^{\dag}\bm{d}^n\bm{q}_{i} \\
+    &= \bm{C}_i^{-1}\left[\underbrace{\bm{q}_i^{\dag}\bm{d}^{n+1}\bm{q}_{i}}_{\bm{S}_{i,i}^{n+1}} - \bm{M}_i\underbrace{\bm{q}_i^{\dag}\bm{d}^n\bm{q}_{i}}_{\bm{S}_{i,i}^n} - \bm{C}_{i-1}^{\dag}\underbrace{\bm{q}_{i-1}^{\dag}\bm{d}^{n}\bm{q}_{i}}_{\bm{S}_{i-1,i}^n}\right]\\
+    &= \boxed{\bm{C}_i^{-1}\left[\bm{S}_{i,i}^{n+1} - \bm{M}_i\bm{S}_{i,i}^n - \bm{C}_{i-1}^{\dag}\bm{S}_{i-1,i}^n\right]}
+\end{align}
+Similarly
+\begin{align}
+    \bm{S}_{i+1,i+1}^{n}&\equiv\bm{q}_{i+1}^{\dag}\bm{d}^n\bm{q}_{i+1} = \left[\left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_i \mathbf{M}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right]\bm{C}_i^{\dag, -1}\right]^{\dag}\bm{d}^n\left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_i \mathbf{M}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right]\bm{C}_i^{\dag, -1}\\
+    %&= \bm{C}_i^{-1}\left[\bm{v}_i^{\dag}\bm{d}^{n+2}\bm{v}_i - \bm{v}_i^{\dag}\bm{d}^{n+1}\bm{v}_i\bm{M}_i - \bm{v}_i^{\dag}\bm{d}^{n+1}\bm{v}_{i-1}\bm{C}_{i-1} \right. \nonumber\\
+    %&\quad \left.  - \bm{M}_i\bm{v}_i^{\dag}\bm{d}^{n+1}\bm{v}_i + \bm{M}_i\bm{v}_i^{\dag}\bm{d}^{n}\bm{v}_{i}\bm{M}_{i} + \bm{M}_i\bm{v}_i^{\dag}\bm{d}^{n}\bm{v}_{i-1}\bm{C}_{i-1} \right. \nonumber \\
+    %&\quad \left.  - \bm{C}_{i-1}^{\dag}\bm{v}_{i-1}^{\dag}\bm{d}^{n+1}\bm{v}_{i} + \bm{C}_{i-1}^{\dag}\bm{v}_{i-1}^{\dag}\bm{d}^{n}\bm{v}_{i}\bm{M}_{i} + \bm{C}_{i-1}^{\dag}\bm{v}_{i-1}^{\dag}\bm{d}^{n}\bm{v}_{i-1}\bm{C}_{i-1} \right] \bm{C}_i^{\dag, -1}\\
+    %&= \bm{C}_i^{-1}\left[\cancel{\color{red}\bm{S}_{i,i}^{n+2}} - \cancel{\color{red}\underbrace{\bm{S}_{i,i}^{n+1}\bm{M}_i}_{\bm{S}_{i,i}^{n+2}}} - \cancel{\color{blue}\bm{S}_{i,i-1}^{n+1}\bm{C}_{i-1}} \right. \nonumber \\
+    %&\quad \left.  - \cancel{\color{red}\underbrace{\bm{M}_i\bm{S}_{i,i}^{n+1}}_{\bm{S}_{i,i}^{n+2}}} + \cancel{\color{red}\underbrace{\bm{M}_i\bm{S}_{i,i}^{n}\bm{M}_i}_{\bm{S}_{i,i}^{n+2}}} + \cancel{\color{blue}\underbrace{\bm{M}_{i}\bm{S}_{i,i-1}^{n}}_{\bm{S}_{i,i-1}^{n+1}}\bm{C}_{i-1}} \right. \nonumber \\
+    %&\quad \left.  - \cancel{\color{green}\bm{C}_{i-1}^{\dag}\bm{S}_{i-1,i}^{n+1}} + \cancel{\color{green}\bm{C}_{i-1}^{\dag}\underbrace{\bm{S}_{i-1,i}^{n}\bm{M}_i}_{\bm{S}_{i-1,i}^{n+1}}} + \bm{C}_{i-1}^{\dag}\bm{S}_{i-1,i-1}^{n}\bm{C}_{i-1} \right] \bm{C}_i^{\dag, -1}\\
+    %&= \bm{C}_i^{-1}\left[ \bm{C}_{i-1}^{\dag}\bm{S}_{i-1,i-1}^{n}\bm{C}_{i-1} \right] \bm{C}_i^{\dag, -1}\\
+\end{align}
+%Where we are able to make the cancelations using the known form $\bm{M}_i \equiv \bm{v}_i^{\dag}\bm{d}\bm{v}_i$. If this was not allowed then we can write
+\begin{align}
+    \bm{S}_{i+1,i+1}^{n} &= \bm{C}_i^{-1}\left[\bm{S}_{i,i}^{n+2} + \bm{M}_i\bm{S}_{i,i}^{n}\bm{M}_i + \bm{C}_{i-1}^{\dag}\bm{S}_{i-1,i-1}^{n}\bm{C}_{i-1} \right. \nonumber \\
+    &\quad \left. - \underbrace{\bm{q}_i^{\dag}\bm{d}^{n+1}\bm{q}_i}_{\bm{S}_{i,i}^{n+1}}\bm{M}_i - \bm{M}_i\underbrace{\bm{q}_i^{\dag}\bm{d}^{n+1}\bm{q}_i}_{\bm{S}_{i,i}^{n+1}} \right. \nonumber \\
+    &\quad \left. - \underbrace{\bm{q}_{i}^{\dag}\bm{d}^{n+1}\bm{q}_{i-1}}_{\bm{S}_{i,i-1}^{n+1}}\bm{C}_{i-1} - \bm{C}_{i-1}^{\dag}\underbrace{\bm{q}_{i-1}^{\dag}\bm{d}^{n+1}\bm{q}_i}_{\bm{S}_{i-1,i}^{n+1}} \right. \nonumber \\
+    &\quad \left. + \bm{M}_i\underbrace{\bm{q}_i^{\dag}\bm{d}^{n}\bm{q}_{i-1}}_{\bm{S}_{i,i-1}^n}\bm{C}_{i-1} + \bm{C}_{i-1}^{\dag}\underbrace{\bm{q}_{i-1}^{\dag}\bm{d}^{n}\bm{q}_i}_{\bm{S}_{i-1,i}^n}\bm{M}_i \right] \bm{C}_i^{\dag, -1} \\
+    &= \bm{C}_i^{-1}\left[\bm{S}_{i,i}^{n+2} + \bm{M}_i\bm{S}_{i,i}^{n}\bm{M}_i + \bm{C}_{i-1}^{\dag}\bm{S}_{i-1,i-1}^{n}\bm{C}_{i-1} \right. \nonumber \\
+    &\quad \left. - P(\bm{S}_{i,i}^{n+1}\bm{M}_i) - P(\bm{S}_{i,i-1}^{n+1}\bm{C}_{i-1}) + P(\bm{M}_i\bm{S}_{i,i-1}^{n}\bm{C}_{i-1}) \right] \bm{C}_i^{\dag, -1}
+\end{align}
+where we introduced the permutation operator as $P(\bm{A}) = \bm{A}+\bm{A}^{\dag}$. Setting $n=0$ we get
+\begin{align}
+    \bm{I} &= \bm{C}_i^{-1}\left[\bm{S}_{i,i}^2+\bm{M}_i^2+\bm{C}_{i-1}^{\dag}\bm{C}_{i-1}-P\left(\bm{M}_i^2\right) - P\left(\bm{S}_{i,i-1}^1\bm{C}_{i-1}\right) + 0\right] \bm{C}_i^{\dag, -1} \\
+    \implies \bm{C}_i^2=\bm{C}_i\bm{C}_i^{\dag} &= \boxed{\bm{S}_{i,i}^2+\bm{M}_i^2+\bm{C}_{i-1}^{\dag}\bm{C}_{i-1}-P\left(\bm{S}_{i,i}^{1}\bm{M}_i\right) - P\left(\bm{S}_{i,i-1}^{1}\bm{C}_{i-1}\right)}\\
+\implies \bm{C}_i \bm{C}_i^{\dag} \equiv \bm{q}_i^{\dag}\bm{d}\bm{q}_{i+1} \bm{q}_{i+1}^{\dag}\bm{d}\bm{q}_i &= \bm{q}_i^{\dag}\bm{d}^2\bm{q}_{i}
+    \label{eqn:cholesky_recurrence}
+\end{align}
+The hope is that we can use the Cholesky QR algorithm to take the effective matrix square root to get the $\bm{C}_i$ . 
+\section{Efficient generation of the self-energy moments}
+Since the self-energy is defined as a convolution between the interacting Green's function and the screened Coulomb potential in $GW$ we can use the known formula for the moment distribution of a convolution of two quantities to get
+\begin{equation}
+    \Sigma_{p q}^{(n,<)}=\sum_{i a, j b, k} \sum_{t=0}^n\binom{n}{t}(-1)^t \epsilon_k^{n-t}(p k \mid i a) \eta_{i a, j b}^{(t)}(q k \mid j b), \\
+\end{equation}
+where we have defined the density-density response moment as
+\begin{equation}
+   \eta_{i a, j b}^{(n)}=\sum_v\left(X_{i a}^v+Y_{i a}^v\right) \Omega_v^n\left(X_{j b}^v+Y_{j b}^v\right)
+   \label{eqn:eta_def}
+\end{equation}
+\subsection{An alternative formulation of the RPA polarizability with the density response moments}
+The Casida equation is given by
+\begin{equation}
+    \begin{pmatrix}
+        \bm{A} & \bm{B} \\
+        -\bm{B} & -\bm{A}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{X} & \bm{Y} \\
+        \bm{Y} & \bm{X}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{\Omega} & \bm{0} \\
+        \bm{0} & -\bm{\Omega}
+    \end{pmatrix}
+    = \begin{pmatrix}
+        \bm{X} & \bm{Y} \\
+        \bm{Y} & \bm{X}
+    \end{pmatrix}
+    \label{eqn:casida_eq}
+\end{equation}
+where the excitation $\bm{X}$ and de-excitation $\bm{Y}$ eigenvectors form the biorthogonal set as
+\begin{equation}
+    (\bm{X}+\bm{Y})(\bm{X}-\bm{Y})^T=(\bm{X}+\bm{Y})^T(\bm{X}-\bm{Y})=\bm{I}
+    \label{eqn:biorthogonality}
+\end{equation}
+The $\bm{A}$ and $\bm{B}$ matrices are defined as
+\begin{align}
+    A_{i a, j b} &= \left(\epsilon_a-\epsilon_i\right) \delta_{i j} \delta_{a b}+\mathcal{K}_{i a, b j} \\
+    B_{i a, j b} &= \mathcal{K}_{i a, j b}
+\end{align}
+and I take the direct approximation, so $\mathcal{K}_{i a, j b}=(i a \mid j b)=\mathcal{K}_{i a, b j}$. As I showed earlier this year, these neutral excitation energies $\bm{\Omega}$ define the poles of the polarizability $\chi_{\text{RPA}}(\omega)$ as
+\begin{equation}
+    \chi_{\text{RPA}}(\omega)=\left[\begin{array}{ll}
+        \bm{X} & \bm{Y} \\
+        \bm{Y} & \bm{X}
+    \end{array}\right]\left[\begin{array}{cc}
+        \omega \bm{I}-\bm{\Omega} & \bm{0} \\
+        \bm{0} & -\omega \bm{I}-\bm{\Omega}
+    \end{array}\right]^{-1}\left[\begin{array}{ll}
+        \bm{X} & \bm{Y} \\
+        \bm{Y} & \bm{X}
+    \end{array}\right]^T.
+    \label{eqn:chi_rpa}
+\end{equation}
+where $\chi_{\text{RPA}}(\omega)=\left(\chi_0(\omega)^{-1}-\mathcal{K}\right)^{-1}$, where $\chi_0(\omega)$ is the irreducible polarizability of the reference state. Because of the bosonic-like symmetry in equation \ref{eqn:chi_rpa}, we can write a more compact form of the RPA polarizability as
+\begin{equation}
+    \eta(\omega)=(\mathbf{X}+\mathbf{Y})(\omega \mathbf{I}-\boldsymbol{\Omega})^{-1}(\mathbf{X}+\mathbf{Y})^T.
+    \label{eqn:eta_rpa}
+\end{equation}
+However, here we are interested in the spectral moments of the compactified RPA polarizability in equation \ref{eqn:eta_rpa} over all RPA excitation energies, which is given as
+\begin{equation}
+    \eta_{i a, j b}^{(n)}=-\frac{1}{\pi} \int_0^{\infty} \operatorname{Im}\left[\eta_{i a, j b}(\omega)\right] \omega^n d \omega = -\frac{1}{\pi} \left(\bm{X}+\bm{Y}\right)\left[\int_0^{\infty}\operatorname{Im}\left[\left(\omega \mathbf{I}-\boldsymbol{\Omega}\right)^{-1}\right] \omega^n d \omega\right]\left(\bm{X}+\bm{Y}\right)^T.
+    \label{eqn:eta_rpa_moments}
+\end{equation}
+where in the final equality we have just factored out the frequency independent piece. Now, we can use the identity from complex analysis that $\frac{1}{ - \bm{\Omega } + \bm{I}\left( \omega + i\eta\right)}= P\left(\frac{1}{\omega\bm{I} - \bm{\Omega}}\right) - i\pi\delta(\omega - \bm{\Omega}) \implies \operatorname{Im}\left[\frac{1}{ - \bm{\Omega} + \bm{I}\left( \omega + i\eta\right)}\right] = -\pi\delta(\omega - \bm{\Omega})$, where $P$ is the Cauchy principal value, so
+\begin{equation}
+    \int_0^{\infty}\operatorname{Im}\left[\left(\omega \mathbf{I}-\boldsymbol{\Omega}\right)^{-1}\right] \omega^n d \omega = -\pi \int_0^{\infty}\delta(\omega - \bm{\Omega}) \omega^n d \omega = -\pi\bm{\Omega}^n.
+    \label{eqn:eta_rpa_moments_identity}
+\end{equation}
+and plugging back and, we get $\bm{\eta}^{(n)} = \left(\bm{X}+\bm{Y}\right)\left(\bm{\Omega}^n\right)\left(\bm{X}+\bm{Y}\right)^T$.
+\subsection{Getting $\eta$ with lower scaling}
+Now we will make use of the symmetric formulation of the RPA problem by Fillip Furche. The RPA eigenvalue problem is given by
+\begin{equation}
+    \begin{pmatrix}
+        \bm{A} & \bm{B} \\
+        -\bm{B} & -\bm{A}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{X}\\
+        \bm{Y}
+    \end{pmatrix}
+    = \bm{\Omega}
+    \begin{pmatrix}
+        \bm{X}\\
+        \bm{Y}
+    \end{pmatrix}
+\end{equation}
+so we can get the coupled equations
+\begin{align}
+    \bm{A}\bm{X} + \bm{B}\bm{Y} &= \bm{\Omega}\bm{X}\\
+    -\bm{B}\bm{X} - \bm{A}\bm{Y} &= \bm{\Omega}\bm{Y}
+\end{align}
+Adding and subtracting these two equations, we get
+\begin{align}
+    \left(\bm{A} - \bm{B}\right)\left(\bm{X}-\bm{Y}\right) &= \left(\bm{X}+\bm{Y}\right)\bm{\Omega} \implies \left(\bm{A} - \bm{B}\right) = \left(\bm{X}+\bm{Y}\right)\bm{\Omega}\left(\bm{X}-\bm{Y}\right)^{\dag} \implies \boxed{\bm{\eta}^{(1)} = \bm{A}-\bm{B}}\\
+    \left(\bm{A} + \bm{B}\right)\left(\bm{X}+\bm{Y}\right) &= \left(\bm{X}-\bm{Y}\right)\bm{\Omega} \implies \left(\bm{A} + \bm{B}\right) = \left(\bm{X}-\bm{Y}\right)\bm{\Omega}\left(\bm{X}+\bm{Y}\right)^{\dag}
+\end{align}
+But then also notice that since $\bm{\eta}^{(0)} = \left(\bm{X}+\bm{Y}\right)\left(\bm{X}+\bm{Y}\right)^{\dag}$, we can write $\bm{\eta}^{(1)} = \bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(0)}$. Continuing on, we arrive at Furche's symmetric formulation of the RPA problem as
+\begin{equation}
+    \left(\bm{A} - \bm{B}\right)\left(\bm{A} + \bm{B}\right)\left(\bm{X}+\bm{Y}\right) = \left(\bm{X}+\bm{Y}\right)\bm{\Omega}^2
+\end{equation}
+By right multiplying by $\left(\bm{X}+\bm{Y}\right)^{\dag}$, this leads to
+\begin{equation}
+    \left(\bm{A}-\bm{B}\right)\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(0)} = \bm{\eta}^{(2)}
+\end{equation}
+This is suggestive of a recursive relation with the form
+\begin{align}
+    \bm{\eta}^{(m)} &= \left(\bm{A}-\bm{B}\right)\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(m-2)} \\
+\end{align}
+But we have already found that $\bm{\eta}^{(1)} = \bm{A}-\bm{B} \implies \bm{\eta}^{(2)} = \bm{\eta}^{(1)}\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(0)}$. Now plug in $\bm{\eta}^{(1)}=\bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(0)}$ to get
+\begin{equation}
+    \bm{\eta}^{(2)} = \bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(0)} = \left[\bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\right]^2\bm{\eta}^{(0)}
+\end{equation}
+Repeating gives
+\begin{equation}
+    \boxed{\bm{\eta}^{(m)} = \left[\bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\right]^m\bm{\eta}^{(0)}}
+\end{equation}
+and then to initialize, consider
+\begin{align}
+    \bm{A} - \bm{B} &= \bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(0)} \\
+    \left(\bm{A} - \bm{B}\right)\left(\bm{A}+\bm{B}\right) &= \bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right) = \left[\bm{\eta}^{(0)}\left(\bm{A}+\bm{B}\right)\right]^2\\
+    \implies \bm{\eta}^{(0)} &= \left[\left(\bm{A}-\bm{B}\right)\left(\bm{A}+\bm{B}\right)\right]^{1/2} \left(\bm{A}+\bm{B}\right)^{-1} 
+    \label{eqn:eta_init}
+\end{align}
+We do assume a lot of things in going to equation \ref{eqn:eta_init}, but I have
+% Inline Python code in the document
+\begin{lstlisting}[language=Python]
+assert np.all(np.linalg.eigvals(ApB) > 0)
+\end{lstlisting}
+
+\subsection{Bringing it back to outline an efficient procedure for Computing Self-Energy Moments}
+\label{sec:self_energy_moments}
+The moments of the lesser and greater parts of the self-energy have the form
+\begin{equation}
+\begin{gathered}
+\Sigma_{pq}^{(n,<)}=\sum_{ia, jb, k} \sum_{t=0}^n\binom{n}{t}(-1)^t \epsilon_k^{n-t}(pk \mid ia) \eta_{ia, jb}^{(t)}(qk \mid jb), \\
+\Sigma_{pq}^{(n,>)}=\sum_{ia, jb, c} \sum_{t=0}^n\binom{n}{t} \epsilon_c^{n-t}(pc \mid ia) \eta_{ia, jb}^{(t)}(qc \mid jb),\\
+\end{gathered}
+\end{equation}
+respectively. The energies $\epsilon$ and integrals $(pq \mid rs)$ are known to us from the prior mean-field calculation, but the density-density moments $\eta^{(t)}$ are not, so we need to compute them. We find them to be defined as
+\begin{equation}
+\begin{aligned}
+\boldsymbol{\eta}^{(m)} 
+& =\left[\boldsymbol{\eta}^{(0)}(\mathbf{A}+\mathbf{B})\right]^m \boldsymbol{\eta}^{(0)} ,
+\end{aligned}
+\end{equation}
+with the initial
+\begin{equation}
+\boldsymbol{\eta}^{(0)}=[(\mathbf{A}-\mathbf{B})(\mathbf{A}+\mathbf{B})]^{\frac{1}{2}}(\mathbf{A}+\mathbf{B})^{-1} 
+\end{equation}
+where we have $\mathbf{A}$ and $\mathbf{B}$ with components $A_{ia,jb}=\delta_{ij}\delta_{ab}\left(\epsilon_a - \epsilon_i\right)+(ia \mid jb)$ and $B_{ia,jb}=(ia \mid jb)$.
+Note that the scaling of the above would be improved by introducing low-rank approximations to the electron repulsion integrals (ERIs) via the Cholesky decomposition or tensor hyper-contraction, which express these 4-index quantities as a sum of two 3- or five 2-index tensors, respectively.
+\section{Avoiding auxiliary space}
+To avoid using the large auxiliary quantities, we introduce an operator which will project onto the block Lanczos space as $\mathbf{S}_{i,j}^{(n)} =\mathbf{q}_i^{\dagger} \mathbf{d}^n \mathbf{q}_j$. But due to the orthogonality of the Krylov subspace, we have $q_i^\dagger q_j = 0$ for $i\neq j$, so $\mathbf{S}_{i,j}^{(n)} = 0$ for $|i-j|>1$. Furthermore, due to Hermiticity, $\mathbf{S}_{i,j}^{(n)} = \mathbf{S}_{j,i}^{(n) \dagger}$. We can start with the initial definition $\mathbf{S}_{1,1}^{(n)} = \mathbf{q}_1^\dagger \mathbf{d}^n \mathbf{q}_1 = \mathbf{L}^{-1} \mathbf{\Sigma}^{(n)} \mathbf{L}^{-1, \dagger}$.
+
+Then we know that the recurrence relation is given by
+\begin{equation}
+    \mathbf{q}_{i+1} \mathbf{C}_i^{\dagger} = \left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_{i} \mathbf{H}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right]
+\end{equation}
+I will not repeat the algebraic manipulations, but Backhouse shows in his thesis that the following relations follow
+\begin{equation}
+\begin{aligned}
+\mathbf{S}_{i+1, i}^{(n)}=&\mathbf{q}_{i+1}^{\dagger} \mathbf{d}^n \mathbf{q}_i=\mathbf{C}_i^{-1}\left[\mathbf{S}_{i, i}^{(n+1)}-\mathbf{H}_i \mathbf{S}_{i, i}^{(n)}-\mathbf{C}_{i-1}^{\dagger} \mathbf{S}_{i-1, i}^{(n)}\right]\\
+\mathbf{S}_{i+1, i+1}^{(n)}= & \mathbf{q}_{i+1}^{\dagger} \mathbf{d}^n \mathbf{q}_{i+1}
+=  \mathbf{C}_i^{-1}\left[\mathbf{S}_{i, i}^{(n+2)}+\mathbf{H}_i \mathbf{S}_{i, i}^{(n)} \mathbf{H}_i+\mathbf{C}_{i-1}^{\dagger} \mathbf{S}_{i-1, i-1}^{(n)} \mathbf{C}_{i-1}\right. \\
+& \left.-P\left(\mathbf{S}_{i, i}^{(n+1)} \mathbf{H}_i\right)+P\left(\mathbf{H}_i \mathbf{S}_{i, i-1}^{(n)} \mathbf{C}_{i-1}\right)-P\left(\mathbf{S}_{i, i-1}^{(n+1)} \mathbf{C}_{i-1}\right)\right] \mathbf{C}_i^{-1, \dagger},
+\end{aligned}
+\end{equation}
+and then solving for $\mathbf{C}_i^2$
+\begin{equation}
+    \mathbf{C}_i^2=\left[\mathbf{S}_{i, i}^{(2)}+\mathbf{H}_i^2+\mathbf{C}_{i-1}^{\dagger} \mathbf{C}_{i-1}-P\left(\mathbf{S}_{i, i}^{(1)} \mathbf{H}_i\right)-P\left(\mathbf{S}_{i, i-1}^{(1)} \mathbf{C}_{i-1}\right)\right]
+\end{equation}
+and we can also find the on-diagonal $\mathbf{H}$ matrices using
+\begin{equation}
+\begin{aligned}
+\mathbf{H}_i=\mathbf{q}_i^{\dagger} \mathbf{d} \mathbf{q}_i=\mathbf{S}_{i, i}^{(1)} .
+\end{aligned}
+\end{equation}
+Now, we know how to compute every quantity of equation \ref{eq:tridiagonal}.
+\section{Spectral Function}
+When we diagonalize the upfolded Hamiltonian, the eigenpairs are composed of charged excitation energies $E_k$ (analogous to QP energies from the QP equation, but without a diagonal approximation to the self-energy)  and eigenvectors $\bm{u}_k$, which can be transformed into the Dyson orbitals $\bm{\psi}_k$ via
+\begin{equation}
+    \bm{\psi}_k = \bm{L}\bm{P}\bm{u}_k
+\end{equation}
+where $\bm{P}$ is the projection operator into the physical space
+\begin{lstlisting}[language=Python]
+eigvec_phys = extracted_eigvecs[j][:mf.nbsf]
+\end{lstlisting}
+and then $\bm{L}$ , depending on whether we have an occupied or virtual state, is
+\begin{lstlisting}[language=Python]
+        moments_less = [form_moment(i, "lesser", mf) for i in range(2*n_initial+2)]
+        moments_great = [form_moment(i, "greater", mf) for i in range(2*n_initial+2)]
+        L_less = np.linalg.cholesky(moments_less[0], upper=False)
+        L_great = np.linalg.cholesky(moments_great[0], upper=False)
+        L = (L_less, L_great)
+\end{lstlisting}
+Then, we can construct the spectral function via
+\begin{equation}
+    A(\omega) = \sum_k ||\bm{\psi}_k||^2 \underbrace{\frac{1}{\pi} \frac{\eta}{\left( \omega - E_k \right)^2 + \eta^2}}_{\text{Lorentzian}}
+\end{equation}
+where $\eta$ is a broadening parameter. In general, the spectral function is known to have the form
+\begin{equation}
+    A(\omega) = -\frac{1}{\pi} \text{Im} G\left(\omega\right)
+\end{equation}
+and the Dyson equation is 
+\begin{equation}
+    G(\omega) = G_0(\omega) + G_0(\omega) \Sigma(\omega) G(\omega) = \frac{1}{\underbrace{\omega - \epsilon_0}_{G_0(\omega)^{-1}} - \Sigma(\omega)}
+\end{equation}
+but then we know that $\Sigma(\omega) = \Sigma_R(\omega) + i\Sigma_I(\omega)$, so we can write
+\begin{equation}
+    G(\omega) = \frac{1}{{\omega - \epsilon_0} - \Sigma_R(\omega) - i\Sigma_I(\omega)}
+\end{equation}
+Defining $x(\omega) = \omega - \epsilon_0 - \Sigma_R(\omega)$ and $y(\omega) = \Sigma_I(\omega)$, we can rewrite the Dyson equation as
+\begin{equation}
+    G(\omega) = \frac{1}{x(\omega) - iy(\omega)}\times \frac{x(\omega) + iy(\omega)}{x(\omega) + iy(\omega)} = \frac{x(\omega) + iy(\omega)}{\left(x(\omega)\right)^2 + \left(y(\omega)\right)^2} \implies \text{Im} G(\omega) = \frac{y(\omega)}{\left(x(\omega)\right)^2 + \left(y(\omega)\right)^2}
+\end{equation}
+We have the following fully analytic expression for the self-energy
+\begin{equation}
+    \Sigma_{pp}^{\text{corr}}(\omega) = \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{w_{pi}^{\mu }w_{ip}^{\mu }}{\omega -(\epsilon _{i}-\Omega  _{\mu })+i\eta}+ \sum_{a}^{\text{virtual}} \frac{w_{pa}^{\mu }w_{ap}^{\mu }}{\omega -(\epsilon _{a}+\Omega  _{\mu })-i\eta}\right)
+\end{equation}
+with
+\begin{equation}
+    w_{pq}^{\mu} = \sum_{jb} (pq|jb) \left(X_{jb}^{\mu} + Y_{jb}^{\mu}\right)
+\end{equation}
+So
+\begin{equation}
+    \Sigma^R_{pp}(\omega) = \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{w_{pi}^{\mu }w_{ip}^{\mu }}{\omega -(\epsilon _{i}-\Omega  _{\mu })}+ \sum_{a}^{\text{virtual}} \frac{w_{pa}^{\mu }w_{ap}^{\mu }}{\omega -(\epsilon _{a}+\Omega  _{\mu })}\right)
+\end{equation}
+and because $\frac{1}{\omega \pm i\eta} = \mathcal{P}\frac{1}{\omega} \mp i\pi \delta(\omega)$, we can write
+\begin{equation}
+    \Sigma^I_{pp}(\omega) = \pi \sum_{\mu }^{\text{RPA}}\left(\sum_{a}^{\text{virtual}} {w_{pa}^{\mu }w_{ap}^{\mu }} \delta(\omega - (\epsilon _{a}+\Omega  _{\mu })-\sum_{i}^{\text{occupied}} {w_{pi}^{\mu }w_{ip}^{\mu }} \delta(\omega - (\epsilon _{i}-\Omega  _{\mu }))\right)
+\end{equation}
+This brings us back to a Lorentzian
+\begin{equation}
+    A(\omega) = -\frac{1}{\pi}\sum_p\frac{\eta(\omega)}{\left(\omega - \epsilon_0 - \Sigma^R_{pp}(\omega)\right)^2 + \eta(\omega)^2}
+\end{equation}
+with $\eta(\omega)\equiv \Sigma^I_{pp}(\omega)$. We need to compute
+\begin{equation}
+    \eta(\omega) = \left(\sum_{\mu }^{\text{RPA}}\left(\sum_{a}^{\text{virtual}} {w_{pa}^{\mu }w_{ap}^{\mu }} \left(\frac{\gamma}{\left(\omega - (\epsilon _{a}+\Omega  _{\mu })\right)^2 + \gamma^2}\right)-\sum_{i}^{\text{occupied}} {w_{pi}^{\mu }w_{ip}^{\mu }} \left(\frac{\gamma}{\left(\omega - (\epsilon _{i}-\Omega  _{\mu })\right)^2 + \gamma^2}\right)\right)\right)_{p}
+\end{equation}
+at each $\omega = E_{QP}$ that we found in the QP equation.
+Meanwhile, we know that the QP renormalization factor is given by
+\begin{equation}
+    Z_{p} = \left(1 - \frac{\partial \Sigma^R_{pp}(\omega)}{\partial \omega}\eval_{\omega = E_{QP}}\right)^{-1}
+\end{equation}
+So I need to prove the equivalence between this form and the one I have above using $\eta(\omega)$.
+\section{6/2 Conclusions}
+\subsection{Hypothesis}
+If one maintains orthogonality in the Krylov subspace, the Ritz eigenpairs will converge to exact diagonalization within numerical precision. However, it is a fact that if the residual of the recurrence relation \ref{eqn:lanczos_recurrence} loses full rank, the off-diagonal elements get a high condition number and are no longer invertible. So we have seen that MC-GW can replicate the block Lanczos up until this condition is met, but no longer afterwards. So even though MC-GW enforces orthogonality of the Krylov subspace even after the residual does lose its full rank, the off-diagonal elements are then no longer invertible, which explains the numerical issues that I observe after this point.
+\subsection{Systems of Study}
+Given my physical dimension $n_\text{nocc}$, the auxiliary dimension is of size $n_\text{channel} \times n_\text{virt} \times n_\text{occ}$, where $n_\text{channel}$ is either $n_\text{occ}$ or $n_\text{virt}$, depending on whether we are dealing with the lesser or greater channel; it becomes clear that the block size, which is determined by the physical dimension, will be $O(n_\text{occ})$, whereas the size of the auxiliary dimension will be $O(n_\text{channel} \times n_\text{virt} \times n_\text{occ})$. I have been doing my tests up until now with a minimal basis, where at least one of these $n$s is small, so I wonder if when I move to a larger basis there will be a noticeable difference with the large discrepancy between $n$ and $n^3$. Perhaps we will be able to exactly converge the low-lying orbital MO QPEs, but not the higher ones, but this is typically all that is desired of the method. 
+\section{6/10 plots}
+As you probably have seen, in the theory of MC-GW, the equations come in two forms; the first gives the explicit definition of the quantity in terms of a projection on the Krylov subspace and the second gives the recurrence relation that is used in MC-GW.
+\begin{align}
+    \bm{S}_{i+1,i}^{n}\equiv\bm{q}_{i+1}^{\dag}\bm{d}^n\bm{q}_{i}
+    &= {\bm{C}_i^{-1}\left[\bm{S}_{i,i}^{n+1} - \bm{M}_i\bm{S}_{i,i}^n - \bm{C}_{i-1}^{\dag}\bm{S}_{i-1,i}^n\right]}
+\end{align}
+or
+\begin{align}
+    \bm{S}_{i+1,i+1}^{n}\equiv\bm{q}_{i+1}^{\dag}\bm{d}^n\bm{q}_{i+1} &= \bm{C}_i^{-1}\left[\bm{S}_{i,i}^{n+2} + \bm{M}_i\bm{S}_{i,i}^{n}\bm{M}_i + \bm{C}_{i-1}^{\dag}\bm{S}_{i-1,i-1}^{n}\bm{C}_{i-1} \right. \nonumber \\
+    &\quad \left. - P(\bm{S}_{i,i}^{n+1}\bm{M}_i) - P(\bm{S}_{i,i-1}^{n+1}\bm{C}_{i-1}) + P(\bm{M}_i\bm{S}_{i,i-1}^{n}\bm{C}_{i-1}) \right] \bm{C}_i^{\dag, -1}
+\end{align}
+or
+\begin{align}
+    \bm{C}_i^2=\bm{C}_i\bm{C}_i^{\dag} &= {\bm{S}_{i,i}^2+\bm{M}_i^2+\bm{C}_{i-1}^{\dag}\bm{C}_{i-1}-P\left(\bm{S}_{i,i}^{1}\bm{M}_i\right) - P\left(\bm{S}_{i,i-1}^{1}\bm{C}_{i-1}\right)}\\
+    \label{eqn:cholesky_recurrence}
+\end{align}
+with
+\begin{align}
+    \bm{C}_i &= \bm{q}_i^{\dag}\bm{d}\bm{q}_{i+1}
+\end{align}
+The curve that I label as MCGW dense corresponds to the middle equality, MCGW sparse corresponds to the right equality, and the black curve is the standard block Lanczos with matrix vector products. Then, I also display the solution that Booth code gives. There is a reason why I am not able to get the MCGW sparse curve to match the dense curve. Recall that to solve \ref{eqn:cholesky_recurrence}, we want to perform a Cholesky decomposition of the matrix $\bm{C}_i^2$ to get $\bm{C}_i$. So the matrix should be symmetric and also positive semidefinite. I always begin by trying to use the modified Cholesky algorithm to perform this matrix square root. However, even in the exact dense theory, the matrix $\bm{C}_i^2$ is not always even positive semidefinite (it has negative eigenvalues), so I cannot use the modified Cholesky algorithm to solve in that case. In addition, due to the rise in numerical imprecision, the matrix also becomes non-symmetric, so in these cases I just symmetrize it, get the eigendecomposition, and do the matrix square root that way. But in exact arithmetic, this is a Hermitian theory, so I shouldn't have to symmetrize like this and in doing so I introduce some error. As can be seen, this gives a fairly good match with what Booth codes predict; we are probably doing similar things. 
+\section{Canonical orthogonalization}
+\label{sec:canonical_orthogonalization}
+The numerical issue with the theory ofMCGW seems to lie with then obtaining the appropriate off-diagonals from
+\begin{align}
+    \bm{C}_i^2=\bm{C}_i\bm{C}_i^{\dag} &= {\bm{S}_{i,i}^2+\bm{M}_i^2+\bm{C}_{i-1}^{\dag}\bm{C}_{i-1}-P\left(\bm{S}_{i,i}^{1}\bm{M}_i\right) - P\left(\bm{S}_{i,i-1}^{1}\bm{C}_{i-1}\right)}\\
+    \label{eqn:cholesky_recurrence}
+\end{align}
+Let us now try to achieve the same result using canonical orthogonalization. Once we build $\bm{C}_i^2$ we can take the eigendecomposition of the matrix to get 
+\begin{equation}
+    \bm{C}_i^2 = \bm{U}_i \bm{\Lambda}_i \bm{U}_i^{\dagger}
+\end{equation}
+\section{Krylov subspace orthogonality contradiction}
+\label{sec:krylov_subspace_orthogonality_contradiction}
+\subsection{Theoretical background}
+There seems to be a contradiction regarding the orthogonality of the Krylov vectors in MCGW. We know that I am able to see convergence to ED to within machine precision when I explicitly build up a Krylov subspace, taking care to ensure orthogonality between Krylov vectors, by both doing Gram-Schmidt on each new vector with all previous ones and then throwing away the small singular values if there is a lack of new directions. This is the exact block Lanczos with matrix vector products curve that I sent Tuesday. Now, MCGW claims to enforce orthogonality in the Krylov subspace by doing $\bm{S}_{i,j}^{(0)} = \delta_{ij}\bm{I}$ with 
+\begin{equation}
+    \bm{S}_{i,j}^{(n)} = \bm{q}_i^{\dag}\bm{d}^n\bm{q}_j
+\label{eqn:mcgw_dense}
+\end{equation}
+This is what rationalizes the simplification in the rewriting of the coupling block $\bm{W}$ as $\bm{R}$ padded with 0s. For a brief refresher, see the flow in the equations below in the example of a Krylov subspace which is containing only two block vectors.
+\begin{align}
+    \bm{\tilde{H}}_{\text{upfolded}}^{\text{Lanczos Iter 2}} &= \bm{\tilde{Q}}^{(2,\dagger)} \bm{H}_{\text{Upfolded}}^{G_0W_0} \bm{\tilde{Q}}^{(2)}\\
+    &= \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & [\bm{q}_1^{\dag}\quad \bm{q}_2^{\dag}]
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{F} + \bm{\Sigma}(\infty) & \bm{W}\\
+        \bm{W}^{\dagger} & \bm{d}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & [\bm{q}_1\quad \bm{q}_2]
+    \end{pmatrix}\\
+    &= \begin{pmatrix}
+        \bm{F} + \bm{\Sigma}(\infty) & [\underbrace{\bm{W}\bm{q}_1}_{\bm{\mathcal{R}}\bm{\mathcal{Q}}^{\dag}\bm{\mathcal{Q}}=\bm{\mathcal{R}}} \quad \underbrace{\bm{W}\bm{q}_2}_{\bm{0}}]\\
+        [\underbrace{\bm{q}_1^{\dag}\bm{W}^{\dagger}}_{\bm{\mathcal{Q}}^{\dagger}\bm{\mathcal{Q}}\bm{\mathcal{R}}^{\dagger}= \bm{\mathcal{R}}^{\dagger}}\quad \underbrace{\bm{q}_2^{\dag}\bm{W}^{\dagger}}_{\bm{0}}] & \begin{pmatrix}
+            \underbrace{\bm{q}_1^{\dag}\bm{d}\bm{q}_1}_{\bm{M}_1} & \underbrace{\bm{q}_1^{\dag}\bm{d}\bm{q}_2}_{\bm{C}_1}\\
+            \underbrace{\bm{q}_2^{\dag}\bm{d}\bm{q}_1}_{\bm{C}_1^{\dagger}} & \underbrace{\bm{q}_2^{\dag}\bm{d}\bm{q}_2}_{\bm{M}_2}
+        \end{pmatrix}
+    \end{pmatrix}
+    \label{eqn:lanczos_projection}
+\end{align}
+But now recall that MCGW relies on the three-term Lanczos recurrence of
+\begin{equation}
+    \mathbf{q}_{i+1} \mathbf{C}_i^{\dagger}=\left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_i \mathbf{M}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right] \implies \mathbf{q}_{i+1} = \left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_i \mathbf{M}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right] \bm{C}_i^{\dag, -1}
+\label{eqn:lanczos_recurrence}
+\end{equation}
+which is used in the definition of the $\bm{S}$es.  Crucially, orthogonality is never enforced in these relations, so after sufficient iterations we get $\bm{q}_i^{\dag}\bm{q}_j \neq 0$ for $i\neq j$. This is in contradiction with our initial assumption that the coupling block $\bm{W}$ can be written as $\bm{R}$ padded with zeros. So it is perfectly natural to not see MCGW converge to ED to within machine precision as is seen in the MCGW sparse curve of my plots. Recall that the MCGW dense curve was obtained by explicitly plugging in the Krylov vector from the exact block Lanczos with matrix vector products into \ref{eqn:mcgw_dense}; this was done with genuinely orthogonalized Krylov vectors and hence we saw an exact convergence to ED similar to that of the matrix vector product implementation.
+\subsection{Comment about the effect of minimal basis}
+It is true that the fact that I was experiencing a lack of new directions was an artifact of me using a minimal basis in my calculations. This put the size of the physical space, which scales as $O(O+V)$, on par with the auxiliary space, which scales as $O(O^2 V)$ or $O(V^2O)$, depending on whether we are dealing with the lesser or greater channel, respectively. The dimension of the auxiliary space will grow faster than that of the physical space as we move to larger system sizes, so it is expected that this effect would be negligible by using a larger basis in my calculation. However, this does not solve the issue of not being able to maintain orthogonality by doing Gram-Schmidt of a new vector on all previous vectors. But, I did a numerical tests of the effect of a lack of reorthogonalization on the Ritz values a few months ago, and the effect was negligible.
+\subsection{Next steps}
+Should I run this with double zeta basis in C++? At the end of the day, I have just speculated, and I haven't proven anything, so it would be nice to see if what I hypothesis plays out in practice.
+
+\section{A hierarchy of approximations to block Lanczos with reorthogonalization}
+To simplify the discussion, I will just consider a single channel here.
+\subsection{Exact solution}
+The QP energies are given by diagonalizing the upfolded Hamiltonian
+\begin{equation}
+    \bm{H}_{\text{upfolded}}= \begin{pmatrix}
+        \bm{F} & \bm{W}\\
+        \bm{W}^{\dagger} & \bm{d}
+    \end{pmatrix}
+\end{equation}
+We can accomplish the same thing by considering the Ritz values as obtained by projecting the upfolded Hamiltonian, which is called exact $\bm{d}$, onto an orthonormal Krylov subspace as
+\begin{align}
+    \bm{\tilde{H}}_{\text{upfolded}}^{\text{Lanczos Iter 3}} &= \bm{\tilde{Q}}^{(3,\dagger)} \bm{H}_{\text{upfolded}} \bm{\tilde{Q}}^{(3)}\\
+    &= \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & [\bm{q}_1^{\dag}\quad \bm{q}_2^{\dag} \quad \bm{q}_3^{\dag}]
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{F} & \bm{W}\\
+        \bm{W}^{\dagger} & \bm{d}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{I} & \bm{0} \\
+        \bm{0} & [\bm{q}_1\quad \bm{q}_2 \quad \bm{q}_3]
+    \end{pmatrix}\\
+    &= \begin{pmatrix}
+        \bm{F} & [\underbrace{\bm{W}\bm{q}_1}_{\bm{\mathcal{R}}\bm{q_1}^{\dag}\bm{q_1}=\bm{\mathcal{R}}} \quad \underbrace{\bm{W}\bm{q}_2}_{\bm{\mathcal{R}}\bm{q_1}^{\dag}\bm{q}_2=\bm{0}} \quad \underbrace{\bm{W}\bm{q}_3}_{\bm{\mathcal{R}}\bm{q_1}^{\dag}\bm{q}_3=\bm{0}}] \\
+        [\underbrace{\bm{q}_1^{\dag}\bm{W}^{\dagger}}_{\bm{q_1}^{\dagger}\bm{q_1}\bm{\mathcal{R}}^{\dagger}= \bm{\mathcal{R}}^{\dagger}}\quad \underbrace{\bm{q}_2^{\dag}\bm{W}^{\dagger}}_{\bm{q_1}^{\dagger}\bm{q_2}\bm{\mathcal{R}}^{\dagger}= \bm{0}^{\dagger}} \quad \underbrace{\bm{q}_3^{\dag}\bm{W}^{\dagger}}_{\bm{q_1}^{\dagger}\bm{q_3}\bm{\mathcal{R}}^{\dagger}= \bm{0}^{\dagger}}] 
+& \begin{pmatrix}
+            \underbrace{\bm{q}_1^{\dag}\bm{d}\bm{q}_1}_{\bm{M}_1} & \underbrace{\bm{q}_1^{\dag}\bm{d}\bm{q}_2}_{\bm{C}_1} & \underbrace{\bm{q}_1^{\dag}\bm{d}\bm{q}_3}_{\bm{0}}\\
+            \underbrace{\bm{q}_2^{\dag}\bm{d}\bm{q}_1}_{\bm{C}_1^{\dagger}} & \underbrace{\bm{q}_2^{\dag}\bm{d}\bm{q}_2}_{\bm{M}_2} & \underbrace{\bm{q}_2^{\dag}\bm{d}\bm{q}_3}_{\bm{C}_2}\\
+            \underbrace{\bm{q}_3^{\dag}\bm{d}\bm{q}_1}_{\bm{0}} & \underbrace{\bm{q}_3^{\dag}\bm{d}\bm{q}_2}_{\bm{C}_2^\dag} & \underbrace{\bm{q}_3^{\dag}\bm{d}\bm{q}_3}_{\bm{M}_3}
+        \end{pmatrix}
+    \end{pmatrix}
+    \label{eqn:lanczos_projection}
+\end{align}
+This is what the matrix-vector product and exact $\bm{d}$ both do when we apply reorthogonalization.
+\subsection{Matrix-vector product without reorthogonalization}
+\label{sec:matrix_vector_product_without_reorthogonalization}
+This is one step down from the exact answer. The only reason that we are able to set $\bm{q}_i\bm{d}\bm{q}_j = \bm{0}$ for $i>j+1$ in \ref{eqn:lanczos_projection} is because we are assuming an orthogonal basis where
+\begin{equation}
+    \bm{d}\bm{q}_j = \bm{C}_{j-1}\bm{q}_{j-1} + \bm{M}_j\bm{q}_j + \bm{C}_{j+1}\bm{q}_{j+1} \implies \bm{q}_{j+2}^{\dagger}\bm{d}\bm{q}_{j} = \bm{q}_{j+2}^{\dagger}\left( \bm{C}_{j-1}^{\dagger}\bm{q}_{j-1} + \bm{M}_j^{\dagger}\bm{q}_j + \bm{C}_{j+1}^{\dagger}\bm{q}_{j+1} \right) = \bm{0}
+    \label{eqn:recurrence_ortho}
+\end{equation}
+We will call this assumption 1.
+But in general, with a non-orthogonal basis, we have
+\begin{equation}
+    \bm{d}\bm{q}_j = \sum_{\ell=1}^{j+1} \bm {H}_{j,\ell}\bm{q}_\ell .
+    \label{eqn:recurrence_general}
+\end{equation}
+This becomes the case after a few Lanczos iterations, which I have shown before. However, the fact that we have written the coupling block as $\bm{R}$ padded with zeros (I will refer to this as assumption 2) is consistent with the way that we have constructed the auxiliary block, so even though we have violated assumption 1, assumption 2 still holds, and we get results one level down from the exact solution.
+\subsection{Exact d without reorthogonalization}
+\label{sec:exact_d_without_reorthogonalization}
+Because this is just projecting $\bm{d}$ onto an increasingly non-orthogonal Krylov subspace, we are no longer making assumption 1. To make it more clear what I mean here, consider that we are no longer assuming a tridiagonal form for the auxiliary block in \ref{eqn:lanczos_projection}, as we are allowing for nonzero $\bm{q}_{i}\bm{d}\bm{q}_j$ with $i>j+1$. But now we are violating assumption 2, which is why this gives different results than \ref{sec:matrix_vector_product_without_reorthogonalization}. \textbf{Do we want to understand under what conditions approximation 1 seems to do better than 2, and if so, then how? It doesn't seem to matter in the context of MC-GW, but maybe you have a broader vision.}
+\subsection{MCGW with recurrence relation}
+In our derivation of the extended recurrence relation, there were 3 instances where we assumed that we could substitute in our expression for $\bm{q}_{j+1}$ from \ref{eqn:recurrence_ortho} as
+\begin{equation}
+    \mathbf{q}_{i+1} = \left[\mathbf{d} \mathbf{q}_i-\mathbf{q}_i \mathbf{M}_i-\mathbf{q}_{i-1} \mathbf{C}_{i-1}\right] \bm{C}_i^{\dag, -1}
+\end{equation}
+2 were when defined a $\bm{S}^n_{i+1, i+1}$ and 1 was when we defined $\bm{S}^n_{i+1, i}$. This uses more approximations than \ref{sec:exact_d_without_reorthogonalization}, so it makes sense that we get worse results.
+\section{Next steps}
+I have a C++ code that I can run now for the dzvp basis, but it is still to slow, which was why I was only able to show you a limited amount of results last time. I will talk to people in the group about how to make it faster. I guess you want me to generate plots like this one for the larger system sizes.
+
+
+

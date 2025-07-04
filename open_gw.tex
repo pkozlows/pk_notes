@@ -1,0 +1,133 @@
+
+
+
+The Generalized Quantum Master Equation (GQME) is given by
+\begin{equation}
+\dot{\mathcal{C}}(t) = \mathcal{C}(t) {\Omega_1} - \int_{0}^{t} d \tau\, \mathcal{C}(t - \tau) \mathcal{K}_1(\tau) + D(t)
+\label{eq:GQME}
+\end{equation}
+where the correlation function is defined as 
+\begin{equation}
+    \mathcal{C}(t) = (\hat{{\mu}} \mid \hat{{\mu}}(t)),
+\label{eq:C}
+\end{equation}
+the higher-order moments are
+\begin{equation}
+\Omega_{n} \equiv\left((i \mathcal{L})^{n} \hat{{\mu}}, \hat{{\mu}}\right) /(\hat{{\mu}}, \hat{{\mu}})
+\end{equation}
+with the auxiliary kernels
+\begin{equation}
+K_{n}(t) \equiv\left((i \mathcal{L})^{n} \hat{f}(t), \hat{{\mu}}\right) /(\hat{{\mu}}, \hat{{\mu}})
+\end{equation}
+$\hat{f}(t)$ in the above equation is referred to as the random force operator
+\begin{equation}
+\hat{f}(t) \equiv e^{i t {\mathcal { L }} \mathcal{L}} \mathcal{Q} i \mathcal{L} \hat{{\mu}}
+\end{equation}
+with $\mathcal{Q}={\mathcal { I }}-\mathcal{P}$ being the complementary projection operator. But this becomes complicated, so Wenjie found that we can express $\mathcal{K}_1(t)$ without time evolution using $\hat{f}(0)=\mathcal{Q} i \mathcal{L} \hat{\mu}$ and, we get
+\begin{equation}
+K_{n}(0)=\Omega_{n+1}-\Omega_{n} \Omega_{1}
+\end{equation}
+Therefore, we only need to consider $\dot{K}_{1}(t)$, which can be obtained directly:
+\begin{equation}
+\dot{K}_{1}(t)=\frac{(i \mathcal{L} \dot{\hat{f}}(t), \hat{\mu})}{(\hat{\mu}, \hat{\mu})}=K_{2}(t)-\Omega_{1} K_{1}(t)
+\end{equation}
+Similarly, we can show that the auxiliary kernels are coupled through
+\begin{equation}
+\dot{K}_{n}(t)=K_{n+1}(t)-\Omega_{n} K_{1}(t).
+\end{equation}
+We expect that the higher order auxiliary kernels will decay quickly, so we can truncate the series at some finite $n$.
+The moments of the memory kernel are
+\begin{equation}
+    \Omega_n = \frac{ \left( (i \mathcal{L})^{n} \hat{{\mu}}, \hat{{\mu}} \right) }{ (\hat{{\mu}}, \hat{{\mu}}) },
+\label{eq:Omega}
+\end{equation}
+with $\mathcal{L}$ being the Liouville superoperator with $\mathcal{L} \hat{{\mu}} = \left[ \hat{H}, \hat{{\mu}} \right]$. The construction of the numerator in equation \ref{eq:Omega} can be thought of as the generation of a Krylov subspace up to level $n$, i.e. we need to build up $\mathcal{K}_n(\mathcal{L}, \hat{{\mu}})= \text{span}\{\hat{{\mu}}, (i\mathcal{L})\hat{{\mu}}, (i\mathcal{L})^2\hat{{\mu}},\ldots, (i\mathcal{L})^{n-1}\hat{{\mu}}\}$, where $\hat{{\mu}} = \hat{c}$ or $\hat{c}^{\dagger}$. In the case if we choose $\hat{{\mu}}=\hat{c}$, we get the lesser Green's function 
+\begin{equation}
+\mathcal{C}(t) = (\hat{c}, \hat{c}(t)) \equiv \langle \hat{c}^{\dagger}(0)\hat{c}(t)\rangle = \frac{G^<(t)}{i}
+\end{equation}
+whereas if we chose $\hat{{\mu}}=\hat{c}^{\dagger}$, we get the greater Green's function 
+\begin{equation}
+\mathcal{C}(t) = (\hat{c}^{\dagger}, \hat{c}^{\dagger}(t)) \equiv \langle \hat{c}(0)\hat{c}^{\dagger}(t)\rangle = -\frac{G^>(t)}{i}
+\end{equation}
+Then we can construct the retarded Green's function as
+\begin{equation}
+    G_R(t) = \Theta(t) \left( G^<(t) - G^>(t) \right)
+\end{equation}
+Using Krylov subspace methods, one never has to construct the Liouvillian matrix, but instead can directly compute the extremal eigenvalues and eigenvectors of $\mathcal{L}$ by considering the action of $\mathcal{L}$ on the Krylov subspace.
+
+\section{Explicit Construction of the Liouville Superoperator}
+Consider that we are working with the upfolded Hamiltonian
+\begin{equation}
+    \textbf{H} = \begin{pmatrix}
+        \textbf{f} & \textbf{W} \\
+        \textbf{W}^{\dagger} & \textbf{d}
+    \end{pmatrix}
+\end{equation}
+where we again have a physical space $\textbf{f}$ and a bath space $\textbf{d}$,  whose coupling is given by $\textbf{W}$. Tell me what would happened if we considered the action of this on the composite operator vector defined lower?
+Lets consider making a Krylov subspace, corresponding to repeated applications of the Liouville superoperator to the initial operator $\hat{\boldsymbol{\mu}}$.
+ Now, The idea is to define a composite operator vector
+\begin{equation}
+\hat{\boldsymbol{\mu}} \equiv
+\begin{pmatrix}
+\hat{\mu}_1 \\
+\hat{\mu}_2
+\end{pmatrix} = \begin{pmatrix}
+\hat{c} \\
+\hat{c}^{\dagger}
+\end{pmatrix},
+\end{equation}
+where \( \hat{c} \) is the annihilation operator and \( \hat{c}^{\dagger} \) is the creation operator. Notice that the equation of motion for the Green's function is
+\begin{align}
+(i \partial_t - \hat{H}_0) G(t,t') = \delta(t-t') 
++ \int_{-\infty}^{\infty} d\tau \, \Sigma(t,\tau) \, G(\tau,t')\\ \rightarrow \dot{G(t,t')} = -i \hat{H}_0 G(t,t') -i\delta(t-t') + \int_{-\infty}^{\infty} d\tau' \, \Sigma(t,\tau') \, G(\tau',t')
+\end{align}
+So our task becomes to figure out how 
+\begin{equation}
+    -i \hat{H}_0 G(t,t') -i\delta(t-t') + \int_{-\infty}^{\infty} d\tau' \, \Sigma(t,\tau') \, G(\tau',t') = \mathcal{C}(t) {\Omega_1} - \int_{0}^{t} d \tau\, \mathcal{C}(t - \tau) \mathcal{K}(\tau) + D(t)
+\end{equation}
+I feel like it should be the case that $-i \hat{H}_0 G(t,t')= \mathcal{C}(t) {\Omega_1}$. Do you think that this should be the case or no? Because I think we can agree that the equation that comes first should be the same as the equation of motion for the greens function. And then try to apply a decomposed Hamiltonia like $H=H_0+V$ to the first equation, so that we can see what happens.
+
+
+
+To simple by things as much as possible initially consider that we only use the noninteracting Hamiltonian $\hat{H}_0= \epsilon \hat{c}^\dagger \hat{c}$ in the action of the Liouvillian.
+\begin{equation}
+    \Omega_1 = \frac{ \left( (i \mathcal{L}) \hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\mu}} \right) }{ (\hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\mu}}) } = \frac{ \left( (i [\hat{H}_0, \hat{\boldsymbol{\mu}}], \hat{\boldsymbol{\mu}} \right) }{ (\hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\mu}}) }
+\end{equation}
+If we just consider the numerator, we see that
+\begin{equation}
+    \left( (i [\hat{H}_0, \hat{\boldsymbol{\mu}}], \hat{\boldsymbol{\mu}} \right) = \left( i [\hat{H}_0, \hat{c}], \hat{c} \right) + \left( i [\hat{H}_0, \hat{c}^\dagger], \hat{c}^\dagger \right)
+\end{equation}
+Considering just the first term
+\begin{equation}
+    \left( i [\hat{H}_0, \hat{c}], \hat{c} \right) = -i \epsilon ([\hat{c}^\dagger \hat{c}, \hat{c}] , \hat{c}) = -i \epsilon (\hat{c}, \hat{c}) = -i \epsilon\left(1-f(\epsilon)\right)
+\end{equation}
+and the second term
+\begin{equation}
+    \left( i [\hat{H}_0, \hat{c}^\dagger], \hat{c}^\dagger \right) = -i \epsilon ([\hat{c}^\dagger \hat{c}, \hat{c}^\dagger] , \hat{c}^\dagger) = -i \epsilon (\hat{c}^\dagger, \hat{c}^\dagger) = -i \epsilon f(\epsilon)
+\end{equation}
+which can be summarized as
+\begin{equation}
+    \left( i [\hat{H}_0, \hat{\boldsymbol{\mu}}], \hat{\boldsymbol{\mu}} \right) = -i \epsilon \implies \Omega_1 = -i \epsilon
+\label{eq:Omega1}
+\end{equation}
+Now, the equation of motion for the interacting Green's function is given by
+\begin{align}
+    \left(i\frac{\partial}{\partial t} - h_0\right)G(t,t') = \delta(t-t') + \int dt'' \Sigma(t,t'')G(t'',t') \\
+    \frac{\partial}{\partial t} G(t,t') = \underbrace{-ih_0 G(t,t')}_{\Omega_1 C(t)} -i \delta(t-t') + \int dt'' \Sigma(t,t'')G(t'',t')
+\end{align}
+Now come if we consider the higher-order moments
+\begin{equation}
+\Omega_{n} \equiv \frac{\left((i \mathcal{L})^{n} \hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\mu}}\right)}{(\hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\mu}})} = \frac{(i)^n \left( \mathcal{L}^{n} \hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\mu}}\right)}{(\hat{\boldsymbol{\mu}}, \hat{\boldsymbol{\mu}})} = (i)^n \left( [\hat{H},[\hat{H},[\hat{H}, \cdots, \hat{\boldsymbol{\mu}}]]] \cdots \right)
+\end{equation}
+where it is implied that we are applying the commutator $n$ times. We want to answer the form for the $\hat{\textbf{H}}^{G_0W_0}$ Hamiltonian, which has the super matrix form of
+\begin{equation}
+    \left[\begin{array}{cc}
+\mathbf{f}+\boldsymbol{\Sigma}_{\infty} & \mathbf{W} \\
+\mathbf{W}^{\dagger} & \mathbf{d}
+\end{array}\right]
+\end{equation}
+and the memory kernel
+\begin{equation}
+\mathcal{K}(t) = \left(\mathbf{A}\left|\mathcal{L} \mathcal{Q} e^{i \mathcal{Q} \mathcal{L} t} \mathcal{Q} \mathcal{L}\right| \mathbf{A}\right),
+\end{equation}
+where \( \mathcal{Q} = \mathcal{I} - \mathcal{P} \) is the complementary projection operator.

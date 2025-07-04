@@ -1,0 +1,332 @@
+\section{Density matrix idempotency}
+\label{sec:density_matrix_idempotency}
+
+Given the orthonormality of the Kohn-Sham orbitals:
+\[
+\int d\mathbf{r}\, \varphi_{j}^{*}(t, \mathbf{r}) \varphi_{k}(t, \mathbf{r}) = \delta_{jk},
+\]
+we can expand $\gamma^2(t)$ as follows:
+\begin{align*}
+\gamma^{2}(t, \mathbf{r}, \mathbf{r}') &= \int d\mathbf{r}_1\, \gamma(t, \mathbf{r}, \mathbf{r}_1) \gamma(t, \mathbf{r}_1, \mathbf{r}') \\
+&= \int d\mathbf{r}_1\, \left( \sum_{j} \varphi_{j}(t, \mathbf{r}) \varphi_{j}^{*}(t, \mathbf{r}_1) \right) \left( \sum_{k} \varphi_{k}(t, \mathbf{r}_1) \varphi_{k}^{*}(t, \mathbf{r}') \right) \\
+&= \sum_{j,k} \varphi_{j}(t, \mathbf{r}) \left( \int d\mathbf{r}_1\, \varphi_{j}^{*}(t, \mathbf{r}_1) \varphi_{k}(t, \mathbf{r}_1) \right) \varphi_{k}^{*}(t, \mathbf{r}') \\
+&= \sum_{j,k} \varphi_{j}(t, \mathbf{r}) \delta_{jk} \varphi_{k}^{*}(t, \mathbf{r}') \\
+&= \sum_{j} \varphi_{j}(t, \mathbf{r}) \varphi_{j}^{*}(t, \mathbf{r}') \\
+&= \gamma(t, \mathbf{r}, \mathbf{r}')
+\end{align*}
+Thus, $\gamma^{2}(t) = \gamma(t)$, confirming idempotency.
+\section{Density matrix time evolution}
+\label{sec:densityMatrixTD}
+First, we take the time derivative of both sides of equation \ref{eq:densityMatrix}:
+\begin{align}
+i \frac{\partial}{\partial t} \gamma(t, \mathbf{r}, \mathbf{r}') &= i \frac{\partial}{\partial t} \left( \sum_{j=1}^{N} \varphi_{j}(t, \mathbf{r}) \varphi_{j}^{*}(t, \mathbf{r}') \right) \\
+&= \sum_{j=1}^{N} \left[ i \frac{\partial \varphi_{j}(t, \mathbf{r})}{\partial t} \varphi_{j}^{*}(t, \mathbf{r}') + i \varphi_{j}(t, \mathbf{r}) \frac{\partial \varphi_{j}^{*}(t, \mathbf{r}')}{\partial t} \right]
+\end{align}
+We know that the TDKS equations for the orbitals \( \varphi_{j}(t, \mathbf{r}) \) and their complex conjugates \( \varphi_{j}^{*}(t, \mathbf{r}') \) are:
+
+\begin{align}
+i \frac{\partial}{\partial t} \varphi_{j}(t, \mathbf{r}) &= H[\rho](t, \mathbf{r}) \varphi_{j}(t, \mathbf{r}) \\
+-i \frac{\partial}{\partial t} \varphi_{j}^{*}(t, \mathbf{r}') &= \varphi_{j}^{*}(t, \mathbf{r}') H[\rho](t, \mathbf{r}') 
+\end{align}
+where \( H[\rho](t, \mathbf{r}) \) is the effective one-particle Hamiltonian.
+
+Substituting these into the time derivative of \( \gamma(t) \):
+
+\[
+i \frac{\partial}{\partial t} \gamma(t, \mathbf{r}, \mathbf{r}') = \sum_{j=1}^{N} \left[ H[\rho](t, \mathbf{r}) \varphi_{j}(t, \mathbf{r}) \varphi_{j}^{*}(t, \mathbf{r}') - \varphi_{j}(t, \mathbf{r}) \varphi_{j}^{*}(t, \mathbf{r}') H[\rho](t, \mathbf{r}') \right]
+\]
+
+Notice that the right-hand side can be written in terms of the density matrix \( \gamma(t) \):
+
+\[
+\sum_{j=1}^{N} H[\rho](t, \mathbf{r}) \varphi_{j}(t, \mathbf{r}) \varphi_{j}^{*}(t, \mathbf{r}') = H[\rho](t, \mathbf{r}) \gamma(t, \mathbf{r}, \mathbf{r}')
+\]
+
+\[
+\sum_{j=1}^{N} \varphi_{j}(t, \mathbf{r}) \varphi_{j}^{*}(t, \mathbf{r}') H[\rho](t, \mathbf{r}') = \gamma(t, \mathbf{r}, \mathbf{r}') H[\rho](t, \mathbf{r}')
+\]
+
+Therefore, the equation becomes:
+
+\[
+i \frac{\partial}{\partial t} \gamma(t, \mathbf{r}, \mathbf{r}') = H[\rho](t, \mathbf{r}) \gamma(t, \mathbf{r}, \mathbf{r}') - \gamma(t, \mathbf{r}, \mathbf{r}') H[\rho](t, \mathbf{r}')
+\]
+
+\section{Fourier Transform Symmetry for Real Functions}
+\label{sec:FourierTransformSymmetry}
+
+In the context of response theory, it is essential to ensure that external perturbations are represented by real-valued functions. This requirement imposes a specific symmetry on their Fourier transforms. Specifically, for any real-valued function \( f(t) \), its Fourier transform \( F(\omega) \) must satisfy the condition:
+
+\begin{equation}
+F(-\omega) = [F(\omega)]^* \label{eq:FourierSymmetry}
+\end{equation}
+
+This subsection provides a four-step derivation of this important property.
+
+\subsubsection*{Step 1: Definition of the Fourier Transform}
+
+The Fourier transform of a real-valued function \( f(t) \) is defined as:
+
+\begin{equation}
+F(\omega) = \int_{-\infty}^{\infty} f(t) e^{i \omega t} \, dt \label{eq:FourierDef}
+\end{equation}
+
+\subsubsection*{Step 2: Taking the Complex Conjugate}
+
+Since \( f(t) \) is real, we have \( f(t) = f^*(t) \). Taking the complex conjugate of both sides of the Fourier transform yields:
+
+\begin{align}
+[F(\omega)]^* &= \left( \int_{-\infty}^{\infty} f(t) e^{i \omega t} \, dt \right)^* \nonumber \\
+&= \int_{-\infty}^{\infty} f^*(t) e^{-i \omega t} \, dt \nonumber \\
+&= \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt \label{eq:ComplexConj}
+\end{align}
+
+\subsubsection*{Step 3: Evaluating \( F(-\omega) \)}
+
+Substituting \( -\omega \) into the Fourier transform definition:
+
+\begin{align}
+F(-\omega) &= \int_{-\infty}^{\infty} f(t) e^{i (-\omega) t} \, dt \nonumber \\
+&= \int_{-\infty}^{\infty} f(t) e^{-i \omega t} \, dt \label{eq:FourierNeg}
+\end{align}
+
+\subsubsection*{Step 4: Establishing the Symmetry}
+
+Comparing equations \eqref{eq:ComplexConj} and \eqref{eq:FourierNeg}, we observe that:
+
+\[
+F(-\omega) = [F(\omega)]^*
+\]
+
+Thus, for any real-valued function \( f(t) \), its Fourier transform satisfies the Hermitian symmetry condition as stated in equation \eqref{eq:FourierSymmetry}.
+
+\subsubsection*{Conclusion}
+
+This symmetry ensures that when constructing real-valued external potentials from their Fourier components, the contributions from positive and negative frequencies are related through complex conjugation. Specifically, in equations (11) and (12) of the response theory framework, the inclusion of both \( e^{i \omega_{\alpha} t} \) and \( e^{-i \omega_{\alpha} t} \) terms with appropriately related spatial components guarantees that the external potentials \( v_{\text{ext}}(t, x) \) and \( \mathbf{A}_{\text{ext}}(t, x) \) remain real-valued functions of time and space.
+
+\[
+v^{(\alpha)}(-\omega_{\alpha}, x) = [v^{(\alpha)}(\omega_{\alpha}, x)]^*, \quad \mathbf{A}^{(\alpha)}(-\omega_{\alpha}, x) = [\mathbf{A}^{(\alpha)}(\omega_{\alpha}, x)]^*
+\]
+
+This property is fundamental in ensuring the physical relevance and mathematical consistency of the perturbations applied in density matrix-based response theory.
+
+\section{First-Order Response of an Observable to External Perturbations}
+\label{sec:firstOrderResponse}
+
+
+In the context of density matrix-based response theory, we are interested in how an observable \( f_{\lambda}(t) \) responds to external perturbations characterized by coupling constants \( \lambda_{\alpha} \). Specifically, we aim to derive the first-order response given by:
+
+\begin{equation}
+\left.\frac{\partial}{\partial \lambda_{\alpha}} f_{\lambda}(t)\right|_{\lambda=0} = f^{(\alpha)}(\omega_{\alpha}) e^{i \omega_{\alpha} t} + f^{(\alpha)}(-\omega_{\alpha}) e^{-i \omega_{\alpha} t} 
+\end{equation}
+
+Here, \( f^{(\alpha)}(\omega_{\alpha}) \) represents the response of the observable at frequency \( \omega_{\alpha} \), and \( f^{(\alpha)}(-\omega_{\alpha}) \) is its counterpart at the negative frequency.
+
+\subsubsection*{Step 1: Expansion of the Observable in Powers of Coupling Constants}
+
+Assume that the observable \( f_{\lambda}(t) \) depends on the coupling strengths \( \boldsymbol{\lambda} = \{\lambda_{\alpha}\} \). We can expand \( f_{\lambda}(t) \) in a Taylor series around \( \boldsymbol{\lambda} = \mathbf{0} \) as follows:
+
+\[
+f_{\lambda}(t) = f^{(0)}(t) + \sum_{\alpha} \lambda_{\alpha} f^{(\alpha)}(t) + \sum_{\alpha, \beta} \lambda_{\alpha} \lambda_{\beta} f^{(\alpha \beta)}(t) + \cdots
+\]
+
+Where:
+\begin{itemize}
+    \item \( f^{(0)}(t) \) is the unperturbed (zeroth-order) value of the observable.
+    \item \( f^{(\alpha)}(t) \) is the first-order response to the perturbation \( \lambda_{\alpha} \).
+    \item Higher-order terms represent responses to multiple perturbations and their interactions.
+\end{itemize}
+
+\subsubsection*{Step 2: Representation of External Perturbations}
+
+The external scalar potential is given by Equation (11):
+
+\[
+\begin{aligned}
+v_{\text{ext}}(t, x) = &\, v^{(0)}(x) + \sum_{\alpha} \lambda_{\alpha} \left( v^{(\alpha)}(\omega_{\alpha}, x) e^{i \omega_{\alpha} t} + v^{(\alpha)}(-\omega_{\alpha}, x) e^{-i \omega_{\alpha} t} \right) \\
+\end{aligned} 
+\]
+
+\noindent Similarly, the external vector potential is given by Equation (12):
+
+\[
+\begin{aligned}
+\mathbf{A}_{\text{ext}}(t, x) = &\, \sum_{\alpha} \lambda_{\alpha} \left( \mathbf{A}^{(\alpha)}(\omega_{\alpha}, x) e^{i \omega_{\alpha} t} + \mathbf{A}^{(\alpha)}(-\omega_{\alpha}, x) e^{-i \omega_{\alpha} t} \right)
+\end{aligned} 
+\]
+
+\noindent These perturbations are **monochromatic** and ensure that the external potentials remain real by including both positive and negative frequency components.
+
+\subsubsection*{Step 3: Taking the First Derivative with Respect to \( \lambda_{\alpha} \)}
+
+To obtain the first-order response of the observable \( f_{\lambda}(t) \) to the perturbation \( \lambda_{\alpha} \), we differentiate the Taylor expansion with respect to \( \lambda_{\alpha} \) and evaluate at \( \boldsymbol{\lambda} = \mathbf{0} \):
+
+\[
+\left.\frac{\partial}{\partial \lambda_{\alpha}} f_{\lambda}(t)\right|_{\lambda=0} = f^{(\alpha)}(t)
+\]
+
+\noindent However, due to the form of the external perturbations in Equations (11) and (12), the response \( f^{(\alpha)}(t) \) inherits the time dependence from the perturbations. Specifically, each perturbation \( \lambda_{\alpha} \) introduces oscillations at frequencies \( \omega_{\alpha} \) and \( -\omega_{\alpha} \). Therefore, the first-order response can be expressed as a sum of contributions from these frequencies:
+
+\[
+f^{(\alpha)}(t) = f^{(\alpha)}(\omega_{\alpha}) e^{i \omega_{\alpha} t} + f^{(\alpha)}(-\omega_{\alpha}) e^{-i \omega_{\alpha} t}
+\]
+
+\noindent Substituting this into the derivative, we obtain:
+
+\[
+\left.\frac{\partial}{\partial \lambda_{\alpha}} f_{\lambda}(t)\right|_{\lambda=0} = f^{(\alpha)}(\omega_{\alpha}) e^{i \omega_{\alpha} t} + f^{(\alpha)}(-\omega_{\alpha}) e^{-i \omega_{\alpha} t} 
+\]
+
+
+\section{Taylor Expansion of Idempotency Constraint in Perturbation Strength $\lambda$ to first order}
+\label{sec:firstOrderIdempotency}
+
+In Time-Dependent Density Functional Theory (TDDFT), the **one-particle density matrix** \( \gamma(t) \) satisfies the **idempotency condition**:
+\begin{equation}
+\gamma(t) = \gamma(t) \gamma(t) \end{equation}
+When external perturbations characterized by coupling constants \( \lambda_{\alpha} \) are applied, the density matrix becomes dependent on these perturbations:
+\begin{equation}
+\gamma_{\lambda}(t) = \gamma(t; \{\lambda_{\alpha}\}) \end{equation}
+Our goal is to expand \( \gamma_{\lambda}(t) \) in powers of \( \lambda_{\alpha} \) and derive the equation of motion for the first-order response \( \gamma^{(\alpha)} \).
+
+\paragraph{Step 1: Taylor Expansion of the Density Matrix and Hamiltonian}
+
+Assume that the density matrix \( \gamma_{\lambda}(t) \) and the Hamiltonian \( H_{\lambda}(t) \) can be expanded in a Taylor series around \( \lambda = 0 \):
+\begin{align}
+\gamma_{\lambda}(t) &= \gamma^{(0)}(t) + \sum_{\alpha} \lambda_{\alpha} \gamma^{(\alpha)}(t) + \sum_{\alpha \leq \beta} \lambda_{\alpha} \lambda_{\beta} \gamma^{(\alpha \beta)}(t) + \cdots \\
+H_{\lambda}(t) &= H^{(0)} + \sum_{\alpha} \lambda_{\alpha} H^{(\alpha)}(t) + \sum_{\alpha \leq \beta} \lambda_{\alpha} \lambda_{\beta} H^{(\alpha \beta)}(t) + \cdots \end{align}
+where:
+\begin{itemize}
+    \item \( \gamma^{(0)}(t) \) is the **zeroth-order** (unperturbed) density matrix.
+    \item \( \gamma^{(\alpha)}(t) \) is the **first-order** response to the perturbation \( \lambda_{\alpha} \).
+    \item \( \gamma^{(\alpha \beta)}(t) \) is the **second-order** response involving perturbations \( \lambda_{\alpha} \) and \( \lambda_{\beta} \).
+    \item Similarly for the Hamiltonian terms.
+\end{itemize}
+
+\paragraph{Step 2: Applying the Idempotency Condition}
+
+Substitute the expansion from Equation (A) into both sides of the idempotency condition (8):
+\begin{align}
+\gamma_{\lambda}(t) &= \gamma_{\lambda}(t) \gamma_{\lambda}(t) \nonumber \\
+\gamma^{(0)} + \sum_{\alpha} \lambda_{\alpha} \gamma^{(\alpha)} + \sum_{\alpha \leq \beta} \lambda_{\alpha} \lambda_{\beta} \gamma^{(\alpha \beta)} + \cdots &= \left( \gamma^{(0)} + \sum_{\alpha} \lambda_{\alpha} \gamma^{(\alpha)} + \sum_{\alpha \leq \beta} \lambda_{\alpha} \lambda_{\beta} \gamma^{(\alpha \beta)} + \cdots \right) \left( \gamma^{(0)} + \sum_{\gamma} \lambda_{\gamma} \gamma^{(\gamma)} + \sum_{\gamma \leq \delta} \lambda_{\gamma} \lambda_{\delta} \gamma^{(\gamma \delta)} + \cdots \right) \nonumber
+\end{align}
+
+Expanding the right-hand side (RHS) and collecting terms up to second order:
+\begin{align}
+\gamma_{\lambda}(t) \gamma_{\lambda}(t) &= \gamma^{(0)} \gamma^{(0)} \nonumber \\
+&+ \sum_{\alpha} \lambda_{\alpha} \left( \gamma^{(0)} \gamma^{(\alpha)} + \gamma^{(\alpha)} \gamma^{(0)} \right) \nonumber \\
+&+ \sum_{\alpha \leq \beta} \lambda_{\alpha} \lambda_{\beta} \left( \gamma^{(0)} \gamma^{(\alpha \beta)} + \gamma^{(\alpha)} \gamma^{(\beta)} + \gamma^{(\beta)} \gamma^{(\alpha)} + \gamma^{(\alpha \beta)} \gamma^{(0)} \right) \nonumber \\
+&+ \cdots \end{align}
+
+\paragraph{Step 3: Equating Terms Order by Order}
+
+To satisfy the idempotency condition at each order of \( \lambda \), equate the coefficients of corresponding powers of \( \lambda \) on both sides (Left-Hand Side and Right-Hand Side).
+
+\begin{enumerate}
+    \item \textbf{Zeroth Order (\( \lambda^0 \)):}
+    \begin{equation}
+    \gamma^{(0)} = \gamma^{(0)} \gamma^{(0)} 
+    \end{equation}
+    
+    \item \textbf{First Order (\( \lambda^1 \)):}
+    \begin{equation}
+    \gamma^{(\alpha)} = \gamma^{(0)} \gamma^{(\alpha)} + \gamma^{(\alpha)} \gamma^{(0)} 
+    \end{equation}
+    
+    \item \textbf{Second Order (\( \lambda^2 \)):}
+    \begin{align}
+    \gamma^{(\alpha \beta)} &= \gamma^{(0)} \gamma^{(\alpha \beta)} + \gamma^{(\alpha)} \gamma^{(\beta)} + \gamma^{(\beta)} \gamma^{(\alpha)} + \gamma^{(\alpha \beta)} \gamma^{(0)} 
+    \end{align}
+\end{enumerate}
+
+These equations ensure that the density matrix remains idempotent at each order of perturbation.
+
+\paragraph{Step 4: Expanding the Equation of Motion Up to First Order}
+
+Consider the **equation of motion** for the density matrix:
+\begin{equation}
+i \frac{\partial}{\partial t} \gamma_{\lambda}(t) = [H_{\lambda}(t), \gamma_{\lambda}(t)] 
+\end{equation}
+
+Substitute the expansions from Equations (A) and (B) into this equation:
+\begin{align}
+i \frac{\partial}{\partial t} \left( \gamma^{(0)} + \sum_{\alpha} \lambda_{\alpha} \gamma^{(\alpha)} + \cdots \right) &= \left( H^{(0)} + \sum_{\alpha} \lambda_{\alpha} H^{(\alpha)} + \cdots \right) \left( \gamma^{(0)} + \sum_{\alpha} \lambda_{\alpha} \gamma^{(\alpha)} + \cdots \right) \nonumber \\
+&- \left( \gamma^{(0)} + \sum_{\alpha} \lambda_{\alpha} \gamma^{(\alpha)} + \cdots \right) \left( H^{(0)} + \sum_{\alpha} \lambda_{\alpha} H^{(\alpha)} + \cdots \right) \nonumber \\
+&= [H^{(0)}, \gamma^{(0)}] + \sum_{\alpha} \lambda_{\alpha} \left( [H^{(0)}, \gamma^{(\alpha)}] + [H^{(\alpha)}, \gamma^{(0)}] \right) + \cdots \end{align}
+
+\paragraph{Step 5: Equating First-Order Terms}
+
+Collecting first-order terms in \( \lambda_{\alpha} \), we obtain:
+\begin{align}
+i \frac{\partial}{\partial t} \gamma^{(\alpha)}(t) &= [H^{(0)}, \gamma^{(\alpha)}(t)] + [H^{(\alpha)}(t), \gamma^{(0)}] \end{align}
+
+\paragraph{Step 6: Frequency Domain Representation}
+
+Assume that the first-order response \( \gamma^{(\alpha)}(t) \) oscillates harmonically at frequency \( \omega_{\alpha} \):
+\begin{equation}
+\gamma^{(\alpha)}(t) = \gamma^{(\alpha)}(\omega_{\alpha}) e^{-i \omega_{\alpha} t} + \gamma^{(\alpha)}(-\omega_{\alpha}) e^{i \omega_{\alpha} t} \end{equation}
+
+Taking the time derivative:
+\begin{align}
+i \frac{\partial}{\partial t} \gamma^{(\alpha)}(t) &= \omega_{\alpha} \gamma^{(\alpha)}(\omega_{\alpha}) e^{-i \omega_{\alpha} t} - \omega_{\alpha} \gamma^{(\alpha)}(-\omega_{\alpha}) e^{i \omega_{\alpha} t} \end{align}
+
+\paragraph{Step 7: Substituting into the Equation of Motion}
+
+Substitute Equations (G) and (H) into Equation (F):
+\begin{align}
+\omega_{\alpha} \gamma^{(\alpha)}(\omega_{\alpha}) e^{-i \omega_{\alpha} t} - \omega_{\alpha} \gamma^{(\alpha)}(-\omega_{\alpha}) e^{i \omega_{\alpha} t} &= [H^{(0)}, \gamma^{(\alpha)}(\omega_{\alpha}) e^{-i \omega_{\alpha} t} + \gamma^{(\alpha)}(-\omega_{\alpha}) e^{i \omega_{\alpha} t}] \nonumber \\
+&\quad + [H^{(\alpha)}(\omega_{\alpha}) e^{-i \omega_{\alpha} t} + H^{(\alpha)}(-\omega_{\alpha}) e^{i \omega_{\alpha} t}, \gamma^{(0)}] \nonumber \\
+&= [H^{(0)}, \gamma^{(\alpha)}(\omega_{\alpha})] e^{-i \omega_{\alpha} t} + [H^{(0)}, \gamma^{(\alpha)}(-\omega_{\alpha})] e^{i \omega_{\alpha} t} \nonumber \\
+&\quad + [H^{(\alpha)}(\omega_{\alpha}), \gamma^{(0)}] e^{-i \omega_{\alpha} t} + [H^{(\alpha)}(-\omega_{\alpha}), \gamma^{(0)}] e^{i \omega_{\alpha} t} \nonumber \\
+&= \left( [H^{(0)}, \gamma^{(\alpha)}(\omega_{\alpha})] + [H^{(\alpha)}(\omega_{\alpha}), \gamma^{(0)}] \right) e^{-i \omega_{\alpha} t} \nonumber \\
+&\quad + \left( [H^{(0)}, \gamma^{(\alpha)}(-\omega_{\alpha})] + [H^{(\alpha)}(-\omega_{\alpha}), \gamma^{(0)}] \right) e^{i \omega_{\alpha} t} \nonumber
+\end{align}
+
+\paragraph{Step 8: Matching Frequency Components}
+
+By matching the coefficients of \( e^{-i \omega_{\alpha} t} \) and \( e^{i \omega_{\alpha} t} \) on both sides, we obtain two separate equations:
+\begin{align}
+\omega_{\alpha} \gamma^{(\alpha)}(\omega_{\alpha}) &= [H^{(0)}, \gamma^{(\alpha)}(\omega_{\alpha})] + [H^{(\alpha)}(\omega_{\alpha}), \gamma^{(0)}]  \\
+-\omega_{\alpha} \gamma^{(\alpha)}(-\omega_{\alpha}) &= [H^{(0)}, \gamma^{(\alpha)}(-\omega_{\alpha})] + [H^{(\alpha)}(-\omega_{\alpha}), \gamma^{(0)}] 
+\end{align}
+
+\paragraph{Step 9: Rearranging to Obtain Equation (20)}
+
+Focusing on Equation (H1), which corresponds to the positive frequency component:
+\begin{align}
+\omega_{\alpha} \gamma^{(\alpha)}(\omega_{\alpha}) &= [H^{(0)}, \gamma^{(\alpha)}(\omega_{\alpha})] + [H^{(\alpha)}(\omega_{\alpha}), \gamma^{(0)}] 
+\end{align}
+
+This matches **Equation (20)** from your paper:
+\begin{equation}
+\omega_{\alpha} \gamma^{(\alpha)} = [H^{(0)}, \gamma^{(\alpha)}] + [H^{(\alpha)}, \gamma^{(0)}] 
+\end{equation}
+
+**Note:** In Equation (20), the frequency dependence is implicit. Here, \( \gamma^{(\alpha)} \) is understood to be associated with the frequency \( \omega_{\alpha} \).
+
+\paragraph{Summary of the Derivation}
+
+1. **Expansion:** The density matrix \( \gamma_{\lambda}(t) \) and Hamiltonian \( H_{\lambda}(t) \) are expanded in powers of the perturbation parameters \( \lambda_{\alpha} \).
+
+2. **Idempotency Condition:** The idempotency condition \( \gamma_{\lambda}(t) = \gamma_{\lambda}(t) \gamma_{\lambda}(t) \) is applied, leading to Equations (16)-(18).
+
+3. **Equation of Motion:** The time-dependent equation of motion is expanded and matched order by order in \( \lambda \).
+
+4. **Frequency Components:** By assuming harmonic time dependence for the first-order response, the equation of motion yields a linear equation for \( \gamma^{(\alpha)}(\omega_{\alpha}) \), resulting in Equation (20).
+
+\paragraph{Implications}
+
+- **Linear Equation for \( \gamma^{(\alpha)} \):** Equation (20) is a linear equation that can be solved to find the first-order response of the density matrix to the perturbation \( \lambda_{\alpha} \).
+
+- **Frequency Dependence:** The factor \( \omega_{\alpha} \) arises from the time derivative, indicating that the response oscillates at the frequency \( \omega_{\alpha} \).
+
+- **Commutators:** The commutators involve the unperturbed Hamiltonian \( H^{(0)} \) and the first-order perturbation \( H^{(\alpha)} \), showing how these operators influence the response.
+
+\paragraph{Conclusion}
+
+Through this systematic expansion and application of the idempotency condition, we derive Equation (20), which governs the first-order response of the density matrix in the presence of external perturbations. This equation is fundamental for calculating how observables respond to external fields within the density matrix-based response theory framework.
+
+If you have any further questions or need additional clarification on specific steps, feel free to ask!
+% Move the Idempotency Expansion derivation here
+
+
