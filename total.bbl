@@ -1,42 +1,8 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{0}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
-
-\bibitem[Furche(2001)]{furche2001density}
-Filipp Furche.
-\newblock On the density matrix based approach to time-dependent density
-  functional response theory.
-\newblock \emph{The Journal of Chemical Physics}, 114\penalty0 (14):\penalty0
-  5982--5992, 2001.
-
-\bibitem[Onida et~al.(2002)Onida, Reining, and Rubio]{Onida2002-pw}
-Giovanni Onida, Lucia Reining, and Angel Rubio.
-\newblock Electronic excitations: density-functional versus many-body
-  green’s-function approaches.
-\newblock \emph{Rev. Mod. Phys.}, 74\penalty0 (2):\penalty0 601--659, June
-  2002.
-
-\bibitem[Ou and Subotnik(2016)]{Ou2016-ti}
-Qi~Ou and Joseph~E Subotnik.
-\newblock Comparison between {GW} and wave-function-based approaches:
-  Calculating the ionization potential and electron affinity for {1D} hubbard
-  chains.
-\newblock \emph{J. Phys. Chem. A}, 120\penalty0 (26):\penalty0 4514--4525, July
-  2016.
-
-\bibitem[Sander et~al.(2015)Sander, Maggio, and Kresse]{Sander2015-xq}
-Tobias Sander, Emanuele Maggio, and Georg Kresse.
-\newblock Beyond the tamm-dancoff approximation for extended systems using
-  exact diagonalization.
-\newblock \emph{Phys. Rev. B}, 92\penalty0 (4):\penalty0 045209, July 2015.
-
-\bibitem[Zhu and Chan(2020)]{Zhu2020-nt}
-Tianyu Zhu and Garnet Kin-Lic Chan.
-\newblock All-electron gaussian-based $g_0w_0$ for valence and core excitation
-  energies of periodic systems.
-\newblock \emph{arXiv [cond-mat.mtrl-sci]}, July 2020.
 
 \end{thebibliography}

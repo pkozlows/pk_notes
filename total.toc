@@ -1,36 +1,75 @@
-\contentsline {section}{\numberline {1}$G_0W_0$ with k-points: 11/9}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Fully analytic}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Analytic continuation}{5}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Screened Coulomb Interaction}{6}{subsubsection.1.2.1}%
-\contentsline {section}{\numberline {2}$G_0W_0$ Derivation: 11/16}{8}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Just the formulas}{8}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}From scratch}{9}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Occupied index $k$}{10}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Virtual index $c$}{10}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Equivalence to previous form}{11}{subsubsection.2.2.3}%
-\contentsline {section}{\numberline {3}Deriving linear response: 11/22}{11}{section.3}%
-\contentsline {subsection}{\numberline {3.1}The Fundamentals}{11}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Introduction to TDKS}{12}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Density Matrix Formulation in TDKS Theory}{13}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}$G_0W_0$ AC at $\Gamma $ point}{15}{subsection.3.4}%
-\contentsline {section}{\numberline {4}Proving $\chi _{RPA}=\frac {\chi _0}{1-v\chi _0}$: 11/29}{15}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Trying direct evaluation}{15}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}How to determine the excitations?}{16}{subsection.4.2}%
-\contentsline {section}{\numberline {A}Derivations}{18}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Density matrix idempotency}{18}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}Density matrix time evolution}{19}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Fourier Transform Symmetry for Real Functions}{19}{subsection.A.3}%
-\contentsline {subsection}{\numberline {A.4}First-Order Response of an Observable to External Perturbations}{21}{subsection.A.4}%
-\contentsline {subsection}{\numberline {A.5}Taylor Expansion of Idempotency Constraint in Perturbation Strength $\lambda $ to first order}{22}{subsection.A.5}%
-\contentsline {paragraph}{Step 1: Taylor Expansion of the Density Matrix and Hamiltonian}{22}{section*.17}%
-\contentsline {paragraph}{Step 2: Applying the Idempotency Condition}{23}{section*.18}%
-\contentsline {paragraph}{Step 3: Equating Terms Order by Order}{23}{section*.19}%
-\contentsline {paragraph}{Step 4: Expanding the Equation of Motion Up to First Order}{23}{section*.20}%
-\contentsline {paragraph}{Step 5: Equating First-Order Terms}{24}{section*.21}%
-\contentsline {paragraph}{Step 6: Frequency Domain Representation}{24}{section*.22}%
-\contentsline {paragraph}{Step 7: Substituting into the Equation of Motion}{24}{section*.23}%
-\contentsline {paragraph}{Step 8: Matching Frequency Components}{24}{section*.24}%
-\contentsline {paragraph}{Step 9: Rearranging to Obtain Equation (20)}{25}{section*.25}%
-\contentsline {paragraph}{Summary of the Derivation}{25}{section*.26}%
-\contentsline {paragraph}{Implications}{25}{section*.27}%
-\contentsline {paragraph}{Conclusion}{25}{section*.28}%
+\contentsline {chapter}{\numberline {1}$G_0W_0$ Derivations: 11/9}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Deriving Hedin's equations}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Time-Domain Definition of the Green's Function}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Hedin's Equations}{3}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Final expressions}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Fully analytic}{4}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Analytic continuation}{8}{subsection.1.2.2}%
+\contentsline {subsubsection}{Screened Coulomb Interaction}{8}{section*.2}%
+\contentsline {section}{\numberline {1.3}UHF formalism}{10}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Deriving linear response: 11/22}{11}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}The Fundamentals}{11}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Introduction to TDKS}{12}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Density Matrix Formulation in TDKS Theory}{13}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Proving $\chi _{RPA}=\frac {\chi _0}{1-v\chi _0}$: 11/29}{15}{subsection.1.4.4}%
+\contentsline {subsubsection}{Trying direct evaluation}{15}{section*.9}%
+\contentsline {subsubsection}{How to determine the excitations?}{16}{section*.10}%
+\contentsline {chapter}{\numberline {2}Dyson to GQME: 12/13}{18}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Explicit Construction of the Liouville Superoperator}{19}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Moment-Conserving $GW$}{21}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Löwdin Downfolding: 2/2/2025}{21}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Cumulant Idea}{22}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Lanczos Iteration}{24}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Creation of Krylov Subspace}{25}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}A sketch of the implicit Lanczos method}{25}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Physical-auxiliary coupling W}{26}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Auxiliary-auxiliary space d: the working equations}{27}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Efficient generation of the self-energy moments}{28}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}An alternative formulation of the RPA polarizability with the density response moments}{28}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Getting $\eta $ with lower scaling}{29}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Bringing it back to outline an efficient procedure for Computing Self-Energy Moments}{30}{subsection.3.4.3}%
+\contentsline {section}{\numberline {3.5}Avoiding auxiliary space}{31}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Spectral Function}{32}{section.3.6}%
+\contentsline {section}{\numberline {3.7}6/2 Conclusions}{33}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Hypothesis}{33}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Systems of Study}{34}{subsection.3.7.2}%
+\contentsline {section}{\numberline {3.8}6/10 plots}{34}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Canonical orthogonalization}{35}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Krylov subspace orthogonality contradiction}{35}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Theoretical background}{35}{subsection.3.10.1}%
+\contentsline {subsection}{\numberline {3.10.2}Comment about the effect of minimal basis}{36}{subsection.3.10.2}%
+\contentsline {subsection}{\numberline {3.10.3}Next steps}{36}{subsection.3.10.3}%
+\contentsline {section}{\numberline {3.11}A hierarchy of approximations to block Lanczos with reorthogonalization}{36}{section.3.11}%
+\contentsline {subsection}{\numberline {3.11.1}Exact solution}{36}{subsection.3.11.1}%
+\contentsline {subsection}{\numberline {3.11.2}Matrix-vector product without reorthogonalization}{37}{subsection.3.11.2}%
+\contentsline {subsection}{\numberline {3.11.3}Exact d without reorthogonalization}{37}{subsection.3.11.3}%
+\contentsline {subsection}{\numberline {3.11.4}MCGW with recurrence relation}{38}{subsection.3.11.4}%
+\contentsline {section}{\numberline {3.12}Next steps}{38}{section.3.12}%
+\contentsline {chapter}{\numberline {4}Berkelbach's $GW$}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Formulation for the dTDA}{39}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Comparing to Booth's ED}{39}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Deriving the matrix vector products}{40}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Formulation for the dRPA}{41}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Deriving the dRPA approach as they propose}{41}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Proving ED equivalence to Booth for the dRPA using Z-vector trick}{42}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Evaluating the matrix-vector products}{43}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Extra}{44}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Derivation with RPA screening using Furche's symmetric formulation}{46}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Extraneous derivations}{48}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Density matrix idempotency}{48}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Density matrix time evolution}{49}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Fourier Transform Symmetry for Real Functions}{49}{section.5.3}%
+\contentsline {section}{\numberline {5.4}First-Order Response of an Observable to External Perturbations}{51}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Taylor Expansion of Idempotency Constraint in Perturbation Strength $\lambda $ to first order}{52}{section.5.5}%
+\contentsline {paragraph}{Step 1: Taylor Expansion of the Density Matrix and Hamiltonian}{52}{section*.19}%
+\contentsline {paragraph}{Step 2: Applying the Idempotency Condition}{53}{section*.20}%
+\contentsline {paragraph}{Step 3: Equating Terms Order by Order}{53}{section*.21}%
+\contentsline {paragraph}{Step 4: Expanding the Equation of Motion Up to First Order}{53}{section*.22}%
+\contentsline {paragraph}{Step 5: Equating First-Order Terms}{54}{section*.23}%
+\contentsline {paragraph}{Step 6: Frequency Domain Representation}{54}{section*.24}%
+\contentsline {paragraph}{Step 7: Substituting into the Equation of Motion}{54}{section*.25}%
+\contentsline {paragraph}{Step 8: Matching Frequency Components}{54}{section*.26}%
+\contentsline {paragraph}{Step 9: Rearranging to Obtain Equation (20)}{55}{section*.27}%
+\contentsline {paragraph}{Summary of the Derivation}{55}{section*.28}%
+\contentsline {paragraph}{Implications}{55}{section*.29}%
+\contentsline {paragraph}{Conclusion}{55}{section*.30}%

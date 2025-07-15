@@ -1,0 +1,456 @@
+\section{Formulation for the dTDA}
+\subsection{Comparing to Booth's ED}
+For simplicity, we will just work with a single candle, the lesser one. In the dTDA case, Booth's formulation for the upfolded Hamiltonian is
+\begin{equation}
+    \bm{H} = \begin{pmatrix} \bm{F} & \bm{W} \\ \bm{W}^{\dagger} & \bm{d} \end{pmatrix}
+\label{eq:booth_hamiltonian}
+\end{equation}
+where we have the definitions
+\begin{equation}
+    W_{pkv} = \sum_{ia} (pk|ia) X_{ia}^{v} \quad \text{and} \quad d_{kv,lv'} = \left(\epsilon_k - \Omega_v\right) \delta_{k,l} \delta_{v,v'}
+\label{eq:booth_definitions}
+\end{equation}
+Now, Tim's version of the Hamiltonian is given by
+\begin{equation}
+    \bm{H} = \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{C}^{2 \mathrm{hlp}} \end{pmatrix}
+\label{eq:tim_hamiltonian}
+\end{equation}
+where the definitions of the matrix elements are
+\begin{align}
+    V_{p, k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} &= \langle p c | k l \rangle \equiv (pk|lc) \\
+    C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} &= \left[\left(\epsilon_i+\epsilon_j-\epsilon_a\right) \delta_{j l} \delta_{a c}-\langle j c | a l \rangle\right] \delta_{i k}
+\end{align}
+and in particular, we have a definition 
+\begin{equation}
+    \bm{C}^{2 \mathrm{hlp}} = \epsilon^{1 \mathrm{~h}} \oplus (-\bm{A}) = \epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes (-\bm{A})
+\label{eq:tim_c_hlp}
+\end{equation}
+Let us define a unitary rotation $\bm{U} = \bm{1} \otimes \bm{X}$. Application of this unitary to the Hamiltonian will not change the spectrum and actually transforms the problem into
+\begin{equation}
+    \bm{H}' = \bm{U}^\dag \bm{H} \bm{U} = \begin{pmatrix} \bm{1} & \bm{0}\\ \bm{0}&\bm{X }^\dag \end{pmatrix} \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{C}^{2 \mathrm{hlp}} \end{pmatrix} \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0}&\bm{X } \end{pmatrix} = \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\bm{X}\\ \bm{X}^\dag \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{X }^\dagger \bm{C}^{2 \mathrm{hlp}} \bm{X } \end{pmatrix}.
+\label{eq:booth_upfolded_hamiltonian}
+\end{equation}
+Now let us evaluate $\bm{X}^\dagger \bm{C}^{2 \mathrm{hlp}} \bm{X }$ in the dTDA case. We have
+\begin{align}
+    \bm{X}^\dagger \bm{C}^{2 \mathrm{hlp}} \bm{X } &= \bm{X}^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes (-\bm{A})\right) \bm{X } \\
+&= \bm{X}^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1}\right) \bm{X } + \bm{X}^\dagger \left(\bm{1} \otimes (-\bm{A})\right) \bm{X } \\
+&= \left(\epsilon^{1 \mathrm{~h}} \underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}} \right) \otimes \left(\underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}}\right) + \left(\underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}}\right) \otimes (-\underbrace{\bm{X}^\dag \bm{A} \bm{X}}_{\bm{\Omega }}) \\
+&= \epsilon^{1 \mathrm{~h}} \oplus (-\bm{\Omega }) \equiv \bm{d}^{<}
+\end{align}
+where we have used the fact that $\bm{X}^\dag \bm{X} = \bm{1}$, since $\bm{X}$ is unitary. Similarly, we can evaluate the other term
+\begin{align}
+    \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \bm{X } &= \bm{W}^< \equiv \sum_{lc} (pk|lc) X_{lc}^{v} \\
+\end{align}
+where we have used the definition of the $W$ matrix in Booth's formulation, as given in \eqref{eq:booth_definitions}.
+\subsection{Deriving the matrix vector products}
+Now, we can define a vector $\bm{R} = ( r_i,\; r_a,\; r_{i[jb]},\; r_{[jb]a} )$. Application of the Hamiltonian to this vector gives us the matrix-vector product $\bm{H} \bm{R} = \bm{\sigma }$, where $\bm{\sigma} = ( \sigma_i,\; \sigma_a,\; \sigma_{i[jb]},\; \sigma_{[jb]a} )$. Consider
+\begin{align}
+\bm{H} \bm{R} &= \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}} & \bm{V}^{2 \mathrm{p} 1 \mathrm{~h}} \\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{C}^{2 \mathrm{hlp}} & \bm{0} \\ \left(\bm{V}^{2 \mathrm{plh}}\right)^{\dagger} & \bm{0} & \bm{C}^{2 \mathrm{plh}} \end{pmatrix} \begin{pmatrix} r_i \\ r_a \\ r_{i[jb]} \\ r_{[jb]a} \end{pmatrix} = \begin{pmatrix} \sigma_i \\ \sigma_a \\ \sigma_{i[jb]} \\ \sigma_{[jb]a} \end{pmatrix} \\[6pt]
+\end{align}
+Let us enumerate now what we actually will get:
+\begin{align}
+\sigma_i &= 
+  \sum_{j} f_{i j}\,r_j
+  + \sum_{b} f_{i b}\,r_b
+  + \sum_{k l c} \bigl\langle i\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
+  + \sum_{k c d} \bigl\langle i\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+\sigma_a &=
+    \sum_{j} f_{a j}\,r_j
+    + \sum_{b} f_{a b}\,r_b
+    + \sum_{k l c} \bigl\langle a\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
+    + \sum_{k c d} \bigl\langle a\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+\sigma_{i[ja]} &
+    \sum_{k} \bigl\langle k\,a \mid i\,j \bigr\rangle\,r_k
+    + \sum_{b} \bigl\langle b\,a \mid i\,j \bigr\rangle\,r_b
+    + \left(\epsilon _{i} + \epsilon _{j} - \epsilon _{a}\right) r_{i[j a]}
+    - \sum_{lc} \bigl\langle j\,c \mid a\,l \bigr\rangle\,r_{i[l c]} \\[6pt]
+\sigma_{[ia]b} &= 
+    \sum_{j} \bigl\langle j\,i \mid b\,a \bigr\rangle\,r_j
+    + \sum_{c} \bigl\langle c\,i \mid b\,a \bigr\rangle\,r_c
+    + \left(\epsilon _{a} + \epsilon _{b} - \epsilon _{i}\right) r_{[i a] b}
+    + \sum_{k c} \bigl\langle a\,k \mid i\,c \bigr\rangle\,r_{[k c] b}.
+\end{align}
+\section{Formulation for the dRPA}
+\subsection{Deriving the dRPA approach as they propose}
+So we start with this generalized eigenvalue equation
+$$
+\mathbf{M}\bm{Z}=\mathbf{N}\bm{Z}\left(\begin{array}{cc}
+\boldsymbol{\Omega}_{+} & 0 \\
+0 & -\boldsymbol{\Omega}_{+}
+\end{array}\right)
+$$
+where
+$$
+\mathbf{M} =\left(\begin{array}{ll}
+\mathbf{A} & \mathbf{B} \\
+\mathbf{B} & \mathbf{A}
+\end{array}\right) \quad 
+\mathbf{N} =\left(\begin{array}{cc}
+\mathbf{1} & \mathbf{0} \\
+\mathbf{0} & -\mathbf{1}
+\end{array}\right) \quad
+\bm{Z} =\left(\begin{array}{ll}
+\bm{X} & \bm{Y} \\
+\bm{Y} & \bm{X}
+\end{array}\right)
+$$
+and $\boldsymbol{\Omega}_{+}$is a diagonal matrix of positive excitation energies. Left multiplying both sides by $\bm{N}$ and right multiplying by $\bm{Z}^{-1}$ gives us
+\begin{equation}
+    \bm{N}\bm{M}\underbrace{\bm{Z} \bm{Z}^{-1}}_{\bm{1}} = \underbrace{\bm{N}\bm{N}}_{\bm{1}}\bm{Z}\left(\begin{array}{cc}
+\boldsymbol{\Omega}_{+} & 0 \\
+0 & -\boldsymbol{\Omega}_{+}
+\end{array}\right) \bm{Z^{-1}} \implies - \bm{N}\bm{M} = -\bm{Z}\left(\begin{array}{cc}\boldsymbol{\Omega}_{+} & 0 \\
+0 & -\boldsymbol{\Omega}_{+}
+\end{array}\right)\bm{Z}^{-1}
+\end{equation}
+Now we can use the fact that the action of a scalar function $f$, such as the step function, on a diagonalizable matrix $\bm{X} \equiv \bm{Y} \bm{\Lambda} \bm{Y}^{-1}$ can be expressed as
+$$
+f(\bm{X}) = \bm{Y} f(\bm{\Lambda}) \bm{Y}^{-1}
+$$
+so we can write
+\begin{equation}
+    \Theta(-\bm{N}\bm{M}) = \bm{Z} \left(\begin{array}{cc}\Theta(-\boldsymbol{\Omega}_{+}) & 0 \\ 0 & \Theta(\boldsymbol{\Omega}_{+})\end{array}\right)\bm{Z}^{-1} = \bm{Z} \left(\begin{array}{cc}\bm{0} & 0 \\ 0 & \bm{1}\end{array}\right)\bm{Z}^{-1}
+\end{equation}
+and so it becomes clear that if we define $\tilde{\bm{M}} = \bm{M} + \eta \bm{N}\Theta(-\bm{N}\bm{M})$, we can write
+\begin{equation}
+    \tilde{\bm{M}} \bm{Z} = \bm{M} \bm{Z} + \eta \bm{N}\Theta(-\bm{N}\bm{M}) \bm{Z} = \mathbf{N}\bm{Z}\left(\begin{array}{cc}
+\boldsymbol{\Omega}_{+} & 0 \\
+0 & -\boldsymbol{\Omega}_{+}
+\end{array}\right) + \bm{N}\bm{Z} \left(\begin{array}{cc}\bm{0} & 0 \\ 0 & \bm{\eta}\end{array}\right) \underbrace{\bm{Z}^{-1} \bm{Z}}_{ \bm{1}} = \bm{N}\bm{Z}\left(\begin{array}{cc}\boldsymbol{\Omega}_{+} & 0 \\ 0 & -\boldsymbol{\Omega}_{+} + \bm{\eta}\end{array}\right).
+\end{equation}
+Now they define a super-matrix,
+\begin{equation}
+\bm{H} =
+\begin{pmatrix}
+\bm{F} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{plh}} & \bm{V}^{2\mathrm{plh}} \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &  & & \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}} & & \bm{0} \\
+\left(\bm{V}^{2\mathrm{plh}}\right)^{\dagger} & & & & \\
+\left(\bm{V}^{2\mathrm{plh}}\right)^{\dagger} &  & \bm{0} & & \bm{C}^{2\mathrm{plh}}
+\end{pmatrix}
+\end{equation}
+where $\mathbf{C}^{2 \mathrm{hlp}}=\varepsilon^{1 \mathrm{~h}} \oplus(-\tilde{\mathbf{M}})$ and $\mathbf{C}^{2 \mathrm{plh}}=\varepsilon^{1 \mathrm{p}} \oplus \tilde{\mathbf{M}}$, which for which we use the super-metric
+$$
+\bm{\mathcal{N}}=\left(\begin{array}{ccc}
+\bm{1} & 0 & 0 \\
+0 & \bm{1} \oplus \bm{N} & 0 \\
+0 & 0 & \bm{1} \oplus \bm{N}
+\end{array}\right)
+$$
+leading to the non-Hermitian eigenvalue equation $\mathcal{\bm{N}} \bm{H} \bm{R} = \bm{R} \bm{E}$. Let us carry this matrix multiplication out, just for the 2h1p sector. Collect the relevant components of the excitation vector into a block vector:
+\[
+\bm{R} = 
+\begin{pmatrix}
+\bm{r}_i &\bm{r}_a &
+\bm{r}_{i[jb]} &
+\bm{\bar{r}}_{i[jb]}
+\end{pmatrix}^\dag
+\]
+We will define the total dimension of this excitation vector as $T$.
+The super-Hamiltonian and super-metric decompose as:
+\[
+\bm{H} =
+\begin{pmatrix}
+\begin{pmatrix}
+    \bm{F}_{oo} & \bm{F}_{ov} \\
+    \bm{F}_{vo} & \bm{F}_{vv}
+\end{pmatrix}_{PP} &
+\begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}_{p,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{p,i[\bar{jb}]} \\
+\end{pmatrix}_{PA} \\ 
+\begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}_{p,k[lc]} & \bm{V}^{2 \mathrm{h1p}}_{p,k[\bar{lc}]}
+\end{pmatrix}^\dagger_{AP} &
+\left(\left(\varepsilon^{1h}\right) \oplus_{\text{kron}} \bm{\tilde{M}}_{jb,jb;lc,lc}\right)_{AA}
+\end{pmatrix}
+\qquad
+\bm{\mathcal{N}} =
+\begin{pmatrix}
+\bm{I_{PP}} & 0 \\[3pt]
+0 & \bm{N_{AA}}
+\end{pmatrix}
+\]
+ with $\bm{N}_{AA} \equiv \bm{1}_{\text{2nov}} \oplus_{\text{direct}} \bm{N}_{\text{2nov}}=\begin{pmatrix} \bm{1}_{\text{2nov}} & 0 \\ 0 & \bm{N}_{\text{2nov}} \end{pmatrix}$ and recall that $o+v=P$.
+The matrix-vector product becomes:
+\[
+\bm{\sigma} = \bm{\mathcal{N}} \bm{H} \bm{R}
+=
+\begin{pmatrix}
+\bm{I}_{PP} \begin{pmatrix}
+\bm{F}_{oo} & \bm{F}_{ov} \\ \bm{F}_{vo} & \bm{F}_{vv}
+\end{pmatrix}_{PP} \begin{pmatrix}
+\bm{r}_i \\ \bm{r}_a
+\end{pmatrix}_{PT} + \bm{I}_{PP} \begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}_{p,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{p,i[\bar{jb}]} \\
+\end{pmatrix}_{P,2O^2V} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[jb]}
+\end{pmatrix}_{2O^2V,T} \\[6pt]
+\bm{N}_{AA} \left( \bm{H}_{ds} \bm{r}_s + \bm{H}_{dd} \bm{r}_d \right)
+\end{pmatrix}
+\]
+so we can quickly identify that that first row becomes
+\begin{equation}
+ \sigma_i = \sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c \mid k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k lc} \bigl\langle i\,c \mid k\,l \bigr\rangle\,\bar{r}_{k[l c]}
+\end{equation}
+and 
+\begin{equation}
+ \sigma_a = \sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c \mid k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k lc} \bigl\langle a\,c \mid k\,l \bigr\rangle\,\bar{r}_{k[l c]}
+\end{equation}
+For the second row, let us start by evaluating $\bm{N}_{dd} \bm{H}_{ds} \bm{r}_s = \begin{pmatrix}
+    \bm{1}_{\text{2nov}} & 0 \\ 0 & \bm{N}_{\text{2nov}}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}^\dag \\
+    \bm{V}^{2 \mathrm{h1p}}^\dag
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{r}_i \\
+    \bm{r}_a
+\end{pmatrix}
+$$
+% \subsubsection{Proving equivalence to Booth's ED}
+% Again, we will just work with a single channel, the lesser one. In the dRPA case, Booth's formulation for the upfolded Hamiltonian is
+% \begin{equation}
+%     \bm{H} = \begin{pmatrix} \bm{F} & \bm{W} \\ \bm{W}^{\dagger} & \bm{d} \end{pmatrix}
+% \label{eq:booth_upfolded_hamiltonian}
+% \end{equation}
+% where we have the definitions
+% \begin{equation}
+%     W_{pkv} = \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \quad \text{and} \quad d_{kv,lv'} = \left(\epsilon_k - \Omega_v\right) \delta_{k,l} \delta_{v,v'}
+% \end{equation}
+% Now Tim's version of the Hamiltonian for the lesser channel is given by
+% \begin{equation}
+%     \bm{H} = \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}} & \bm{V}^{2 \mathrm{h1p}} \\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & &\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} && \bm{C}^{2 \mathrm{hlp}} \end{pmatrix}
+% \label{eq:tim_upfolded_hamiltonian}
+% \end{equation}
+% where the formal defintions are $\bm{C}^{2 \mathrm{hlp}} = \epsilon^{1 \mathrm{~h}} \oplus (-\tilde{\bm{M}})$ and $\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} = \langle p c | k l \rangle $. Note that now the auxiliary block contain two seperate paricle-hole excitations, which is why the coupling blocks are duplicated. Let us define a unitary rotation $\bm{U} = \bm{1} \otimes \bm{Z}$. Application of this unitary to the Hamiltonian will not change the spectrum and actually transforms the problem into
+% \begin{equation}
+%     \bm{H}' = \bm{U}^\dag \bm{H} \bm{U} = \begin{pmatrix} \bm{1} & \bm{0}\\ \bm{0}&\bm{Z }^\dag \end{pmatrix} \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}} & \bm{V}^{2 \mathrm{h1p}} \\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & &\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} && \bm{C}^{2 \mathrm{hlp}} \end{pmatrix} \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0}&\bm{Z } \end{pmatrix}
+% = \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\bm{Z} & \bm{V}^{2 \mathrm{h1p}}\bm{Z} \\ \bm{Z}^\dag \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & &\\ \bm{Z}^\dag \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} && \bm{Z }^\dagger \bm{C}^{2 \mathrm{hlp}} \bm{Z } \end{pmatrix}.
+% \label{eq:tim_upfolded_hamiltonian}
+% \end{equation}
+\subsection{Proving ED equivalence to Booth for the dRPA using Z-vector trick}
+For dRPA, we will choose 
+\begin{equation}
+    \bm{C}^{2 \mathrm{hlp}} = \epsilon^{1 \mathrm{~h}} \oplus (-\bm{M}^{1/2})
+\implies C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} = \left[\epsilon _i - \bm{M^{1/2}}_{ja,lc}\right] \delta_{i k}
+\end{equation}
+ where $\bm{M}$ is the matrix defined in \eqref{eq:berk_gw_M}.
+If we choose our unitary transformation to be $\bm{U'} = \bm{1} \otimes \bm{T}$, where $\bm{T}$ is the matrix of eigenvectors of the symmetric formulation as 
+\begin{equation}
+    \bm{M}\bm{T}= \bm{\lambda } \bm{T}
+\label{eq:berk_gw_eigenproblem}
+\end{equation}
+with the matrix $\bm{M}$ defined as
+\begin{equation}
+    \bm{M}=(\bm{A}-\bm{B})^{1 / 2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1 / 2}
+\label{eq:berk_gw_M}
+\end{equation}
+with the identities $\bm{\lambda } = \bm{\Omega }^2$ and $\bm{T} = \bm{\Omega }^{1/2} \left[\bm{A}-\bm{B}\right]^{-1/2}\left(\bm{X} + \bm{Y}\right)$, where $\bm{X}$ and $\bm{Y}$ are the excitation and de-excitation vectors, respectively. 
+
+Then, we can apply the unitary transformation to the Hamiltonian in Tim's formulation as
+\begin{equation}
+    \bm{H'} = \bm{U'}^\dag \bm{H} \bm{U'} = \begin{pmatrix} \bm{1} & \bm{0}\\ \bm{0}&\bm{T }^\dag \end{pmatrix} \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{C}^{2 \mathrm{hlp}} \end{pmatrix} \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0}&\bm{T } \end{pmatrix} = \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\bm{T}\\ \bm{T}^\dag \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{T }^\dagger \bm{C}^{2 \mathrm{hlp}} \bm{T } \end{pmatrix}.
+\label{eq:tim_upfolded_hamiltonian}
+\end{equation}
+But now let us try evaluating the term $\bm{T}^\dagger \bm{C}^{2 \mathrm{hlp}} \bm{T }$ in the dRPA case. We have
+\begin{align}
+    \bm{T}^\dagger \bm{C}^{2 \mathrm{hlp}} \bm{T } &= \bm{T}^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes (-\bm{M}^{1/2})\right) \bm{T } \\
+&= \bm{T}^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1}\right) \bm{T } + \bm{T}^\dagger \left(\bm{1} \otimes (-\bm{M}^{1/2})\right) \bm{T } \\
+&= \left(\epsilon^{1 \mathrm{~h}} \underbrace{\bm{T}^\dag \bm{T}}_{\bm{\bm{I}}} \right) \otimes \left(\underbrace{\bm{T}^\dag \bm{T}}_{\bm{\bm{I}}}\right) + \left(\underbrace{\bm{T}^\dag \bm{T}}_{\bm{\bm{I}}}\right) \otimes (-\underbrace{\bm{T}^\dag \bm{M}^{1/2} \bm{T}}_{\bm{\Omega }}) \\
+\end{align}
+Next, let us consider the product $\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \bm{T }$. We have
+\begin{align}
+    \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \bm{T } &= \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \Omega_{ia;v}^{1/2} \underbrace{\sum_{jb} \left(A_{ia,jb} - B_{ia,jb}\right)^{-1/2}}_{\Delta _{ia;v}^{-1/2}} \\
+\end{align}
+Now we can approximate $\frac{\Omega _{ia;v}}{\Delta _{ia;v}} \approx \sqrt{1+2\frac{K_{ia,jb; v}}{\Delta _{ia;v}}} \implies \left(\frac{\Omega _{ia;v}}{\Delta _{ia;v}}\right)^{1/2} \approx \sqrt[4]{1 + 2\frac{K_{ia,jb;v}}{\Delta _{ia;v}}}$. For weak to moderately correlated systems, we can assume that the ratio of Coulomb coupling to orbital energy gaps $\frac{K_{ia,jb;v}}{\Delta _{ia;v}}$
+is negligible, so we can just assume that $\left(\frac{\Omega _{ia;v}}{\Delta _{ia;v}}\right)^{1/2} \approx 1$. 
+\subsection{Evaluating the matrix-vector products}
+Now, we can define a vector $\bm{R} = ( r_i,\; r_a,\; r_{i[jb]},\; r_{[jb]a} )$. Application of the Hamiltonian to this vector gives us the matrix-vector product $\bm{H'} \bm{R} = \bm{\sigma }$, where $\bm{\sigma} = ( \sigma_i,\; \sigma_a,\; \sigma_{i[jb]},\; \sigma_{[jb]a} )$. So the one body matrix vector products are the same as in the dTDA case
+\begin{align}
+\sigma_i &= 
+  \sum_{j} f_{i j}\,r_j
+  + \sum_{b} f_{i b}\,r_b
+  + \sum_{k l c} \bigl\langle i\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
+  + \sum_{k c d} \bigl\langle i\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+\sigma_a &=
+    \sum_{j} f_{a j}\,r_j
+    + \sum_{b} f_{a b}\,r_b
+    + \sum_{k l c} \bigl\langle a\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
+    + \sum_{k c d} \bigl\langle a\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+\end{align}
+For the two-body matrix vector products, we have
+\begin{align}
+\sigma_{i[ja]} &=
+    \sum_{k} \bigl\langle k\,a \mid i\,j \bigr\rangle\,r_k
+    + \sum_{b} \bigl\langle b\,a \mid i\,j \bigr\rangle\,r_b
+    + \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}
+\end{align}
+Now, consider just
+\begin{equation}
+    \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}= \sum_{klc} \left[\left(\epsilon_i-\bm{M}^{1/2}_{ja,lc}\right) \delta_{ik} r_{i[l c]} \right] = \sum_{l c} \left(\epsilon_i - \bm{M}^{1/2}_{ja,lc}\right) r_{i[l c]}
+\end{equation}
+Consider now just the term 
+\begin{equation}
+    \sum_{l c} \bm{M}^{1/2}_{ja,lc} r_{i[l c]} =  \sum_{l c} \left[\underbrace{\Delta _{ja}^{1/2} \left(\Delta_{ja} + 2(ja|lc)\right)_{ja,lc} \Delta_{ja}^{1/2}}_{\bm{D}}\right]^{1/2} r_{i[l c]}.
+\end{equation}
+Let us consider instead the similarity transformed $\tilde{\bm{D}} = \Delta^{-1/2} \bm{D} \Delta^{-1/2} = \left(\Delta + 2K\right)$. This is useful because we have $D^{1/2} = \Delta^{1/2}\tilde{D}^{1/2}\Delta^{1/2}=\left(\Delta+2K\right)^{1/2}$ for our SPD D.Now make the change of variables $u = \Delta^{1/2}r \implies r = \Delta^{-1/2}u$. Then we have $\left(\Delta + 2K\right) \Delta^{-1/2}u = \Delta^{1/2} \left[ {I} + \underbrace{2\Delta^{-1/2}K\Delta^{-1/2}}_{L}\right] u$. Again, because we are working with weak to moderately correlated systems, we can assume that L is small, and neglect it for now. So we have
+\begin{equation}
+    \sum_{l c} \bm{M}^{1/2}_{ja,lc} r_{i[l c]} \approx \sum_{l c} \Delta^{1/2} I \Delta^{1/2} r_{i[l c]} \approx \sum_{l c} \Delta r_{i[l c]}
+\end{equation}
+
+We can rewrite this as
+So really we have reduced the scaling to $O(O^3V^2)$. If we do a similar thing for the other term, we have
+\begin{align}
+\sigma_{[ia]b} &= 
+    \sum_{j} \bigl\langle j\,i \mid b\,a \bigr\rangle\,r_j
+    + \sum_{c} \bigl\langle c\,i \mid b\,a \bigr\rangle\,r_c
+    + \sum_{kc} \left[\epsilon_b + \bm{M}^{1/2}_{ia,kc}\right] r_{[kc] b}
+\end{align}
+which gives the scaling of $O(O^2V^3)$.
+\section{Extra}
+Recall that we are trying to recover the form 
+\begin{equation}
+    \bm{H} = \begin{pmatrix} \bm{F} & \bm{W}^<\\ \bm{W}^{<,\dagger} & \bm{d}^< \end{pmatrix}
+\label{eq:booth_upfolded_hamiltonian2}
+\end{equation}
+where now we have the definitions
+\begin{align}
+    W_{pkv}^{<} &= \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \\
+    d_{kv,lv'}^{<} &= \left(\epsilon_k - \Omega_v\right) \delta_{k,l} \delta_{v,v'}
+\label{eq:booth_definitions2}
+\end{align}
+where now $\bm{\Omega }$ is taken fromm the eigenproblem $\bm{M}\bm{T}= \bm{\Omega}^2 \bm{T}$, which is the symmetric formulation of the RPA.
+Application of downfolding on this upfolded form then gave us the expression
+\begin{equation}
+    \mathbf{\Sigma }(\omega )=\mathbf{W}^<(\omega \mathbf{I}-{\mathbf{d}^<})^{-1} {\mathbf{W}}^{<,\dagger} + \mathbf{W}^>(\omega \mathbf{I}-{\mathbf{d}^>})^{-1} {\mathbf{W}}^{>,\dagger}
+\label{eq:booth_self_energy}
+\end{equation}
+Meanwhile, downfolding Tim's formulation gives us the expression for the correlation self energy
+\begin{equation}
+    \Sigma(\omega)= \mathbf{V}^{2 \mathrm{hlp}}\left[\omega \mathbf{1}-\mathbf{C}^{2 \mathrm{hlp}}\right]^{-1}\left[\mathbf{V}^{2 \mathrm{hlp}}\right]^{\dagger} +\mathbf{V}^{2 \mathrm{plh}}\left[\omega \mathbf{1}-\mathbf{C}^{2 \mathrm{plh}}\right]^{-1}\left[\mathbf{V}^{2 \mathrm{plh}}\right]^{\dagger}
+\end{equation}
+where in the dTDA case the supermatrix is
+\begin{equation}
+    \mathbf{H}=\left(\begin{array}{ccc}
+\mathbf{f} & \mathbf{V}^{2 \mathrm{hlp}} & \mathbf{V}^{2 \mathrm{p} 1 \mathrm{~h}} \\
+\left(\mathbf{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \mathbf{C}^{2 \mathrm{hlp}} & \mathbf{0} \\
+\left(\mathbf{V}^{2 \mathrm{plh}}\right)^{\dagger} & \mathbf{0} & \mathbf{C}^{2 \mathrm{plh}}
+\end{array}\right)
+\end{equation}
+with the definitions
+\begin{align}
+    V_{p, k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} &= \langle p c | k l \rangle \\
+    V_{p,[k c] d}^{2 \mathrm{p} 1 \mathrm{~h}} &= \langle p k | d c \rangle \\
+    C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} &= \left[\left(\epsilon_i+\epsilon_j-\epsilon_a\right) \delta_{j l} \delta_{a c}-\langle j c | a l \rangle\right] \delta_{i k} \\
+    C_{[i a] b,[k c] d}^{2 \mathrm{p} 1 \mathrm{~h}} &= \left[\left(\epsilon_a+\epsilon_b-\epsilon_i\right) \delta_{i k} \delta_{a c}+\langle a k | i c\rangle\right] \delta_{b d}
+\end{align}
+Presumably they should be equivalent but I am a little bet confused. In both kisses we have physical and auxiliary spaces. However, Tim uses a bare Coulomb interaction for the coupling matrix, while Booth uses the screened interaction. Then also the definitions of the auxiliary spaces $\bm{d}$ versus $\bm{C}$ are different, where the former makes use of the $\Omega $, assuming that the RPA calculation has already been performed, while the latter is just defined by the A matrix in the dTDA case.  Please show how to get from Tim's formulation to Booth's formulation, or vice versa, and how the two are equivalent. let's just focus on a single channel, so just the lesser channel. Let us start by proving for the dTDA case, where we have the definitions for Booth's formulation
+\begin{align}
+    W_{pkv}^{<} &= \sum_{ia} (pk|ia) \left( X_{ia}^{v} \right) \\
+    d_{kv,lv'}^{<} &= \left(\epsilon_k - \Omega_v\right) \delta_{k,l} \delta_{v,v'}
+\end{align}
+where in the dtda case, we are working with the eigenproblem $\bm{A}\bm{X} = \bm{\Omega }\bm{X}$.
+while in Tim's formulation we have
+\begin{align}
+    \bm{C}^{2 \mathrm{hlp}} &= \epsilon^{1 \mathrm{~h}} \oplus (-\bm{A}) \\
+\end{align}
+with the metrics aliments defined as
+\begin{align}
+    V_{p, k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} &= \langle p c | k l \rangle \\
+    C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} &= \left[\left(\epsilon_i+\epsilon_j-\epsilon_a\right) \delta_{j l} \delta_{a c}-\langle j c | a l \rangle\right] \delta_{i k}
+\end{align}
+\section{Derivation with RPA screening using Furche's symmetric formulation}
+\label{sec:berk_gw}
+In the symmetric formulation, we have the hermitian eigenproblem:
+\begin{equation}
+    \bm{M}\bm{T}= \bm{\lambda } \bm{T}
+\label{eq:berk_gw_eigenproblem}
+\end{equation}
+where we define
+\begin{equation}
+    \bm{M}=(\bm{A}-\bm{B})^{1 / 2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1 / 2}
+\end{equation}
+with the $\bm{A}$ and $\bm{B}$ matrices defined as
+\begin{align}
+    A_{i a, j b} &= \left(\epsilon_a-\epsilon_i\right) \delta_{i j} \delta_{a b}+\mathcal{K}_{i a, b j} \\
+    B_{i a, j b} &= \mathcal{K}_{i a, j b}.
+\end{align}
+From this eigenproblem, we can get the quantities that we need for GW as
+\begin{equation}
+    \begin{aligned}
+& \Omega_n=\sqrt{\lambda_n} \\
+& (X+Y)_n=\frac{1}{\sqrt{\Omega_n}}(A-B)^{1 / 2} T_n \\
+\end{aligned}
+\end{equation}
+In direct RPA, one defines a frequency-independent "super-matrix" H,
+$$
+\mathbf{H}=\left(\begin{array}{ccc}
+\mathbf{f} & \mathbf{V}^{2 \mathrm{hlp}} & \mathbf{V}^{2 \mathrm{p} 1 \mathrm{~h}} \\
+\left(\mathbf{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \mathbf{C}^{2 \mathrm{hlp}} & \mathbf{0} \\
+\left(\mathbf{V}^{2 \mathrm{plh}}\right)^{\dagger} & \mathbf{0} & \mathbf{C}^{2 \mathrm{plh}}
+\end{array}\right)
+$$
+If the Tamm-Dancoff approximation is used, we have $\mathbf{C}^{2 \text { hlp }}=\varepsilon^{1 \mathrm{~h}} \oplus(-\mathbf{A})$ and $\mathbf{C}^{2 \mathrm{plh}}=\varepsilon^{1 \mathrm{p}} \oplus \mathbf{A}$. 
+
+with matrix elements
+$$
+\begin{gathered}
+V_{p, k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}}=\langle p c \mid k l\rangle \\
+V_{p,[k c] d}^{2 \mathrm{p} 1 \mathrm{~h}}=\langle p k \mid d c\rangle \\
+C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}}=\left[\left(\varepsilon_i+\varepsilon_j-\varepsilon_a\right) \delta_{j l} \delta_{a c}-\langle j c \mid a l\rangle\right] \delta_{i k} \\
+C_{[i a] b,[k c] d}^{2 \mathrm{p} 1 \mathrm{~h}}=\left[\left(\varepsilon_a+\varepsilon_b-\varepsilon_i\right) \delta_{i k} \delta_{a c}+\langle a k \mid i c\rangle\right] \delta_{b d}
+\end{gathered}
+$$
+But now, to incorporate the RPA screening, we can instead define $\bm{C}^{2 \text{h1p}} \equiv \varepsilon^{1 \mathrm{~h}} \oplus(-\bm{M})$ and $\bm{C}^{2 \mathrm{p} 1 \mathrm{~h}} \equiv \varepsilon^{1 \mathrm{p}} \oplus \bm{M}$, where $\bm{M}$ is the matrix defined above. We can get the matrix elements of $\bm{M}$ as
+\begin{align}
+    M_{i a, j b} &= \left(\bm{A}-\bm{B}\right)^{1 / 2}_{i a, j b} \left(\bm{A}+\bm{B}\right)_{i a, j b} \left(\bm{A}-\bm{B}\right)^{1 / 2}_{i a, j b} \\
+\\
+&= \sqrt{\Delta _{ia}}\left[\left(\epsilon_a-\epsilon_i\right) \delta_{i j} \delta_{a b}+2 \mathcal{K}_{i a, b j}
+\right] \sqrt{\Delta _{jb}}. \\
+\end{align}
+In the second line we have used the fact that in the direct formulation $\bm{A}-\bm{B}$ is purely diagonal, so in fact $\left(\bm{A}-\bm{B}\right)^{1/2}$ is just the square root of the diagonal elements, which we denote as $\sqrt{\Delta_{ia}}$. Furthermore, we have that the interaction kernels $\mathcal{K}_{ia,bj} \equiv \mathcal{K}_{i a, j b}$ for the HF reference, where in the physicist's notation we have $\mathcal{K}_{i a, j b} = \langle i j | a b \rangle$. So the expressions become
+\begin{align}
+    \bm{C}^{2 \text{h1p}} &= \epsilon^{1 \mathrm{~h}} \oplus (-\bm{M}) \\
+& = \begin{pmatrix}
+    \epsilon ^{1h} & 0 \\
+    0 & -\bm{M}
+\end{pmatrix}
+\end{align}
+and
+\begin{align}
+    \bm{C}^{2 \mathrm{p} 1 \mathrm{~h}} &= \epsilon^{1 \mathrm{p}} \oplus \bm{M} \\
+& = \begin{pmatrix}
+    \epsilon ^{1p} & 0 \\
+    0 & \bm{M}
+\end{pmatrix}
+\end{align}
+where $\epsilon^{1 \mathrm{~h}}$ and $\epsilon^{1 \mathrm{p}}$ are the diagonal matrices of the one-electron energies for the hole and particle states, respectively. 
+
+% Now, we actually want to evaluate the metrics vector products, so we define a excitation vector $\boldsymbol{R} = ( r_i,\; r_a,\; r_{i[jb]},\; r_{[jb]a} )$ and the matrix-vector product $\bm{H} \boldsymbol{R} = \bm{\sigma }$, where $\bm{\sigma} = ( \sigma_i,\; \sigma_a,\; \sigma_{i[jb]},\; \sigma_{[jb]a} )$. Let us enumerate now what we actually will get:
+% \begin{align}
+% \sigma_i &= 
+%   \sum_{j} f_{i j}\,r_j
+%   + \sum_{b} f_{i b}\,r_b
+%   + \sum_{k l c} \bigl\langle i\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
+%   + \sum_{k c d} \bigl\langle i\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+% \sigma_a &= 
+%   \sum_{j} f_{a j}\,r_j
+%   + \sum_{b} f_{a b}\,r_b
+%   + \sum_{j l c} \bigl\langle a\,c \mid j\,l \bigr\rangle\,r_{j[l c]}
+%   + \sum_{k c d} \bigl\langle a\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+% \sigma_{i[jb]} &
+%   \sum_{k} \bigl\langle k\,b \mid i\,j \bigr\rangle\,r_k
+%   + \sum_{a} \bigl\langle a\,j \mid b\,i \bigr\rangle\,r_a
+%   + M_{i a,\,j b}\,r_{i[jb]}, \\[6pt]
+% \sigma_{[jb]a} &= 
+%   \sum_{k} \bigl\langle k\,j \mid a\,b \bigr\rangle\,r_k
+%   + \sum_{c} \bigl\langle c\,b \mid j\,a \bigr\rangle\,r_c
+%   + M_{i a,\,j b}\,r_{[jb]a}.
+% \end{align}
+% The interesting part will be to figure out how to evaluate elements like $M_{i a, j b}r_{i[jb]}$. We can write this as
+% \begin{align}
+%     M_{i a, j b} r_{i[jb]} &= \sqrt{\Delta_{ia}} \left[\left(\epsilon_a-\epsilon_i\right) \delta_{i j} \delta_{a b}+2 \mathcal{K}_{i a, b j}\right] \sqrt{\Delta_{jb}} r_{i[jb]} \\
+% &= \sqrt{\Delta_{ia}} \left[\left(\epsilon_a-\epsilon_i\right) \delta_{i j} \delta_{a b}+2 \mathcal{K}_{i a, b j}\right] r_{i[jb]} \sqrt{\Delta_{jb}}.
+% \end{align}
