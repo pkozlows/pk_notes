@@ -51,25 +51,27 @@
 \contentsline {subsection}{\numberline {4.1.2}Deriving the matrix vector products}{40}{subsection.4.1.2}%
 \contentsline {section}{\numberline {4.2}Formulation for the dRPA}{41}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Deriving the dRPA approach as they propose}{41}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Proving ED equivalence to Booth for the dRPA using Z-vector trick}{42}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Evaluating the matrix-vector products}{43}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Extra}{44}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Derivation with RPA screening using Furche's symmetric formulation}{46}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Extraneous derivations}{48}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Density matrix idempotency}{48}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Density matrix time evolution}{49}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Fourier Transform Symmetry for Real Functions}{49}{section.5.3}%
-\contentsline {section}{\numberline {5.4}First-Order Response of an Observable to External Perturbations}{51}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Taylor Expansion of Idempotency Constraint in Perturbation Strength $\lambda $ to first order}{52}{section.5.5}%
-\contentsline {paragraph}{Step 1: Taylor Expansion of the Density Matrix and Hamiltonian}{52}{section*.19}%
-\contentsline {paragraph}{Step 2: Applying the Idempotency Condition}{53}{section*.20}%
-\contentsline {paragraph}{Step 3: Equating Terms Order by Order}{53}{section*.21}%
-\contentsline {paragraph}{Step 4: Expanding the Equation of Motion Up to First Order}{53}{section*.22}%
-\contentsline {paragraph}{Step 5: Equating First-Order Terms}{54}{section*.23}%
-\contentsline {paragraph}{Step 6: Frequency Domain Representation}{54}{section*.24}%
-\contentsline {paragraph}{Step 7: Substituting into the Equation of Motion}{54}{section*.25}%
-\contentsline {paragraph}{Step 8: Matching Frequency Components}{54}{section*.26}%
-\contentsline {paragraph}{Step 9: Rearranging to Obtain Equation (20)}{55}{section*.27}%
-\contentsline {paragraph}{Summary of the Derivation}{55}{section*.28}%
-\contentsline {paragraph}{Implications}{55}{section*.29}%
-\contentsline {paragraph}{Conclusion}{55}{section*.30}%
+\contentsline {subsubsection}{Downfolding equivalence}{42}{section*.11}%
+\contentsline {subsubsection}{Equivalence to Booth form}{43}{section*.12}%
+\contentsline {subsection}{\numberline {4.2.2}Proving ED equivalence to Booth for the dRPA using Z-vector trick}{43}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Evaluating the matrix-vector products}{44}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Extra}{45}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Derivation with RPA screening using Furche's symmetric formulation}{47}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Extraneous derivations}{49}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Density matrix idempotency}{49}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Density matrix time evolution}{50}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Fourier Transform Symmetry for Real Functions}{50}{section.5.3}%
+\contentsline {section}{\numberline {5.4}First-Order Response of an Observable to External Perturbations}{52}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Taylor Expansion of Idempotency Constraint in Perturbation Strength $\lambda $ to first order}{53}{section.5.5}%
+\contentsline {paragraph}{Step 1: Taylor Expansion of the Density Matrix and Hamiltonian}{53}{section*.21}%
+\contentsline {paragraph}{Step 2: Applying the Idempotency Condition}{54}{section*.22}%
+\contentsline {paragraph}{Step 3: Equating Terms Order by Order}{54}{section*.23}%
+\contentsline {paragraph}{Step 4: Expanding the Equation of Motion Up to First Order}{54}{section*.24}%
+\contentsline {paragraph}{Step 5: Equating First-Order Terms}{55}{section*.25}%
+\contentsline {paragraph}{Step 6: Frequency Domain Representation}{55}{section*.26}%
+\contentsline {paragraph}{Step 7: Substituting into the Equation of Motion}{55}{section*.27}%
+\contentsline {paragraph}{Step 8: Matching Frequency Components}{55}{section*.28}%
+\contentsline {paragraph}{Step 9: Rearranging to Obtain Equation (20)}{56}{section*.29}%
+\contentsline {paragraph}{Summary of the Derivation}{56}{section*.30}%
+\contentsline {paragraph}{Implications}{56}{section*.31}%
+\contentsline {paragraph}{Conclusion}{56}{section*.32}%

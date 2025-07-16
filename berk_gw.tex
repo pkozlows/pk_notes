@@ -25,7 +25,7 @@ and in particular, we have a definition
     \bm{C}^{2 \mathrm{hlp}} = \epsilon^{1 \mathrm{~h}} \oplus (-\bm{A}) = \epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes (-\bm{A})
 \label{eq:tim_c_hlp}
 \end{equation}
-Let us define a unitary rotation $\bm{U} = \bm{1} \otimes \bm{X}$. Application of this unitary to the Hamiltonian will not change the spectrum and actually transforms the problem into
+Let us define a unitary rotation $\bm{U} = \bm{1} \oplus_{\text{diag}} \bm{X}$. Application of this unitary to the Hamiltonian will not change the spectrum and actually transforms the problem into
 \begin{equation}
     \bm{H}' = \bm{U}^\dag \bm{H} \bm{U} = \begin{pmatrix} \bm{1} & \bm{0}\\ \bm{0}&\bm{X }^\dag \end{pmatrix} \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{C}^{2 \mathrm{hlp}} \end{pmatrix} \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0}&\bm{X } \end{pmatrix} = \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\bm{X}\\ \bm{X}^\dag \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{X }^\dagger \bm{C}^{2 \mathrm{hlp}} \bm{X } \end{pmatrix}.
 \label{eq:booth_upfolded_hamiltonian}
@@ -137,7 +137,59 @@ $$
 0 & 0 & \bm{1} \oplus \bm{N}
 \end{array}\right)
 $$
-leading to the non-Hermitian eigenvalue equation $\mathcal{\bm{N}} \bm{H} \bm{R} = \bm{R} \bm{E}$. Let us carry this matrix multiplication out, just for the 2h1p sector. Collect the relevant components of the excitation vector into a block vector:
+and the excitation vector is $\bm{R} = (\bm{R}^{1\mathrm{h}+1\mathrm{p}}, \bm{R}^{2\mathrm{h}1\mathrm{p}}, \bm{R}^{2\mathrm{p}1\mathrm{h}})$ with $\bm{R}^{2\mathrm{h}1\mathrm{p}}=(\bm{r}^{2\mathrm{h}1\mathrm{p}}, \bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}})$ and $\bm{R}^{2\mathrm{p}1\mathrm{h}}=(\bm{r}^{2\mathrm{p}1\mathrm{h}}, \bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}})$. So 
+$\bm{\mathcal{N}} \bm{H} \bm{R} = \bm{R} \bm{E}$ leads to:
+\begin{equation}
+\begin{pmatrix}
+\bm{1} & 0 & 0 \\
+0 & \bm{1} \oplus \bm{N} & 0 \\
+0 & 0 & \bm{1} \oplus \bm{N}
+\end{pmatrix}
+\begin{pmatrix}
+\bm{F} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{plh}} & \bm{V}^{2\mathrm{plh}} \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &  & & \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}} & & \bm{0} \\
+\left(\bm{V}^{2\mathrm{plh}}\right)^{\dagger} & & & & \\
+\left(\bm{V}^{2\mathrm{plh}}\right)^{\dagger} &  & \bm{0} & & \bm{C}^{2\mathrm{plh}}
+\end{pmatrix}
+\begin{pmatrix}
+\bm{r}^{1\mathrm{h}+1\mathrm{p}} \\
+\bm{r}^{2\mathrm{h}1\mathrm{p}} \\
+\bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}} \\
+\bm{r}^{2\mathrm{p}1\mathrm{h}} \\
+\bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}}
+\end{pmatrix} = E
+\begin{pmatrix}
+\bm{r}^{1\mathrm{h}+1\mathrm{p}} \\
+\bm{r}^{2\mathrm{h}1\mathrm{p}} \\
+\bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}} \\
+\bm{r}^{2\mathrm{p}1\mathrm{h}} \\
+\bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}}
+\end{pmatrix}
+\end{equation}
+The 5 coupled equations can be written as
+\begin{align}
+\bm{F} \bm{r}^{1\mathrm{h}+1\mathrm{p}} + \bm{V}^{2\mathrm{h}1\mathrm{p}} \left(\bm{r}^{2\mathrm{h}1\mathrm{p}} + \bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}}\right) + \bm{V}^{2\mathrm{plh}} \left(\bm{r}^{2\mathrm{p}1\mathrm{h}} + \bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}}\right) &= E \bm{r}^{1\mathrm{h}+1\mathrm{p}} \\
+\left(\bm{V}^{2\mathrm{h}1\mathrm{p}}\right)^\dagger \bm{r}^{1\mathrm{h}+1\mathrm{p}} + [\bm{\tilde{C}}^{2\mathrm{hlp}}]^{xx}\bm{r}^{2\mathrm{h}1\mathrm{p}}+ [\bm{\tilde{C}}^{2\mathrm{hlp}}]^{xd}\bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}} &= E \bm{r}^{2\mathrm{h}1\mathrm{p}} \\
+\left(\bm{V}^{2\mathrm{h}1\mathrm{p}}\right)^\dagger \bm{r}^{1\mathrm{h}+1\mathrm{p}} + [\bm{\tilde{C}}^{2\mathrm{hlp}}]^{dx}\bm{r}^{2\mathrm{h}1\mathrm{p}}+ [\bm{\tilde{C}}^{2\mathrm{hlp}}]^{dd}\bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}} &= E \bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}} \\
+\left(\bm{V}^{2\mathrm{plh}}\right)^\dagger \bm{r}^{1\mathrm{h}+1\mathrm{p}} + [\bm{\tilde{C}}^{2\mathrm{plh}}]^{xx}\bm{r}^{2\mathrm{p}1\mathrm{h}}+ [\bm{\tilde{C}}^{2\mathrm{plh}}]^{xd}\bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}} &= E \bm{r}^{2\mathrm{p}1\mathrm{h}} \\
+\left(\bm{V}^{2\mathrm{plh}}\right)^\dagger \bm{r}^{1\mathrm{h}+1\mathrm{p}} + [\bm{\tilde{C}}^{2\mathrm{plh}}]^{dx}\bm{r}^{2\mathrm{p}1\mathrm{h}}+ [\bm{\tilde{C}}^{2\mathrm{plh}}]^{dd}\bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}} &= E \bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}}
+\end{align}
+% We can combine into 3 by adding the second to the third and the fourth to the fifth, which gives us
+% \begin{align}
+% \bm{F} \bm{r}^{1\mathrm{h}+1\mathrm{p}} + \bm{V}^{2\mathrm{h}1\mathrm{p}} \left(\bm{r}^{2\mathrm{h}1\mathrm{p}} + \bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}}\right) + \bm{V}^{2\mathrm{plh}} \left(\bm{r}^{2\mathrm{p}1\mathrm{h}} + \bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}}\right) &= E \bm{r}^{1\mathrm{h}+1\mathrm{p}} \\[6pt]
+% 2\left(\bm{V}^{2\mathrm{h}1\mathrm{p}}\right)^\dagger \bm{r}^{1\mathrm{h}+1\mathrm{p}} + \left([\bm{\tilde{C}}^{2\mathrm{hlp}}]^{xx}+[\bm{\tilde{C}}^{2\mathrm{hlp}}]^{xd}\right)\bm{r}^{2\mathrm{h}1\mathrm{p}}+ \left([\bm{\tilde{C}}^{2\mathrm{hlp}}]^{dx}+[\bm{\tilde{C}}^{2\mathrm{hlp}}]^{dd}\right)\bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}} &= E \bm{r}^{2\mathrm{h}1\mathrm{p}} \\[6pt]
+% \end{align}
+where now we have $\bm{\tilde{C}}^{2\mathrm{hlp}} = \varepsilon^{1\mathrm{~h}} \oplus (-\bm{N}\bm{\tilde{M}})$ and $\bm{\tilde{C}}^{2\mathrm{plh}} = \varepsilon^{1\mathrm{p}} \oplus \bm{N}\bm{\tilde{M}}$.
+Solving the last two equations gives:
+\begin{align}
+\bm{r}^{2\mathrm{h}1\mathrm{p}} + \bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}} &= \left(E\bm{1} - \bm{\tilde{C}}^{2\mathrm{hlp}}\right)^{-1} \left(\left(\bm{V}^{2\mathrm{h}1\mathrm{p}}\right)^\dagger \bm{r}^{1\mathrm{h}+1\mathrm{p}} - \bm{\tilde{C}}^{2\mathrm{plh}} \left(\bm{r}^{2\mathrm{p}1\mathrm{h}} + \bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}}\right)\right) \\[6pt]
+\bm{r}^{2\mathrm{p}1\mathrm{h}} + \bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}} &= \left(\bm{\tilde{C}}^{2\mathrm{plh}} - E \bm{1}\right)^{-1} \left(\left(\bm{V}^{2\mathrm{plh}}\right)^\dagger \bm{r}^{1\mathrm{h}+1\mathrm{p}} + \bm{\tilde{C}}^{2\mathrm{hlp}} \left(\bm{r}^{2\mathrm{h}1\mathrm{p}} + \bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}}\right)\right)
+\end{align}
+ The eigenvalue equation is then given by
+what they claim gives $\bm{H} \bm{R} = \bm{\mathcal{N}} \bm{R} \bm{E}$ and then leading to the non-Hermitian eigenvalue equation $\mathcal{\bm{N}} \bm{H} \bm{R} = \bm{R} \bm{E}$.
+\subsubsection{Downfolding equivalence}
+Let us carry this matrix multiplication out, just for the 2h1p sector. Collect the relevant components of the excitation vector into a block vector:
 \[
 \bm{R} = 
 \begin{pmatrix}
@@ -146,8 +198,8 @@ leading to the non-Hermitian eigenvalue equation $\mathcal{\bm{N}} \bm{H} \bm{R}
 \bm{\bar{r}}_{i[jb]}
 \end{pmatrix}^\dag
 \]
-We will define the total dimension of this excitation vector as $T$.
-The super-Hamiltonian and super-metric decompose as:
+We will define the total dimension of this excitation vector as $T=P+A_O$, where $P=O+V$ and $A_O=2O^2V$.
+The super-Hamiltonian decomposes as:
 \[
 \bm{H} =
 \begin{pmatrix}
@@ -157,58 +209,112 @@ The super-Hamiltonian and super-metric decompose as:
 \end{pmatrix}_{PP} &
 \begin{pmatrix}
     \bm{V}^{2 \mathrm{h1p}}_{p,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{p,i[\bar{jb}]} \\
-\end{pmatrix}_{PA} \\ 
+\end{pmatrix}_{PA_O} \\ 
 \begin{pmatrix}
     \bm{V}^{2 \mathrm{h1p}}_{p,k[lc]} & \bm{V}^{2 \mathrm{h1p}}_{p,k[\bar{lc}]}
-\end{pmatrix}^\dagger_{AP} &
-\left(\left(\varepsilon^{1h}\right) \oplus_{\text{kron}} \bm{\tilde{M}}_{jb,jb;lc,lc}\right)_{AA}
+\end{pmatrix}^\dagger_{A_OP} &
+\left(\left(\varepsilon^{1h}\right) \oplus_{\text{kron}} -\bm{\tilde{M}}_{jb,jb;lc,lc}\right)_{A_OA_O}
 \end{pmatrix}
-\qquad
-\bm{\mathcal{N}} =
-\begin{pmatrix}
-\bm{I_{PP}} & 0 \\[3pt]
-0 & \bm{N_{AA}}
-\end{pmatrix}
-\]
- with $\bm{N}_{AA} \equiv \bm{1}_{\text{2nov}} \oplus_{\text{direct}} \bm{N}_{\text{2nov}}=\begin{pmatrix} \bm{1}_{\text{2nov}} & 0 \\ 0 & \bm{N}_{\text{2nov}} \end{pmatrix}$ and recall that $o+v=P$.
+\] 
+\subsubsection{Equivalence to Booth form}
+We would need to perform a rotation by
 The matrix-vector product becomes:
 \[
-\bm{\sigma} = \bm{\mathcal{N}} \bm{H} \bm{R}
-=
+\bm{\sigma}
+= 
+\bm{\mathcal{N}}
 \begin{pmatrix}
-\bm{I}_{PP} \begin{pmatrix}
+ \begin{pmatrix}
 \bm{F}_{oo} & \bm{F}_{ov} \\ \bm{F}_{vo} & \bm{F}_{vv}
 \end{pmatrix}_{PP} \begin{pmatrix}
 \bm{r}_i \\ \bm{r}_a
-\end{pmatrix}_{PT} + \bm{I}_{PP} \begin{pmatrix}
+\end{pmatrix}_{PT} + \begin{pmatrix}
     \bm{V}^{2 \mathrm{h1p}}_{p,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{p,i[\bar{jb}]} \\
-\end{pmatrix}_{P,2O^2V} \begin{pmatrix}
+\end{pmatrix}_{PA_O} \begin{pmatrix}
     \bm{r}_{i[jb]} \\
-\bm{\bar{r}}_{i[jb]}
-\end{pmatrix}_{2O^2V,T} \\[6pt]
-\bm{N}_{AA} \left( \bm{H}_{ds} \bm{r}_s + \bm{H}_{dd} \bm{r}_d \right)
+\bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{A_OT} \\[6pt]
+ \begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}_{p,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{p,i[\bar{jb}]} \\
+\end{pmatrix}^\dag_{A_OP} \begin{pmatrix}
+\bm{r}_i \\ \bm{r}_a
+\end{pmatrix}_{PT} +
+\left(\left(\varepsilon^{1h}\right) \oplus_{\text{kron}} -\bm{\tilde{M}}_{jb,jb;lc,lc}\right)_{A_OA_O} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{A_OT}
 \end{pmatrix}
 \]
-so we can quickly identify that that first row becomes
-\begin{equation}
- \sigma_i = \sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c \mid k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k lc} \bigl\langle i\,c \mid k\,l \bigr\rangle\,\bar{r}_{k[l c]}
-\end{equation}
-and 
-\begin{equation}
- \sigma_a = \sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c \mid k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k lc} \bigl\langle a\,c \mid k\,l \bigr\rangle\,\bar{r}_{k[l c]}
-\end{equation}
-For the second row, let us start by evaluating $\bm{N}_{dd} \bm{H}_{ds} \bm{r}_s = \begin{pmatrix}
-    \bm{1}_{\text{2nov}} & 0 \\ 0 & \bm{N}_{\text{2nov}}
-\end{pmatrix}
+Now we are left to decide what the super-metric $\bm{\mathcal{N}}$ is. We can define it as
+\[\bm{\mathcal{N}} =
 \begin{pmatrix}
-    \bm{V}^{2 \mathrm{h1p}}^\dag \\
-    \bm{V}^{2 \mathrm{h1p}}^\dag
+\bm{I_{PP}} & 0 \\[3pt]
+0 & \bm{N_{A_OA_O}}
 \end{pmatrix}
+\]
+ with $\bm{N}_{A_OA_O} \equiv \bm{1}_{O} \oplus_{\text{kron}} \bm{N}_{\text{2OV}}=\bm{1}_O \otimes \bm{1}_{2OV} + \bm{1}_{O} \otimes \bm{N}_{\text{2OV}}$. But if we take this definiton, then $\bm{\mathcal{N}}\bm{\mathcal{N}} \neq \bm{1}$, so we can't do $\bm{H} \bm{R} = \bm{\mathcal{N}} \bm{R} \bm{E} \implies \bm{\mathcal{N}} \bm{H} \bm{R} = \bm{R} \bm{E}$, as they claim. Next, assume they made a typo, so do $\bm{N}_{A_OA_O} = \begin{pmatrix}
+ \bm{1}_{O^2V} & 0 \\
+0 & \bm{-1}_{O^2V}
+ \end{pmatrix}$. Now, we have  $\bm{N}_{A_OA_O}\bm{N}_{A_OA_O} = \bm{1}_{A_OA_O}$ and
+\begin{align}
+&    \bm{\mathcal{N}} \bm{H} \bm{R}
+= 
 \begin{pmatrix}
-    \bm{r}_i \\
-    \bm{r}_a
-\end{pmatrix}
-$$
+\bm{1}_{PP}
+ \begin{pmatrix}
+\bm{F}_{oo} & \bm{F}_{ov} \\ \bm{F}_{vo} & \bm{F}_{vv}
+\end{pmatrix}_{PP} \begin{pmatrix}
+\bm{r}_i \\ \bm{r}_a
+\end{pmatrix}_{PT} + \bm{1}_{PP}\begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}_{p,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{p,i[{jb}]} \\
+\end{pmatrix}_{PA_O} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{A_OT} \\[6pt]
+ \bm{N}_{A_OA_O}\begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}_{p,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{p,i[{jb}]} \\
+\end{pmatrix}^\dag_{A_OP} \begin{pmatrix}
+\bm{r}_i \\ \bm{r}_a
+\end{pmatrix}_{PT} +
+\bm{N}_{A_OA_O}\left(\left(\varepsilon^{1h}\right) \oplus_{\text{kron}} -\bm{\tilde{M}}_{jb,jb;lc,lc}\right)_{A_OA_O} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{A_OT}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+ \begin{pmatrix}
+\bm{F}_{oo}\bm{r}_i + \bm{F}_{ov}\bm{r}_a \\ \bm{F}_{vo}\bm{r}_i + \bm{F}_{vv}\bm{r}_a
+\end{pmatrix}_{PT} + \begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}_{k,j[lc]}\bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{k,i[{jb}]}\bm{\bar{r}}_{i[\bar{jb}]}\\ \bm{V}^{2 \mathrm{h1p}}_{c,a[jb]}\bm{r}_{a[jb]} + \bm{V}^{2 \mathrm{h1p}}_{c,a[{jb}]}\bm{\bar{r}}_{a[{jb}]}
+\end{pmatrix}_{PT} \\[6pt]
+ \bm{N}_{A_OA_O}\begin{pmatrix}
+    \bm{V}^{2 \mathrm{h1p}}_{k,i[jb]}\bm{r}_k+ \bm{V}^{2 \mathrm{h1p}}_{a,i[jb]}\bm{r}_a \\
+\end{pmatrix}^\dag_{A_OT} +
+\bm{N}_{A_OA_O}\left(\left(\varepsilon^{1h}\right) \oplus_{\text{kron}} -\begin{pmatrix}
+\bm{\tilde{M}}^{xx}_{jb,lc} & \bm{\tilde{M}}^{xd}_{jb,lc} \\
+\bm{\tilde{M}}^{dx}_{jb,lc} & \bm{\tilde{M}}^{dd}_{jb,lc}
+\end{pmatrix}\right)_{A_OA_O} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{A_OT}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+ \begin{pmatrix}
+\sum_j f_{ij}r_j+ \sum_b f_{ib}r_b + \sum_{jlc} \langle i c | jl \rangle r_{j[lc]} + \sum_{jlc} \langle i c | jl \rangle \bar{r}_{j[lc]} \\ \sum_j f_{aj}r_j+ \sum_b f_{ab}r_b + \sum_{jlc} \langle a c | jl \rangle r_{j[lc]} + \sum_{jlc} \langle a c | jl \rangle \bar{r}_{j[lc]}
+\end{pmatrix}_{PT} \\[6pt]
+\begin{pmatrix}
+    \sum_k \langle ka | ij  \rangle {r}_k + \sum_b \langle ba | ij  \rangle {r}_b \\
+-\sum_k \langle ka | ij  \rangle {r}_k - \sum_b \langle ba | ij  \rangle {r}_b
+\end{pmatrix}_{A_OT} +
+\bm{N}_{A_OA_O}\left(\left(\varepsilon^{1h}\right) \oplus_{\text{kron}} -\begin{pmatrix}
+\bm{\tilde{M}}^{xx}_{jb,lc} & \bm{\tilde{M}}^{xd}_{jb,lc} \\
+\bm{\tilde{M}}^{dx}_{jb,lc} & \bm{\tilde{M}}^{dd}_{jb,lc}
+\end{pmatrix}\right)_{A_OA_O} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{A_OT}
+\end{pmatrix} \\
+\end{align}
 % \subsubsection{Proving equivalence to Booth's ED}
 % Again, we will just work with a single channel, the lesser one. In the dRPA case, Booth's formulation for the upfolded Hamiltonian is
 % \begin{equation}
