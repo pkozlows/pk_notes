@@ -1,0 +1,325 @@
+\section{Constructing the Hamiltonian}
+The idea of this method is not to work in the MO basis, but rather to work in a basis of particle-hole excitations, which are approximated as bosons. So $\hat{a}_a^\dagger \hat{a}_i \approx \hat{b}_\nu^\dag$ and $\hat{a}_i^\dagger \hat{a}_a \approx \hat{b}_\nu$, where in second quantization $\hat{a}$ are fermionic and $\hat{b}$ are bosonic operators, respectively. However, the drawback is that these bosonic operators no longer obey the Pauli exclusion principle; what was done above is known as the quasi-boson approximation. Then we define the electron-boson Hamiltonian as
+\begin{equation}
+\hat{H}^{\mathrm{eB}}=\hat{H}^{\mathrm{e}}+\hat{H}^{\mathrm{B}}+\hat{V}^{\mathrm{eB}}
+\end{equation}
+where $\hat{H}^{\mathrm{e}}$ is the electronic Hamiltonian, $\hat{H}^{\mathrm{B}}$ is the bosonic Hamiltonian, and $\hat{V}^{\mathrm{eB}}$ is the electron-boson coupling term, given as
+\begin{align}
+\hat{H}^e&=\sum_{p q} f_{p q}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\} \\
+\hat{H}^{B}&=\sum_{\nu \mu} A_{\nu \mu} \hat{b}_\nu^{\dagger} \hat{b}_\mu+\frac{1}{2} \sum_{\nu \mu} B_{\nu \mu}\left(\hat{b}_\nu^{\dagger} \hat{b}_\mu^{\dagger}+\hat{b}_\nu \hat{b}_\mu\right)
+\label{b} \\
+\hat{V}^{eB}&=\sum_{p q, \nu} V_{p q \nu}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\}\left(\hat{b}_\nu^{\dagger}+\hat{b}_\nu\right)
+\label{eb}
+\end{align}
+In the electronic Hamiltonian, $\{\cdots\}$ denotes normal-ordered fermionic operators with respect to the Fermi vacuum and $f_{p q}$ denotes the Hartree-Fock matrix. In the bosonic Hamiltonian, $A_{\nu \mu}$ and $B_{\nu \mu}$ denote the dRPA matrices, as
+\begin{equation}
+\begin{split}
+A_{\nu \mu}&=A_{i a, j b}=\delta_{i j} \delta_{a b}\left(\epsilon _a-\epsilon _i\right)+(ia|bj) \\
+B_{v \mu}&=B_{i a, j b}=(i a | j b)
+\end{split}
+\end{equation}
+The electron-boson coupling term is defined as
+\begin{equation}
+V_{p q \nu}=V_{p q, i a}=(p q| i a)
+\end{equation}
+As we will see shortly, the coupling between electronic and bosonic operators in the electron-boson coupling term will introduce the desired RPA screening within this quasi-boson formalism. But the connection to the exact downfolded form (previously called Booth's ED) is clear; the physical space is represented by the electronic Hamiltonian, the auxiliary space by the bosonic Hamiltonian, and the coupling between them by the electron-boson coupling term. Right now the bosonic Hamiltonian (specifically its second term) does not conserve the boson number. To remedy this, we perform a unitary transformation
+\begin{equation}
+\hat{U}^{\dagger} \hat{H}^{\mathrm{eB}} \hat{U} \rightarrow \tilde{H}^{\mathrm{eB}}.
+\end{equation}
+\subsection{Nature of the unitary transformation}
+The bosonic Hamiltonian can be expressed in the bosonic basis $\bm{{b}} = \left( \hat{b}_1, \hat{b}_2, \ldots \right)$ as
+\begin{align}
+\hat{H}^{\mathrm{B}}\left(\hat{b}, \hat{b}^{\dagger}\right)&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left(\begin{array}{ll}
+\mathbf{b}^{\dagger} & \mathbf{b}
+\end{array}\right)\left(\begin{array}{ll}
+\mathbf{A} & \mathbf{B} \\
+\mathbf{B} & \mathbf{A}
+\end{array}\right)\binom{\mathbf{b}}{\mathbf{b}^{\dagger}}
+\label{eq:rpa_rec}
+ \\
+&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\begin{pmatrix}\bm{b}^{\dagger}& \bm{b}\end{pmatrix}\begin{pmatrix}
+    \bm{A}\bm{b} + \bm{B}\bm{b}^{\dagger} \\
+    \bm{B}\bm{b} + \bm{A}\bm{b}^{\dagger}
+\end{pmatrix} \\
+&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left[\bm{b}^{\dagger} \bm{A} \bm{b} + \bm{b}^{\dagger} \bm{B} \bm{b}^{\dagger} + \bm{b} \bm{B} \bm{b} + \bm{b} \bm{A} \bm{b}^{\dagger}\right]
+\label{eq:normal}
+ \\
+&=\bm{b}^{\dagger} \bm{A} \bm{b} + \frac{1}{2}\left[\bm{b}^{\dagger} \bm{B} \bm{b}^{\dagger} + \bm{b} \bm{B} \bm{b}\right] + \bm{0}\\
+&=\sum_{\nu \mu} A_{\nu \mu} \hat{b}_\nu^{\dagger} \hat{b}_\mu+\frac{1}{2} \sum_{\nu \mu} B_{\nu \mu}\left(\hat{b}_\nu^{\dagger} \hat{b}_\mu^{\dagger}+\hat{b}_\nu \hat{b}_\mu\right)
+\end{align}
+From \ref{eq:normal}, we used the fact that the final term needs to be put into normal order so we can do $\bm{b} \bm{A} \bm{b}^{\dagger}=\sum_{\mu\nu}A_{\mu\nu}b_\mu b_\nu^{\dagger}= \sum_{\mu\nu}A_{\mu\nu}\left(b_\nu^\dagger b_\mu + \delta_{\mu\nu}\right) = \bm{b}^\dagger \bm{A} \bm{b} + \operatorname{Tr}\left(\bm{A}\right)$. In the above we have showed equivalence to the previously defined form in \ref{eb}.  From this definition of the bosonic Hamiltonian, in \ref{eq:rpa_rec}, we recognize the appearance of the RPA matrix. We can obtain a diagonalized form 
+\begin{equation}
+\hat{H}^{\mathrm{B}}\left(\bar{b}, \bar{b}^{\dagger}\right)=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left(\overline{\mathbf{b}}^{\dagger} \overline{\mathbf{b}}\right)\left(\begin{array}{cc}
+\Omega \mathbf{1} & 0 \\
+0 & \Omega \mathbf{1}
+\end{array}\right)\binom{\overline{\mathbf{b}}}{\overline{\mathbf{b}}^{\dagger}}
+\end{equation}
+through a redefinition of the bosonic operators as
+\begin{align}
+\binom{\overline{\mathbf{b}}}{\overline{\mathbf{b}}^{\dagger}}=\left(\begin{array}{cc}
+\mathbf{X} & -\mathbf{Y} \\
+-\mathbf{Y} & \mathbf{X}
+\end{array}\right)^T\binom{\mathbf{b}}{\mathbf{b}^{\dagger}} \quad \text{and} \quad
+\binom{\mathbf{b}}{\mathbf{b}^{\dagger}}=\left(\begin{array}{ll}
+\mathbf{X} & \mathbf{Y} \\
+\mathbf{Y} & \mathbf{X}
+\end{array}\right)\binom{\overline{\mathbf{b}}}{\overline{\mathbf{b}}^{\dagger}} .
+\end{align}
+\subsubsection{Effect on the bosonic Hamiltonian}
+Now by expanding, we see
+\begin{align}
+\hat{H}^{\mathrm{B}}\left(\overline{\mathbf{b}},
+\overline{\mathbf{b}}^{\dagger}\right)&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left(\overline{\mathbf{b}}^{\dagger} \overline{\mathbf{b}}\right)\left(\begin{array}{cc}\Omega \mathbf{1} & 0 \\
+0 & \Omega \mathbf{1}
+\end{array}\right)\binom{\overline{\mathbf{b}}}{\overline{\mathbf{b}}^{\dagger}} \\
+&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+ \frac{1}{2}\begin{pmatrix}
+\overline{\mathbf{b}}^{\dagger} & \overline{\mathbf{b}}\end{pmatrix}
+\begin{pmatrix}
+\bm{\Omega} \overline{\mathbf{b}} \\
+\bm{\Omega} \overline{\mathbf{b}}^{\dagger}
+\end{pmatrix}
+\\
+&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left[\overline{\mathbf{b}}^{\dagger} \bm{\Omega} \overline{\mathbf{b}} + \underbrace{\overline{\mathbf{b}} \bm{\Omega} \overline{\mathbf{b}}^{\dagger}}_{\overline{b}^\dagger \bm{\Omega} \overline{b} + \operatorname{Tr}\left(\bm{\Omega}\right)}\right] \\
+&=\overline{\mathbf{b}}^{\dagger} \bm{\Omega} \overline{\mathbf{b}} + \frac{1}{2}\operatorname{Tr}\left(\bm{\Omega} - \mathbf{A}\right) \\
+&=\sum_{\nu} \Omega_\nu \overline{b}_\nu^{\dagger} \overline{b}_\nu + E_{\mathrm{RPA}}^c
+\end{align}
+\subsubsection{Effect on the electron-boson coupling term}
+Originally, the electron-boson coupling term is given as
+\begin{equation}
+\hat{V}^{\mathrm{eB}}=\sum_{p q, \nu} V_{p q, \nu}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\}\left(\hat{b}_\nu^{\dagger}+\hat{b}_\nu\right)
+\end{equation}
+Here, we will use that the redefinition of the bosonic operators such that $\hat{b_\nu} = \sum_\mu \left(\mathbf{X}_{\mu}^{\nu} \hat{\overline{b}}_\nu + \mathbf{Y}_{\mu}^{\nu} \hat{\overline{b}}_\nu^{\dagger}\right)$ and $\hat{b_\nu}^\dagger = \sum_\mu \left(\mathbf{X}_{\mu}^{\nu} \hat{\overline{b}}_\nu^\dagger + \mathbf{Y}_{\mu}^{\nu} \hat{\overline{b}}_\nu\right)$, which gives $\hat{b}_\nu + \hat{b}_{\nu}^\dagger = \sum_\mu \left(\mathbf{X}_{\mu}^{\nu} + \mathbf{Y}_{\mu}^{\nu}\right) \left(\hat{\overline{b}}_\nu + \hat{\overline{b}}_\nu^\dagger\right)$, so after we plug in
+\begin{align}
+\hat{V}^{\mathrm{eB}}&=\sum_{p q, \nu} V_{p q, \nu}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\}\left(\sum_\mu \left(\mathbf{X}_{\mu}^{\nu}  + \mathbf{Y}_{\mu}^{\nu} \right) \right)\left(\hat{\overline{b}}_\nu + \hat{\overline{b}}_\nu^\dagger\right) \\
+&= \sum_{p q, \nu} W_{p q, \nu} \left\{ \hat{a}_p^{\dagger} \hat{a}_q \right\}\left(\bar{b}_\nu+\bar{b}_\nu^{\dagger}\right)
+\end{align}
+where now we had identified the RPA screened Coulomb interaction $W_{p q, \nu} = V_{p q, \nu} \left(\mathbf{X}_{\mu}^{\nu} + \mathbf{Y}_{\mu}^{\nu}\right)$. 
+\section{Defining the supermatrix}
+We then build the supermatrices $\mathbf{H}$ and $\mathbf{S}$ with matrix elements,
+$$
+\begin{gathered}
+H_{I J}=\left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[C_I,\left[\tilde{H}^{\mathrm{eB}}, C_J^{\dagger}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle \\
+S_{I J}=\left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[C_I, C_J^{\dagger}\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle
+\end{gathered}
+$$
+where $\left\{C_I^{\dagger}\right\}=\left\{\underbrace{a_i}_{1h}, \underbrace{a_a}_{1p}, \underbrace{a_i b_\nu^{\dagger}}_{2h1p}, \underbrace{a_a b_\nu}_{1p2p}\right\}$ and $|0\rangle_{\mathrm{F}}$ and $|0\rangle_{\mathrm{B}}$ are the Fermi and boson vacuums. Computing the matrix elements of these $\bm{S}$ gives:
+\begin{align}
+\bm{S} &= \begin{pmatrix}
+    \delta_{ij} & 0 & 0 & 0 \\
+    0 & \delta_{ab} & 0 & 0 \\
+    0 & 0 & \delta_{ij}\delta_{\nu\nu'} & 0 \\
+    0 & 0 & 0 & \delta_{ab}\delta_{\nu\nu'}
+\end{pmatrix}
+\end{align}
+$\bm{H}$ takes more care and so we first consider
+\begin{equation}
+\begin{split}
+    H_{ij} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i, \left[\hat{H}^{\mathrm{eB}}, a_j^{\dagger}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i, \left[\hat{H}^{\mathrm{e}}, a_j^{\dagger}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle \\
+\end{split}
+\end{equation}
+We can make this simplification because the electronic operators commute with all bosonic operators. Now
+\begin{align}
+[\hat H^e,\;a_j^\dagger]
+&= \sum_{p q}f_{pq}\,\bigl[a_p^\dagger a_q,\;a_j^\dagger\bigr]
+= \sum_{p q}f_{pq}\;a_p^\dagger\,[\,a_q,a_j^\dagger\,]
+= \sum_{p}f_{p j}\,a_p^\dagger,\\[6pt]
+[a_i,\;[\hat H^e,\;a_j^\dagger]]
+&= \bigl[a_i,\;\sum_{p}f_{p j}\,a_p^\dagger\bigr]
+= \sum_{p}f_{p j}\,[\,a_i,a_p^\dagger\,]
+= \sum_{p}f_{p j}\,\delta_{i p}
+= f_{i j}
+\end{align}
+So $H_{ij} = f_{ij}$ and similarly, we can find $H_{ab} = f_{ab}$. Next, we do the auxiliary blocks:
+\begin{align}
+H_{i \nu j \nu'} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i b_\nu^{\dagger}, \left[\hat{H}^{\mathrm{eB}}, a_j^{\dagger}b_{\nu'}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i b_\nu^{\dagger}, \left[\hat{H}^{\mathrm{e}} + \hat{H}^{\mathrm{B}} + \hat{V}^{\mathrm{eB}}, a_j^{\dagger}b_{\nu'}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle \\
+\end{align}
+First
+\begin{align}
+[\hat H^e,\;a_j^\dagger b_{\nu'}] &= \sum_{p q}f_{pq}\,[a_p^\dagger a_q, a_j^{\dagger} b_{\nu'}] = \sum_{p}f_{pj}a_p^\dagger b_{\nu'} \\
+[a_i b_\nu^\dagger,\;[\hat H^e,\;a_j^\dagger b_{\nu'}]] &= [a_i b_\nu^\dagger,\; \sum_{p}f_{pj} a_p^\dagger b_{\nu'}] = \sum_{p}f_{pj}[a_i b_\nu^\dagger, a_p^\dagger b_{\nu'}] = \sum_{p}f_{pj}\delta_{ip}\delta_{\nu\nu'} = f_{ij}\delta_{\nu\nu'}
+\end{align}
+next
+\begin{align}
+[\hat H^B,\;a_j^\dagger b_{\nu'}] &= [\sum_{\nu} \Omega_\nu {b}_\nu^{\dagger} {b}_\nu + E_{\mathrm{RPA}}^c, a_j^{\dagger} b_{\nu'}] = \sum_{\nu} \Omega_\nu a_j^{\dagger}[ {b}_\nu^{\dagger} {b}_\nu, b_{\nu'}] = - \Omega_{\nu'} a_j^{\dagger} {b}_{\nu'} \\
+[a_i b_\nu^\dagger,\;[\hat H^B,\;a_j^\dagger b_{\nu'}]] &= [a_i b_\nu^\dagger,\;-\Omega_{\nu'} a_j^\dagger b_{\nu'}] = -\Omega_{\nu'} [a_i,\;a_j^\dagger] [b_\nu^\dagger,\;b_{\nu'}] = -\Omega_{\nu'} \delta_{ij} \delta_{\nu \nu'}.
+\end{align}
+last
+\begin{align}
+[\hat V^{eB},\;a_j^\dagger b_{\nu'}] &= [\sum_{p q, \nu} W_{p q, \nu} \hat{a}_p^{\dagger} \hat{a}_q \left({b}_\nu+{b}_\nu^{\dagger}\right), a_j^{\dagger} b_{\nu'}] = \sum_{p q, \nu} W_{p q, \nu} [\hat{a}_p^{\dagger} \hat{a}_q, a_j^{\dagger}] [{b}_\nu+{b}_\nu^{\dagger}, b_{\nu'}]\\
+& = -\sum_{p} W_{p j, \nu'} \hat{a}_p^{\dagger} \\ [a_i b_\nu^\dagger,\;[\hat V^{eB},\;a_j^\dagger b_{\nu'}]] &= 0
+\end{align}
+So $H_{i\nu j \nu'} = f_{ij} \delta_{\nu \nu'} - \Omega_{\nu'} \delta_{ij} \delta_{\nu \nu'} = \left(\epsilon_i - \Omega_{\nu'}\right) \delta_{ij} \delta_{\nu \nu'}$, where in the last line we used the fact that in the canonical MO basis, the HF Fock matrix is diagonal. Similarly, we can find $H_{a \nu b \nu'} = \left(\epsilon_a + \Omega_{\nu'}\right) \delta_{ab} \delta_{\nu \nu'}$. Finally, for the electron-boson coupling blocks, we have
+\begin{align}
+H_{p,i\nu} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_p, \left[\hat{H}^{\mathrm{eB}}, a_i^{\dagger} b_\nu\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_p, \left[\hat{V}^{\mathrm{eB}}, a_i^{\dagger} b_\nu\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle
+\end{align}
+So 
+\begin{align}
+[\hat V^{eB},\;a_i^\dagger b_\nu] &= \sum_{rs,\nu'} W_{rs, \nu'} [\hat{a}_r^{\dagger} \hat{a}_s (\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}), a_i^{\dagger} b_\nu] = \sum_{rs,\nu'} W_{rs, \nu'} \left[ \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} [\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}, b_\nu] + [\hat{a}_r^{\dagger} \hat{a}_s, a_i^{\dagger}]b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) \right] \\
+[a_p,\;[\hat V^{eB},\;a_i^\dagger b_\nu]] &= \sum_{rs,\nu'} W_{rs, \nu'} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} \delta_{\nu' \nu} + \hat{a}_r^{\dagger} \delta_{si} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) \right] = \sum_{rs,\nu'} W_{rs, \nu'} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} \delta_{\nu' \nu} \right]
+\end{align}
+\begin{equation}
+\begin{split}
+\hat{a}_p^{\dagger} \hat{a}_q a_i^{\dagger} [\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}, b_\nu] = -\hat{a}_p^{\dagger} \hat{a}_q a_i^{\dagger} \delta_{\nu' \nu}\\
+[\hat{a}_p^{\dagger} \hat{a}_q, a_i^{\dagger}]b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) = \hat{a}_p^{\dagger} \delta_{qi} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger})
+\end{split}
+\end{equation}
+Leibniz's rule is 
+[\,AB,CD\,]
+= A[B,C]D \;+\; A\,C\,[B,D] \;+\; [A,C]\,D\,B \;+\; C\,[A,D]\,B.
+ so we have
+So $H_{p,i \nu} = -W_{p i, \nu}$. Similarly, we can find $H_{p,a \nu} = -W_{p a, \nu}$. The final supermatrix is then
+\begin{equation}
+\bm{H} = \begin{pmatrix}
+    \bm{F} & \bm{W}^< & \bm{W}^> \\
+    (\bm{W}^<)^\dagger & \bm{d}^< & \bm{0} \\
+    (\bm{W}^>)^\dagger & \bm{0} & \bm{d}^>
+\end{pmatrix}
+\end{equation}
+with $W_{p i, \nu}^< = -\sum_\nu V_{p i, \nu} (X_{\nu} + Y_{\nu})$ and $W_{p a, \nu} = -\sum_\nu V_{p a, \nu} (X_{\nu} + Y_{\nu})$, where $X_{\nu}$ and $Y_{\nu}$ are the RPA eigenvectors and $d^<_{i \nu, j \nu'} = f_{i j} \delta_{\nu \nu'} - \Omega_{\nu'} \delta_{i j} \delta_{\nu \nu'}$ and $d^>_{a \nu, b \nu'} = f_{a b} \delta_{\nu \nu'} + \Omega_{\nu'} \delta_{a b} \delta_{\nu \nu'}$.
+$$
+\mathbf{H}^{G_0 W_0} \mathbf{R}=\mathbf{R} \mathbf{E}
+$$
+where $\mathbf{H}^{\mathrm{G}_0 \mathrm{~W}_0}=\mathbf{S}^{-1} \mathbf{H}$, yields the $G_0 W_0$ quasiparticle energies. 
+We start from the unitary-transformed electron–boson Hamiltonian
+\[
+\tilde H^{eB}=H^e+\tilde H^B+V^{eB},
+\]
+with
+\[
+H^e=\sum_{pq}f_{pq}\,\{a_p^\dagger a_q\},
+\quad
+\tilde H^B=E^c_{\rm RPA}+\sum_v\Omega_v\,\bar b_v^\dagger\bar b_v,
+\quad
+V^{eB}=\sum_{pq,\nu}W_{pq,\nu}\,a_p^\dagger a_q\,(\bar b_\nu+\bar b_\nu^\dagger).
+\]
+
+\subsection*{Excitation Operator Basis}
+Define the operator set
+\[
+\{C_I^\dagger\}=
+\{\,a_i,\;a_a,\;a_i b_v^\dagger,\;a_a b_v\},
+\quad
+\{C_I\}=
+\{\,a_i^\dagger,\;a_a^\dagger,\;b_v a_i^\dagger,\;b_v^\dagger a_a^\dagger\}.
+\]
+
+\subsection*{Matrix Elements of $H$ and $S$}
+Compute
+\begin{align*}
+H_{IJ}&=\bigl\langle0_F0_B\bigl|\,[C_I,\,[\tilde H^{eB},C_J^\dagger]]\bigr|0_F0_B\bigr\rangle,\\
+S_{IJ}&=\bigl\langle0_F0_B\bigl|\,[C_I,C_J^\dagger]\bigr|0_F0_B\bigr\rangle.
+\end{align*}
+
+\subsection*{Block Structure}
+By evaluating commutators in each sector one finds:
+\[
+S=\mathrm{diag}(\,1,1,1,1),
+\quad
+H=\begin{pmatrix}
+F & W^< & W^>\\
+(W^<)^\dagger & d^< & 0\\
+(W^>)^\dagger & 0 & d^>
+\end{pmatrix},
+\]
+with
+\[
+F_{pq}=f_{pq},
+\quad
+W^<_{p,i v} = \sum_\nu V_{pi,\nu}(X_{\nu v}+Y_{\nu v}),
+\quad
+W^>_{p,a v}=\sum_\nu V_{pa,\nu}(X_{\nu v}+Y_{\nu v}),
+\]
+\[
+d^<_{i v,j v'}=(\epsilon_i-\Omega_v)\,\delta_{ij}\,\delta_{vv'},
+\quad
+d^>_{a v,b v'}=(\epsilon_a+\Omega_v)\,\delta_{ab}\,\delta_{vv'}.
+\]
+
+\subsection*{Final $G_0W_0$ Supermatrix}
+Since $S$ is the identity, $H^{G_0W_0}=S^{-1}H=H$, yielding
+\[
+\mathbf H^{G_0W_0}=
+\begin{pmatrix}
+\bm F & \bm W^< & \bm W^>\\
+(\bm W^<)^\dagger & \bm d^< & \bm0\\
+(\bm W^>)^\dagger & \bm0 & \bm d^>
+\end{pmatrix}.
+\]
+I would like to show an equivalence of this with the known upfolded Hamiltonian, which is given as
+\begin{equation}
+    \bm{H}^{G_0 W_0} = \begin{pmatrix} \bm{F} & \bm{W}^< & \bm{W}^> \\ \bm{W}^{\dagger<} & \bm{d}^< & \bm{0} \\ \bm{W}^{\dagger>} & \bm{0} & \bm{d}^> \end{pmatrix}
+\end{equation}
+where $\bm{F}$ is the Fock matrix, $\bm{W}^<$ and $\bm{W}^>$ are the lesser and greater components of the RPA screened Coulomb interaction, defined as
+\begin{equation}
+\begin{split}
+    W_{pk\nu}^{<} &= \sum_{ia} (pk|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right) \\
+    W_{pc\nu}^{>} &= \sum_{ia} (pc|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right)
+\end{split}
+\end{equation}
+and the auxiliary blocks are
+\begin{equation}
+\begin{split}
+    d_{k\nu,l\nu'}^{<} &= \left(\epsilon_k - \Omega_\nu\right) \delta_{k,l} \delta_{\nu,\nu'}\\
+    d_{c\nu,d\nu'}^{>} &= \left(\epsilon_c + \Omega_\nu\right) \delta_{c,d} \delta_{\nu,\nu'}\\
+\end{split}
+\end{equation}
+$$
+\begin{aligned}
+& \hat{b}_v^{\dagger} \approx \sum_Q^{N_{A B}} C_v^Q \hat{b}_Q^{\dagger} \\
+& \hat{b}_v \approx \sum_Q^{N_{A B}} C_v^Q \hat{b}_Q
+\end{aligned}
+$$
+where $Q$ (and capital Latin letters in general) denotes $A B$ bosonic indices (and related density fitting indices below).
+A different approach, and the one we focus on in this work, is to construct $C_v^Q$ from a resolution of the identity (RI) Gaussian basis. The resolution of the identity (RI) expansion coefficients $R_v^L$ is defined from the integrals, ${ }^{28}$ i.e.,
+$$
+(i a \mid j b) \approx \sum_L R_{i a}^L R_{j b}^L
+$$
+with
+$$
+R_{i a}^L=\sum_Q(i a \mid Q)\left[\mathbf{V}^{-1 / 2}\right]_{Q P},
+$$
+where $\mathbf{V}$ denotes the Coulomb metric. ${ }^{30}$ We define the auxiliary basis by symmetric orthogonalization of the basis,
+$$
+C_v^Q=\sum_{L M} R_v^L\left[\mathbf{S}^{-1 / 2}\right]_{L M} P_M^Q
+$$
+where
+$$
+S_{L M}=\sum_v R_v^L R_v^M=\sum_Q P_L^Q E_Q P_{M^{-}}^Q
+$$
+
+The auxiliary basis size may already be smaller than $N_o N_v$, but a further truncated AB basis can be obtained by defining the overlap and its inverse with $E_Q>\tau_{\mathrm{RI}}$. This determination of the AB basis requires the RI expansion coefficients in the molecular orbital basis (which are obtained with $\mathcal{O}\left(N_{\mathrm{orb}}^3 N_{\mathrm{aux}}\right)$ cost, $N_{\text {orb }}=N_o+N_v$ ), the construction of $S_{L M}$ with $\mathcal{O}\left(N_{\mathrm{o}} N_{\mathrm{v}} N_{\mathrm{aux}}^2\right)$, and the determination of the AB basis with $\mathcal{O}\left(N_{\mathrm{AB}} N_{\mathrm{aux}}^2\right)$ cost. We denote the choice of AB expansion by $\mathrm{AB}(\mathrm{aux})$, where "aux" is the name of the auxiliary RI basis.
+The Bogoliubov transformation for $\dot{H}^{\mathrm{eB}}$, expressed in the AB basis, results in (note that the electronic part remains unchanged)
+$$
+\bar{H}^{\mathrm{eB}}=\hat{H}^e+\sum_Q \Omega_Q^{\mathrm{dRPA}} \bar{b}_Q^{\dagger} \bar{b}_Q+\sum_{p q \cdot Q} W_{p q}^Q\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\}\left(\bar{b}_Q^{\dagger}+\bar{b}_Q\right)+E_{\mathrm{dRPA}}^c,
+$$
+where $\Omega_Q^{\mathrm{dRPA}}$ denotes the dRPA excitation energies and $W_{P q}^Q$ denotes the transformed electron-boson coupling term,
+$$
+W_{p q}^Q=\sum_R^{N_{A B}} V_{p q, R}(\mathbf{X}+\mathbf{Y})_{R Q^{\prime}}
+$$
+with $\mathbf{X}$ and $\mathbf{Y}$ being the dRPA excitation vectors. $E_{\mathrm{dRPA}}^{\mathrm{c}}$ is calculated as
+$$
+E_{\mathrm{dRPA}}^c=\frac{1}{2} \operatorname{tr}\{\boldsymbol{\Omega}-\mathbf{A}\}
+$$
+$\bar{H}^{\mathrm{eB}}$ is constructed in two steps. First, the symmetrized dRPA eigenvalue problem is solved in the $A B$ basis,
+$$
+(A-B)^{1 / 2}(A+B)(A-B)^{1 / 2} R=R \Omega^2
+$$
+
+The dRPA excitation energies are obtained from the square root of $\mathbf{\Omega}^2$. The excitation vectors $(\mathbf{X}+\mathbf{Y})$ are then reconstructed using $\mathbf{R}$ (see, e.g., Ref. 31 for the explicit expressions). These steps [determination of $\boldsymbol{\Omega}$ and $(\mathbf{X}+\mathbf{Y})]$ scale as $\mathcal{O}\left(N_{\mathrm{AB}}^3\right)$. Next, the eigenvectors are used to transform the electron-boson coupling [Eq. (26)], which scales as $\mathcal{O}\left(N_{\text {orb }}^2 N_{\text {AB }}^2\right)$ ( $N_{\text {orb }}$ denotes the number of electronic orbitals). This results in an overall quartic scaling of the Hamiltonian transformation.
+
+As discussed below, $N_{\mathrm{AB}}$ is typically larger than the size of standard RI basis, $N_{\text {aux. }}$. Thus, the prefactor of the Hamiltonian transformation can be further reduced by using a smaller RI basis to represent the integrals,
+$$
+W_{p q}^p=\sum_Q^{\mathrm{N}_{\lambda \beta}} \sum_L^{N_{\mathrm{aux}}} \sum_v R_{p q}^L R_v^L C_v^Q(\mathbf{X}+\mathbf{Y})_{Q p}
+$$
+where the contractions can be performed with $\mathcal{O}\left(N_{\text {aux }} N_{\text {AB }}^2\right)$ $+\mathcal{O}\left(N_{\text {orb }}^2 N_{\text {aux }} N_{\mathrm{AB}}\right)$ cost, which is a savings if $N_{\mathrm{AB}}>N_{\text {aux }}$.
+
+Using $\dot{H}^{\mathrm{eB}}$, we obtain selected quasiparticle energies from Eq. (14) using the Davidson iterative diagonalization procedure. The $\sigma$-vector equations for an excitation $n$ are given as (the excitation vector is denoted as $r$ )
+$$
+\begin{gathered}
+\sigma_i^n=\sum_j f_{i j} r_j^n+\sum_a f_{i a} r_a^n+\sum_{Q j} W_{j i}^Q r_{j Q}^n+\sum_{Q a} W_{i a}^Q r_{Q a}^n \\
+\sigma_a^n=\sum_b f_{a b} r_b^n+\sum_i f_{i a} r_i^n+\sum_{Q i} W_{i a}^Q r_{i Q}^n+\sum_{Q b} W_{a b}^Q r_{Q b}^n \\
+\sigma_{i p}^n=\sum_j f_{i j} r_{j p}^n+\sum_j W_{j i}^Q r_j^n+\sum_a W_{i a}^Q r_a^n+\sum_Q \bar{A}_{P Q} r_{i Q}^n \\
+\sigma_{a P}^n=\sum_b f_{a b} r_{b P}^n+\sum_i W_{i a}^Q r_i^n+\sum_b W_{a b}^Q r_b^n+\sum_Q \bar{A}_{P Q} r_{a Q}^n
+\end{gathered}
+$$
+where the scaling for the matrix-vector products (for each root $n$ ) is $\mathcal{O}\left(N_{\text {orb }}^2 N_{A B}\right) / \mathcal{O}\left(N_{\text {orb }} N_{\mathrm{AB}}^2\right)$ (depending on $N_{\text {orb }}>N_{\mathrm{AB}}$ or $N_{\mathrm{AB}}$ $>N_{\text {orb }}$ ), i.e., cubic with system size [note that $\AA_{P Q}$ is diagonal when using the transformed Hamiltonian as defined in Eq. (25)]. One
