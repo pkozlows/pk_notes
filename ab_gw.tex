@@ -93,7 +93,7 @@ Here, we will use that the redefinition of the bosonic operators such that $\hat
 \hat{V}^{\mathrm{eB}}&=\sum_{p q, \nu} V_{p q, \nu}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\}\left(\sum_\mu \left(\mathbf{X}_{\mu}^{\nu}  + \mathbf{Y}_{\mu}^{\nu} \right) \right)\left(\hat{\overline{b}}_\nu + \hat{\overline{b}}_\nu^\dagger\right) \\
 &= \sum_{p q, \nu} W_{p q, \nu} \left\{ \hat{a}_p^{\dagger} \hat{a}_q \right\}\left(\bar{b}_\nu+\bar{b}_\nu^{\dagger}\right)
 \end{align}
-where now we had identified the RPA screened Coulomb interaction $W_{p q, \nu} = V_{p q, \nu} \left(\mathbf{X}_{\mu}^{\nu} + \mathbf{Y}_{\mu}^{\nu}\right)$. 
+where now we had identified the RPA screened Coulomb interaction $W_{p q, \nu} = V_{p q, \nu} \sum_\mu\left(\mathbf{X}_{\mu}^{\nu} + \mathbf{Y}_{\mu}^{\nu}\right)$. 
 \section{Defining the supermatrix}
 We then build the supermatrices $\mathbf{H}$ and $\mathbf{S}$ with matrix elements,
 $$
@@ -145,40 +145,60 @@ H_{i \nu j \nu'} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i^{
 First
 \begin{align}
 [\hat H^e,\;a_j b_{\nu'}^{\dagger}] &= \sum_{p q}f_{pq}\,[a_p^\dagger a_q, a_j b_{\nu'}^{\dagger}] = \sum_{pq}f_{pq} [a_p^\dagger a_q a_j - a_j a_p^\dagger a_q] b_{\nu'}^{\dagger} \\
-[a_i^\dagger b_\nu,\;[\hat H^e,\;a_j b_{\nu'}^{\dagger}]] &= [a_i^\dagger b_\nu,\; \sum_{pq}f_{pq} [a_p^\dagger a_q a_j - a_j a_p^\dagger a_q] b_{\nu'}^{\dagger}] = \sum_{pq}f_{pq} [a_i^\dagger b_\nu, a_p^\dagger a_q a_j - a_j a_p^\dagger a_q] [b_\nu, b_{\nu'}^{\dagger}] \\
+[a_i^\dagger b_\nu,\;[\hat H^e,\;a_j b_{\nu'}^{\dagger}]] &= [a_i^\dagger b_\nu,\; \sum_{pq}f_{pq} [a_p^\dagger a_q a_j - a_j a_p^\dagger a_q] b_{\nu'}^{\dagger}] = \sum_{pq}f_{pq} [a_i^\dagger , a_p^\dagger a_q a_j - a_j a_p^\dagger a_q] [b_\nu, b_{\nu'}^{\dagger}] \\
+&= -\delta_{\nu \nu'} \sum_{pq}f_{pq} \left( a_i^\dagger a_p^\dagger a_q a_j - a_p^\dagger a_q a_j a_i^\dagger - a_i^\dagger a_j a_p^\dagger a_q + a_j a_p^\dagger a_q a_i^\dagger \right) \\
+a_i^\dagger a_p^\dagger a_q a_j &= \wick{\c1 a_i^\dagger \c2 a_p^\dagger \c1 a_q \c2 a_j} + \wick{\c2 a_i^\dagger \c1 a_p^\dagger \c1 a_q \c2 a_j} = -\delta_{iq} \delta_{jp}+\delta_{ij} \delta_{pq} \\
+a_p^\dagger a_q a_j a_i^\dagger &= 0 \\
+a_i^\dagger a_j a_p^\dagger a_q &= \wick{\c2 a_i^\dagger \c1 a_j \c1 a_p^\dagger \c2 a_q} + \wick{\c1 a_i^\dagger \c1 a_j \c1 a_p^\dagger \c1 a_q} = \delta_{iq} \delta_{jp} + \delta_{ij} \delta_{pq} \\
+a_p^\dagger a_j a_q a_i^\dagger &= 0 \\
 \end{align}
-next
+So $[a_i^\dagger b_\nu,\;[\hat H^e,\;a_j b_{\nu'}^{\dagger}]] = 2 \delta_{\nu \nu'} f_{ji}$.
+Next
 \begin{align}
-[\hat H^B,\;a_j^\dagger b_{\nu'}] &= [\sum_{\nu} \Omega_\nu {b}_\nu^{\dagger} {b}_\nu + E_{\mathrm{RPA}}^c, a_j^{\dagger} b_{\nu'}] = \sum_{\nu} \Omega_\nu a_j^{\dagger}[ {b}_\nu^{\dagger} {b}_\nu, b_{\nu'}] = - \Omega_{\nu'} a_j^{\dagger} {b}_{\nu'} \\
-[a_i b_\nu^\dagger,\;[\hat H^B,\;a_j^\dagger b_{\nu'}]] &= [a_i b_\nu^\dagger,\;-\Omega_{\nu'} a_j^\dagger b_{\nu'}] = -\Omega_{\nu'} [a_i,\;a_j^\dagger] [b_\nu^\dagger,\;b_{\nu'}] = -\Omega_{\nu'} \delta_{ij} \delta_{\nu \nu'}.
+[\hat H^B,\;a_j b_{\nu'}^\dagger] &= [\sum_{\nu} \Omega_\nu {b}_\nu^{\dagger} {b}_\nu + E_{\mathrm{RPA}}^c, a_j b_{\nu'}^\dag] = \sum_{\nu} \Omega_\nu a_j[ {b}_\nu^{\dagger} {b}_\nu, b_{\nu'}^\dag] \\
+[a_i^\dagger b_\nu,\;[\hat H^B,\;a_j b_{\nu'}^\dagger]] &= \sum_{\nu''} \Omega_{\nu''} [a_i^\dagger b_\nu, a_j [ {b}_{\nu''}^{\dagger} {b}_{\nu''}, b_{\nu'}^\dag]] = \sum_{\nu''} \Omega_{\nu''} [a_i^\dagger, a_j] [b_\nu, [ {b}_{\nu''}^{\dagger} {b}_{\nu''}, b_{\nu'}^\dag]] \\
+&= \delta_{ij} \sum_{\nu''} \Omega_{\nu''} [b_\nu, [ {b}_{\nu''}^{\dagger} {b}_{\nu''}, b_{\nu'}^\dag]] = \delta_{ij} \sum_{\nu''} \Omega_{\nu''} [b_\nu,  {b}_{\nu''}^{\dagger} {b}_{\nu''} b_{\nu'}^\dag - b_{\nu'}^\dag {b}_{\nu''}^{\dagger} {b}_{\nu''}] \\
+&= \delta_{ij} \sum_{\nu''} \Omega_{\nu''} \left[b_\nu {b}_{\nu''}^{\dagger} {b}_{\nu''} b_{\nu'}^\dag - {b}_{\nu''}^{\dagger} {b}_{\nu''} b_{\nu'}^\dag b_\nu - \left( b_{\nu} {b}_{\nu'}^{\dagger} {b}_{\nu''}^\dag b_{\nu''} - {b}_{\nu'}^{\dagger} {b}_{\nu''}^\dag b_{\nu''} b_{\nu} \right)\right] \\
+b_\nu {b}_{\nu''}^{\dagger} {b}_{\nu''} b_{\nu'}^\dag &= \wick{\c1 b_\nu \c1 b_{\nu''}^{\dagger} \c1 b_{\nu''} \c1 b_{\nu'}^\dag} + \wick{\c2 b_\nu \c1 b_{\nu''}^{\dagger} \c1 b_{\nu''} \c2 b_{\nu'}^\dag} = -2\delta_{\nu \nu'} \\
+{b}_{\nu''}^{\dagger} {b}_{\nu''} b_{\nu'}^\dag b_\nu & = 0 \\
+b_{\nu} {b}_{\nu'}^{\dagger} {b}_{\nu''}^\dag b_{\nu''} &= 0 \\
+{b}_{\nu'}^{\dagger} {b}_{\nu''}^\dag b_{\nu''} b_{\nu} &= 0 \\
 \end{align}
+So $[a_i^\dagger b_\nu,\;[\hat H^B,\;a_j b_{\nu'}^\dagger]] = -2 \delta_{ij} \delta_{\nu \nu'} \Omega_{\nu'}$.
+% [a_i b_\nu^\dagger,\;[\hat H^B,\;a_j^\dagger b_{\nu'}]] &=  \sum_{\nu''} \Omega_{\nu''}[a_i b_\nu^\dagger, a_j^{\dagger}[ {b}_{\nu''}^{\dagger} {b}_{\nu''}, b_{\nu'}] ] = -\Omega_{\nu'} [a_i,\;a_j^\dagger] [b_\nu^\dagger,[ {b}_{\nu''}^{\dagger} {b}_{\nu''}, b_{\nu'}]] \\
 last
 \begin{align}
-[\hat V^{eB},\;a_j^\dagger b_{\nu'}] &= [\sum_{p q, \nu} W_{p q, \nu} \hat{a}_p^{\dagger} \hat{a}_q \left({b}_\nu+{b}_\nu^{\dagger}\right), a_j^{\dagger} b_{\nu'}] = \sum_{p q, \nu} W_{p q, \nu} [\hat{a}_p^{\dagger} \hat{a}_q, a_j^{\dagger}] [{b}_\nu+{b}_\nu^{\dagger}, b_{\nu'}]\\
-& = -\sum_{p} W_{p j, \nu'} \hat{a}_p^{\dagger} \\ [a_i b_\nu^\dagger,\;[\hat V^{eB},\;a_j^\dagger b_{\nu'}]] &= 0
+[a_i^\dagger b_\nu,\;[\hat V^{eB},\;a_j b_{\nu'}^\dagger]] & = 0
 \end{align}
-So $H_{i\nu j \nu'} = f_{ij} \delta_{\nu \nu'} - \Omega_{\nu'} \delta_{ij} \delta_{\nu \nu'} = \left(\epsilon_i - \Omega_{\nu'}\right) \delta_{ij} \delta_{\nu \nu'}$, where in the last line we used the fact that in the canonical MO basis, the HF Fock matrix is diagonal. Similarly, we can find $H_{a \nu b \nu'} = \left(\epsilon_a + \Omega_{\nu'}\right) \delta_{ab} \delta_{\nu \nu'}$. Finally, for the electron-boson coupling blocks, we have
+because we notice that in the coupling term, the number of bosons is not conserved.
+So $H_{i\nu j \nu'} = -  \delta_{\nu \nu'} \left(2\delta_{ij}\Omega_{\nu'}-z f_{ji}\right)$. Finally, for the electron-boson coupling blocks, we have
 \begin{align}
-H_{p,i\nu} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_p, \left[\hat{H}^{\mathrm{eB}}, a_i^{\dagger} b_\nu\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_p, \left[\hat{V}^{\mathrm{eB}}, a_i^{\dagger} b_\nu\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle
-\end{align}
-So 
+H_{p,i\nu} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_p^\dag, \left[\hat{H}^{\mathrm{eB}}, a_i b_\nu^{\dagger} \right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_p^\dag, \left[\hat{V}^{\mathrm{eB}}, a_i b_\nu^{\dagger} \right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle
+\end{align}\
+Note that we have neglected the electronic and bosonic Hamiltonians, because using them in this arrangement will not conserve the number of bosons. So we have
 \begin{align}
-[\hat V^{eB},\;a_i^\dagger b_\nu] &= \sum_{rs,\nu'} W_{rs, \nu'} [\hat{a}_r^{\dagger} \hat{a}_s (\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}), a_i^{\dagger} b_\nu] = \sum_{rs,\nu'} W_{rs, \nu'} \left[ \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} [\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}, b_\nu] + [\hat{a}_r^{\dagger} \hat{a}_s, a_i^{\dagger}]b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) \right] \\
-[a_p,\;[\hat V^{eB},\;a_i^\dagger b_\nu]] &= \sum_{rs,\nu'} W_{rs, \nu'} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} \delta_{\nu' \nu} + \hat{a}_r^{\dagger} \delta_{si} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) \right] = \sum_{rs} W_{rs, \nu} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger}  \right] \\
-&= \sum_{rs} W_{rs, \nu} \left( -a_p \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} + \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} a_p\right) = \sum_{rs} W_{rs, \nu} \left( \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} a_p\right) 
+[ V^{eB},\; a_i b_\nu^\dagger ] &= \sum_{rs,\nu'} W_{rs, \nu'} [ a_r^{\dagger} a_s ( b_{\nu'} + b_{\nu'}^{\dagger} ), a_i b_\nu^\dagger ] = \sum_{rs,\nu'} W_{rs, \nu'} [ a_r^{\dagger} a_s, a_i ][ b_{\nu'}, b_\nu^\dagger ] \\
+&= -\sum_{rs} W_{rs, \nu} \left( a_r^{\dagger} a_s a_i -  a_i a_r^{\dagger} a_s \right) \\
+[a_p^\dagger,\;[\hat V^{eB},\;a_i b_\nu^\dagger]] &= -\sum_{rs} W_{rs, \nu} \left[ a_p^\dagger \hat{a}_r^{\dagger} \hat{a}_s a_i  - \hat{a}_r^{\dagger} \hat{a}_s a_i a_p^\dagger  - \left( a_p^\dag a_i a_r^{\dagger}a_s   - a_i a_r^{\dagger}a_s a_p^\dagger \right) \right] \\
+a_p^\dagger \hat{a}_r^{\dagger} \hat{a}_s a_i  &= \wick{\c1 a_p^\dagger \c2 a_r^{\dagger} \c1 a_s \c2 a_i} + \wick{\c2 a_p^\dagger \c1 a_r^{\dagger} \c1 a_s \c2 a_i} = -\delta_{ps} \delta_{ri} + \delta_{pi} \delta_{rs} \\
+\hat{a}_r^{\dagger} \hat{a}_s a_i a_p^\dagger &= \wick{\c1 a_r^{\dagger} \c2 a_s \c1 a_i \c2 a_p^\dagger} + \wick{\c1 a_r^{\dagger} \c1 a_s \c1 a_i \c1 a_p^\dagger} = -\delta_{ri} \delta_{ps} + 0 \\
+a_p^\dag a_i a_r^{\dagger}a_s &= \wick{\c1 a_p^\dag \c1 a_i \c1 a_r^{\dagger} \c1 a_s} + \wick{\c2 a_p^\dag \c1 a_i \c1 a_r^{\dagger} \c2 a_s} = \delta_{pi} \delta_{rs} + 0 \\
+a_i a_r^{\dagger}a_s a_p^\dagger &= 0 \\
+% a_i^\dagger b_\nu ] &= \sum_{rs,\nu'} W_{rs, \nu'} [ a_r^{\dagger} a_s ( b_{\nu'} + b_{\nu'}^{\dagger} ), a_i^{\dagger} b_\nu ] = \sum_{rs,\nu'} W_{rs, \nu'} \left[ a_r^{\dagger} a_s a_i^{\dagger} [ b_{\nu'} + b_{\nu'}^{\dagger}, b_\nu ] + [ a_r^{\dagger} a_s, a_i^{\dagger} ] b_{\nu} ( b_{\nu'} + b_{\nu'}^{\dagger} ) \right] \\
+% [a_p,\;[\hat V^{eB},\;a_i^\dagger b_\nu]] &= \sum_{rs,\nu'} W_{rs, \nu'} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} \delta_{\nu' \nu} + \hat{a}_r^{\dagger} \delta_{si} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) \right] = \sum_{rs} W_{rs, \nu} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger}  \right] \\
+% &= \sum_{rs} W_{rs, \nu} \left( -a_p \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} + \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} a_p\right) = \sum_{rs} W_{rs, \nu} \left( \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} a_p\right) 
 \end{align}
-So $p$ must be a hole index, because we cannot annihilate a particle from Fermi vacuum. So we can write $H_{p,i \nu} = -W_{p i, \nu}$, where $W_{p i, \nu} = \sum_\nu V_{p i, \nu} (X_{\nu} + Y_{\nu})$. Similarly, we can find $H_{p,a \nu} = -W_{p a, \nu}$, where $W_{p a, \nu} = \sum_\nu V_{p a, \nu} (X_{\nu} + Y_{\nu})$.
-\begin{equation}
-\begin{split}
-\hat{a}_p^{\dagger} \hat{a}_q a_i^{\dagger} [\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}, b_\nu] = -\hat{a}_p^{\dagger} \hat{a}_q a_i^{\dagger} \delta_{\nu' \nu}\\
-[\hat{a}_p^{\dagger} \hat{a}_q, a_i^{\dagger}]b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) = \hat{a}_p^{\dagger} \delta_{qi} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger})
-\end{split}
-\end{equation}
+So we can write $H_{p,i \nu} = 0$.
+% \begin{equation}
+% \begin{split}
+% \hat{a}_p^{\dagger} \hat{a}_q a_i^{\dagger} [\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}, b_\nu] = -\hat{a}_p^{\dagger} \hat{a}_q a_i^{\dagger} \delta_{\nu' \nu}\\
+% [\hat{a}_p^{\dagger} \hat{a}_q, a_i^{\dagger}]b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) = \hat{a}_p^{\dagger} \delta_{qi} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger})
+% \end{split}
+% \end{equation}
 Leibniz's rule is 
 [\,AB,CD\,]
 = A[B,C]D \;+\; A\,C\,[B,D] \;+\; [A,C]\,D\,B \;+\; C\,[A,D]\,B.
- so we have
-So $H_{p,i \nu} = -W_{p i, \nu}$. Similarly, we can find $H_{p,a \nu} = -W_{p a, \nu}$. The final supermatrix is then
+ Similarly, we can find $H_{p,a \nu} = 0$. The final supermatrix is then
 \begin{equation}
 \bm{H} = \begin{pmatrix}
     \bm{F} & \bm{W}^< & \bm{W}^> \\
@@ -186,7 +206,7 @@ So $H_{p,i \nu} = -W_{p i, \nu}$. Similarly, we can find $H_{p,a \nu} = -W_{p a,
     (\bm{W}^>)^\dagger & \bm{0} & \bm{d}^>
 \end{pmatrix}
 \end{equation}
-with $W_{p i, \nu}^< = -\sum_\nu V_{p i, \nu} (X_{\nu} + Y_{\nu})$ and $W_{p a, \nu} = -\sum_\nu V_{p a, \nu} (X_{\nu} + Y_{\nu})$, where $X_{\nu}$ and $Y_{\nu}$ are the RPA eigenvectors and $d^<_{i \nu, j \nu'} = f_{i j} \delta_{\nu \nu'} - \Omega_{\nu'} \delta_{i j} \delta_{\nu \nu'}$ and $d^>_{a \nu, b \nu'} = f_{a b} \delta_{\nu \nu'} + \Omega_{\nu'} \delta_{a b} \delta_{\nu \nu'}$.
+with $W_{p i, \nu}^< = 0$ and $W_{p a, \nu} = 0$, where $X_{\nu}$ and $Y_{\nu}$ are the RPA eigenvectors and $d^<_{i \nu, j \nu'} = f_{i j} \delta_{\nu \nu'} - \Omega_{\nu'} \delta_{i j} \delta_{\nu \nu'}$ and $d^>_{a \nu, b \nu'} = f_{a b} \delta_{\nu \nu'} + \Omega_{\nu'} \delta_{a b} \delta_{\nu \nu'}$.
 $$
 \mathbf{H}^{G_0 W_0} \mathbf{R}=\mathbf{R} \mathbf{E}
 $$
