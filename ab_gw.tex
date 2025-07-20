@@ -108,35 +108,44 @@ where $\left\{C_I^{\dagger}\right\}=\left\{\underbrace{a_i}_{1h}, \underbrace{a_
     \delta_{ij} & 0 & 0 & 0 \\
     0 & \delta_{ab} & 0 & 0 \\
     0 & 0 & \delta_{ij}\delta_{\nu\nu'} & 0 \\
-    0 & 0 & 0 & \delta_{ab}\delta_{\nu\nu'}
+    0 & 0 & 0 & -\delta_{ab}\delta_{\nu\nu'}
 \end{pmatrix}
 \end{align}
 $\bm{H}$ takes more care and so we first consider
 \begin{equation}
 \begin{split}
-    H_{ij} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i, \left[\hat{H}^{\mathrm{eB}}, a_j^{\dagger}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i, \left[\hat{H}^{\mathrm{e}}, a_j^{\dagger}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle \\
+    H_{ij} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i^\dag, \left[\hat{H}^{\mathrm{eB}}, a_j\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i^\dag, \left[\hat{H}^{\mathrm{e}}, a_j\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle \\
 \end{split}
 \end{equation}
 We can make this simplification because the electronic operators commute with all bosonic operators. Now
 \begin{align}
-[\hat H^e,\;a_j^\dagger]
-&= \sum_{p q}f_{pq}\,\bigl[a_p^\dagger a_q,\;a_j^\dagger\bigr]
-= \sum_{p q}f_{pq}\;a_p^\dagger\,[\,a_q,a_j^\dagger\,]
-= \sum_{p}f_{p j}\,a_p^\dagger,\\[6pt]
-[a_i,\;[\hat H^e,\;a_j^\dagger]]
-&= \bigl[a_i,\;\sum_{p}f_{p j}\,a_p^\dagger\bigr]
-= \sum_{p}f_{p j}\,[\,a_i,a_p^\dagger\,]
-= \sum_{p}f_{p j}\,\delta_{i p}
-= f_{i j}
+[\hat H^e,\;a_j]
+&= \sum_{p q}f_{pq}\,\bigl[a_p^\dagger a_q,\;a_j\bigr]
+= \sum_{p q}f_{pq}\left(a_p^\dagger\,[\,a_q,a_j\,]+ [a_p^\dagger, a_j] a_q\right) = \sum_q f_{jq} a_q  \\
+&= \sum_{p q}f_{pq}\left(a_p^\dagger a_q a_j - a_p^\dagger a_j a_q + a_p^\dagger a_j a_q -  a_j a_q a_p^\dagger \right) \\
+[a_i^\dagger,\;[\hat H^e,\;a_j]] &= \sum_{p q}f_{pq}\,\bigl[a_i^\dagger,\left( a_p^\dagger a_q a_j - a_p^\dagger a_j a_q + a_p^\dagger a_j a_q -  a_j a_q a_p^\dagger \right)\bigr] \\
+&= \sum_{p q}f_{pq}\,\bigl([a_i^\dagger, a_p^\dagger a_q a_j] - [a_i^\dagger, a_p^\dagger a_j a_q] + [a_i^\dagger, a_p^\dagger a_j a_q] - [a_i^\dagger, a_j a_q a_p^\dagger]\bigr) \\
+&= \sum_{p q}f_{pq}\,\bigl( \left. a_i^\dagger a_p^\dagger a_q a_j - a_p^\dagger a_q a_j a_i^\dagger - a_i^\dagger a_p^\dagger a_j a_q + a_p^\dagger a_j a_q a_i^\dagger + a_i^\dagger a_p^\dagger a_j a_q - a_p^\dagger a_j a_q a_i^\dagger \right.\\
+&-a_i^\dag a_j a_q a_p^\dagger + a_j a_q a_p^\dagger a_i^\dag \bigr) \\
+    a_i^\dagger a_p^\dagger a_q a_j &= \wick{\c1 a_i^\dagger \c2 a_p^\dagger \c1 a_q \c2 a_j} + \wick{\c2 a_i^\dagger \c1 a_p^\dagger \c1 a_q \c2 a_j} = -\delta_{iq} \delta_{jp}+\delta_{ij} \delta_{pq} \\
+a_p^\dagger a_q a_j a_i^\dagger &= 0 \\
+a_i^\dagger a_p^\dagger a_j a_q &= \wick{\c1 a_i^\dagger \c2 a_p^\dagger \c1 a_j \c2 a_q} + \wick{\c2 a_i^\dagger \c1 a_p^\dagger \c1 a_j \c2 a_q} = -\delta_{ij} \delta_{pq} + \delta_{iq} \delta_{jp} \\
+a_p^\dagger a_j a_q a_i^\dagger &= 0 \\
+a_i^\dagger a_p^\dagger a_j a_q &= \wick{\c1 a_i^\dagger \c2 a_p^\dagger \c1 a_j \c2 a_q} + \wick{\c2 a_i^\dagger \c1 a_p^\dagger \c1 a_j \c2 a_q} = -\delta_{ij} \delta_{pq} + \delta_{iq} \delta_{jp} \\
+a_p^\dagger a_j a_q a_i^\dagger &= 0 \\
+a_i^\dag a_j a_q a_p^\dagger &= \wick{\c1 a_i^\dag \c2 a_j \c1 a_q \c2 a_p^\dagger} + \wick{\c1 a_i^\dag \c1 a_j \c1 a_q \c1 a_p^\dagger} = 0 + \delta_{ij} \delta_{pq} \\
+a_j a_q a_p^\dagger a_i^\dagger &= 0 \\
+&= \sum_{p q}f_{pq}\,\bigl( \left. -\delta_{iq} \delta_{jp}+\delta_{ij} \delta_{pq}  - \left( -\delta_{ij} \delta_{pq} + \delta_{iq} \delta_{jp}\right) + \left(-\delta_{ij} \delta_{pq} + \delta_{iq} \delta_{jp}\right)  - \delta_{ij} \delta_{pq} \right) \\
+&= - \sum_{p q}f_{pq} \delta_{iq} \delta_{jp} = - f_{ji} 
 \end{align}
-So $H_{ij} = f_{ij}$ and similarly, we can find $H_{ab} = f_{ab}$. Next, we do the auxiliary blocks:
+So $H_{ij} = -f_{ji}$ and similarly, we can find $H_{ab} = -f_{ba}$. Next, we do the auxiliary blocks:
 \begin{align}
-H_{i \nu j \nu'} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i b_\nu^{\dagger}, \left[\hat{H}^{\mathrm{eB}}, a_j^{\dagger}b_{\nu'}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i b_\nu^{\dagger}, \left[\hat{H}^{\mathrm{e}} + \hat{H}^{\mathrm{B}} + \hat{V}^{\mathrm{eB}}, a_j^{\dagger}b_{\nu'}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle \\
+H_{i \nu j \nu'} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i^{\dagger} b_\nu, \left[\hat{H}^{\mathrm{eB}}, a_j b_{\nu'}^{\dagger}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle = \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_i^{\dagger} b_\nu, \left[\hat{H}^{\mathrm{e}} + \hat{H}^{\mathrm{B}} + \hat{V}^{\mathrm{eB}}, a_j b_{\nu'}^{\dagger}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle \\
 \end{align}
 First
 \begin{align}
-[\hat H^e,\;a_j^\dagger b_{\nu'}] &= \sum_{p q}f_{pq}\,[a_p^\dagger a_q, a_j^{\dagger} b_{\nu'}] = \sum_{p}f_{pj}a_p^\dagger b_{\nu'} \\
-[a_i b_\nu^\dagger,\;[\hat H^e,\;a_j^\dagger b_{\nu'}]] &= [a_i b_\nu^\dagger,\; \sum_{p}f_{pj} a_p^\dagger b_{\nu'}] = \sum_{p}f_{pj}[a_i b_\nu^\dagger, a_p^\dagger b_{\nu'}] = \sum_{p}f_{pj}\delta_{ip}\delta_{\nu\nu'} = f_{ij}\delta_{\nu\nu'}
+[\hat H^e,\;a_j b_{\nu'}^{\dagger}] &= \sum_{p q}f_{pq}\,[a_p^\dagger a_q, a_j b_{\nu'}^{\dagger}] = \sum_{pq}f_{pq} [a_p^\dagger a_q a_j - a_j a_p^\dagger a_q] b_{\nu'}^{\dagger} \\
+[a_i^\dagger b_\nu,\;[\hat H^e,\;a_j b_{\nu'}^{\dagger}]] &= [a_i^\dagger b_\nu,\; \sum_{pq}f_{pq} [a_p^\dagger a_q a_j - a_j a_p^\dagger a_q] b_{\nu'}^{\dagger}] = \sum_{pq}f_{pq} [a_i^\dagger b_\nu, a_p^\dagger a_q a_j - a_j a_p^\dagger a_q] [b_\nu, b_{\nu'}^{\dagger}] \\
 \end{align}
 next
 \begin{align}
@@ -155,8 +164,10 @@ H_{p,i\nu} &= \left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[a_p, \left[
 So 
 \begin{align}
 [\hat V^{eB},\;a_i^\dagger b_\nu] &= \sum_{rs,\nu'} W_{rs, \nu'} [\hat{a}_r^{\dagger} \hat{a}_s (\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}), a_i^{\dagger} b_\nu] = \sum_{rs,\nu'} W_{rs, \nu'} \left[ \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} [\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}, b_\nu] + [\hat{a}_r^{\dagger} \hat{a}_s, a_i^{\dagger}]b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) \right] \\
-[a_p,\;[\hat V^{eB},\;a_i^\dagger b_\nu]] &= \sum_{rs,\nu'} W_{rs, \nu'} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} \delta_{\nu' \nu} + \hat{a}_r^{\dagger} \delta_{si} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) \right] = \sum_{rs,\nu'} W_{rs, \nu'} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} \delta_{\nu' \nu} \right]
+[a_p,\;[\hat V^{eB},\;a_i^\dagger b_\nu]] &= \sum_{rs,\nu'} W_{rs, \nu'} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} \delta_{\nu' \nu} + \hat{a}_r^{\dagger} \delta_{si} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) \right] = \sum_{rs} W_{rs, \nu} \left[ a_p, -\hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger}  \right] \\
+&= \sum_{rs} W_{rs, \nu} \left( -a_p \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} + \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} a_p\right) = \sum_{rs} W_{rs, \nu} \left( \hat{a}_r^{\dagger} \hat{a}_s a_i^{\dagger} a_p\right) 
 \end{align}
+So $p$ must be a hole index, because we cannot annihilate a particle from Fermi vacuum. So we can write $H_{p,i \nu} = -W_{p i, \nu}$, where $W_{p i, \nu} = \sum_\nu V_{p i, \nu} (X_{\nu} + Y_{\nu})$. Similarly, we can find $H_{p,a \nu} = -W_{p a, \nu}$, where $W_{p a, \nu} = \sum_\nu V_{p a, \nu} (X_{\nu} + Y_{\nu})$.
 \begin{equation}
 \begin{split}
 \hat{a}_p^{\dagger} \hat{a}_q a_i^{\dagger} [\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}, b_\nu] = -\hat{a}_p^{\dagger} \hat{a}_q a_i^{\dagger} \delta_{\nu' \nu}\\

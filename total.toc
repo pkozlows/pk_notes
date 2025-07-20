@@ -65,21 +65,21 @@
 \contentsline {subsubsection}{Effect on the bosonic Hamiltonian}{53}{section*.15}%
 \contentsline {subsubsection}{Effect on the electron-boson coupling term}{53}{section*.16}%
 \contentsline {section}{\numberline {5.2}Defining the supermatrix}{53}{section.5.2}%
-\contentsline {chapter}{\numberline {6}Extraneous derivations}{59}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Density matrix idempotency}{59}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Density matrix time evolution}{60}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Fourier Transform Symmetry for Real Functions}{60}{section.6.3}%
-\contentsline {section}{\numberline {6.4}First-Order Response of an Observable to External Perturbations}{62}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Taylor Expansion of Idempotency Constraint in Perturbation Strength $\lambda $ to first order}{63}{section.6.5}%
-\contentsline {paragraph}{Step 1: Taylor Expansion of the Density Matrix and Hamiltonian}{63}{section*.29}%
-\contentsline {paragraph}{Step 2: Applying the Idempotency Condition}{64}{section*.30}%
-\contentsline {paragraph}{Step 3: Equating Terms Order by Order}{64}{section*.31}%
-\contentsline {paragraph}{Step 4: Expanding the Equation of Motion Up to First Order}{64}{section*.32}%
-\contentsline {paragraph}{Step 5: Equating First-Order Terms}{65}{section*.33}%
-\contentsline {paragraph}{Step 6: Frequency Domain Representation}{65}{section*.34}%
-\contentsline {paragraph}{Step 7: Substituting into the Equation of Motion}{65}{section*.35}%
-\contentsline {paragraph}{Step 8: Matching Frequency Components}{65}{section*.36}%
-\contentsline {paragraph}{Step 9: Rearranging to Obtain Equation (20)}{66}{section*.37}%
-\contentsline {paragraph}{Summary of the Derivation}{66}{section*.38}%
-\contentsline {paragraph}{Implications}{66}{section*.39}%
-\contentsline {paragraph}{Conclusion}{66}{section*.40}%
+\contentsline {chapter}{\numberline {6}Extraneous derivations}{61}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Density matrix idempotency}{61}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Density matrix time evolution}{62}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Fourier Transform Symmetry for Real Functions}{62}{section.6.3}%
+\contentsline {section}{\numberline {6.4}First-Order Response of an Observable to External Perturbations}{64}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Taylor Expansion of Idempotency Constraint in Perturbation Strength $\lambda $ to first order}{65}{section.6.5}%
+\contentsline {paragraph}{Step 1: Taylor Expansion of the Density Matrix and Hamiltonian}{65}{section*.29}%
+\contentsline {paragraph}{Step 2: Applying the Idempotency Condition}{66}{section*.30}%
+\contentsline {paragraph}{Step 3: Equating Terms Order by Order}{66}{section*.31}%
+\contentsline {paragraph}{Step 4: Expanding the Equation of Motion Up to First Order}{66}{section*.32}%
+\contentsline {paragraph}{Step 5: Equating First-Order Terms}{67}{section*.33}%
+\contentsline {paragraph}{Step 6: Frequency Domain Representation}{67}{section*.34}%
+\contentsline {paragraph}{Step 7: Substituting into the Equation of Motion}{67}{section*.35}%
+\contentsline {paragraph}{Step 8: Matching Frequency Components}{67}{section*.36}%
+\contentsline {paragraph}{Step 9: Rearranging to Obtain Equation (20)}{68}{section*.37}%
+\contentsline {paragraph}{Summary of the Derivation}{68}{section*.38}%
+\contentsline {paragraph}{Implications}{68}{section*.39}%
+\contentsline {paragraph}{Conclusion}{68}{section*.40}%
