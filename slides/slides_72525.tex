@@ -1,0 +1,342 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{simpler-wick}
+\usepackage{cancel}
+\usepackage{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[numbers]{natbib}
+\bibliographystyle{plainnat}  % or another style like 'apsrev4-2'
+\usepackage{hyperref}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{listings}
+\title{Slides for Patryk's Notes}
+\author{Patryk Kozlowski}
+\date{\today}
+
+\hypersetup{
+    colorlinks=true,    % false: boxed links; true: colored links
+    linkcolor=blue,     % color of internal links
+    urlcolor=cyan       % color of external links
+}
+\setbeamertemplate{section in toc}[sections numbered]
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+\section{GW Supermatrices}
+\begin{frame}
+    \frametitle{Booth GW Supermatrix}
+
+\begin{equation}
+    \bm{H}^{G_0 W_0} = \begin{pmatrix} \bm{F} & \bm{W}^< & \bm{W}^> \\ \bm{W}^{\dagger<} & \bm{d}^< & \bm{0} \\ \bm{W}^{\dagger>} & \bm{0} & \bm{d}^> \end{pmatrix}
+\end{equation}
+where $\bm{F}$ is the Fock matrix, $\bm{W}^<$ and $\bm{W}^>$ are the lesser and greater components of the RPA screened Coulomb interaction, defined as
+\begin{equation}
+\begin{split}
+    W_{pk\nu}^{<} = \sum_{ia} (pk|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right) \quad \text{and} \quad W_{pc\nu}^{>} = \sum_{ia} (pc|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right)
+\end{split}
+\end{equation}
+and the auxiliary blocks $\bm{d}^<$ and $\bm{d}^>$ are defined as
+\begin{equation}
+\begin{split}
+    d_{k\nu,l\nu'}^{<} = \left(\epsilon_k - \Omega_\nu\right) \delta_{k,l} \delta_{\nu,\nu'}\quad \text{and} \quad
+    d_{c\nu,d\nu'}^{>} = \left(\epsilon_c + \Omega_\nu\right) \delta_{c,d} \delta_{\nu,\nu'}\\
+\end{split}
+\end{equation}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Garnet GW via auxiliary bosons}
+They used a basis of particle-hole excitations, approximated as bosons. So $\hat{a}_a^\dagger \hat{a}_i \approx \hat{b}_\nu^\dag$ and $\hat{a}_i^\dagger \hat{a}_a \approx \hat{b}_\nu$
+Define \begin{equation}
+\hat{H}^{\mathrm{eB}}=\hat{H}^{\mathrm{e}}+\hat{H}^{\mathrm{B}}+\hat{V}^{\mathrm{eB}}
+\end{equation}
+where $\hat{H}^{\mathrm{e}}$ is the electronic Hamiltonian, $\hat{H}^{\mathrm{B}}$ is the bosonic Hamiltonian, and $\hat{V}^{\mathrm{eB}}$ is the electron-boson coupling term, given as
+\begin{align}
+\hat{H}^e&=\sum_{p q} f_{p q}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\} \\
+\hat{H}^{B}&=\sum_{\nu \mu} A_{\nu \mu} \hat{b}_\nu^{\dagger} \hat{b}_\mu+\frac{1}{2} \sum_{\nu \mu} B_{\nu \mu}\left(\hat{b}_\nu^{\dagger} \hat{b}_\mu^{\dagger}+\hat{b}_\nu \hat{b}_\mu\right)
+\label{b} \\
+\hat{V}^{eB}&=\sum_{p q, \nu} V_{p q \nu}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\}\left(\hat{b}_\nu^{\dagger}+\hat{b}_\nu\right)
+\label{eb}
+\end{align}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Form in bosonic basis}
+Originally $\hat{H}^{\mathrm{B}}$ in the bosonic basis was
+\begin{align}
+\hat{H}^{\mathrm{B}}\left(\hat{b}, \hat{b}^{\dagger}\right)&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left(\begin{array}{ll}
+\mathbf{b}^{\dagger} & \mathbf{b}
+\end{array}\right)\left(\begin{array}{ll}
+\mathbf{A} & \mathbf{B} \\
+\mathbf{B} & \mathbf{A}
+\end{array}\right)\binom{\mathbf{b}}{\mathbf{b}^{\dagger}}
+\label{eq:rpa_rec}
+ \\
+&=\sum_{\nu \mu} A_{\nu \mu} \hat{b}_\nu^{\dagger} \hat{b}_\mu+\frac{1}{2} \sum_{\nu \mu} B_{\nu \mu}\left(\hat{b}_\nu^{\dagger} \hat{b}_\mu^{\dagger}+\hat{b}_\nu \hat{b}_\mu\right)
+\end{align}
+But if we redefine the basis via a Bogoliubov transformation
+\begin{align}
+\binom{\overline{\mathbf{b}}}{\overline{\mathbf{b}}^{\dagger}}=\left(\begin{array}{cc}
+\mathbf{X} & -\mathbf{Y} \\
+-\mathbf{Y} & \mathbf{X}
+\end{array}\right)^T\binom{\mathbf{b}}{\mathbf{b}^{\dagger}}
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Effect of transformation on Hamiltonians}
+Then
+\begin{align}
+    \hat{H}^{\mathrm{B}}\left(\overline{\mathbf{b}},
+\overline{\mathbf{b}}^{\dagger}\right)&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left(\overline{\mathbf{b}}^{\dagger} \overline{\mathbf{b}}\right)\left(\begin{array}{cc}\Omega \mathbf{1} & 0 \\
+0 & \Omega \mathbf{1}
+\end{array}\right)\binom{\overline{\mathbf{b}}}{\overline{\mathbf{b}}^{\dagger}} \\
+&=\sum_{\nu} \Omega_\nu \overline{b}_\nu^{\dagger} \overline{b}_\nu + E_{\mathrm{RPA}}^c \\
+\end{align}
+Because $\hat{b}_\nu + \hat{b}_{\nu}^\dagger = \sum_\mu \left(\mathbf{X}_{\mu}^{\nu} + \mathbf{Y}_{\mu}^{\nu}\right) \left(\hat{\overline{b}}_\nu + \hat{\overline{b}}_\nu^\dagger\right)$, we also get
+\begin{align}
+\hat{V}^{\mathrm{eB}}\left(\overline{\mathbf{b}},
+\overline{\mathbf{b}}^{\dagger}\right)
+&= \sum_{p q, \nu} W_{p q, \nu} \left\{ \hat{a}_p^{\dagger} \hat{a}_q \right\}\left(\bar{b}_\nu+\bar{b}_\nu^{\dagger}\right)
+\end{align}
+\end{frame}
+\begin{frame}
+    \frametitle{Supermatrix construction}
+We then build the supermatrices $\mathbf{H}$ and $\mathbf{S}$ with matrix elements,
+$$
+\begin{gathered}
+H_{I J}=\left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[C_I,\left[\tilde{H}^{\mathrm{eB}}, C_J^{\dagger}\right]\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle \\
+S_{I J}=\left\langle 0_{\mathrm{F}} 0_{\mathrm{B}}\right|\left[C_I, C_J^{\dagger}\right]\left|0_{\mathrm{F}} 0_{\mathrm{B}}\right\rangle
+\end{gathered}
+$$
+where $\left\{C_I^{\dagger}\right\}=\left\{\underbrace{a_i}_{1h}, \underbrace{a_a}_{1p}, \underbrace{a_i b_\nu^{\dagger}}_{2h1p}, \underbrace{a_a b_\nu}_{1p2p}\right\}$ and $|0\rangle_{\mathrm{F}}$ and $|0\rangle_{\mathrm{B}}$ are the Fermi and boson vacuums. Then constructing $-\bm{S}^{-1}\bm{H}$ yields Booth's ED. Derivation is in my notes. Nothing too complicated, but long due to many Wick contractions.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Realization of the idea}
+Describe the bosons via an auxiliary basis, scaling linearly with system size.
+\begin{equation}
+\begin{aligned}
+& \hat{b}_\nu^{\dagger} \approx \sum_Q^{N_{\mathrm{AB}}} C_\nu^Q \hat{b}_Q^{\dagger}, \quad \hat{b}_\nu \approx \sum_Q^{N_{\mathrm{AB}}} C_\nu^Q \hat{b}_Q
+\end{aligned}
+\end{equation}
+Use RI technique to get the $C_\nu^Q$ coefficients. Define 
+\begin{equation}
+(i a \mid j b) \approx \sum_L R_{i a}^L R_{j b}^L
+\end{equation}
+Then 
+$C_\nu^Q=\sum_{L M} R_\nu^L\left[\mathbf{S}^{-1 / 2}\right]_{L M} P_M^Q$ with $S_{L M}=\sum_\nu R_\nu^L R_\nu^M=\sum_Q P_L^Q E_Q P_M^Q$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Realization of the idea continued}
+\begin{itemize}
+    \item 1. Get the excitation energies $\bm{\Omega}$ and vectors $\bm{X}+\bm{Y}$ by solving the symmetrized Casida eigenproblem in $O(N_{AB}^3)$ time 
+    \item Recall last week we identified using $\textbf{T} = \boldsymbol{\Omega }^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}\left(\textbf{X} + \textbf{Y}\right)$ to get excitation vectors as problematic; but that was in a different context and now we have explicit access to $\bm{\Omega }$ and $\bm{A}-\bm{B}$, so we can do this
+    \item 2. Transform the excitation vectors into a screened Coulomb interaction in $O(N_{\text{orb}}^2 N_{\text{AB}}^2)$ time, where $N_{\text{orb}}=O+V$
+    \item 3. Diagonalize the Hamiltonian with a Davidson procedure in $\mathcal{O}\left(N_{\text {orb }}^2 N_{\mathrm{AB}}\right) / \mathcal{O}\left(N_{\text {orb }} N_{\mathrm{AB}}^2\right)$ time for each root
+\end{itemize}
+Interestingly, their highest scaling step is 2. 
+\end{frame}
+\section{RPA via Equation of Motion}
+\begin{frame}
+    \frametitle{Equation of motion formalism}
+Define an oscillator that satisfies 
+\begin{align}
+    [H, O^\dag] = \omega O^\dag , \quad  \quad [H, O] = -\omega O , \quad \quad [O, O^\dag] = 1
+\end{align}
+With the arbitrary operator $R$ we have
+\begin{align}
+\langle \phi | [R,[H, O^\dagger]] | \phi \rangle &= \omega \langle \phi | [R, O^\dagger] | \phi \rangle\\
+\langle \phi | [R,[H, O]] | \phi \rangle 
+    &= -\omega \langle \phi | [R, O] | \phi \rangle\\
+    \implies\langle\phi|\left[R, H, O^{\dagger}\right]|\phi\rangle&=\omega\langle\phi|\left[R, O^{\dagger}\right]|\phi\rangle
+\label{duble_commutator}
+\end{align}
+where we have defined the double commutator as
+\begin{equation}
+    2\left[R, H, O^{\dagger}\right]=\left[R,\left[H, O^{\dagger}\right]\right]+\left[[R, H], O^{\dagger}\right] 
+\end{equation}
+This approach can save because we exploit Hermiticity and the commutator is of lower-rank than the product, so we don't need to know much about the wavefunction to get good matrix elements.
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{The particle hole approximation leads to RPA}
+Define the excitation operator $
+\hat O^\dagger
+=\sum_{a i}\bigl(Y_{a i}\,a_a^\dagger a_i - Z_{i a}\,a_i^\dagger a_a\bigr).$ Then, 
+\begin{align}
+A_{ai,bj}
+&=\langle\phi|\bigl[a_i^\dagger a_a,\,H,\,a_b^\dagger a_j\bigr]|\phi\rangle\\
+B_{ai,bj}
+&=-\,\langle\phi|\bigl[a_i^\dagger a_a,\,H,\,a_j^\dagger a_b\bigr]|\phi\rangle \\
+U_{ai,bj}
+&=\langle\phi|\bigl[a_i^\dagger a_a,\,a_b^\dagger a_j\bigr]|\phi\rangle
+\end{align}
+or in matrix form
+\begin{equation}
+\begin{pmatrix}
+A & B \\[6pt]
+B^\dagger & A^*
+\end{pmatrix}
+\begin{pmatrix}
+Y \\ Z
+\end{pmatrix}
+\;=\;
+\omega
+\begin{pmatrix}
+U & 0 \\[3pt]
+0 & -\,U^*
+\end{pmatrix}
+\begin{pmatrix}
+Y \\ Z
+\end{pmatrix}.
+\label{eq:block_matrix}
+\end{equation}
+Then if we choose the basis that diagonalizes the single-particle Hamiltonian, we get the RPA equations
+\begin{align}
+    A_{a i b j} &= \langle 0_{\mathrm{F}} | a_a^\dagger \left[H, a_b^\dagger a_i\right] | 0_{\mathrm{F}} \rangle = \delta_{a b} \delta_{i j}\left(\varepsilon_i-\varepsilon_a\right) + V_{a j i b} \\
+    B_{a i b j} &= \langle 0_{\mathrm{F}} | a_a^\dagger \left[H, a_b a_i^\dagger\right] | 0_{\mathrm{F}} \rangle = V_{a b i j} \\
+    U_{a i b j} &= \langle 0_{\mathrm{F}} | a_a^\dagger \left[H, a_b a_i\right] | 0_{\mathrm{F}} \rangle = \delta_{a b} \delta_{i j} .
+\end{align}
+
+\end{frame}
+\section{BSE}
+\begin{frame}
+    \frametitle{The BSE problem}
+We want to solve the problem
+\begin{align}
+&\bm{L}^{-1} = \bm{L}_0^{-1} - \bm{\Xi}^{\mathrm{eh}} \\
+        &\implies \begin{pmatrix}
+        \mathcal{\bm{A}}(\omega ) & \mathcal{\bm{B}}(\omega ) \\
+        \mathcal{\bm{B}}(\omega ) & \mathcal{\bm{A}}(\omega )
+    \end{pmatrix}
+\begin{pmatrix}
+    \bm{X}^m \\
+\bm{Y}^m
+\end{pmatrix}
+=
+\Omega ^m
+\begin{pmatrix}
+    \bm{X}^m \\
+\bm{Y}^m
+\end{pmatrix}
+\end{align}
+with
+\begin{align}
+\label{a}
+\mathcal{A}_{\mu \nu} \equiv \mathcal{A}_{ai,bj} &= \underbrace{\left( \epsilon_a^{QP} - \epsilon_i^{QP} \right) \delta_{ab} \delta_{ij} + (ai|jb)}_{\tilde{A}_{ai,bj}} - {\Xi}_{ab,ji}(\omega) \\
+\mathcal{B}_{\mu \nu} \equiv \mathcal{B}_{ai,bj} &= (ai|bj) - {\Xi}_{bi|aj}(\omega)
+\end{align}
+ BSE@GW approximates the kernel as the screened Coulomb interaction
+\begin{equation}
+    \bm{\Xi}(\omega ) \approx \bm{\Xi}_{GW}(\omega ) = W(\omega )
+\end{equation}
+Common to do $\bm{\Xi}_{GW}(\omega ) \approx W(\omega=0)$, which introduces errors
+\end{frame}
+
+\begin{frame}
+\frametitle{Tim's full frequency and frequency free BSE@TDA}
+In TDA, the upfolded 2p Hamiltonian is given by
+\begin{equation}
+\mathcal{H}=
+\begin{pmatrix}
+\mathbf{\tilde{A}} & -\mathbf{V}^{\mathrm{e}} & -\mathbf{V}^{\mathrm{h}} \\
+\left(\mathbf{V}^{\mathrm{h}}\right)^{\dagger} & \mathbf{D} & \mathbf{0} \\
+\left(\mathbf{V}^{\mathrm{e}}\right)^{\dagger} & \mathbf{0} & \mathbf{D}
+\end{pmatrix}
+\end{equation}
+The single excitation block $\tilde{A}$ was defined last slide; the rest is:
+\begin{align}
+\mathbf{D}_{iajb,iajb} &= \left[-\boldsymbol{E}_{\mathrm{occ}}\right] \oplus_{\text{kron}} \boldsymbol{E}_{\mathrm{vir}} \oplus_{\text{kron}} \mathbf{S} \\
+V_{ia,ldkc}^{\mathrm{h}} &= \sqrt{2}\,(il|kc)\,\delta_{ad} \\
+V_{ia,ldkc}^{\mathrm{e}} &= \sqrt{2}\,(kc|ad)\,\delta_{il}
+\end{align}
+Here, $\mathbf{S}$ is the direct RPA matrix in the TDA. Claim: this downfolds to \ref{a}, thus preserving full frequency dependence; I have not been able to prove this yet.
+\end{frame}
+
+\begin{frame}
+\frametitle{Where I am stuck in the derivation}
+\begin{align}
+\mathcal{A}(\omega)
+&= \tilde{\mathbf{A}} - \mathbf{V}^{\mathrm{e}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{h}})^{\dagger} - \mathbf{V}^{\mathrm{h}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{e}})^{\dagger} \\
+\end{align}
+This implies the kernel shoulld be
+\begin{align}
+K_{abij}^{(\mathrm{p})}(\omega) &= \mathbf{V}^{\mathrm{e}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{h}})^{\dagger} + \mathbf{V}^{\mathrm{h}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{e}})^{\dagger} \\
+&= \frac{\mathbf{V}^{\mathrm{e}} \bm{\tilde{X}}  (\bm{V}^{\mathrm{h}}\bm{\tilde{X}})^{\dagger}}{\omega \mathbf{I} - \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right)} + \frac{\bm{V}^{\mathrm{h}} \bm{\tilde{X}}  (\bm{V}^{\mathrm{e}}\bm{\tilde{X}})^{\dagger}}{\omega \mathbf{I} - \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right)} \\
+\end{align}
+I should be getting
+\begin{align}
+K_{abij}^{(\mathrm{p})}(\omega) &= 2 \sum_m^{\Omega_m>0}\left(i j| \rho_m\right)\left(a b|\rho_m\right)\left[\frac{1}{\omega-\left(E_b-E_i\right)-\Omega_m}+\frac{1}{\omega-\left(E_a-E_j\right)-\Omega_m}\right]
+\end{align}
+where $\left(p q | \rho_m\right)=\sum_{i a} X_{i a}^m(p q | i a)$.
+
+\end{frame}
+\section{Ideas of what to look at next}
+\begin{frame}
+\frametitle{Starting from QRPA}
+If ground state $|\phi\rangle$ is the quasiparticle vacuum 
+\begin{equation}
+|\tilde{\phi}\rangle=\prod_{\nu>0}\left(U_\nu+V_\nu a_\nu^{\dagger} a_{\overline{\nu}}^{\dagger}\right)|-\rangle
+\end{equation}
+with quasiparticles (satisfying $U_\nu^2+V_\nu^2=1$) defined by: 
+\begin{align}
+    \alpha_\nu^{\dagger}=U_\nu a_\nu^{\dagger}-V_\nu a_{\bar{\nu}} \\
+    \alpha_{\bar{\nu}}^{\dagger}=U_\nu a_{\bar{\nu}}^{\dagger}+V_\nu a_\nu
+\end{align}
+Then $\alpha_\nu |\tilde{\phi}\rangle=0$ 
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Starting from QRPA continued}
+Define excitation vector as
+\begin{equation}
+    O^{\dagger}=\sum_{\mu \nu}\left(Y_{\mu \nu} \alpha_\mu^{\dagger} \alpha_\nu^{\dagger}+Z_{\mu \nu} \alpha_\mu \alpha_\nu\right)
+\end{equation}
+Then
+\begin{align}
+    A_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \langle\phi|\left[\alpha_\nu \alpha_\mu, H, \alpha_{\mu^{\prime}}^{\dagger} \alpha_{\nu^{\prime}}^{\dagger}\right]|\phi\rangle, \\
+    B_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \langle\phi|\left[\alpha_\nu \alpha_\mu, H, \alpha_{\mu^{\prime}} \alpha_{\nu^{\prime}}\right]|\phi\rangle, \\
+    U_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \langle\phi|\left[\alpha_\nu \alpha_\mu, \alpha_{\mu^{\prime}}^{\dagger} \alpha_{\nu^{\prime}}^{\dagger}\right]|\phi\rangle .
+\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{Form of $H^{eB}$}
+Define \begin{equation}
+\hat{H}^{\mathrm{eB}}=\hat{H}^{\mathrm{e}}+\hat{H}^{\mathrm{B}}+\hat{V}^{\mathrm{eB}}
+\end{equation}
+where $\hat{H}^{\mathrm{e}}$ is the electronic Hamiltonian, $\hat{H}^{\mathrm{B}}$ is the bosonic Hamiltonian, and $\hat{V}^{\mathrm{eB}}$ is the electron-boson coupling term, given as
+\begin{align}
+\hat{H}^e&=\sum_{p q} f_{p q}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\} \\
+\hat{H}^{B}&=\sum_{\nu \mu} A_{\nu \mu} \hat{b}_\nu^{\dagger} \hat{b}_\mu+\frac{1}{2} \sum_{\nu \mu} B_{\nu \mu}\left(\hat{b}_\nu^{\dagger} \hat{b}_\mu^{\dagger}+\hat{b}_\nu \hat{b}_\mu\right)
+\label{b} \\
+\hat{V}^{eB}&=\sum_{p q, \nu} V_{p q \nu}\left\{\hat{a}_p^{\dagger} \hat{a}_q\right\}\left(\hat{b}_\nu^{\dagger}+\hat{b}_\nu\right)
+\label{eb}
+\end{align}
+\end{frame}
+
+
+
+\end{document}
+

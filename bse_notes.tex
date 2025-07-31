@@ -1,0 +1,264 @@
+\section{The standard canon}
+To get the particle-hole response function $L$, we need to solve the Dyson equation, which reads
+\begin{equation}
+    \frac{\partial G(1,1')}{\partial U(2',2)}\equiv L\left(1,2 ; 1^{\prime} ,2^{\prime}\right)=L_0\left(1,2 ; 1^{\prime}, 2^{\prime}\right) +\int \mathrm{d}\left(3456\right) L_0\left(1,4 ; 1^{\prime}, 3\right) \Xi^{\mathrm{eh}}\left(3,5 ; 4 ,6\right) L\left(6, 2 ; 5,2^{\prime}\right)
+\end{equation}
+$G$ is the one-particle Green's function and $U$ is the fictitious nonlocal potential due to Schwinger. $L_0\left(1,2 ; 1^{\prime} ,2^{\prime}\right)=G\left(1,2^{\prime}\right) G\left(2,1^{\prime}\right)$ is the non-interacting eh propagator and the eh kernel $\Xi^{\mathrm{eh}}$ is defined as
+\begin{equation}
+    i\Xi^{\mathrm{eh}}\left(3,5 ; 4,6\right)=v(3,6)\delta (3,4)\delta (5,6)+i\frac{\delta \Sigma\left(3,4\right)}{\delta G\left(6,5\right)}
+\end{equation}
+\subsection{TD-DFT Similarity}
+In the TD-DFT framework, we have the Dyson equation for the density-density response function $\chi$:
+\begin{equation}
+    \frac{\partial \rho(1)}{\partial U(2)}\equiv \chi(1,2)=\chi_0(1,2)+\int \mathrm{d} 34 \chi_0(1,3) \Xi^{\mathrm{DFT}}(3,4) \chi(4,2)
+\end{equation}
+$\rho$ is the density. $\chi_0$ is the non-interacting density-density response function and $\Xi^{\mathrm{DFT}}$ is the DFT kernel given by
+\begin{equation}
+    \Xi^{\mathrm{DFT}}(3,4)=v(3,4)+\frac{\partial V^{\mathrm{xc}}(3)}{\partial \rho(4)}
+\end{equation}
+It is worth noting that $\chi(1,2)=-iL(1,2;1^+, 2^+)$ with $\rho(1)=-iG(1,1^+)$, with the $+$ indicating a slightly shifted time to preserve causality. So the Dyson equation for $L$ reduces to the Dyson equation for $\chi$ once the appropriate contractions have been performed. Earlier in the year, I was able to show that
+\begin{align}
+\chi_{RPA}(\omega) &= \left[\left(\begin{array}{ll}
+\mathbf{A} & \mathbf{B} \\
+\mathbf{B} & \mathbf{A}
+\end{array}\right)+\omega\left(\begin{array}{cc}
+\mathbf{I} & 0 \\
+0 & -\mathbf{I}
+\end{array}\right)\right]^{-1} \\
+\end{align}
+So presumably, we can also write
+\begin{equation}
+    L(\omega) = \left[\left(\begin{array}{ll}\tilde{\mathbf{A}} & \tilde{\mathbf{B}} \\
+\tilde{\mathbf{B}} & \tilde{\mathbf{A}}
+\end{array}\right)+\omega\left(\begin{array}{cc}
+\mathbf{I} & 0 \\
+0 & -\mathbf{I}
+\end{array}\right)\right]^{-1}
+\end{equation}
+where now the matrices $\tilde{\mathbf{A}}$ and $\tilde{\mathbf{B}}$ are defined in the direct approximation as
+\begin{align}
+\tilde{A}_{\mu \nu} \equiv \tilde{A}_{ai,bj} &= \left( \epsilon_a^{GW} - \epsilon_i^{GW} \right) \delta_{ab} \delta_{ij} + (ai|jb) - {\Xi}^c_{ab,ji}(\omega) \\
+\tilde{B}_{\mu \nu} \equiv \tilde{B}_{ai,bj} &= (ai|bj) - {\Xi}^c_{bi,aj}(\omega)
+\end{align}
+So we know that we want to solve for the eigenvalues of the matrix
+\begin{equation}
+    \begin{pmatrix}
+        \tilde{\bm{A}} & \tilde{\bm{B}} \\
+        \tilde{\bm{B}} & \tilde{\bm{A}}
+    \end{pmatrix}
+=\begin{pmatrix}
+    \bm{X} & -\bm{Y} \\
+-\bm{Y} & \bm{X}
+\end{pmatrix}
+\begin{pmatrix}
+    \Omega \mathbf{1} & 0 \\
+0 & \Omega \mathbf{1}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{X} & -\bm{Y} \\
+-\bm{Y} & \bm{X}
+\end{pmatrix}
+\end{equation}
+% Define a basis  of bosonic operators $\bm{b}=\begin{pmatrix} \hat{b}_1 \\ \hat{b}_2 \\ \vdots \\ \hat{b}_N \end{pmatrix}$.
+% Now the form for the bosonic Hamiltonian in Garnet's paper was
+% \begin{align}
+% \hat{H}^{\mathrm{B}}\left(\hat{b}, \hat{b}^{\dagger}\right)&=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left(\begin{array}{ll}
+% \mathbf{b}^{\dagger} & \mathbf{b}
+% \end{array}\right)\left(\begin{array}{ll}
+% \mathbf{A} & \mathbf{B} \\
+% \mathbf{B} & \mathbf{A}
+% \end{array}\right)\binom{\mathbf{b}}{\mathbf{b}^{\dagger}}
+% \label{eq:rpa_rec}
+%  \\
+% &=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\begin{pmatrix}\bm{b}^{\dagger}& \bm{b}\end{pmatrix}\begin{pmatrix}
+%     \bm{A}\bm{b} + \bm{B}\bm{b}^{\dagger} \\
+%     \bm{B}\bm{b} + \bm{A}\bm{b}^{\dagger}
+% \end{pmatrix} \\
+% &=-\frac{1}{2} \operatorname{tr} \mathbf{A}+\frac{1}{2}\left[\bm{b}^{\dagger} \bm{A} \bm{b} + \bm{b}^{\dagger} \bm{B} \bm{b}^{\dagger} + \bm{b} \bm{B} \bm{b} + \bm{b} \bm{A} \bm{b}^{\dagger}\right]
+% \label{eq:normal}
+%  \\
+% &=\bm{b}^{\dagger} \bm{A} \bm{b} + \frac{1}{2}\left[\bm{b}^{\dagger} \bm{B} \bm{b}^{\dagger} + \bm{b} \bm{B} \bm{b}\right] + \bm{0}
+% \label{string}\\
+% &=\sum_{\nu \mu} A_{\nu \mu} \hat{b}_\nu^{\dagger} \hat{b}_\mu+\frac{1}{2} \sum_{\nu \mu} B_{\nu \mu}\left(\hat{b}_\nu^{\dagger} \hat{b}_\mu^{\dagger}+\hat{b}_\nu \hat{b}_\mu\right)
+% \end{align}
+% I guess the question that they were not able to solve is how to exploit something similar for BSE. 
+\subsection{The $G W$ formulation}
+In the GW approximation, eh kernel takes on the simpler form
+\begin{equation}
+    i{\Xi}^{\mathrm{eh}}_{GW}(3,5;4,6) =v(3,6)\delta (3,4)\delta (5,6) -W(3^{+}, 4)\delta (3,6)\delta (4,5) 
+\end{equation}
+This follows when we approximate $\Sigma $ by the GW self-energy:
+\begin{equation}
+    \Sigma(1,2)\approx \Sigma^{GW}(1,2) = iG(1,2) W(2,1^+) \implies i\frac{\delta \Sigma\left(3,4\right)}{\delta G\left(6,5\right)} \approx i\frac{\delta \Sigma^{GW}\left(3,4\right)}{\delta G\left(6,5\right)} = -W(3^{+}, 4)\delta (3,6)\delta (4,5)
+\end{equation}
+The $\bm{A}$ and $\bm{B}$ matrices become:
+\begin{align}
+A_{ai,bj} &= \left( \epsilon_a - \epsilon_i \right) \delta_{ab} \delta_{ij} + (ai|jb) - W_{ab,ji}(\omega) \\
+B_{ai,bj} &= (ai|bj) - W_{bi|aj}(\omega)
+\end{align}
+It is customary to make the static approximation to the screened Coulomb potentitial, i.e. $W_{ab,ji}(\omega) \approx W_{ab,ji}(\omega =0)$. Because the super matrix formulation for GW was so successful at obtaining all QPEs without having to solve a QP equation, I wonder if formulating the BSE in a supermatrix form will enable us to discard this static approximation.
+\section{Berkelbach TDA BSE}
+Here the BSE is defined as
+\begin{align}
+    \mathcal{A}(\omega) & \equiv A_{ia,jb} - K^{(p)}_{ab,ij}(\omega)\\
+\end{align}
+where
+\begin{align}
+A_{ia,jb} &= (E_a - E_i)\,\delta_{ij}\delta_{ab} + \kappa (ia|jb) - (ab|ij) \\
+K_{abij}^{(\mathrm{p})}(\omega) &= 2 \sum_m^{\Omega_m>0}\left(i j| \rho_m\right)\left(a b|\rho_m\right)\left[\frac{1}{\omega-\left(E_b-E_i\right)-\Omega_m}+\frac{1}{\omega-\left(E_a-E_j\right)-\Omega_m}\right] \\
+\end{align}
+with $\kappa$ set to 2 for singlets and 0 for triplets.
+
+We want to show that the spectrum of the upfolded matrix $\bm{\mathcal{H}}$ is equivalent to that of the Bethe-Salpeter equation (BSE) in the Tamm-Dancoff approximation (TDA). The upfolded Hamiltonian is given by
+\begin{equation}
+\mathcal{H}=
+\begin{pmatrix}
+\mathbf{A} & -\mathbf{V}^{\mathrm{e}} & -\mathbf{V}^{\mathrm{h}} \\
+\left(\mathbf{V}^{\mathrm{h}}\right)^{\dagger} & \mathbf{D} & \mathbf{0} \\
+\left(\mathbf{V}^{\mathrm{e}}\right)^{\dagger} & \mathbf{0} & \mathbf{D}
+\end{pmatrix}
+\end{equation}
+The physical block has already been defined; the rest is:
+\begin{align}
+\mathbf{D} &= \left[-\boldsymbol{E}_{\mathrm{occ}}\right] \oplus_{\text{kron}} \boldsymbol{E}_{\mathrm{vir}} \oplus_{\text{kron}} \mathbf{S} \\
+V_{ia,ldkc}^{\mathrm{h}} &= \sqrt{2}\,(il|kc)\,\delta_{ad} \\
+V_{ia,ldkc}^{\mathrm{e}} &= \sqrt{2}\,(kc|ad)\,\delta_{il}
+\end{align}
+Here, $\mathbf{S}$ is the direct RPA matrix in the TDA, defined as
+\begin{equation}
+S_{ia,jb} = \left( \epsilon_a - \epsilon_i \right) \delta_{ij} \delta_{ab} + (ia|jb),\end{equation}
+$\boldsymbol{E}_{\mathrm{occ}}$ and $\boldsymbol{E}_{\mathrm{vir}}$ are diagonal matrices containing the GW QPEs of the occupied and virtual orbitals, respectively.  The dimensions of the blocks are as follows: $\mathbf{A}$ is $OV \times OV$, $\mathbf{V}^{\mathrm{e}}$ is $OV \times O^2V^2$, $\mathbf{V}^{\mathrm{h}}$ is $OV \times O^2V^2$, and $\mathbf{D}$ is $O^2V^2 \times O^2V^2$, where $O$ and $V$ are the numbers of occupied and virtual orbitals, respectively. 
+
+\subsubsection{Comment on system-bath distinction here}
+The idea is that here we are effectively treating the $\bm{A}$ as the physical space that has only the single excitations, while $\bm{D}$ is the bath space that has the double excitations. Just as in their frequency free implementation for GW in the TDA, the couplings between the physical and bath spaces, are just defined in terms of the two-electron integrals.
+
+
+By downfolding the double excitations into the space of single excitations, we obtain the frequency-dependent effective matrix:
+\begin{align}
+\mathcal{A}(\omega)
+&= \mathbf{A} - \mathbf{V}^{\mathrm{e}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{h}})^{\dagger} - \mathbf{V}^{\mathrm{h}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{e}})^{\dagger}
+\end{align}
+
+Start by working out the eigenvalues of $\bm{D}$.
+\begin{align}
+    \bm{D} = -\bm{E}_{O} \otimes \bm{I}_V \otimes \bm{I}_{OV} + \bm{I}_O \otimes \bm{E}_{V} \otimes \bm{I}_{OV} + \bm{I}_O \otimes \bm{I}_V \otimes \bm{A}_{OV}
+\end{align}
+Now define the unitary transformation $\bm{\tilde{X}}=\bm{I}_O \otimes \bm{I}_V \otimes \bm{X}_{OV}$, where $\bm{X}_{OV}$ diagonalizes $\bm{A}_{OV}$. The transformation is applied to the matrix $\bm{D}$ as follows:
+\begin{align}
+    \bm{\tilde{X}}^\dagger \bm{D} \bm{\tilde{X}} &= \bm{\tilde{X}}^\dagger \left(-\bm{E}_{O} \otimes \bm{I}_V \otimes \bm{I}_{OV} + \bm{I}_O \otimes \bm{E}_{V} \otimes \bm{I}_{OV} + \bm{I}_O \otimes \bm{I}_V \otimes \bm{A}_{OV} \right) \bm{\tilde{X}}  \\
+&= \bm{\tilde{X}}^\dagger \left(-\bm{E}_{O} \otimes \bm{I}_V \otimes \bm{I}_{OV}\right) \bm{\tilde{X}} + \bm{\tilde{X}}^\dagger \left(\bm{I}_O \otimes \bm{E}_{V} \otimes \bm{I}_{OV}\right) \bm{\tilde{X}} + \bm{\tilde{X}}^\dagger \left(\bm{I}_O \otimes \bm{I}_V \otimes \bm{A}_{OV}\right) \bm{\tilde{X}}  \\
+&= -\bm{E}_{O} \underbrace{\bm{I}_O^\dag \bm{I_O}}_{\bm{I}_O} \otimes \underbrace{\bm{I_V}^\dag \bm{I_V}}_{\bm{I}_V} \otimes \underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}_{OV}} + \underbrace{\bm{I}_O^\dag \bm{I}_O}_{\bm{I}_O} \otimes \bm{E}_{V} \underbrace{\bm{I}_V^\dag \bm{I}_V}_{\bm{I}_{V}} \otimes \underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}_{OV}} + \underbrace{\bm{I}_O^\dag \bm{I}_O}_{\bm{I}_O} \otimes \underbrace{\bm{I}_V^\dag \bm{I}_V}_{\bm{I}_V} \otimes \underbrace{\bm{X}^\dag \bm{A}\bm{X}}_{\bm{\Omega }_{OV}} \\
+&= -\bm{E}_{O} \oplus \bm{E}_{V} \oplus \bm{\Omega }_{OV} \\
+\implies \bm{D} &= \bm{\tilde{X}} \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right) \bm{\tilde{X}}^\dagger\\
+\end{align}
+Now we can write the spectral representation of the resolvent as
+\begin{align}
+(\omega \mathbf{I} - \bm{D})^{-1} &= \bm{\tilde{X}} \left[\left(\omega \mathbf{I} - \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right)\right)^{-1}\right] \bm{\tilde{X}}^\dagger
+\end{align}
+This leads to
+\begin{align}
+K_{abij}^{(\mathrm{p})}(\omega) &= \mathbf{V}^{\mathrm{e}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{h}})^{\dagger} + \mathbf{V}^{\mathrm{h}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{e}})^{\dagger} \\
+&= \frac{\mathbf{V}^{\mathrm{e}} \bm{\tilde{X}}  (\bm{V}^{\mathrm{h}}\bm{\tilde{X}})^{\dagger}}{\omega \mathbf{I} - \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right)} + \frac{\bm{V}^{\mathrm{h}} \bm{\tilde{X}}  (\bm{V}^{\mathrm{e}}\bm{\tilde{X}})^{\dagger}}{\omega \mathbf{I} - \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right)} \\
+&= 2\sum_{\nu}(\frac{\sum_{ldkc}(kc|ad) \delta_{il} \left( e_l \otimes e_d \otimes X_{kc,\nu} \right) (\sum_{ldkc} (il|kc) \delta_{ad} \left( e_l \otimes e_d \otimes X_{kc,\nu} \right))^{\dagger}}{\omega - (E_b - E_i) - \Omega_{\nu}} \\
+&+ \frac{\sum_{ldkc}(il|kc) \delta_{ad} \left( e_l \otimes e_d \otimes X_{kc,\nu} \right) (\sum_{ldkc} (kc|ad) \delta_{il} \left( e_l \otimes e_d \otimes X_{kc,\nu} \right))^{\dagger}}{\omega - (E_a - E_j) - \Omega_{\nu}} )\\
+% &+ \bm{V}^{\mathrm{h}} \bm{\tilde{X}} \left[\left(\omega \mathbf{I} - \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right)\right)^{-1}\right] (\bm{V}^{\mathrm{e}}\bm{\tilde{X}})^{\dagger} \\
+% \implies K_{abij}^{(\mathrm{p})}(\omega)  &= 2\sum_{kc,ld,\nu}\langle ia,kc | \frac{\delta _{ad} (il|kc)\delta _{il}(kc|ad)}{\omega - (E_b - E_i) - \Omega_{\nu}} | jb,ld \rangle + 2\sum_{kc,ld,\nu}\langle ia,kc | \frac{\delta _{il} (il|kc)\delta _{ad}(kc|ad)}{\omega - (E_a - E_j) - \Omega_{\nu}} | jb,ld \rangle \\
+&= 2 \sum_m^{\Omega_m>0}\left(i j| \rho_m\right)\left(a b|\rho_m\right)\left[\frac{1}{\omega-\left(E_b-E_i\right)-\Omega_m}+\frac{1}{\omega-\left(E_a-E_j\right)-\Omega_m}\right]
+\end{align}
+where $\left(p q | \rho_m\right)=\sum_{i a} X_{i a}^m(p q | i a)$.
+Not sure how to derive this. But we can write the upfolded 2p Hamiltonian with RPA screening, noting that
+\begin{align}
+    B_{ia,jb} &= \kappa (ib|aj)
+\end{align}
+\begin{align}
+\mathcal{H} &= \begin{pmatrix}
+\mathbf{} & -\mathbf{V}^{\mathrm{e}} & -\mathbf{V}^{\mathrm{h}} \\
+\left(\mathbf{V}^{\mathrm{h}}\right)^{\dagger} & \mathbf{D} & \mathbf{0} \\
+\left(\mathbf{V}^{\mathrm{e}}\right)^{\dagger} & \mathbf{0} & \mathbf{D}
+\end{pmatrix} \\
+\end{align}
+Now we can write the spectral decomposition 
+\begin{align}
+\implies \left(\omega {I} - {D}\right)_{ia,\nu}^{-1} &= \frac{|ia,\nu\rangle \langle ia,\nu|}{\omega - (E_a - E_i) - \Omega_{\nu}} \\
+\end{align}
+where $|ia,\nu\rangle$ is the right eigenvector of $\bm{D}$ defined by $e_i \otimes e_a \otimes \sum_{jb} X_{jb,\nu}$, with $e_i$ and $e_a$ being unit vectors in the occupied and virtual orbital spaces, respectively, and $\sum_{jb} X_{jb,\nu}$ as the excitation vector for the $\nu$th RPA excitation in the TDA and  $\left(p q | \rho_m\right)=\sum_{i a} X_{i a}^m(p q | i a)$ with
+\begin{equation}
+ K_{abij}^{(\mathrm{p})}(\omega)\equiv  \mathbf{V}^{\mathrm{e}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{h}})^{\dagger} + \mathbf{V}^{\mathrm{h}}(\omega \mathbf{I} - \mathbf{D})^{-1} (\mathbf{V}^{\mathrm{e}})^{\dagger}
+\end{equation}
+
+Explicitly, the matrix elements of $\mathcal{A}(\Omega)$ are given by
+\begin{align}
+\mathcal{A}_{ia,jb}(\Omega) &= A_{ia,jb} - K_{abij}^{(\mathrm{p})}(\Omega) \\
+A_{ia,jb} &= (E_a - E_i)\,\delta_{ij}\delta_{ab} + \kappa (ia|jb) - (ab|ij)
+\end{align}
+where the frequency-dependent kernel is
+\begin{align}
+K_{abij}^{(\mathrm{p})}(\Omega) &= \frac{i}{2\pi} \int d\omega\, e^{-i\omega 0^+} W_{abij}^{(\mathrm{p})}(\omega) \left[ \frac{1}{\Omega - \omega - (E_b - E_i) + i\eta} + \frac{1}{\Omega + \omega - (E_a - E_j) + i\eta} \right]\\
+&= 2 \sum_m^{\Omega_m>0}\left(i j| \rho_m\right)\left(a b|\rho_m\right)\left[\frac{1}{\Omega-\left(E_b-E_i\right)-\Omega_m}+\frac{1}{\Omega-\left(E_a-E_j\right)-\Omega_m}\right]
+\end{align}
+
+
+To prove the equivalence, we need to show that the eigenvalues of the upfolded Hamiltonian $\mathcal{H}$ correspond to the excitation energies obtained from the BSE in the TDA, i.e., the poles of the response function defined by the effective matrix $\mathcal{A}(\omega)$.
+$$
+\begin{aligned}
+K_{a b i j}^{(\mathrm{p})}(\Omega)= & 2 \sum_m^{\Omega_m>0}\left(i j \mid \rho_m\right)\left(a b \mid \rho_m\right)\left[\frac{1}{\Omega-\left(E_b-E_i\right)-\Omega_m}\right. \\
+& \left.+\frac{1}{\Omega-\left(E_a-E_j\right)-\Omega_m}\right]
+\end{aligned}
+$$
+ and we have dropped $i \eta$ terms. The
+\section{A formulation in terms of supermatrices}
+We know the equation
+\begin{equation}
+    \bm{L}^{-1} = \bm{L}_0^{-1} - \bm{\Xi}^{\mathrm{eh}}
+\end{equation}
+The excitation energies that we are trying to solve for in the Bethe-Salpeter equation are formally the poles of the reducible eh response function $\bm{L}$, so we just need to determine the eigenvalues of the RHS of the above equation. This is analogous to how we were able to determine the QPEs by finding the poles of the Green's function, which were the eigenvalues of the upfolded Hamiltonian. First consider 
+\begin{align}
+\bm{L}_0 &= \bm{G} \otimes \bm{G}\\
+\implies \bm{L}_0^{-1} &= \bm{G}^{-1} \otimes \bm{G}^{-1} \\
+&=(\bm{H}^{GW}) \otimes (\bm{H}^{GW})
+\end{align}
+where 
+\begin{equation}
+    \bm{H}^{GW} = \begin{pmatrix} \bm{F} & \bm{W}^< & \bm{W}^> \\ \bm{W}^{\dagger<} & \bm{d}^< & \bm{0} \\ \bm{W}^{\dagger>} & \bm{0} & \bm{d}^> \end{pmatrix}
+\end{equation}
+Note that the irreducible eh response function $\bm{L}_0$ reduces to the irredubible density-density response function $\chi_0$, when we integrate out one space-time variable.
+\begin{align}
+    \frac{\delta \bm{\Sigma }^H}{\delta \bm{G}} &= \bm{v} \otimes \bm{I} \\
+    \frac{\delta \bm{\Sigma }^x}{\delta \bm{G}} &= -\bm{\Pi}\left(\bm{W} \otimes \bm{I}\right) \\
+\end{align}
+where $\bm{\Pi}$ is a permutation operator with the action of swapping one space-time index betwween the two spaces.
+
+is the so-called BSE kernel. 
+$$
+\chi(1,2)=\chi_0(1,2)+\int \mathrm{d} 34 \chi_0(1,3) \Xi^{\mathrm{DFT}}(3,4) \chi(4,2)
+$$
+where
+$$
+\Xi^{\mathrm{DFT}}(3,4)=v(3,4)+\frac{\partial V^{\mathrm{xc}}(3)}{\partial \rho(4)}
+$$
+is the TD-DFT kernel. Plugging now the $G W$ self-energy (see eq 7), in a scheme that we label BSE@GW, leads to an approximate version of the BSE kernel
+$$
+\begin{aligned}
+& i \Xi^{\mathrm{BSE}}(3,5 ; 4,6)=v(3,6) \delta(34) \delta(56) \\
+& \quad-W\left(3^{+}, 4\right) \delta(36) \delta(45)
+\end{aligned}
+$$
+TODO: check that in the theory we satisfy $\bm{\chi} = \operatorname{Tr}\bm{L}$, which is the trace of the supermatrix $\bm{L}$.
+% at the end of this derivation note that we want to arrive at
+% \begin{equation}
+%     \begin{pmatrix}
+%         \bm{A} & \bm{B} \\
+% \bm{B} & \bm{A}
+%     \end{pmatrix}
+% \begin{pmatrix}
+    
+% \bm{X} \\
+% \bm{Y}
+% \end{pmatrix}
+% =
+% \bm{\Omega}
+% \begin{pmatrix}
+%     \bm{X} \\
+%     \bm{Y}
+% \end{pmatrix}
+% \end{equation}

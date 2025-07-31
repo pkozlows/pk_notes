@@ -5,6 +5,7 @@
 \usepackage{physics}
 \usepackage{tikz}
 \usepackage{simpler-wick}
+\usepackage{cancel}
 \usepackage{geometry}
 \usepackage{algorithm}
 \usepackage{algorithmic}
@@ -14,6 +15,8 @@
 \usepackage{bm}
 \usepackage{xcolor}
 \usepackage{listings}
+
+\usepackage{tcolorbox}
 
 
 
@@ -69,17 +72,24 @@
 % Rest of your document content
 \chapter{$G_0W_0$ Derivations: 11/9}
 \input{g0w0_basics}
-\chapter{Dyson to GQME: 12/13}
-\input{open_gw}
+% \chapter{Dyson to GQME: 12/13}
+% \input{open_gw}
+\chapter{RPA Derivations}
+\input{rpa.tex}
 \chapter{Moment-Conserving $GW$}
 \input{moment_gw}
 \chapter{Berkelbach's $GW$}
 \input{berk_gw.tex}
 \chapter{Auxiliary-boson $GW$}
 \input{ab_gw.tex}
+\chapter{BSE Notes}
+\input{bse_notes.tex}
+% \chapter{Lanczos Method without Supermatrix}
+% \input{lanczos_no_super.tex}
 
 
 
-\chapter{Extraneous derivations}
-\input{gpt_derivations}
+
+% \chapter{Extraneous derivations}
+% \input{gpt_derivations}
 \end{document}

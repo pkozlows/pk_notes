@@ -52,23 +52,23 @@ Let us enumerate now what we actually will get:
 \sigma_i &= 
   \sum_{j} f_{i j}\,r_j
   + \sum_{b} f_{i b}\,r_b
-  + \sum_{k l c} \bigl\langle i\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
-  + \sum_{k c d} \bigl\langle i\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+  + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}
+  + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
 \sigma_a &=
     \sum_{j} f_{a j}\,r_j
     + \sum_{b} f_{a b}\,r_b
-    + \sum_{k l c} \bigl\langle a\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
-    + \sum_{k c d} \bigl\langle a\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+    + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]}
+    + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
 \sigma_{i[ja]} &
-    \sum_{k} \bigl\langle k\,a \mid i\,j \bigr\rangle\,r_k
-    + \sum_{b} \bigl\langle b\,a \mid i\,j \bigr\rangle\,r_b
+    \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k
+    + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b
     + \left(\epsilon _{i} + \epsilon _{j} - \epsilon _{a}\right) r_{i[j a]}
-    - \sum_{lc} \bigl\langle j\,c \mid a\,l \bigr\rangle\,r_{i[l c]} \\[6pt]
+    - \sum_{lc} \bigl\langle j\,c | a\,l \bigr\rangle\,r_{i[l c]} \\[6pt]
 \sigma_{[ia]b} &= 
-    \sum_{j} \bigl\langle j\,i \mid b\,a \bigr\rangle\,r_j
-    + \sum_{c} \bigl\langle c\,i \mid b\,a \bigr\rangle\,r_c
+    \sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j
+    + \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c
     + \left(\epsilon _{a} + \epsilon _{b} - \epsilon _{i}\right) r_{[i a] b}
-    + \sum_{k c} \bigl\langle a\,k \mid i\,c \bigr\rangle\,r_{[k c] b}.
+    + \sum_{k c} \bigl\langle a\,k | i\,c \bigr\rangle\,r_{[k c] b}.
 \end{align}
 \section{Formulation for the dRPA}
 \subsection{Deriving the dRPA approach as they propose}
@@ -131,7 +131,7 @@ Now they define a super-matrix,
 \left(\bm{V}^{2\mathrm{plh}}\right)^{\dagger} &  & \bm{0} & & \bm{C}^{2\mathrm{plh}}
 \end{pmatrix}
 \end{equation}
-where $\mathbf{C}^{2 \mathrm{hlp}}=\varepsilon^{1 \mathrm{~h}} \oplus(-\tilde{\mathbf{M}})$ and $\mathbf{C}^{2 \mathrm{plh}}=\varepsilon^{1 \mathrm{p}} \oplus \tilde{\mathbf{M}}$, which for which we use the super-metric
+where $\mathbf{C}^{2 \mathrm{hlp}}=\varepsilon^{1 \mathrm{~h}} \oplus(-\tilde{\mathbf{M}})$ and $\mathbf{C}^{2 \mathrm{plh}}=\varepsilon^{1 \mathrm{p}} \oplus \tilde{\mathbf{M}}$, which for which we are instructed to use the super-metric
 $$
 \bm{\mathcal{N}}=\left(\begin{array}{ccc}
 \bm{1} & 0 & 0 \\
@@ -139,7 +139,172 @@ $$
 0 & 0 & \bm{1} \oplus \bm{N}
 \end{array}\right)
 $$
-and the excitation vector is $\bm{R} = (\bm{R}^{1\mathrm{h}+1\mathrm{p}}, \bm{R}^{2\mathrm{h}1\mathrm{p}}, \bm{R}^{2\mathrm{p}1\mathrm{h}})^\dag$ with $\bm{R}^{2\mathrm{h}1\mathrm{p}}=(\bm{r}^{2\mathrm{h}1\mathrm{p}}, \bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}})^\dag$ and $\bm{R}^{2\mathrm{p}1\mathrm{h}}=(\bm{r}^{2\mathrm{p}1\mathrm{h}}, \bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}})^\dag$. We will define the row dimension of this excitation vector as $T=P+2A+2\bar{A}$, where $P=O+V$, $A=O^2V$, and $\bar{A}=OV^2$. If we assume that the virtual space is largest, this means that the column width of the excitation vector is $\bar{A}$. The action of the super-metric on the excitation vector is given by
+and the excitation vector is $\bm{R} = (\bm{R}^{1\mathrm{h}+1\mathrm{p}}, \bm{R}^{2\mathrm{h}1\mathrm{p}}, \bm{R}^{2\mathrm{p}1\mathrm{h}})^\dag$ with $\bm{R}^{2\mathrm{h}1\mathrm{p}}=(\bm{r}^{2\mathrm{h}1\mathrm{p}}, \bm{\bar{r}}^{2\mathrm{h}1\mathrm{p}})^\dag$ and $\bm{R}^{2\mathrm{p}1\mathrm{h}}=(\bm{r}^{2\mathrm{p}1\mathrm{h}}, \bm{\bar{r}}^{2\mathrm{p}1\mathrm{h}})^\dag$.
+% \begin{tcolorbox}[colback=red!10!white, colframe=red!50!black, title=Suspicion for their motivation in constructing a supermatrix of this form]
+
+% We know that the analytic form for the correlation self energy is
+% \begin{equation}
+%     \Sigma_{pq}^{\text{corr}}(\omega) = \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{w_{pi}^{\mu }w_{iq}^{\mu }}{\omega -(\epsilon _{i}-\Omega  _{\mu })+i\eta}+ \sum_{a}^{\text{virtual}} \frac{w_{pa}^{\mu }w_{aq}^{\mu }}{\omega -(\epsilon _{a}+\Omega  _{\mu })-i\eta}\right)
+% \label{eq:correlation_self_energy}
+% \end{equation}
+% with
+% \begin{equation}
+%     w_{pq}^{\mu} = \sum_{jb} (pq|jb) \left(X_{jb}^{\mu} + Y_{jb}^{\mu}\right)
+% \end{equation}
+% and if we consider the downfolding of $\bm{H}$, I suspect that they want to achieve a form 
+% \begin{align}
+%     \Sigma_{pq}^{\text{corr}}(\omega) &= \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{w_{pi}^{\mu }w_{iq}^{\mu }}{\omega -(\epsilon _{i}-\Omega  _{\mu })+i\eta}+ \sum_{a}^{\text{virtual}} \frac{w_{pa}^{\mu }w_{aq}^{\mu }}{\omega -(\epsilon _{a}+\Omega  _{\mu })-i\eta}\right)\\
+% & + \sum_{\nu(>>\mu) }^{\text{shifted}}\left(\sum_{i}^{\text{occupied}} \frac{w_{pi}^{\nu }w_{iq}^{\nu }}{\omega -(\epsilon _{i}-\Omega  _{\nu })+i\eta}+ \sum_{a}^{\text{virtual}} \frac{w_{pa}^{\nu }w_{aq}^{\nu }}{\omega -(\epsilon _{a}+\Omega  _{\nu })-i\eta}\right)
+% \end{align}
+% But remember that by design the $\Omega _{\nu}$ are  shifted to large positive values and so therefore the second term can be neglected and we can recover \ref{eq:correlation_self_energy}. So probably the downfolding is trying to achieve the qualitative form
+% \begin{align}
+%     \bm{\Sigma }^c(\omega) &= \left(\frac{ \bm{V}^{2\mathrm{h1p}} \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger}}{\omega \bm{I}-\bm{C}^{2\mathrm{hlp}}} + \frac{ \bm{V}^{2\mathrm{p1h}} \left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger}}{\omega \bm{I}-\bm{C}^{2\mathrm{plh}}}\right) \oplus \left(\frac{ \bm{V}^{2\mathrm{h1p}} \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger}}{\omega \bm{I}-\bm{C}^{2\mathrm{hlp}}} + \frac{ \bm{V}^{2\mathrm{p1h}} \left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger}}{\omega \bm{I}-\bm{C}^{2\mathrm{plh}}}\right)
+% \end{align}
+% but how can this be done if we know that $\bm{C}^{2\mathrm{hlp}}=\epsilon^{1\mathrm{~h}} \oplus (-\tilde{\bm{M}})$ and from above we know that $\bm{N}\tilde{\bm{M}} = \bm{Z}\left(\begin{array}{cc}\bm{\Omega } &\bm{0}  \\ \bm{0} & \bm{\zeta}-\bm{\Omega }\end{array}\right)\bm{Z}^{-1}$, where $\zeta$ is a large positive number.
+% \end{tcolorbox}
+\subsubsection{Proving ED equivalence}
+We have the eigenproblem $\bm{\mathcal{N}} \bm{H} \bm{R} = \bm{R} \bm{E}$, so we really care about the matrix-vector products $\bm{\sigma }=\mathcal{\bm{N}}\bm{H}\bm{R}$. The answer they give is:
+\begin{align}
+\sigma_i &= \sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d} + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,\bar{r}_{[k c]d} \\
+\sigma_a &= \sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,\bar{r}_{[k c]d} \\
+    \sigma _{i[ja]} &= \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]} \\
+    \bar{\sigma}_{i[ja]} &= -\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]} \\
+\sigma _{[ia]b} &= \sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j + \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c + \varepsilon_b r_{[i a] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{xx}} r_{[j c] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{xd}} \bar{r}_{[j c] b} \\
+\bar{\sigma}_{[ia]b} &= -\sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j - \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c + \varepsilon_b \bar{r}_{[i a] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dx}} r_{[j c] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dd}} \bar{r}_{[j c] b}
+\end{align}
+% $$
+% \begin{aligned}
+% \sigma_i= & \sum_j f_{i j} r_j+\sum_b f_{i b} r_b+\sum_{k l c}\langle i c | k l\rangle r_{k[l c]}+\sum_{k c d}\langle i k | d c\rangle r_{[k c] d} \\
+% & +\sum_{k l c}\langle i c | k l\rangle \bar{r}_{k[l c]}+\sum_{k c d}\langle i k | d c\rangle \bar{r}_{[k c] d} \\
+% \sigma_a= & \sum_j f_{a j} r_j+\sum_b f_{a b} r_b+\sum_{k l c}\langle a c | k l\rangle r_{k[l c]}+\sum_{k c d}\langle a k | d c\rangle r_{[k c] d} \\
+% & +\sum_{k l c}\langle a c | k l\rangle \bar{r}_{k[l c]}+\sum_{k c d}\langle a k | d c\rangle \bar{r}_{[k c] d}
+% \end{aligned}
+% $$
+\begin{tcolorbox}[colback=red!10!white, colframe=red!50!black, title=It is unclear where these equations come from]
+I found that these equations give rise to nearly the same spectrum (test on LiH with cc-pvdz basis show up to $~10^{-9} Ha$ of agreement) as that of the exact upfolded $GW$ Hamiltonian (Booth's ED), which is given by
+\begin{equation}
+    \bm{H}_{\text{Upfolded}}^{G_0W_0} = \begin{pmatrix} \bm{F} & \bm{W}^< & \bm{W}^> \\ \bm{W}^{<,\dagger} & \bm{d}^< & 0 \\ \bm{W}^{>, \dagger} & 0 & \bm{d}^> \end{pmatrix}
+\label{eq:booth_hamiltonian}
+\end{equation}
+where we have the definitions
+\begin{align}
+    W_{pkv}^< > = \left(\epsilon_k + \Omega_v\right) \delta_{k,l} \delta_{v,v'}
+\label{eq:booth_definitions}
+\end{align}
+It concerns me that the agreement isn't exact (below $10^{-13} Ha$). I would want to have this cleared up before I try to reduce the scaling by implementing the Arnoldi procedure they try. Also, I am not able to figure out what motivated the form for this upfolded Hamiltonian for Tim's GW-RPA. Specifically, if one interprets the $\oplus$ as a direct sum, then the shapes of the matrices are not compatible since, for example, $\mathbf{C}^{2 \mathrm{hlp}}=\varepsilon^{1 \mathrm{~h}} \oplus(-\tilde{\mathbf{M}})$ has the column dimension $O+2OV$ which does not equal the width of its upstairs neighbor $\begin{pmatrix}
+    \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}
+\end{pmatrix}$, which is $2O^2V$. If one interprets the $\oplus$ as a Kronecker sum, the shapes are compatible, but the energies are wrong. If we assume that the $\oplus$ should actually be the Kronecker product $\otimes$, again the shapes will be compatible, but the energies are wrong. I asked Jinghong, Nemo, and Hamlin and no one was able to figure it out. Can I email Tim to ask him about this?
+%  that means I am not able to exactly identify the proper preconditioner, which is usually the diagonal of the matrix. But if the preconditioner just has the function of accelerating convergence, and does not determine the final results, then I am not sure if this is a problem.
+%  I don't want to implement the Arnoldi iteration that they suggest to obtain lower scaling until I know understand the discrepancy for this high scaling version.
+\end{tcolorbox}
+
+To figure out how to recreate them consider the matrix multiplication
+\begin{align}
+&\bm{\mathcal{N}}^{2\mathrm{h1p}} \bm{H}^{2\mathrm{h1p}} \bm{R}^{2\mathrm{h1p}} \\
+&= \begin{pmatrix}
+\bm{1}_{P,P} & 0 \\
+0 & \bm{X} \\
+\end{pmatrix}
+\begin{pmatrix}
+\bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &  \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}
+\end{pmatrix}
+\begin{pmatrix}
+r_i \\
+r_a \\
+r_{i[j b]} \\
+\bar{r}_{i[j b]} \\
+\end{pmatrix}\\
+&= \begin{pmatrix}
+\bm{1}_{P,P} & 0 \\
+0 & \bm{X} \\
+\end{pmatrix}
+\begin{pmatrix}
+\bm{f}_{O,O}r^i_{O,\bar{A}} + \bm{f}_{O,V}r^a_{V,\bar{A}} + \bm{v}^{2\mathrm{h1p}}_{O,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{v}^{2\mathrm{h1p}}_{O,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+\bm{f}_{V,O}r^i_{O,\bar{A}} + \bm{f}_{V,V}r^a_{V,\bar{A}} + \bm{v}^{2\mathrm{h1p}}_{V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{v}^{2\mathrm{h1p}}_{V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+\bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,O} r^i_{O,\bar{A}} + \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,V} r^a_{V,\bar{A}} + \bm{c}^{2\mathrm{hlp},xx}_{O^2V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{c}^{2\mathrm{hlp},xd}_{O^2V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+\bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,O} r^i_{O,\bar{A}} + \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,V} r^a_{V,\bar{A}} + \bm{c}^{2\mathrm{hlp},dx}_{O^2V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{c}^{2\mathrm{hlp},dd}_{O^2V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+\end{pmatrix}
+\\
+&= \begin{pmatrix}
+\sigma_i \\
+\sigma_a \\
+\sigma_{i[j a]} \\
+\bar{\sigma}_{i[j a]} \\
+\end{pmatrix}
+=\begin{pmatrix}
+\sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}+ \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]}  \\
+\sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} \\
+\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]} \\
+-\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]} \\
+\end{pmatrix}
+\end{align}
+They say that $\bm{V}^{2\mathrm{h1p}}$ has the  elements $V_{p, k[ia]}^{2 \mathrm{~h} 1 \mathrm{p}} = \langle p a | k i \rangle \equiv (pk|ia)$ so we say that $\bm{v}^{2\mathrm{h1p}}_{O,O^2V}$ is the first O rows of $\bm{V}^{2\mathrm{h1p}}$, while $\bm{v}^{2\mathrm{h1p}}_{V,O^2V}$ is the latter V rows of $\bm{V}^{2\mathrm{h1p}}$.
+$\bm{C}^{2\mathrm{hlp}}$ is defined as $\varepsilon^{1h} \oplus -\tilde{\bm{M}}.$ They also say that $\bm{X}=1\oplus \bm{N}$, where $\bm{N}=\begin{pmatrix} \bm{1}_{OV} & 0 \\ 0 & -\bm{1}_{OV} \end{pmatrix}$, but I am doubting this because the shapes in the matrix multiplication don't work out then.
+Define $\begin{pmatrix} \bm{1}_{OV} & 0 \\
+0 & -\bm{1}_{OV} \end{pmatrix} = \bm{N}$ and we have $V_{p, k[ia]}^{2 \mathrm{~h} 1 \mathrm{p}} = \langle p a | k i \rangle \equiv (pk|ia)$. To simplify matters, let's just consider the $2\mathrm{h1p}$ sector. Writing this down gives
+\begin{align}
+&\bm{\mathcal{N}} \bm{H}^{2\mathrm{h1p}}\\ &= \begin{pmatrix}
+\bm{1}_{P,P} & 0 \\
+0 & \bm{1}_{O,O} \oplus \bm{N}_{2OV,2OV} \\
+\end{pmatrix}
+\begin{pmatrix}
+\bm{F} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &  \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}
+\end{pmatrix} \\
+&= \begin{pmatrix}\bm{F}_{P,P} & \bm{1}_{P,P} \bm{V}^{2\mathrm{h1p}}_{P,2O^2V} & \bm{1}_{P,P} \bm{V}^{2\mathrm{h1p}}_{P,2O^2V} \\
+& &  &  & & \\
+\begin{pmatrix}
+\bm{1}_{O,O} & 0 \\
+0 & \bm{N}_{2OV,2OV}
+\end{pmatrix}
+\begin{bmatrix}
+\left( \bm{V}^{2\mathrm{h1p}} \right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}\end{bmatrix}_{2O^2V,P} &  &\begin{pmatrix}
+\bm{1}_{O,O} & 0 \\
+0 & \bm{N}_{2OV,2OV}
+\end{pmatrix}\begin{pmatrix}
+    \epsilon^{1\mathrm{h}}_{O,O} & 0 \\
+    0 & -\tilde{\mathbf{M}}_{2OV,2OV}
+\end{pmatrix} \\
+\end{pmatrix}\\
+&= \begin{pmatrix}\bm{F}_{P,P} & \bm{1}_{P,P} \bm{V}^{2\mathrm{h1p}}_{P,2O^2V} & \bm{1}_{P,P} \bm{V}^{2\mathrm{h1p}}_{P,2O^2V} \\
+& &  &  & & \\
+\begin{pmatrix}
+\bm{1}_{O,O} & 0 \\
+0 & \bm{N}_{2OV,2OV}
+\end{pmatrix}
+\begin{bmatrix}
+\left( \bm{V}^{2\mathrm{h1p}} \right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}\end{bmatrix}_{2O^2V,P} &  &\begin{pmatrix}
+    \epsilon^{1\mathrm{h}}_{O,O} & 0 \\
+    0 & -\mathbf{N}\tilde{\bm{M}}_{2OV,2OV}
+\end{pmatrix} \\
+\end{pmatrix}
+\end{align}
+% \begin{align}
+% &\bm{\mathcal{N}} \bm{H}\\ &= \begin{pmatrix}
+% \bm{1}_{P,P} & 0 & 0 \\
+% 0 & \bm{1}_{O,O} \oplus \bm{N}_{2OV,2OV} & 0 \\
+% 0 & 0 & \bm{1}_{V,V} \oplus \bm{N}_{2OV,2OV}
+% \end{pmatrix}
+% \begin{pmatrix}
+% \bm{F} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{plh}} & \bm{V}^{2\mathrm{plh}} \\
+% \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &  & & \\
+% \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}} & & \bm{0} \\
+% \left(\bm{V}^{2\mathrm{plh}}\right)^{\dagger} & & & & \\
+% \left(\bm{V}^{2\mathrm{plh}}\right)^{\dagger} &  & \bm{0} & & \bm{C}^{2\mathrm{plh}}
+% \end{pmatrix} \\
+% &= \begin{pmatrix}\bm{F}_{P,P} & \bm{1}_{P,P} \bm{V}^{2\mathrm{h1p}}_{P,A} & \bm{1}_{P,P} \bm{V}^{2\mathrm{h1p}}_{P,A} & \bm{1}_{P,P} \bm{V}^{2\mathrm{plh}}_{P,\bar{A}} & \bm{1}_{P,P} \bm{V}^{2\mathrm{plh}}_{P,\bar{A}} \\
+% & &  &  & & \\
+% \left[ \bm{1} \oplus \bm{N} \right]_{2A,2A}\begin{bmatrix}
+% \left( \bm{V}^{2\mathrm{h1p}} \right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}\end{bmatrix}_{2A,P} &  & \left[ \bm{1} \oplus \bm{N} \right]_{2A,2A}\bm{C}^{2\mathrm{hlp}}_{2A,2A} & & \bm{0}\\
+% & & & & & \\
+% \left[ \bm{1} \oplus \bm{N} \right]_{2\bar{A},2\bar{A}}\begin{bmatrix}
+% \left( \bm{V}^{2\mathrm{plh}} \right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{plh}}\right)^{\dagger}\end{bmatrix}_{2\bar{A},P} &  & \bm{0} & & \left[ \bm{1} \oplus \bm{N} \right]_{2\bar{A},2\bar{A}}\bm{C}^{2\mathrm{plh}}_{2\bar{A},2\bar{A}}
+% \end{pmatrix}
+% \end{align}
+ If we assume that the virtual space is largest, this means that the column width of the excitation vector is $\bar{A}$. The action of the super-metric on the excitation vector is given by
 $\bm{\mathcal{N}} \bm{H} \bm{R} = \bm{R} \bm{E}$ leads to:
 \begin{equation}
 \begin{pmatrix}
@@ -175,8 +340,8 @@ From this we get:
 &
 \begin{pmatrix}
 \bm{1}_{P,P} & 0 & 0 \\
-0 & \left(\bm{1} \oplus \bm{N}\right)_{2A,2A} & 0 \\
-0 & 0 & \left(\bm{1} \oplus \bm{N}\right)_{2\bar{A},2\bar{A}}
+0 & \left(\bm{1}_{O} \oplus_{\text{kron}} \bm{N}_{2OV}\right)_{2A,2A} & 0 \\
+0 & 0 & \left(\bm{1}_V \oplus_{\text{kron}} \bm{N}_{2OV}\right)_{2\bar{A},2\bar{A}}
 \end{pmatrix}_{T,T} \\
 &
 \begin{pmatrix}
@@ -549,19 +714,19 @@ Now, we can define a vector $\bm{R} = ( r_i,\; r_a,\; r_{i[jb]},\; r_{[jb]a} )$.
 \sigma_i &= 
   \sum_{j} f_{i j}\,r_j
   + \sum_{b} f_{i b}\,r_b
-  + \sum_{k l c} \bigl\langle i\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
-  + \sum_{k c d} \bigl\langle i\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+  + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}
+  + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
 \sigma_a &=
     \sum_{j} f_{a j}\,r_j
     + \sum_{b} f_{a b}\,r_b
-    + \sum_{k l c} \bigl\langle a\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
-    + \sum_{k c d} \bigl\langle a\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+    + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]}
+    + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
 \end{align}
 For the two-body matrix vector products, we have
 \begin{align}
 \sigma_{i[ja]} &=
-    \sum_{k} \bigl\langle k\,a \mid i\,j \bigr\rangle\,r_k
-    + \sum_{b} \bigl\langle b\,a \mid i\,j \bigr\rangle\,r_b
+    \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k
+    + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b
     + \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}
 \end{align}
 Now, consider just
@@ -581,8 +746,8 @@ We can rewrite this as
 So really we have reduced the scaling to $O(O^3V^2)$. If we do a similar thing for the other term, we have
 \begin{align}
 \sigma_{[ia]b} &= 
-    \sum_{j} \bigl\langle j\,i \mid b\,a \bigr\rangle\,r_j
-    + \sum_{c} \bigl\langle c\,i \mid b\,a \bigr\rangle\,r_c
+    \sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j
+    + \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c
     + \sum_{kc} \left[\epsilon_b + \bm{M}^{1/2}_{ia,kc}\right] r_{[kc] b}
 \end{align}
 which gives the scaling of $O(O^2V^3)$.
@@ -674,10 +839,10 @@ If the Tamm-Dancoff approximation is used, we have $\mathbf{C}^{2 \text { hlp }}
 with matrix elements
 $$
 \begin{gathered}
-V_{p, k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}}=\langle p c \mid k l\rangle \\
-V_{p,[k c] d}^{2 \mathrm{p} 1 \mathrm{~h}}=\langle p k \mid d c\rangle \\
-C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}}=\left[\left(\varepsilon_i+\varepsilon_j-\varepsilon_a\right) \delta_{j l} \delta_{a c}-\langle j c \mid a l\rangle\right] \delta_{i k} \\
-C_{[i a] b,[k c] d}^{2 \mathrm{p} 1 \mathrm{~h}}=\left[\left(\varepsilon_a+\varepsilon_b-\varepsilon_i\right) \delta_{i k} \delta_{a c}+\langle a k \mid i c\rangle\right] \delta_{b d}
+V_{p, k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}}=\langle p c | k l\rangle \\
+V_{p,[k c] d}^{2 \mathrm{p} 1 \mathrm{~h}}=\langle p k | d c\rangle \\
+C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}}=\left[\left(\varepsilon_i+\varepsilon_j-\varepsilon_a\right) \delta_{j l} \delta_{a c}-\langle j c | a l\rangle\right] \delta_{i k} \\
+C_{[i a] b,[k c] d}^{2 \mathrm{p} 1 \mathrm{~h}}=\left[\left(\varepsilon_a+\varepsilon_b-\varepsilon_i\right) \delta_{i k} \delta_{a c}+\langle a k | i c\rangle\right] \delta_{b d}
 \end{gathered}
 $$
 But now, to incorporate the RPA screening, we can instead define $\bm{C}^{2 \text{h1p}} \equiv \varepsilon^{1 \mathrm{~h}} \oplus(-\bm{M})$ and $\bm{C}^{2 \mathrm{p} 1 \mathrm{~h}} \equiv \varepsilon^{1 \mathrm{p}} \oplus \bm{M}$, where $\bm{M}$ is the matrix defined above. We can get the matrix elements of $\bm{M}$ as
@@ -710,20 +875,20 @@ where $\epsilon^{1 \mathrm{~h}}$ and $\epsilon^{1 \mathrm{p}}$ are the diagonal 
 % \sigma_i &= 
 %   \sum_{j} f_{i j}\,r_j
 %   + \sum_{b} f_{i b}\,r_b
-%   + \sum_{k l c} \bigl\langle i\,c \mid k\,l \bigr\rangle\,r_{k[l c]}
-%   + \sum_{k c d} \bigl\langle i\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+%   + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}
+%   + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
 % \sigma_a &= 
 %   \sum_{j} f_{a j}\,r_j
 %   + \sum_{b} f_{a b}\,r_b
-%   + \sum_{j l c} \bigl\langle a\,c \mid j\,l \bigr\rangle\,r_{j[l c]}
-%   + \sum_{k c d} \bigl\langle a\,k \mid d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+%   + \sum_{j l c} \bigl\langle a\,c | j\,l \bigr\rangle\,r_{j[l c]}
+%   + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
 % \sigma_{i[jb]} &
-%   \sum_{k} \bigl\langle k\,b \mid i\,j \bigr\rangle\,r_k
-%   + \sum_{a} \bigl\langle a\,j \mid b\,i \bigr\rangle\,r_a
+%   \sum_{k} \bigl\langle k\,b | i\,j \bigr\rangle\,r_k
+%   + \sum_{a} \bigl\langle a\,j | b\,i \bigr\rangle\,r_a
 %   + M_{i a,\,j b}\,r_{i[jb]}, \\[6pt]
 % \sigma_{[jb]a} &= 
-%   \sum_{k} \bigl\langle k\,j \mid a\,b \bigr\rangle\,r_k
-%   + \sum_{c} \bigl\langle c\,b \mid j\,a \bigr\rangle\,r_c
+%   \sum_{k} \bigl\langle k\,j | a\,b \bigr\rangle\,r_k
+%   + \sum_{c} \bigl\langle c\,b | j\,a \bigr\rangle\,r_c
 %   + M_{i a,\,j b}\,r_{[jb]a}.
 % \end{align}
 % The interesting part will be to figure out how to evaluate elements like $M_{i a, j b}r_{i[jb]}$. We can write this as

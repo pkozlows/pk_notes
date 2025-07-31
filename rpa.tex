@@ -1,0 +1,297 @@
+Here I will enumerate the different routes that can be taken to derive the RPA.
+\section{Green's function approach}
+In this section we combined spacetime coordinates into a single index, i.e. $1 \equiv (t_1, \mathbf{x}_1)$.
+In the RPA, we approximate the four point kernel $\hat{\mathcal{K}}$ by just the two-point $\hat{\mathcal{U}}$ as
+\begin{equation}
+\hat{\mathcal{K}}^{\mathrm{RPA}}\left( 1, 2, 3, 4\right)=\hat{\mathcal{U}}\left(1, 4\right)\left[\delta\left(1-2\right) \delta\left(3-4\right)-\delta\left(1-3\right) \delta\left(2-4\right)\right]
+\end{equation}
+So the Dyson equation for the one-body Green's function becomes
+\begin{align}
+    \mathrm{G}\left(1, 2, 3, 4\right)&=\mathrm{G}^0\left(1, 2, 3, 4\right) + \int d5 d6 d7 d8 \mathrm{G}^0\left(1, 2, 5, 6\right) \hat{\mathcal{K}}\left(5, 6, 7, 8\right) \mathrm{G}\left(7, 8, 3, 4\right)\\
+\tilde{\mathrm{G}}\left(1, 2, 3, 4\right) &=\mathrm{G}^0\left(1, 2, 3, 4\right)+ \int d5 d6 \hat{\mathcal{U}}\left(5, 6\right) \left( \mathrm{G}^0\left(1, 2, 5, 5\right) \tilde{\mathrm{G}}\left(6, 6, 3, 4\right) - \mathrm{G}^0\left(1, 2, 5, 6\right)  \tilde{\mathrm{G}}\left(5, 6, 3, 4\right)\right)
+\end{align}
+where $\tilde{\mathrm{G}}$ is the RPA approximation of the Green's function and we identify that the first term is direct and the second term is exchange. After making the Fourier transform into the energy space and introducing the single particle basis $\nu$, we get
+\begin{align}
+    \tilde{G}\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right) &= G^0\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right) + \frac{1}{\hbar} \sum_{\bar{1}, \bar{2}, \bar{3}, \bar{4}} G^0\left(\nu_1, \nu_2, \bar{1}, \bar{2}, E\right) \left[ \hat{V}_{1234} - \hat{V}_{1423} \right] \tilde{G}\left(\bar{3}, \bar{4}, \nu_3, \nu_4, E\right)\\
+\end{align}
+where  $\hat{V}_{1234} = \langle \bar{1} \bar{3} | \hat{V} | \bar{2} \bar{4} \rangle$ and $\hat{V}_{1423} = \langle \bar{1} \bar{2} | \hat{V} | \bar{4} \bar{3} \rangle$ and we have introduced $\hat{\mathcal{U}} = \frac{\hat{V}}{\hbar}$.
+% $\begin{aligned} & \tilde{G}^{\mathrm{RPA}}\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right)=\tilde{G}^0\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right) \\ + & \sum_{\mu_1, \mu_2, \mu_3, \mu_4} \tilde{G}^0\left(\nu_1, \nu_2, \mu_1, \mu_2, E\right)\left\langle\mu_1 \mu_3\right| \hat{V}\left|\mu_2 \mu_4\right\rangle \tilde{G}^{\mathrm{RPA}}\left(\mu_3, \mu_4, \nu_3, \nu_4, E\right) \frac{1}{\hbar} \\ - & \sum_{\mu_1, \mu_2, \mu_3, \mu_4} \tilde{G}^0\left(\nu_1, \nu_2, \mu_1, \mu_2, E\right)\left\langle\mu_1 \mu_2\right| \hat{V}\left|\mu_4 \mu_3\right\rangle \tilde{G}^{\mathrm{RPA}}\left(\mu_3, \mu_4, \nu_3, \nu_4, E\right) \frac{1}{\hbar} \\ = & \sum_{\mu_1, \mu_2, \mu_3, \mu_4} \tilde{G}^0\left(\nu_1, \nu_2, \mu_1, \mu_2, E\right)\left\{\delta_{\mu_1, \nu_3} \delta_{\mu_2, \nu_4}\right. \\ + & \frac{1}{\hbar}\left\langle\mu_1 \mu_3\right| \hat{V}\left|\mu_2 \mu_4\right\rangle \tilde{G}^{\mathrm{RPA}}\left(\mu_3, \mu_4, \nu_3, \nu_4, E\right)\end{aligned}$
+% \end{aligned}
+% \end{equation}
+% \begin{equation}
+% \begin{aligned}
+% & \mathrm{G}\left(\mathrm{x}_1, \mathrm{x}_2, \mathrm{x}_3, x_4\right)=\mathrm{G}^0\left(\mathrm{x}_1, \mathrm{x}_2, \mathrm{x}_3, \mathrm{x}_4\right) \\
+% & +\quad \int d^4 \mathrm{y}_1 d^4 \mathrm{y}_2 d^4 \mathrm{y}_3 d^4 \mathrm{y}_4 \mathrm{G}^0\left(\mathrm{x}_1, \mathrm{x}_2, \mathrm{y}_1, \mathrm{y}_2\right) \hat{\mathscr{K}}\left(\mathrm{y}_1, \mathrm{y}_2, \mathrm{y}_3, \mathrm{y}_4\right) \mathrm{G}\left(\mathrm{y}_3, \mathrm{y}_4, \mathrm{x}_3, \mathrm{x}_4\right)
+% \end{aligned}
+% \end{equation}
+\section{TDHF approach}
+\section{Equation of motion approach}
+The idea is to define an oscillator that satisfies
+\begin{align}
+    [H, O^\dag] = \omega O^\dag , \quad  \quad [H, O] = -\omega O , \quad \quad [O, O^\dag] = 1
+\end{align}
+and it has the usual ladder properties. But we cannot have an ideal harmonic oscillator because there will not be an infinite number of excitations, so we define the operators as
+\begin{equation}
+O^{\dagger}=\sum_{n=0}^m(n+1)^{1 / 2}|n+1\rangle\langle n|+\sum_{p, q>m} C_{p q}|p\rangle\langle q|
+\end{equation}
+where $m$ is the maximum number of excitations,
+which gives 
+\begin{equation}
+{\left[H, O^{\dagger}\right] } =\omega O^{\dagger}+P, \quad \quad
+{[H, O] } =-\omega O-P^{\dagger}, \quad \quad [O, O^{\dagger}] = 1+Q
+\end{equation}
+where
+$$
+P|n\rangle=P^\dag|n\rangle=Q|n\rangle=Q^{\dagger}|n\rangle=0, \quad \text { all } n \leq m .
+$$
+Now define an arbitrary operator $R$, so
+\begin{align}
+    \langle \phi | [R,[H, O^\dagger]] | \phi \rangle 
+    &= \langle \phi | R[H, O^\dagger] + R^\dagger[H, O] | \phi \rangle \\
+    &= \langle \phi | R(\omega O^\dagger + P) + R^\dagger(-\omega O - P^\dagger) | \phi \rangle \\
+    &= \omega \langle \phi | R O^\dagger | \phi \rangle - \omega \langle \phi | R^\dagger O | \phi \rangle \\
+    &= \omega \left( \langle \phi | R O^\dagger | \phi \rangle - \langle \phi | R^\dagger O | \phi \rangle \right) \\
+    &= \omega \left( \langle \phi | R O^\dagger | \phi \rangle - \langle \phi | O^\dagger R | \phi \rangle^* \right) \\
+    &= \omega \left( \langle \phi | R O^\dagger | \phi \rangle - \langle \phi | O^\dagger R | \phi \rangle
+ \right) \\
+    &= \omega \langle \phi | [R, O^\dagger] | \phi \rangle
+\end{align}
+and similarly,
+\begin{align}
+    \langle \phi | [R,[H, O]] | \phi \rangle 
+    &= -\omega \langle \phi | [R, O] | \phi \rangle
+\end{align}
+These manipulations can introduce some significant computational savings. Notice how the first equation is the Hermitian conjugate of the second, so we make a savings by just considering the first. But Hermicity is not guaranteed for our approximate ground state $|\phi\rangle$, so we can define the double commutator
+\begin{equation}
+    2\left[R, H, O^{\dagger}\right]=\left[R,\left[H, O^{\dagger}\right]\right]+\left[[R, H], O^{\dagger}\right] 
+\end{equation}
+and now
+\begin{equation}
+    \langle\phi|\left[R, H, O^{\dagger}\right]|\phi\rangle=\omega\langle\phi|\left[R, O^{\dagger}\right]|\phi\rangle
+\label{duble_commutator}
+\end{equation}
+Also, the commutator of two operators is of lower particle rank than the product, and hence its matrix elements require less knowledge of the wave functions, so we can get more bang for our buck by starting from an imperfect $\phi$. Next we make that expansion in terms of a basis $\left\{\eta_\alpha\right\}$ with $
+\eta_{\bar{\alpha}^{\dagger}} \equiv \eta_\alpha
+$ into
+\begin{equation}
+    O_k^{\dagger}=\sum_\alpha X_\alpha(\kappa) \eta_\alpha^{\dagger}
+\label{auxiliary_basis}
+\end{equation}
+\begin{tcolorbox}[colback=red!10!white, colframe=red!50!black, title=Equivalence to what Garnet did]
+Note that this is equivalent to what they did in Garnet's paper when they chose to describe via an auxiliary bosonic basis
+\begin{equation}
+\begin{aligned}
+& \hat{b}_\nu^{\dagger} \approx \sum_Q^{N_{\mathrm{AB}}} C_\nu^Q \hat{b}_Q^{\dagger}
+\end{aligned}
+\end{equation}
+Then, they used the RI technique to get the $C_\nu^Q$ coefficients by defining
+\begin{align}
+&(i a \mid j b) \approx \sum_L R_{i a}^L R_{j b}^L\\
+&\implies C_\nu^Q=\sum_{L M} R_\nu^L\left[\mathbf{S}^{-1 / 2}\right]_{L M} P_M^Q \quad \text{with } S_{L M}=\sum_\nu R_\nu^L R_\nu^M=\sum_Q P_L^Q E_Q P_M^Q
+\end{align}
+\end{tcolorbox}
+Plugging \ref{auxiliary_basis} into \ref{duble_commutator} gives
+\begin{equation}
+    \sum_\beta\langle\underbrace{\phi|\left[\eta_\alpha, H, \eta_\beta^{\dagger}\right]|\phi\rangle}_{M_{\alpha \beta}} X_\beta(\kappa) =\omega_\kappa \sum_\beta\langle\underbrace{\phi|\left[\eta_\alpha, \eta_\beta^{\dagger}\right]|\phi\rangle}_{N_{\alpha \beta}} X_\beta(\kappa)
+\label{eq:matrix_equation_nobasis}
+\end{equation}
+The stability condition for real eigenvalues is that $M$ is positive definite. Note that if we assume that $| \phi\rangle$ is the exact ground state, so $H|\phi\rangle=E_0|\phi\rangle$, and set up the excited state configurations $\ket{\alpha}= \eta_\alpha^{\dagger} |\phi\rangle, \quad \eta_\alpha | \phi\rangle = 0$ then a Tamm-Dancoff approximation gives
+
+\begin{equation}
+\sum_{\beta>0}\langle\alpha| H|\beta\rangle X_\beta(\kappa)=\left(E_0+\omega_k\right) \sum_{\beta>0}\langle\alpha \mid \beta\rangle X_\beta(\kappa)
+\end{equation}
+\subsection{Particle-hole RPA}
+\noindent Now approximate \(O^\dagger\) by restricting to particle–hole operators $
+\hat O^\dagger
+=\sum_{a i}\bigl(Y_{a i}\,a_a^\dagger a_i - Z_{i a}\,a_i^\dagger a_a\bigr).$ and identify two sets of basis operators $
+\eta_{a i}^\dagger = a_a^\dagger a_i,
+\eta_{i a}^\dagger = a_i^\dagger a_a.$
+In this basis the nonzero matrix elements are
+\begin{align}
+A_{ai,bj}
+&=\langle\phi|\bigl[a_i^\dagger a_a,\,H,\,a_b^\dagger a_j\bigr]|\phi\rangle\\
+B_{ai,bj}
+&=-\,\langle\phi|\bigl[a_i^\dagger a_a,\,H,\,a_j^\dagger a_b\bigr]|\phi\rangle \\
+U_{ai,bj}
+&=\langle\phi|\bigl[a_i^\dagger a_a,\,a_b^\dagger a_j\bigr]|\phi\rangle
+\end{align}
+
+\medskip
+
+\noindent Finally, collecting the amplitudes \(Y\) and \(Z\) into one vector,
+the coupled equations take on the block-matrix form
+\begin{equation}
+\begin{pmatrix}
+A & B \\[6pt]
+B^\dagger & A^*
+\end{pmatrix}
+\begin{pmatrix}
+Y \\ Z
+\end{pmatrix}
+\;=\;
+\omega
+\begin{pmatrix}
+U & 0 \\[3pt]
+0 & -\,U^*
+\end{pmatrix}
+\begin{pmatrix}
+Y \\ Z
+\end{pmatrix}.
+\label{eq:block_matrix}
+\end{equation}
+and by considering a Hamiltonian of the form
+\begin{equation}
+H=\sum_{\nu \nu^{\prime}} T_{\nu \nu^{\prime}} a_\nu^{\dagger} a_{\nu^{\prime}}+\frac{1}{4} \sum_{\mu \nu \mu^{\prime} \nu^{\prime}} V_{\mu \nu \mu^{\prime} \nu^{\prime}} a_\mu^{\dagger} a_\nu^{\dagger} a_{\nu^{\prime}} a_{\mu^{\prime}}
+\end{equation}
+where we choose the single-particle basis as the one which diagonalizes the single-particle Hamiltonian, so
+\begin{align}
+\langle | a_a\left[H, a_b^{\dagger}\right]| \rangle & =\delta_{a b} \varepsilon_a \\
+\langle | a_i^{\dagger}\left[H, a_j\right]| \rangle & =-\delta_{i j} \varepsilon_i .
+\end{align}
+we get the RPA form of
+\begin{align}
+    A_{a i b j} & = \delta_{a b} \delta_{i j}\left(\varepsilon_i-\varepsilon_a\right) + V_{a j i b} \\
+    B_{a i b j} & = V_{a b i j} \\
+    U_{a i b j} &=  \delta_{a b} \delta_{i j} .
+\end{align}
+\subsection{Quasiparticle RPA}
+Here, we are starting from a correlated ground state. This is relevant for the BSE, where a GW calculation is performed first to get the quasiparticle energies, which form the correlated ground state. So it is more appropriate to define the excitation operator as
+\begin{equation}
+    O^{\dagger}=\sum_{\mu \nu}\left(Y_{\mu \nu} \alpha_\mu^{\dagger} \alpha_\nu^{\dagger}+Z_{\mu \nu} \alpha_\mu \alpha_\nu\right)
+\end{equation}
+Then, we define the quasi-particles by the Bogolyubov transformation
+\begin{align}
+    \alpha_\nu^{\dagger}=U_\nu a_\nu^{\dagger}-V_\nu a_\nu \\
+    \alpha_{\bar{\nu}}^{\dagger}=U_\nu a_{\bar{\nu}}^{\dagger}+V_\nu a_\nu
+\end{align}
+where $U_\nu$ and $V_\nu$ are positive real numbers subject to the normalization $U_\nu^2+V_\nu^2=1$. Plugging in this ansatz for the excitation operator into the equations of motion \ref{duble_commutator} gives
+\begin{align}
+    A_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \langle\phi|\left[\alpha_\nu \alpha_\mu, H, \alpha_{\mu^{\prime}}^{\dagger} \alpha_{\nu^{\prime}}^{\dagger}\right]|\phi\rangle, \\
+    B_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \langle\phi|\left[\alpha_\nu \alpha_\mu, H, \alpha_{\mu^{\prime}} \alpha_{\nu^{\prime}}\right]|\phi\rangle, \\
+    U_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \langle\phi|\left[\alpha_\nu \alpha_\mu, \alpha_{\mu^{\prime}}^{\dagger} \alpha_{\nu^{\prime}}^{\dagger}\right]|\phi\rangle .
+\end{align}
+\begin{tcolorbox}[colback=red!10!white, colframe=red!50!black, title=Idea]
+Take $H^{eB}$ and plug it in here and see what happens.
+\end{tcolorbox}
+This expands into
+\begin{equation}
+\begin{split}
+A_{\mu \nu \mu^{\prime} \nu^{\prime}}= & \left(1-\hat{p}_{\mu \nu}\right)\left[( 1 + \hat{p}_{\mu \nu} \hat{p}_{\mu^{\prime} \nu^{\prime}} ) \left(\langle\phi| \alpha_\nu\left[H, \alpha_{\nu^{\prime}}^{\dagger}\right]|\phi\rangle \delta_{\mu \mu^{\prime}}\right.\right. \\
+& \left.-\langle\phi|\left\{\alpha_\nu,\left[H, \alpha_{\nu^{\prime}}^{\dagger}\right]\right\}|\phi\rangle\langle\phi| \alpha_{\mu^{\prime}}^{\dagger} \alpha_\mu|\phi\rangle\right)+\mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{F})} \\
+& -\frac{1}{2}\left(1-\hat{p}_{\mu \nu}\right)\langle\phi|\left[\alpha_\mu,\left\{\left[H, \alpha_{\mu^{\prime}}^{\dagger}\right], \alpha_{\nu^{\prime}}^{\dagger}\right\}\right] \alpha_\nu|\phi\rangle \\
+& -\frac{1}{2}\left(1-\hat{p}_{\mu^{\prime} \nu^{\prime}}\right)\langle\phi| \alpha_{\nu^{\prime}}^{\dagger}\left[\alpha_\nu,\left\{\alpha_\mu,\left[H, \alpha_{\mu^{\prime}}^{\dagger}\right]\right\}\right]|\phi\rangle \\
+& \left.-\left(1+\hat{p}_{\mu \nu} \hat{p}_{\mu^{\prime} \nu^{\prime}}\right)\langle\phi|: \alpha_{\mu^{\prime}}^{\dagger}\left\{\alpha_\nu,\left[H, \alpha_{\nu^{\prime}}^{\dagger}\right]\right\} \alpha_\mu:|\phi\rangle\right] \\
+B_{\mu \nu \mu^{\prime} \nu^{\prime}}= & \left(1-\hat{p}_{\mu \nu}\right)\left(1+\hat{p}_{\mu \nu} \hat{p}_{\mu^{\prime} \nu^{\prime}}\right)\langle\phi|\left\{\alpha_\mu,\left[H, \alpha_{\mu^{\prime}}\right]\right\}\rangle\langle\phi| \alpha_\nu \alpha_{\nu^{\prime}}|\phi\rangle \\
+& +\mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{B})} \\
+& +\frac{1}{2}\left(1-\hat{p}_{\mu \nu}\right)\langle\phi|\left[\alpha_\mu,\left\{\left[H, \alpha_{\mu^{\prime}}\right], \alpha_{\nu^{\prime}}\right\}\right] \alpha_\nu|\phi\rangle \\
+& +\frac{1}{2}\left(1-\hat{p}_{\mu^{\prime} \nu^{\prime}}\right)\langle\phi|\left[\alpha_\nu,\left\{\alpha_\mu,\left[H, \alpha_{\mu^{\prime}}\right]\right\}\right] \alpha_{\nu^{\prime}}|\phi\rangle \\
+& \left.+\left(1+\hat{p}_{\mu \nu} \hat{p}_{\mu^{\prime} \nu^{\prime}}\right)\langle\phi|:\left\{\alpha_\mu,\left[H, \alpha_{\mu^{\prime}}\right]\right\} \alpha_\nu \alpha_{\nu^{\prime}}:|\phi\rangle\right], \\
+U_{\mu \nu \mu^{\prime} \nu^{\prime}}= & \left(1-\hat{p}_{\mu \nu}\right)\left[\delta_{\mu \mu^{\prime}} \delta_{\nu \nu^{\prime}}-\delta_{\mu \mu^{\prime}}\langle\phi| \alpha_{\nu^{\prime}} \alpha_\nu|\phi\rangle-\delta_{\nu \nu^{\prime}}\langle\phi| \alpha_{\mu^{\prime}}^{\dagger} \alpha_\mu|\phi\rangle\right],
+\end{split}
+\end{equation}
+where $\hat{p}_{\mu \nu}$ is an operator which permutes the indices $\mu, \nu$. $ \mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{F})}$ is the quasi-particle generalization of a forwardgoing particle-hole graph defined by
+\begin{equation}
+    \mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{F})}=\frac{1}{2}\left\{\alpha_\nu,\left[\alpha_\mu,\left\{\left[H, \alpha_{\mu^{\prime}}^{\dagger}\right], \alpha_{\nu^{\prime}}^{\dagger}\right\}\right]\right\}
+\end{equation}
+$\mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{B})}$ is the quasi-particle generalization of a backwardgoing particle-hole graph defined by
+\begin{equation}
+    \mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{B})}=-\frac{1}{2}\left\{\alpha_\nu,\left[\alpha_\mu,\left\{\left[H, \alpha_{\mu^{\prime}}\right], \alpha_{\nu^{\prime}}\right\}\right]\right\}
+\end{equation}
+If we demand that the correlated ground state takes a quasi-particle vacuum form, as
+\begin{equation}
+|\tilde{\phi}\rangle=\prod_{\nu>0}\left(U_\nu+V_\nu a_\nu^{\dagger} a_{\overline{\nu}}^{\dagger}\right)|-\rangle
+\end{equation}
+where $|-\rangle$ is the bare vacuum, we find that
+\begin{equation}
+    A_{\mu \nu \mu^{\prime} \nu^{\prime}}=\left(1-\hat{p}_{\mu \nu}\right)\left[\left(1+\hat{p}_{\mu \nu} \hat{p}_{\mu^{\prime} \nu^{\prime}}\right)\langle  \tilde{\phi}| \alpha_\nu\left[H, \alpha_{\nu^{\prime}}^{\dagger}\right]| \tilde{\phi}\rangle \delta_{\mu \mu^{\prime}}+\mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{F})}\right] .
+\end{equation}
+Now a single-particle basis is chosen as the one which diagonalizes
+\begin{equation}
+\langle \tilde{\phi}|\left\{a_\nu,\left[H, a_{\nu^{\prime}}{ }^{\dagger}\right]\right\}|\tilde{\phi}\rangle=\delta_{\nu \nu^{\prime}}\left(\varepsilon_\nu-\lambda\right) .
+\end{equation}
+where $\lambda$ is the chemical potential.
+The coefficients $U_\nu$ and $V_\nu$ are defined by the requirement that
+\begin{align}
+    \langle \tilde{\phi}|\left\{\alpha_{\bar{\nu}}^{\dagger},\left[H, \alpha_{\nu^{\prime}}^{\dagger}\right]\right\}|\tilde{\phi}\rangle = \delta_{\nu^{\prime} \nu}\left[\left(U_\nu{ }^2-V_\nu{ }^2\right)\Delta _\nu-2 U_\nu V_\nu\left(\varepsilon_\nu-\lambda\right)\right] = 0 
+\end{align}
+where $\Delta_\nu$ is the gap parameter defined by
+\begin{equation}
+    \langle \tilde{\phi}|\left\{a_{\bar{\nu}},\left[H, a_{\nu^{\prime}}\right]\right\}|\tilde{\phi}\rangle=\langle \tilde{\phi}|\left\{a_\nu{ }^{\dagger},\left[H, a_{\bar{\nu}^{\prime}}{ }^{\dagger}\right]\right\}|\tilde{\phi}\rangle=\delta_{\nu^{\prime}} \Delta_\nu .
+\end{equation}
+Explicitly,
+\begin{equation}
+    \Delta_\nu=\frac{1}{2} \sum_\mu V_{\bar{\mu} \mu \bar{\nu} \bar{\nu}}\langle | a_{\bar{\mu}}^{\dagger} a_\mu^{\dagger}| \rangle=-\frac{1}{2} \sum_\mu V_{\bar{\mu} \mu \bar{\nu}} U_\mu V_\mu .
+\end{equation}
+These equations, together with the normalization $U_\nu^2+V_\nu^2=1$ and the number equation $
+\langle \tilde{\phi}| n| \tilde{\phi}\rangle=A,$
+define the quasi-particles completely. The quasi-particle energy $E_\nu$, defined by
+\begin{equation}
+    \langle \tilde{\phi}|\left\{\alpha_\nu,\left[H, \alpha_{\nu^{\prime}}{ }^{\dagger}\right]\right\}|\tilde{\phi}\rangle=\delta_{\nu \nu^{\prime}}\langle \tilde{\phi}|\left\{\alpha_\nu,\left[H, \alpha_\nu{ }^{\dagger}\right]\right\}|\tilde{\phi}\rangle=\delta_{\nu \nu^{\prime}} E_\nu,
+\end{equation}
+is given by
+\begin{align}
+    E_\nu & =\left(U_\nu^2-V_\nu^2\right)\left(\varepsilon_\nu-\lambda\right)+2 U_\nu V_\nu \Delta_\nu \\
+\end{align}
+% We start from the BCS consistency condition and normalization:
+% \begin{align}
+% & (U_\nu^2 - V_\nu^2)\,\Delta_\nu \;-\; 2\,U_\nu V_\nu\,(\varepsilon_\nu - \lambda) \;=\; 0,
+% \label{eq:offdiag}\\
+% & U_\nu^2 + V_\nu^2 \;=\; 1.
+% \label{eq:normal}
+% \end{align}
+
+% Define the quasiparticle energy \(E_\nu\) via
+% \begin{equation}
+% U_\nu^2 - V_\nu^2 \;=\; \frac{\varepsilon_\nu - \lambda}{E_\nu},
+% \qquad
+% 2\,U_\nu V_\nu \;=\; \frac{\Delta_\nu}{E_\nu}.
+% \label{eq:UVdefs}
+% \end{equation}
+
+% Substitute \eqref{eq:UVdefs} into the definition
+% \[
+% E_\nu
+% = (U_\nu^2 - V_\nu^2)\,(\varepsilon_\nu - \lambda)
+% \;+\;2\,U_\nu V_\nu\,\Delta_\nu
+% \]
+% to obtain
+% \[
+% E_\nu
+% = \frac{\varepsilon_\nu - \lambda}{E_\nu}\,(\varepsilon_\nu - \lambda)
+%   + \frac{\Delta_\nu}{E_\nu}\,\Delta_\nu
+% = \frac{(\varepsilon_\nu - \lambda)^2 + \Delta_\nu^2}{E_\nu}.
+% \]
+% Multiplying both sides by \(E_\nu\) yields
+% \begin{equation}
+% E_\nu^2 = (\varepsilon_\nu - \lambda)^2 + \Delta_\nu^2
+% \quad\Longrightarrow\quad
+% E_\nu = \sqrt{(\varepsilon_\nu - \lambda)^2 + \Delta_\nu^2}.
+% \end{equation}
+With this choice of quasi-particle basis, the submatrices of the QRPA become
+\begin{align}
+    A_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \left(1-\hat{p}_{\mu \nu}\right)\left[\delta_{\mu \mu^{\prime}} \delta_{\nu \nu^{\prime}}\left(E_\mu+E_\nu\right)+\mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{F})}\right], \\
+    B_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \left(1-\hat{p}_{\mu \nu}\right) \mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{B})}, \\
+    U_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \left(1-\hat{p}_{\mu \nu}\right) \delta_{\mu \mu^{\prime}} \delta_{\nu \nu^{\prime}} .
+\end{align}
+% \subsection{Proceeding to the Bethe-Salpeter equation}
+% Starred by defining the effective Hamiltonian
+% \begin{equation}
+% H_{\rm eff}(\omega) = H_0 + V_{\rm stat} + V_{\rm dyn}(\omega),
+% \end{equation}
+% In the qusiparticle basis, $H_0$ is diagonal and given by
+% \begin{equation}
+% H_0 = \sum_\nu E_\nu \alpha_\nu^\dagger \alpha_\nu.
+% \end{equation}
+% where $E_\nu$ is the quasiparticle energy defined above. The static part of the potential $V_{\rm stat}$ will be 
+% \begin{equation}
+% V_{\rm stat} = \frac{1}{2} \sum_{pqrs} v_{pq,rs} \alpha_p^\dagger \alpha_q^\dagger \alpha_s \alpha_r,
+% \end{equation}
+% where $v_{pq,rs}$ is the bare Coulomb interaction matrix elements. The dynamical part of the potential $V_{\rm dyn}(\omega)$ is given by
+% We wish to show
+% \[
+% A_{ai,bj}(\omega)
+% =\bigl\langle\,[\,c_i^\dagger c_a,\;H_{\rm eff}(\omega),\;c_b^\dagger c_j]\bigr\rangle
+% =(\varepsilon_a^{GW}-\varepsilon_i^{GW})\,\delta_{ab}\,\delta_{ij}
+% +(ai\!\mid\!jb)
+% -\Xi^c_{ab,ji}(\omega).
+% \]

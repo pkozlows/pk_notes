@@ -1,0 +1,79 @@
+\section{Lanczos Algorithm without Supermatrix}
+In this approach, the diaconal approximation is employed. They choose to rewrite the matrix Artemis of the screened Coulob interaction as:
+singularity. The matrix elements $W_{n m}^s$ are
+$$
+W_{n m}^s=\sum_{v c}(n m \mid v c) \sqrt{\frac{\epsilon_c-\epsilon_v}{\Omega_s}} Z_{v c}^s
+$$
+
+The exchange part of the self-energy $\Sigma_{m m}^{\mathrm{ex}}$ is independent of frequency and relatively easy to compute, while the correlation part $\Sigma_{m m}^{\text {corr }}(\omega)$ includes the frequencydependent screening effects of dielectric responses. The poles of frequency-dependent screened effects can be determined by the eigenvalues of $\mathbf{C}$. As a result, the most expensive step of the aforementioned method is diagonalizing the Casida equation, as the computational cost scales as $O\left(N^6\right)$. To make further progress, we intend to avoid this costly step by defining a vector $\left|P_{n m}\right\rangle$ of dimension $N_{v c}$, which has elements given by $\left(P_{n m}\right)_{v c}=(n m \mid v c)\left(\epsilon_c-\epsilon_v\right)^{1 / 2}$. Then $W_{n m}^s$ becomes
+$$
+W_{n m}^s=\left\langle P_{n m} \mid Z^s\right\rangle \Omega_s^{-\frac{1}{2}}
+$$
+$\Sigma_{m m}^{\text {corr }}$ can be rewritten as
+$$
+\Sigma_{m m}^{\mathrm{corr}}(\omega)=\sum_{n=1}^{N_v+N_c} \Sigma_{m m}^{\mathrm{corr}}(\omega, n)
+$$
+where
+$$
+\begin{aligned}
+\Sigma_{m m}^{\mathrm{corr}}(\omega, n)= & \frac{1}{z_n} \sum_{s=1}^{N_{v c}}\left\langle P_{n m} \mid Z^s\right\rangle\left\langle Z^s \mid P_{n m}\right\rangle \times \\
+& {\left[\frac{1}{\Omega_s}-\frac{1}{\Omega_s+\eta_n z_n}\right] }
+\end{aligned}
+$$
+where $z_n=\omega-\epsilon_n-i \eta_n \delta$.
+Examining Eq. 11, we note the formula for $\Sigma_{m m}^{\text {corr }}(\omega, n)$ is similar to a general resolvent matrix element of the form $\sum_k\langle\star \mid k\rangle\langle k \mid \star\rangle /\left(z-\lambda_k\right)=\langle\star| 1 /(z-\mathbf{H})|\star\rangle$, where $\mathbf{H}$ is a general Hermitian matrix with eigenvalues $\lambda_k$ and eigenvectors $|k\rangle, z$ is a complex number, and $|\star\rangle$ is a ket. Motivated by this observation, we reformulate Eq. 11 as the resolvent of a symmetric matrix $\mathbf{D}$
+$$
+\Sigma_{m m}^{\mathrm{corr}}(\omega, n)=\frac{1}{z_n}\left\langle P_{n m}\right| \frac{1}{\mathbf{D}}-\frac{1}{\mathbf{D}+\eta_n z_n}\left|P_{n m}\right\rangle
+$$
+
+Matrix D satisfies $\mathbf{D}^2=\mathbf{C}$ and its eigenvalues are the square root of those of matrix C , i.e., $\mathbf{D} Z^s=Z^s \Omega_s$. We use a $g$-th degree polynomial function $p_g$ to fit the square root function $p_g(x)=\sum_{k=0}^g a_k x^k \approx \sqrt{x}$ within $x \in$ $\left[\min \Omega_s^2, \max \Omega_s^2\right]$, which is the range between minimum and maximum eigenvalues of matrix $\mathbf{C}$. Accordingly, $\mathbf{D}$ can be approximated by $\mathbf{D}=p_g(\mathbf{C})+\Delta_g \approx p_g(\mathbf{C})=$ $a_0 \mathbf{I}+\sum_{k=1}^g a_k \mathbf{C}^k$, where $\mathbf{I}$ is an identity matrix and the fitting error $\Delta_g$ can be controlled via the degree $g$ of the polynomial function and fitting procedures. More discussions on Eq. 10 to Eq. 12 are presented in Section 1 of the Supplemental Material [28].
+Given Eq. 12 and matrix D, the Lanczos method can then be applied to efficiently compute the resolvent of matrix $\mathbf{D}$, which is an important step in calculating $\Sigma_{m m}^{\text {corr }}(\omega, n)$. In the calculation of $\Sigma_{m m}^{\text {corr }}(\omega)$, we prepare $\left|P_{n m}\right\rangle$ for each state $n$ in the summation of Eq. 10, where $\left|P_{n m}\right\rangle$ is used as the starting vector for the Lanczos tridiagonalization procedure of the symmetric matrix $\mathbf{D}$. With $L$ steps of Lanczos iterations, one can construct a tridiagonal matrix $\mathbf{D}_L$ with dimension $L$ in the following form:
+$$
+\mathbf{D}_L=\left(\begin{array}{cccccc}
+a_0 & b_1 & 0 & \ldots & 0 & 0 \\
+b_1 & a_1 & b_2 & \ldots & 0 & 0 \\
+0 & b_2 & a_2 & \ldots & 0 & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \ldots & a_{L-1} & b_L \\
+0 & 0 & 0 & \ldots & b_L & a_L
+\end{array}\right) .
+$$
+
+Once the tridiagonal matrix $\mathbf{D}_L$ is obtained, a resolvent matrix element (such as Eq. 12) can be computed using
+the continuous fraction
+$$
+\left\langle P_{n m}\right| \frac{1}{z-\mathbf{D}}\left|P_{n m}\right\rangle=\frac{1}{z-a_0-\frac{b_1^2}{z-a_1-\frac{b_2^2}{a_2-\ldots}}},
+$$
+which is also known as the Haydock method [29]. The computation of Eq. 14 is efficient, and one can easily calculate the quasiparticle energies for a series of frequencies by varying $z$ in Eq. 14. When applied to eigenvalue problems, the Lanczos algorithm can lead to ghost eigenvalues. However, applying the Lanczos method to calculate resolvent is free of such a numerical problem [30].
+
+There are several advantages to using the Lanczos method for computing $\Sigma_{m m}^{\text {corr }}$. Solving the eigenvalue problem of the Casida matrix $\mathbf{C}$ is avoided, and the resulting full-frequency GW calculations become more efficient than the conventional method represented by Eq. 7, which explicitly requires the eigenpairs of $\mathbf{C}$. Frequency grids, analytical continuation, and approximations like plasmonpole models are not required, as the frequency dependence of $W$ and $\Sigma_{m m}^{\text {corr }}$ are implicitly treated via Lanczos iterations. Moreover, the method is in principle applicable to any basis sets of wave functions, as our derivation does not rely on any features of specific basis functions.
+We start from $W_{n m}^s$ defined in Eq. (8) of the main text:
+$$
+\begin{gathered}
+W_{n m}^s=\sum_{v c}(n m \mid v c) \sqrt{\frac{\epsilon_c-\epsilon_v}{\Omega_s}} Z_{v c}^s \\
+=\sum_{v c}\left[(n m \mid v c)\left(\epsilon_c-\epsilon_v\right)^{\frac{1}{2}}\right] Z_{v c}^s \Omega_s^{-\frac{1}{2}}=\left\langle P_{n m} \mid Z^s\right\rangle \Omega_s^{\frac{1}{2}}
+\end{gathered}
+$$
+
+Here we introduce an auxiliary vector $P_{n m}$ of dimension $N_v N_c$ to get Eq. (9) in the main text. The elements of $P_{n m}$ are defined by $\left(P_{n m}\right)_{v c}=(n m \mid v c)\left(\epsilon_c-\epsilon_v\right)^{\frac{1}{2}}$. By comparing Eq. (10) and Eq. (7), one can find the expression of $\Sigma_{m m}^{\text {corr }}(\omega, n)$
+$$
+\Sigma_{m m}^{c o r r}(\omega, n)=\sum_s^{N_{v c}} \frac{W_{n m}^s W_{n m}^s}{\omega-\epsilon_n+\eta_n\left(\Omega_s-i \delta\right)}
+$$
+
+Using Eq. (9), $\Sigma_{m m}^{\text {corr }}(\omega, n)$ can be further simplified as below
+$$
+\begin{gathered}
+\Sigma_{m m}^{c o r r}(\omega, n)=\sum_s^{N_{v c}} \frac{\left\langle P_{n m} \mid Z^s\right\rangle \Omega_s^{-\frac{1}{2}}\left\langle Z^s \mid P_{n m}\right\rangle \Omega_s^{-\frac{1}{2}}}{\omega-\epsilon_n+\eta_n\left(\Omega_s-i \delta\right)} \\
+=\sum_s^{N_{v c}} \frac{\left\langle P_{n m} \mid Z^s\right\rangle\left\langle Z^s \mid P_{n m}\right\rangle}{\left[\omega-\epsilon_n+\eta_n\left(\Omega_s-i \delta\right)\right] \Omega_s} \\
+=\sum_s^{N_{v c}}\left\langle P_{n m} \mid Z^s\right\rangle\left\langle Z^s \mid P_{n m}\right\rangle \times\left[\frac{1}{\Omega_s}-\frac{1}{\eta_n\left(\omega-\epsilon_n+\eta_n \Omega_s-i \eta_n \delta\right)}\right] \frac{1}{\left(\omega-\epsilon_n-i \eta_n \delta\right)}
+\end{gathered}
+$$
+$$
+=\frac{1}{z_n} \sum_s^{N_{v c}}\left\langle P_{n m} \mid Z^s\right\rangle\left\langle Z^s \mid P_{n m}\right\rangle\left[\frac{1}{\Omega_s}-\frac{1}{\Omega_s+\eta_n z_n}\right]
+$$
+which is Eq. (11) of the main text. In the last step, we use $\eta_n^2=1$ and introduce a complex variable $z_n=\omega-\epsilon_n-i \eta_n \delta$. Considering matrix $\mathbf{D}$, which satisfies $\mathbf{D} Z^s=\Omega^s Z^s$ and $\sum_s^N\left|Z^s\right\rangle\left\langle Z^s\right|=\mathbf{I}$, we rewrite Eq. (11) as follow (Eq. (12)):
+$$
+\Sigma_{m m}^{c o r r}(\omega, n)=\frac{1}{z_n}\left[\left\langle P_{n m}\right| \mathbf{D}^{-\mathbf{1}}\left|P_{n m}\right\rangle-\left\langle P_{n m}\right|\left(\mathbf{D}+\eta_n z_n\right)^{-\mathbf{1}}\left|P_{n m}\right\rangle\right]
+$$
+
+Since the Casida matrix satisfies $\mathbf{C} Z^s=Z^s \Omega_s^2$, one can use a polynomial function of $\mathbf{C}$ to approximate matrix $\mathbf{D}$ which has eigenvalues equal to the square root of $\Omega_s^2$. We use a least square fitting procedure to find a polynomial approximation of the square root function $\sqrt{x}$ in the range of $\left[\min \left(\Omega_s^2\right), \max \left(\Omega_s^2\right)\right]$. The fitting points are chosen as the Chebyshev nodes of the fitting range. One can use standard Lanczos algorithm to determine the extremal eigenvalues $\min \left(\Omega_s^2\right)$ and $\max \left(\Omega_s^2\right)$ of $\mathbf{C}$. In our current implementation, we simply use $\left[0.8 \mathrm{~min}\left(\epsilon_c-\epsilon_v\right)^2, 1.25 \mathrm{~min}\left(\epsilon_c-\epsilon_v\right)^2\right]$ as the fitting range, which works well for the systems studied in this work.

@@ -444,20 +444,25 @@ Therefore, with the different spins we form a super matrix:
         \mathbf{Y}_{\beta\alpha} & \mathbf{Y}_{\beta\beta}
     \end{pmatrix}
 \end{equation}
-This implies a way to get the excitation energies $\Omega^\mu$ and the eigenvectors $\mathbf{X}^\mu$ and $\mathbf{Y}^\mu$ for a certain spin channel $\sigma $. Next, for each spin channel, we need to formulate the matrix $\mathbf{M}^{\mu }$, which is used to form the transition densities.
-\begin{equation}
-M_{i a j b}^{\mu }=X_{i a}^{\mu } X_{j b}^{\mu }+X_{i a}^{\mu } Y_{j b}^{\mu }+Y_{i a}^{\mu } X_{j b}^{\mu }+Y_{i a}^{\mu } Y_{j b}^{\mu }
-\end{equation}
-With these quantities, we can then form the self energy for the given spin channel:
-\begin{equation}
-\Sigma_{p q}^c\left(\omega \right)= \sum_{j b k c} \sum_{\mu }\left(\sum_i \frac{(i p \mid j b)(i q \mid k c)}{\omega -\Omega_{\mu }-\varepsilon_i^{\mathrm{MF}}-\mathrm{i} \eta}\right.
-\left.+\sum_a \frac{(a p \mid j b)(a q \mid k c)}{\omega +\Omega_{\mu }-\varepsilon_a^{\mathrm{MF}}+\mathrm{i} \eta}\right) M_{j b k c}^{\mu }
-\label{eq:Sigma}
-\end{equation}
-But in solving the case partial equation, we are just interested in the real, diagonal part of the self energy, so this reduces to:
-\begin{equation}
-\Sigma_{p p}^c\left(\omega \right)= \sum_{j b k c} \sum_{\mu }\left(\sum_i \frac{(i p \mid j b)(i p \mid k c)}{\omega -\Omega_{\mu }-\varepsilon_i^{\mathrm{MF}}} + \sum_a \frac{(a p \mid j b)(a p \mid k c)}{\omega +\Omega_{\mu }-\varepsilon_a^{\mathrm{MF}}}\right) M_{j b k c}^{\mu }
-\end{equation}
+Now, there will be $2OV$ unique excitation energies; we sort them into singlets or triplets as follows: for each excitation we compute the overlap between the $\alpha $ and $\beta $ excitation. For TDA, this is just the $\nu$th column of $\begin{pmatrix}
+\mathbf{X}_{\alpha\alpha} & \mathbf{X}_{\alpha\beta}\\
+\end{pmatrix}$ with the $\nu$th row of $\begin{pmatrix}
+    \mathbf{X}_{\beta\alpha} \\ \mathbf{X}_{\beta\beta}\\
+\end{pmatrix}$. If greater than 0, we have a singlet excitation, otherwise we have a triplet excitation. For later use in GW, we just want the neutral excitation energies, so we only care about the singlet excitations.
+% This implies a way to get the excitation energies $\Omega^\mu$ and the eigenvectors $\mathbf{X}^\mu$ and $\mathbf{Y}^\mu$ for a certain spin channel $\sigma $. Next, for each spin channel, we need to formulate the matrix $\mathbf{M}^{\mu }$, which is used to form the transition densities.
+% \begin{equation}
+% M_{i a j b}^{\mu }=X_{i a}^{\mu } X_{j b}^{\mu }+X_{i a}^{\mu } Y_{j b}^{\mu }+Y_{i a}^{\mu } X_{j b}^{\mu }+Y_{i a}^{\mu } Y_{j b}^{\mu }
+% \end{equation}
+% With these quantities, we can then form the self energy for the given spin channel:
+% \begin{equation}
+% \Sigma_{p q}^c\left(\omega \right)= \sum_{j b k c} \sum_{\mu }\left(\sum_i \frac{(i p \mid j b)(i q \mid k c)}{\omega -\Omega_{\mu }-\varepsilon_i^{\mathrm{MF}}-\mathrm{i} \eta}\right.
+% \left.+\sum_a \frac{(a p \mid j b)(a q \mid k c)}{\omega +\Omega_{\mu }-\varepsilon_a^{\mathrm{MF}}+\mathrm{i} \eta}\right) M_{j b k c}^{\mu }
+% \label{eq:Sigma}
+% \end{equation}
+% But in solving the case partial equation, we are just interested in the real, diagonal part of the self energy, so this reduces to:
+% \begin{equation}
+% \Sigma_{p p}^c\left(\omega \right)= \sum_{j b k c} \sum_{\mu }\left(\sum_i \frac{(i p \mid j b)(i p \mid k c)}{\omega -\Omega_{\mu }-\varepsilon_i^{\mathrm{MF}}} + \sum_a \frac{(a p \mid j b)(a p \mid k c)}{\omega +\Omega_{\mu }-\varepsilon_a^{\mathrm{MF}}}\right) M_{j b k c}^{\mu }
+% \end{equation}
 
 \section{Deriving linear response: 11/22}
 \subsection{The Fundamentals}
