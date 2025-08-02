@@ -11,74 +11,66 @@
 \contentsline {subsection}{\numberline {1.4.1}The Fundamentals}{11}{subsection.1.4.1}%
 \contentsline {subsection}{\numberline {1.4.2}Introduction to TDKS}{12}{subsection.1.4.2}%
 \contentsline {subsection}{\numberline {1.4.3}Density Matrix Formulation in TDKS Theory}{13}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}Proving $\chi _{RPA}=\frac {\chi _0}{1-v\chi _0}$: 11/29}{14}{subsection.1.4.4}%
-\contentsline {subsubsection}{Trying direct evaluation}{14}{section*.9}%
-\contentsline {subsubsection}{How to determine the excitations?}{15}{section*.10}%
-\contentsline {chapter}{\numberline {2}RPA Derivations}{18}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Green's function approach}{18}{section.2.1}%
-\contentsline {section}{\numberline {2.2}TDHF approach}{19}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Equation of motion approach}{19}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Particle-hole RPA}{20}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Quasiparticle RPA}{21}{subsection.2.3.2}%
-\contentsline {chapter}{\numberline {3}Moment-Conserving $GW$}{24}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Löwdin Downfolding: 2/2/2025}{24}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Cumulant Idea}{25}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Lanczos Iteration}{27}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Creation of Krylov Subspace}{28}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}A sketch of the implicit Lanczos method}{28}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Physical-auxiliary coupling W}{29}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Auxiliary-auxiliary space d: the working equations}{30}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Efficient generation of the self-energy moments}{31}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}An alternative formulation of the RPA polarizability with the density response moments}{31}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Getting $\eta $ with lower scaling}{32}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Bringing it back to outline an efficient procedure for Computing Self-Energy Moments}{33}{subsection.3.4.3}%
-\contentsline {section}{\numberline {3.5}Avoiding auxiliary space}{34}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Spectral Function}{35}{section.3.6}%
-\contentsline {section}{\numberline {3.7}6/2 Conclusions}{36}{section.3.7}%
-\contentsline {subsection}{\numberline {3.7.1}Hypothesis}{36}{subsection.3.7.1}%
-\contentsline {subsection}{\numberline {3.7.2}Systems of Study}{37}{subsection.3.7.2}%
-\contentsline {section}{\numberline {3.8}6/10 plots}{37}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Canonical orthogonalization}{38}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Krylov subspace orthogonality contradiction}{38}{section.3.10}%
-\contentsline {subsection}{\numberline {3.10.1}Theoretical background}{38}{subsection.3.10.1}%
-\contentsline {subsection}{\numberline {3.10.2}Comment about the effect of minimal basis}{39}{subsection.3.10.2}%
-\contentsline {subsection}{\numberline {3.10.3}Next steps}{39}{subsection.3.10.3}%
-\contentsline {section}{\numberline {3.11}A hierarchy of approximations to block Lanczos with reorthogonalization}{39}{section.3.11}%
-\contentsline {subsection}{\numberline {3.11.1}Exact solution}{39}{subsection.3.11.1}%
-\contentsline {subsection}{\numberline {3.11.2}Matrix-vector product without reorthogonalization}{40}{subsection.3.11.2}%
-\contentsline {subsection}{\numberline {3.11.3}Exact d without reorthogonalization}{40}{subsection.3.11.3}%
-\contentsline {subsection}{\numberline {3.11.4}MCGW with recurrence relation}{41}{subsection.3.11.4}%
-\contentsline {section}{\numberline {3.12}Next steps}{41}{section.3.12}%
-\contentsline {chapter}{\numberline {4}Berkelbach's $GW$}{42}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Formulation for the dTDA}{42}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Comparing to Booth's ED}{42}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Deriving the matrix vector products}{43}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Formulation for the dRPA}{44}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Deriving the dRPA approach as they propose}{44}{subsection.4.2.1}%
-\contentsline {subsubsection}{Showing equivalence between excitation energies of M and Mtilde}{44}{section*.11}%
-\contentsline {subsubsection}{Downfolding equivalence}{44}{section*.12}%
-\contentsline {subsubsection}{Proving ED equivalence}{45}{section*.13}%
-\contentsline {subsubsection}{Deriving matrix vector products for 2h1p sector}{49}{section*.14}%
-\contentsline {subsection}{\numberline {4.2.2}Proving ED equivalence to Booth for the dRPA using Z-vector trick}{50}{subsection.4.2.2}%
-\contentsline {subsubsection}{Casida transformation}{51}{section*.15}%
-\contentsline {subsection}{\numberline {4.2.3}Evaluating the matrix-vector products}{52}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Extra}{53}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Derivation with RPA screening using Furche's symmetric formulation}{55}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Auxiliary-boson $GW$}{57}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Constructing the Hamiltonian}{57}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Nature of the unitary transformation}{58}{subsection.5.1.1}%
-\contentsline {subsubsection}{Effect on the bosonic Hamiltonian}{59}{section*.16}%
-\contentsline {subsubsection}{Effect on the electron-boson coupling term}{59}{section*.17}%
-\contentsline {section}{\numberline {5.2}Connection to Booth supermatrix}{59}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Derivation of the supermatrices for the 2h1p sector}{60}{subsection.5.2.1}%
-\contentsline {subsubsection}{Overlap}{60}{section*.18}%
-\contentsline {subsubsection}{Physical}{61}{section*.19}%
-\contentsline {subsubsection}{Auxiliary}{61}{section*.20}%
-\contentsline {subsubsection}{Coupling}{62}{section*.21}%
-\contentsline {chapter}{\numberline {6}BSE Notes}{64}{chapter.6}%
-\contentsline {section}{\numberline {6.1}The standard canon}{64}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}TD-DFT Similarity}{64}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}The $G W$ formulation}{65}{subsection.6.1.2}%
-\contentsline {section}{\numberline {6.2}Berkelbach TDA BSE}{65}{section.6.2}%
-\contentsline {subsubsection}{Comment on system-bath distinction here}{66}{section*.22}%
-\contentsline {section}{\numberline {6.3}A formulation in terms of supermatrices}{68}{section.6.3}%
+\contentsline {section}{\numberline {1.5}GW Density Matrix}{14}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Moment-Conserving $GW$}{16}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Löwdin Downfolding: 2/2/2025}{16}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Cumulant Idea}{17}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Lanczos Iteration}{19}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Creation of Krylov Subspace}{20}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}A sketch of the implicit Lanczos method}{20}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Physical-auxiliary coupling W}{21}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Auxiliary-auxiliary space d: the working equations}{22}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Efficient generation of the self-energy moments}{23}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}An alternative formulation of the RPA polarizability with the density response moments}{23}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Getting $\eta $ with lower scaling}{24}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Bringing it back to outline an efficient procedure for Computing Self-Energy Moments}{25}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Avoiding auxiliary space}{26}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Spectral Function}{27}{section.2.6}%
+\contentsline {section}{\numberline {2.7}6/2 Conclusions}{28}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Hypothesis}{28}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Systems of Study}{29}{subsection.2.7.2}%
+\contentsline {section}{\numberline {2.8}6/10 plots}{29}{section.2.8}%
+\contentsline {section}{\numberline {2.9}Canonical orthogonalization}{30}{section.2.9}%
+\contentsline {section}{\numberline {2.10}Krylov subspace orthogonality contradiction}{30}{section.2.10}%
+\contentsline {subsection}{\numberline {2.10.1}Theoretical background}{30}{subsection.2.10.1}%
+\contentsline {subsection}{\numberline {2.10.2}Comment about the effect of minimal basis}{31}{subsection.2.10.2}%
+\contentsline {subsection}{\numberline {2.10.3}Next steps}{31}{subsection.2.10.3}%
+\contentsline {section}{\numberline {2.11}A hierarchy of approximations to block Lanczos with reorthogonalization}{31}{section.2.11}%
+\contentsline {subsection}{\numberline {2.11.1}Exact solution}{31}{subsection.2.11.1}%
+\contentsline {subsection}{\numberline {2.11.2}Matrix-vector product without reorthogonalization}{32}{subsection.2.11.2}%
+\contentsline {subsection}{\numberline {2.11.3}Exact d without reorthogonalization}{32}{subsection.2.11.3}%
+\contentsline {subsection}{\numberline {2.11.4}MCGW with recurrence relation}{33}{subsection.2.11.4}%
+\contentsline {section}{\numberline {2.12}Next steps}{33}{section.2.12}%
+\contentsline {chapter}{\numberline {3}Berkelbach's $GW$}{34}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Formulation for the dTDA}{34}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Comparing to Booth's ED}{34}{subsection.3.1.1}%
+\contentsline {subsubsection}{Downfolding the upfolded Hamiltonian}{35}{section*.9}%
+\contentsline {subsection}{\numberline {3.1.2}Deriving the matrix vector products}{36}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Formulation for the dRPA}{36}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Deriving the dRPA approach as they propose}{36}{subsection.3.2.1}%
+\contentsline {subsubsection}{Showing equivalence between excitation energies of M and Mtilde}{36}{section*.10}%
+\contentsline {subsubsection}{Connecting to Booth}{37}{section*.11}%
+\contentsline {subsubsection}{Downfolding equivalence}{40}{section*.12}%
+\contentsline {subsubsection}{Proving ED equivalence}{41}{section*.13}%
+\contentsline {subsubsection}{Deriving matrix vector products for 2h1p sector}{45}{section*.14}%
+\contentsline {subsection}{\numberline {3.2.2}Proving ED equivalence to Booth for the dRPA using Z-vector trick}{46}{subsection.3.2.2}%
+\contentsline {subsubsection}{Casida transformation}{47}{section*.15}%
+\contentsline {subsection}{\numberline {3.2.3}Evaluating the matrix-vector products}{48}{subsection.3.2.3}%
+\contentsline {chapter}{\numberline {4}Auxiliary-boson $GW$}{50}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Constructing the Hamiltonian}{50}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Nature of the unitary transformation}{51}{subsection.4.1.1}%
+\contentsline {subsubsection}{Effect on the bosonic Hamiltonian}{52}{section*.16}%
+\contentsline {subsubsection}{Effect on the electron-boson coupling term}{52}{section*.17}%
+\contentsline {section}{\numberline {4.2}Connection to Booth supermatrix}{52}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Derivation of the supermatrices for the 2h1p sector}{53}{subsection.4.2.1}%
+\contentsline {subsubsection}{Overlap}{53}{section*.18}%
+\contentsline {subsubsection}{Physical}{54}{section*.19}%
+\contentsline {subsubsection}{Auxiliary}{54}{section*.20}%
+\contentsline {subsubsection}{Coupling}{55}{section*.21}%
+\contentsline {chapter}{\numberline {5}BSE Notes}{57}{chapter.5}%
+\contentsline {section}{\numberline {5.1}The standard canon}{57}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}TD-DFT Similarity}{57}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}The $G W$ formulation}{58}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Berkelbach TDA BSE}{58}{section.5.2}%
+\contentsline {subsubsection}{Comment on system-bath distinction here}{59}{section*.22}%
+\contentsline {section}{\numberline {5.3}A formulation in terms of supermatrices}{61}{section.5.3}%

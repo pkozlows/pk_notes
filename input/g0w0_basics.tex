@@ -598,217 +598,30 @@ The equations of motion up to second order read
 \left(\omega_{\alpha}+\omega_{\beta}\right) \gamma^{(\alpha \beta)}& = {\left[H^{(0)}, \gamma^{(\alpha \beta)}\right]+\left[H^{(\alpha)}, \gamma^{(\beta)}\right] } +\left[H^{(\beta)}, \gamma^{(\alpha)}\right]+\left[H^{(\alpha \beta)}, \gamma^{(0)}\right]
 \end{align}
 Proof of this series is given in section \ref{sec:firstOrderIdempotency}. 
-\subsection{Proving $\chi_{RPA}=\frac{\chi_0}{1-v\chi_0}$: 11/29}
-
-\subsubsection{Trying direct evaluation}
-We know
+\section{GW Density Matrix}
+The expression for the density matrix $\gamma $ is
 \begin{equation}
-    \chi_{RPA}^{-1}(\omega) = \frac{1-v \chi_0}{\chi_0} = \chi_0^{-1} - \mathbf{v}
-\label{eq:RPAmatrix}
+\gamma\left(\mathbf{r}, \mathbf{r}^{\prime}\right)=-\frac{i}{2 \pi} \int_{-\infty}^{+\infty} d \omega e^{i \eta \omega} G\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega\right)
 \end{equation}
-The Lehmann representation for $\chi_0$ is
+Next, we want to consider the expression for the linearized Dyson equation, which is given by
 \begin{equation}
-    \chi_{0}\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega\right)=\sum_{ia}\frac{\psi_{i}(\mathbf{r}) \psi_{a}^{*}(\mathbf{r}^{\prime}) \psi_{i}(\mathbf{r}^{\prime}) \psi_{a}^{*}(\mathbf{r})}{\omega\operatorname{sgn}\left(\epsilon_{a}-\epsilon_{i} - \mu\right)+\underbrace{\left(\epsilon_{a}-\epsilon_{i}\right)}_{\text{KS bare } \Omega _0}+i \eta \operatorname{sgn}\left(\epsilon_{a}-\epsilon_{i} - \mu\right)}
-\label{eq:chi0Lehmann}
+G=G_0+G_0\left(\Sigma_{x c}-V_{x c}\right) G_0
+\label{eq:linearDyson}
 \end{equation}
-Let's start by considering the right-hand side of equation \ref{eq:RPAmatrix}. We know that in the particle-hole basis $\chi_0(\omega )= \chi_0^{+}(\omega ) + \chi_0^{-}(\omega ) = \begin{pmatrix}
-    \chi_0^{+}(\omega ) & 0 \\
-    0 & \chi_0^{-}(\omega )
-\end{pmatrix}$ is diagonal, where we define $\chi_0^{\pm}(\omega ) = \frac{1}{\pm\omega + \left[\epsilon_a - \epsilon_i\right]}$ as the KS excitation/de-excitations polarizabilities.
+So by inserting this LDE into the expression for the density matrix, we can identify a few different terms. First, consider the term just corresponding to $G_0$:
 \begin{equation}
-    \chi_0^{-1}(\omega ) = \begin{pmatrix}
-        \frac{1}{\chi_0^{+}(\omega )} & 0 \\
-        0 & \frac{1}{\chi_0^{-}(\omega )}
-    \end{pmatrix}
-= \begin{pmatrix}
-    \omega + \left[\epsilon_a - \epsilon_i\right] & 0 \\
-    0 & -\omega + \left[\epsilon_a - \epsilon_i\right]
-\end{pmatrix}
+\gamma_{\mathbf{k} i j}^{\mathrm{gKS}}=2 \delta_{i j} \theta\left(\mu-\epsilon_{\mathbf{k} i}\right)
 \end{equation}
-The Coulomb interaction in the particle-hole basis is
+We can take a similar approach to treat the static portion of \ref{eq:linearDyson}, i.e., the Hartree-Fock term, which is given by
 \begin{equation}
-    \mathbf{v} = \begin{pmatrix}
-        \mathbf{v}^{++} & \mathbf{v}^{+-} \\
-        \mathbf{v}^{-+} & \mathbf{v}^{--}
-    \end{pmatrix}
+\Delta \gamma_{\mathbf{k} i j}^{\mathrm{HF}}=2 \theta\left(\mu-\epsilon_{\mathbf{k} i}\right) \theta\left(\epsilon_{\mathbf{k} j}-\mu\right) \frac{\langle\mathbf{k} i| \Sigma_x-V_{xc}|\mathbf{k} j\rangle}{\epsilon_{\mathbf{k} i}-\epsilon_{\mathbf{k} j}}
 \end{equation}
-Note the permutational symmetries, so $v^{++}_{pq,rs} \equiv (ia|jb) = (ai|bj) \equiv v^{--}_{pq,rs}$ and $v^{+-}_{pq,rs} \equiv (ia|bj) = (ai|jb) \equiv v^{-+}_{pq,rs}$. So the RHS of equation \ref{eq:RPAmatrix} is
+Note that for a HF noninteracting Green's function, the static term is given by the Hartree-Fock self-energy, but this cancels out exactly with the exchange correlation potential $V_{xc}$, so this term is zero. Finally we have the most complicated term involving the insertion of $G_0\Sigma _c G_0$. The correlation self energy has a frequency dependence, so what they do is
+Finally, we get
 \begin{equation}
-    \chi_{RPA}^{-1}(\omega) = \chi_0^{-1}(\omega) - \mathbf{v} = \begin{pmatrix}
-        \left(\omega + \left[\epsilon_a - \epsilon_i\right]\right) - \mathbf{v}^{++} & -\mathbf{v}^{+-} \\
-        -\mathbf{v}^{-+} & \left(-\omega + \left[\epsilon_a - \epsilon_i\right]\right) - \mathbf{v}^{--}
-    \end{pmatrix}
-= \omega \mathbf{\Sigma_z} + \mathbf{M}
+\gamma^{G W}=\gamma^{\mathrm{gKS}}+\Delta \gamma^{\mathrm{HF}}+\Delta \gamma^{G W}
 \end{equation}
-where 
-\begin{align}
-\mathbf{\Sigma_z} &= \begin{pmatrix}
-    \mathbf{I} & 0 \\
-    0 & -\mathbf{I}
-\end{pmatrix}  \quad \text{and} \quad \mathbf{M} = \begin{pmatrix}
-    \textbf{A} & \textbf{B} \\
-    \textbf{B} & \textbf{A}
-\end{pmatrix}
-\end{align}
-where $A_{ij,ab} = \delta_{ij}\delta_{ab}\left(\epsilon_a - \epsilon_i\right) - (ia|jb)$ and $B_{ij,ab} = -(ia|bj)$. So we have found that $\chi_{RPA}(\omega) = \left[\omega \mathbf{\Sigma_z} + \mathbf{M}\right]^{-1}$. And so we recover
-\begin{align}
-\chi_{RPA}(\omega) &= \left[\left(\begin{array}{ll}
-\mathbf{A} & \mathbf{B} \\
-\mathbf{B} & \mathbf{A}
-\end{array}\right)+\omega\left(\begin{array}{cc}
-\mathbf{I} & 0 \\
-0 & -\mathbf{I}
-\end{array}\right)\right]^{-1}
-\end{align}
-To forced further, recognize that the matrix $\omega \mathbf{\Sigma_z} + \mathbf{M}$ is diagonal in the RPA eigenbasis, so we can write
-\begin{align}
-\omega \mathbf{\Sigma_z} + \mathbf{M} = \begin{pmatrix}
-\mathbf{X} \\
-\mathbf{Y}
-\end{pmatrix}
-\begin{pmatrix}
-\mathbf{\Omega } - \omega & 0 \\
-0 & \mathbf{\Omega } + \omega
-\end{pmatrix}
-\begin{pmatrix}
-\mathbf{X} \\
-\mathbf{Y}
-\end{pmatrix}^\dagger \\
-\chi_{RPA}(\omega) = \left(\omega \mathbf{\Sigma_z} + \mathbf{M}\right)^{-1} = \begin{pmatrix}
-\mathbf{X} \\
-\mathbf{Y}
-\end{pmatrix}
-\begin{pmatrix}
-\frac{1}{\mathbf{\Omega } - \omega} & 0 \\
-0 & \frac{1}{\mathbf{\Omega } + \omega}
-\end{pmatrix}
-\begin{pmatrix}
-\mathbf{X} \\
-\mathbf{Y}
-\end{pmatrix}^\dagger \\
-\chi_{RPA}(\omega) = \sum_{\mathrm{I}}\left[\frac{1}{\Omega_{\mathrm{I}}+\omega}\binom{X^{\mathrm{I}}}{Y^{\mathrm{I}}}\left(\begin{array}{ll}
-X^{\mathrm{I}} & Y^{\mathrm{I}}
-\end{array}\right)+\frac{1}{\Omega_{\mathrm{I}}-\omega}\binom{Y^{\mathrm{I}}}{X^{\mathrm{I}}}\left(\begin{array}{ll}
-Y^{\mathrm{I}} & X^{\mathrm{I}}
-\end{array}\right)\right]
-\end{align}
-\subsubsection{How to determine the excitations?}
-To just determine the locations of the poles, we take a different route here.
-We have the form:
-\begin{equation}
-    \chi_{RPA} = \chi_0 + \chi_0 v \chi_{RPA} = \frac{\chi_0}{1 - v \chi_0}
-\end{equation}
-This implies that we are faced with a matrix inversion problem. The condition for the matrix $\left[\mathbf{I} - \mathbf{v}\mathbf{\chi_0}(\omega )\right]$ to be invertible is one this matrix is non-singular; therefore, the poles of the RPA occur where $\left[\mathbf{I} - \mathbf{v}\mathbf{\chi_0}(\omega )\right]$ is singular, i.e. where $\det\left[\mathbf{I} - \mathbf{v}\mathbf{\chi_0}(\omega )\right] = 0$. This condition implies that we must have a nonzero eigenvector $\mathbf{F}$ such that
-\begin{equation}
-    \left[\mathbf{I} - \mathbf{v}\mathbf{\chi_0}(\omega )\right]\mathbf{F} = 0 \implies \mathbf{v}\mathbf{\chi_0}(\omega )\mathbf{F} = \mathbf{F}
-\label{eq:RPAinvertible}
-\end{equation}
-We need to determine what the matrix element of the operator $\mathbf{v}\chi_0(\omega)$ is in a basis that we will specify later. With the resolution of the identity, we have
-\begin{equation}
-    \bra{pq} \mathbf{v}\chi_0(\omega) \ket{rs} = \sum_{tu} \bra{pq} \mathbf{v} \ket{tu} \bra{tu} \chi_0(\omega) \ket{rs}
-\end{equation}
-But we know that the $\chi_0$ is diagonal in a particle-hole basis, so we will have
-\begin{equation}
-    \bra{\tilde{pq}} \mathbf{v}\chi_0(\omega) \ket{\tilde{rs}} = v_{\tilde{pq}\tilde{rs}} \chi_{0,\tilde{rs}}(\omega)
-\label{eq:chi0MatrixElement}
-\end{equation}
-where it is understood that $\tilde{pq}, \tilde{rs}$ form an occupied-virtual pair. Now consider partitioning $\chi_0$ into two pieces, $\chi_0^{+}$ for OV excitations and $\chi_0^{-}$ for VO de-excitations:
-\begin{equation}
-    \chi_0(\omega) = \chi_{0}^{+}(\omega) + \chi_{0}^{-}(\omega)
-\end{equation}
-We know that since $\chi_{0}^{\pm}\left(\omega\right) = \frac{1}{\pm \left(\omega - \left[\epsilon_{a}-\epsilon_{i}\right]\right)}\implies \chi_{0}^{+}\left(\omega\right) = \tilde{\chi}_{0}(\omega)$ and $\chi_{0}^{-}\left(\omega\right) = -\tilde{\chi}_{0}(\omega)$, where $\tilde{\chi}_{0}(\omega)= \frac{1}{\omega - \left[\epsilon_{a}-\epsilon_{i}\right]}$. Notice from equation \ref{eq:chi0MatrixElement} that the occupied virtual combination of $\chi_0$ constrains the second index of $\mathbf{v}$, so we can formulate a matrix for equation \ref{eq:RPAinvertible} in this pair basis:
-\begin{equation}
-    \begin{pmatrix}
-\mathbf{v}^{++}\tilde{\chi}_{0}\left(\omega\right) & -\mathbf{v}^{+-}\tilde{\chi}_{0}\left(\omega\right) \\
-\mathbf{v}^{-+}\tilde{\chi}_{0}\left(\omega\right) & -\mathbf{v}^{--}\tilde{\chi}_{0}\left(\omega\right)
-\end{pmatrix}
-\begin{pmatrix}
-\mathbf{F}^{+} \\
-\mathbf{F}^{-}
-\end{pmatrix}
-=
-\begin{pmatrix}
-\mathbf{F}^{+} \\
-\mathbf{F}^{-}
-\end{pmatrix}
-\end{equation}
-This implies the system of equations
-\begin{align}
-    \left(\mathbf{v}^{++}\tilde{\chi}_{0}\left(\omega\right) - \mathbf{I}\right) \mathbf{F}^{+} - \mathbf{v}^{+-}\tilde{\chi}_{0}\left(\omega\right) \mathbf{F}^{-} = 0 \\
-    \mathbf{v}^{-+}\tilde{\chi}_{0}\left(\omega\right) \mathbf{F}^{+} - \left(\mathbf{v}^{--}\tilde{\chi}_{0}\left(\omega\right) + \mathbf{I}\right) \mathbf{F}^{-} = 0
-\end{align}
-but we can multiply through by $\tilde{\chi}_{0}\left(\omega\right)^{-1} = \omega - \left[\epsilon_{a}-\epsilon_{i}\right]$ to yield
-\begin{align}
-    \mathbf{v}^{++}\mathbf{F}^{+} - \mathbf{v}^{+-}\mathbf{F}^{-} = \left(\omega - \left[\epsilon_{a}-\epsilon_{i}\right]\right) \mathbf{F}^{+} \\
-    \mathbf{v}^{-+}\mathbf{F}^{+} - \mathbf{v}^{--}\mathbf{F}^{-} = -\left(\omega - \left[\epsilon_{a}-\epsilon_{i}\right]\right) \mathbf{F}^{-} \\
-    \begin{pmatrix}
-        \mathbf{v}^{++} & \mathbf{v}^{+-} \\
-        \mathbf{v}^{-+} & \mathbf{v}^{--}
-    \end{pmatrix}
-    \begin{pmatrix}
-        \mathbf{F}^{+} \\
-        -\mathbf{F}^{-}
-    \end{pmatrix} = \left(\omega - \left[\epsilon_{a}-\epsilon_{i}\right]\right) \begin{pmatrix}
-        \mathbf{F}^{+} \\
-        -\mathbf{F}^{-}
-    \end{pmatrix}\\
-\begin{pmatrix}
-        \mathbf{v}^{++} & \mathbf{v}^{+-} \\
-        \mathbf{v}^{-+} & \mathbf{v}^{--}
-    \end{pmatrix}
-    \begin{pmatrix}
-        \mathbf{F}^{+} \\
-        -\mathbf{F}^{-}
-    \end{pmatrix} = \omega \begin{pmatrix}
-        \mathbf{F}^{+} \\
-        -\mathbf{F}^{-}
-    \end{pmatrix}
-- \left[\epsilon_{a}-\epsilon_{i}\right] \begin{pmatrix}
-        \mathbf{F}^{+} \\
-        -\mathbf{F}^{-}
-    \end{pmatrix}\\
-\begin{pmatrix}
-    \left[\epsilon_{a}-\epsilon_{i}\right] + \mathbf{v}^{++} & \mathbf{v}^{+-} \\
-    \mathbf{v}^{-+} & \left[\epsilon_{a}-\epsilon_{i}\right] + \mathbf{v}^{--}
-\end{pmatrix}
-\begin{pmatrix}
-    \mathbf{F}^{+} \\
-    -\mathbf{F}^{-}
-\end{pmatrix}
-= \omega \begin{pmatrix}
-    \mathbf{F}^{+} \\
-    -\mathbf{F}^{-}
-\end{pmatrix}
-\end{align}
-where now we recognize $\mathbf{A}$ and $\mathbf{B}$ with elements in the particle-hole basis as
-\begin{align}
-    A_{i a j b} &= \delta_{i j} \delta_{a b} \left(\epsilon_{a} - \epsilon_{i}\right) - (i a | j b) \\
-    B_{i a j b} &= (i a | b j)
-\end{align}
-and note that we can make this work because $(ia|jb)=(ai|bj)$ and $(ia|bj)=(ai|jb)$ by permutation symmetry, so we can rewrite the matrix problem as
-\begin{align}
-    \begin{pmatrix}
-        \mathbf{A} & \mathbf{B} \\
-        -\mathbf{B} & -\mathbf{A}
-    \end{pmatrix}
-\begin{pmatrix}
-    \mathbf{F}^{+} \\
-    \mathbf{F}^{-}
-\end{pmatrix} = \omega \mathbf{\sigma_z}
-\begin{pmatrix}
-    \mathbf{F}^{+} \\
-    \mathbf{F}^{-}
-\end{pmatrix}
-\end{align}
-with Pauli matrix $\mathbf{\sigma_z}=\begin{pmatrix}
-    \mathbf{I} & 0 \\
-    0 & -\mathbf{I}
-\end{pmatrix}$.
-So, by solving this eigenvalue problem, we determine the poles of the RPA $\omega \equiv\mathbf{\Omega}^I$ with excitation vectors $\begin{pmatrix}
-    \mathbf{F}^{+} \\
-    \mathbf{F}^{-}
-\end{pmatrix} \equiv \begin{pmatrix}
-    \mathbf{X}^{\mathrm{I}} \\
-    \mathbf{Y}^{\mathrm{I}}
-\end{pmatrix}$. 
-
+% A similar approach can be used for the static term right-hand part of Eq. (4), $G_0\left(\Sigma_x-V_{x c}\right) G_0$ :
+% $$
+% \Delta \gamma_{\mathbf{k} i j}^{\mathrm{HF}}=2 \theta\left(\mu-\epsilon_{\mathbf{k} i}\right) \theta\left(\epsilon_{\mathbf{k} j}-\mu\right) \frac{\langle\mathbf{k} i| \Sigma_x-V_{x c}|\mathbf{k} j\rangle}{\epsilon_{\mathbf{k} i}-\epsilon_{\mathbf{k} j}}
+% $$

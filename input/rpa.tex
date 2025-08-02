@@ -1,20 +1,121 @@
-Here I will enumerate the different routes that can be taken to derive the RPA.
-\section{Green's function approach}
+\section{RPA Derivations}
+Here I will enumerate the different routes that can be taken to derive the RPA. See the review \cite{co2023introducing} for an excellent introduction.
+\subsection{Green's function approach}
 In this section we combined spacetime coordinates into a single index, i.e. $1 \equiv (t_1, \mathbf{x}_1)$.
 In the RPA, we approximate the four point kernel $\hat{\mathcal{K}}$ by just the two-point $\hat{\mathcal{U}}$ as
 \begin{equation}
 \hat{\mathcal{K}}^{\mathrm{RPA}}\left( 1, 2, 3, 4\right)=\hat{\mathcal{U}}\left(1, 4\right)\left[\delta\left(1-2\right) \delta\left(3-4\right)-\delta\left(1-3\right) \delta\left(2-4\right)\right]
 \end{equation}
-So the Dyson equation for the one-body Green's function becomes
+So the Dyson equation for the two-body Green's function becomes
 \begin{align}
     \mathrm{G}\left(1, 2, 3, 4\right)&=\mathrm{G}^0\left(1, 2, 3, 4\right) + \int d5 d6 d7 d8 \mathrm{G}^0\left(1, 2, 5, 6\right) \hat{\mathcal{K}}\left(5, 6, 7, 8\right) \mathrm{G}\left(7, 8, 3, 4\right)\\
-\tilde{\mathrm{G}}\left(1, 2, 3, 4\right) &=\mathrm{G}^0\left(1, 2, 3, 4\right)+ \int d5 d6 \hat{\mathcal{U}}\left(5, 6\right) \left( \mathrm{G}^0\left(1, 2, 5, 5\right) \tilde{\mathrm{G}}\left(6, 6, 3, 4\right) - \mathrm{G}^0\left(1, 2, 5, 6\right)  \tilde{\mathrm{G}}\left(5, 6, 3, 4\right)\right)
+\tilde{\mathrm{G}}\left(1, 2, 3, 4\right) &=\mathrm{G}^0\left(1, 2, 3, 4\right)\\
++ & \int d5 d6 \mathrm{G}^0\left(1, 2, 5, 6\right) \hat{\mathcal{U}}\left(5, 6\right) \tilde{\mathrm{G}}\left(6, 5, 3, 4\right)\\
+- & \int d5 d6 \mathrm{G}^0\left(1, 2, 5, 6\right) \hat{\mathcal{U}}\left(5, 6\right) \tilde{\mathrm{G}}\left(5, 6, 3, 4\right)
 \end{align}
+% \begin{equation}
+% \begin{aligned}
+% & G^{\mathrm{RPA}}\left(x_1, x_2, x_3, x_4\right)=G^0\left(x_1, x_2, x_3, x_4\right) \\
+% + & \int d^4 y_1 d^4 y_2 G^0\left(x_1, x_2, y_1, y_1\right) \hat{u}\left(y_1, y_2\right) G^{\mathrm{RPA}}\left(y_2, y_2, x_3, x_4\right) \\
+% - & \int d^4 y_1 d^4 y_2 G^0\left(x_1, x_2, y_1, y_2\right) \hat{u}\left(y_1, y_2\right) G^{\mathrm{RPA}}\left(y_1, y_2, x_3, x_4\right)
+% \end{aligned}
+% \end{equation}
 where $\tilde{\mathrm{G}}$ is the RPA approximation of the Green's function and we identify that the first term is direct and the second term is exchange. After making the Fourier transform into the energy space and introducing the single particle basis $\nu$, we get
 \begin{align}
-    \tilde{G}\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right) &= G^0\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right) + \frac{1}{\hbar} \sum_{\bar{1}, \bar{2}, \bar{3}, \bar{4}} G^0\left(\nu_1, \nu_2, \bar{1}, \bar{2}, E\right) \left[ \hat{V}_{1234} - \hat{V}_{1423} \right] \tilde{G}\left(\bar{3}, \bar{4}, \nu_3, \nu_4, E\right)\\
+    \tilde{G}\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right) &= G^0\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right) + \frac{1}{\hbar} \sum_{\bar{1}, \bar{2}, \bar{3}, \bar{4}} G^0\left(\nu_1, \nu_2, \bar{1}, \bar{2}, E\right) \left[ \hat{V}_{1234} - \hat{V}_{1423} \right] \tilde{G}\left(\bar{3}, \bar{4}, \nu_3, \nu_4, E\right)
+\label{eq:rpa_green}
 \end{align}
 where  $\hat{V}_{1234} = \langle \bar{1} \bar{3} | \hat{V} | \bar{2} \bar{4} \rangle$ and $\hat{V}_{1423} = \langle \bar{1} \bar{2} | \hat{V} | \bar{4} \bar{3} \rangle$ and we have introduced $\hat{\mathcal{U}} = \frac{\hat{V}}{\hbar}$.
+Now, we note that the two body Green's function can be expressed as:
+\begin{align}
+    \frac{i}{\hbar} {G}\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right)=\frac{1}{\left\langle\Psi_0 \mid \Psi_0\right\rangle} \sum_n\left[\frac{\left\langle\Psi_0\right| \hat{a}_{\nu_1} \hat{a}_{\nu_3}^{+}\left|\Psi_n\right\rangle\left\langle\Psi_n\right| \hat{a}_{\nu_2} \hat{a}_{\nu_4}^{+}\left|\Psi_0\right\rangle}{E-\left(E_n-E_0\right)-i \eta}-\frac{\left\langle\Psi_0\right| \hat{a}_{\nu_2} \hat{a}_{\nu_4}^{+}\left|\Psi_n\right\rangle\left\langle\Psi_n\right| \hat{a}_{\nu_1} \hat{a}_{\nu_3}^{+}\left|\Psi_0\right\rangle}{E+\left(E_n-E_0\right)+i \eta}\right]
+\end{align}
+so in particular, the form of the unperturbed Green's function, with $m,n
+\ldots$ and $i,j\ldots$ representing particle and hole indices respectively, is
+\begin{align}
+G^0(m, i, j, n, E) &= \hbar \frac{\delta_{i j} \delta_{m n}}{\epsilon_m-\epsilon_i-E-i \eta}, \\
+G^0(i, m, n, j, E) &= \hbar \frac{\delta_{i j} \delta_{m n}}{\epsilon_m-\epsilon_i+E-i \eta}, \\
+G^0(m, i, n, j, E) &= G^0(i, m, j, n, E) = 0.
+\end{align}
+Insertion of these identities into \ref{eq:rpa_green} gives rise to the equations
+\begin{align}
+    \sum_{q, l}\left\{\left[A_{m i q l}-E \delta_{m, q} \delta_{i, l}\right] \tilde{G}(q, l, j, n, E)+B_{m i q l} \tilde{G}(l, q, j, n, E)\right\} &= \delta_{m, n} \delta_{i, j}, \\
+    \sum_{q, l}\left\{\left[A_{m i q l}^*+E \delta_{m, q} \delta_{i, l}\right] \tilde{G}(l, q, j, n, E)+B_{m i q l}^* \tilde{G}(q, l, j, n, E)\right\} &= 0, \\
+    \left.\sum_{q, l}\left\{\left[A_{m i q l}-E\right) \delta_{m, q} \delta_{i, l}\right] \tilde{G}(q, l, n, j, E)+B_{m i q l} \tilde{G}(l, q, n, j, E)\right\} &= 0, \\
+    \sum_{q, l}\left\{\left[A_{m i q l}^*+E \delta_{m, q} \delta_{i, l}\right] \tilde{G}(l, q, n, j, E)+B_{m i q l}^* \tilde{G}(q, l, n, j)\right\} &= \delta_{m, n} \delta_{i, j},
+\end{align}
+with $A_{m i q l} = \left(\epsilon_m-\epsilon_i\right) \delta_{m, q} \delta_{i, l}+\bar{V}_{i q m l}$ and $B_{m i q l} = -\bar{V}_{i l m q}$. Defining the matrices
+\begin{align}
+    G_1(E) &\equiv \tilde{G}(m, i, j, n, E), \\
+    G_2(E) &\equiv \tilde{G}(m, i, n, j, E), \\
+    G_3(E) &\equiv \tilde{G}(i, m, j, n, E), \\
+    G_4(E) &\equiv \tilde{G}(i, m, n, j, E)
+\end{align}
+and rewriting the equations in matrix form gives
+\begin{equation}
+    \begin{pmatrix}
+    A-E \mathbb{I} & B \\
+    B^* & A^*+E \mathbb{I}
+    \end{pmatrix}
+    \begin{pmatrix}
+    G_1(E) & G_2(E) \\
+    G_3(E) & G_4(E)
+\end{pmatrix}
+    =
+    \begin{pmatrix}
+    \mathbb{I} & 0 \\
+    0 & \mathbb{I}
+    \end{pmatrix}
+\end{equation}
+The poles $E$ of these RPA Green's functions are the RPA excitation energies. Because the value of the RPA Green's function goes to infinity at each of these poles, correspondingly, we must have that the matrix of coefficients goes to zero in these cases, implying that we can get the RPA excitation energies $\omega _{n}$ through a solution of the equation
+\begin{equation}
+\left(\begin{array}{cc}
+A-\omega_n \mathbb{I} & B \\
+B^* & A^*+\omega_n \mathbb{I}
+\end{array}\right)\left(\begin{array}{c}
+X_n \\
+\\
+Y_n
+\end{array}\right)=0.
+\end{equation}
+% \end{array}
+% $$
+% we obtain
+% $$
+% \left(\begin{array}{cc}
+% A-E \mathbb{I} & B \\
+% B^* & A^*+E \mathbb{I}
+% \end{array}\right)\left(\begin{array}{cc}
+% G_1(E) & G_2(E) \\
+% G_3(E) & G_4(E)
+% \end{array}\right)=\left(\begin{array}{cc}
+% \mathbb{I} & 0 \\
+% 0 & \mathbb{I}
+% \end{array}\right) .
+% $$
+% $$
+% \begin{aligned}
+% & \sum_{q, l}\left\{\left[A_{m i q l}-E \delta_{m, q} \delta_{i, l}\right] \bar{G}^{\mathrm{RPA}}(q, l, j, n, E)+B_{m i q l} \bar{G}^{\mathrm{RPA}}(l, q, j, n, E)\right\}=\delta_{m, n} \delta_{i, j}, \\
+% & \sum_{q, l}\left\{\left[A_{m i q l}^*+E \delta_{m, q} \delta_{i, l}\right] \bar{G}^{\mathrm{RPA}}(l, q, j, n, E)+B_{m i q l}^* \bar{G}^{\mathrm{RPA}}(q, l, j, n, E)\right\}=0, \\
+% & \left.\sum_{q, l}\left\{\left[A_{m i q l}-E\right) \delta_{m, q} \delta_{i, l}\right] \bar{G}^{\mathrm{RPA}}(q, l, n, j, E)+B_{m i q l} \bar{G}^{\mathrm{RPA}}(l, q, n, j, E)\right\}=0, \\
+% & \sum_{q, l}\left\{\left[A_{m i q l}^*+E \delta_{m, q} \delta_{i, l}\right] \bar{G}^{\mathrm{RPA}}(l, q, n, j, E)+B_{m i q l}^* \bar{G}^{\mathrm{RPA}}(q, l, n, j)\right\}=\delta_{m, n} \delta_{i, j},
+% \end{aligned}
+% $$
+% where we have defined the matrices
+% $$
+% \begin{aligned}
+% A_{m i q l} & =\left(\epsilon_m-\epsilon_i\right) \delta_{m, q} \delta_{i, l}+\bar{V}_{i q m l}, \\
+% B_{m i q l} & =-\bar{V}_{i l m q} .
+% \end{aligned}
+% $$
+% $$
+% \bar{G}^0(m, i, j, n, E)=\hbar \frac{\delta_{i j} \delta_{m n}}{\epsilon_m-\epsilon_i-E-i \eta} \quad, \quad \bar{G}^0(i, m, n, j, E)=\hbar \frac{\delta_{i j} \delta_{m n}}{\epsilon_m-\epsilon_i+E-i \eta},
+% $$
+% and
+% $$
+% \tilde{G}^0(m, i, n, j, E)=\tilde{G}^0(i, m, j, n, E)=0 .
+% $$
+% $\begin{aligned} & \frac{i}{\hbar} \bar{G}\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right)=\frac{1}{\left\langle\Psi_0 \mid \Psi_0\right\rangle} \\ & \sum_n\left[\frac{\left\langle\Psi_0\right| \hat{a}_{\nu_1} \hat{a}_{\nu_3}^{+}\left|\Psi_n\right\rangle\left\langle\Psi_n\right| \hat{a}_{\nu_2} \hat{a}_{\nu_4}^{+}\left|\Psi_0\right\rangle}{E-\left(E_n-E_0\right)-i \eta}-\frac{\left\langle\Psi_0\right| \hat{a}_{\nu_2} \hat{a}_{\nu_4}^{+}\left|\Psi_n\right\rangle\left\langle\Psi_n\right| \hat{a}_{\nu_1} \hat{a}_{\nu_3}^{+}\left|\Psi_0\right\rangle}{E+\left(E_n-E_0\right)+i \eta}\right]\end{aligned}$
 % $\begin{aligned} & \tilde{G}^{\mathrm{RPA}}\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right)=\tilde{G}^0\left(\nu_1, \nu_2, \nu_3, \nu_4, E\right) \\ + & \sum_{\mu_1, \mu_2, \mu_3, \mu_4} \tilde{G}^0\left(\nu_1, \nu_2, \mu_1, \mu_2, E\right)\left\langle\mu_1 \mu_3\right| \hat{V}\left|\mu_2 \mu_4\right\rangle \tilde{G}^{\mathrm{RPA}}\left(\mu_3, \mu_4, \nu_3, \nu_4, E\right) \frac{1}{\hbar} \\ - & \sum_{\mu_1, \mu_2, \mu_3, \mu_4} \tilde{G}^0\left(\nu_1, \nu_2, \mu_1, \mu_2, E\right)\left\langle\mu_1 \mu_2\right| \hat{V}\left|\mu_4 \mu_3\right\rangle \tilde{G}^{\mathrm{RPA}}\left(\mu_3, \mu_4, \nu_3, \nu_4, E\right) \frac{1}{\hbar} \\ = & \sum_{\mu_1, \mu_2, \mu_3, \mu_4} \tilde{G}^0\left(\nu_1, \nu_2, \mu_1, \mu_2, E\right)\left\{\delta_{\mu_1, \nu_3} \delta_{\mu_2, \nu_4}\right. \\ + & \frac{1}{\hbar}\left\langle\mu_1 \mu_3\right| \hat{V}\left|\mu_2 \mu_4\right\rangle \tilde{G}^{\mathrm{RPA}}\left(\mu_3, \mu_4, \nu_3, \nu_4, E\right)\end{aligned}$
 % \end{aligned}
 % \end{equation}
@@ -24,9 +125,10 @@ where  $\hat{V}_{1234} = \langle \bar{1} \bar{3} | \hat{V} | \bar{2} \bar{4} \ra
 % & +\quad \int d^4 \mathrm{y}_1 d^4 \mathrm{y}_2 d^4 \mathrm{y}_3 d^4 \mathrm{y}_4 \mathrm{G}^0\left(\mathrm{x}_1, \mathrm{x}_2, \mathrm{y}_1, \mathrm{y}_2\right) \hat{\mathscr{K}}\left(\mathrm{y}_1, \mathrm{y}_2, \mathrm{y}_3, \mathrm{y}_4\right) \mathrm{G}\left(\mathrm{y}_3, \mathrm{y}_4, \mathrm{x}_3, \mathrm{x}_4\right)
 % \end{aligned}
 % \end{equation}
-\section{TDHF approach}
-\section{Equation of motion approach}
-The idea is to define an oscillator that satisfies
+\subsection{TDHF approach}
+See the review \cite{co2023introducing} for the derivation. 
+\subsection{Equation of motion approach}
+The ideas here are based of \cite{rowe1968equations}. The idea is to define an oscillator that satisfies
 \begin{align}
     [H, O^\dag] = \omega O^\dag , \quad  \quad [H, O] = -\omega O , \quad \quad [O, O^\dag] = 1
 \end{align}
@@ -100,7 +202,7 @@ The stability condition for real eigenvalues is that $M$ is positive definite. N
 \begin{equation}
 \sum_{\beta>0}\langle\alpha| H|\beta\rangle X_\beta(\kappa)=\left(E_0+\omega_k\right) \sum_{\beta>0}\langle\alpha \mid \beta\rangle X_\beta(\kappa)
 \end{equation}
-\subsection{Particle-hole RPA}
+\subsubsection{Particle-hole RPA}
 \noindent Now approximate \(O^\dagger\) by restricting to particle–hole operators $
 \hat O^\dagger
 =\sum_{a i}\bigl(Y_{a i}\,a_a^\dagger a_i - Z_{i a}\,a_i^\dagger a_a\bigr).$ and identify two sets of basis operators $
@@ -154,7 +256,7 @@ we get the RPA form of
     B_{a i b j} & = V_{a b i j} \\
     U_{a i b j} &=  \delta_{a b} \delta_{i j} .
 \end{align}
-\subsection{Quasiparticle RPA}
+\subsubsection{Quasiparticle RPA}
 Here, we are starting from a correlated ground state. This is relevant for the BSE, where a GW calculation is performed first to get the quasiparticle energies, which form the correlated ground state. So it is more appropriate to define the excitation operator as
 \begin{equation}
     O^{\dagger}=\sum_{\mu \nu}\left(Y_{\mu \nu} \alpha_\mu^{\dagger} \alpha_\nu^{\dagger}+Z_{\mu \nu} \alpha_\mu \alpha_\nu\right)
@@ -273,6 +375,236 @@ With this choice of quasi-particle basis, the submatrices of the QRPA become
     B_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \left(1-\hat{p}_{\mu \nu}\right) \mathcal{V}_{\mu \nu \mu^{\prime} \nu^{\prime}}^{(\mathrm{B})}, \\
     U_{\mu \nu \mu^{\prime} \nu^{\prime}} &= \left(1-\hat{p}_{\mu \nu}\right) \delta_{\mu \mu^{\prime}} \delta_{\nu \nu^{\prime}} .
 \end{align}
+\section{Extra}
+\subsection{Comments about the correlation energy}
+The well known form is $E_c^{RPA} = \frac{1}{2} \text{Tr} \left[ \bm{\Omega } - \bm{A}\right]$. Now we will provide an interpretation for what this means. First, consider the fact that in the TDA, we are solving the eigenproblem $\bm{A} \bm{X} = \bm{\Omega} \bm{X}$, so $E_c^{RPA}$ is actually zero. To understand why this is the case, consider that the TDA is defining the excited state as:
+\begin{equation}
+    \ket{\nu} = \hat{O}_\nu^\dagger \ket{\nu_0}
+\end{equation}
+, where $\nu_0$ is the TDA ground state, where we used the definition
+\begin{equation}
+    \hat{O}_\nu^\dagger = \sum_{ia} \left( X^\nu_{ai} a_a^\dagger a_i \right).
+\end{equation}
+so actually the TDA ground state is equivalent to the "best" single Slater determinant predicted by our SCF procedure $\Phi_0$ (HF) and thus it does not contain any correlation by definition. Meanwhile, in the full RPA the excitation operator is defined as $\hat{O}_\nu^\dagger = \sum_{ia} \left( X^\nu_{ai} a_a^\dagger a_i + Y^\nu_{ai} a_i^\dagger a_a \right)$. The RPA ground state $\ket{\nu_0}$ is defined by $\hat{O} \ket{\nu_0} = 0$. So we see that it cannot be just a single Slater determinant, because
+\begin{equation}
+    \hat{O}_\nu \ket{\Phi_0} = \sum_{ia} \left( X^\nu_{ai} a_a a_i^\dagger + Y^\nu_{ai} a_i a_a^\dagger \right) \ket{\Phi_0} \neq 0
+\end{equation}
+in which the second term cannot be zero.
+% $\hat{Q}_\nu\left|\Phi_0\right\rangle=\sum_{p h} X_{p h}^{* \nu} \hat{a}_h^{+} \hat{a}_p\left|\Phi_0\right\rangle-\sum_{p h} Y_{p h}^{* \nu} \hat{a}_p^{+} \hat{a}_h\left|\Phi_0\right\rangle \neq 0$.
+\subsection{Proving $\chi_{RPA}=\frac{\chi_0}{1-v\chi_0}$: 11/29}
+\subsubsection{Trying direct evaluation}
+We know
+\begin{equation}
+    \chi_{RPA}^{-1}(\omega) = \frac{1-v \chi_0}{\chi_0} = \chi_0^{-1} - \mathbf{v}
+\label{eq:RPAmatrix}
+\end{equation}
+The Lehmann representation for $\chi_0$ is
+\begin{equation}
+    \chi_{0}\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega\right)=\sum_{ia}\frac{\psi_{i}(\mathbf{r}) \psi_{a}^{*}(\mathbf{r}^{\prime}) \psi_{i}(\mathbf{r}^{\prime}) \psi_{a}^{*}(\mathbf{r})}{\omega\operatorname{sgn}\left(\epsilon_{a}-\epsilon_{i} - \mu\right)+\underbrace{\left(\epsilon_{a}-\epsilon_{i}\right)}_{\text{KS bare } \Omega _0}+i \eta \operatorname{sgn}\left(\epsilon_{a}-\epsilon_{i} - \mu\right)}
+\label{eq:chi0Lehmann}
+\end{equation}
+Let's start by considering the right-hand side of equation \ref{eq:RPAmatrix}. We know that in the particle-hole basis $\chi_0(\omega )= \chi_0^{+}(\omega ) + \chi_0^{-}(\omega ) = \begin{pmatrix}
+    \chi_0^{+}(\omega ) & 0 \\
+    0 & \chi_0^{-}(\omega )
+\end{pmatrix}$ is diagonal, where we define $\chi_0^{\pm}(\omega ) = \frac{1}{\pm\omega + \left[\epsilon_a - \epsilon_i\right]}$ as the KS excitation/de-excitations polarizabilities.
+\begin{equation}
+    \chi_0^{-1}(\omega ) = \begin{pmatrix}
+        \frac{1}{\chi_0^{+}(\omega )} & 0 \\
+        0 & \frac{1}{\chi_0^{-}(\omega )}
+    \end{pmatrix}
+= \begin{pmatrix}
+    \omega + \left[\epsilon_a - \epsilon_i\right] & 0 \\
+    0 & -\omega + \left[\epsilon_a - \epsilon_i\right]
+\end{pmatrix}
+\end{equation}
+The Coulomb interaction in the particle-hole basis is
+\begin{equation}
+    \mathbf{v} = \begin{pmatrix}
+        \mathbf{v}^{++} & \mathbf{v}^{+-} \\
+        \mathbf{v}^{-+} & \mathbf{v}^{--}
+    \end{pmatrix}
+\end{equation}
+Note the permutational symmetries, so $v^{++}_{pq,rs} \equiv (ia|jb) = (ai|bj) \equiv v^{--}_{pq,rs}$ and $v^{+-}_{pq,rs} \equiv (ia|bj) = (ai|jb) \equiv v^{-+}_{pq,rs}$. So the RHS of equation \ref{eq:RPAmatrix} is
+\begin{equation}
+    \chi_{RPA}^{-1}(\omega) = \chi_0^{-1}(\omega) - \mathbf{v} = \begin{pmatrix}
+        \left(\omega + \left[\epsilon_a - \epsilon_i\right]\right) - \mathbf{v}^{++} & -\mathbf{v}^{+-} \\
+        -\mathbf{v}^{-+} & \left(-\omega + \left[\epsilon_a - \epsilon_i\right]\right) - \mathbf{v}^{--}
+    \end{pmatrix}
+= \omega \mathbf{\Sigma_z} + \mathbf{M}
+\end{equation}
+where 
+\begin{align}
+\mathbf{\Sigma_z} &= \begin{pmatrix}
+    \mathbf{I} & 0 \\
+    0 & -\mathbf{I}
+\end{pmatrix}  \quad \text{and} \quad \mathbf{M} = \begin{pmatrix}
+    \textbf{A} & \textbf{B} \\
+    \textbf{B} & \textbf{A}
+\end{pmatrix}
+\end{align}
+where $A_{ij,ab} = \delta_{ij}\delta_{ab}\left(\epsilon_a - \epsilon_i\right) - (ia|jb)$ and $B_{ij,ab} = -(ia|bj)$. So we have found that $\chi_{RPA}(\omega) = \left[\omega \mathbf{\Sigma_z} + \mathbf{M}\right]^{-1}$. And so we recover
+\begin{align}
+\chi_{RPA}(\omega) &= \left[\left(\begin{array}{ll}
+\mathbf{A} & \mathbf{B} \\
+\mathbf{B} & \mathbf{A}
+\end{array}\right)+\omega\left(\begin{array}{cc}
+\mathbf{I} & 0 \\
+0 & -\mathbf{I}
+\end{array}\right)\right]^{-1}
+\end{align}
+To forced further, recognize that the matrix $\omega \mathbf{\Sigma_z} + \mathbf{M}$ is diagonal in the RPA eigenbasis, so we can write
+\begin{align}
+\omega \mathbf{\Sigma_z} + \mathbf{M} = \begin{pmatrix}
+\mathbf{X} \\
+\mathbf{Y}
+\end{pmatrix}
+\begin{pmatrix}
+\mathbf{\Omega } - \omega & 0 \\
+0 & \mathbf{\Omega } + \omega
+\end{pmatrix}
+\begin{pmatrix}
+\mathbf{X} \\
+\mathbf{Y}
+\end{pmatrix}^\dagger \\
+\chi_{RPA}(\omega) = \left(\omega \mathbf{\Sigma_z} + \mathbf{M}\right)^{-1} = \begin{pmatrix}
+\mathbf{X} \\
+\mathbf{Y}
+\end{pmatrix}
+\begin{pmatrix}
+\frac{1}{\mathbf{\Omega } - \omega} & 0 \\
+0 & \frac{1}{\mathbf{\Omega } + \omega}
+\end{pmatrix}
+\begin{pmatrix}
+\mathbf{X} \\
+\mathbf{Y}
+\end{pmatrix}^\dagger \\
+\chi_{RPA}(\omega) = \sum_{\mathrm{I}}\left[\frac{1}{\Omega_{\mathrm{I}}+\omega}\binom{X^{\mathrm{I}}}{Y^{\mathrm{I}}}\left(\begin{array}{ll}
+X^{\mathrm{I}} & Y^{\mathrm{I}}
+\end{array}\right)+\frac{1}{\Omega_{\mathrm{I}}-\omega}\binom{Y^{\mathrm{I}}}{X^{\mathrm{I}}}\left(\begin{array}{ll}
+Y^{\mathrm{I}} & X^{\mathrm{I}}
+\end{array}\right)\right]
+\end{align}
+\subsubsection{How to determine the excitations?}
+To just determine the locations of the poles, we take a different route here.
+We have the form:
+\begin{equation}
+    \chi_{RPA} = \chi_0 + \chi_0 v \chi_{RPA} = \frac{\chi_0}{1 - v \chi_0}
+\end{equation}
+This implies that we are faced with a matrix inversion problem. The condition for the matrix $\left[\mathbf{I} - \mathbf{v}\mathbf{\chi_0}(\omega )\right]$ to be invertible is one this matrix is non-singular; therefore, the poles of the RPA occur where $\left[\mathbf{I} - \mathbf{v}\mathbf{\chi_0}(\omega )\right]$ is singular, i.e. where $\det\left[\mathbf{I} - \mathbf{v}\mathbf{\chi_0}(\omega )\right] = 0$. This condition implies that we must have a nonzero eigenvector $\mathbf{F}$ such that
+\begin{equation}
+    \left[\mathbf{I} - \mathbf{v}\mathbf{\chi_0}(\omega )\right]\mathbf{F} = 0 \implies \mathbf{v}\mathbf{\chi_0}(\omega )\mathbf{F} = \mathbf{F}
+\label{eq:RPAinvertible}
+\end{equation}
+We need to determine what the matrix element of the operator $\mathbf{v}\chi_0(\omega)$ is in a basis that we will specify later. With the resolution of the identity, we have
+\begin{equation}
+    \bra{pq} \mathbf{v}\chi_0(\omega) \ket{rs} = \sum_{tu} \bra{pq} \mathbf{v} \ket{tu} \bra{tu} \chi_0(\omega) \ket{rs}
+\end{equation}
+But we know that the $\chi_0$ is diagonal in a particle-hole basis, so we will have
+\begin{equation}
+    \bra{\tilde{pq}} \mathbf{v}\chi_0(\omega) \ket{\tilde{rs}} = v_{\tilde{pq}\tilde{rs}} \chi_{0,\tilde{rs}}(\omega)
+\label{eq:chi0MatrixElement}
+\end{equation}
+where it is understood that $\tilde{pq}, \tilde{rs}$ form an occupied-virtual pair. Now consider partitioning $\chi_0$ into two pieces, $\chi_0^{+}$ for OV excitations and $\chi_0^{-}$ for VO de-excitations:
+\begin{equation}
+    \chi_0(\omega) = \chi_{0}^{+}(\omega) + \chi_{0}^{-}(\omega)
+\end{equation}
+We know that since $\chi_{0}^{\pm}\left(\omega\right) = \frac{1}{\pm \left(\omega - \left[\epsilon_{a}-\epsilon_{i}\right]\right)}\implies \chi_{0}^{+}\left(\omega\right) = \tilde{\chi}_{0}(\omega)$ and $\chi_{0}^{-}\left(\omega\right) = -\tilde{\chi}_{0}(\omega)$, where $\tilde{\chi}_{0}(\omega)= \frac{1}{\omega - \left[\epsilon_{a}-\epsilon_{i}\right]}$. Notice from equation \ref{eq:chi0MatrixElement} that the occupied virtual combination of $\chi_0$ constrains the second index of $\mathbf{v}$, so we can formulate a matrix for equation \ref{eq:RPAinvertible} in this pair basis:
+\begin{equation}
+    \begin{pmatrix}
+\mathbf{v}^{++}\tilde{\chi}_{0}\left(\omega\right) & -\mathbf{v}^{+-}\tilde{\chi}_{0}\left(\omega\right) \\
+\mathbf{v}^{-+}\tilde{\chi}_{0}\left(\omega\right) & -\mathbf{v}^{--}\tilde{\chi}_{0}\left(\omega\right)
+\end{pmatrix}
+\begin{pmatrix}
+\mathbf{F}^{+} \\
+\mathbf{F}^{-}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\mathbf{F}^{+} \\
+\mathbf{F}^{-}
+\end{pmatrix}
+\end{equation}
+This implies the system of equations
+\begin{align}
+    \left(\mathbf{v}^{++}\tilde{\chi}_{0}\left(\omega\right) - \mathbf{I}\right) \mathbf{F}^{+} - \mathbf{v}^{+-}\tilde{\chi}_{0}\left(\omega\right) \mathbf{F}^{-} = 0 \\
+    \mathbf{v}^{-+}\tilde{\chi}_{0}\left(\omega\right) \mathbf{F}^{+} - \left(\mathbf{v}^{--}\tilde{\chi}_{0}\left(\omega\right) + \mathbf{I}\right) \mathbf{F}^{-} = 0
+\end{align}
+but we can multiply through by $\tilde{\chi}_{0}\left(\omega\right)^{-1} = \omega - \left[\epsilon_{a}-\epsilon_{i}\right]$ to yield
+\begin{align}
+    \mathbf{v}^{++}\mathbf{F}^{+} - \mathbf{v}^{+-}\mathbf{F}^{-} = \left(\omega - \left[\epsilon_{a}-\epsilon_{i}\right]\right) \mathbf{F}^{+} \\
+    \mathbf{v}^{-+}\mathbf{F}^{+} - \mathbf{v}^{--}\mathbf{F}^{-} = -\left(\omega - \left[\epsilon_{a}-\epsilon_{i}\right]\right) \mathbf{F}^{-} \\
+    \begin{pmatrix}
+        \mathbf{v}^{++} & \mathbf{v}^{+-} \\
+        \mathbf{v}^{-+} & \mathbf{v}^{--}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \mathbf{F}^{+} \\
+        -\mathbf{F}^{-}
+    \end{pmatrix} = \left(\omega - \left[\epsilon_{a}-\epsilon_{i}\right]\right) \begin{pmatrix}
+        \mathbf{F}^{+} \\
+        -\mathbf{F}^{-}
+    \end{pmatrix}\\
+\begin{pmatrix}
+        \mathbf{v}^{++} & \mathbf{v}^{+-} \\
+        \mathbf{v}^{-+} & \mathbf{v}^{--}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \mathbf{F}^{+} \\
+        -\mathbf{F}^{-}
+    \end{pmatrix} = \omega \begin{pmatrix}
+        \mathbf{F}^{+} \\
+        -\mathbf{F}^{-}
+    \end{pmatrix}
+- \left[\epsilon_{a}-\epsilon_{i}\right] \begin{pmatrix}
+        \mathbf{F}^{+} \\
+        -\mathbf{F}^{-}
+    \end{pmatrix}\\
+\begin{pmatrix}
+    \left[\epsilon_{a}-\epsilon_{i}\right] + \mathbf{v}^{++} & \mathbf{v}^{+-} \\
+    \mathbf{v}^{-+} & \left[\epsilon_{a}-\epsilon_{i}\right] + \mathbf{v}^{--}
+\end{pmatrix}
+\begin{pmatrix}
+    \mathbf{F}^{+} \\
+    -\mathbf{F}^{-}
+\end{pmatrix}
+= \omega \begin{pmatrix}
+    \mathbf{F}^{+} \\
+    -\mathbf{F}^{-}
+\end{pmatrix}
+\end{align}
+where now we recognize $\mathbf{A}$ and $\mathbf{B}$ with elements in the particle-hole basis as
+\begin{align}
+    A_{i a j b} &= \delta_{i j} \delta_{a b} \left(\epsilon_{a} - \epsilon_{i}\right) - (i a | j b) \\
+    B_{i a j b} &= (i a | b j)
+\end{align}
+and note that we can make this work because $(ia|jb)=(ai|bj)$ and $(ia|bj)=(ai|jb)$ by permutation symmetry, so we can rewrite the matrix problem as
+\begin{align}
+    \begin{pmatrix}
+        \mathbf{A} & \mathbf{B} \\
+        -\mathbf{B} & -\mathbf{A}
+    \end{pmatrix}
+\begin{pmatrix}
+    \mathbf{F}^{+} \\
+    \mathbf{F}^{-}
+\end{pmatrix} = \omega \mathbf{\sigma_z}
+\begin{pmatrix}
+    \mathbf{F}^{+} \\
+    \mathbf{F}^{-}
+\end{pmatrix}
+\end{align}
+with Pauli matrix $\mathbf{\sigma_z}=\begin{pmatrix}
+    \mathbf{I} & 0 \\
+    0 & -\mathbf{I}
+\end{pmatrix}$.
+So, by solving this eigenvalue problem, we determine the poles of the RPA $\omega \equiv\mathbf{\Omega}^I$ with excitation vectors $\begin{pmatrix}
+    \mathbf{F}^{+} \\
+    \mathbf{F}^{-}
+\end{pmatrix} \equiv \begin{pmatrix}
+    \mathbf{X}^{\mathrm{I}} \\
+    \mathbf{Y}^{\mathrm{I}}
+\end{pmatrix}$. 
+
+
 % \subsection{Proceeding to the Bethe-Salpeter equation}
 % Starred by defining the effective Hamiltonian
 % \begin{equation}

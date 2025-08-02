@@ -1,0 +1,55 @@
+
+\section{Issues with Tim's GW@RPA}
+\begin{frame}
+    \frametitle{Attempt to figure out how they derived MV products}
+
+
+\begin{align}
+&\bm{\mathcal{N}}^{2\mathrm{h1p}} \bm{H}^{2\mathrm{h1p}} \bm{R}^{2\mathrm{h1p}} \\
+&= \begin{pmatrix}
+\bm{1}_{P,P} & 0 \\
+0 & \bm{X} \\
+\end{pmatrix}
+\begin{pmatrix}
+\bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &  \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}
+\end{pmatrix}
+\begin{pmatrix}
+r_i \\
+r_a \\
+r_{i[j b]} \\
+\bar{r}_{i[j b]} \\
+\end{pmatrix}\\
+&= \begin{pmatrix}
+\bm{1}_{P,P} & 0 \\
+0 & \bm{X} \\
+\end{pmatrix}
+\begin{pmatrix}
+\bm{f}_{O,O}r^i_{O,\bar{A}} + \bm{f}_{O,V}r^a_{V,\bar{A}} + \bm{v}^{2\mathrm{h1p}}_{O,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{v}^{2\mathrm{h1p}}_{O,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+\bm{f}_{V,O}r^i_{O,\bar{A}} + \bm{f}_{V,V}r^a_{V,\bar{A}} + \bm{v}^{2\mathrm{h1p}}_{V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{v}^{2\mathrm{h1p}}_{V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+\bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,O} r^i_{O,\bar{A}} + \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,V} r^a_{V,\bar{A}} + \bm{c}^{2\mathrm{hlp},xx}_{O^2V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{c}^{2\mathrm{hlp},xd}_{O^2V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+\bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,O} r^i_{O,\bar{A}} + \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,V} r^a_{V,\bar{A}} + \bm{c}^{2\mathrm{hlp},dx}_{O^2V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{c}^{2\mathrm{hlp},dd}_{O^2V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+\end{pmatrix}
+\\
+&= \begin{pmatrix}
+\sigma_i \\
+\sigma_a \\
+\sigma_{i[j a]} \\
+\bar{\sigma}_{i[j a]} \\
+\end{pmatrix}
+=\begin{pmatrix}
+\sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}+ \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]}  \\
+\sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} \\
+\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]} \\
+-\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]} \\
+\end{pmatrix}
+\end{align}
+
+
+\end{frame}
+
+
+
+
+
