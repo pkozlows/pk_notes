@@ -42,35 +42,42 @@
 \contentsline {subsection}{\numberline {2.11.4}MCGW with recurrence relation}{33}{subsection.2.11.4}%
 \contentsline {section}{\numberline {2.12}Next steps}{33}{section.2.12}%
 \contentsline {chapter}{\numberline {3}Berkelbach's $GW$}{34}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Formulation for the dTDA}{34}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Comparing to Booth's ED}{34}{subsection.3.1.1}%
-\contentsline {subsubsection}{Downfolding the upfolded Hamiltonian}{35}{section*.9}%
-\contentsline {subsection}{\numberline {3.1.2}Deriving the matrix vector products}{36}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.1}Formulation for the TDA}{34}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Definitions}{34}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Similarity transformation}{35}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Deriving the matrix vector products}{35}{subsection.3.1.3}%
 \contentsline {section}{\numberline {3.2}Formulation for the dRPA}{36}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Deriving the dRPA approach as they propose}{36}{subsection.3.2.1}%
-\contentsline {subsubsection}{Showing equivalence between excitation energies of M and Mtilde}{36}{section*.10}%
-\contentsline {subsubsection}{Connecting to Booth}{37}{section*.11}%
-\contentsline {subsubsection}{Downfolding equivalence}{40}{section*.12}%
-\contentsline {subsubsection}{Proving ED equivalence}{41}{section*.13}%
-\contentsline {subsubsection}{Deriving matrix vector products for 2h1p sector}{45}{section*.14}%
-\contentsline {subsection}{\numberline {3.2.2}Proving ED equivalence to Booth for the dRPA using Z-vector trick}{46}{subsection.3.2.2}%
-\contentsline {subsubsection}{Casida transformation}{47}{section*.15}%
-\contentsline {subsection}{\numberline {3.2.3}Evaluating the matrix-vector products}{48}{subsection.3.2.3}%
-\contentsline {chapter}{\numberline {4}Auxiliary-boson $GW$}{50}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Constructing the Hamiltonian}{50}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Nature of the unitary transformation}{51}{subsection.4.1.1}%
-\contentsline {subsubsection}{Effect on the bosonic Hamiltonian}{52}{section*.16}%
-\contentsline {subsubsection}{Effect on the electron-boson coupling term}{52}{section*.17}%
-\contentsline {section}{\numberline {4.2}Connection to Booth supermatrix}{52}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Derivation of the supermatrices for the 2h1p sector}{53}{subsection.4.2.1}%
-\contentsline {subsubsection}{Overlap}{53}{section*.18}%
-\contentsline {subsubsection}{Physical}{54}{section*.19}%
-\contentsline {subsubsection}{Auxiliary}{54}{section*.20}%
-\contentsline {subsubsection}{Coupling}{55}{section*.21}%
-\contentsline {chapter}{\numberline {5}BSE Notes}{57}{chapter.5}%
-\contentsline {section}{\numberline {5.1}The standard canon}{57}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}TD-DFT Similarity}{57}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}The $G W$ formulation}{58}{subsection.5.1.2}%
-\contentsline {section}{\numberline {5.2}Berkelbach TDA BSE}{58}{section.5.2}%
-\contentsline {subsubsection}{Comment on system-bath distinction here}{59}{section*.22}%
-\contentsline {section}{\numberline {5.3}A formulation in terms of supermatrices}{61}{section.5.3}%
+\contentsline {subsubsection}{Exact form}{36}{section*.9}%
+\contentsline {subsubsection}{Showing equivalence between excitation energies of M and Mtilde}{38}{section*.10}%
+\contentsline {subsection}{\numberline {3.2.1}Trials of different combinations of the supermetric and the auxiliary block}{38}{subsection.3.2.1}%
+\contentsline {subsubsection}{Multiplication by the excitation vector}{39}{section*.11}%
+\contentsline {subsubsection}{Direct sum}{41}{section*.12}%
+\contentsline {subsubsection}{Supermetric: Kronecker product, Auxiliary: Kronecker sum}{41}{section*.13}%
+\contentsline {subsubsection}{Similarity transformation}{43}{section*.14}%
+\contentsline {subsubsection}{Supermetric: Kronecker sum, Auxiliary: Kronecker sum}{43}{section*.15}%
+\contentsline {subsubsection}{Supermetric: Kronecker sum, Auxiliary: Kronecker product}{44}{section*.16}%
+\contentsline {subsection}{\numberline {3.2.2}Reverse engineering}{45}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Krylov procedure to approximate the step function}{47}{subsection.3.2.3}%
+\contentsline {subsubsection}{Arnoldi iteration}{47}{section*.17}%
+\contentsline {subsubsection}{Lanczos iteration}{48}{section*.18}%
+\contentsline {subsection}{\numberline {3.2.4}Tried and failed using Z-vector trick for dRPA}{48}{subsection.3.2.4}%
+\contentsline {subsubsection}{Casida transformation}{49}{section*.19}%
+\contentsline {subsubsection}{Evaluating the matrix-vector products}{51}{section*.20}%
+\contentsline {chapter}{\numberline {4}Auxiliary-boson $GW$}{53}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Constructing the Hamiltonian}{53}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Nature of the unitary transformation}{54}{subsection.4.1.1}%
+\contentsline {subsubsection}{Effect on the bosonic Hamiltonian}{55}{section*.21}%
+\contentsline {subsubsection}{Effect on the electron-boson coupling term}{55}{section*.22}%
+\contentsline {section}{\numberline {4.2}Connection to Booth supermatrix}{55}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Derivation of the supermatrices for the 2h1p sector}{56}{subsection.4.2.1}%
+\contentsline {subsubsection}{Overlap}{56}{section*.23}%
+\contentsline {subsubsection}{Physical}{57}{section*.24}%
+\contentsline {subsubsection}{Auxiliary}{57}{section*.25}%
+\contentsline {subsubsection}{Coupling}{58}{section*.26}%
+\contentsline {chapter}{\numberline {5}BSE Notes}{60}{chapter.5}%
+\contentsline {section}{\numberline {5.1}The standard canon}{60}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}TD-DFT Similarity}{60}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}The $G W$ formulation}{61}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Berkelbach TDA BSE}{61}{section.5.2}%
+\contentsline {subsubsection}{Comment on system-bath distinction here}{62}{section*.27}%
+\contentsline {section}{\numberline {5.3}A formulation in terms of supermatrices}{64}{section.5.3}%
