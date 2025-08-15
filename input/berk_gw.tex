@@ -82,6 +82,7 @@ where we have used the fact that $\bm{X}^\dag \bm{X} = \bm{1}$, since $\bm{X}$ i
  \equiv \bm{W}^< \\
 \end{align}
 So because Booth's and Tim's forms for TDA are related by a similarity transformation, we know that they have the same spectrum.
+
 % \subsubsection{Downfolding the upfolded Hamiltonian}
 % Application of downfolding on George's supermatrix gave us the expression
 % \begin{equation}
@@ -230,7 +231,7 @@ and so it becomes clear that if we define $\tilde{\bm{M}} = \bm{M} + \eta \bm{N}
 \end{equation}
 
 
-\subsection{Trials of different combinations of the supermetric and the auxiliary block}
+\subsection{Considering the supermatrices they give}
 It is understood that the notations $<$,$>$ and 2h1p, 2p1h can be used interchangeably, respectively. Tim's supermatrix is given by
 \begin{equation}
 \bm{H} =
@@ -250,34 +251,44 @@ We are told that $\mathbf{C}^{2 \mathrm{hlp}}=\varepsilon^{1 \mathrm{~h}} \oplus
 0 & 0 & \bm{1} \oplus \bm{N}
     \end{pmatrix}
 \end{equation}
-But this doesn't seem to work so we will try out different combinations. Let's just focus on the 2h1p sector for now, so the Hamiltonian is given by
+Let's just focus on the 2h1p sector for now, so the supermatrices are
 \begin{equation}
     \bm{H}^{2 \mathrm{hlp}} = 
     \begin{pmatrix}
         \bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} \\
         \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  &  \\
         \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V}
+    \end{pmatrix}, \quad
+    \bm{\mathcal{N}}^{2 \mathrm{hlp}} =
+    \begin{pmatrix}
+        \bm{1}_{P,P} & 0 \\
+        0 & \bm{1}_O \oplus \bm{N}_{2OV}
+    \end{pmatrix}, \quad
+\bm{R}^{2 \mathrm{hlp}} =
+    \begin{pmatrix}
+        r_i \\
+        r_a \\
+        r_{i[jb]} \\
+        \bar{r}_{i[jb]}
     \end{pmatrix}
 \end{equation}
-\subsubsection{Multiplication by the excitation vector}
+In the following, we might sometimes use the notation $P=O+V$, $A=O^2V$ and $T$ as the column dimension of the excitation vector.
+
+\subsubsection{Multiplication of the Hamiltonian by the excitation vector}
 First, we can take
 \begin{align}
-&\bm{H}\bm{R}\\
+&\bm{H}^{2 \mathrm{hlp}} \bm{R}^{2 \mathrm{hlp}}\\
 &=
     \begin{pmatrix}
-        \bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} & \bm{V}^{2\mathrm{plh}}_{P,OV^2} & \bm{V}^{2\mathrm{plh}}_{P,OV^2} \\
-        \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  &  & & \\
-        \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V} && \bm{0} \\
-        \left(\bm{V}^{2\mathrm{plh}}_{P,OV^2}\right)^{\dagger} & & & & \\
-        \left(\bm{V}^{2\mathrm{plh}}_{P,OV^2}\right)^{\dagger} &  & \bm{0} & & \bm{C}^{2\mathrm{plh}}_{OV^2,OV^2}
+        \bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} \\
+        \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  &  \\
+        \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V}
     \end{pmatrix}
     \begin{pmatrix}
         r_i \\
         r_a \\
         r_{i[jb]} \\
-        \bar{r}_{i[jb]} \\
-        r_{[jb]a}\\
-\bar{r}_{[jb]a}
+        \bar{r}_{i[jb]}
     \end{pmatrix} \\
 &=
     \begin{pmatrix}
@@ -290,12 +301,7 @@ First, we can take
 \end{pmatrix}_{P,2A} \begin{pmatrix}
     \bm{r}_{i[jb]} \\
 \bm{\bar{r}}_{i[\bar{jb}]}
-\end{pmatrix}_{2A,T}  + \begin{pmatrix}
-\bm{V}^{2 \mathrm{p1h}}_{O,[jb]a} & \bm{V}^{2 \mathrm{p1h}}_{O,[jb]{a}} \\ \bm{V}^{2 \mathrm{p1h}}_{V,[jb]a} & \bm{V}^{2 \mathrm{p1h}}_{V,[jb]{a}}
-\end{pmatrix}_{P,2B} \begin{pmatrix}
-    \bm{r}_{[jb]a} \\
-\bm{\bar{r}}_{[jb]a}
-\end{pmatrix}_{2B,T} \\
+\end{pmatrix}_{2A,T}  \\
         \begin{pmatrix}
 \left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^{\dagger} & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^{\dagger} \\ \left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^{\dagger} & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^{\dagger} 
 \end{pmatrix}_{2A,P} \begin{pmatrix}
@@ -304,25 +310,7 @@ First, we can take
     \bm{r}_{i[jb]} \\
 \bm{\bar{r}}_{i[\bar{jb}]}
 \end{pmatrix}_{2A,T} \\
-\begin{pmatrix}
-\left(\bm{V}^{2 \mathrm{plh}}_{O,[jb]a}\right)^{\dagger} & \left(\bm{V}^{2 \mathrm{plh}}_{V,[jb]{a}}\right)^{\dagger} \\ \left(\bm{V}^{2 \mathrm{plh}}_{O,[jb]a}\right)^{\dagger} & \left(\bm{V}^{2 \mathrm{plh}}_{V,[jb]{a}}\right)^{\dagger}
-\end{pmatrix}_{2B,P} \begin{pmatrix}
-\bm{r}_i \\ \bm{r}_a
-\end{pmatrix}_{P,T}
-+ \left[ \bm{\epsilon}^{1 \mathrm{p}}_{V,V} \otimes \bm{1}_{2OV,2OV} + \bm{1}_{V,V} \otimes \tilde{\bm{M}}_{2OV,2OV} \right]_{2B,2B}
-\begin{pmatrix}
-    \bm{r}_{[jb]a} \\
-    \bm{\bar{r}}_{[jb]a}
-\end{pmatrix}_{2B,T} \\
-\end{pmatrix}\\
-&= \begin{pmatrix}
-\bm{F}_{OO} \bm{r}_i + \bm{F}_{OV} \bm{r}_a + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} \bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} \bm{\bar{r}}_{i[\bar{jb}]} + \bm{V}^{2 \mathrm{p1h}}_{O,[jb]a} \bm{r}_{[jb]a} + \bm{V}^{2 \mathrm{p1h}}_{O,[jb]a} \bm{\bar{r}}_{[jb]a} \\
-\bm{F}_{VO} \bm{r}_i + \bm{F}_{VV} \bm{r}_a + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} \bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} \bm{\bar{r}}_{i[\bar{jb}]} + \bm{V}^{2 \mathrm{p1h}}_{V,[jb]a} \bm{r}_{[jb]a} + \bm{V}^{2 \mathrm{p1h}}_{V,[jb]a} \bm{\bar{r}}_{[jb]a} \\
-\end{pmatrix}_{P+2A,T} \\
-&= \begin{pmatrix}
-\sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d} + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,\bar{r}_{[k c]d} \\
-\sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,\bar{r}_{[k c]d} \\
-\end{pmatrix}_{P+2A,T}
+\end{pmatrix}
 \end{align}
 Just evaluate
 \begin{align}
@@ -330,26 +318,111 @@ Just evaluate
     \bm{r}_{i[jb]} \\
 \bm{\bar{r}}_{i[\bar{jb}]}
 \end{pmatrix}_{2A,T} \\
-&= \left(\bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \otimes \bm{1}_{2OV,2OV} \right)\begin{pmatrix}
+% &= \left(\bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \otimes \bm{1}_{2OV,2OV} \right)\begin{pmatrix}
+%     \bm{r}_{i[jb]} \\
+% \bm{\bar{r}}_{i[\bar{jb}]}
+% \end{pmatrix}_{2A,T} - \left(\bm{1}_{O,O} \otimes \tilde{\bm{M}}_{2OV,2OV} \right) \begin{pmatrix}
+%     \bm{r}_{i[jb]} \\
+% \bm{\bar{r}}_{i[\bar{jb}]}
+% \end{pmatrix}_{2A,T} \\
+\end{align}
+% We have the identity $\operatorname{vec}(ABC) = (C^\top \otimes A) \operatorname{vec}(B)$. If we choose that $C^\top = \bm{\epsilon}^{1 \mathrm{~h}}_{O} + \bm{1}_{O}$, $A = \bm{1}_{2OV} - \tilde{\bm{M}}_{2OV}$, and $\operatorname{vec}(B) =\begin{pmatrix}
+%     \bm{r}_{i[jb]} \\
+% \bm{\bar{r}}_{i[\bar{jb}]}
+% \end{pmatrix}$ this implies that
+% \begin{align}
+%     &\left[ \bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \otimes \bm{1}_{2OV,2OV} + \bm{1}_{O,O} \otimes -\tilde{\bm{M}}_{2OV,2OV} \right]_{2A,2A} \begin{pmatrix}
+%     \bm{r}_{i[jb]} \\
+% \bm{\bar{r}}_{i[\bar{jb}]}
+% \end{pmatrix}_{2A,T} \\
+% &= \left[ \left(\bm{\epsilon}^{1 \mathrm{~h}}_{O,O} + \bm{1}_{O,O}\right) \otimes \left(\bm{1}_{2OV,2OV} - \tilde{\bm{M}}_{2OV,2OV}\right) \right]_{2A,2A} \begin{pmatrix}
+%     \bm{r}_{i[jb]} \\[6pt]
+% \bm{\bar{r}}_{i[\bar{jb}]}
+% \end{pmatrix}_{2A,T} \\
+% &= \operatorname{vec}\left[\left(\bm{1}_{2OV,2OV} - \tilde{\bm{M}}_{2OV,2OV}\right) \begin{pmatrix}
+%     \bm{r}_{i[jb]} \\[6pt]
+% \bm{\bar{r}}_{i[\bar{jb}]}
+% \end{pmatrix}_{2OV,T} \left(\bm{\epsilon}^{1 \mathrm{~h}}_{O,O} + \bm{1}_{O,O}\right)^\top \right] \\ 
+% \end{align}
+First, use the definition of the tensor product and also notice that $\bm{\epsilon}^{1 \mathrm{~h}}_{O,O}$ is a matrix with the hole energies on the diagonal and zeros elsewhere
+\begin{align}
+    \bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \otimes \bm{1}_{2OV,2OV} &= \begin{pmatrix}
+\epsilon^{1 \mathrm{~h}}_{11} \bm{1}_{2OV,2OV} & \epsilon^{1 \mathrm{~h}}_{12} \bm{1}_{2OV,2OV} & \dots & \epsilon^{1 \mathrm{~h}}_{1O} \bm{1}_{2OV,2OV} \\[6pt]
+\epsilon^{1 \mathrm{~h}}_{21} \bm{1}_{2OV,2OV} & \epsilon^{1 \mathrm{~h}}_{22} \bm{1}_{2OV,2OV} & \dots & \epsilon^{1 \mathrm{~h}}_{2O} \bm{1}_{2OV,2OV} \\[6pt]
+\vdots & \vdots & \ddots & \vdots \\[6pt]
+\epsilon^{1 \mathrm{~h}}_{O1} \bm{1}_{2OV,2OV} & \epsilon^{1 \mathrm{~h}}_{O2} \bm{1}_{2OV,2OV} & \dots & \epsilon^{1 \mathrm{~h}}_{OO} \bm{1}_{2OV,2OV}
+\end{pmatrix}_{2A,2A}\\
+&= \begin{pmatrix}
+\epsilon^{1 \mathrm{~h}}_{11} \bm{1}_{2OV,2OV} & \bm{0} & \dots & \bm{0} \\[6pt]
+\bm{0} & \epsilon^{1 \mathrm{~h}}_{22} \bm{1}_{2OV,2OV} & \dots & \bm{0} \\[6pt]
+\vdots & \vdots & \ddots & \vdots \\[6pt]
+\bm{0} & \bm{0} & \dots & \epsilon^{1 \mathrm{~h}}_{OO} \bm{1}_{2OV,2OV}
+\end{pmatrix}_{2A,2A}
+\end{align}
+\begin{align}
+    &\implies \left(\bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \otimes \bm{1}_{2OV,2OV} \right)_{2A,2A}\begin{pmatrix}
     \bm{r}_{i[jb]} \\
 \bm{\bar{r}}_{i[\bar{jb}]}
-\end{pmatrix}_{2A,T} - \left(\bm{1}_{O,O} \otimes \tilde{\bm{M}}_{2OV,2OV} \right) \begin{pmatrix}
-    \bm{r}_{i[jb]} \\
+\end{pmatrix}_{2A,T}\\
+& = \begin{pmatrix}
+\epsilon^{1 \mathrm{~h}}_{11} \bm{1}_{2OV,2OV} & \bm{0} & \dots & \bm{0} \\[6pt]
+\bm{0} & \epsilon^{1 \mathrm{~h}}_{22} \bm{1}_{2OV,2OV} & \dots & \bm{0} \\[6pt]
+\vdots & \vdots & \ddots & \vdots \\[6pt]
+\bm{0} & \bm{0} & \dots & \epsilon^{1 \mathrm{~h}}_{OO} \bm{1}_{2OV,2OV}
+\end{pmatrix}_{2A,2A} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\[6pt]
 \bm{\bar{r}}_{i[\bar{jb}]}
 \end{pmatrix}_{2A,T} \\
 \end{align}
 For these, we can use the formula 
 \begin{align}
-    \left(A \otimes B\right) K=\left[\begin{array}{c}\sum_{j=1}^n a_{1 j} B K^{(j)} \\ \sum_{j=1}^n a_{2 j} B K^{(j)} \\ \vdots \\ \sum_{j=1}^n a_{m j} B K^{(j)}\end{array}\right]
+    \left(A \otimes B\right) = \begin{pmatrix}
+a_{1 1} B & a_{1 2} B & \dots & a_{1 n} B \\[6pt]
+a_{2 1} B & a_{2 2} B & \dots & a_{2 n} B \\[6pt]
+\vdots & \vdots & \ddots & \vdots \\[6pt]
+a_{m 1} B & a_{m 2} B & \dots & a_{m n} B   
+    \end{pmatrix}\implies\left(A \otimes B\right) K=\left[\begin{array}{c}\sum_{j=1}^n a_{1 j} B K^{(j)} \\ \sum_{j=1}^n a_{2 j} B K^{(j)} \\ \vdots \\ \sum_{j=1}^n a_{m j} B K^{(j)}\end{array}\right]
 \end{align}
-% $ where $K^{(j)}$ is the $j$-th block of $K$ with the same number of rows as $B$ and $A$ is an $m \times n$ matrix.
-% $(A \otimes B) K=\left[\begin{array}{c}\sum_{j=1}^n a_{1 j} B K^{(j)} \\ \sum_{j=1}^n a_{2 j} B K^{(j)} \\ \vdots \\ \sum_{j=1}^n a_{m j} B K^{(j)}\end{array}\right]$
-with
+where the $K^{(j)}$ are the rows of the matrix $K$. To simplify the notation let us define $t=O//2$.
+First, with
+\begin{align}
+    &\bm{K} = \begin{pmatrix}
+\bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[{jb}]} \\
+\end{pmatrix} = \begin{pmatrix}
+r_{1[jb]} \\[6pt]
+\vdots \\[6pt]
+r_{O[jb]} \\[6pt]
+\bar{r}_{1[{j} b]} \\[6pt]
+\vdots \\[6pt]
+\bar{r}_{O[{j} b]}
+\end{pmatrix} = \begin{pmatrix}
+K^{(1)} \\[6pt]
+\vdots \\[6pt]
+K^{(t)} \\[6pt]
+\vdots \\[6pt]
+K^{(O)}
+\end{pmatrix}\in \mathbb{R}^{2O^2V},\\
+&K^{(m)} = \begin{pmatrix}
+r_{(2m-1)[jb]} \\[3pt]
+{r}_{(2m)[{j} b]}
+\end{pmatrix} \in \mathbb{R}^{2OV} \forall m \leq t, \quad K^{(m)} = \begin{pmatrix}
+\bar{r}_{(m-1-t)[jb]} \\[3pt]
+\bar{r}_{(m-t)[{j} b]}
+\end{pmatrix} \in \mathbb{R}^{2OV} \forall m>t+1
+\end{align}
+Depending on whether O is even or odd, $K^{(t)}$ will be $\begin{pmatrix}
+r_{(O-1)[jb]} \\[3pt]
+r_{O[jb]}
+\end{pmatrix}$ or $\begin{pmatrix}r_{O[jb]} \\[3pt]
+\bar{r}_{1[{j} b]}
+\end{pmatrix}$, respectively. This version seems correct, but I am unsure about how to proceed. Next, I will consider a modification to lead to a familiar form, but I am not sure if it is correct.
+\subsubsection{Incorrect but suggestive form}
 \begin{align}
     \bm{K} = \begin{pmatrix}
 \bm{r}_{i[jb]} \\
 \bm{\bar{r}}_{i[{jb}]} \\
-\end{pmatrix} = \begin{pmatrix}
+\end{pmatrix} \color{red} \stackrel{?}{=} \color{black} \begin{pmatrix}
 r_{1[jb]} \\[6pt]
 \bar{r}_{1[{j} b]} \\[6pt]
 r_{2[jb]} \\[6pt]
@@ -369,13 +442,12 @@ r_{i[jb]} \\[3pt]
 \bar{r}_{i[{j} b]}
 \end{pmatrix} \in \mathbb{R}^{2OV}
 \end{align} 
-so we can see that
 \begin{align}
-    \left(\bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \otimes \bm{1}_{2OV,2OV} \right)_{2A,2A}\begin{pmatrix}
+    \implies \left(\bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \otimes \bm{1}_{2OV,2OV} \right)_{2A,2A}\begin{pmatrix}
     \bm{r}_{i[jb]} \\
 \bm{\bar{r}}_{i[\bar{jb}]}
 \end{pmatrix}_{2A,T}
-&= \begin{pmatrix}
+& \color{red} \stackrel{?}{=} \color{black} \begin{pmatrix}
 \epsilon^{1\mathrm{h}}_{11} K^{(1)} + \epsilon^{1\mathrm{h}}_{12} K^{(2)} + \dots + \epsilon^{1\mathrm{h}}_{1O} K^{(O)} \\[1.2em]
 \epsilon^{1\mathrm{h}}_{21} K^{(1)} + \epsilon^{1\mathrm{h}}_{22} K^{(2)} + \dots + \epsilon^{1\mathrm{h}}_{2O} K^{(O)} \\[1em]
 \vdots \\[6pt]
@@ -388,23 +460,23 @@ so we can see that
 0 + \dots + \epsilon^{1\mathrm{h}}_{OO} K^{(O)}
 \end{pmatrix} =\begin{pmatrix}
 \epsilon^{1\mathrm{h}}_{11} \begin{pmatrix} r_{1[jb]} \\[6pt]
-\bar{r}_{1[\bar{j} b]} \end{pmatrix}\\
+\bar{r}_{1[{j} b]} \end{pmatrix}\\
 \epsilon^{1\mathrm{h}}_{22} \begin{pmatrix} r_{2[jb]} \\[6pt]
-\bar{r}_{2[\bar{j} b]} \end{pmatrix}\\
+\bar{r}_{2[{j} b]} \end{pmatrix}\\
 \vdots \\[6pt]
 \epsilon^{1\mathrm{h}}_{OO} \begin{pmatrix} r_{O[jb]} \\[6pt]
-\bar{r}_{O[\bar{j} b]} \end{pmatrix}
+\bar{r}_{O[{j} b]} \end{pmatrix}
 \end{pmatrix} = \begin{pmatrix}
 \bm{\epsilon}^{1\mathrm{h}} \bm{r}_{i[jb]} \\[6pt]
 \bm{\epsilon}^{1\mathrm{h}} \bar{\bm{r}}_{i[{jb}]}
 \end{pmatrix}
 \end{align}
-Next, it is useful to define (where the composite index $\mu \equiv OV$)
+where we have used the fact that $\bm{\epsilon}^{1\mathrm{h}}$ is a diagonal matrix with the hole energies. Next, it is useful to define (where the composite index $\mu \equiv OV$; it implies that the occupied-virtual pair is fixed)
 \begin{align}
     \bm{K} = \begin{pmatrix}
 \bm{r}_{i[jb]} \\
 \bm{\bar{r}}_{i[{jb}]} \\
-\end{pmatrix} = \begin{pmatrix}
+\end{pmatrix}  \color{red} \stackrel{?}{=} \color{black} \begin{pmatrix}
 r_{i[\mu_1]} \\[6pt]
 \bar{r}_{i[\mu_2]} \\[6pt]
 r_{i[\mu_3]} \\[6pt]
@@ -420,43 +492,311 @@ K^{(2OV)}
 \end{pmatrix} \in \mathbb{R}^{2O^2V},
 \quad
 K^{(i)} = \begin{pmatrix}
-r_{i[jb]}/\bar{r}_{i[{j} b]}
+r_{i[OV]}/\bar{r}_{i[OV]}
 \end{pmatrix} \in \mathbb{R}^{O}
 \end{align} 
-and
 \begin{align}
-    &\left(\bm{1}_{O,O} \otimes \tilde{\bm{M}}_{2OV,2OV} \right)_{2A,2A} \begin{pmatrix}    
+    &\implies \left(\bm{1}_{O,O} \otimes \tilde{\bm{M}}_{2OV,2OV} \right)_{2A,2A} \begin{pmatrix}    
     \bm{r}_{i[jb]} \\[6pt]
 \bm{\bar{r}}_{i[\bar{jb}]}
-\end{pmatrix}_{2A,T}=\left( \tilde{\bm{M}}_{2OV,2OV} \otimes \bm{1}_{O,O}\right)_{2A,2A} \begin{pmatrix}    
+\end{pmatrix}_{2A,T} \color{red} \stackrel{?}{=} \color{black}\left( \tilde{\bm{M}}_{2OV,2OV} \otimes \bm{1}_{O,O}\right)_{2A,2A} \begin{pmatrix}    
     \bm{r}_{i[jb]} \\[6pt]
 \bm{\bar{r}}_{i[\bar{jb}]}
 \end{pmatrix}_{2A,T}\\
-& =\begin{pmatrix}
-\tilde{\bm{M}}_{11} K^{(1)} + \dots + \tilde{\bm{M}}_{1,OV} K^{(OV)} + \tilde{\bm{M}}_{1,OV+1} K^{(OV+1)}+\dots + \tilde{\bm{M}}_{1,2OV} K^{(2OV)} \\
-\tilde{\bm{M}}_{2,1} K^{(1)} +  \dots + \tilde{\bm{M}}_{2,OV} K^{(OV)} + \tilde{\bm{M}}_{2,OV+1} K^{(OV+1)}+\dots + \tilde{\bm{M}}_{2,2OV} K^{(2OV)} \\[1.2em]
+& \color{red} \stackrel{?}{=} \color{black}\begin{pmatrix}
+\tilde{M}_{11} K^{(1)} + \dots + \tilde{M}_{1,OV} K^{(OV)} + \tilde{M}_{1,OV+1} K^{(OV+1)}+\dots + \tilde{M}_{1,2OV} K^{(2OV)} \\
+\tilde{M}_{2,1} K^{(1)} +  \dots + \tilde{M}_{2,OV} K^{(OV)} + \tilde{M}_{2,OV+1} K^{(OV+1)}+\dots + \tilde{M}_{2,2OV} K^{(2OV)} \\[1.2em]
 \vdots \\[6pt]
-\tilde{\bm{M}}_{OV,1} K^{(1)} + \dots + \tilde{\bm{M}}_{OV,OV} K^{(OV)} + \tilde{\bm{M}}_{OV,OV+1} K^{(OV+1)}+\dots + \tilde{\bm{M}}_{OV,2OV} K^{(2OV)} \\[1em]
-\tilde{\bm{M}}_{OV+1,1} K^{(1)} + \dots + \tilde{\bm{M}}_{OV+1,OV} K^{(OV)} + \tilde{\bm{M}}_{OV+1,OV+1} K^{(OV+1)} + \dots + \tilde{\bm{M}}_{OV+1,2OV} K^{(2OV)} \\[1em]
+\tilde{M}_{OV,1} K^{(1)} + \dots + \tilde{M}_{OV,OV} K^{(OV)} + \tilde{M}_{OV,OV+1} K^{(OV+1)}+\dots + \tilde{M}_{OV,2OV} K^{(2OV)} \\[1em]
+\tilde{M}_{OV+1,1} K^{(1)} + \dots + \tilde{M}_{OV+1,OV} K^{(OV)} + \tilde{M}_{OV+1,OV+1} K^{(OV+1)} + \dots + \tilde{M}_{OV+1,2OV} K^{(2OV)} \\[1em]
 \vdots \\[6pt]
-\tilde{\bm{M}}_{2OV,1} K^{(1)} + \dots + \tilde{\bm{M}}_{2OV,OV} K^{(OV)} + \tilde{\bm{M}}_{2OV,OV+1} K^{(OV+1)} + \dots + \tilde{\bm{M}}_{2OV,2OV} K^{(2OV)}\\
+\tilde{M}_{2OV,1} K^{(1)} + \dots + \tilde{M}_{2OV,OV} K^{(OV)} + \tilde{M}_{2OV,OV+1} K^{(OV+1)} + \dots + \tilde{M}_{2OV,2OV} K^{(2OV)}\\
 \end{pmatrix}\\
 &=\begin{pmatrix}
-\tilde{\bm{M}}_{xx} K_{xx} + \tilde{\bm{M}}_{xd} K_{xd} \\
-\tilde{\bm{M}}_{dx} K_{dx} + \tilde{\bm{M}}_{dd} K_{dd} \\
+\tilde{\bm{M}}_{xx} \bm{K}_{1\rightarrow OV} + \tilde{\bm{M}}_{xd} \bm{K}_{OV+1\rightarrow 2OV} \\
+\tilde{\bm{M}}_{dx} \bm{K}_{1\rightarrow OV} + \tilde{\bm{M}}_{dd} \bm{K}_{OV+1\rightarrow 2OV} \\
 \end{pmatrix}
 \end{align}
+where $\tilde{\bm{M}}_{xx}$, $\tilde{\bm{M}}_{xd}$, $\tilde{\bm{M}}_{dx}$, and $\tilde{\bm{M}}_{dd}$ are the excitation-excitation, excitation-de-excitation, de-excitation-excitation, and de-excitation-de-excitation blocks of the matrix $\tilde{\bm{M}}$ respectively. $\bm{K}_{1\rightarrow OV}$ and $\bm{K}_{OV+1\rightarrow 2OV}$ are defined as
+\begin{align}
+\bm{K}_{1\rightarrow OV} = \begin{pmatrix} K^{(1)} & K^{(2)} & \dots & K^{(OV)} \end{pmatrix} = \begin{pmatrix}
+r_{i[\mu_1]} & \bar{r}_{i[\mu_2]} & \dots & r_{i[\mu_{OV}]}
+\end{pmatrix} \\
+\bm{K}_{OV+1\rightarrow 2OV} = \begin{pmatrix} K^{(OV+1)} & K^{(OV+2)} & \dots & K^{(2OV)} \end{pmatrix} = \begin{pmatrix}
+r_{i[\mu_{OV+1}]} & \bar{r}_{i[\mu_{OV+2}]} & \dots & r_{i[\mu_{2OV}]}
+\end{pmatrix}
+\end{align}
+%  $\bm{K}_{1\rightarrow OV} = \begin{pmatrix} K^{(1)} & K^{(2)} & \dots & K^{(OV)} \end{pmatrix}$ and $\bm{K}_{OV+1\rightarrow 2OV}$ horizontally stacks the last $OV$ rows of $\bm{K}$. So putting this back in gives
+\begin{align}
+    &\bm{H}^{2 \mathrm{hlp}} \bm{R}^{2 \mathrm{hlp}}\\
+& \color{red} \stackrel{?}{=} \color{black} \begin{pmatrix}
+\bm{F}_{OO} \bm{r}_i + \bm{F}_{OV} \bm{r}_a + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} \bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} \bm{\bar{r}}_{i[\bar{jb}]} \\
+\bm{F}_{VO} \bm{r}_i + \bm{F}_{VV} \bm{r}_a + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} \bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} \bm{\bar{r}}_{i[\bar{jb}]}  \\
+\left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^{\dagger} \bm{r}_i + \left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^{\dagger} \bm{r}_a + \bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \bm{r}_{i[jb]} - \tilde{\bm{M}}_{xx} \bm{K}_{1\rightarrow OV} - \tilde{\bm{M}}_{xd} \bm{K}_{OV+1\rightarrow 2OV} \\
+\left(\bm{V}^{2 \mathrm{h1p}}_{V,i[jb]}\right)^{\dagger} \bm{r}_i + \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[jb]}\right)^{\dagger} \bm{r}_a + \bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \bm{\bar{r}}_{i[jb]} - \tilde{\bm{M}}_{dx} \bm{K}_{1\rightarrow OV} - \tilde{\bm{M}}_{dd} \bm{K}_{OV+1\rightarrow 2OV} \\
+\end{pmatrix}_{P+2A,T} \\% \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}^{\dagger} \bm{r}_i + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}^{\dagger} \bm{r}_a + \bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \bm{r}_{i[jb]} - \tilde{\bm{M}}_{xx} \bm{K}_{1\rightarrow OV} - \tilde{\bm{M}}_{xd} \bm{K}_{OV+1\rightarrow 2OV} \\
+% \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]}^{\dagger} \bm{r}_i + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]}^{\dagger} \bm{r}_a + \bm{\epsilon}^{1 \mathrm{~h}}_{V,V} \bm{r}_{i[jb]} - \tilde{\bm{M}}_{dx} \bm{K}_{1\rightarrow OV} - \tilde{\bm{M}}_{dd} \bm{K}_{OV+1\rightarrow 2OV} \\
+% \end{pmatrix}_{P+2A,T} \\
+&= \begin{pmatrix}
+\sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} \\
+\sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} \\
+\vdots
+\end{pmatrix}_{P+2A,T}
+\end{align}
 
+\subsubsection{Multiplying the supermetric by the Hamiltonian}
+Alternatively, we can consider the LHS matrix multiplication
+\begin{align}
+    \bm{\mathcal{N}}^{2 \mathrm{hlp}} \bm{H}^{2 \mathrm{hlp}} &= \begin{pmatrix}
+        \bm{1}_{P,P} & 0 \\
+        0 & \bm{1}_{O,O} \oplus_{\text{kron}} \bm{N}_{2OV,2OV}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} \\
+        \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  &  \\
+        \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V}
+    \end{pmatrix} \\
+&= \begin{pmatrix}        \bm{F}_{P,P} & \begin{pmatrix} \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}\end{pmatrix}_{P,2O^2V} \\
+        \left( \bm{1} \oplus_{\text{kron}} \bm{N} \right)_{2O^2V,2O^2V}\begin{pmatrix} \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \end{pmatrix}_{2O^2V,P} &   \left( \bm{1} \oplus_{\text{kron}} \bm{N} \right)_{2O^2V,2O^2V} \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V}  \\
+    \end{pmatrix} \\
+\end{align}
+First, we can consider the off diagonal term
+\begin{align}
+    \left( \bm{1} \oplus_{\text{kron}} \bm{N}_{2OV,2OV} \right) \begin{pmatrix}
+        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}
+    \end{pmatrix} _{2O^2V,P} &=\left( \bm{1}_O \otimes \bm{1}_{2OV} + \bm{1}_O \otimes \bm{N}_{2OV} \right) \begin{pmatrix}
+        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}
+    \end{pmatrix} _{2O^2V,P}\\
+& =\begin{pmatrix}
+        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}
+    \end{pmatrix} _{2O^2V,P} + \begin{pmatrix}
+        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ -\left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}
+    \end{pmatrix} _{2O^2V,P} \\
+&= \begin{pmatrix}
+        2\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ 0
+    \end{pmatrix} _{2O^2V,P}
+\end{align}
+Next, we can consider the auxiliary block
+\begin{align}
+ \left( \bm{1} \oplus_{\text{kron}} \bm{N} \right)\bm{C}^{2\mathrm{hlp}} &= \left(\bm{1}_{O} \oplus_{\text{kron}} \bm{N}_{2OV}\right) \left( \bm{\epsilon}^{1 \mathrm{~h}}_{O} \oplus_{\text{kron}} (-\bm{\tilde{M}})_{2OV} \right)\\
+&= \left( \bm{1}_O \otimes \bm{1}_{2OV} + \bm{1}_O \otimes \bm{N}_{2OV} \right) \left( \bm{\epsilon}^{1 \mathrm{~h}}_{O} \otimes \bm{1}_{2OV} + \bm{1}_{O} \otimes (-\bm{\tilde{M}})_{2OV} \right)\\
+&= \bm{\epsilon}^{1 \mathrm{~h}}_O \otimes \bm{1}_{2OV} + \underbrace{\bm{1}_O \otimes -\bm{\tilde{M}}_{2OV} + \bm{\epsilon}^{1 \mathrm{~h}}_O \otimes \bm{N}_{2OV}}_{\text{cross terms}} + \bm{1}_O \otimes -\bm{N}\bm{\tilde{M}}_{2OV}
+\end{align}
+\begin{align}
+ &= \begin{pmatrix}
+\epsilon^{1 \mathrm{~h}}_{1} \bm{1}_{2OV} & 0 & \dots & 0 \\[6pt]
+0 & \epsilon^{1 \mathrm{~h}}_{2} \bm{1}_{2OV} & \dots & 0 \\[6pt]
+\vdots & \vdots & \ddots & \vdots \\[6pt]
+0 & 0 & \dots & \epsilon^{1 \mathrm{~h}}_{O} \bm{1}_{2OV}
+\end{pmatrix} -  \begin{pmatrix}
+1 \tilde{\bm{M}}_{2OV} & 0 & \dots & 0\\[6pt]
+0 & 1 \tilde{\bm{M}}_{2OV} & \dots & 0\\[6pt]
+\vdots & \vdots & \ddots & \vdots \\[6pt]
+0 & 0 & \dots & 1 \tilde{\bm{M}}_{2OV}
+\end{pmatrix}\\
+&+ \begin{pmatrix}
+\epsilon^{1 \mathrm{~h}}_{1} \bm{N}_{2OV} & 0 & \dots & 0 \\[6pt]
+0 & \epsilon^{1 \mathrm{~h}}_{2} \bm{N}_{2OV} & \dots & 0 \\[6pt]
+\vdots & \vdots & \ddots & \vdots \\[6pt]
+0 & 0 & \dots & \epsilon^{1 \mathrm{~h}}_{O} \bm{N}_{2OV}   
+\end{pmatrix} - \begin{pmatrix}
+1 \left(\bm{N} \tilde{\bm{M}}\right)_{2OV} & 0 & \dots & 0\\[6pt]
+0 & 1 \left(\bm{N} \tilde{\bm{M}}\right)_{2OV} & \dots & 0\\[6pt]
+\vdots & \vdots & \ddots & \vdots \\[6pt]
+0 & 0 & \dots &  1
+    \left(\bm{N} \tilde{\bm{M}}\right)_{2OV}
+\end{pmatrix}\\
+&= \begin{pmatrix}
+\epsilon^{1 \mathrm{~h}}_{1} \left(\bm{1} + \bm{N}\right)_{2OV} & \dots & 0 \\[6pt]
+\vdots  & \ddots & \vdots \\[6pt]
+0 & \dots & \epsilon^{1 \mathrm{~h}}_{O} \left(\bm{1} + \bm{N}\right)_{2OV}
+\end{pmatrix} - \begin{pmatrix}
+1 \left(\tilde{\bm{M}}+\bm{N} \tilde{\bm{M}}\right)_{2OV} & \dots & 0\\[6pt]
+\vdots & \ddots & \vdots \\[6pt]
+0 & \dots &  1 \left(\tilde{\bm{M}}+\bm{N} \tilde{\bm{M}}\right)_{2OV}
+\end{pmatrix}\\
+&= \begin{pmatrix}
+\epsilon^{1 \mathrm{~h}}_{1} \left(\bm{1} + \bm{N}\right)_{2OV} - \left(\tilde{\bm{M}}+\bm{N} \tilde{\bm{M}}\right)_{2OV} & \dots & 0 \\[6pt]
+\vdots  & \ddots & \vdots \\[6pt]
+0 & \dots & \epsilon^{1 \mathrm{~h}}_{O} \left(\bm{1} + \bm{N}\right)_{2OV} - \left(\tilde{\bm{M}}+\bm{N} \tilde{\bm{M}}\right)_{2OV}
+\end{pmatrix}\\
+&= \begin{pmatrix}
+\epsilon^{1 \mathrm{~h}}_{1} \left(\bm{1} + \bm{N}\right)_{2OV} -  \left[\left(\bm{1} + \bm{N}\right)\tilde{\bm{M}}\right]_{2OV} & \dots & 0 \\[6pt]
+\vdots  & \ddots & \vdots \\[6pt]
+0 & \dots & \epsilon^{1 \mathrm{~h}}_{O} \left(\bm{1} + \bm{N}\right)_{2OV} -  \left[\left(\bm{1} + \bm{N}\right)\tilde{\bm{M}}\right]_{2OV}
+\end{pmatrix}
+\end{align}
+I have plotted 3 different data points from each molecular calculation. The blue bar shows the average deviation of the Ritz values from the exact solution using the expressions for the matrix vector products given in the main paper. The orange bar shows the average deviation of the Ritz values from the exact solution using the expressions for the matrix vector products given in the supplemental material (Supp. MV), where we set B=0. The green bar is just showing the norm of the final residual (when I reach the maximum number of iterations) I get when I run the Davidson iteration using Supp. MV. I am running for up to 75 iterations without doing any restarting. I interpret this as there not being a bug in my implementation since I see the same behavior across different molecules, but perhaps the expressions for the matrix vector products that he proposes in the supplemental material are just not exact. Do you have a different opinion?
+\subsubsection{Reverse engineering}
+We have the problem $\bm{\sigma} = \bm{\mathcal{N}}\bm{H} \bm{R}$. I know that $\bm{\sigma}$ is given by
+\begin{align}
+\sigma_i &= \sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d} + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,\bar{r}_{[k c]d} \\
+\sigma_a &= \sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,\bar{r}_{[k c]d} \\
+    \sigma _{i[ja]} &= \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]}
+\label{sija} \\
+    \bar{\sigma}_{i[ja]} &= -\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]} \\
+\sigma _{[ia]b} &= \sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j + \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c + \varepsilon_b r_{[i a] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{xx}} r_{[j c] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{xd}} \bar{r}_{[j c] b} \\
+\bar{\sigma}_{[ia]b} &= -\sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j - \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c + \varepsilon_b \bar{r}_{[i a] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dx}} r_{[j c] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dd}} \bar{r}_{[j c] b}
+\end{align}
+$\bm{R}^{2h1p}= \begin{pmatrix}
+r_i \\ r_a \\ r_{i[jb]} \\ \bar{r}_{i[\bar{jb}]} \\
+\end{pmatrix} $ is the excitation vector. We will assume the form $\bm{\mathcal{N}}^{2h1p} = \begin{pmatrix}
+\bm{1} & 0 \\
+0 & \bm{X} \\
+\end{pmatrix}$. We assume that $\bm{H}^{2h1p}$ is given by
+\begin{equation}
+\bm{H}^{2h1p} = \begin{pmatrix}
+\bm{F} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}  \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &   \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}} \\
+\end{pmatrix}
+\end{equation}
+In our notation, $P=O+V$ is the number of molecular orbitals, $A=O^2V$ and $T$ is the column dimension of our excitation vector.
+\begin{align}
+&    \bm{\mathcal{N}}^{2h1p} \bm{H}^{2h1p} \bm{R}^{2h1p}\\
+&= 
+\begin{pmatrix}\bm{1}_{P,P} & 0 \\
+0 & \bm{X}_{2A,2A}
+\end{pmatrix}_{P+2A, P+2A}
+\begin{pmatrix}\bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}}_{P,A} & \bm{V}^{2\mathrm{h1p}}_{P,A} \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger}_{A,P} &  &   \\
+\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger}_{A,P} &  & \bm{C}^{2\mathrm{hlp}}_{2A,2A} \\
+\end{pmatrix}_{P+2A, P+2A}
+\begin{pmatrix}\bm{r}_i \\ \bm{r}_a \\ \bm{r}_{i[jb]} \\ \bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{P+2A,T} \\
+&= 
+\begin{pmatrix}
+\bm{1}_{P,P}
+ \begin{pmatrix}
+\bm{F}_{OO} & \bm{F}_{OV} \\ \bm{F}_{VO} & \bm{F}_{VV}
+\end{pmatrix}_{P,P} \begin{pmatrix}
+\bm{r}_i \\ \bm{r}_a
+\end{pmatrix}_{P,T} + \bm{1}_{P,P} \begin{pmatrix}
+\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{O,i[{jb}]} \\ \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]} 
+\end{pmatrix}_{P,2A} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{2A,T} \\
+\bm{X}_{2A,2A} \begin{pmatrix}\left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag \\ \left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag\end{pmatrix}_{2A,P} \begin{pmatrix}
+\bm{r}_i \\ \bm{r}_a
+\end{pmatrix}_{P,T} + \bm{X}_{2A,2A} \bm{C}^{2 \mathrm{hlp}}_{2A,2A} \begin{pmatrix}
+    \bm{r}_{i[jb]} \\
+\bm{\bar{r}}_{i[\bar{jb}]}
+\end{pmatrix}_{2A,T}\\
+%  \bm{N}_{2A,2A}\begin{pmatrix}
+%     \left(\bm{V}^{2 \mathrm{h1p}}_{p,i[jb]}\right)^\dag \\ \left(\bm{V}^{2 \mathrm{h1p}}_{p,i[{jb}]}\right)^\dag \\
+% \end{pmatrix}_{2A,P} \begin{pmatrix}
+% \bm{r}_i \\ \bm{r}_a
+% \end{pmatrix}_{P,A} +
+% \bm{N}_{2A,2A}\left(\left(\varepsilon^{1h}\right) \oplus_{\text{direct}} -\bm{\tilde{M}}_{jb,jb;lc,lc}\right)_{2A,2A} \begin{pmatrix}
+%     \bm{r}_{i[jb]} \\
+% \bm{\bar{r}}_{i[\bar{jb}]}
+% \end{pmatrix}_{2A,A}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+\bm{F}_{OO} \bm{r}_i + \bm{F}_{OV} \bm{r}_a + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} \bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} \bm{\bar{r}}_{i[\bar{jb}]} \\
+\bm{F}_{VO} \bm{r}_i + \bm{F}_{VV} \bm{r}_a + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} \bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} \bm{\bar{r}}_{i[\bar{jb}]} \\[6pt]
+?\\
+\end{pmatrix}_{P+2A,T} \\
+&= \begin{pmatrix}
+\sum_j f_{ij} r_j + \sum_b f_{ib} r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle r_{k[l c]} + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle \bar{r}_{k[l c]}  \\
+\sum_j f_{aj} r_j + \sum_b f_{ab} r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle r_{k[l c]} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle \bar{r}_{k[l c]} \\
+?\\
+% \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]}\\
+%  -\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]}
+\end{pmatrix} \\
+\end{align}
+Now let's consider that $\bm{X}_{2A,2A} = \bm{1}_O \otimes \bm{N}_{2OV,2OV} =\bm{1}_O \otimes \begin{pmatrix}
+\bm{1}_{OV,OV} & 0 \\
+0 & -\bm{1}_{OV,OV}
+\end{pmatrix}
+$.Then, it becomes true that
+\begin{align}
+&\left( \bm{1}_O \otimes \bm{N}_{2OV,2OV} \right) \begin{pmatrix}\left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag \\ \left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag\end{pmatrix}_{2A,P} \begin{pmatrix}
+\bm{r}_i \\ \bm{r}_a
+\end{pmatrix}_{P,T}\\
+ &= \begin{pmatrix}\left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag \\ \left(-\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & -\left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag\end{pmatrix}_{2A,P} \begin{pmatrix}
+\bm{r}_i \\ \bm{r}_a
+\end{pmatrix}_{P,T} \\
+&= \begin{pmatrix}
+\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b \\
+-\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b
+\end{pmatrix}_{2A,T}
+\end{align}
+But it is still unclear how terms like \ref{sija}, arising from the auxiliary space, come about.
+\subsection{My hypothesis for the supermatrix}
+By reverse engineering from the matrix vector products given in the supplemental material, I have found the form (we have defined $P=O+V$)
+\begin{align}
+    \bm{H} = \begin{pmatrix}
+\bm{F}_{P,P} & \begin{pmatrix} \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} \end{pmatrix}_{P,2O^2V} & \begin{pmatrix} \bm{V}^{2\mathrm{p1h}} & \bm{V}^{2\mathrm{p1h}} \end{pmatrix}_{P,2OV^2}\\
+\begin{pmatrix} \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ -\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \end{pmatrix}_{2O^2V,P} & \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V} & \bm{0} \\
+\begin{pmatrix} \left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger} \\ -\left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger} \end{pmatrix}_{2OV^2,P} & \bm{0} & \bm{C}^{2\mathrm{plh}}_{2OV^2,2OV^2} \\
+\end{pmatrix}
+\end{align}
+with 
+\begin{align}
+    V_{p, k[ia]}^{2h1p} &= \langle p a | k i \rangle \equiv (pk|ia) \\
+    V_{p, [ia] c}^{2p1h} &= \langle p i | a c \rangle \equiv (pc|ia) \\
+    % C_{i[j a], k[l c]}^{2h1p} &= \left[\left(\epsilon_i+\epsilon_j-\epsilon_a\right) \delta_{j l} \delta_{a c}-\langle j c | a l \rangle\right] \delta_{i k}
+\label{c}
+\end{align}
+and 
+\begin{align}
+    {C}^{2 \mathrm{hlp}}_{i[ka],j[lb]} &= \begin{pmatrix}
+{\varepsilon}^{1h}_{ij}\delta_{kl} \delta_{ab} - \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xx}}_{ka,lb} \delta _{ij} & - \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xd}}_{ka,lb} \delta _{ij} \\
+- \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dx}}_{ka,lb}\delta _{ij} & {\varepsilon}^{1h}_{ij}\delta_{kl} \delta_{ab} - \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dd}}_{ja,lb} \delta _{ij} \\
+\end{pmatrix} \\
+{C}^{2 \mathrm{plh}}_{[kc]a,[ld]b} &= \begin{pmatrix}
+{\varepsilon}^{1p}_{ab}\delta_{kl} \delta_{cd} + \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xx}}_{kc,ld} \delta _{ab} &  \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xd}}_{kc,ld} \delta _{ab} \\ 
+    \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dx}}_{kc,ld}\delta _{ab} & {\varepsilon}^{1p}_{ab}\delta_{kl} \delta_{cd} + \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dd}}_{kc,ld} \delta _{ab} \\
+\end{pmatrix}
+\end{align}
+where we use the fact that $\bm{\varepsilon}^{1h}$ and $\bm{\varepsilon}^{1p}$ are diagonal matrices with the 1h and 1p energies on the diagonal, so actually $\varepsilon^{1h}_{ij} = \varepsilon^{1h}_i \delta_{ij}$ and $\varepsilon^{1p}_{ab} = \varepsilon^{1p}_a \delta_{ab}$, respectively.
 
-\subsubsection{Direct sum}
-The direct sum cannot work in neither the supermetric nor the auxiliary block because the shapes won't match. For example, we would be having $\mathbf{C}^{2 \mathrm{hlp}}=\varepsilon^{1 \mathrm{~h}} \oplus_{\text{direct}}(-\tilde{\mathbf{M}})$ with the column dimension $O+2OV$ which does not equal the width of its upstairs neighbor $\begin{pmatrix}
-    \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}
-\end{pmatrix}$, which is $2O^2V$. The same kind of idea goes for the supermetric; $\begin{pmatrix}
-    \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}
-\end{pmatrix}^\dag$ will have row dimension $2O^2V$ and if $\mathcal{\bm{N}}=\begin{pmatrix}
-    \bm{1}_{P,P} & 0 \\
-    0 & \bm{1}_{O,O} \oplus_{\text{direct}} \bm{N}_{2OV,2OV}
-\end{pmatrix}$, then the row dimension of the supermetric in the 2h1p space is $O+2OV$ again.
+% To figure out how to recreate them consider the matrix multiplication for just the 2h1p channel
+% \begin{align}
+% &\bm{\mathcal{N}}^{2\mathrm{h1p}} \bm{H}^{2\mathrm{h1p}} \bm{R}^{2\mathrm{h1p}} \\
+% &= \begin{pmatrix}
+% \bm{1}_{P,P} & 0 \\
+% 0 & \bm{X} \\
+% \end{pmatrix}
+% \begin{pmatrix}
+% \bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} \\
+% \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &  \\
+% \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}
+% \end{pmatrix}
+% \begin{pmatrix}
+% r_i \\
+% r_a \\
+% r_{i[j b]} \\
+% \bar{r}_{i[j b]} \\
+% \end{pmatrix}\\
+% &= \begin{pmatrix}
+% \bm{1}_{P,P} & 0 \\
+% 0 & \bm{X} \\
+% \end{pmatrix}
+% \begin{pmatrix}
+% \bm{f}_{O,O}r^i_{O,\bar{A}} + \bm{f}_{O,V}r^a_{V,\bar{A}} + \bm{v}^{2\mathrm{h1p}}_{O,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{v}^{2\mathrm{h1p}}_{O,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+% \bm{f}_{V,O}r^i_{O,\bar{A}} + \bm{f}_{V,V}r^a_{V,\bar{A}} + \bm{v}^{2\mathrm{h1p}}_{V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{v}^{2\mathrm{h1p}}_{V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+% \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,O} r^i_{O,\bar{A}} + \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,V} r^a_{V,\bar{A}} + \bm{c}^{2\mathrm{hlp},xx}_{O^2V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{c}^{2\mathrm{hlp},xd}_{O^2V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+% \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,O} r^i_{O,\bar{A}} + \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,V} r^a_{V,\bar{A}} + \bm{c}^{2\mathrm{hlp},dx}_{O^2V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{c}^{2\mathrm{hlp},dd}_{O^2V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
+% \end{pmatrix}
+% \\
+% &= \begin{pmatrix}
+% \sigma_i \\
+% \sigma_a \\
+% \sigma_{i[j a]} \\
+% \bar{\sigma}_{i[j a]} \\
+% \end{pmatrix}
+% =\begin{pmatrix}
+% \sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}+ \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]}  \\
+% \sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} \\
+% \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]} \\
+% -\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]} \\
+% \end{pmatrix}
+% \end{align}
+
+\subsection{Alternate possibilities (assuming a typo was made)}
 \subsubsection{Supermetric: Kronecker product, Auxiliary: Kronecker sum}
 Note that it makes the most sense for the auxiliary block to be a Kronecker sum, because this was the case for TDA as can be seen in \ref{tda_kron}. So here, I tried the case where the supermetric is a Kronecker product
 \begin{equation}
@@ -556,45 +896,7 @@ Accordingly, doing ED of this form for the supermatrices gives the wrong spectru
 %     \bm{Y} & \bm{X}
 % \end{pmatrix} = \bm{1}$. How does this help though?
 % where the elements of $\bm{W}^<$ are given by $\bm{W}^<_{pk\nu} = \sum_{ia} (pk|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right)$.
-\subsubsection{Supermetric: Kronecker sum, Auxiliary: Kronecker sum}
-Now we can consider the matrix multiplication
-\begin{align}
-    \bm{\mathcal{N}}^{2 \mathrm{hlp}} \bm{H}^{2 \mathrm{hlp}} &= \begin{pmatrix}
-        \bm{1}_{P,P} & 0 \\
-        0 & \bm{1}_{O,O} \oplus_{\text{kron}} \bm{N}_{2OV,2OV}
-    \end{pmatrix}
-    \begin{pmatrix}
-        \bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} & \bm{V}^{2\mathrm{h1p}}_{P,O^2V} \\
-        \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  &  \\
-        \left(\bm{V}^{2\mathrm{h1p}}_{P,O^2V}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V}
-    \end{pmatrix} \\
-&= \begin{pmatrix}        \bm{F}_{P,P} & \begin{pmatrix} \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}\end{pmatrix}_{P,2O^2V} \\
-        \left( \bm{1} \oplus_{\text{kron}} \bm{N} \right)_{2O^2V,2O^2V}\begin{pmatrix} \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \end{pmatrix}_{2O^2V,P} &   \left( \bm{1} \oplus_{\text{kron}} \bm{N} \right)_{2O^2V,2O^2V} \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V}  \\
-    \end{pmatrix} \\
-\end{align}
-First, we can consider the off diagonal term
-\begin{align}
-    \left( \bm{1} \oplus_{\text{kron}} \bm{N}_{2OV,2OV} \right) \begin{pmatrix}
-        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}
-    \end{pmatrix} _{2O^2V,P} &=\left( \bm{1}_O \otimes \bm{1}_{2OV} + \bm{1}_O \otimes \bm{N}_{2OV} \right) \begin{pmatrix}
-        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}
-    \end{pmatrix} _{2O^2V,P}\\
-& =\begin{pmatrix}
-        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ \left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}
-    \end{pmatrix} _{2O^2V,P} + \begin{pmatrix}
-        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ -\left( \bm{V}^{2\mathrm{h1p}}\right)^{\dagger}
-    \end{pmatrix} _{2O^2V,P} \\
-&= \begin{pmatrix}
-        2\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ 0
-    \end{pmatrix} _{2O^2V,P}
-\end{align}
-Next, we can consider the auxiliary block
-\begin{align}
- \left( \bm{1} \oplus_{\text{kron}} \bm{N} \right)\bm{C}^{2\mathrm{hlp}} &= \left(\bm{1}_{O,O} \oplus_{\text{kron}} \bm{N}_{2OV,2OV}\right) \left( \bm{\epsilon}^{1 \mathrm{~h}}_{O,O} \oplus_{\text{kron}} (-\bm{\tilde{M}})_{2OV,2OV} \right)\\
-&= \left( \bm{1}_O \otimes \bm{1}_{2OV} + \bm{1}_O \otimes \bm{N}_{2OV} \right) \left( \bm{\epsilon}^{1 \mathrm{~h}}_{,O} \otimes \bm{1}_{2OV,} + \bm{1}_{O,} \otimes (-\bm{\tilde{M}})_{2OV,} \right)\\
-&= \bm{\epsilon}^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes -\bm{\tilde{M}} + \bm{\epsilon}^{1 \mathrm{~h}} \otimes \bm{N} + \bm{1} \otimes -\bm{N}\bm{\tilde{M}}\\
-&= \left( \bm{1} \otimes \left( \bm{1} + \bm{N} \right) \right) \left( \bm{\epsilon}^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes -\bm{\tilde{M}} \right) \\
-\end{align}
+
 \subsubsection{Supermetric: Kronecker sum, Auxiliary: Kronecker product}
 Let us try the alternate case where $\bm{C}^{2\mathrm{hlp}} = \left( \bm{\epsilon}^{1 \mathrm{~h}} \otimes -\bm{\tilde{M}} \right)$, which gives
 \begin{align}
@@ -632,165 +934,6 @@ This is not what we want and the form for the off-diagonal term is the same as i
 % \begin{equation}
 %     \Sigma_{pp}^{\text{corr}}(\omega) = \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{w_{pi}^{\mu }w_{ip}^{\mu }}{\omega -(\epsilon _{i}-\Omega  _{\mu })}+ \sum_{a}^{\text{virtual}} \frac{w_{pa}^{\mu }w_{ap}^{\mu }}{\omega -(\epsilon _{a}+\Omega  _{\mu })}\right)
 % \end{equation}
-\subsection{Reverse engineering}
-We have the problem $\bm{\sigma} = \bm{\mathcal{N}}\bm{H} \bm{R}$. I know that $\bm{\sigma}$ is given by
-\begin{align}
-\sigma_i &= \sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d} + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,\bar{r}_{[k c]d} \\
-\sigma_a &= \sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,\bar{r}_{[k c]d} \\
-    \sigma _{i[ja]} &= \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]}
-\label{sija} \\
-    \bar{\sigma}_{i[ja]} &= -\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]} \\
-\sigma _{[ia]b} &= \sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j + \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c + \varepsilon_b r_{[i a] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{xx}} r_{[j c] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{xd}} \bar{r}_{[j c] b} \\
-\bar{\sigma}_{[ia]b} &= -\sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j - \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c + \varepsilon_b \bar{r}_{[i a] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dx}} r_{[j c] b} + \sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dd}} \bar{r}_{[j c] b}
-\end{align}
-$\bm{R}^{2h1p}= \begin{pmatrix}
-r_i \\ r_a \\ r_{i[jb]} \\ \bar{r}_{i[\bar{jb}]} \\
-\end{pmatrix} $ is the excitation vector. We will assume the form $\bm{\mathcal{N}}^{2h1p} = \begin{pmatrix}
-\bm{1} & 0 \\
-0 & \bm{X} \\
-\end{pmatrix}$. We assume that $\bm{H}^{2h1p}$ is given by
-\begin{equation}
-\bm{H}^{2h1p} = \begin{pmatrix}
-\bm{F} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}  \\
-\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &   \\
-\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}} \\
-\end{pmatrix}
-\end{equation}
-In our notation, $P=O+V$ is the number of molecular orbitals, $A=O^2V$ and $T$ is the column dimension of our excitation vector.
-\begin{align}
-&    \bm{\mathcal{N}}^{2h1p} \bm{H}^{2h1p} \bm{R}^{2h1p}\\
-&= 
-\begin{pmatrix}\bm{1}_{P,P} & 0 \\
-0 & \bm{X}_{2A,2A}
-\end{pmatrix}_{P+2A, P+2A}
-\begin{pmatrix}\bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}}_{P,A} & \bm{V}^{2\mathrm{h1p}}_{P,A} \\
-\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger}_{A,P} &  &   \\
-\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger}_{A,P} &  & \bm{C}^{2\mathrm{hlp}}_{2A,2A} \\
-\end{pmatrix}_{P+2A, P+2A}
-\begin{pmatrix}\bm{r}_i \\ \bm{r}_a \\ \bm{r}_{i[jb]} \\ \bm{\bar{r}}_{i[\bar{jb}]}
-\end{pmatrix}_{P+2A,T} \\
-&= 
-\begin{pmatrix}
-\bm{1}_{P,P}
- \begin{pmatrix}
-\bm{F}_{OO} & \bm{F}_{OV} \\ \bm{F}_{VO} & \bm{F}_{VV}
-\end{pmatrix}_{P,P} \begin{pmatrix}
-\bm{r}_i \\ \bm{r}_a
-\end{pmatrix}_{P,T} + \bm{1}_{P,P} \begin{pmatrix}
-\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{O,i[{jb}]} \\ \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} & \bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]} 
-\end{pmatrix}_{P,2A} \begin{pmatrix}
-    \bm{r}_{i[jb]} \\
-\bm{\bar{r}}_{i[\bar{jb}]}
-\end{pmatrix}_{2A,T} \\
-\bm{X}_{2A,2A} \begin{pmatrix}\left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag \\ \left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag\end{pmatrix}_{2A,P} \begin{pmatrix}
-\bm{r}_i \\ \bm{r}_a
-\end{pmatrix}_{P,T} + \bm{X}_{2A,2A} \bm{C}^{2 \mathrm{hlp}}_{2A,2A} \begin{pmatrix}
-    \bm{r}_{i[jb]} \\
-\bm{\bar{r}}_{i[\bar{jb}]}
-\end{pmatrix}_{2A,T}\\
-%  \bm{N}_{2A,2A}\begin{pmatrix}
-%     \left(\bm{V}^{2 \mathrm{h1p}}_{p,i[jb]}\right)^\dag \\ \left(\bm{V}^{2 \mathrm{h1p}}_{p,i[{jb}]}\right)^\dag \\
-% \end{pmatrix}_{2A,P} \begin{pmatrix}
-% \bm{r}_i \\ \bm{r}_a
-% \end{pmatrix}_{P,A} +
-% \bm{N}_{2A,2A}\left(\left(\varepsilon^{1h}\right) \oplus_{\text{direct}} -\bm{\tilde{M}}_{jb,jb;lc,lc}\right)_{2A,2A} \begin{pmatrix}
-%     \bm{r}_{i[jb]} \\
-% \bm{\bar{r}}_{i[\bar{jb}]}
-% \end{pmatrix}_{2A,A}
-\end{pmatrix} \\
-&= \begin{pmatrix}
-\bm{F}_{OO} \bm{r}_i + \bm{F}_{OV} \bm{r}_a + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} \bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{O,i[jb]} \bm{\bar{r}}_{i[\bar{jb}]} \\
-\bm{F}_{VO} \bm{r}_i + \bm{F}_{VV} \bm{r}_a + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} \bm{r}_{i[jb]} + \bm{V}^{2 \mathrm{h1p}}_{V,i[jb]} \bm{\bar{r}}_{i[\bar{jb}]} \\[6pt]
-?\\
-\end{pmatrix}_{P+2A,T} \\
-&= \begin{pmatrix}
-\sum_j f_{ij} r_j + \sum_b f_{ib} r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle r_{k[l c]} + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle \bar{r}_{k[l c]}  \\
-\sum_j f_{aj} r_j + \sum_b f_{ab} r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle r_{k[l c]} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle \bar{r}_{k[l c]} \\
-?\\
-% \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]}\\
-%  -\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]}
-\end{pmatrix} \\
-\end{align}
-Now let's consider that $\bm{X}_{2A,2A} = \bm{1}_O \otimes \bm{N}_{2OV,2OV} =\bm{1}_O \otimes \begin{pmatrix}
-\bm{1}_{OV,OV} & 0 \\
-0 & -\bm{1}_{OV,OV}
-\end{pmatrix}
-$.Then, it becomes true that
-\begin{align}
-&\left( \bm{1}_O \otimes \bm{N}_{2OV,2OV} \right) \begin{pmatrix}\left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag \\ \left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag\end{pmatrix}_{2A,P} \begin{pmatrix}
-\bm{r}_i \\ \bm{r}_a
-\end{pmatrix}_{P,T}\\
- &= \begin{pmatrix}\left(\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & \left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag \\ \left(-\bm{V}^{2 \mathrm{h1p}}_{O,i[jb]}\right)^\dag & -\left(\bm{V}^{2 \mathrm{h1p}}_{V,i[{jb}]}\right)^\dag\end{pmatrix}_{2A,P} \begin{pmatrix}
-\bm{r}_i \\ \bm{r}_a
-\end{pmatrix}_{P,T} \\
-&= \begin{pmatrix}
-\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b \\
--\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b
-\end{pmatrix}_{2A,T}
-\end{align}
-But it is still unclear how terms like \ref{sija}, arising from the auxiliary space, come about.
-
-\begin{tcolorbox}[colback=red!10!white, colframe=red!50!black, title=It is unclear where these equations come from]
-I found that these equations give rise to nearly the same spectrum (test on LiH with cc-pvdz basis show up to $~10^{-9} Ha$ of agreement) as that of the exact upfolded $GW$ Hamiltonian (Booth's ED), which is given by
-\begin{equation}
-    \bm{H}_{\text{Upfolded}}^{G_0W_0} = \begin{pmatrix} \bm{F} & \bm{W}^< & \bm{W}^> \\ \bm{W}^{<,\dagger} & \bm{d}^< & 0 \\ \bm{W}^{>, \dagger} & 0 & \bm{d}^> \end{pmatrix}
-\label{eq:booth_hamiltonian}
-\end{equation}
-where we have the definitions
-\begin{align}
-    W_{pkv}^< > = \left(\epsilon_k + \Omega_v\right) \delta_{k,l} \delta_{v,v'}
-\label{eq:booth_definitions}
-\end{align}
-It concerns me that the agreement isn't exact (below $10^{-13} Ha$). I would want to have this cleared up before I try to reduce the scaling by implementing the Arnoldi procedure they try. Also, I am not able to figure out what motivated the form for this upfolded Hamiltonian for Tim's GW-RPA. Specifically, if one interprets the $\oplus$ as a direct sum, then the shapes of the matrices are not compatible since, for example, $\mathbf{C}^{2 \mathrm{hlp}}=\varepsilon^{1 \mathrm{~h}} \oplus(-\tilde{\mathbf{M}})$ has the column dimension $O+2OV$ which does not equal the width of its upstairs neighbor $\begin{pmatrix}
-    \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}
-\end{pmatrix}$, which is $2O^2V$. If one interprets the $\oplus$ as a Kronecker sum, the shapes are compatible, but the energies are wrong. If we assume that the $\oplus$ should actually be the Kronecker product $\otimes$, again the shapes will be compatible, but the energies are wrong. I asked Jinghong, Nemo, and Hamlin and no one was able to figure it out. Can I email Tim to ask him about this?
-%  that means I am not able to exactly identify the proper preconditioner, which is usually the diagonal of the matrix. But if the preconditioner just has the function of accelerating convergence, and does not determine the final results, then I am not sure if this is a problem.
-%  I don't want to implement the Arnoldi iteration that they suggest to obtain lower scaling until I know understand the discrepancy for this high scaling version.
-\end{tcolorbox}
-
-% To figure out how to recreate them consider the matrix multiplication for just the 2h1p channel
-% \begin{align}
-% &\bm{\mathcal{N}}^{2\mathrm{h1p}} \bm{H}^{2\mathrm{h1p}} \bm{R}^{2\mathrm{h1p}} \\
-% &= \begin{pmatrix}
-% \bm{1}_{P,P} & 0 \\
-% 0 & \bm{X} \\
-% \end{pmatrix}
-% \begin{pmatrix}
-% \bm{F}_{P,P} & \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} \\
-% \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  &  \\
-% \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} &  & \bm{C}^{2\mathrm{hlp}}
-% \end{pmatrix}
-% \begin{pmatrix}
-% r_i \\
-% r_a \\
-% r_{i[j b]} \\
-% \bar{r}_{i[j b]} \\
-% \end{pmatrix}\\
-% &= \begin{pmatrix}
-% \bm{1}_{P,P} & 0 \\
-% 0 & \bm{X} \\
-% \end{pmatrix}
-% \begin{pmatrix}
-% \bm{f}_{O,O}r^i_{O,\bar{A}} + \bm{f}_{O,V}r^a_{V,\bar{A}} + \bm{v}^{2\mathrm{h1p}}_{O,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{v}^{2\mathrm{h1p}}_{O,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
-% \bm{f}_{V,O}r^i_{O,\bar{A}} + \bm{f}_{V,V}r^a_{V,\bar{A}} + \bm{v}^{2\mathrm{h1p}}_{V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{v}^{2\mathrm{h1p}}_{V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
-% \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,O} r^i_{O,\bar{A}} + \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,V} r^a_{V,\bar{A}} + \bm{c}^{2\mathrm{hlp},xx}_{O^2V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{c}^{2\mathrm{hlp},xd}_{O^2V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
-% \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,O} r^i_{O,\bar{A}} + \bm{v}^{2\mathrm{h1p},\dagger}_{O^2V,V} r^a_{V,\bar{A}} + \bm{c}^{2\mathrm{hlp},dx}_{O^2V,O^2V} r^{i[j b]}_{O^2V, \bar{A}} + \bm{c}^{2\mathrm{hlp},dd}_{O^2V,O^2V} \bar{r}^{i[j b]}_{O^2V, \bar{A}} \\
-% \end{pmatrix}
-% \\
-% &= \begin{pmatrix}
-% \sigma_i \\
-% \sigma_a \\
-% \sigma_{i[j a]} \\
-% \bar{\sigma}_{i[j a]} \\
-% \end{pmatrix}
-% =\begin{pmatrix}
-% \sum_{j} f_{i j}\,r_j + \sum_{b} f_{i b}\,r_b + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}+ \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]}  \\
-% \sum_{j} f_{a j}\,r_j + \sum_{b} f_{a b}\,r_b + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]} + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,\bar{r}_{k[l c]} \\
-% \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i r_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a k b}^{\mathrm{xd}} \bar{r}_{i[k b]} \\
-% -\sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k - \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b + \varepsilon_i \bar{r}_{i[j a]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dx}} r_{i[k b]} - \sum_{k b} \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]_{j a, k b}^{\mathrm{dd}} \bar{r}_{i[k b]} \\
-% \end{pmatrix}
-% \end{align}
-
 \subsection{Krylov procedure to approximate the step function}
 It does not seem like a good idea to me to start applying the Krylov procedure without first having ED. But we can start to think about what this would look like. The matrix vector products contain terms like $\sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dd}} \bar{r}_{[j c] b}$. Right now, I am explicitly constructing $\Theta(-\bm{N}\bm{M})$, which requires diagonalizing $\bm{N}\bm{M}$, naively scaling as $O(N^6)$. Using a Krylov subspace method, we can avoid this. The idea is to approximate the entirety of $\mathbf{N} \tilde{\mathbf{M}}$ once before the start of the Davidson iteration, and then we can extract the xx, xd, dx, and dd blocks from the approximate matrix. Specifically
 \begin{align}
@@ -887,15 +1030,27 @@ We make the ansatz that the eigenvectors of the symmetric formulation are given 
 \end{tcolorbox}
 Then, we can apply the unitary transformation to the Hamiltonian in Tim's formulation as
 \begin{align}
-    \bm{H'} &= \bm{U'}^\dag \bm{H} \bm{U'} = \begin{pmatrix} \bm{1} & \bm{0}\\ \bm{0}&\bm{1}\otimes\bm{T } \end{pmatrix}^\dag \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{C}^{2 \mathrm{hlp}} \end{pmatrix} \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0}&\bm{1}\otimes\bm{T } \end{pmatrix}\\
-& = \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\left(\bm{1}\otimes\bm{T}\right)\\ \left(\bm{1}\otimes\bm{T}\right)^\dag \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \left(\bm{1}\otimes\bm{T}\right)^\dagger \bm{C}^{2 \mathrm{hlp}} \left(\bm{1}\otimes\bm{T}\right) \end{pmatrix}.
+    \bm{H'} &= {\bm{U}'}^\dagger \bm{H} \bm{U'} \\
+    &= \begin{pmatrix} \bm{1} & \bm{0}\\ \bm{0}&\bm{1}\otimes\bm{T} \end{pmatrix}^\dagger 
+       \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\\ 
+       \left( \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \right)^{\dagger} & 
+       \bm{C}^{2 \mathrm{hlp}} \end{pmatrix} 
+       \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0}&\bm{1} \otimes \bm{T} \end{pmatrix} \\
+    &= \begin{pmatrix} 
+        \bm{F} & \bm{V}^{2 \mathrm{h1p}} \left( \bm{1} \otimes \bm{T} \right) \\
+        \left( \bm{1} \otimes \bm{T} \right)^\dagger 
+        \left( \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \right)^{\dagger} & 
+        \left( \bm{1} \otimes \bm{T} \right)^\dagger 
+        \bm{C}^{2 \mathrm{hlp}} 
+        \left( \bm{1} \otimes \bm{T} \right) 
+    \end{pmatrix}.
 \label{eq:tim_upfolded_hamiltonian}
 \end{align}
 But now let us try evaluating the term $\left(\bm{1}\otimes\bm{T}\right)^\dagger \bm{C}^{2 \mathrm{hlp}} \left(\bm{1}\otimes\bm{T}\right)$ in the dRPA case. We have
 \begin{align}
-    \left(\bm{1}\otimes\bm{T}\right)^\dagger \bm{C}^{2 \mathrm{hlp}} \left(\bm{1}\otimes\bm{T}\right) &= \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes (-\bm{M}^{1/2})\right) \left(\bm{1}\otimes\bm{T}\right) \\
-&= \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1}\right) \left(\bm{1}\otimes\bm{T}\right) + \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\bm{1} \otimes (-\bm{M}^{1/2})\right) \left(\bm{1}\otimes\bm{T}\right) \\
-&= \epsilon^{1 \mathrm{~h}} \otimes\bm{T}^\dagger\bm{T} + \bm{1} \otimes \left(\underbrace{\bm{T}^\dagger (-\bm{M}^{1/2}) \bm{T}}_{-\bm{\Omega }}\right) \\
+    \left(\bm{1}\otimes\bm{T}\right)^\dagger \bm{C}^{2 \mathrm{hlp}} \left(\bm{1}\otimes\bm{T}\right) &= \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes (-{\bm{M}}^{1/2})\right) \left(\bm{1}\otimes\bm{T}\right) \\
+&= \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1}\right) \left(\bm{1}\otimes\bm{T}\right) + \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\bm{1} \otimes (-{\bm{M}}^{1/2})\right) \left(\bm{1}\otimes\bm{T}\right) \\
+&= \epsilon^{1 \mathrm{~h}} \otimes\bm{T}^\dagger\bm{T} + \bm{1} \otimes \left(\underbrace{\bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T}}_{-\boldsymbol{\Omega}}\right) \\
 \end{align}
 Next, let us consider the product $\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \left(\bm{1}\otimes\bm{T}\right) $. We have
 \begin{align}
@@ -903,19 +1058,25 @@ Next, let us consider the product $\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \left(\bm
 \end{align}
 So we have
 \begin{align}
-    \bm{H'} &= \begin{pmatrix} \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \Omega_{ia;v}^{1/2} \Delta _{ia}^{-1/2} \\ \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger \Omega_{jb;v}^{1/2} \Delta _{jb}^{-1/2} & \epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}} - \bm{\Omega }\end{pmatrix}
+    \bm{H'} &= \begin{pmatrix} \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \Omega_{ia;v}^{1/2} \Delta _{ia}^{-1/2} \\ \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger \Omega_{jb;v}^{1/2} \Delta _{jb}^{-1/2} & \epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}} - \boldsymbol{\Omega }\end{pmatrix}
 \end{align}
 Now consider a second similarity transform of $\bm{U}'' = \bm{1} \oplus \left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)$, which gives us
 \begin{align}
-    &\bm{H''} = \bm{U}''^\dag \bm{H'} \bm{U}'' \\
-% & = \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0} & \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \end{pmatrix}^\dag \begin{pmatrix} \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \Omega_{ia;v}^{1/2} \Delta _{ia}^{-1/2} \\ \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger \Omega_{jb;v}^{1/2} \Delta _{jb}^{-1/2} & \epsilon^{1 \mathrm{~h}} - \bm{\Omega }^{1/2}\end{pmatrix} \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0} & \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \end{pmatrix} \\
-&= \begin{pmatrix} \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \\ \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger & \left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}}\bm{T}^\dagger (-\bm{M}^{1/2}) \bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)\end{pmatrix}
+    &\bm{H''} = {\bm{U}''}^\dagger \bm{H'} \bm{U}'' \\
+    &= \begin{pmatrix}
+        \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \\
+        \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger & 
+        \left( \bm{1} \otimes \left( \frac{\Delta_{lc}}{\Omega_{lc;v}} \right)^{1/2} \right)^\dagger
+        \left( \epsilon^{1\mathrm{~h}} \oplus_{\text{kron}} \bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T} \right)
+        \left( \bm{1} \otimes \left( \frac{\Delta_{lc}}{\Omega_{lc;v}} \right)^{1/2} \right)
+    \end{pmatrix}
 \end{align}
+
 Just considering the auxiliary term gives
 \begin{align}
-    &\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}}\bm{T}^\dagger (-\bm{M}^{1/2}) \bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right) \\
-&= \left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes \bm{T}^\dagger (-\bm{M}^{1/2})\bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right) \\
-&= \epsilon^{1 \mathrm{~h}} \otimes \frac{\Delta _{lc}}{\Omega _{lc;v}} + \bm{1} \otimes \left(\bm{T}\left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2}\right)^\dagger (-\bm{M}^{1/2})\left(\bm{T}\left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2}\right) \\
+    &\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}}\bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right) \\
+&= \left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes \bm{T}^\dagger (-{\bm{M}}^{1/2})\bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right) \\
+&= \epsilon^{1 \mathrm{~h}} \otimes \frac{\Delta _{lc}}{\Omega _{lc;v}} + \bm{1} \otimes \left(\bm{T}\left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2}\right)^\dagger (-{\bm{M}}^{1/2})\left(\bm{T}\left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2}\right) \\
 \end{align}
 So $\bm{T}$ are eigenvectors of the matrix $\bm{M}$, with eigenvalues $\bm{\Omega }^2$. Is there any alternate choice of $\bm{M}$ that would massage this into the desired form of $\epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}} (-\bm{\Omega })$?
 This would only work if we could assume that $\left(\frac{\Omega _{ia;v}}{\Delta _{ia}}\right)^{1/2} \approx 1$. 
@@ -942,15 +1103,15 @@ For the two-body matrix vector products, we have
 \end{align}
 Now, consider just
 \begin{equation}
-    \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}= \sum_{klc} \left[\left(\epsilon_i-\bm{M}^{1/2}_{ja,lc}\right) \delta_{ik} r_{i[l c]} \right] = \sum_{l c} \left(\epsilon_i - \bm{M}^{1/2}_{ja,lc}\right) r_{i[l c]}
+    \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}= \sum_{klc} \left[\left(\epsilon_i-{\bm{M}}^{1/2}_{ja,lc}\right) \delta_{ik} r_{i[l c]} \right] = \sum_{l c} \left(\epsilon_i - {\bm{M}}^{1/2}_{ja,lc}\right) r_{i[l c]}
 \end{equation}
 Consider now just the term 
 \begin{equation}
-    \sum_{l c} \bm{M}^{1/2}_{ja,lc} r_{i[l c]} =  \sum_{l c} \left[\underbrace{\Delta _{ja}^{1/2} \left(\Delta_{ja} + 2(ja|lc)\right)_{ja,lc} \Delta_{ja}^{1/2}}_{\bm{D}}\right]^{1/2} r_{i[l c]}.
+    \sum_{l c} {\bm{M}}^{1/2}_{ja,lc} r_{i[l c]} =  \sum_{l c} \left[\underbrace{\Delta _{ja}^{1/2} \left(\Delta_{ja} + 2(ja|lc)\right)_{ja,lc} \Delta_{ja}^{1/2}}_{\bm{D}}\right]^{1/2} r_{i[l c]}.
 \end{equation}
 Let us consider instead the similarity transformed $\tilde{\bm{D}} = \Delta^{-1/2} \bm{D} \Delta^{-1/2} = \left(\Delta + 2K\right)$. This is useful because we have $D^{1/2} = \Delta^{1/2}\tilde{D}^{1/2}\Delta^{1/2}=\left(\Delta+2K\right)^{1/2}$ for our SPD D.Now make the change of variables $u = \Delta^{1/2}r \implies r = \Delta^{-1/2}u$. Then we have $\left(\Delta + 2K\right) \Delta^{-1/2}u = \Delta^{1/2} \left[ {I} + \underbrace{2\Delta^{-1/2}K\Delta^{-1/2}}_{L}\right] u$. Again, because we are working with weak to moderately correlated systems, we can assume that L is small, and neglect it for now. So we have
 \begin{equation}
-    \sum_{l c} \bm{M}^{1/2}_{ja,lc} r_{i[l c]} \approx \sum_{l c} \Delta^{1/2} I \Delta^{1/2} r_{i[l c]} \approx \sum_{l c} \Delta r_{i[l c]}
+    \sum_{l c} {\bm{M}}^{1/2}_{ja,lc} r_{i[l c]} \approx \sum_{l c} \Delta^{1/2} I \Delta^{1/2} r_{i[l c]} \approx \sum_{l c} \Delta r_{i[l c]}
 \end{equation}
 
 We can rewrite this as

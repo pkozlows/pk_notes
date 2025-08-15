@@ -147,13 +147,13 @@ Now define the unitary transformation $\bm{\tilde{X}}=\bm{I}_O \otimes \bm{I}_V 
 \begin{align}
     \bm{\tilde{X}}^\dagger \bm{D} \bm{\tilde{X}} &= \bm{\tilde{X}}^\dagger \left(-\bm{E}_{O} \otimes \bm{I}_V \otimes \bm{I}_{OV} + \bm{I}_O \otimes \bm{E}_{V} \otimes \bm{I}_{OV} + \bm{I}_O \otimes \bm{I}_V \otimes \bm{A}_{OV} \right) \bm{\tilde{X}}  \\
 &= \bm{\tilde{X}}^\dagger \left(-\bm{E}_{O} \otimes \bm{I}_V \otimes \bm{I}_{OV}\right) \bm{\tilde{X}} + \bm{\tilde{X}}^\dagger \left(\bm{I}_O \otimes \bm{E}_{V} \otimes \bm{I}_{OV}\right) \bm{\tilde{X}} + \bm{\tilde{X}}^\dagger \left(\bm{I}_O \otimes \bm{I}_V \otimes \bm{A}_{OV}\right) \bm{\tilde{X}}  \\
-&= -\bm{E}_{O} \underbrace{\bm{I}_O^\dag \bm{I_O}}_{\bm{I}_O} \otimes \underbrace{\bm{I_V}^\dag \bm{I_V}}_{\bm{I}_V} \otimes \underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}_{OV}} + \underbrace{\bm{I}_O^\dag \bm{I}_O}_{\bm{I}_O} \otimes \bm{E}_{V} \underbrace{\bm{I}_V^\dag \bm{I}_V}_{\bm{I}_{V}} \otimes \underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}_{OV}} + \underbrace{\bm{I}_O^\dag \bm{I}_O}_{\bm{I}_O} \otimes \underbrace{\bm{I}_V^\dag \bm{I}_V}_{\bm{I}_V} \otimes \underbrace{\bm{X}^\dag \bm{A}\bm{X}}_{\bm{\Omega }_{OV}} \\
-&= -\bm{E}_{O} \oplus \bm{E}_{V} \oplus \bm{\Omega }_{OV} \\
-\implies \bm{D} &= \bm{\tilde{X}} \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right) \bm{\tilde{X}}^\dagger\\
+&= -\bm{E}_{O} \underbrace{\bm{I}_O^\dag \bm{I}_O}_{\bm{I}_O} \otimes \underbrace{\bm{I}_V^\dag \bm{I}_V}_{\bm{I}_V} \otimes \underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}_{OV}} + \underbrace{\bm{I}_O^\dag \bm{I}_O}_{\bm{I}_O} \otimes \bm{E}_{V} \underbrace{\bm{I}_V^\dag \bm{I}_V}_{\bm{I}_{V}} \otimes \underbrace{\bm{X}^\dag \bm{X}}_{\bm{I}_{OV}} + \underbrace{\bm{I}_O^\dag \bm{I}_O}_{\bm{I}_O} \otimes \underbrace{\bm{I}_V^\dag \bm{I}_V}_{\bm{I}_V} \otimes \underbrace{\bm{X}^\dag \bm{A}\bm{X}}_{\bm{\Omega}_{OV}} \\
+&= -\bm{E}_{O} \oplus \bm{E}_{V} \oplus \bm{\Omega}_{OV} \\
+\implies \bm{D} &= \bm{\tilde{X}} \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega}_{OV}\right) \bm{\tilde{X}}^\dagger\\
 \end{align}
 Now we can write the spectral representation of the resolvent as
 \begin{align}
-(\omega \mathbf{I} - \bm{D})^{-1} &= \bm{\tilde{X}} \left[\left(\omega \mathbf{I} - \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega }_{OV}\right)\right)^{-1}\right] \bm{\tilde{X}}^\dagger
+(\omega \mathbf{I} - \bm{D})^{-1} &= \bm{\tilde{X}} \left[\left(\omega \mathbf{I} - \left(-\bm{E}_O \oplus \bm{E}_V \oplus \bm{\Omega}_{OV}\right)\right)^{-1}\right] \bm{\tilde{X}}^\dagger
 \end{align}
 This leads to
 \begin{align}
