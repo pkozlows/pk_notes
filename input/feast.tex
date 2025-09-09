@@ -1,0 +1,52 @@
+\section{Background}
+\subsubsection{Rearrangements}
+The observation is that because the screened Coulomb potential $W_0$ can be expressed just in terms of the bare Coulomb interaction $v$ and $G_0$, therefore the self-energy is determined by these quantities as well. It is common to express $G_0$ using the eigendecomposition in the Lehmann representation, but it is equivalent to write
+\begin{align}
+    G_0(\mathbf{r}, \mathbf{r}'; \omega) &= \sum_i^{\text{occ}} \frac{\psi_i(\mathbf{r}) \psi_i^*(\mathbf{r'})}{\omega - \epsilon_i - \bm{i}\eta} + \sum_a^{\text{unocc}} \frac{\psi_a(\mathbf{r}) \psi_a^*(\mathbf{r'})}{\omega - \epsilon_a + \bm{i}\eta}\\
+    &= \left( \omega + \bm{i}\eta - \hat{H}_0 \right)^{-1} + R(\bm{i}\eta)
+% \sum_n \frac{\psi_n(\mathbf{r}) \psi_n^*(\mathbf{r'})}{\omega - \epsilon_n - \bm{i}\eta\operatorname{sgn}(E_F - \epsilon_n)} = \left( \omega + \bm{i}\eta - \hat{H}_0 \right)^{-1} + R(\bm{i}\eta)
+\end{align}
+where we have the single-particle wave functions $\psi_n$ and energies $\epsilon_n$, which are taken from the noninteracting Hamiltonian $\hat{H}_0$ and the Fermi energy is $E_F$. $R(\bm{i}\eta)$ is a quantity that can be computed only using the occupied orbitals. Motivated by this observation, we can make a similar simplification for the irreducible polarizability $\chi_0$, neglecting spin for now:
+\begin{align}
+    \chi_0(\mathbf{r}, \mathbf{r}'; \omega) &= \sum_i^{\text{occ}} \sum_a^{\text{unocc}} \left[\frac{\psi_i^*(\mathbf{r}) \psi_a(\mathbf{r}) \psi_a^*(\mathbf{r'}) \psi_i(\mathbf{r'})}{\omega - (\epsilon_a - \epsilon_i) + \bm{i}\eta} - \frac{\psi_i(\mathbf{r}) \psi_a^*(\mathbf{r}) \psi_a(\mathbf{r'}) \psi_i^*(\mathbf{r'})}{\omega + (\epsilon_a - \epsilon_i) - \bm{i}\eta}\right]\\
+&= \sum_i^{\text{occ}} \sum_a^{\text{unocc}} \left[\frac{\psi_i^*(\mathbf{r}) \psi_a(\mathbf{r}) \psi_a^*(\mathbf{r'}) \psi_i(\mathbf{r'})}{\omega - (\epsilon_a - \epsilon_i) + \bm{i}\eta} + \frac{\psi_i(\mathbf{r}) \psi_a^*(\mathbf{r}) \psi_a(\mathbf{r'}) \psi_i^*(\mathbf{r'})}{-\omega - (\epsilon_a + \epsilon_i) + \bm{i}\eta}\right]\\
+&= \sum_i^{\text{occ}} \psi_i(\mathbf{r}) \psi_i^*(\mathbf{r'}) \left[G_0(\mathbf{r}, \mathbf{r'}; \epsilon_i + \omega + \bm{i}\eta) + G_0(\mathbf{r'}, \mathbf{r}; \epsilon_i - \omega + \bm{i}\eta)\right]\\
+\end{align}
+where we house the sum over unoccupied states in a Green's function.
+\subsection{Self-energy}
+We know that the $G_0W_0$ self-energy can be expressed as:
+\begin{equation}
+\Sigma(\mathbf{r}, \mathbf{r}'; \epsilon ) = \frac{\bm{i}}{2\pi} \int d\omega' e^{\bm{i}\omega' \eta} G_0(\mathbf{r}, \mathbf{r}'; \epsilon + \omega') W_0(\mathbf{r}, \mathbf{r}'; \omega')
+\end{equation}
+We can split it into two pieces as $\Sigma (\omega ) = \Sigma_x + \Sigma_c(\omega)$ and get:
+\begin{align}
+    \Sigma_x(\mathbf{r}, \mathbf{r}') &= \frac{\bm{i}}{2\pi} \int d\omega' e^{\bm{i}\omega' \eta} G_0(\mathbf{r}, \mathbf{r}'; \epsilon + \omega') v(\mathbf{r}, \mathbf{r}')\\
+    &= -\sum_i^{\text{occ}} \psi_i(\mathbf{r}) \psi_i^*(\mathbf{r'}) v(\mathbf{r}, \mathbf{r'})\\
+    \Sigma_c(\mathbf{r}, \mathbf{r}'; \epsilon) &= \frac{\bm{i}}{2\pi} \int d\omega' e^{\bm{i}\omega' \eta} G_0(\mathbf{r}, \mathbf{r}'; \epsilon + \omega') [W_0(\mathbf{r}, \mathbf{r}'; \omega') - v(\mathbf{r}, \mathbf{r}')]\\
+    &= \frac{\bm{i}}{2\pi} \int d\omega' e^{\bm{i}\omega' \eta} G_0(\mathbf{r}, \mathbf{r}'; \epsilon + \omega') W_0^c(\mathbf{r}, \mathbf{r}'; \omega')
+\end{align}
+ The correlation piece is difficult to solve because of the nonlinear dependence on $\omega$; it is the target for scaling reductions. They apply their FEAST algorithm to the  $O(N^5)$ contour deformation and $O(N^6)$ fully analytic approaches.
+\subsubsection{Contour deformation approach}
+In order to avoid the all the poles of $W_0$ and most of the poles of $G_0$, we can avoid performing the integration directly and rather rearrange as a contour internal minus an itegral on the imaginary axis:
+\begin{align}
+    \Sigma_c(\mathbf{r}, \mathbf{r}'; \epsilon) &= \frac{\bm{i}}{2\pi} \int_{-\infty}^{\infty} d\omega' e^{\bm{i}\omega' \eta} G_0(\mathbf{r}, \mathbf{r}'; \epsilon + \omega') W_0^c(\mathbf{r}, \mathbf{r}'; \omega')\\
+&= \frac{1}{2\pi} \left[ \bm{i} \oint d\omega e^{\bm{i}\omega \eta} G_0(\mathbf{r}, \mathbf{r}'; \epsilon + \omega) W_0^c(\mathbf{r}, \mathbf{r}'; \omega) -  \int d\omega G_0(\mathbf{r}, \mathbf{r}'; \epsilon + \bm{i}\omega) W_0^c(\mathbf{r}, \mathbf{r}'; \bm{i}\omega)\right]
+\label{eq:contour_deformation}\\
+&= \mp \sum_m^{\text{poles}} \psi_m(\mathbf{r}) \psi_m^*(\mathbf{r'}) W_0^C(\mathbf{r}, \mathbf{r'}; \varepsilon_m - \varepsilon + \bm{i}\eta) - \frac{1}{2\pi} \int G_0(\mathbf{r}, \mathbf{r'}; \varepsilon + \bm{i}\omega) W_0^C(\mathbf{r}, \mathbf{r'}; \bm{i}\omega) d\omega
+% \begin{aligned}
+% = & \mp \sum_m^{\text {poles }} \psi_m(r) \psi_m^*\left(r^{\prime}\right) W_0^C\left(r, r^{\prime}, \varepsilon_m-\varepsilon \pm \mathbf{i} \eta\right) \\
+% & -\frac{1}{2 \pi} \int G_0\left(r, r^{\prime}, \varepsilon+\mathbf{i} \omega\right) W_0^C\left(r, r^{\prime}, \mathbf{i} \omega\right) d \omega
+% \end{aligned}
+\end{align}
+   To better visualize this, it is useful to look at \cite{golze_gw_2019}. To deal with the second term, we can use the Gauss-Legendre quadrature.
+\subsubsection{Fully analytic approach}
+We know this one well so we will skip the introduction.
+ After the discretization, we need to be able to solve
+$\left(\mathbf{h}+\mathbf{\Sigma}^X+\mathbf{\Sigma}^C(\varepsilon)\right) \mathbf{\Psi}=\varepsilon \mathbf{S} \boldsymbol{\Psi}$ with overlap matrix $\mathbf{S}$.
+\section{Solution with FEAST}
+This nonlinear eigenvalue problem can be written as $\bm{T}(\varepsilon) \mathbf{\Psi} = 0$ with
+\begin{equation}
+    \bm{T}(\varepsilon) = \varepsilon \mathbf{S} - \left[\mathbf{h} + \mathbf{\Sigma}^X + \mathbf{\Sigma}^C(\varepsilon)\right]
+\end{equation}
+FEAST well convert this into a series of independent linear problems over a complex contour $\mathcal{C}$:
+% $\mathbf{T}(z)=z \mathbf{S}-\left[\mathbf{h}+\mathbf{\Sigma}^X+\mathbf{\Sigma}^C(z)\right]$.

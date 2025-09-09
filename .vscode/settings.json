@@ -1,0 +1,62 @@
+{
+    "latex-workshop.latex.rootFile.doNotPrompt": true,
+    "latex-workshop.latex.rootFile.useSubFile": false,
+    
+    // Use full paths to LaTeX executables to avoid PATH issues
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "/Library/TeX/texbin/pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "/Library/TeX/texbin/bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "latexmk",
+            "command": "/Library/TeX/texbin/latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOCFILE%"
+            ]
+        }
+    ],
+    
+    // Define build recipes using the tools above
+    "latex-workshop.latex.recipes": [
+        {
+           "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ] 
+        },
+        {
+            "name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk"
+            ]
+        }
+    ]
+}

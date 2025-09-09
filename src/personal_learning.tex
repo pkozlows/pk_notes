@@ -52,6 +52,11 @@
 % Activate the style
 \lstset{style=mystyle}
 
+\newcommand{\im}{\textup{i}}
+\newcommand{\Lv}{\mathcal{L}}
+\newcommand{\Proj}{\bm{\mathcal{P}}}
+\newcommand{\Qroj}{\bm{\mathcal{Q}}}
+
 \geometry{
     margin=1in,
     textwidth=6.5in,
@@ -71,29 +76,35 @@
 
 % Rest of your document content
 \chapter{$G_0W_0$ Derivations: 11/9}
-\input{input/g0w0_basics}
+\input{../input/g0w0_basics.tex}
 \chapter{Dyson to GQME: 12/13}
-\input{input/open_gw}
+\input{../input/open_gw.tex}
 \chapter{RPA}
-\input{input/rpa.tex}
+\input{../input/rpa.tex}
+\chapter{Down folding methods}
+\input{../input/downfolding.tex}
+\chapter{Non-Symmetric Davidson}
+\input{../input/non_symmetric_davidson.tex}
+\chapter{Cumulant Expansion}
+\input{../input/ce.tex}
 % \chapter{Moment-Conserving $GW$}
 % \input{input/moment_gw.tex}
-\chapter{Berkelbach's $GW$}
-\input{input/berk_gw.tex}
-\chapter{Auxiliary-boson $GW$}
-\input{input/ab_gw.tex}
-\chapter{BSE Notes}
-\input{input/bse_notes.tex}
+% \chapter{Berkelbach's $GW$}
+% \input{input/berk_gw.tex}
+% \chapter{Auxiliary-boson $GW$}
+% \input{input/ab_gw.tex}
+% \chapter{BSE Notes}
+% \input{input/bse_notes.tex}
 % \chapter{Lanczos Method without Supermatrix}
 % \input{lanczos_no_super.tex}
 
 
 
 
-\chapter{Extraneous derivations}
-\input{input/gpt_derivations}
+% \chapter{Extraneous derivations}
+% \input{input/gpt_derivations}
 
 % Bibliography
-\bibliography{input/citations}
+\bibliography{citations}
 
 \end{document}

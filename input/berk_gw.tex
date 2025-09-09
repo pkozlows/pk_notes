@@ -57,9 +57,10 @@ Let us show how \ref{c} comes from \ref{c_kron}. If $A_{[ja],[lc]} = (\epsilon_j
 % \bm{C}^{2\mathrm{h}1\mathrm{p}} = \epsilon^{1\mathrm{h}} \otimes \bm{1}_{ja} + \bm{1}_i \otimes (-\bm{A})
 % \]
 \subsection{Similarity transformation}
+\label{sec:gwtda_sim}
 Let us define a unitary rotation $\bm{U} = \bm{1}_P \oplus_{\text{diag}} \left( \bm{1}_O \otimes \bm{X}_{OV} \right)$. Application of this unitary to the Hamiltonian will not change the spectrum and actually transforms the problem into
 \begin{align}
-    \bm{H}' &= \bm{U}^\dag \bm{H} \bm{U} = \begin{pmatrix} \bm{1}_{P} & \bm{0}\\ \bm{0}&\left( \bm{1}_O \otimes \bm{X }_{OV} \right) \end{pmatrix}^\dag \begin{pmatrix} \bm{F}_P & \bm{V}^{2 \mathrm{h1p}}_{P,O^2V}\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger}_{O^2V,P} & \bm{C}^{2 \mathrm{hlp}}_{O^2V,O^2V} \end{pmatrix} \begin{pmatrix} \bm{1}_P & \bm{0}\\ \bm{0}&\left( \bm{1}_O \otimes \bm{X }_{OV} \right) \end{pmatrix}\\
+    \bm{H}^{2h1p,\prime} &= \bm{U}^\dag \bm{H}^{2h1p} \bm{U} = \begin{pmatrix} \bm{1}_{P} & \bm{0}\\ \bm{0}&\left( \bm{1}_O \otimes \bm{X }_{OV} \right) \end{pmatrix}^\dag \begin{pmatrix} \bm{F}_P & \bm{V}^{2 \mathrm{h1p}}_{P,O^2V}\\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger}_{O^2V,P} & \bm{C}^{2 \mathrm{hlp}}_{O^2V,O^2V} \end{pmatrix} \begin{pmatrix} \bm{1}_P & \bm{0}\\ \bm{0}&\left( \bm{1}_O \otimes \bm{X }_{OV} \right) \end{pmatrix}\\
 & = \begin{pmatrix} \bm{F}_P & \bm{V}^{2 \mathrm{h1p}}_{P,O^2V}\left( \bm{1}\otimes \bm{X }\right)_{O^2V,O^2V}\\ \left(\bm{V}^{2 \mathrm{h1p}}_{P,O^2V}\left( \bm{1} \otimes \bm{X } \right)_{O^2V,O^2V}\right)^{\dagger} & \left( \left( \bm{1} \otimes \bm{X } \right)_{O^2V,O^2V}\right)^\dagger \bm{C}^{2 \mathrm{hlp}}_{O^2V,O^2V} \left( \left( \bm{1} \otimes \bm{X } \right)_{O^2V,O^2V} \right) \end{pmatrix}.
 \label{eq:booth_upfolded_hamiltonian}
 \end{align}
@@ -732,6 +733,7 @@ By reverse engineering from the matrix vector products given in the supplemental
 \begin{pmatrix} \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ -\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \end{pmatrix}_{2O^2V,P} & \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V} & \bm{0} \\
 \begin{pmatrix} \left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger} \\ -\left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger} \end{pmatrix}_{2OV^2,P} & \bm{0} & \bm{C}^{2\mathrm{plh}}_{2OV^2,2OV^2} \\
 \end{pmatrix}
+\label{supermatrix}
 \end{align}
 with 
 \begin{align}
@@ -742,17 +744,243 @@ with
 \end{align}
 and 
 \begin{align}
+\label{c2h1p}
     {C}^{2 \mathrm{hlp}}_{i[ka],j[lb]} &= \begin{pmatrix}
 {\varepsilon}^{1h}_{ij}\delta_{kl} \delta_{ab} - \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xx}}_{ka,lb} \delta _{ij} & - \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xd}}_{ka,lb} \delta _{ij} \\
 - \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dx}}_{ka,lb}\delta _{ij} & {\varepsilon}^{1h}_{ij}\delta_{kl} \delta_{ab} - \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dd}}_{ja,lb} \delta _{ij} \\
-\end{pmatrix} \\
+\end{pmatrix} = \delta_{kl}\delta_{ab}\left(\bm{\varepsilon}^{1h}\oplus_{\text{diag}} \bm{\varepsilon}^{1h}\right) -\delta_{ij} \bm{N}\tilde{\mathbf{M}}\\
+\label{c2p1h}
 {C}^{2 \mathrm{plh}}_{[kc]a,[ld]b} &= \begin{pmatrix}
 {\varepsilon}^{1p}_{ab}\delta_{kl} \delta_{cd} + \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xx}}_{kc,ld} \delta _{ab} &  \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xd}}_{kc,ld} \delta _{ab} \\ 
     \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dx}}_{kc,ld}\delta _{ab} & {\varepsilon}^{1p}_{ab}\delta_{kl} \delta_{cd} + \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dd}}_{kc,ld} \delta _{ab} \\
+\end{pmatrix} = \delta_{kl}\delta_{cd}\left(\bm{\varepsilon}^{1p}\oplus_{\text{diag}} \bm{\varepsilon}^{1p}\right) +\delta_{ab} \bm{N}\tilde{\mathbf{M}}
+\end{align}
+with $\bm{\varepsilon}^{1h}$ and $\bm{\varepsilon}^{1p}$ diagonal matrices with the 1h and 1p energies on the diagonal, so actually $\varepsilon^{1h}_{ij} = \varepsilon^{1h}_{ii} \delta_{ij}$ and $\varepsilon^{1p}_{ab} = \varepsilon^{1p}_{aa} \delta_{ab}$, respectively and $\tilde{\bm{M}} = \bm{M} + \eta \bm{N}\Theta(-\bm{N}\bm{M})$ 
+where
+\begin{align}
+\bm{M} &= \begin{pmatrix}
+\bm{A} & \bm{B} \\
+\bm{B} & \bm{A}
+\end{pmatrix}_{2OV,2OV} \quad
+\bm{N} = \begin{pmatrix}
+\bm{1} & \bm{0} \\
+\bm{0} & -\bm{1}
+\end{pmatrix}_{2OV,2OV}
+\end{align}
+and $\eta$ is some very large number.
+\subsubsection{Connecting to the exact form of GW-RPA}
+We know the eigendecomposition $\bm{N}\tilde{\mathbf{M}}=\bm{Z}\begin{pmatrix} \bm{\Omega}_{+} & 0 \\ 0 & -\bm{\Omega}_{+} + \bm{\eta} \end{pmatrix}\bm{Z}^{-1}$. This means we can rewrite \ref{c2h1p} and \ref{c2p1h} as
+\begin{align}
+    {C}^{2 \mathrm{hlp}}_{i[ka],j[lb]} &= \delta_{kl}\delta_{ab}\left(\bm{\varepsilon}^{1h}\oplus_{\text{diag}} \bm{\varepsilon}^{1h}\right) -\delta_{ij} \bm{Z}\begin{pmatrix} \bm{\Omega}_{+} & 0 \\ 0 & -\bm{\Omega}_{+} + \bm{\eta} \end{pmatrix}\bm{Z}^{-1}\\
+    {C}^{2 \mathrm{plh}}_{[kc]a,[ld]b} &= \delta_{kl}\delta_{cd}\left(\bm{\varepsilon}^{1p}\oplus_{\text{diag}} \bm{\varepsilon}^{1p}\right) +\delta_{ab} \bm{Z}\begin{pmatrix} \bm{\Omega}_{+} & 0 \\ 0 & -\bm{\Omega}_{+} + \bm{\eta} \end{pmatrix}\bm{Z}^{-1}
+\end{align}
+\subsubsection{Why would we want an Mtilde of this form?}
+Now, we know the following identity to be true
+\begin{equation}
+\bm{M} \bm{Z} = \bm{N} \bm{Z} \begin{pmatrix}
+\boldsymbol{\Omega}_{+} & 0 \\
+0 & -\boldsymbol{\Omega}_{+}
+\end{pmatrix}
+\end{equation}
+% $$
+with eigenvectors $\bm{Z}=\begin{pmatrix}
+\bm{X} & \bm{Y} \\
+\bm{Y} & \bm{X}
+\end{pmatrix}_{2OV,2OV}$ and eigenvalues $\begin{pmatrix}
+\bm{\Omega}_{+} & 0 \\
+0 & -\bm{\Omega}_{+}
+\end{pmatrix}$.
+Now we can use the fact that the action of a scalar function $f$, such as the step function, on a diagonalizable matrix $\bm{X} \equiv \bm{Y} \bm{\Lambda} \bm{Y}^{-1}$ can be expressed as $f(\bm{X}) = \bm{Y} f(\bm{\Lambda}) \bm{Y}^{-1}$
+so we can write
+\begin{align}
+    &\Theta(-\bm{N}\bm{M}) = \bm{Z} \left(\begin{array}{cc}\Theta(-\boldsymbol{\Omega}_{+}) & 0 \\ 0 & \Theta(\boldsymbol{\Omega}_{+})\end{array}\right)\bm{Z}^{-1} = \bm{Z} \left(\begin{array}{cc}\bm{0} & 0 \\ 0 & \bm{1}\end{array}\right)\bm{Z}^{-1} \\
+& \implies \tilde{\bm{M}} \bm{Z} = \bm{N}\bm{Z}\left(\begin{array}{cc}\boldsymbol{\Omega}_{+} & 0 \\ 0 & -\boldsymbol{\Omega}_{+} + \bm{\eta}\end{array}\right) \quad \text{and} \quad \tilde{\bm{M}} = \bm{Z}\bm{N}\left(\begin{array}{cc}\boldsymbol{\Omega}_{+} & 0 \\ 0 & -\boldsymbol{\Omega}_{+} + \bm{\eta}\end{array}\right)\bm{Z}^{-1}
+\end{align}
+So now the purpose of the $\eta$ becomes clear; it is removing the influence of the negative RPA roots, so that in the GW supermatrix we can easily disregard the portion of its spectrum which inherits from the negative RPA roots. After all, the expression for the GW correlation self-energy is
+\begin{equation}
+\Sigma_{pq}^{c}(\omega) = \sum_{\mu}^{RPA} \left[\underbrace{\sum_{i}^{occ} \frac{\rho_{pi}^\mu \rho_{qi}^\mu}{\omega - (\epsilon_i - \Omega_\mu) - i\eta}}_{2h1p} + \underbrace{\sum_{a}^{virt} \frac{\rho_{pa}^n \rho_{qa}^n}{\omega - (\epsilon_a + \Omega_\mu) + i\eta}}_{1h2p}\right]
+\end{equation}
+with the transition densities $\rho_{rs}^\nu = \sum_{ia} (rs|ia) \left(X_{ia}^\nu + Y_{ia}^\nu\right)$, where $\nu$ is the RPA index. 
+The standard way to show that this maps to GW-RPA is via similarity transformations, like we did with GW-TDA in \ref{sec:gwtda_sim}, but we can't do this her because $\bm{N}\tilde{\bm{M}}$ is not a Hermitian.
+\subsubsection{Avoid constructing Theta}
+Right now in order to construct $\Theta(-\bm{N}{\bm{M}})$, I have to diagonalize $\bm{N}{\bm{M}}$ first, which is $O(N^6)$ cost. To avoid this, we can approximate the step function by Chebyshev polynomials. But we don't want to form this Chebyshev polynomial at the beginning of the Davidson iteration, but rather just make an approximation, that will keep improving as we iterate. It is true, though, that we can efficiently estimate the bounds of the spectrum of $\bm{N}{\bm{M}}$ using a few iterations of Arnoldi, getting $\lambda_{\text{max}}$ (because this is RPA, we know that $\lambda_{\text{min}} = -\lambda_{\text{max}} $). So we can rescale the matrix so that its spectrum lies within the interval $[-1,1]$; this is accomplished by dividing by $\lambda_{\text{max}}$. Then, at each iteration of Davidson, we can apply this polynomial to the current guess vectors. This will be $O(N^4)$ cost per iteration, which is not too bad. The hope is that as we iterate, the guess vectors will span more and more of the space spanned by the negative eigenvalues of $\bm{N}{\bm{M}}$, so that we are effectively applying the step function to the relevant subspace.
+\subsubsection{Attempting to transform to a Hermitian matrix}
+\label{subsub:attempting_to_transform_to_a_hermitian_matrix}
+The supermatrix \ref{supermatrix} is not pseudohermitian, or Hermitian under the super metric, so it really is just a similarity transform
+\begin{align}
+&\bm{\mathcal{N}} = \begin{pmatrix}
+\bm{1}_{P,P} & \bm{0} & \bm{0} \\
+\bm{0} & \bm{1}_{O,O} \otimes \bm{N}_{2OV,2OV} & \bm{0} \\
+\bm{0} & \bm{0} & \bm{1}_{V,V} \otimes \bm{N}_{2OV,2OV}
+\end{pmatrix}\\
+&\implies \bm{H}^\dagger = \bm{\mathcal{N}} \bm{H} \bm{\mathcal{N}}^{-1}\\
+& = \begin{pmatrix}
+\bm{1} & \bm{0} & \bm{0} \\
+\bm{0} & \bm{1} \otimes \bm{N} & \bm{0} \\
+\bm{0} & \bm{0} & \bm{1} \otimes \bm{N}
+\end{pmatrix}
+\begin{pmatrix}
+\bm{F} & \begin{pmatrix} \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} \end{pmatrix} & \begin{pmatrix} \bm{V}^{2\mathrm{p1h}} & \bm{V}^{2\mathrm{p1h}} \end{pmatrix} \\
+\begin{pmatrix} \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ -\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \end{pmatrix} & \bm{C}^{2\mathrm{hlp}} & \bm{0} \\
+\begin{pmatrix} \left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger} \\ -\left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger} \end{pmatrix} & \bm{0} & \bm{C}^{2\mathrm{plh}} \\
+\end{pmatrix}
+\begin{pmatrix}
+\bm{1} & \bm{0} & \bm{0} \\
+\bm{0} & \bm{1} \otimes \bm{N} & \bm{0} \\
+\bm{0} & \bm{0} & \bm{1} \otimes \bm{N}
+\end{pmatrix} \\
+&=
+\begin{pmatrix}
+\bm{F} & \begin{pmatrix} \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}} \end{pmatrix} & \begin{pmatrix} \bm{V}^{2\mathrm{p1h}} & \bm{V}^{2\mathrm{p1h}} \end{pmatrix} \\
+\left(\bm{1}\otimes \bm{N}\right)\begin{pmatrix} \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ -\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \end{pmatrix} & \left(\bm{1}\otimes \bm{N}\right)\bm{C}^{2\mathrm{hlp}} & \bm{0} \\
+\left(\bm{1}\otimes \bm{N}\right)\begin{pmatrix} \left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger} \\ -\left(\bm{V}^{2\mathrm{p1h}}\right)^{\dagger} \end{pmatrix} & \bm{0} & \left(\bm{1}\otimes \bm{N}\right)\bm{C}^{2\mathrm{plh}} \\
+\end{pmatrix}
+\begin{pmatrix}
+\bm{1} & \bm{0} & \bm{0} \\
+\bm{0} & \bm{1} \otimes \bm{N} & \bm{0} \\
+\bm{0} & \bm{0} & \bm{1} \otimes \bm{N}
+\end{pmatrix} \\
+\end{align}
+To simplify notation, from here on, we will just consider the 2h1p sector
+\begin{align}
+&\bm{\mathcal{N}}^{2\mathrm{h1p}} \bm{H}^{2\mathrm{h1p}} \left(\bm{\mathcal{N}}^{2\mathrm{h1p}}\right)^{-1} \\
+&= \begin{pmatrix}
+\bm{F}_{P} & 
+    \left[\begin{pmatrix} 
+        \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}
+    \end{pmatrix}  \left(\bm{1}\otimes \bm{N}\right)\right]_{P,2O^2V}  \\[1em]
+\left[\left(\bm{1}\otimes \bm{N}\right)
+    \begin{pmatrix} 
+        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ 
+        -\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} 
+    \end{pmatrix}\right]_{2O^2V,P} & 
+    \left(\bm{1}\otimes \bm{N}\right)_{2O^2V}\bm{C}^{2\mathrm{hlp}}_{2O^2V}\left(\bm{1}\otimes \bm{N}\right)_{2O^2V} \\
 \end{pmatrix}
 \end{align}
-where we use the fact that $\bm{\varepsilon}^{1h}$ and $\bm{\varepsilon}^{1p}$ are diagonal matrices with the 1h and 1p energies on the diagonal, so actually $\varepsilon^{1h}_{ij} = \varepsilon^{1h}_i \delta_{ij}$ and $\varepsilon^{1p}_{ab} = \varepsilon^{1p}_a \delta_{ab}$, respectively.
-
+Consider just the multiplication 
+\begin{align}
+&\begin{pmatrix} 
+        \bm{V}^{2\mathrm{h1p}} & \bm{V}^{2\mathrm{h1p}}
+    \end{pmatrix}  \left(\bm{1}\otimes \bm{N}\right) =\begin{pmatrix} 
+        \bm{V}^{2\mathrm{h1p}} & -\bm{V}^{2\mathrm{h1p}}
+    \end{pmatrix} \\
+\end{align}
+and
+\begin{align}
+\left(\bm{1}\otimes \bm{N}\right)
+    \begin{pmatrix} 
+        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ 
+        -\left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} 
+    \end{pmatrix} =
+    \begin{pmatrix} 
+        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} \\ 
+        \left(\bm{V}^{2\mathrm{h1p}}\right)^{\dagger} 
+    \end{pmatrix}
+\end{align}
+But now we are left to evaluate
+\begin{align}
+    &\left(\bm{1}\otimes \bm{N}\right)_{2O^2V,2O^2V} \bm{C}^{2\mathrm{hlp}}_{2O^2V,2O^2V} \left(\bm{1}\otimes \bm{N}\right)_{2O^2V,2O^2V}\\
+&= \sum_{i'[k'a']}\sum_{j'[l'b']}\left(\delta_{ii'}N_{k'a',ka}\right)\left[ \begin{pmatrix}
+{\varepsilon}^{1h}_{i'j'}\delta_{k'l'} \delta_{a'b'}  & 0 \\
+0 & {\varepsilon}^{1h}_{i'j'}\delta_{k'l'} \delta_{a'b'}
+\end{pmatrix} - \begin{pmatrix}
+\delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xx}}_{k'a',l'b'} & \delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xd}}_{k'a',l'b'} \\
+\delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dx}}_{k'a',l'b'} & \delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dd}}_{k'a',l'b'}
+\end{pmatrix}\right] \\
+& \times \left(\delta_{jj'}N_{lb,l'b'}\right) \\
+&= \sum_{i'[k'a']}\sum_{j'[l'b']} \begin{pmatrix} \delta _{ii'}\delta_{k'k}\delta_{a'a}&0\\
+0&-\delta _{ii'}\delta_{k'k}\delta_{a'a}
+\end{pmatrix}
+\left[ \begin{pmatrix}
+{\varepsilon}^{1h}_{i'j'}\delta_{k'l'} \delta_{a'b'}  & 0 \\
+0 & {\varepsilon}^{1h}_{i'j'}\delta_{k'l'} \delta_{a'b'}
+\end{pmatrix} - \begin{pmatrix}
+\delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xx}}_{k'a',l'b'} & \delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xd}}_{k'a',l'b'} \\
+\delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dx}}_{k'a',l'b'} & \delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dd}}_{k'a',l'b'}
+\end{pmatrix}\right]\\
+&\times  \begin{pmatrix} \delta _{jj'}\delta_{ll'}\delta_{aa'}&0\\
+0&-\delta _{jj'}\delta_{ll'}\delta_{aa'}
+\end{pmatrix} \\
+&= \left[ \begin{pmatrix}
+{\varepsilon}^{1h}_{ij}\delta_{kl} \delta_{ab}  & 0 \\
+0 & {\varepsilon}^{1h}_{ij}\delta_{kl} \delta_{ab}
+\end{pmatrix} - \sum_{i'[k'a']}\sum_{j'[l'b']}\begin{pmatrix} \delta _{ii'}\delta_{k'k}\delta_{a'a}&0\\
+0&-\delta _{ii'}\delta_{k'k}\delta_{a'a}
+\end{pmatrix}\begin{pmatrix}
+\delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xx}}_{k'a',l'b'} & \delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xd}}_{k'a',l'b'} \\
+\delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dx}}_{k'a',l'b'} & \delta _{i'j'}\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dd}}_{k'a',l'b'}
+\end{pmatrix}\right.\\
+&\left.\times\begin{pmatrix} \delta _{jj'}\delta_{ll'}\delta_{aa'}&0\\
+0&-\delta _{jj'}\delta_{ll'}\delta_{aa'}
+\end{pmatrix}\right]\\
+&=  \left[ \begin{pmatrix}
+{\varepsilon}^{1h}_{ij}\delta_{kl} \delta_{ab}  & 0 \\
+0 & {\varepsilon}^{1h}_{ij}\delta_{kl} \delta_{ab}
+\end{pmatrix} - \delta _{ij}\begin{pmatrix}
+\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xx}}_{ka,lb} & -\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{xd}}_{ka,lb} \\
+-\bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dx}}_{ka,lb} & \bigl[\mathbf{N} \tilde{\mathbf{M}}\bigr]^{\mathrm{dd}}_{ka,lb}
+\end{pmatrix}\right]
+\end{align}
+This is nothing new, but I have left it here in case it becomes useful.
+%  \left[\begin{pmatrix} 
+%         \bm{V}^{2\mathrm{h1p}}_{P,O^2V} & \bm{V}^{2\mathrm{h1p}}
+%     \end{pmatrix}  \left(\bm{1}\otimes \bm{N}\right)\right] = \begin{pmatrix}
+%     V^{2\mathrm{h1p}}_{n,\,k[ia]} & V^{2\mathrm{h1p}}_{n,\,k[ia]}\\
+%     V^{2\mathrm{h1p}}_{d,\,k[ia]} & V^{2\mathrm{h1p}}_{d,\,k[ia]}
+% \end{pmatrix} \left(\bm{1}_O\otimes \bm{N}_{2OV}\right)$.
+% \subsubsection{Starting from the downfolding}
+% To recap the relevant equations, we have
+% \begin{align}
+% \begin{pmatrix}
+% \omega - \bm{H}_{\mathcal{SS}} & -\bm{H}_{\mathcal{SL}} \\
+% -\bm{H}_{\mathcal{LS}} & \omega - \bm{H}_{\mathcal{LL}}
+% \end{pmatrix}
+% \begin{pmatrix}
+% \bm{G}_{\mathcal{SS}} & \bm{G}_{\mathcal{SL}} \\
+% \bm{G}_{\mathcal{LS}} & \bm{G}_{\mathcal{LL}}
+% \end{pmatrix}
+% =
+% \begin{pmatrix}
+% \bm{I}_{\mathcal{SS}} & \bm{0} \\
+% \bm{0} & \bm{I}_{\mathcal{LL}}
+% \end{pmatrix}
+% \end{align}
+% leading to 
+% \begin{align}
+%     \bm{G}_{\mathcal{SS}} = \left[(\omega - \bm{H}_{\mathcal{SS}}) - \bm{H}_{\mathcal{SL}}\,(\omega - \bm{H}_{\mathcal{LL}})^{-1}\,\bm{H}_{\mathcal{LS}}\right]^{-1} = \left[(\omega - \left[\bm{F} + \bm{\Sigma }(\infty)\right]) - \bm{H}_{\mathcal{SL}}\,(\omega - \bm{H}_{\mathcal{LL}})^{-1}\,\bm{H}_{\mathcal{LS}}\right]^{-1} 
+% \end{align}
+% Now, the correlation self-energy can be defined by $\bm{H}_{\mathcal{SL}}\,(\omega - \bm{H}_{\mathcal{LL}})^{-1}\,\bm{H}_{\mathcal{LS}}$. In the GW approximation, it is
+% \subsubsection{Contour integration}
+% We can define a Green's function $\mathcal{\bm{G}}$ for the matrix $\bm{M}=(\bm{A}-\bm{B})^{1 / 2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1 / 2}$ as
+% \begin{equation}
+% \mathcal{\bm{G}}(\omega) = \frac{1}{\omega - \bm{M}} = \frac{1}{\omega - (\bm{A}-\bm{B})^{1 / 2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1 / 2}}
+% \end{equation}
+% As shown in the original FEAST paper, if $\bm{T}$ is the matrix of eigenvectors of $\bm{M}$ and $\bm{\Lambda}$ is the diagonal matrix of eigenvalues, we can write
+% \begin{equation}
+% \bm{T}\bm{T}^{\dagger} = \oint_{\mathcal{C}} \frac{\mathcal{\bm{G}}(\omega)}{2\pi i} d\omega
+% \end{equation}
+% The eigenvalues of $\bm{M}$ are the same as those of
+% % \begin{equation}
+% %     \bm{M}=(\bm{A}-\bm{B})^{1 / 2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1 / 2}
+% % \label{eq:berk_gw_M}
+% % \end{equation}
+\subsubsection{Identification analysis}
+Some explanation of the terminology is in order. When I talk about a priori identification, I mean that I identify eigenvalues within the spectrum as QPEs by identifying the eigenpair whose eigenvector has the largest overlap with the MO. This is what I have and still am always doing to identify QPEs in the exact ED spectrum; mathematically, it seemed like the most straightforward approach. However, because there is not a unitary transformation to relate the Supp. supermatrix to the exact one, I suspect that this method may not work for the Supp. supermatrix. In a posteriori identification, I choose which eigenvalue of Supp. supermatrix is closest to the exact QPE, by computing all the differences after both diagonalizations have proceeded. Note that this is not a sustainable approach, but I have included it to highlight that my a priori identification method is not working for the Supp. supermatrix. Alternatively, I have seen in this GW supermatrix literature sometimes people adopt different methods for selecting QPEs from the spectrum, so maybe I can try out some other ones. Attached is a screenshot from Tim's paper. Maybe I can try one of the alternatives he proposes. So I see two things that I need to do:
+\begin{enumerate}
+    \item Explore different methods for selecting QPEs from the spectrum of the Supp. supermatrix, like the ones proposed in Tim's paper.
+    \item Find a way to mathematically bound the difference of the Supp. supermatrix with the exact one. From Googling, I see that there are some different ways, for instance, from the idea for the pseudospectrum. 
+\end{enumerate}
+The first plot that I have attached has the exact same format as what I sent you earlier today, but with CO included, as you requested. The following plots look through all the roots for certain molecule/parameter pairings for CO and N2; these are the parameters that seem to be presenting me with the most identification trouble.
+\subsubsection{What to do next?}
+I find numerically that all the eigenvalues of the Supp. supermatrix \ref{supermatrix} are real. This implies that there is some metric with respect to which the matrix is pseudo-Hermitian. I have not been able to find it yet. I have tried
+\begin{equation}
+    \bm{\mathcal{N}} = \begin{pmatrix}
+\bm{1}_{P,P} & \bm{0} & \bm{0} \\
+\bm{0} & \bm{1}_{O,O} \otimes \bm{N}_{2OV,2OV} & \bm{0} \\
+\bm{0} & \bm{0} & \bm{1}_{V,V} \otimes \bm{N}_{2OV,2OV}
+\end{pmatrix}
+\end{equation}
+but this doesn't work (see \ref{subsub:attempting_to_transform_to_a_hermitian_matrix}). I probably want to inverstigate this further first, before I move on to a non-Hermitian Davidson, because if I can find the metric, I can use a Hermitian Davidson, which is simpler.
 % To figure out how to recreate them consider the matrix multiplication for just the 2h1p channel
 % \begin{align}
 % &\bm{\mathcal{N}}^{2\mathrm{h1p}} \bm{H}^{2\mathrm{h1p}} \bm{R}^{2\mathrm{h1p}} \\
@@ -933,197 +1161,197 @@ This is not what we want and the form for the off-diagonal term is the same as i
 % We want to figure out how this matches with my previous $O(N^6)$ expression, which was
 % \begin{equation}
 %     \Sigma_{pp}^{\text{corr}}(\omega) = \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{w_{pi}^{\mu }w_{ip}^{\mu }}{\omega -(\epsilon _{i}-\Omega  _{\mu })}+ \sum_{a}^{\text{virtual}} \frac{w_{pa}^{\mu }w_{ap}^{\mu }}{\omega -(\epsilon _{a}+\Omega  _{\mu })}\right)
+% % \end{equation}
+% \subsection{Krylov procedure to approximate the step function}
+% It does not seem like a good idea to me to start applying the Krylov procedure without first having ED. But we can start to think about what this would look like. The matrix vector products contain terms like $\sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dd}} \bar{r}_{[j c] b}$. Right now, I am explicitly constructing $\Theta(-\bm{N}\bm{M})$, which requires diagonalizing $\bm{N}\bm{M}$, naively scaling as $O(N^6)$. Using a Krylov subspace method, we can avoid this. The idea is to approximate the entirety of $\mathbf{N} \tilde{\mathbf{M}}$ once before the start of the Davidson iteration, and then we can extract the xx, xd, dx, and dd blocks from the approximate matrix. Specifically
+% \begin{align}
+% \bm{N}\tilde{\bm{M}} = \bm{N}\left(\bm{M}+\eta \bm{N} \Theta(-\bm{N}\bm{M})\right) = \bm{N}\bm{M} + \eta \Theta(-\bm{N}\bm{M})
+% \end{align}
+% The first term is not a problem, but then we approximate the spectrum of $-\bm{N}\bm{M}$ using a Krylov subspace method, to determine where are the negative eigenvalues, thus determining the step function $\Theta(-\bm{N}\bm{M})$.
+% \subsubsection{Arnoldi iteration}
+% They suggest an Arnoldi procedure to determine the spectrum of $-\bm{N}\bm{M}$, since it is not Hermitian. We might be able to do better by converting into a symmetric problem. 
+
+% \subsubsection{Lanczos iteration}
+% We start by considering $\bm{B} = \bm{N}\bm{M}\bm{N}$, which is symmetric since $\bm{N}$ is symmetric and $\bm{M}$ is symmetric. Then, we can do Lanczos to determine the spectrum of $\bm{B}$, giving the Ritz pairs $\{\bm{\lambda}_i, \bm{v}_i\}$. Then, we can determine the step function on the $\bm{B}$ space as $\bm{Q}\bm{V}_- \bm{V}_-^\dagger \bm{Q}^\dagger$, where $\bm{V}_-$ is the matrix of Ritz vectors with negative Ritz values and $\bm{Q}$ is the Krylov subspace. Then, we can transform back to the original space using $\bm{N}$, giving us $\Theta(-\bm{N}\bm{M})=\bm{N}\bm{Q}\bm{V}_- \bm{V}_-^\dagger \bm{Q}^\dagger\bm{N}$.
+% \begin{tcolorbox}[colback=red!10!white, colframe=red!50!black]
+%  I run into trouble when I try to do this because the spectrum of $\bm{B}$ is completely positive, so it no longer makes sense to use the step function.
+% \end{tcolorbox}
+% \subsection{Tried and failed using Z-vector trick for dRPA}
+% The super matrix that downfolds into the GW self-energy is
+% \begin{align}
+% \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}} & \bm{V}^{2 \mathrm{p} 1 \mathrm{~h}} \\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{C}^{2 \mathrm{hlp}} & \bm{0} \\ \left(\bm{V}^{2 \mathrm{plh}}\right)^{\dagger} & \bm{0} & \bm{C}^{2 \mathrm{plh}} \end{pmatrix}
+% \end{align}
+% For dRPA, we will choose 
+% \begin{equation}
+%     \bm{C}^{2 \mathrm{hlp}} = \epsilon^{1 \mathrm{~h}} \oplus (-\bm{M}^{1/2})
+% \implies C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} = \left[\epsilon _i - \bm{M^{1/2}}_{ja,lc}\right] \delta_{i k}
 % \end{equation}
-\subsection{Krylov procedure to approximate the step function}
-It does not seem like a good idea to me to start applying the Krylov procedure without first having ED. But we can start to think about what this would look like. The matrix vector products contain terms like $\sum_{jc}\bigl[ \mathbf{N} \tilde{\mathbf{M}}\bigr]_{i a, j c}^{\mathrm{dd}} \bar{r}_{[j c] b}$. Right now, I am explicitly constructing $\Theta(-\bm{N}\bm{M})$, which requires diagonalizing $\bm{N}\bm{M}$, naively scaling as $O(N^6)$. Using a Krylov subspace method, we can avoid this. The idea is to approximate the entirety of $\mathbf{N} \tilde{\mathbf{M}}$ once before the start of the Davidson iteration, and then we can extract the xx, xd, dx, and dd blocks from the approximate matrix. Specifically
-\begin{align}
-\bm{N}\tilde{\bm{M}} = \bm{N}\left(\bm{M}+\eta \bm{N} \Theta(-\bm{N}\bm{M})\right) = \bm{N}\bm{M} + \eta \Theta(-\bm{N}\bm{M})
-\end{align}
-The first term is not a problem, but then we approximate the spectrum of $-\bm{N}\bm{M}$ using a Krylov subspace method, to determine where are the negative eigenvalues, thus determining the step function $\Theta(-\bm{N}\bm{M})$.
-\subsubsection{Arnoldi iteration}
-They suggest an Arnoldi procedure to determine the spectrum of $-\bm{N}\bm{M}$, since it is not Hermitian. We might be able to do better by converting into a symmetric problem. 
+%  where $\bm{M}$ is the matrix defined in \eqref{eq:berk_gw_M}.
+% If we choose our unitary transformation to be $\bm{U'} = \bm{1} \oplus_{\text{diag}} \left(\bm{1}\otimes \bm{T}\right)$, where $\bm{T}$ is the matrix of eigenvectors of the symmetric formulation as 
+% \begin{equation}
+%     \bm{M}\bm{T}= \bm{\lambda } \bm{T}
+% \label{eq:berk_gw_eigenproblem}
+% \end{equation}
+% with the matrix $\bm{M}$ defined as
+% \begin{equation}
+%     \bm{M}=(\bm{A}-\bm{B})^{1 / 2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1 / 2}
+% \label{eq:berk_gw_M}
+% \end{equation}
+% with the identities $\bm{\lambda } = \bm{\Omega }^2$ and $\bm{T} = \bm{\Omega }^{1/2} \left[\bm{A}-\bm{B}\right]^{-1/2}\left(\bm{X} + \bm{Y}\right)$, where $\bm{X}$ and $\bm{Y}$ are the excitation and de-excitation vectors, respectively. 
+% \begin{tcolorbox}[colback=red!10!white, colframe=red!50!black, title=Exercise]
+% \subsubsection{Casida transformation}
+% The matrix problem is:
+% \begin{equation}
+% \begin{bmatrix}
+% \textbf{A} & \textbf{B} \\
+% -\textbf{B} & -\textbf{A}
+% \end{bmatrix}
+% \begin{bmatrix}
+% \textbf{X}&\textbf{Y} \\
+% \textbf{Y} &\textbf{X}
+% \end{bmatrix}
+% = 
+% \begin{bmatrix}
+% \textbf{X} & \textbf{Y}\\
+% \textbf{Y} & \textbf{X}
+% \end{bmatrix}
+% \begin{bmatrix}
+% \boldsymbol{\Omega } & 0 \\
+% 0 & -\boldsymbol{\Omega }
+% \end{bmatrix}
+% .
+% \end{equation}
+% which becomes equivalent to the pair of linear equations for each excitation mode
+% \begin{equation}
+% \begin{split}
+%     \left(\textbf{A} + \textbf{B}\right) \left(X + {Y}\right)_\nu = \Omega_\nu \left({X} - {Y}\right)_\nu \\
+%     \left(\textbf{A} - \textbf{B}\right) \left(X - {Y}\right)_\nu = \Omega_\nu \left(X + {Y}\right)_\nu
+% \label{eqn:A_B}
+% \end{split}
+% \end{equation}
+% We know we have the symmetric eigenproblem $\bm{M}T_\nu = \lambda_\nu T_\nu$, where $\bm{M}=(\bm{A}-\bm{B})^{1/2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1/2}$. Let us make the ansatze 
+% \begin{equation}
+% \begin{split}
+%     \left({X} + {Y}\right)_\nu &= {\Omega }_\nu^{-\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu \\
+%     \left({X} - {Y}\right)_\nu &= {\Omega }_\nu^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}T_\nu
+% \label{eqn:XY_ansatz}
+% \end{split}
+% \end{equation}
+% We know that this satisfies the biorthogonality relation since
+% \begin{equation}
+%     \left({X} + {Y}\right)_\nu^\dagger \left({X} - {Y}\right)_\nu = \left({\Omega }_\nu^{-\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu\right)^\dagger \left({\Omega }_\nu^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}T_\nu\right) = T_\nu^\dagger T_\nu = {1}
+% \end{equation}
+% Now, we can plug the ansatz \ref{eqn:XY_ansatz} into the equations \ref{eqn:A_B} to get
+% \begin{equation}
+% \begin{split}
+%     \left(\textbf{A} + \textbf{B}\right) \left({\Omega }_\nu^{-\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu\right) &= {\Omega }_\nu \left( {\Omega }_\nu^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}T_\nu\right) \\
+%     \implies {\Omega }_\nu^{-\frac{1}{2}} \left(\textbf{A} + \textbf{B}\right) \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu &= {\Omega }_\nu^{\frac{3}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}T_\nu \\
+% \implies \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}} \left(\textbf{A} + \textbf{B}\right) \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu &= {\Omega }_\nu^{2} T_\nu
+% \end{split}
+% \end{equation}
+% We make the ansatz that the eigenvectors of the symmetric formulation are given by $\textbf{T} = \boldsymbol{\Omega }^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}\left(\textbf{X} + \textbf{Y}\right)$. Plugging into \ref{eqn:Aplus_B} gives us
+% \begin{align}
+%     \left(\textbf{A} + \textbf{B}\right) \left(\boldsymbol{\Omega }^{-\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}\bm{T}\right) &= \boldsymbol{\Omega } \left( \bm{X} - \bm{Y}\right) \\
+% \bm{\Omega}^{-\frac{1}{2}} \left(\textbf{A} + \textbf{B}\right) \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}\bm{T} &= \boldsymbol{\Omega } \left( \bm{X} - \bm{Y}\right) \\
+% \bm{\Omega}^{-\frac{1}{2}}\left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}} \bm{M} \bm{T} &= \boldsymbol{\Omega } \left( \bm{X} - \bm{Y}\right) \\
+% \end{align}
+% \end{tcolorbox}
+% Then, we can apply the unitary transformation to the Hamiltonian in Tim's formulation as
+% \begin{align}
+%     \bm{H'} &= {\bm{U}'}^\dagger \bm{H} \bm{U'} \\
+%     &= \begin{pmatrix} \bm{1} & \bm{0}\\ \bm{0}&\bm{1}\otimes\bm{T} \end{pmatrix}^\dagger 
+%        \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\\ 
+%        \left( \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \right)^{\dagger} & 
+%        \bm{C}^{2 \mathrm{hlp}} \end{pmatrix} 
+%        \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0}&\bm{1} \otimes \bm{T} \end{pmatrix} \\
+%     &= \begin{pmatrix} 
+%         \bm{F} & \bm{V}^{2 \mathrm{h1p}} \left( \bm{1} \otimes \bm{T} \right) \\
+%         \left( \bm{1} \otimes \bm{T} \right)^\dagger 
+%         \left( \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \right)^{\dagger} & 
+%         \left( \bm{1} \otimes \bm{T} \right)^\dagger 
+%         \bm{C}^{2 \mathrm{hlp}} 
+%         \left( \bm{1} \otimes \bm{T} \right) 
+%     \end{pmatrix}.
+% \label{eq:tim_upfolded_hamiltonian}
+% \end{align}
+% But now let us try evaluating the term $\left(\bm{1}\otimes\bm{T}\right)^\dagger \bm{C}^{2 \mathrm{hlp}} \left(\bm{1}\otimes\bm{T}\right)$ in the dRPA case. We have
+% \begin{align}
+%     \left(\bm{1}\otimes\bm{T}\right)^\dagger \bm{C}^{2 \mathrm{hlp}} \left(\bm{1}\otimes\bm{T}\right) &= \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes (-{\bm{M}}^{1/2})\right) \left(\bm{1}\otimes\bm{T}\right) \\
+% &= \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1}\right) \left(\bm{1}\otimes\bm{T}\right) + \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\bm{1} \otimes (-{\bm{M}}^{1/2})\right) \left(\bm{1}\otimes\bm{T}\right) \\
+% &= \epsilon^{1 \mathrm{~h}} \otimes\bm{T}^\dagger\bm{T} + \bm{1} \otimes \left(\underbrace{\bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T}}_{-\boldsymbol{\Omega}}\right) \\
+% \end{align}
+% Next, let us consider the product $\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \left(\bm{1}\otimes\bm{T}\right) $. We have
+% \begin{align}
+%     \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \left(\bm{1}\otimes\bm{T}\right) &= \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \Omega_{ia;v}^{1/2} \underbrace{\sum_{jb} \left(A_{ia,jb} - B_{ia,jb}\right)^{-1/2}}_{\Delta _{ia}^{-1/2}} \\
+% \end{align}
+% So we have
+% \begin{align}
+%     \bm{H'} &= \begin{pmatrix} \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \Omega_{ia;v}^{1/2} \Delta _{ia}^{-1/2} \\ \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger \Omega_{jb;v}^{1/2} \Delta _{jb}^{-1/2} & \epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}} - \boldsymbol{\Omega }\end{pmatrix}
+% \end{align}
+% Now consider a second similarity transform of $\bm{U}'' = \bm{1} \oplus \left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)$, which gives us
+% \begin{align}
+%     &\bm{H''} = {\bm{U}''}^\dagger \bm{H'} \bm{U}'' \\
+%     &= \begin{pmatrix}
+%         \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \\
+%         \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger & 
+%         \left( \bm{1} \otimes \left( \frac{\Delta_{lc}}{\Omega_{lc;v}} \right)^{1/2} \right)^\dagger
+%         \left( \epsilon^{1\mathrm{~h}} \oplus_{\text{kron}} \bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T} \right)
+%         \left( \bm{1} \otimes \left( \frac{\Delta_{lc}}{\Omega_{lc;v}} \right)^{1/2} \right)
+%     \end{pmatrix}
+% \end{align}
 
-\subsubsection{Lanczos iteration}
-We start by considering $\bm{B} = \bm{N}\bm{M}\bm{N}$, which is symmetric since $\bm{N}$ is symmetric and $\bm{M}$ is symmetric. Then, we can do Lanczos to determine the spectrum of $\bm{B}$, giving the Ritz pairs $\{\bm{\lambda}_i, \bm{v}_i\}$. Then, we can determine the step function on the $\bm{B}$ space as $\bm{Q}\bm{V}_- \bm{V}_-^\dagger \bm{Q}^\dagger$, where $\bm{V}_-$ is the matrix of Ritz vectors with negative Ritz values and $\bm{Q}$ is the Krylov subspace. Then, we can transform back to the original space using $\bm{N}$, giving us $\Theta(-\bm{N}\bm{M})=\bm{N}\bm{Q}\bm{V}_- \bm{V}_-^\dagger \bm{Q}^\dagger\bm{N}$.
-\begin{tcolorbox}[colback=red!10!white, colframe=red!50!black]
- I run into trouble when I try to do this because the spectrum of $\bm{B}$ is completely positive, so it no longer makes sense to use the step function.
-\end{tcolorbox}
-\subsection{Tried and failed using Z-vector trick for dRPA}
-The super matrix that downfolds into the GW self-energy is
-\begin{align}
-\begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}} & \bm{V}^{2 \mathrm{p} 1 \mathrm{~h}} \\ \left(\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}}\right)^{\dagger} & \bm{C}^{2 \mathrm{hlp}} & \bm{0} \\ \left(\bm{V}^{2 \mathrm{plh}}\right)^{\dagger} & \bm{0} & \bm{C}^{2 \mathrm{plh}} \end{pmatrix}
-\end{align}
-For dRPA, we will choose 
-\begin{equation}
-    \bm{C}^{2 \mathrm{hlp}} = \epsilon^{1 \mathrm{~h}} \oplus (-\bm{M}^{1/2})
-\implies C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} = \left[\epsilon _i - \bm{M^{1/2}}_{ja,lc}\right] \delta_{i k}
-\end{equation}
- where $\bm{M}$ is the matrix defined in \eqref{eq:berk_gw_M}.
-If we choose our unitary transformation to be $\bm{U'} = \bm{1} \oplus_{\text{diag}} \left(\bm{1}\otimes \bm{T}\right)$, where $\bm{T}$ is the matrix of eigenvectors of the symmetric formulation as 
-\begin{equation}
-    \bm{M}\bm{T}= \bm{\lambda } \bm{T}
-\label{eq:berk_gw_eigenproblem}
-\end{equation}
-with the matrix $\bm{M}$ defined as
-\begin{equation}
-    \bm{M}=(\bm{A}-\bm{B})^{1 / 2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1 / 2}
-\label{eq:berk_gw_M}
-\end{equation}
-with the identities $\bm{\lambda } = \bm{\Omega }^2$ and $\bm{T} = \bm{\Omega }^{1/2} \left[\bm{A}-\bm{B}\right]^{-1/2}\left(\bm{X} + \bm{Y}\right)$, where $\bm{X}$ and $\bm{Y}$ are the excitation and de-excitation vectors, respectively. 
-\begin{tcolorbox}[colback=red!10!white, colframe=red!50!black, title=Exercise]
-\subsubsection{Casida transformation}
-The matrix problem is:
-\begin{equation}
-\begin{bmatrix}
-\textbf{A} & \textbf{B} \\
--\textbf{B} & -\textbf{A}
-\end{bmatrix}
-\begin{bmatrix}
-\textbf{X}&\textbf{Y} \\
-\textbf{Y} &\textbf{X}
-\end{bmatrix}
-= 
-\begin{bmatrix}
-\textbf{X} & \textbf{Y}\\
-\textbf{Y} & \textbf{X}
-\end{bmatrix}
-\begin{bmatrix}
-\boldsymbol{\Omega } & 0 \\
-0 & -\boldsymbol{\Omega }
-\end{bmatrix}
-.
-\end{equation}
-which becomes equivalent to the pair of linear equations for each excitation mode
-\begin{equation}
-\begin{split}
-    \left(\textbf{A} + \textbf{B}\right) \left(X + {Y}\right)_\nu = \Omega_\nu \left({X} - {Y}\right)_\nu \\
-    \left(\textbf{A} - \textbf{B}\right) \left(X - {Y}\right)_\nu = \Omega_\nu \left(X + {Y}\right)_\nu
-\label{eqn:A_B}
-\end{split}
-\end{equation}
-We know we have the symmetric eigenproblem $\bm{M}T_\nu = \lambda_\nu T_\nu$, where $\bm{M}=(\bm{A}-\bm{B})^{1/2}(\bm{A}+\bm{B})(\bm{A}-\bm{B})^{1/2}$. Let us make the ansatze 
-\begin{equation}
-\begin{split}
-    \left({X} + {Y}\right)_\nu &= {\Omega }_\nu^{-\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu \\
-    \left({X} - {Y}\right)_\nu &= {\Omega }_\nu^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}T_\nu
-\label{eqn:XY_ansatz}
-\end{split}
-\end{equation}
-We know that this satisfies the biorthogonality relation since
-\begin{equation}
-    \left({X} + {Y}\right)_\nu^\dagger \left({X} - {Y}\right)_\nu = \left({\Omega }_\nu^{-\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu\right)^\dagger \left({\Omega }_\nu^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}T_\nu\right) = T_\nu^\dagger T_\nu = {1}
-\end{equation}
-Now, we can plug the ansatz \ref{eqn:XY_ansatz} into the equations \ref{eqn:A_B} to get
-\begin{equation}
-\begin{split}
-    \left(\textbf{A} + \textbf{B}\right) \left({\Omega }_\nu^{-\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu\right) &= {\Omega }_\nu \left( {\Omega }_\nu^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}T_\nu\right) \\
-    \implies {\Omega }_\nu^{-\frac{1}{2}} \left(\textbf{A} + \textbf{B}\right) \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu &= {\Omega }_\nu^{\frac{3}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}T_\nu \\
-\implies \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}} \left(\textbf{A} + \textbf{B}\right) \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}T_\nu &= {\Omega }_\nu^{2} T_\nu
-\end{split}
-\end{equation}
-We make the ansatz that the eigenvectors of the symmetric formulation are given by $\textbf{T} = \boldsymbol{\Omega }^{\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}}\left(\textbf{X} + \textbf{Y}\right)$. Plugging into \ref{eqn:Aplus_B} gives us
-\begin{align}
-    \left(\textbf{A} + \textbf{B}\right) \left(\boldsymbol{\Omega }^{-\frac{1}{2}} \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}\bm{T}\right) &= \boldsymbol{\Omega } \left( \bm{X} - \bm{Y}\right) \\
-\bm{\Omega}^{-\frac{1}{2}} \left(\textbf{A} + \textbf{B}\right) \left(\textbf{A}-\textbf{B}\right)^{\frac{1}{2}}\bm{T} &= \boldsymbol{\Omega } \left( \bm{X} - \bm{Y}\right) \\
-\bm{\Omega}^{-\frac{1}{2}}\left(\textbf{A}-\textbf{B}\right)^{-\frac{1}{2}} \bm{M} \bm{T} &= \boldsymbol{\Omega } \left( \bm{X} - \bm{Y}\right) \\
-\end{align}
-\end{tcolorbox}
-Then, we can apply the unitary transformation to the Hamiltonian in Tim's formulation as
-\begin{align}
-    \bm{H'} &= {\bm{U}'}^\dagger \bm{H} \bm{U'} \\
-    &= \begin{pmatrix} \bm{1} & \bm{0}\\ \bm{0}&\bm{1}\otimes\bm{T} \end{pmatrix}^\dagger 
-       \begin{pmatrix} \bm{F} & \bm{V}^{2 \mathrm{h1p}}\\ 
-       \left( \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \right)^{\dagger} & 
-       \bm{C}^{2 \mathrm{hlp}} \end{pmatrix} 
-       \begin{pmatrix} \bm{1} & \bm{0} \\ \bm{0}&\bm{1} \otimes \bm{T} \end{pmatrix} \\
-    &= \begin{pmatrix} 
-        \bm{F} & \bm{V}^{2 \mathrm{h1p}} \left( \bm{1} \otimes \bm{T} \right) \\
-        \left( \bm{1} \otimes \bm{T} \right)^\dagger 
-        \left( \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \right)^{\dagger} & 
-        \left( \bm{1} \otimes \bm{T} \right)^\dagger 
-        \bm{C}^{2 \mathrm{hlp}} 
-        \left( \bm{1} \otimes \bm{T} \right) 
-    \end{pmatrix}.
-\label{eq:tim_upfolded_hamiltonian}
-\end{align}
-But now let us try evaluating the term $\left(\bm{1}\otimes\bm{T}\right)^\dagger \bm{C}^{2 \mathrm{hlp}} \left(\bm{1}\otimes\bm{T}\right)$ in the dRPA case. We have
-\begin{align}
-    \left(\bm{1}\otimes\bm{T}\right)^\dagger \bm{C}^{2 \mathrm{hlp}} \left(\bm{1}\otimes\bm{T}\right) &= \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes (-{\bm{M}}^{1/2})\right) \left(\bm{1}\otimes\bm{T}\right) \\
-&= \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1}\right) \left(\bm{1}\otimes\bm{T}\right) + \left(\bm{1}\otimes\bm{T}\right)^\dagger \left(\bm{1} \otimes (-{\bm{M}}^{1/2})\right) \left(\bm{1}\otimes\bm{T}\right) \\
-&= \epsilon^{1 \mathrm{~h}} \otimes\bm{T}^\dagger\bm{T} + \bm{1} \otimes \left(\underbrace{\bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T}}_{-\boldsymbol{\Omega}}\right) \\
-\end{align}
-Next, let us consider the product $\bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \left(\bm{1}\otimes\bm{T}\right) $. We have
-\begin{align}
-    \bm{V}^{2 \mathrm{~h} 1 \mathrm{p}} \left(\bm{1}\otimes\bm{T}\right) &= \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \Omega_{ia;v}^{1/2} \underbrace{\sum_{jb} \left(A_{ia,jb} - B_{ia,jb}\right)^{-1/2}}_{\Delta _{ia}^{-1/2}} \\
-\end{align}
-So we have
-\begin{align}
-    \bm{H'} &= \begin{pmatrix} \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \Omega_{ia;v}^{1/2} \Delta _{ia}^{-1/2} \\ \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger \Omega_{jb;v}^{1/2} \Delta _{jb}^{-1/2} & \epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}} - \boldsymbol{\Omega }\end{pmatrix}
-\end{align}
-Now consider a second similarity transform of $\bm{U}'' = \bm{1} \oplus \left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)$, which gives us
-\begin{align}
-    &\bm{H''} = {\bm{U}''}^\dagger \bm{H'} \bm{U}'' \\
-    &= \begin{pmatrix}
-        \bm{F} & \sum_{ia} (pk|ia) \left( X_{ia}^{v} + Y_{ia}^{v} \right) \\
-        \sum_{jb} (pk|jb)^\dagger \left( X_{jb}^{v} + Y_{jb}^{v} \right)^\dagger & 
-        \left( \bm{1} \otimes \left( \frac{\Delta_{lc}}{\Omega_{lc;v}} \right)^{1/2} \right)^\dagger
-        \left( \epsilon^{1\mathrm{~h}} \oplus_{\text{kron}} \bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T} \right)
-        \left( \bm{1} \otimes \left( \frac{\Delta_{lc}}{\Omega_{lc;v}} \right)^{1/2} \right)
-    \end{pmatrix}
-\end{align}
+% Just considering the auxiliary term gives
+% \begin{align}
+%     &\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}}\bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right) \\
+% &= \left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes \bm{T}^\dagger (-{\bm{M}}^{1/2})\bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right) \\
+% &= \epsilon^{1 \mathrm{~h}} \otimes \frac{\Delta _{lc}}{\Omega _{lc;v}} + \bm{1} \otimes \left(\bm{T}\left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2}\right)^\dagger (-{\bm{M}}^{1/2})\left(\bm{T}\left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2}\right) \\
+% \end{align}
+% So $\bm{T}$ are eigenvectors of the matrix $\bm{M}$, with eigenvalues $\bm{\Omega }^2$. Is there any alternate choice of $\bm{M}$ that would massage this into the desired form of $\epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}} (-\bm{\Omega })$?
+% This would only work if we could assume that $\left(\frac{\Omega _{ia;v}}{\Delta _{ia}}\right)^{1/2} \approx 1$. 
+% \subsubsection{Evaluating the matrix-vector products}
+% Now, we can define a vector $\bm{R} = ( r_i,\; r_a,\; r_{i[jb]},\; r_{[jb]a} )$. Application of the Hamiltonian to this vector gives us the matrix-vector product $\bm{H'} \bm{R} = \bm{\sigma }$, where $\bm{\sigma} = ( \sigma_i,\; \sigma_a,\; \sigma_{i[jb]},\; \sigma_{[jb]a} )$. So the one body matrix vector products are the same as in the dTDA case
+% \begin{align}
+% \sigma_i &= 
+%   \sum_{j} f_{i j}\,r_j
+%   + \sum_{b} f_{i b}\,r_b
+%   + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}
+%   + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+% \sigma_a &=
+%     \sum_{j} f_{a j}\,r_j
+%     + \sum_{b} f_{a b}\,r_b
+%     + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]}
+%     + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
+% \end{align}
+% For the two-body matrix vector products, we have
+% \begin{align}
+% \sigma_{i[ja]} &=
+%     \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k
+%     + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b
+%     + \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}
+% \end{align}
+% Now, consider just
+% \begin{equation}
+%     \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}= \sum_{klc} \left[\left(\epsilon_i-{\bm{M}}^{1/2}_{ja,lc}\right) \delta_{ik} r_{i[l c]} \right] = \sum_{l c} \left(\epsilon_i - {\bm{M}}^{1/2}_{ja,lc}\right) r_{i[l c]}
+% \end{equation}
+% Consider now just the term 
+% \begin{equation}
+%     \sum_{l c} {\bm{M}}^{1/2}_{ja,lc} r_{i[l c]} =  \sum_{l c} \left[\underbrace{\Delta _{ja}^{1/2} \left(\Delta_{ja} + 2(ja|lc)\right)_{ja,lc} \Delta_{ja}^{1/2}}_{\bm{D}}\right]^{1/2} r_{i[l c]}.
+% \end{equation}
+% Let us consider instead the similarity transformed $\tilde{\bm{D}} = \Delta^{-1/2} \bm{D} \Delta^{-1/2} = \left(\Delta + 2K\right)$. This is useful because we have $D^{1/2} = \Delta^{1/2}\tilde{D}^{1/2}\Delta^{1/2}=\left(\Delta+2K\right)^{1/2}$ for our SPD D.Now make the change of variables $u = \Delta^{1/2}r \implies r = \Delta^{-1/2}u$. Then we have $\left(\Delta + 2K\right) \Delta^{-1/2}u = \Delta^{1/2} \left[ {I} + \underbrace{2\Delta^{-1/2}K\Delta^{-1/2}}_{L}\right] u$. Again, because we are working with weak to moderately correlated systems, we can assume that L is small, and neglect it for now. So we have
+% \begin{equation}
+%     \sum_{l c} {\bm{M}}^{1/2}_{ja,lc} r_{i[l c]} \approx \sum_{l c} \Delta^{1/2} I \Delta^{1/2} r_{i[l c]} \approx \sum_{l c} \Delta r_{i[l c]}
+% \end{equation}
 
-Just considering the auxiliary term gives
-\begin{align}
-    &\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}}\bm{T}^\dagger (-{\bm{M}}^{1/2}) \bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right) \\
-&= \left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right)^\dag \left(\epsilon^{1 \mathrm{~h}} \otimes \bm{1} + \bm{1} \otimes \bm{T}^\dagger (-{\bm{M}}^{1/2})\bm{T}\right)\left( \bm{1} \otimes \left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2} \right) \\
-&= \epsilon^{1 \mathrm{~h}} \otimes \frac{\Delta _{lc}}{\Omega _{lc;v}} + \bm{1} \otimes \left(\bm{T}\left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2}\right)^\dagger (-{\bm{M}}^{1/2})\left(\bm{T}\left(\frac{\Delta _{lc}}{\Omega _{lc;v}}\right)^{1/2}\right) \\
-\end{align}
-So $\bm{T}$ are eigenvectors of the matrix $\bm{M}$, with eigenvalues $\bm{\Omega }^2$. Is there any alternate choice of $\bm{M}$ that would massage this into the desired form of $\epsilon^{1 \mathrm{~h}} \oplus_{\text{kron}} (-\bm{\Omega })$?
-This would only work if we could assume that $\left(\frac{\Omega _{ia;v}}{\Delta _{ia}}\right)^{1/2} \approx 1$. 
-\subsubsection{Evaluating the matrix-vector products}
-Now, we can define a vector $\bm{R} = ( r_i,\; r_a,\; r_{i[jb]},\; r_{[jb]a} )$. Application of the Hamiltonian to this vector gives us the matrix-vector product $\bm{H'} \bm{R} = \bm{\sigma }$, where $\bm{\sigma} = ( \sigma_i,\; \sigma_a,\; \sigma_{i[jb]},\; \sigma_{[jb]a} )$. So the one body matrix vector products are the same as in the dTDA case
-\begin{align}
-\sigma_i &= 
-  \sum_{j} f_{i j}\,r_j
-  + \sum_{b} f_{i b}\,r_b
-  + \sum_{k l c} \bigl\langle i\,c | k\,l \bigr\rangle\,r_{k[l c]}
-  + \sum_{k c d} \bigl\langle i\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
-\sigma_a &=
-    \sum_{j} f_{a j}\,r_j
-    + \sum_{b} f_{a b}\,r_b
-    + \sum_{k l c} \bigl\langle a\,c | k\,l \bigr\rangle\,r_{k[l c]}
-    + \sum_{k c d} \bigl\langle a\,k | d\,c \bigr\rangle\,r_{[k c]d}, \\[6pt]
-\end{align}
-For the two-body matrix vector products, we have
-\begin{align}
-\sigma_{i[ja]} &=
-    \sum_{k} \bigl\langle k\,a | i\,j \bigr\rangle\,r_k
-    + \sum_{b} \bigl\langle b\,a | i\,j \bigr\rangle\,r_b
-    + \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}
-\end{align}
-Now, consider just
-\begin{equation}
-    \sum_{klc} C_{i[j a], k[l c]}^{2 \mathrm{~h} 1 \mathrm{p}} r_{i[l c]}= \sum_{klc} \left[\left(\epsilon_i-{\bm{M}}^{1/2}_{ja,lc}\right) \delta_{ik} r_{i[l c]} \right] = \sum_{l c} \left(\epsilon_i - {\bm{M}}^{1/2}_{ja,lc}\right) r_{i[l c]}
-\end{equation}
-Consider now just the term 
-\begin{equation}
-    \sum_{l c} {\bm{M}}^{1/2}_{ja,lc} r_{i[l c]} =  \sum_{l c} \left[\underbrace{\Delta _{ja}^{1/2} \left(\Delta_{ja} + 2(ja|lc)\right)_{ja,lc} \Delta_{ja}^{1/2}}_{\bm{D}}\right]^{1/2} r_{i[l c]}.
-\end{equation}
-Let us consider instead the similarity transformed $\tilde{\bm{D}} = \Delta^{-1/2} \bm{D} \Delta^{-1/2} = \left(\Delta + 2K\right)$. This is useful because we have $D^{1/2} = \Delta^{1/2}\tilde{D}^{1/2}\Delta^{1/2}=\left(\Delta+2K\right)^{1/2}$ for our SPD D.Now make the change of variables $u = \Delta^{1/2}r \implies r = \Delta^{-1/2}u$. Then we have $\left(\Delta + 2K\right) \Delta^{-1/2}u = \Delta^{1/2} \left[ {I} + \underbrace{2\Delta^{-1/2}K\Delta^{-1/2}}_{L}\right] u$. Again, because we are working with weak to moderately correlated systems, we can assume that L is small, and neglect it for now. So we have
-\begin{equation}
-    \sum_{l c} {\bm{M}}^{1/2}_{ja,lc} r_{i[l c]} \approx \sum_{l c} \Delta^{1/2} I \Delta^{1/2} r_{i[l c]} \approx \sum_{l c} \Delta r_{i[l c]}
-\end{equation}
-
-We can rewrite this as
-So really we have reduced the scaling to $O(O^3V^2)$. If we do a similar thing for the other term, we have
-\begin{align}
-\sigma_{[ia]b} &= 
-    \sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j
-    + \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c
-    + \sum_{kc} \left[\epsilon_b + \bm{M}^{1/2}_{ia,kc}\right] r_{[kc] b}
-\end{align}
-which gives the scaling of $O(O^2V^3)$.
-% \section{Extra}
+% We can rewrite this as
+% So really we have reduced the scaling to $O(O^3V^2)$. If we do a similar thing for the other term, we have
+% \begin{align}
+% \sigma_{[ia]b} &= 
+%     \sum_{j} \bigl\langle j\,i | b\,a \bigr\rangle\,r_j
+%     + \sum_{c} \bigl\langle c\,i | b\,a \bigr\rangle\,r_c
+%     + \sum_{kc} \left[\epsilon_b + \bm{M}^{1/2}_{ia,kc}\right] r_{[kc] b}
+% \end{align}
+% which gives the scaling of $O(O^2V^3)$.
+% % \section{Extra}
 % Recall that we are trying to recover the form 
 % \begin{equation}
 %     \bm{H} = \begin{pmatrix} \bm{F} & \bm{W}^<\\ \bm{W}^{<,\dagger} & \bm{d}^< \end{pmatrix}

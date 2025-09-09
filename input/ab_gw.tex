@@ -234,4 +234,52 @@ So we can write ${H_{i,p \nu} = -W_{pi,\nu}=-W_{ip,\nu}}$ because of the permuta
 % [\hat{a}_p^{\dagger} \hat{a}_q, a_i^{\dagger}]b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger}) = \hat{a}_p^{\dagger} \delta_{qi} b_{\nu}(\hat{b}_{\nu'} + \hat{b}_{\nu'}^{\dagger})
 % \end{split}
 % \end{equation}
+\section{Implementation for periodic systems}
+\subsection{RI}
+We know the periodic integrals can be expressed as:
+\begin{equation}
+    \left(i \mathbf{k}_1, a \mathbf{k}_2 \mid j \mathbf{k}_3, b \mathbf{k}_4\right)=\delta_{\mathbf{k}_1+\mathbf{k}_2, \mathbf{k}_3+\mathbf{k}_4+\mathbf{G}}(i a \mid j b)_{\mathbf{q}'}
+\end{equation}
+where $\mathbf{q}'=\mathbf{k}_1-\mathbf{k}_3$ and $\mathbf{G}$ is a reciprocal lattice vector. The RI coefficients are then given by
+\begin{equation}
+    R_{jb}^L(\mathbf{q})=\sum_Q\left[\mathbf{V}^{-1 / 2}(\mathbf{q})\right]_{LQ} \left( Q \mathbf{q} \mid j \mathbf{k}_j, b \mathbf{k}_b\right)
+    % \left(i \mathbf{k}_i, a \mathbf{k}_a \mid Q \mathbf{q}\right)
+\end{equation}
+It is understood that we must have $\bm{q} = \mathbf{k}_j - \mathbf{k}_b$ to ensure momentum conservation and $\mathbf{V}(\mathbf{q})$ is the Coulomb metric in the auxiliary basis for that $\mathbf{q}$:
+\begin{equation}
+    V_{P Q}(\mathbf{q})=(P \mathbf{q} \mid Q \mathbf{q})=\sum_{\mathbf{R}} e^{-i \mathbf{q} \cdot \mathbf{R}} \int d \mathbf{r} d \mathbf{r}^{\prime} \chi_P(\mathbf{r}) \frac{1}{\left|\mathbf{r}-\mathbf{r}^{\prime}\right|} \chi_Q\left(\mathbf{r}^{\prime}-\mathbf{R}\right)
+\label{coul}
+\end{equation}
+So we can recover the ERIs as
+\begin{align}
+    (i a \mid j b)_{\mathbf{q}} &= \sum_L \left( R_{i a}^L(\mathbf{q}) \right) ^\dagger R_{j b}^L(\mathbf{q}) \\
+    &= \sum_L \left( \sum_Q (i \mathbf{k}_i, a \mathbf{k}_a \mid Q \mathbf{q}) [\mathbf{V}^{-1/2}(\mathbf{q})]_{Q L} \right)
+       \left( \sum_R [\mathbf{V}^{-1/2}(\mathbf{q})]_{LR}(R \mathbf{q} \mid j \mathbf{k}_j, b \mathbf{k}_b)\right) \\
+    &= \sum_{Q R} (i \mathbf{k}_i, a \mathbf{k}_a \mid Q \mathbf{q}) \left( \sum_L [\mathbf{V}^{-1/2}(\mathbf{q})]_{Q L} [\mathbf{V}^{-1/2}(\mathbf{q})]_{LR} \right)
+       (R \mathbf{q} \mid j \mathbf{k}_j, b \mathbf{k}_b)\\
+    &= \sum_{Q R} (i \mathbf{k}_i, a \mathbf{k}_a \mid Q \mathbf{q}) [\mathbf{V}^{-1}(\mathbf{q})]_{Q R}
+       (R \mathbf{q} \mid j \mathbf{k}_j, b \mathbf{k}_b) \\
+    &= (i \mathbf{k}_i, a \mathbf{k}_a \mid j \mathbf{k}_j, b \mathbf{k}_b)_{\mathbf{q}}.
+\end{align}
+where in the last step we used the definition of \ref{coul} to make the appropriate cancellation. Then, we can define a basis of auxiliary bosons as
+\begin{equation}
+    \hat{b}_\nu(\mathbf{q}) = \sum_Q^{N_{AB}} C_\nu^Q(\mathbf{q}) \hat{b}_Q(\mathbf{q})
+\end{equation}
+where we define the expansion coefficients as
+\begin{equation}
+    C_\nu^Q(\mathbf{q}) = \sum_L R_\nu^L(\mathbf{q})\left[\bm{S}^{-1 / 2}(\mathbf{q})\right]_{L M} P_M^Q
+\end{equation}
+where $S_{L M}(\mathbf{q}) = \sum_\nu R_\nu^L(\mathbf{q}) R_\nu^M(\mathbf{q})= \sum_Q P_L^Q (\mathbf{q}) E_Q(\mathbf{q}) P_M^Q(\mathbf{q})$ can be thought of as the overlap matrix in this AB basis where the final expression employs its eigendecomposition. Even though the axillary bases already is small, we can obtain a further truncated basis by only choosing the eigenvalues over a certain threshhold $E_Q(\mathbf{q}) > \epsilon_{AB}$. This is a similar idea to the one that was used to identify rank deficiency in Lanczos. 
+\subsubsection{Scaling comments}
+Getting the RI coefficients into the MO basis scales as $O(N_{\text{orb}}^3N_{\text{aux}}N_{\mathbf{k}})$, the determination of the overlap matrix scales as $O(N_oN_vN_{\text{aux}}^2N_{\mathbf{k}}^2)$, and then computing the AB basis will cost $O(N_{\text{AB}}N_{\text{aux}}^2N_{\mathbf{k}})$. In order to construct the transformed electron boson Hamiltonian in the AB basis we first need to solve the symmetrized dRPA eigenvalue problem 
+
+%  $\hat{b}_\nu(\mathbf{q}) \approx \sum_{L} R_\nu^L(\mathbf{q}) \hat{b}_L(\mathbf{q})$ where $\hat{b}_L(\mathbf{q})$ are the auxiliary bosons in the $\mathbf{q}$-dependent basis. The orthogonalization and AB construction also becomes $\mathbf{q}$-dependent:
+% The orthogonalization and AB construction also becomes $\mathbf{q}$-dependent:
+% \begin{align}
+% S_{L M}(\mathbf{q}) &= \sum_\nu R_\nu^L(\mathbf{q}) R_\nu^M(\mathbf{q}) \\
+% C_\nu^Q(\mathbf{q}) &= \sum_{L M} R_\nu^L(\mathbf{q})\left[S^{-1 / 2}(\mathbf{q})\right]_{L M} P_M^Q
+% \end{align} 
+% % In a periodic setting, the Rl expansion coefficients become $\mathbf{k}$-dependent:
+
+
 

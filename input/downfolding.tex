@@ -1,0 +1,20 @@
+\section{Constrained RPA}
+See \cite{aryasetiawan_downfolding_nodate} and \cite{van2021random} for useful introductions. I will just sketch the main ideas here. We partition into a target space and a rest space. Accordingly, we can write the total non-interacting polarizability $P$ as
+\begin{equation}
+    P = P^t + P^r
+\end{equation}
+where $P^t$ and $P^r$ are the non-interacting polarizabilities in the target and rest spaces respectively. Then, after some algebra, we can write the Dyson equation for the total screened interaction $W$ as
+\begin{equation}
+    W = W_r + W_r P^t W_r
+\end{equation}
+and then with the bare interaction $v$ we can write
+\begin{equation}
+    W_r = v + v P^r W_r.
+\end{equation}
+Then, $W_r$ is identified with the effective interaction a.k.a Hubbard $U$, i.e. $U = W_r$. 
+\subsubsection{Why it is useful}
+It enables us to perform the so called fluctuation diagnostics. By varying which bands we choose to put in the target space, we are able to see how much each contributes to the screening. 
+\subsection{cRPA through the lens of CC}
+In section \ref{sec:ph_rpa} we showed how the RPA comes about in the EOM formalism. In order to connect with CC, my idea would be to constrain the second quantization operators involved to be part of the target space or rest space. This may lead us to a potential constrained CC method.
+
+

@@ -1,0 +1,76 @@
+\section{Equations}
+After deforming the contour, the real frequency integral for the self-energy is rewritten as the difference of a contour integral and an integral along the imaginary axis:
+\begin{align}
+\Sigma\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega\right) & =\underbrace{\frac{i}{2 \pi} \oint \mathrm{~d} \omega^{\prime} G_0\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega+\omega^{\prime}\right) W_0\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega^{\prime}\right)}_{\Sigma^C\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega\right)} -\underbrace{\frac{1}{2 \pi} \int_{-\infty}^{\infty} \mathrm{d} \omega^{\prime} G_0\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega+i \omega^{\prime}\right) W_0\left(\mathbf{r}, \mathbf{r}^{\prime}, i \omega^{\prime}\right)}_{\Sigma^I\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega\right)} \\
+\end{align}
+We know the poles of $G_0$ are located at frequencies
+\begin{align}
+\omega_{m \mathbf{k}_m}^{\prime}=\epsilon_{m \mathbf{k}_m}-\omega+i \eta \operatorname{sgn}\left(\epsilon_F-\epsilon_{m \mathbf{k}_m}\right)
+\end{align}
+with residues
+\begin{align}
+\operatorname{Res}\left\{G_0\left(\mathbf{r},
+\mathbf{r}^{\prime}, \omega+\omega^{\prime}\right), \omega_{m \mathbf{k}_m}^{\prime}\right\}=\psi_{m \mathbf{k}_m}(\mathbf{r}) \psi_{m \mathbf{k}_m}^*\left(\mathbf{r}^{\prime}\right)
+\end{align}
+Depending on where the single Portugal energy is in relation to the Fermi level, the poles of $G_0$ will enter either the upper or lower contour. The contour interval is given by
+\begin{align}
+\Sigma_{n n^{\prime}}^C(\mathbf{k}, \omega) & =\frac{1}{N_{\mathbf{k}}} \sum_{m \mathbf{q}} f_{m \mathbf{k}-\mathbf{q}} \left(n \mathbf{k}, m \mathbf{k}-\mathbf{q}\left|W\left(\omega_{m \mathbf{k}-\mathbf{q}}^{\prime}\right)\right| m \mathbf{k}-\mathbf{q}, n^{\prime} \mathbf{k}\right) \\
+& =\frac{1}{N_{\mathbf{k}}} \sum_{m \mathbf{q}} f_{m \mathbf{k}-\mathbf{q}} \left(n \mathbf{k}, m \mathbf{k}-\mathbf{q}\left|\left(v+W^C\left(\omega_{m \mathbf{k}-\mathbf{q}}^{\prime}\right)\right)\right| m \mathbf{k}-\mathbf{q}, n^{\prime} \mathbf{k}\right) \\
+& =\frac{1}{N_{\mathbf{k}}} \sum_{m \mathbf{q}} f_{m \mathbf{k}-\mathbf{q}} \sum_{P Q} v_P^{n m}\left[\mathbf{I}-\mathbf{\Pi}\left(\mathbf{q}, \omega_{m \mathbf{k}-\mathbf{q}}^{\prime}\right)\right]_{P Q}^{-1} v_Q^{m n^{\prime}}\\
+& =\frac{1}{N_{\mathbf{k}}} \sum_{m \mathbf{q}} f_{m \mathbf{k}-\mathbf{q}} \sum_{P Q} v_P^{n m}\left[\mathbf{I}-\mathbf{\Pi}\left(\mathbf{q}, \omega_{m \mathbf{k}-\mathbf{q}}^{\prime}\right)\right]_{P Q}^{-1} v_Q^{m n^{\prime}}\\
+% & =\underbrace{\Sigma_{\text{Corr}^C}_{n n^{\prime}}(\mathbf{k}, \omega)}_{\text{correlation}} + \underbrace{\Sigma_{\text{Ex}^C}_{n n^{\prime}}(\mathbf{k})}_{\text{exchange}}
+\end{align}
+% $$
+% \begin{aligned}
+% \mathbf{\Sigma}_{n n^{\prime}}(\mathbf{k}, i \omega)= & -\frac{1}{2 \pi N_{\mathbf{k}}} \sum_{m \mathbf{q}} \int_{-\infty}^{\infty} \mathrm{d} \omega^{\prime} \\
+% & \frac{1}{i\left(\omega+\omega^{\prime}\right)+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}} \times \\
+% & \sum_{P Q} v_P^{n m}\left[\mathbf{I}-\boldsymbol{\Pi}\left(\mathbf{q}, i \omega^{\prime}\right)\right]_{P Q}^{-1} v_Q^{n n^{\prime}}
+% \end{aligned}
+% $$
+
+% The self-energy term in eq 25 is further divided into exchange and correlation components $\boldsymbol{\Sigma}(\mathbf{k}, i \omega)=\boldsymbol{\Sigma}^x(\mathbf{k})+\boldsymbol{\Sigma}^c(\mathbf{k}, i \omega)$, where the frequency-independent exchange $\boldsymbol{\Sigma}^x(\mathbf{k})$ is the Hartree-Fock (HF) exchange matrix evaluated using the DFT orbitals:
+% $$
+% \Sigma_{n n^{\prime}}^x(\mathbf{k})=-\frac{1}{N_{\mathbf{k}}} \sum_{P_{\mathbf{q}}} \sum_i^{\mathrm{occ}} v_{P_{\mathbf{q}}}^{n \mathbf{k}, i \mathbf{k}-\mathbf{q}} \cdot v_{P(-\mathbf{q})}^{i \mathbf{k}-\mathbf{q}, n^{\prime} \mathbf{k}}
+% $$
+
+% The advantage of this division is that the HF exchange is free of integration error. Accordingly, the correlation part of self-energy becomes
+% $$
+% \begin{aligned}
+% \Sigma_{n n^{\prime}}^c(\mathbf{k}, i \omega)= & -\frac{1}{\pi N_{\mathbf{k}}} \sum_{m \mathbf{q}} \int_0^{\infty} \mathrm{d} \omega^{\prime} \\
+% & \frac{i \omega+\epsilon_{\mathrm{F}}-\epsilon_{m \mathbf{k}-\mathbf{q}}}{\left(i \omega+\epsilon_{\mathrm{F}}-\epsilon_{m \mathbf{k}-\mathbf{q}}\right)^2+\omega^{\prime 2}} \times \\
+% & \sum_{P Q} v_P^{n m}\left[\left[\mathbf{I}-\boldsymbol{\Pi}\left(\mathbf{q}, i \omega^{\prime}\right)\right]_{P Q}^{-1}-\delta_{P Q}\right] v_Q^{m n^{\prime}}
+% \end{aligned}
+% $$
+% $$
+% \begin{aligned}
+% \Sigma_{n n^{\prime}}^C(\mathbf{k}, \omega) & =\frac{1}{N_{\mathbf{k}}} \sum_{m \mathbf{q}} f_{m \mathbf{k}-\mathbf{q}} \\
+% & \times\left(n \mathbf{k}, m \mathbf{k}-\mathbf{q}\left|W\left(\omega_{m \mathbf{k}-\mathbf{q}}^{\prime}\right)\right| m \mathbf{k}-\mathbf{q}, n^{\prime} \mathbf{k}\right) \\
+% & =\frac{1}{N_{\mathbf{k}}} \sum_{m \mathbf{q}} f_{m \mathbf{k}-\mathbf{q}} \sum_{P Q} v_P^{n m}\left[\mathbf{I}-\mathbf{\Pi}\left(\mathbf{q}, \omega_{m \mathbf{k}-\mathbf{q}}^{\prime}\right)\right]_{P Q}^{-1} \\
+% & \times v_Q^{m m^{\prime}}
+% \end{aligned}
+% $$
+% and the contribution of residues $f_{m k-q}$ is given by
+% $$
+% f_{m \mathbf{k}-\mathbf{q}}=\left\{\begin{array}{cl}
+% 1 & \text { if } \epsilon_{\mathrm{F}}<\epsilon_{m \mathbf{k}-\mathbf{q}}<\omega \\
+% -1 & \text { if } \epsilon_{\mathrm{F}}>\epsilon_{m \mathbf{k}-\mathbf{q}}>\omega \\
+% 0 & \text { else }
+% \end{array}\right.
+% $$
+
+% The auxiliary density response function is computed as (we use $\eta =0.001 \mathrm{au}$ )
+% $$
+% \begin{aligned}
+% \boldsymbol{\Pi}_{P Q}(\mathbf{q}, \omega)= & \frac{1}{N_{\mathbf{k}}} \sum_{\mathbf{k}} \sum_i^{\mathrm{occ}} \sum_a^{\mathrm{vir}} \nu_P^{i a}\left(\frac{1}{\omega-\left(\epsilon_{a \mathbf{k}-\mathbf{q}}-\epsilon_{i \mathbf{k}}\right)+i \eta}\right. \\
+% & \left.-\frac{1}{\omega+\left(\epsilon_{a \mathbf{k}-\mathbf{q}}-\epsilon_{i \mathbf{k}}\right)-i \eta}\right) \nu_Q^{a i}
+% \end{aligned}
+% $$
+
+% The other integration over the imaginary frequency axis in eq 31 is calculated on the modified Gauss-Legendre grid, as described in section 2.3:
+% $$
+% \begin{aligned}
+% \boldsymbol{\Sigma}_{n n^{\prime}}^I(\mathbf{k}, \omega)= & -\frac{1}{2 \pi N_{\mathbf{k}}} \sum_{m \mathbf{k}-\mathbf{q}} \int_{-\infty}^{\infty} \mathrm{d} \omega^{\prime} \\
+% & \frac{1}{\omega+i \omega^{\prime}+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}} \times \\
+% & \sum_{P Q} v_P^{n m}\left[\mathbf{I}-\boldsymbol{\Pi}\left(\mathbf{q}, i \omega^{\prime}\right)\right]_{P Q}^{-1} v_Q^{m n^{\prime}}
+% \end{aligned}
+% $$

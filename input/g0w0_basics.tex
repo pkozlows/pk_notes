@@ -621,7 +621,52 @@ Finally, we get
 \begin{equation}
 \gamma^{G W}=\gamma^{\mathrm{gKS}}+\Delta \gamma^{\mathrm{HF}}+\Delta \gamma^{G W}
 \end{equation}
-% A similar approach can be used for the static term right-hand part of Eq. (4), $G_0\left(\Sigma_x-V_{x c}\right) G_0$ :
-% $$
-% \Delta \gamma_{\mathbf{k} i j}^{\mathrm{HF}}=2 \theta\left(\mu-\epsilon_{\mathbf{k} i}\right) \theta\left(\epsilon_{\mathbf{k} j}-\mu\right) \frac{\langle\mathbf{k} i| \Sigma_x-V_{x c}|\mathbf{k} j\rangle}{\epsilon_{\mathbf{k} i}-\epsilon_{\mathbf{k} j}}
-% $$
+\section{Summary of GW-RPA implementations}
+Note that mainly we will be talking about $G_0W_0$ implementations, but it will be commented on as to the whether self-consistency is possible. We will also discuss scaling and whether it can be applied to extended systems.
+\subsection{Complex integration approaches}
+Treatment of extended systems is possible for the below. Self-consistency is also possible in all cases, as there is no restriction for what the reference state can be. For a discussion of all of the below approaches, see \cite{golze_gw_2019}.
+\subsubsection{Fully analytic}
+ Here we will perform the frequency integration over the real axis. If we choose the upper or lower contour, we encounter many poles of $G$ and $W$, so we must apply Cauchy's residue theorem repeatedly. Therefore this method must explicitly calculate the reducible polarizability for all frequencies, or in other words, if the RPA approximation is employed, diagonalize the RPA matrix, which scales as $O(N^6)$. Because of this prohibitive cost, the method is never used.
+\subsubsection{Analytic continuation (AC)}
+ The idea is to not perform the frequency integration over the real axis in order to avoid the poles of $G$ and $W$, but instead to perform this integration completely on the imaginary axis. This has positive effects on the scaling, but at the expense of a poor description of core states. For example, to accurately evaluate the QP equation for a core state, we need the self-energy at frequencies close to the core solution, where there is a fine pole structure, which AC cannot capture. By a similar reasoning, satellite features are also not captured. 
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Scaling analysis for extended systems]
+It is true that if only $G_0 W_0$ QP energies are required, one only needs to compute the diagonal self-energy matrix elements. The most expensive step is then computing the auxiliary density response function $\Pi$, whose cost scales as $O\left(N_{\bm{k}}^2 N_{O} N_V N_{\text {aux }}^2\right)$.  If the full $G_0 W_0$ Green's function and off-diagonal self-energy matrix at all k-points are sought, computation of $\Sigma ^c$ becomes the most time-consuming step, with a cost scaling of $O\left(N_{\bm{k}}^2 N_{AO}^2 N_{\text {aux }}^2\right)$. For more detail, see \cite{Zhu2020-nt}.
+\end{tcolorbox}
+Note that one must apply a finite size correction to the dielectric function to get a reasonable convergence towards the TDL, known as the head and wings correction. This is a result of the fact that RI is used for this method, where the 3-center integrals have a divergence at $\mathbf{q} = 0$.
+\subsubsection{Contour deformation (CD)}
+The real frequency integration is decomposed into an integral over the deformed contour minus an integral over the imaginary axis. By doing so, we avoid all poles of $W$, but poles of $G$ below the Fermi level remain. This has a negative effect on the scaling if core states are sought, because we will have to evaluate the self-energy at frequencies well below the Fermi level, where we may encounter many of the occupied poles of $G$, which are positioned above the real axis. However the description of core states is known to be accurate, and the GW satellite structure is well-preserved.
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Scaling analysis for extended systems]
+As is also the case for AC, if only $G_0 W_0$ QP energies are required, one only needs to compute the diagonal self-energy matrix elements. In the decomposition of the real frequency integral in CD, the imaginary integration has a similar computational cost to the $G_0 W_0$-AC scheme. But in the contour integral, we encounter many poles if we want core states, which are far away from the Fermi level, and so we must compute many residues. So for deep core excitations, the scaling becomes $O\left(N_{\bm{k}}^3 N_{\mathrm{O}}^2 N_{\mathrm{V}} N_{\mathrm{aux}}^2\right)$. For more detail, see \cite{Zhu2020-nt}.
+\end{tcolorbox}
+In analogy to AC, we must apply the finite size correction to the dielectric function for reasonable convergence towards the TDL.
+\subsection{Supermatrix approaches}
+These all make use of Löwdin's partitioning technique to form an upfolded supermatrix, whose eigenpairs are the QP energies and Dyson orbitals. It is given by
+\begin{equation}
+    \bm{H}_{\text{Upfolded}}^{GW} = \begin{pmatrix} \bm{F} & \bm{W}^< & \bm{W}^> \\ \bm{W}^{<,\dagger} & \bm{d}^< & 0 \\ \bm{W}^{>, \dagger} & 0 & \bm{d}^> \end{pmatrix}
+\label{eq:booth_hamiltonian}
+\end{equation}
+where $\bm{F}$ is the HF Fock matrix, $\bm{W}^<_{pk\nu} = \sum_{ia} (pk|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right)$, $\bm{W}^>_{pc\nu} = \sum_{ia} (pc|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right)$, $\bm{d}^<_{k\nu , l\nu'} = \left(\epsilon_k - \Omega_\nu\right) \delta_{k,l} \delta_{\nu,\nu'}$, and $\bm{d}^>_{c\nu , d\nu'} = \left(\epsilon_c + \Omega_\nu\right) \delta_{c,d} \delta_{\nu,\nu'}$. Recall that the $X_{ia}^{\nu}$ and $Y_{ia}^{\nu}$ are the RPA eigenvectors and the $\Omega_\nu$ are the RPA excitation energies. Just constructing this supermatrix requires diagonalizing the RPA matrix, which scales as $O(N^6)$. Therefore, the below methods use Krylov subspace procedures to reduce this scaling. Because the QPs are interior eigenpairs of the supermatrix, the strategy is to identify the QPs by a root-following procedure, where we look to maximize overlap with the mean field eigenvectors. 
+\subsubsection{Moment conserving} Moments of the self-energy are computed, which are then used to power a Lanczos procedure. To learn more, see \cite{scott2023moment}. Crucially, the Krylov subspace is not reorthogonalized throughout the iteration. If the lack of reorthogonalization did not interfere with the convergence of the Ritz values to the exact solution to within chemical accuracy, this would not be a problem, but as can be seen, it is a problem for some small molecules, invalidating the approach. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{../images/mcgw_issues.png}
+    \caption{From the first $2N_{occ}$ orbitals, representing the space of interest, the maximum and minimum differences between the Ritz values and the exact eigenvalues are plotted as a function of the number of Lanczos iterations used. A cc-pvdz basis is used. An exact match between the blue (my implementation) and the orange curves (George Booth's open source code, momentGW) is shown for all early Lanczos iterations. For later iterations, there start to become no new directions for Lanczos to explore, and so the match no longer is exact, reflecting the different numerical handlings of this limiting case.}
+\end{figure}
+\begin{tcolorbox}
+The Casida transformation is used in this, so extension to extended systems is not possible. Self-consistency is possible, as shown in \cite{backhouse2025self}. Scaling is $O(N^4)$ with RI. No diagonal approximation to the self-energy must be made.
+\end{tcolorbox}
+\subsubsection{Auxiliary boson (AB)}
+The known connection of CC to $G_0W_0$ discussed in \cite{tolle2023exact} is exploited in \cite{tolle2024ab} to form a supermatrix. Then, a series of matrix-vector products is proposed, which can be used in a Davidson procedure.
+\begin{tcolorbox}
+The study is done for finite systems so the Casida transformation is used, but it can not be used too, so extension to extended systems is possible. Self-consistency is not possible; in CC, the reference determinant must always be HF, so there can no self-consistency in the exactly related AB method. Scaling is $O(N^4)$ with RI. No diagonal approximation to the self-energy must be made. In principle, the method is exact, but poor convergence with respect to the basis size is observed, likely due to the AB expansion ansatz.
+\end{tcolorbox}
+\subsubsection{Tim's method}
+As discussed in \cite{bintrim2021full}, this method is exact for the case of TDA screening. The supplementary material proposes an extension to the full RPA screening, by postulating a non-symmetric supermatrix, which can be iteratively diagonalized by a non-symmetric Davidson procedure. I was not able to find a similarity transformation that relates their supermatrix to the exact solution, so the validity of this method is doubtful.
+\begin{tcolorbox}
+It can be applied to extended systems. Self-consistency is possible. No diagonal approximation to the self-energy must be made. Focusing the discussion here just on finite systems, the scaling could be brought down to $O(N^4)$ with RI, but I already observe the numerical issues with my $O(N^6)$ implementation due to the introduction of a large $\eta$ parameter, so I did not pursue the scaling reduction. A few words about this potential scaling reduction; the construction of the matrix-vector products requires building a step function, which requires diagonalizing the RPA matrix, conventionally at a $O(N^6)$ cost, but an approximation to the step function with Chebyshev polynomials could be made, reducing the scaling.
+\end{tcolorbox}
+\subsubsection{Numerical Lanczos}
+The method described in \cite{gao2024efficient} does not use a supermatrix per se, but it fits better conceptually in this section. This method reformulates the correlation part of the GW self-energy as a resolvent of a Hermitian matrix to which a Lanczos procedure can be applied.
+\begin{tcolorbox}
+    It cannot be applied to extended systems, since the method relies on the Casida transformation. Self-consistency is possible. The diagonal approximation to the self-energy must be made. The scaling is $O(N^4)$ with RI.
+\end{tcolorbox}

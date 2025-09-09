@@ -1,0 +1,563 @@
+\section{Mathematical origins}
+TODO
+\subsection{Alternate derivation starting from Dyson equation}
+We can start from where Schwinger's fictitious potential $u$ has already been introduced:
+\begin{align}
+G_{u}\left(1,1^{\prime}\right)= & G^{0}\left(1,1^{\prime}\right)+G^{0}(1, \overline{2}) \left\{\left[u(\overline{2})+v_{H u}(\overline{2})\right] G_{u}\left(\overline{2}, 1^{\prime}\right)+i v_{c}(\overline{2}, \overline{3}) \frac{\delta G_{u}\left(\overline{2}, 1^{\prime}\right)}{\delta u\left(\overline{3}^{+}\right)}\right\} 
+\end{align}
+where $G^{0}$ is the non-interacting Green's function and $v_{c}$ is the bare Coulomb interaction. $v_{H u}$ is the Hartree potential built with the density $n_{u}(\mathbf{x})=-i G_{u}\left(\mathbf{x}, \mathbf{x}, t, t^{+}\right)$. One of the complications of the equations is the fact that the density $n_{u}$ in the Hartree potential introduces a term that is quadratic in $G_{u}$ for the first term in the above equation. To overcome this problem, we introduce the total classical potential
+\begin{equation}
+u_{\mathrm{cl}}(1)=u(1)+v_{H u}(1)
+\end{equation}
+which allows us to rewrite the equation for $G_{u}\equiv G_u^{\mathrm{cl}}$ as
+\begin{align}
+G_{u}\left(1,1^{\prime}\right)= & G^{0}\left(1,1^{\prime}\right)+G^{0}(1, \overline{2}) u_{\mathrm{cl}}(\overline{2}) G_{u}\left(\overline{2}, 1^{\prime}\right) +i G^{0}(1, \overline{2}) v_{c}(\overline{2}, \overline{3}) \frac{\delta G_{u}\left(\overline{2}, 1^{\prime}\right)}{\delta u\left(\overline{3}^{+}\right)} \\
+= & G^{0}\left(1,1^{\prime}\right)+G^{0}(1, \overline{2}) u_{\mathrm{cl}}(\overline{2}) G_{u}\left(\overline{2}, 1^{\prime}\right) +i G^{0}(1, \overline{2}) W_{u}(\overline{2}, \overline{3}) \frac{\delta G_{u}\left(\overline{2}, 1^{\prime}\right)}{\delta u_{\mathrm{cl}}\left(\overline{3}^{+}\right)}
+\end{align}
+where we have defined the screened Coulomb interaction $W_{u} =\epsilon_{u}^{-1} v_{c}$ with the time-ordered inverse dielectric function $\epsilon_{u}^{-1} =\delta u_{\mathrm{cl}} / \delta u$. Note that $\epsilon_{u}^{-1}$ is not the usual linear response dielectric function, since it depends on the perturbing potential. However, since we are interested in the solution for vanishing $u$, a reasonable approximation is to evaluate the equation using $\epsilon_{u}^{-1} \approx \epsilon^{-1}$ at $u=0$. \emph{This corresponds to a linear-response approximation.} Written in a basis, the resulting equation reads
+\begin{align}
+G_{i j}^{u_{cl}}\left(t_{12}\right)= & G_{i j}^{0}\left(t_{12}\right)+G_{i m}^{0}\left(t_{13}\right) u_{\mathrm{cl}, m k}\left(t_{3}\right) G_{k j}^{u_{cl}}\left(t_{32}\right) +i G_{i k}^{0}\left(t_{13}\right) W_{k l m n}\left(t_{34}\right) \frac{\partial G_{n j}^{u_{cl}}\left(t_{32}\right)}{\partial u_{\mathrm{cl}, l m}\left(t_{4}\right)}
+\label{eq:gw_start}
+\end{align}
+where $t_{12} \equiv\left(t_{1}, t_{2}\right)$ or $\left(t_{1}-t_{2}\right)$ in equilibrium, $W_{k l m n}$ is a matrix element of the screened Coulomb interaction $W$, and we have replaced functional derivatives by partial derivatives, supposing the basis to be discrete, which corresponds to calculations in practice. Repeated indices are summed over.
+\subsubsection{GW approximation}
+ The $GW$ approximation sets
+\begin{equation}
+\frac{\partial G_{n j}^{u}\left(t_{32}\right)}{\partial u_{\mathrm{cl}, l m}\left(t_{4}\right)} \approx G_{n l}\left(t_{34}\right) G_{m j}\left(t_{42}\right)
+\end{equation}
+At $u=0$, this yields the Dyson equation $G =G^{0}+G^{0} \Sigma^{G W} G$ with the $GW$ approximation for the self-energy,
+\begin{equation}
+\Sigma_{i m}^{G W}\left(t_{34}\right)=v_{H, i m}+i G_{n l}\left(t_{34}\right) W_{i l m n}\left(t_{34}\right) .
+\end{equation}
+But we will take a different route here, in order to obtain the cumulant expression for the Green's function.
+\subsubsection{Cumulant expansion}
+The basic idea is to introduce a quasi-particle Green's function $G^{Q P, u}$, defined as
+\begin{align}
+\left[G^{Q P, u}\right]_{i j}^{-1}&=\left[G_{0}^{-1}\right]_{i j}-\left[u_{\mathrm{cl}}\right]_{i j}-\Sigma_{i j}^{G W}\left(\frac{\varepsilon_{i}+\varepsilon_{j}}{2}\right)\\
+ \implies \left[G_0\right]_{ij} &= G^{Q P, u}_{i j} - G^{Q P, u}_{i m} \left( u_{\mathrm{cl}, m k} + \Sigma_{m k}^{G W}\left(\frac{\varepsilon_{m}+\varepsilon_{k}}{2}\right) \right) \left[ G_0\right]_{kj}
+\end{align}
+Plugging this into \ref{eq:gw_start} (suppressing the time and orbital indices for ease of notation) gives
+\begin{align}
+G^{u}&= G^{Q P, u} - G^{Q P, u} \left( u_{\mathrm{cl}} +  \Sigma  \right) G_0 \notag \\
+& + \left(G^{Q P, u} - G^{Q P, u} \left( u_{\mathrm{cl}} +  \Sigma \right) G_0\right) u_{\mathrm{cl}} G^{u} \notag \\
+& + i \left(G^{Q P, u} - G^{Q P, u} \left( u_{\mathrm{cl}} +  \Sigma \right) G_0\right) W \frac{\partial G^{u}}{\partial u_{\mathrm{cl}}} \\
+&= G^{Q P, u} + G^{Q P, u} u_{\mathrm{cl}} G^{u} + i G^{Q P, u} W \frac{\partial G^{u}}{\partial u_{\mathrm{cl}}} \notag \\
+& - G^{Q P, u} \left( u_{\mathrm{cl}} +  \Sigma \right) \left[ \underbrace{G_0 + G_0 u_{\mathrm{cl}} G^{u} + i G_0 W \frac{\partial G^{u}}{\partial u_{\mathrm{cl}}}}_{G^{u}} \right] \notag \\
+&= G^{Q P, u} + i G^{Q P, u} W \frac{\partial G^{u}}{\partial u_{\mathrm{cl}}} - G^{Q P, u}  \Sigma  G^{u} \\
+\implies G^{u}_{ij}(t_{12}) &= G^{Q P, u}_{ij}(t_{12}) + i G^{Q P, u}_{ik}(t_{13}) W_{klmn}(t_{34}) \frac{\partial G^{u}_{mj}(t_{32})}{\partial u_{\mathrm{cl}, lm}(t_4)} - G^{Q P, u}_{ik}(t_{13}) \Sigma^{GW}_{kl}\left(\frac{\varepsilon_k + \varepsilon_l}{2}\right) G^{u}_{lj}(t_{32})
+\end{align}
+\textcolor{orange}{%
+We have made use of the $GW$ self-energy. It is known that in the $GW$ approximation, because of a fortuitous cancellation of errors, it is most wise to use the RPA approximation for the dielectric function that goes into the screened Coloumb interaction. I wonder if this is also the smartest decision for the cumulant expansion; we could try using a more accurate approximation to the dielectric function and see what the effect is.} Now one decouples the equations by supposing that $G^{u}$ and $G^{Q P, u}$ are diagonal in the same $u$-independent basis. So we take the diagonal components of all operators in the above equation, so $G^{u}_{ij} \rightarrow G^{u}_{ii}\equiv \mathcal{G}^{u}$, $G^{Q P, u}_{ij} \rightarrow G^{Q P, u}_{ii} \equiv \mathcal{G}^{Q P, u}$, $\Sigma^{GW}_{ij}\left(\frac{\varepsilon_{i}+\varepsilon_{j}}{2}\right) \rightarrow \Sigma^{GW}_{ii}\left(\varepsilon_i\right) \equiv \tilde{\Sigma}^{GW}$, $W_{ijkl} \rightarrow W_{iiii} \equiv \mathcal{W}$, and $u_{\mathrm{cl}, ij} \rightarrow u_{\mathrm{cl}, ii} \equiv u$. This is a strong assumption, but nevertheless, it allows us to get to the conventional form for the cumulant expansion. The resulting equation is
+\begin{equation}
+\mathcal{G}^{u}(t_{12}) = \mathcal{G}^{Q P, u}(t_{12}) + i \mathcal{G}^{Q P, u}(t_{13}) \mathcal{W}(t_{34}) \frac{\partial \mathcal{G}^{u}(t_{32})}{\partial {u}(t_4)} - \mathcal{G}^{Q P, u}(t_{13}) \tilde{\Sigma}^{GW} \mathcal{G}^{u}(t_{32})
+\end{equation}
+In the paper they claim that the solution for $u \rightarrow 0$ is
+\begin{align}
+\mathcal{G}\left(t_{12}\right)= & \mathcal{G}_{Q P}^{0}\left(t_{12}\right) e^{i\left(t_{1}-t_{2}\right) \Sigma_{i i}^{G W}\left(\varepsilon_{i}\right)} \exp \left[-i \int_{t_{1}}^{t_{2}} d t^{\prime} \int_{t^{\prime}}^{t_{2}} d t^{\prime \prime} \mathcal{W}\left(t^{\prime}-t^{\prime \prime}\right)\right].
+\end{align}
+ I have not been able to derive, but my attempts are below, and we will just continue for now. The double integral can be evaluated as
+\begin{align}
+-i \int_{t_{1}}^{t_{2}} d t^{\prime} \int_{t^{\prime}}^{t_{2}} d t^{\prime \prime} \mathcal{W}\left(t^{\prime}-t^{\prime \prime}\right) 
+\label{a}
+& =-\frac{i}{2\pi} \int d\omega\, \mathcal W(\omega)
+\int_{t_1}^{t_2} dt' \int_{t'}^{t_2} dt''\, e^{-i\omega (t' - t'')}\\
+&= -\frac{1}{2\pi} \int d\omega\, \frac{\mathcal W(\omega)}{\omega}
+\int_{t_1}^{t_2} dt' \Big( e^{i\omega (t_2-t')} - 1 \Big) 
+\label{b}
+\\
+&= -\frac{1}{2\pi} \int d\omega\, \frac{\mathcal W(\omega)}{\omega}
+\left[ \frac{e^{i\omega (t_2-t_1)} - 1}{i\omega} - (t_2-t_1) \right] 
+\label{c}
+\\
+&=-\left(t_{1}-t_{2}\right) \frac{1}{2 \pi} \int d \omega \frac{\mathcal{W}(\omega)}{\omega} +\frac{i}{2 \pi} \int d \omega \frac{\mathcal{W}(\omega)}{\omega^{2}}\left(e^{-i \omega\left(t_{1}-t_{2}\right)}-1\right)
+\label{d}
+\end{align}
+where in going from Eq.~(\ref{a}) to Eq.~(\ref{b}) we have used $\int_{t'}^{t_2} dt'' \, e^{-i\omega(t'-t'')}  = \frac{e^{i\omega (t_2-t')} - 1}{i\omega}$, and in going from Eq.~(\ref{b}) to Eq.~(\ref{c}) we have used $\int_{t_1}^{t_2} dt' \big(e^{i\omega(t_2-t')} - 1\big)
+= \frac{e^{i\omega \Delta}-1}{i\omega} - \Delta$ with $\Delta = t_2-t_1$.
+Let us first examine the term proportional to $\left(t_{1}-t_{2}\right)$ in Eq.~(\ref{d}), by comparing it to a GW quasi-particle shift. In the decoupling approximation, $\Sigma_{k k}^{G W} \approx i G_{k k} W_{k k k k}$. Evaluated at the quasi-particle energy, this yields exactly the term we are interested in. This means that $e^{-\left(t_{1}-t_{2}\right) \frac{1}{2 \pi} \int d \omega \frac{\mathcal{W}(\omega)}{\omega}}$ approximately cancels with the GW shift in $e^{i\left(t_{1}-t_{2}\right) \Sigma_{i i}^{G W}\left(\varepsilon_{i}\right)}$, and we are left with
+\begin{equation*}
+\mathcal{G}\left(t_{12}\right)=\mathcal{G}_{Q P}^{0}\left(t_{12}\right) \exp \left[\frac{i}{2 \pi} \int d \omega \frac{\mathcal{W}(\omega)}{\omega^{2}}\left(e^{i \omega\left(t_{1}-t_{2}\right)}-1\right)\right] \tag{17}
+\end{equation*}
+
+
+\begin{tcolorbox}
+Using the functional derivative identity $\frac{\partial \mathcal{G}^{u}(t_{32})}{\partial u(t_4)}|_{u=0} = \mathcal{G}(t_{34}) \mathcal{G}(t_{42})$ and correspondingly setting $\mathcal{G}^{u}\rightarrow \mathcal{G}$, $\mathcal{G}^{Q P, u}\rightarrow \mathcal{G}^{Q P}$ gives
+\begin{equation}
+\mathcal{G}(t_{12}) = \mathcal{G}^{Q P}(t_{12}) + i \mathcal{G}^{Q P}(t_{13}) \mathcal{W}(t_{34}) \mathcal{G}(t_{34}) \mathcal{G}(t_{42}) - \mathcal{G}^{Q P}(t_{13}) \tilde{\Sigma}^{GW} \mathcal{G}(t_{32})
+\end{equation}
+Now define $\tilde{\mathcal{G}}(t_{12}) = e^{i (t_1 - t_2) \tilde{\Sigma}^{GW}} \mathcal{G}(t_{12}) \implies \mathcal{G}(t_{12}) = e^{-i (t_1 - t_2) \tilde{\Sigma}^{GW}} \tilde{\mathcal{G}}(t_{12})$. Plugging this in gives
+\begin{align}
+\tilde{\mathcal{G}}(t_{12}) &= e^{i (t_1 - t_2) \tilde{\Sigma}^{GW}} \mathcal{G}^{Q P}(t_{12}) + i e^{i (t_1 - t_2) \tilde{\Sigma}^{GW}} \mathcal{G}^{Q P}(t_{13}) \mathcal{W}(t_{34}) e^{-i (t_3 - t_4) \tilde{\Sigma}^{GW}} \tilde{\mathcal{G}}(t_{34}) e^{-i (t_4 - t_2) \tilde{\Sigma}^{GW}} \tilde{\mathcal{G}}(t_{42}) \notag \\
+& - e^{i (t_1 - t_2) \tilde{\Sigma}^{GW}} \mathcal{G}^{Q P}(t_{13}) \tilde{\Sigma}^{GW} e^{-i (t_3 - t_2) \tilde{\Sigma}^{GW}} \tilde{\mathcal{G}}(t_{32}) \notag \\
+\end{align}
+\subsubsection{Inegration factor method}
+Define $A(u)=-\mathcal{G}^{Q P, u}\left(t_{13}\right) \tilde{\Sigma}^{G W}, \quad B(u)=\mathcal{G}^{Q P, u}\left(t_{12}\right), \quad C(u)=i \mathcal{G}^{Q P, u}\left(t_{13}\right) \mathcal{W}\left(t_{34}\right) .$ Then the equation can be written as
+\begin{equation}
+C(u) \frac{\partial \mathcal{G}^u}{\partial u}+A(u) \mathcal{G}^u=B(u) .
+\end{equation}
+Divide through by $C(u)$, we get
+\begin{equation}
+\frac{\partial \mathcal{G}^u}{\partial u}+\frac{A(u)}{C(u)} \mathcal{G}^u=\frac{B(u)}{C(u)} .
+\end{equation}
+So our integrating factor is
+\begin{equation}
+\mu(u)=\exp \left(\int^u \frac{A(s)}{C(s)} d s\right) = \exp \left(+i \int^u d s \frac{\tilde{\Sigma}^{G W}}{\mathcal{W}}\right)
+\end{equation}
+and the solution is
+\begin{align}
+\mathcal{G}^u&=\frac{1}{\mu(u)}\left[C_0+\int^u \mu(s) \frac{B(s)}{C(s)} d s\right]\\
+& = \exp \left(-i \int^u d s \frac{\tilde{\Sigma}^{G W}}{\mathcal{W}}\right)\left[C_0+\int^u d s \exp \left(+i \int^s d s' \frac{\tilde{\Sigma}^{G W}}{\mathcal{W}}\right) \frac{\mathcal{G}^{Q P, s}}{i \mathcal{G}^{Q P, s} \mathcal{W}}\right] \\
+& = \exp \left(-i \int^u d s \frac{\tilde{\Sigma}^{G W}}{\mathcal{W}}\right)\left[C_0+\int^u d s \exp \left(+i\int^s d s' \frac{\tilde{\Sigma}^{G W}}{\mathcal{W}}\right) \frac{-i}{ \mathcal{W}}\right] \\
+\end{align}    
+\end{tcolorbox}
+
+
+% Introduce shorthand:
+% $$
+% A(u)=-\mathcal{G}^{Q P, u}\left(t_{13}\right) \tilde{\Sigma}^{G W}, \quad B(u)=\mathcal{G}^{Q P, u}\left(t_{12}\right), \quad C(u)=i \mathcal{G}^{Q P, u}\left(t_{13}\right) \mathcal{W}\left(t_{34}\right) .
+% $$
+
+% Equation (1) is equivalent to
+% $$
+% C(u) \frac{\partial \mathcal{G}^u}{\partial u}+A(u) \mathcal{G}^u=B(u) .
+% $$
+
+% Divide through by $C(u)$ :
+% $$
+% \frac{\partial \mathcal{G}^u}{\partial u}+\frac{A(u)}{C(u)} \mathcal{G}^u=\frac{B(u)}{C(u)} .
+% $$
+
+% Now this is in the standard form $\frac{d Y}{d u}+\alpha(u) Y=\beta(u)$.
+% 5. Integrating factor
+
+% Define
+% $$
+% \mu(u)=\exp \left(\int^u \frac{A(s)}{C(s)} d s\right)
+% $$
+
+% Then the solution is
+% $$
+% g^u=\frac{1}{\mu(u)}\left[C_0+\int^u \mu(s) \frac{B(s)}{C(s)} d s\right]
+% $$
+% with constant $C_0$ fixed by the boundary condition.
+% 6. Boundary condition and physical solution
+
+% The physical requirement is:
+% - As the Coulomb interaction $v_c \rightarrow 0$, or equivalently $W \rightarrow 0$, the solution must reduce to the non-interacting Green's function.
+% - This selects the correct $C_0$.
+
+% So you discard spurious solutions (phase transitions) and keep the branch that connects continuously to the free Green's function.
+% 7. Set $u \rightarrow 0$
+
+% Finally, evaluate (5) at $u=0$. Since $\mathcal{G}^{Q P, u}$ is linear in $u$, the coefficients $A(u), B(u), C(u)$ reduce to constants when $u=0$. The integral in the exponent then gives you exactly the exponentials in the cumulant solution:
+% $$
+% \mathcal{G}\left(t_{12}\right)=\mathcal{G}_{Q P}^0\left(t_{12}\right) \exp \left[i\left(t_1-t_2\right) \Sigma_{i i}^{G W}\left(\varepsilon_i\right)\right] \exp \left(-i \int_{t_1}^{t_2} d t^{\prime} \int_{t^{\prime}}^{t_2} d t^{\prime \prime} W\left(t^{\prime}-t^{\prime \prime}\right)\right)
+% $$
+
+
+
+
+\section{Motivation}
+The cumulant has the ability to enhance spectral features with respect to $GW$. The prototypical example that is given to motivate its utility is the analysis of the self-consistent $GW$ spectral function by von Barth and Holm for the uniform electron gas. There they show that scGW predicts an unphysical peak, known as the plasmaron, which is off from the expected plasmon frequency, as the only feature in the satellite spectrum. Cumulant plus $GW$, on the other hand, gives a more accurate answer. 
+\subsubsection{A qualitative interpretation}
+The way I think about this is as follows. $GW$ (with or without self-consistency) yields similar quasiparticle energies, while self-consistency mostly affects spectral weight distribution. However, $GW$ often produces an artificial plasmaron satellite. The cumulant expansion not only redistributes weight but also corrects the satellite structure, eliminating the spurious plasmaron and aligning the features with the physical plasmon frequency.\\\\
+As we know, the ansatz for the cumulant $C(t)$ is
+\begin{equation}
+    G(t) = G_0(t) e^{C(t)}
+\end{equation}
+where we have the non-interacting and fully interacting Green's functions $G_0$ and $G$, respectively. After some derivation, we arrive at the Landau form for the cumulant
+\begin{equation}
+    C(t)=\int d \omega \frac{\beta(\omega)}{\omega^2}\left[e^{-i \omega t}+i \omega t-1\right]
+\end{equation}
+where the cumulant kernel is defined as
+\begin{equation}
+    \beta(\omega)=-\frac{1}{\pi} \operatorname{Im} \Sigma^{\mathrm{c}}(\omega)
+\end{equation}
+This form is amenable to physical interpretation if we partition into
+\begin{equation}
+    C(t)=-a+i \Delta t+\tilde{C}(t)
+\end{equation}
+where $a=\int d \omega \beta(\omega) / \omega^2$ is the net satellite strength, $\Delta=\int d \omega \beta(\omega) / \omega$ is the quasiparticle shift, or core-level "relaxation energy", and $\tilde{C}(t)$ is the remainder of the cumulant, which contains the information about the satellites.
+\section{Current directions in the field}
+\subsection{Connection to CC}
+The conceptual similarities between the cumulant and CC are there; both are exponential ansatzes that attempt to provide a more accurate treatment of many-body correlation. There is a body of literature that seeks to exploit this connection, but if the focus is on a low-scaling ab initio method, then one does not escape the high cost of CC usually.
+\subsection{Non-linear cumulant}
+TODO
+\subsection{Self-consistent cumulant}
+
+\subsubsection{My derivation}
+ The cumulant ansatz for the retarded Green's function is:
+\begin{equation}
+    G^R(t)=-i \theta(t) e^{-i \epsilon_0 t} e^{C^R(t)} .
+\end{equation}
+Note that because this is for the retarded Green's function, we can assume that $t>0$ when differentiating, so $\theta(t)=1$. 
+Differentiating with respect to time gives:
+\begin{align}
+    \partial_t G^R(t)&=-i\partial_t\left(e^{-i \epsilon_0 t} e^{C^R(t)}\right)\\
+    &= -i \epsilon_0 G^R(t) - i \dot{C}^R(t) G^R(t)\\
+\end{align}
+% Notice that a product in the time domain is equivalent to a convolution integral in the frequency domain, so $\dot{C}^R(t) G^R(t) = G^R(t)\dot{C}^R(t) = \int_{-\infty}^\infty d \tau G^R\left(t-\tau\right) \dot{C}^R\left(\tau\right) = \int_0^t d \tau G^R\left(t-\tau\right) \dot{C}^R\left(\tau\right)$. We have been able to change the bounds of the integral from $[-\infty, \infty]\rightarrow [0,t]$ because we are dealing with retarded quantities, i.e. $\dot{C}^R\left(\tau\right) = 0 \quad \forall\quad  \tau<0$ and $G^R\left(t-\tau\right) = 0 \quad \forall\quad  \tau>t$.
+%  Plugging this in gives:
+% \begin{equation}
+%     \partial_t G^R(t)=-i \epsilon_0 G^R(t)-\int_0^t d \tau G^R\left(t-\tau\right) \dot{C}^R\left(\tau\right) .
+% \end{equation}
+ Now, the equation of motion for the retarded Green's function in the Dyson formulation with the self energy $\Sigma$ is given by
+\begin{align}
+&\left(i \partial_t-H_0\right) G^R(t)-\int_0^t d \tau \Sigma^R(\tau) G^R(t-\tau)=0\\
+\implies \partial_t G^R(t)&=-i \epsilon _0 G^R(t)-i \int_0^t d \tau G^R(t-\tau) \Sigma^R(\tau)
+\end{align}
+\begin{tcolorbox}[colback=orange!5!white, colframe=orange!75!black, title=COMPARISON]
+The Nakajima-Zwanzig equation for a correlation function $\mathcal{A}(t)$ is given by
+\begin{equation}
+\dot{\mathcal{A}}(t) = \mathcal{A}(t) {\Omega_1} - \int_{0}^{t} d \tau\, \mathcal{A}(t - \tau) \mathcal{K}_1(\tau) + D(t)
+\label{eq:GQME}
+\end{equation}
+The self-energy, cumulant and the memory kernel are all auxiliary quantities that bridge the mean-field description with the exact solution. Your conjecture is that the memory kernel decays faster than the self-energy, potentially enabling lower scaling methods with high accuracy. I wonder how the cumulant compares in this respect. The linked cluster theorem says that the cumulant performs an exponential resummation of the diagrams so that it is able to treat all higher order diagrams approximately.
+\end{tcolorbox}
+Equating the two gives an expression for the cumulant derivative:
+\begin{align}
+\dot{C}^R(t)G^R(t) &= \int_0^t d \tau G^R(t-\tau) \Sigma^R(\tau)\\
+\implies \dot{C}^R(t) &= \int_0^t d \tau \Sigma^R(\tau) \frac{G^R(t-\tau)}{G^R(t)} .
+\end{align}
+Using the cumulant ansatz for the Green's function, we can write:
+\begin{equation}
+    \frac{G^R(t-\tau)}{G^R(t)}=e^{i \epsilon_0 \tau} e^{C^R(t-\tau)-C^R(t)} = e^{i \epsilon_0 \tau} e^{-\int_{t-\tau}^t d t' \dot{C}^R(t')} .
+\end{equation}
+So the final expression for the cumulant derivative is a nonlinear Volterra integro-differential equation (VIDE):
+\begin{align}
+    \dot{C}^R(t)&=\int_0^t d \tau \Sigma^R(\tau) e^{i \epsilon_0 \tau} e^{-\int_{t-\tau}^t d t' \dot{C}^R(t')} \\
+    &=i\int_0^t d \tau \int_0^{\infty} d \tau' \left[G^R(\tau - \tau') W^{>}(\tau')+G^{<}(\tau-\tau') W^R(\tau')\right] e^{i \epsilon_0 \tau} e^{-\int_0^\tau d t' \dot{C}^R(t')} 
+\end{align}
+A VIDE also appeared in PJ's SC-CE and they solved it using differential equation solvers in the time domain.
+\subsubsection{One-shot cumulant}
+In the first iteration, we set the exponential factor to 1, which gives the time-derivative of the one-shot cumulant:
+\begin{equation}
+    \dot{C}^{R}_0(t)=\int_0^t d \tau \Sigma^R(\tau) e^{i \epsilon_0 \tau} .
+\end{equation}
+Note that we can express the second-derivative of the one-shot retarded cumulant as
+\begin{equation}
+    \ddot{C}^{R}_0= \Sigma^R(t) e^{i \epsilon_0 t} .
+\end{equation}
+We integrate with respect to time to get the cumulant itself:
+\begin{equation}
+    C^{R}_0(t)=\int_0^t d t' \int_0^{t'} d \tau \Sigma^R(\tau) e^{i \epsilon_0 \tau} = \int_0^t d \tau \Sigma^R(\tau) e^{i \epsilon_0 \tau} (t-\tau) .
+\end{equation}
+Now, we perform a Fourier transform to get the frequency-domain cumulant:
+\begin{align}
+    C^{R}_0(\omega) &= \int_0^\infty dt\, e^{i\omega t} \int_0^t d\tau\, \Sigma^R(\tau) e^{i\epsilon_0 \tau} (t-\tau) \\
+    &= \int_0^\infty d\tau\, \Sigma^R(\tau) e^{i\epsilon_0 \tau} \int_\tau^\infty dt\, e^{i\omega t} (t-\tau)
+\end{align}
+Let $t' = t - \tau$, so $dt = dt'$, and when $t = \tau$, $t' = 0$, and as $t \to \infty$, $t' \to \infty$:
+\begin{align}
+    \int_\tau^\infty dt\, e^{i\omega t} (t-\tau) &= \int_0^\infty dt'\, e^{i\omega (t'+\tau)} t' \\
+    &= e^{i\omega \tau} \int_0^\infty dt'\, e^{i\omega t'} t'
+\end{align}
+We can evaluate the integral over $t'$ as
+\begin{align}
+    \int_0^\infty dt'\, e^{i\omega t'} t' & = -\frac{1}{(\omega + i\eta)^2}
+\end{align}
+where where $\eta$ is the positive infinitesimal convergence factor.
+
+Putting it all together,
+\begin{align}
+    C^{R}_0(\omega) &= \int_0^\infty d\tau\, \Sigma^R(\tau) e^{i(\omega+\epsilon_0)\tau} \left(-\frac{1}{(\omega + i\eta)^2}\right) \\
+    &= -\frac{1}{(\omega + i\eta)^2} \int_0^\infty d\tau\, \Sigma^R(\tau) e^{i(\omega+\epsilon_0)\tau} \\
+    &= -\frac{\Sigma^R(\omega+\epsilon_0)}{(\omega + i\eta)^2} 
+\end{align}
+Now, consider the inverse Fourier transform to get back to the time domain:
+\begin{align}
+    C^{R}_0(t) &= \int_{-\infty}^{\infty} d\omega\, e^{-i\omega t} C^{R}_0(\omega) \\
+    &= \int_{-\infty}^{\infty} d\omega\, e^{-i\omega t} \left(-\frac{\Sigma^R(\omega+\epsilon_0)}{(\omega + i\eta)^2}\right)
+\end{align}
+% Let's start from the definition for the retarded Green's function
+% \begin{equation}
+% G_k^R(t)=G_k^{R, 0}(t) e^{C_k^R(t)}
+% \end{equation}
+% where $G_k^{R, 0}(t)=-i \Theta(t) e^{-i \epsilon_k t}$ is the non-interacting retarded Green's function and $C_k^R(t)$ is the retarded cumulant. Let us rewrite this as
+% \begin{equation}
+% G_k^R(t)=-i \Theta(t) e^{\bar{C}_k^R(t)}
+% \end{equation}
+% where $\bar{C}_k^R(t)=-i \epsilon_k t + C_k^R(t)$. Self consistency is the goal.
+\subsubsection{Annotating PJ's SC-CE paper}
+ The time-ordered form of the electron Green's function is given by
+\begin{equation}
+\mathcal{G}_k(t)=\mathcal{G}_k^{(0)}(t)\left\langle a_k T e^{-i \int_0^t d \tau V(\mathrm{\tau})} a_k^\dag\right\rangle,
+\label{6.5}
+\end{equation}
+where $a_k$ and $a_k^\dag$ are the annihilation and creation operators for an electron in state $k$, $T$ is the time-ordering operator, and $V(t)$ is the interaction picture representation of the electron-boson interaction. The non-interacting Green's function is given by
+\begin{equation}
+\mathcal{G}_k^{(0)}(t) \equiv-i \Theta(t) e^{-i \epsilon_k t},
+\end{equation}
+This can be rewritten as
+\begin{equation}
+\mathcal{G}_k(t)=\mathcal{G}_k^{(0)}(t) T e^S = -i \Theta(t) e^{C_k(t)},
+\end{equation}
+with the differential operator $S$ and cumulant $C_k(t)$. Note that they are actually setting $e^{-i \epsilon_k t}Te^S = e^{C_k(t)}$ as this is supposed to be a self consistent formulation. We can expand the exponential in \ref{6.5} in a power series like $T e^{-i \int_0^t d \tau V(\tau)}=\sum_{n=0}^{\infty} \frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n T\left[V ( t _ { 1 } ) \cdots V \left(t_n\right)\right]$ with $V(t)=\sum_{k, q} g_{q, k} a_{k+q}^{\dagger}(t) a_k(t) A_q(t)$ where $g_{q,k}$ is the electron-boson coupling constant and $A_q(t)=b_q e^{-i \omega_q t}+b_{-q}^\dagger e^{i \omega_q t}$ ($b_q$ and $b_q^\dagger$ are the annihilation and creation operators for a phonon of momentum $q$ and frequency $\omega_q$ so $[b_q, b_{q^{\prime}}^{\dagger}]=\delta_{q q^{\prime}}$).
+They specialize to the case of a single electron on a lattice, and so the Green's function becomes
+\begin{align}
+\mathcal{G}_k(t)&=G_k^{(0)}(t)\left\langle \sum_{n=0}^{\infty} T\left[\frac{(-i)^n}{n!} \sum_{\left.(q)\right|_{j=1} ^n} \int_0^t d t_1 \cdots \int_0^t d t_n\right.\right.\\
+&\times g_{q_n, k} e^{-i t_n \epsilon_k} e^{i t_n \epsilon _{k+q_{n}}} A_{q_n}\left(t_n\right) \\
+&\times g_{q_{n-1}, k+q_n} e^{-t_{n-1} \epsilon_{k+q_n}} e^{i t_{n-1} \epsilon_{k+q_n+q_{n-1}}} A_{q_{n-1}}\left(t_{n-1}\right) \\
+&\left.\left.\times \cdots \times g_{q_1, k+q_2+\cdots+q_n} e^{-i t_1 \epsilon_{k+q_2+\cdots+q_n}} e^{i t_1 \epsilon_k} A_{q_1}\left(t_1\right)\right]\right\rangle
+\end{align}
+ with $\sum_i q_i=0$. By defining the vertex operator $\Gamma_{q k}(t)=g_{q k} e^{-i t \epsilon_k} e^{q \cdot \frac{d}{d k}} e^{i t \epsilon_k}$ we can rewrite the electron Green's function as an exponential,
+\begin{equation}
+\mathcal{G}_k(t)=\mathcal{G}_k^{(0)}(t)\left\langle T e^{-i \sum_q \int_0^t d \tau \Gamma_{q k}(\tau) A_q(\tau)}\right\rangle
+\end{equation}
+so we can see that in the single electron case $\left\langle a_k T e^{-i \int_0^t d \tau V(\mathrm{\tau})} a_k^\dag\right\rangle = \left\langle T e^{-i \sum_q \int_0^t d \tau \Gamma_{q k}(\tau) A_q(\tau)}\right\rangle$, where the trace on the RHS is only over the bosonic degrees of freedom. Assuming harmonic bosons, we can use $\left\langle e^B \right\rangle = e^{\left\langle B^2\right\rangle / 2}$ with the definition
+\begin{equation}
+    B=-i \sum_q \int_0^t d \tau \Gamma_{q k}(\tau) A_q(\tau)
+\end{equation}
+where our $B$ is linear in the bosonic operators $A_q$, so the identity applies. Then, 
+\begin{align}
+    \ln \left\langle T e^B\right\rangle & =\frac{1}{2}\left\langle T B^2\right\rangle \\
+& =\frac{1}{2}(-i)^2 \sum_{q q^{\prime}} \int_0^t d \tau \int_0^t d \tau^{\prime} \Gamma_{q k}(\tau) \Gamma_{q^{\prime} k}\left(\tau^{\prime}\right)\left\langle T A_q(\tau) A_{q^{\prime}}\left(\tau^{\prime}\right)\right\rangle \\
+& =-\frac{1}{2} \sum_{q q^{\prime}} \int_0^t d \tau \int_0^t d \tau^{\prime} \Gamma_{q k}(\tau) \Gamma_{q^{\prime} k}\left(\tau^{\prime}\right)\left[i D_q^{(0)}\left(\tau-\tau^{\prime}\right) \delta_{q,-q^{\prime}}\right] \\
+& =-\frac{i}{2} \sum_q \int_0^t d \tau \int_0^t d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \Gamma_{q k}(\tau) \Gamma_{-q, k}\left(\tau^{\prime}\right) \\
+& = -i \sum_q \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \Gamma_{-q k}(\tau) \Gamma_{q k}\left(\tau^{\prime}\right) = S
+\end{align}
+To find a self consistent expression for $S$, we use the Feynman operator ordering theorem, which states that given a functional of time-dependent operators $F[\hat{A}(\tau), \hat{B}(\tau), \ldots]$ where $\tau \in[0, t]$ and with a unitary operator of the form $\hat{U}\left(\tau^{\prime}\right)=T \exp \left[\int_0^{\tau^{\prime}} d \tau \hat{P}(\tau)\right]$, then
+\begin{equation}
+\hat{U}(t) F[\hat{A}(\tau), \hat{B}(\tau), \ldots] =T\left[\exp \left(\int_0^t d \tau \hat{P}(\tau)\right) F\left[\hat{U}(\tau) \hat{A}(\tau) \hat{U}^{-1}(\tau), \ldots\right]\right] .
+\end{equation}
+We choose $\hat{P}(\tau)=-i\left[\epsilon_k+\frac{d}{d \tau} \phi_k(\tau)\right]$ and also $\phi_k(t)=-i C_k(t)$, so $\hat{U}(\tau)=e^{-i \epsilon_k \tau} e^{-\phi_k(\tau)}$.
+ This choice of $\phi_k(t)$ emphasizes that at time 0 the noninteracting and fully interacting Green's functions are equal.
+The transformed vertex functional can be simplified to
+\begin{align}
+    \bar{\Gamma}_{q k}(\tau) &= \hat{U}(\tau) \Gamma_{q k}(\tau) \hat{U}^{-1}(\tau)\\
+&= \left( e^{-i \epsilon_k \tau} e^{-i\phi_k(\tau)} \right) g_{q k} e^{-i \tau \epsilon_k} e^{q \cdot \frac{d}{d k}} e^{i \tau \epsilon_k} \left( e^{i\phi_k(\tau)} e^{i \epsilon_k \tau} \right) \\
+&= g_{q k} e^{-i\phi_k(\tau)}   e^{-2i \tau \epsilon_k} e^{q \cdot \frac{d}{d k}} e^{2i \tau \epsilon_k} e^{i\phi_k(\tau)} \\
+&= g_{q k} e^{-i \phi_k(\tau)} e^{q \cdot \frac{d}{d k}} e^{+i \phi_k(\tau)},
+\end{align}
+and the transformed $S$ is then given by
+\begin{equation}
+    \bar{S}= -i \int_0^t d \tau\left(\epsilon_k+\frac{d}{d \tau} \phi_k(\tau)\right) -i \sum_q \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \bar{\Gamma}_{-q k}(\tau) \bar{\Gamma}_{q k}\left(\tau^{\prime}\right)
+\end{equation}
+Just as in the standard cumulant expansion, the cumulants of a given order can be computed by evaluating time-ordered powers of $S$,
+\begin{equation}
+    C_k(t)=\sum_{n=1}^{\infty} \frac{1}{n!} T\left[\bar{S}^n\right]_c
+\label{a7}
+\end{equation}
+where the notation $[\cdot \cdot \cdot]_c$ denotes the cumulant of an operator, and $T[\bar{S}]_c=T[\bar{S}]$. Subsequent terms are given by
+\begin{equation}
+    T\left[\bar{S}^n\right]_c=T\left[\bar{S}^n\right]-\sum_{m=1}^{n-1} \frac{(n-1)!}{m!(n-m-1)!} T\left[\bar{S}^m\right] T\left[\bar{S}^{n-m}\right]_c
+\end{equation}
+
+Evaluating \ref{a7} with $\phi_k(t)=C_k(t)$ to leading order produces
+\begin{equation}
+    C_k(t)=-i \epsilon_k t - i \frac{g^2}{N}\sum_q \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) e^{-C_k(\tau)+C_{k-q}(\tau)-C_{k-q}\left(\tau^{\prime}\right)+C_k\left(\tau^{\prime}\right)}
+\end{equation}
+Here, $D_q^{(0)}(t)$ is the free phonon propagator, $D_q^{(0)}(t)= -i\left[\left(1+N_q\right) e^{-i \omega_q|l|}+N_q e^{\left|\omega_q\right| l \mid}\right]$, and $N_q$ is the Bose occupation factor, $N_q=\left[\exp \left(\beta \omega_q\right)-1\right]^{-1}$. Equation (12) is a difficult integral equation to solve, coupling the solution for a fixed wave vector at time $t$ to all other Green's functions for other momenta and all previous times. It is, however, readily transformed into a self-consistent expression for the interacting Green's functions, which is more convenient for calculations
+$$
+\begin{aligned}
+\frac{d \mathcal{G}_{\hat{k}}(t)}{d t}= & -i \epsilon_{\hat{k}} \mathcal{G}_{\hat{k}}(t) \\
+& -i \frac{g^2}{N} \sum_{\vec{q}} \int_0^t d \tau D_{\vec{q}}^{(0)}(t-\tau) \frac{\mathcal{G}_{\vec{k}}(\tau) \mathcal{G}_{\vec{k}-\vec{q}}(t)}{\mathcal{G}_{\vec{k}-\vec{q}}(\tau)}
+\end{aligned}
+$$
+
+The properties of the solutions to Eqs. (12) and (13) are not readily apparent; however, it can be shown by expressing Eq. (12) recursively (Appendix B) that the weak-coupling limit of this SC-CE returns to that of the standard CE. The recursive SC-CE solution demonstrates that the SC-CE approximates higher-order cumulants by screened second-order cumulants.
+
+The recursive expression (13) suggests that SC-CE might suffer from some of the same problems as the fourth-order CE which introduces, e.g., negative spectral weight. However, it is not clear whether terms which appear to be problematic in the recursive formulation are suppressed when Eq. (13) is solved directly. Before taking up the question of the performance of the SC-CE, we first take a detour, exploring Eq. (13) from a different perspective.
+Here, we illustrate how the lowest-order SC-CE generates the exact second-order CE and approximations to all higherorder CEs. Considering only the lowest order in Eqs. (A7) and (A8), we can write Eq. (13) for the SC-CE as a selfconsistent equation for the Green's function,
+$$
+\begin{aligned}
+\mathcal{G}_k(t)= & \mathcal{G}_k^{(0)}(t) \exp \left(i \sum_q \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2\right. \\
+& \left.\times D_q^{(0)}(\sigma-\tau) \frac{\mathcal{G}_{k-q}(\sigma) \mathcal{G}_k(\tau)}{\mathcal{G}_{k-q}(\tau) \mathcal{G}_k(\sigma)}\right)
+\end{aligned}
+$$
+
+In the weak-coupling limit, we find an iterative solution starting with the bare Green's function. The first iteration is straightforward and replicates exactly the second cumulant,
+$$
+\mathcal{G}_k^{(1)}(t)=\mathcal{G}_k^{(0)}(t) \exp \left[C_2(k, t)\right] .
+$$
+While the integrals for subsequent iterations may be analytically evaluated, it is more instructive to consider the further iterations as functions of $C_2(k, t)$.
+
+The second and all subsequent iterations now have exponential resummations of the second-order cumulant itself. Explicitly,
+$$
+\begin{aligned}
+\mathcal{G}_k^{(2)}(t)= & \mathcal{G}_k^{(0)}(t) \exp \left(-i \sum_q \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2\right. \\
+& \times D_q^{(0)}(\sigma-\tau) \mathcal{G}_{k-q}^{(0)}(\sigma-\tau) \mathcal{G}_k^{(0)}(\tau-\sigma) \\
+& \left.\times e^{c_2(k, \tau)+c_2(k-q, \sigma)-c_2(k, \sigma)-c_2(k-q, \tau)}\right)
+\end{aligned}
+$$
+
+The $n$th cumulant is defined as being proportional to the $n$th power of the coupling constant, so by expanding the exponent we find an approximation for all higher-order cumulants,
+$$
+\begin{aligned}
+\mathcal{G}_k^{(2)}(t)= & \mathcal{G}_k^{(0)}(t) \exp \left(\sum_{n=0}^{\infty} \frac{-i}{n!} \sum_q \int_0^t d \sigma \int_0^\sigma d \tau\right. \\
+& \times\left|g_{q k}\right|^2 D_q^{(0)}(\sigma-\tau) \mathcal{G}_{k-q}^{(0)}(\sigma-\tau) \mathcal{G}_k^{(0)}(\tau-\sigma) \\
+& \times\left[C_2(k, \tau)+C_2(k-q, \sigma)\right. \\
+& \left.\left.-C_2(k, \sigma)-C_2(k-q, \tau)\right]^n\right)
+\end{aligned}
+$$
+
+We can simplify this expression by introducing $C_m^{(n)}(k, t)$, which represents the approximation to the $n$th iteration of the $m$ th cumulant. This results in
+$$
+\mathcal{G}_k^{(2)}(t)=\mathcal{G}_k^{(0)}(t) \exp \left(\sum_{n=1}^{\infty} C_{2 n}^{(2)}(k, t)\right) .
+$$
+
+Importantly, because the second iteration produces cumulants of all orders, further iterations require expanding the exponent into moments.
+
+After the second iteration, we can generalize to an arbitrary iteration:
+$$
+\begin{aligned}
+\mathcal{G}_{\mathbf{k}}^{(n+1)}(t)= & \mathcal{G}_{\mathbf{k}}^{(0)}(t) \exp \left(-i \sum_{\mathbf{q}} \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2\right. \\
+& \left.\times D_{\mathbf{q}}^0(\sigma-\tau) \mathcal{G}_{\mathbf{k}}^{(0)}(\tau-\sigma) \mathcal{G}_{\mathbf{k}-\mathbf{q}}^{(0)}(\sigma-\tau) e^{F(\mathrm{w})(\mathbf{k}, \mathbf{q}, \sigma, \tau)}\right)
+\end{aligned}
+$$
+
+Here, we introduce the notation
+$$
+\begin{aligned}
+F^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) \equiv & F_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+F_4^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+\cdots \\
+F_i^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) \equiv & C_i^{(n)}(\mathbf{k}-\mathbf{q}, \sigma)-C_i^{(n)}(\mathbf{k}-\mathbf{q}, \tau) \\
+& -C_i^{(n)}(\mathbf{k}, \sigma)+C_i^{(n)}(\mathbf{k}, \tau) .
+\end{aligned}
+$$
+The procedure for constructing the approximation to the $n$th iteration of the $m$ th cumulant is given by the moment expansion
+$$
+\sum_{m=0}^{\infty} \lambda^{2 m} W_{2 m}^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=e^{\sum_{m=1}^{\infty} \lambda^{2 m} F_m^{(k)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)},
+$$
+where the first few moments are given by
+$$
+\begin{gathered}
+W_0^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=1, \\
+W_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=F_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau), \\
+W_4^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=F_4^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+\frac{1}{2}\left(F_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)\right)^2 .
+\end{gathered}
+$$
+
+Because each iteration introduces another power of $g^2$ to all of the approximated cumulants, and the $n$ th-order cumulant is defined as being proportional to $g^{\prime \prime}$, the $n$th iteration cannot alter any of the approximated cumulants of order lower than $n$. Because of this, and the fact that the approximate cumulant for a given order is an integral over lower-order approximations, the iterative method is actually recursive. Dropping the superscripts indicating iteration, the general form for the SC-CE approximation to the $n$th cumulant is
+$$
+\begin{aligned}
+C_{2 n}^{\mathrm{SCCE}}(\mathbf{k}, t)= & -i \sum_{\mathbf{q}} \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q \mathbf{k}}\right|^2 D_{\mathbf{q}}(\sigma-\tau) \\
+& \times \mathcal{G}_{\mathbf{k}}^{(0)}(\tau-\sigma) \mathcal{G}_{\mathbf{k}-\mathbf{q}}^{(0)}(\sigma-\tau) W_{2 n-2}(\mathbf{k}, \mathbf{q}, \sigma, \tau)
+\end{aligned}
+$$
+APPENDIX C: NUMERICAL VIDE SOLUTION
+Equation (13) is not convenient for numerical calculations. Instead, we define $y_k(t)=e^{C_\lambda(t)}$ and solve directly for $y_k(t)$,
+$$
+\begin{aligned}
+\frac{d y_k(t)}{d t}= & -i \sum_q \int_0^t d \tau\left|g_{q k}\right|^2 D_q^{(0)}(t-\tau) \\
+& \times e^{i(\epsilon-\epsilon-\epsilon-q)(t-\tau)} \frac{y_k(\tau) y_{k-q}(t)}{y_{k-q}(\tau)}
+\end{aligned}
+$$
+
+Numerical solutions to Eq. (C1) were carried out with a multistep predictor corrector method as derived by Linz [55]. His method is general for first-order Volterra integrodifferential equations (VIDEs) of the form
+$$
+y^{\prime}(x)=F\left(x, y(x), \int_0^x d t K[x, t, y(t)]\right)
+$$
+
+The form of Eq. (Cl) implies that $F$ can be written purely as a function of $\int_0^x d t K[x, t, y(t)]$. We used an Adams-Bashforth second-order predictor step and a third-order Adams-Moulton corrector step. Following Linz, for the starting procedure of the Holstein model we applied the self-consistent Simpson's method iterated five times [55].
+\subsubsection{Annotation of second memory kernel coupling theory}
+Following Mori's projection approach, \cite{mori1965projection} the correlation function in Eq.~\ref{eqn:corr} satisfies the generalized quantum master equation (GQME):  
+\begin{equation}
+    \dot{C}_{AA}(t) = \Omega C_{AA}(t) + \int_{0}^{t} \dd{\tau} K(t - \tau) C_{AA}(\tau), 
+\end{equation}
+where the scalar $\Omega$ and the kernel function $K(t)$ are derived from the Mori-Zwanzig formalism:
+\begin{equation}
+    \Omega = (\im \Lv \hat{A}, A) (\hat{A}, \hat{A})^{-1},
+\end{equation}
+\begin{equation}
+    K(t) = (\im \Lv e^{\im t \Qroj \Lv} \Qroj \im \Lv \hat{A}, \hat{A}) (\hat{A}, \hat{A})^{-1}.
+\end{equation}
+Here, the Mori-product notation $(\hat{A}, \hat{B})$ denotes an appropriate inner product. The Liouville operator acts on an arbitrary operator $\hat{X}$ as $\Lv \hat{X} \equiv \frac{1}{\hbar} \comm{\hat{H}}{\hat{X}}$. The projection operator is defined as $\Proj \hat{X} = (\hat{X}, \hat{A}) \hat{A} (\hat{A}, \hat{A})^{-1}$, and the complementary projection operator is $\Qroj = \bm{1} - \Proj$. In the first paper on MKCT, they introduced the high order moments
+\begin{equation}
+\Omega_n=\frac{\left((\mathrm{i} \mathcal{L})^n \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})},
+\end{equation}
+with the corresponding auxiliary kernels
+\begin{equation}
+K_n(t)=\frac{\left((\mathrm{i} \mathcal{L})^n \hat{f}(t), \hat{A}\right)}{(\hat{A}, \hat{A})}
+\end{equation}
+So we can show the main result of their first paper that the higher-order kernels satisfy the following coupled ordinary differential equation (ODE):
+\begin{align}
+\dot{K}_n(t) & =\frac{\left((\mathrm{i} \mathcal{L})^n \dot{\tilde{f}}(t), \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+& =\frac{\left((\mathrm{i} \mathcal{L})^n \mathrm{i} \mathcal{Q} \mathcal{L} \hat{f}(t), \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+& =\frac{\left((\mathrm{i} \mathcal{L})^{n+1} \hat{f}(t), \hat{A}\right)}{(\hat{A}, \hat{A})}-\frac{\left((\mathrm{i} \mathcal{L})^n \mathrm{i} \mathcal{P} \mathcal{L} \hat{f}(t), \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+& =K_{n+1}(t)-\frac{(\mathrm{i} \mathcal{L} \hat{f}(t), \hat{A})}{(\hat{A}, \hat{A})} \times \frac{\left((\mathrm{i} \mathcal{L})^n \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+& =K_{n+1}(t)-K_1(t) \Omega_n,
+\end{align}
+where we have used the fact that the random fluctuation operator is $\hat{f}(t)=e^{\mathrm{i} t}{ }^{\mathrm{Q}}{ }^{\mathrm{C}} \mathcal{Q} \mathrm{i} \mathcal{L} \hat{A} \Longrightarrow \dot{f}(t)=\mathrm{i} \mathcal{Q} \mathcal{L} \hat{f}(t)$ and we can deduce the initial conditions in a similar fashion with $\hat{f}(0)=\mathcal{Q} i \mathcal{L} \hat{A}$, so
+\begin{align}
+K_n(0) & =\frac{\left((\mathrm{i} \mathcal{L})^n \mathrm{Qi} \mathcal{L} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+& =\frac{\left((\mathrm{i} \mathcal{L})^n(\mathrm{i} \mathcal{L} \hat{A}-\mathrm{P} \mathrm{i} \mathcal{L} \hat{A}), \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+& =\frac{\left((\mathrm{i} \mathcal{L})^{n+1} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})}-\frac{\left((\mathrm{i} \mathcal{L})^n \mathrm{P} \mathrm{i} \mathcal{L} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+& =\Omega_{n+1}-\Omega_1 \Omega_n,
+\end{align}
+suggesting that the central quantity to compute is the $\left\{\Omega_n\right\}$. But an issue with this ODE is that it extends to infinite order, and hard truncation to finite order can lead to numerical instabilities. To this end, they introduce a truncation scheme with Padé approximants. First, they noticed that the $m$-th derivative of kernel $K_n(t)$ evaluated at $t=0$ is
+\begin{align}
+K_n^{(m)} &= \frac{\left((\mathrm{i} \mathcal{L})^n(\mathcal{Q} \mathrm{i} \mathcal{L})^{m+1} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+&= \frac{\left((\mathrm{i} \mathcal{L})^n \mathcal{Q} \mathrm{i} \mathcal{L} (\mathcal{Q} \mathrm{i} \mathcal{L})^{m}\hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+&= \frac{\left((\mathrm{i} \mathcal{L})^n \left(1-\mathcal{P}\right) \mathrm{i} \mathcal{L} (\mathcal{Q} \mathrm{i} \mathcal{L})^{m} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+&= \frac{\left((\mathrm{i} \mathcal{L})^{n+1} (\mathcal{Q} \mathrm{i} \mathcal{L})^{m} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} - \frac{\left((\mathrm{i} \mathcal{L})^n \mathcal{P} \mathrm{i} \mathcal{L} (\mathcal{Q} \mathrm{i} \mathcal{L})^{m} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+\end{align}
+and that a recursion relation can be found by expanding $\mathcal{Q}=1-\mathcal{P}$ that
+\begin{equation}
+K_n^{(m)}=K_{n+1}^{(m-1)}-\Omega_n \bar{\Omega}_m,
+\end{equation}
+where they introduced the auxiliary moment
+\begin{equation}
+\bar{\Omega}_m=\frac{\left(\mathrm{i} \mathcal{L}(\mathcal{Q} \mathrm{i} \mathcal{L})^m \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})}
+\end{equation}
+\subsubsection{Relation of improper self energy to cumulant}
+The Dyson equation for the one particle greens function can be written using an improper $\Sigma^I$ self energy as
+\begin{align}
+    \label{dyson}
+    & G_k(t,t') =G_k^0(t,t') + G_k^0(t,t')\Sigma_k^I(t,t')G_k^0(t,t'),\\
+\end{align}
+instead of using the proper self energy $\Sigma^*$, which satisfies $G_k(t,t') = G_k^0(t,t') + G_k^0(t,t')\Sigma_k^*(t,t')G_k(t,t').$ 
+% We can rewrite
+% \begin{align}
+% & G\left(t, t^{\prime}\right)-G^0\left(t, t^{\prime}\right)=\iint d t_1 d t_2 G^0\left(t, t_1\right) \Sigma^I\left(t_1, t_2\right) G^0\left(t_2, t^{\prime}\right)\\
+% & \implies \frac{G\left(t, t^{\prime}\right)}{G^0\left(t, t^{\prime}\right)}-1=\left[G^0\left(t, t^{\prime}\right)\right]^{-1} \iint d t_1 d t_2 G^0\left(t, t_1\right) \Sigma^I\left(t_1, t_2\right) G^0\left(t_2, t^{\prime}\right)\\
+%     % &= G_k^0(t,t')[1 + \Sigma_k^{I}(t,t')G_k^0(t,t')] \label{dysoni}\\
+%     % &= {G_k^0(t,t') \over 1 - \Sigma_k^*(t,t')G_k^0(t,t')} \label{dysonp},
+% \end{align} 
+Now, the retarded cumulant ansatz can be written as
+\begin{align}
+&G_k^R(t,t') = G_k^{0,R}(t,t')e^{C_k^R(t,t')}\\
+& \implies {G_k^R(t,t') \over G_k^{0,R}(t,t')} = e^{C_k^R(t,t')}\\
+\end{align}
+%  This leads to the following form for the cumulant 
+% \begin{eqnarray}
+% C_k(t,t') &=& \ln\left(1 + \left[G_k^{R,0}(t,t')\right]^{-1}\iint dt_1dt_2 \textcolor{white}{\int}G_k^{R,0}(t,t_1)\Sigma_k^{R,I}(t_1,t_2)G_k^{R,0}(t_2,t')\right).
+% \label{cum_time}
+% \end{eqnarray}
+% So
+% \begin{align}
+% &e^{C_k\left(t, t^{\prime}\right)}-1=\left[G_k^{0}\left(t, t^{\prime}\right)\right]^{-1} \iint d t_1 d t_2 G_k^{0}\left(t, t_1\right) \Sigma_k^{I}\left(t_1, t_2\right) G_k^{0}\left(t_2, t^{\prime}\right) \\
+% & \implies C_k\left(t, t^{\prime}\right)=\ln \left(1+\left[G_k^{0}\left(t, t^{\prime}\right)\right]^{-1} \iint d t_1 d t_2 G_k^{0}\left(t, t_1\right) \Sigma_k^{I}\left(t_1, t_2\right) G_k^{0}\left(t_2, t^{\prime}\right)\right)
+% \end{align}
+ Let's deal directly with this ratio instead of needing to introduce a self energy.
+The retarded Green's function can be written as
+\begin{align}
+G_k^R(t)&=-i \theta(t)\left\langle\left\{c_k(t), c_k^{\dagger}(0)\right\}\right\rangle \\
+&=-i \theta(t)\left\langle\left\{e^{i H t} c_k e^{-i H t}, c_k^{\dagger}\right\}\right\rangle \\
+&=-i \theta(t)\left\langle\left\{\sum_{n=0}^{\infty} \frac{(-i t)^n}{n!} \mathcal{L}^n c_k, c_k^{\dagger}\right\}\right\rangle \\
+% &=-i \theta(t)\left( \left\langle\left\{c_k, c_k^{\dagger}\right\}\right\rangle+i t\left\langle\left\{\left[H, c_k\right], c_k^{\dagger}\right\}\right\rangle+\frac{(i t)^2}{2}\left\langle\left\{\left[H,\left[H, c_k\right]\right], c_k^{\dagger}\right\}\right\rangle+\cdots \right)\\
+&=-i \theta(t)\left( \mu_{0,k}-i t\mu_{1,k}-\frac{t^2}{2}\mu_{2,k}+O(t^3) \right)
+\end{align}
+where we have defined the moments $\mu_{n,k}=\left\langle\left\{\mathcal{L}^n c_k, c_k^{\dagger}\right\}\right\rangle$ and the Liouvillian superoperator $\mathcal{L} O=[H,O]$. The non-interacting retarded Green's function is given by
+\begin{align}
+G_k^{R,0}(t)&=-i \theta(t)\left( \mu_{0,k}^0-i t\mu_{1,k}^0-\frac{t^2}{2}\mu_{2,k}^0+O(t^3) \right)
+\end{align}
+where the non-interacting moments are $\mu_{n,k}^0=\left\langle\left\{\mathcal{L}_0^n c_k, c_k^{\dagger}\right\}\right\rangle$ and $\mathcal{L}_0 O=[H_0,O]$. Defining $A(t)= 1-i t\mu_{1,k}-\frac{t^2}{2}\mu_{2,k}+O(t^3)$ and $B(t)= 1-i t\mu_{1,k}^0-\frac{t^2}{2}\mu_{2,k}^0+O(t^3)$ we can use a geometric series to write
+\begin{align}
+\frac{1}{B(t)}&=1+i t \mu_{1, k}^0+t^2\left[-\left(\mu_{1, k}^0\right)^2+\frac{1}{2}\mu_{2, k}^0\right]+O\left(t^3\right)
+\end{align}
+Note that the inverse power series coefficients can be computed by Wronski's formula (if one is interested in still higher orders of $t$).
+So, we can write the ratio and then group terms by order in $t$, to get
+\begin{align}
+R_k(t)=\frac{G_k^R(t)}{G_k^{R,0}(t)}
+&=\frac{-i\theta (t)}{-i\theta (t)}\times\frac{A(t)}{B(t)} \\
+&= \left( 1-i t\mu_{1,k}-\frac{t^2}{2}\mu_{2,k}+O(t^3) \right) \left( 1+i t \mu_{1, k}^0+t^2\left[-\left(\mu_{1, k}^0\right)^2+\frac{1}{2}\mu_{2, k}^0\right]+O\left(t^3\right) \right)\\
+&= \left( 1+t\underbrace{\left[-i\left(\mu_{1,k}-\mu_{1,k}^0\right)\right]}_{\alpha _{1,k}}+t^2\underbrace{\left[-\frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)+\mu_{1,k}\mu_{1,k}^0-\left(\mu_{1,k}^0\right)^2\right]}_{\alpha _{2,k}}+O(t^3) \right)
+\end{align}
+Given that the cumulant can be expanded as $C_k^R(t) = \kappa_{1,k} t + \kappa_{2,k} t^2 + O(t^3)$, we can Taylor expand the exponential $e^{C_k^R(t)}$ and then match coefficients with the above expression for $R_k(t)$ to plug into the usual relations between the cumulants $\kappa _{n,k}$ and moments $\alpha_{n,k}$, to get
+\begin{align}
+    \kappa_{1,k} = \alpha_{1,k} &= -i\left(\mu_{1,k}-\mu_{1,k}^0\right)\\
+    \kappa_{2,k} = \alpha_{2,k} - \frac{\alpha_{1,k}^2}{2} &= -\frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)+\mu_{1,k}\mu_{1,k}^0-\left(\mu_{1,k}^0\right)^2 -\frac{1}{2}{\left[-i\left(\mu_{1,k}-\mu_{1,k}^0\right)\right]^2}\\
+&= -\frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)+\mu_{1,k}\mu_{1,k}^0-\left(\mu_{1,k}^0\right)^2 +\frac{1}{2}\left(\mu_{1,k}-\mu_{1,k}^0\right)^2\\
+&= \frac{1}{2}\left[\left( \mu_{1,k} \right)^2 - \left( \mu_{1,k}^0 \right)^2 - \left( \mu_{2,k} - \mu_{2,k}^0 \right)\right]
+\end{align}
+

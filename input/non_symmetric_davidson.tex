@@ -1,0 +1,121 @@
+% !TEX root = ../src/personal_learning.tex
+\section{The problem}
+We are tasked with the nonsymmetric eigenvalue problem
+\begin{equation}
+    \mathbf{A}X_i = \lambda_i X_i
+\end{equation}
+where $\mathbf{A} \in \mathbb{R}^{n \times n}$ is a real nonsymmetric matrix with right-hand eigenvector corresponding to the eigenvalue $\lambda_i$ denoted by $\mathbf{X}_i$. Because $\mathbf{A}$ is nonsymmetric, we will also have a left-hand eigenvector $\bar{X}_i$ such that
+\begin{equation}
+    \mathbf{A}^\dag \bar{X}_i = \lambda_i \bar{X}_i.
+\end{equation}
+The left-hand eigenvector is related to the right-hand eigenvector by the bi-orthogonality condition
+\begin{equation}
+    \mathbf{\bar{X}}^\dag \mathbf{X} = \bm{I}^{(n)}
+\end{equation}
+with $\bm{I}^{(n)}$ being the $n \times n$ identity matrix.
+\section{Ritz approximation}
+Now, to pursue the Ritz approximation, define $N \times m$ matrices
+\begin{equation}
+\bm{\bar{B}}^{(m)} = \left(\bar{b}_1, \bar{b}_2, \ldots, \bar{b}_m\right) \quad \text{and} \quad \bm{B}^{(m)} = \left(b_1, b_2, \ldots, b_m\right)
+\end{equation}
+where $\bm{\bar{B}}^{(m)}$ contains left-hand trial vectors and $\bm{B}^{(m)}$ contains right-hand trial vectors. In addition, they satisfy the bi-orthogonality condition
+\begin{equation}
+\left(\bm{\bar{B}}^{(m)}\right)^\dagger \bm{B}^{(m)} = \bm{I}^{(m)}
+\end{equation}
+where $\bm{I}^{(m)}$ is an $m \times m$ unit matrix. The LHS and RHS Ritz vectors are determined simultaneously in order to give a fast convergence to the desired eigenpairs. Since $\bm{A}$ is nonsymmetric, it is normal for complex Ritz vectors to appear at some stage of the iteration even when one starts initially with real vectors. A projection of $\bm{A}$ onto the LHS and RHS subspaces gives the interaction matrix
+\begin{equation}
+\bm{\tilde{A}}^{(m)} = \left(\bm{\bar{B}}^{(m)}\right)^\dagger \bm{A} \bm{B}^{(m)}
+\end{equation}
+Assume that $\bm{\tilde{A}}^{(m)}$ can be diagonalized such that
+\begin{equation}
+\left(\bm{C}^{(m)}\right)^{-1} \bm{\tilde{A}}^{(m)} \bm{C}^{(m)} = \left(\bar{\bm{C}}^{(m)}\right)^\dagger \bm{\tilde{A}}^{(m)} \bm{C}^{(m)} = \bm{\Lambda}^{(m)}
+\label{eq:ritz_diag}
+\end{equation}
+where $\bm{\Lambda}^{(m)}$ is a diagonal matrix containing the collection of Ritz values. Since the LHS and RHS vectors are biorthogonal
+\begin{equation}
+\left(\bm{C}^{(m)}\right)^\dagger \bm{C}^{(m)} = \bm{I}^{(m)} \implies \left(\bm{C}^{(m)}\right)^\dagger = \left(\bm{C}^{(m)}\right)^{-1}.
+\end{equation}
+\ref{eq:ritz_diag} is equivalent to eigenvalue equations
+\begin{align}
+\left(\bm{\tilde{A}}^{(m)} - \lambda_k^{(m)}\right) {C}_k^{(m)} & = 0, \\
+\left(\left(\bm{\tilde{A}}^{(m)}\right)^\dagger - \lambda_k^{(m)}\right) \bar{{C}}_k^{(m)} & = 0.
+\label{eq:ritz_eigen}
+\end{align}
+Then, the expansions $\bm{\bar{B}}^{(m)} \bar{C}_k^{(m)}$ and $\bm{B}^{(m)} C_k^{(m)}$ will converge to left- and right-hand eigenvectors of $\bm{A}$, $\bar{X}_k^{(m)}$ and $X_k^{(m)}$, respectively. So the connection to Krylov becomes clear: $\bm{\bar{B}}^{(m)}$ and $\bm{B}^{(m)}$ are the left- and right-hand Krylov subspaces, at the $m$-th step of the iteration, respectively. If we define LHS and RHS residual vectors $\bar{\xi}$ and $\xi$ such that
+\begin{align}
+\left(\bm{A} - \lambda_k^{(m)}\right)  \left(X_k^{(m)} + \xi\right)& = 0, \\
+\left(\bm{A}^\dag - \lambda_k^{(m)}\right) \left(\bar{X}_k^{(m)} + \bar{\xi}\right) & = 0,
+\end{align}
+then we can approximate them at iteration $m+1$ as (where the preconditioner $\left(\lambda_k^{(m)} - A_{II}\right)^{-1}$ is introduced to accelerate convergence)
+\begin{align}
+    & \xi_{I, m+1}=\left(\lambda_{k}^{(m)}-A_{I I}\right)^{-1} q_{I, m}, \\
+    & \bar{\xi}_{I, m+1}=\left(\lambda_{k}^{(m)}-A_{I I}\right)^{-1} \bar{q}_{I, m}, \quad I=1,2, \ldots, N,
+\end{align}
+where
+\begin{align}
+    & q_m=\left(\bm{A}-\lambda_{k}^{(m)}\right) X_k^{(m)}, \\
+    & \bar{q}_m=\left(\bm{A}^\dag-\lambda_{k}^{(m)}\right) \bar{X}_k^{(m)}.
+\end{align}
+so notice that $q_m\approx 0$ if $\lambda_k^{(m)}$ and $X_k^{(m)}$ become good approximations to the exact eigenpair. We want to biorthogonalize our new directions, so do this by defining
+\begin{align}
+    & d_{m+1}=\left[\prod_{i=1}^m\left(I-b_i \bar{b}_i^\dag\right)\right] \xi_{m+1}, \\
+    & \bar{d}_{m+1}=\left[\prod_{i=1}^m\left(I-\bar{b}_i b_i^\dag\right)\right] \bar{\xi}_{m+1}.
+\end{align} 
+and then the new vectors are defined as
+\begin{align}
+    & b_{m+1}=d_{m+1} / g_{m+1}^{1 / 2}, \\
+    & \bar{b}_{m+1}=\bar{d}_{m+1} / g_{m+1}^{1 / 2},
+\end{align}
+where
+\begin{equation}
+g_{m+1}=\bar{d}_{m+1}^\dag d_{m+1}.
+\end{equation}
+As previously alluded to, we claim convergence when $\left\|q_m\right\|$ and $\left\|\bar{q}_m\right\|$ become less than a given threshold. The left- and right-hand eigenvectors obtained are biorthogonal
+% with
+% $$
+% \begin{aligned}
+% & q_m=\left(A-\lambda_{k^{\prime}}^{(m)}\right) X_k^{(m)} \\
+% & \bar{q}_m=\left(A^H-\lambda_{k^{\prime}}^{(m)}\right) \bar{X}_k^{(m)}
+% \end{aligned}
+% $$
+
+% If $\lambda_{k^{\prime}}^{(m)}$ and $X_k^{(m)}$ are an exact eigenvalue and eigenvector pair, then $q_m=0$. Thus, the size of $q_m$ measures the accuracy of $\lambda_{k^{\prime}}^{(m)}$ and $X_k^{(m)}$.
+
+% It is convenient to bi-orthogonalize predicted vectors before a further round of iteration. Current vectors can be bi-orthogonalized according to
+% $$
+% \begin{aligned}
+% & d_{m+1}=\left[\prod_{i=1}^m\left(I-b_i \bar{b}_i^H\right)\right] \xi_{m+1} \\
+% & \bar{d}_{m+1}=\left[\prod_{i=1}^m\left(I-\bar{b}_i b_i^H\right)\right] \bar{\xi}_{m+1}
+% \end{aligned}
+% $$
+
+% Arbitrary scaling factors can be applied to each vector to give
+% $$
+% \bar{b}_{m+1}^H b_{m+1}=1 .
+% $$
+
+% In practice, $\bar{b}_{m+1}$ and $b_{m+1}$ have been chosen such that
+% $$
+% b_{m+1}=d_{m+1} /\left(g_{m+1}\right)^{1 / 2}, \quad \bar{b}_{m+1}=\bar{d}_{m+1} /\left(g_{m+1}\right)^{1 / 2},
+% $$
+% where
+% $$
+% g_{m+1}=\bar{d}_{m+1}^H d_{m+1} .
+% $$
+
+% It is necessary to change the sign of one of the vectors if $g_{m+1}$ becomes negative. However, this may only happen in the initial round of iteration.
+
+% Convergence is achieved if $\left\|q_m\right\|$ and $\left\|\bar{q}_m\right\|$ become less than a given threshold. Left- and right-hand eigenvectors obtained are bi-orthogonal
+% $$
+% \left(\bar{X}^{(m)}\right)^H X^{(m)}=\left(\bar{C}^{(m)}\right)^H\left(\bar{B}^{(m)}\right)^H B^{(m)} C^{(m)}=I
+% $$
+% but they are not self-orthonormal. So it is necessary to renormalize eigenvectors after convergence is reached. As suggested by Davidson [7], when $m$ becomes large, current sets of $\bar{B}^{(m)} \bar{C}_{k^{\prime}}^{(m)}$ and $B^{(m)} C_{k^{\prime}}^{(m)}$ can be taken as new initial sets and the calculation restarted. We call this a refreshment process.
+
+% If $A$ is symmetric, two sets of $\bar{B}^{(m)}$ and $B^{(m)}$ are identical and the method becomes essentially Davidson's method since columns of $B^{(m)}$ itself are made orthogonal at each stage.
+
+% The present method is only based on the eigenvalue equations (1) and (2) (i.e., (8a) and (8b)). Thus, theoretically any eigenvalues and eigenvectors of the matrix can be found. In practice the convergence for each eigenvalue is obtained by means of the root-homing-procedure discussed by Butscher and Kammer [13]. The eigenvector
+
+% 250
+% HIRAO AND NAKATSUJI
+
+% matrix $X^{(m)}$ is inspected after each iteration such that $X_{k^{\prime}}^{(m)}$ has the largest overlap with the prediagonalization vector which represents the structure of the eigenvector wanted. The algorithm enforces convergence into just the eigenvalue whose eigenvector has the desired structure. The use of the root- homing procedure is essential for the calculation of higher roots and degenerate roots.
