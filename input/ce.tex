@@ -490,15 +490,35 @@ K_n^{(m)} &= \frac{\left((\mathrm{i} \mathcal{L})^n(\mathcal{Q} \mathrm{i} \math
 &= \frac{\left((\mathrm{i} \mathcal{L})^n \mathcal{Q} \mathrm{i} \mathcal{L} (\mathcal{Q} \mathrm{i} \mathcal{L})^{m}\hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
 &= \frac{\left((\mathrm{i} \mathcal{L})^n \left(1-\mathcal{P}\right) \mathrm{i} \mathcal{L} (\mathcal{Q} \mathrm{i} \mathcal{L})^{m} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
 &= \frac{\left((\mathrm{i} \mathcal{L})^{n+1} (\mathcal{Q} \mathrm{i} \mathcal{L})^{m} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} - \frac{\left((\mathrm{i} \mathcal{L})^n \mathcal{P} \mathrm{i} \mathcal{L} (\mathcal{Q} \mathrm{i} \mathcal{L})^{m} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+&= K_{n+1}^{(m-1)} - \frac{\left(\mathrm{i} \mathcal{L}(\mathcal{Q} \mathrm{i} \mathcal{L})^m \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \times \frac{\left((\mathrm{i} \mathcal{L})^n \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} \\
+&= K_{n+1}^{(m-1)} - \bar{\Omega}_m \Omega_n 
 \end{align}
-and that a recursion relation can be found by expanding $\mathcal{Q}=1-\mathcal{P}$ that
-\begin{equation}
-K_n^{(m)}=K_{n+1}^{(m-1)}-\Omega_n \bar{\Omega}_m,
+where we introduced the auxiliary moment $\bar{\Omega}_m=\frac{\left(\mathrm{i} \mathcal{L}(\mathcal{Q} \mathrm{i} \mathcal{L})^m \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})}$.
+So recursively applying this expression leads to the relation: 
+\begin{align}
+K_n^{(m)} &= K_{n+2}^{(m-2)} - \bar{\Omega}_{m-1} \Omega_{n+1} - \bar{\Omega}_m \Omega_{n} \\
+&= K_{n+m}^{(0)} - \sum_{j=0}^{m-1} \bar{\Omega}_{m-j} \Omega_{n+j} \\
+&= \Omega_{n+m+1} - \Omega_{1} \Omega_{n+m} - \sum_{j=0}^{m-1} \bar{\Omega}_{m-j} \Omega_{n+j} \\
+&= \Omega_{n+m+1} - \bar{\Omega}_{0} \Omega_{n+m} - \sum_{j=0}^{m-1} \bar{\Omega}_{m-j} \Omega_{n+j} \\
+&= \Omega_{n+m+1} - \sum_{j=0}^{m} \bar{\Omega}_{m-j} \Omega_{n+j} \\
+\end{align}
+that $K_{n}^{(m)}$ can be expressed with moments and auxiliary moments. Similarly, the auxiliary moments themselves have recursions
+\begin{equation}    
+\begin{aligned}
+    \tilde{\Omega}_m &= \frac{\left((\mathrm{i} \mathcal{L} \mathcal{Q})^{m} \mathrm{i} \mathcal{L} \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})} - \tilde{\Omega}_{m-1} \Omega_1\\
+% (\im\Lv (\Qroj \im \Lv)^{m-1} \im \Lv \hat{A}, \hat{A}) (\hat{A}, \hat{A})^{-1} - \tilde{\Omega}_{m-1} \Omega_1, \\
+    &= \Omega_{m+1} - \sum_{j=0}^{m-1} \tilde{\Omega}_j \Omega_{m-j} \\ 
+\end{aligned}
 \end{equation}
-where they introduced the auxiliary moment
+which means the auxiliary moments $\{\tilde{\Omega}_m\}$ can be obtained by the moments $\{\Omega_n\}$; it becomes a problem of efficiently computing the moments. The series expansion for the $n$-th order auxiliary kernel can then be given by Pad\'{e} approximant. Initially, $K_n(t)$ is expressed as a truncated Taylor series:
 \begin{equation}
-\bar{\Omega}_m=\frac{\left(\mathrm{i} \mathcal{L}(\mathcal{Q} \mathrm{i} \mathcal{L})^m \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})}
+    K_n(t) \approx \sum_{j=0}^{M} \frac{K_n^{(j)}(0)}{j!} t^j,
 \end{equation}
+which is a good local approximation but lacks accuracy over a broader range of $t$. A more reliable approximation can be achieved using the Pad\'{e} approximant: 
+\begin{equation}\label{eqn:pade}
+    K_n(t) \approx \frac{p_{M_1}(t)}{q_{M_2}(t)} = \frac{a_0 + a_1 t + \dots + a_{M_1} t^{M_1}}{1 + b_1 t + \dots + b_{M_2} t^{M_2}},
+\end{equation}
+where $ p_{M_1}(t)$ and $q_{M_2}(t)$ are polynomials of degrees $M_1$ and $M_2$, respectively. The coefficients $\{a_i\}$ and $\{b_i\}$ are computed using the python library SciPy, which implements the standard Pad\'{e} approximant procedure as described in Ref.~\cite{Baker1996pade}. Overall, Eq.~\ref{eqn:pade} provides a numerically stable truncation for the MKCT Eq.~\ref{eqn:kn_ode}, where \emph{all} coefficients can be evaluated with higher-order moments $\{ \Omega_n \}$.
 \subsubsection{Relation of improper self energy to cumulant}
 The Dyson equation for the one particle greens function can be written using an improper $\Sigma^I$ self energy as
 \begin{align}
@@ -535,29 +555,91 @@ G_k^R(t)&=-i \theta(t)\left\langle\left\{c_k(t), c_k^{\dagger}(0)\right\}\right\
 &=-i \theta(t)\left\langle\left\{e^{i H t} c_k e^{-i H t}, c_k^{\dagger}\right\}\right\rangle \\
 &=-i \theta(t)\left\langle\left\{\sum_{n=0}^{\infty} \frac{(-i t)^n}{n!} \mathcal{L}^n c_k, c_k^{\dagger}\right\}\right\rangle \\
 % &=-i \theta(t)\left( \left\langle\left\{c_k, c_k^{\dagger}\right\}\right\rangle+i t\left\langle\left\{\left[H, c_k\right], c_k^{\dagger}\right\}\right\rangle+\frac{(i t)^2}{2}\left\langle\left\{\left[H,\left[H, c_k\right]\right], c_k^{\dagger}\right\}\right\rangle+\cdots \right)\\
-&=-i \theta(t)\left( \mu_{0,k}-i t\mu_{1,k}-\frac{t^2}{2}\mu_{2,k}+O(t^3) \right)
+&=-i \theta(t)\left( \mu_{0,k}- t\mu_{1,k}+\frac{t^2}{2}\mu_{2,k}+O(t^3) \right)
 \end{align}
-where we have defined the moments $\mu_{n,k}=\left\langle\left\{\mathcal{L}^n c_k, c_k^{\dagger}\right\}\right\rangle$ and the Liouvillian superoperator $\mathcal{L} O=[H,O]$. The non-interacting retarded Green's function is given by
+where we have defined the moments $\mu_{n,k}=\left\langle\left\{\left(i \mathcal{L} \right)^n c_k, c_k^{\dagger}\right\}\right\rangle$ and the Liouvillian superoperator $\mathcal{L} O=[H,O]$. The non-interacting retarded Green's function is given by
 \begin{align}
-G_k^{R,0}(t)&=-i \theta(t)\left( \mu_{0,k}^0-i t\mu_{1,k}^0-\frac{t^2}{2}\mu_{2,k}^0+O(t^3) \right)
+G_k^{R,0}(t)&=-i \theta(t)\left( \mu_{0,k}^0- t\mu_{1,k}^0+\frac{t^2}{2}\mu_{2,k}^0+O(t^3) \right)
 \end{align}
-where the non-interacting moments are $\mu_{n,k}^0=\left\langle\left\{\mathcal{L}_0^n c_k, c_k^{\dagger}\right\}\right\rangle$ and $\mathcal{L}_0 O=[H_0,O]$. Defining $A(t)= 1-i t\mu_{1,k}-\frac{t^2}{2}\mu_{2,k}+O(t^3)$ and $B(t)= 1-i t\mu_{1,k}^0-\frac{t^2}{2}\mu_{2,k}^0+O(t^3)$ we can use a geometric series to write
+where the non-interacting moments are $\mu_{n,k}^0=\left\langle\left\{\left( i \mathcal{L}_0\right)^n c_k, c_k^{\dagger}\right\}\right\rangle$ and $\mathcal{L}_0 O=[H_0,O]$. Defining $A(t)= 1-t\mu_{1,k}+\frac{t^2}{2}\mu_{2,k}+O(t^3)$ and $B(t)= 1- t\mu_{1,k}^0+\frac{t^2}{2}\mu_{2,k}^0+O(t^3)$ we can use a geometric series to write
 \begin{align}
-\frac{1}{B(t)}&=1+i t \mu_{1, k}^0+t^2\left[-\left(\mu_{1, k}^0\right)^2+\frac{1}{2}\mu_{2, k}^0\right]+O\left(t^3\right)
+\frac{1}{B(t)}&=1+ t \mu_{1, k}^0+t^2\left[\left(\mu_{1, k}^0\right)^2-\frac{1}{2}\mu_{2, k}^0\right]+O\left(t^3\right)
 \end{align}
 Note that the inverse power series coefficients can be computed by Wronski's formula (if one is interested in still higher orders of $t$).
 So, we can write the ratio and then group terms by order in $t$, to get
 \begin{align}
 R_k(t)=\frac{G_k^R(t)}{G_k^{R,0}(t)}
 &=\frac{-i\theta (t)}{-i\theta (t)}\times\frac{A(t)}{B(t)} \\
-&= \left( 1-i t\mu_{1,k}-\frac{t^2}{2}\mu_{2,k}+O(t^3) \right) \left( 1+i t \mu_{1, k}^0+t^2\left[-\left(\mu_{1, k}^0\right)^2+\frac{1}{2}\mu_{2, k}^0\right]+O\left(t^3\right) \right)\\
-&= \left( 1+t\underbrace{\left[-i\left(\mu_{1,k}-\mu_{1,k}^0\right)\right]}_{\alpha _{1,k}}+t^2\underbrace{\left[-\frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)+\mu_{1,k}\mu_{1,k}^0-\left(\mu_{1,k}^0\right)^2\right]}_{\alpha _{2,k}}+O(t^3) \right)
+&= \left( 1- t\mu_{1,k}+\frac{t^2}{2}\mu_{2,k}+O(t^3) \right) \left( 1+ t \mu_{1, k}^0+t^2\left[\left(\mu_{1, k}^0\right)^2-\frac{1}{2}\mu_{2, k}^0\right]+O\left(t^3\right) \right)\\
+&= \left( 1+t\underbrace{\left[-\left(\mu_{1,k}-\mu_{1,k}^0\right)\right]}_{\alpha _{1,k}}+t^2\underbrace{\left[\frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)-\mu_{1,k}\mu_{1,k}^0+\left(\mu_{1,k}^0\right)^2\right]}_{\alpha _{2,k}}+O(t^3) \right)
 \end{align}
 Given that the cumulant can be expanded as $C_k^R(t) = \kappa_{1,k} t + \kappa_{2,k} t^2 + O(t^3)$, we can Taylor expand the exponential $e^{C_k^R(t)}$ and then match coefficients with the above expression for $R_k(t)$ to plug into the usual relations between the cumulants $\kappa _{n,k}$ and moments $\alpha_{n,k}$, to get
 \begin{align}
-    \kappa_{1,k} = \alpha_{1,k} &= -i\left(\mu_{1,k}-\mu_{1,k}^0\right)\\
-    \kappa_{2,k} = \alpha_{2,k} - \frac{\alpha_{1,k}^2}{2} &= -\frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)+\mu_{1,k}\mu_{1,k}^0-\left(\mu_{1,k}^0\right)^2 -\frac{1}{2}{\left[-i\left(\mu_{1,k}-\mu_{1,k}^0\right)\right]^2}\\
-&= -\frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)+\mu_{1,k}\mu_{1,k}^0-\left(\mu_{1,k}^0\right)^2 +\frac{1}{2}\left(\mu_{1,k}-\mu_{1,k}^0\right)^2\\
-&= \frac{1}{2}\left[\left( \mu_{1,k} \right)^2 - \left( \mu_{1,k}^0 \right)^2 - \left( \mu_{2,k} - \mu_{2,k}^0 \right)\right]
+    \kappa_{1,k} = \alpha_{1,k} &= -\left(\mu_{1,k}-\mu_{1,k}^0\right)\\
+    \kappa_{2,k} = \alpha_{2,k} - \frac{\alpha_{1,k}^2}{2} &= \frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)-\mu_{1,k}\mu_{1,k}^0+\left(\mu_{1,k}^0\right)^2 -\frac{1}{2}{\left[-\left(\mu_{1,k}-\mu_{1,k}^0\right)\right]^2}\\
+&= \frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)-\mu_{1,k}\mu_{1,k}^0+\left(\mu_{1,k}^0\right)^2 -\frac{1}{2}\left(\mu_{1,k}-\mu_{1,k}^0\right)^2\\
+&= \frac{1}{2}\left[\left( \mu_{2,k} - \mu_{2,k}^0 \right) +\left( \mu_{1,k} \right)^2 + \left( \mu_{1,k}^0 \right)^2 \right]
 \end{align}
+So now we need to determine how to compute the moments for this cumulant approach and potentially for the MKCT approach. But let's begin by discerning the form for the 2/2 Padé approximant to the cumulant for the memory kernel at n=1:
+\begin{align}
+    K_1(t) &\approx \frac{a_0 + a_1 t+ a_2 t^2}{1 + b_1 t + b_2 t^2}\\
+& \approx \left(a_0 + a_1 t+ a_2 t^2\right)\left(1 - b_1 t + \left(b_1^2 - b_2\right) t^2 + O(t^3)\right) \\
+& \approx a_0 + t\left(a_1 - a_0 b_1\right) + t^2\left(a_2 - a_1 b_1 + a_0\left(b_1^2 - b_2\right)\right) + O(t^3)
+\end{align}
+with the derivatives given by $c_0 = K_1(0)$, $c_1 = K_1^{(1)}(0)$, and $c_2 = \frac{K_1^{(2)}(0)}{2}$. Matching coefficients of $t^0$, $t^1$, and $t^2$ gives us the following system of equations:
+\begin{align}
+    c_0 &= a_0 \\
+    c_1 &= a_1 - a_0 b_1 \implies a_1 = c_1 + a_0 b_1\\
+    c_2 &= a_2 - a_1 b_1 + a_0\left(b_1^2 - b_2\right) \implies a_2 = c_2 + a_1 b_1 - a_0\left(b_1^2 - b_2\right)
+\end{align}
+We can find that $a_0 = K_1(0)$, $a_1 = K_1^{(1)}(0) - \frac{K_1(0) K_1^{(2)}(0)}{2 K_1^{(1)}(0)}$, and $b_1 = -\frac{K_1^{(2)}(0) / 2}{K_1^{(1)}(0)}$. We start by computing
+\begin{align}
+    K_1(0) &= \Omega_2 - \Omega_1^2 = \mu_{2,k} - \mu_{1,k}^2\\
+    K_1^{(1)}(0) &= K_2(0) - \bar{\Omega}_1 \Omega_1 = \Omega_3 - \Omega_1 \Omega_2 - \bar{\Omega}_1 \Omega_1 = \mu_{3,k} - \mu_{1,k} \mu_{2,k} - \bar{\Omega}_1 \mu_{1,k}\\
+\end{align}
+% So:
+% $$
+% b_1=-\frac{K_n^{(2)}(0) / 2}{K_n^{(1)}(0)}, \quad a_1=K_n^{(1)}(0)-\frac{K_n(0) K_n^{(2)}(0)}{2 K_n^{(1)}(0)}
+% $$
 
+% Final [1/1] Padé:
+% $$
+% K_n^{[1 / 1]}(t)=\frac{K_n(0)+\left(K_n^{(1)}(0)-\frac{K_n(0) K_n^{(2)}(0)}{2 K_n^{(1)}(0)}\right) t}{1-\frac{K_n^{(2)}(0)}{2 K_n^{(1)}(0)} t} .
+% $$
+% \begin{align}
+%     \mu_{2,k} &= \left\langle\left\{\mathcal{L}^2 c_k, c_k^{\dagger}\right\}\right\rangle = \left\langle\left\{[H,[H,c_k]], c_k^{\dagger}\right\}\right\rangle \\
+%     &= \left\langle\left\{[H_0 + V,[H_0 + V,c_k]], c_k^{\dagger}\right\}\right\rangle \\4
+% \end{align}
+\subsubsection{Fundamental starting point}
+We start with the definition of the retarded Green's function in the time domain:
+\begin{equation}
+G_k^R(t) \equiv -i \theta(t)\left\langle\left\{c_k(t), c_k^{\dagger}(0)\right\}\right\rangle .
+\end{equation}
+Immediately, we can Fourier transform to the frequency domain:
+\begin{equation}
+G_k^R(\omega)=\int_{-\infty}^{\infty} d t e^{i \omega t} G_k^R(t) .
+\end{equation}
+But because $G_k^R(t)$ is already zero for $t<0$ (by the $\theta(t)$ ), this integral reduces to
+\begin{align}
+G_k^R(\omega)&=-i \int_0^{\infty} d t e^{i \omega t}\left\langle\left\{c_k(t), c_k^{\dagger}(0)\right\}\right\rangle \\
+&=-i \int_0^{\infty} d t e^{i \omega t} \sum_{n=0}^{\infty} \frac{(i t)^n}{n!}\mu_{n,k} \\
+&=-i \sum_{n=0}^{\infty} \frac{i^n}{n!}\mu_{n,k} \int_0^{\infty} d t e^{i \omega t}t^n \\
+&=-i \sum_{n=0}^{\infty} \frac{i^n}{n!}\mu_{n,k} \frac{n!}{(i \omega)^{n+1}} \\
+&=-\sum_{n=0}^{\infty} \frac{\mu_{n,k}}{\omega^{n+1}} ,
+\end{align}
+where we have defined the moments $\mu_{n,k}=\left\langle\left\{\mathcal{L}^n c_k, c_k^{\dagger}\right\}\right\rangle$. This works because $c_k(t)=e^{i H t} c_k e^{-i H t} = e^{i \mathcal{L} t} c_k$, where $\mathcal{L}$ is the Liouvillian superoperator, so the time evolution operator can be expanded in a Taylor series, as $e^{i \mathcal{L} t}=\sum_{n=0}^{\infty} \frac{(i t)^n}{n!} \mathcal{L}^n \implies \left\langle\left\{c_k(t), c_k^{\dagger}(0)\right\}\right\rangle  = \sum_{n=0}^{\infty} \frac{(i t)^n}{n!}\mu_{n,k}$. The complementary projection operator is $\mathcal{Q} = 1 - \mathcal{P}$. The Liouvillian superoperator acts on an arbitrary operator $X$ as $\mathcal{L} X = [H,X]$.
+Since we know that Mori's is formally a projector method with $\mathcal{P}X = \frac{(X,c_k)}{(c_k,c_k)} c_k$, where $(A,B) = \langle \{A, B^\dagger\} \rangle$ is the fermionic Mori inner product, so $(c_k, c_k) = \langle \{c_k, c_k^\dagger\} \rangle = 1$. Lanczos is also formally a projection onto the Krylov subspace, so we can try to exploit this by devising a Lanczos procedure. Then we can initiate a Lanczos sequence with $|f_0\rangle = c_k$ and then for $n=0$, we have
+\begin{equation}
+|f_1\rangle = \mathcal{L} |f_0\rangle - a_0 |f_0\rangle ,
+\end{equation}
+where $a_0 = \frac{(\mathcal{L} f_0, f_0)}{(f_0, f_0)} = \mu_{1,k}$. Then for 
+$n \geq 1$ define
+\begin{equation}
+|f_{n+1}\rangle = \mathcal{L} |f_n\rangle - a_n |f_n\rangle - b_n^2 |f_{n-1}\rangle ,
+\end{equation}
+where the coefficients are given by $a_n = \frac{(\mathcal{L} f_n, f_n)}{(f_n, f_n)}$ and $b_{n+1}^2 = \frac{(f_{n+1}, f_{n+1})}{(f_n, f_n)}$. Let us try to determine the action of the Liouvillian onto a given state $|f_n\rangle$. We can write
+\begin{align}
+\mathcal{L} |f_n\rangle &= [H_0 + V, |f_n\rangle] \\
+&= \mathcal{L}_0 |f_n\rangle + [V, |f_n\rangle] \\
+\end{align}
+where $H_0$ is the non-interacting Hamiltonian and $V$ is the interaction. We can also define a non-interacting Liouvillian $\mathcal{L}_0$ such that $\mathcal{L}_0 X = [H_0, X]$. So we can write
