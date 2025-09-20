@@ -449,19 +449,19 @@ y^{\prime}(x)=F\left(x, y(x), \int_0^x d t K[x, t, y(t)]\right)
 $$
 
 The form of Eq. (Cl) implies that $F$ can be written purely as a function of $\int_0^x d t K[x, t, y(t)]$. We used an Adams-Bashforth second-order predictor step and a third-order Adams-Moulton corrector step. Following Linz, for the starting procedure of the Holstein model we applied the self-consistent Simpson's method iterated five times [55].
-\subsubsection{Annotation of second memory kernel coupling theory}
-Following Mori's projection approach, \cite{mori1965projection} the correlation function in Eq.~\ref{eqn:corr} satisfies the generalized quantum master equation (GQME):  
-\begin{equation}
-    \dot{C}_{AA}(t) = \Omega C_{AA}(t) + \int_{0}^{t} \dd{\tau} K(t - \tau) C_{AA}(\tau), 
-\end{equation}
-where the scalar $\Omega$ and the kernel function $K(t)$ are derived from the Mori-Zwanzig formalism:
-\begin{equation}
-    \Omega = (\im \Lv \hat{A}, A) (\hat{A}, \hat{A})^{-1},
-\end{equation}
-\begin{equation}
-    K(t) = (\im \Lv e^{\im t \Qroj \Lv} \Qroj \im \Lv \hat{A}, \hat{A}) (\hat{A}, \hat{A})^{-1}.
-\end{equation}
-Here, the Mori-product notation $(\hat{A}, \hat{B})$ denotes an appropriate inner product. The Liouville operator acts on an arbitrary operator $\hat{X}$ as $\Lv \hat{X} \equiv \frac{1}{\hbar} \comm{\hat{H}}{\hat{X}}$. The projection operator is defined as $\Proj \hat{X} = (\hat{X}, \hat{A}) \hat{A} (\hat{A}, \hat{A})^{-1}$, and the complementary projection operator is $\Qroj = \bm{1} - \Proj$. In the first paper on MKCT, they introduced the high order moments
+% \subsubsection{Annotation of second memory kernel coupling theory}
+% Following Mori's projection approach, \cite{mori1965projection} the correlation function in Eq.~\ref{eqn:corr} satisfies the generalized quantum master equation (GQME):  
+% \begin{equation}
+%     \dot{C}_{AA}(t) = \Omega C_{AA}(t) + \int_{0}^{t} \dd{\tau} K(t - \tau) C_{AA}(\tau), 
+% \end{equation}
+% where the scalar $\Omega$ and the kernel function $K(t)$ are derived from the Mori-Zwanzig formalism:
+% \begin{equation}
+%     \Omega = (\im \Lv \hat{A}, A) (\hat{A}, \hat{A})^{-1},
+% \end{equation}
+% \begin{equation}
+%     K(t) = (\im \Lv e^{\im t \Qroj \Lv} \Qroj \im \Lv \hat{A}, \hat{A}) (\hat{A}, \hat{A})^{-1}.
+% \end{equation}
+% Here, the Mori-product notation $(\hat{A}, \hat{B})$ denotes an appropriate inner product. The Liouville operator acts on an arbitrary operator $\hat{X}$ as $\Lv \hat{X} \equiv \frac{1}{\hbar} \comm{\hat{H}}{\hat{X}}$. The projection operator is defined as $\Proj \hat{X} = (\hat{X}, \hat{A}) \hat{A} (\hat{A}, \hat{A})^{-1}$, and the complementary projection operator is $\Qroj = \bm{1} - \Proj$. In the first paper on MKCT, they introduced the high order moments
 \begin{equation}
 \Omega_n=\frac{\left((\mathrm{i} \mathcal{L})^n \hat{A}, \hat{A}\right)}{(\hat{A}, \hat{A})},
 \end{equation}
@@ -643,3 +643,187 @@ where the coefficients are given by $a_n = \frac{(\mathcal{L} f_n, f_n)}{(f_n, f
 &= \mathcal{L}_0 |f_n\rangle + [V, |f_n\rangle] \\
 \end{align}
 where $H_0$ is the non-interacting Hamiltonian and $V$ is the interaction. We can also define a non-interacting Liouvillian $\mathcal{L}_0$ such that $\mathcal{L}_0 X = [H_0, X]$. So we can write
+\subsection{Annotation of Loos paper}
+The definition of the cumulant ansatz for the retarded Green's function is given by:
+\begin{equation}
+    \bm{G}(t) = \bm{G}^0(t)e^{\bm{C}(t)}
+\end{equation}
+where $\bm{C}(t)$ is the retarded cumulant and $\bm{G}^0(t)$ is the retarded HF Green's function. By relating the Dyson equation to the Taylor series expansion of the exponential, we can write:
+\begin{equation}
+    \bm{G}^0(t) \bm{C}(t) = \iint \dd t_1 \dd t_2 \bm{G}^0(t-t_1) \bm{\Sigma}^c(t_1 - t_2) \bm{G}^0(t_2)
+\end{equation}
+Projecting to the spin-orbital basis and inserting the resolution of the identity, we get:
+\begin{align}
+    \sum_{r}\bra{p}\bm{G}^0(t) \ket{r}\bra{r}\bm{C}(t)\ket{q} &= \sum_{rs}\iint \dd t_1 \dd t_2 \bra{p}\bm{G}^0(t-t_1)\ket{r} \bra{r}\bm{\Sigma}^c(t_1 - t_2)\ket{s} \bra{s}\bm{G}^0(t_2)\ket{q} \\
+    \sum_{r}\bm{G}_{pr}^0(t) \bm{C}_{rq}(t) &= \sum_{rs}\iint \dd t_1 \dd t_2 \bm{G}_{ps}^0(t-t_1) \bm{\Sigma}_{sr}^c(t_1 - t_2) \bm{G}_{rq}^0(t_2)\\
+    \bm{G}_{pp}^{0}(t) \bm{C}_{pq}(t) &= \underbrace{\iint \dd t_1 \dd t_2 \bm{G}_{pp}^{0}(t-t_1) \bm{\Sigma}_{pq}^c(t_1 - t_2) \bm{G}_{qq}^{0}(t_2)}_{*}
+    \label{eqn:cumulant_connection}
+\end{align}
+where $\bm{G}^0(t)$ is the retarded HF Green's function, which is diagonal in the spin-orbital basis, specifically $\bm{G}_{pp}^{0}(t) = -i\Theta(t)e^{-i\epsilon_p t}$, where $\epsilon_p$ is the HF energy of the $p$-th spin-orbital.
+% \begin{align}
+%     \bm{C}_{pq}(t) &= -i \Theta(t-t_1)\Theta(t_2)e^{i\epsilon_p t}\iint \dd t_1 \dd t_2 \left( e^{-i\epsilon_p \left(t-t_1\right)} \bm{\Sigma}_{pq}^c(t_1 - t_2) e^{-i\epsilon_q t_2}\right) \\
+%     &= -i \Theta(t-t_1)\Theta(t_2)\iint \dd t_1 \dd t_2 \left( e^{i\epsilon_p \left(t_1\right)} \bm{\Sigma}_{pq}^c(t_1 - t_2) e^{-i\epsilon_q t_2}\right) \\
+%     &= -i \Theta(t-t_1)\Theta(t_2)\iint \dd t_1 \dd t_2 \left( e^{i\epsilon_p \left(t_1\right)} \left( \int \frac{\dd \omega}{2\pi} e^{-i\omega (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega)\right) e^{-i\epsilon_q t_2}\right) \\
+%     &= -\frac{i}{2\pi} \Theta(t-t_1)\Theta(t_2)\int \dd \omega \bm{\Sigma}_{pq}^c(\omega)\int \dd t_1 e^{-it_1\left(\omega - \epsilon_p\right)}\dd t_2 \left( e^{i\epsilon_q t_2} e^{-i\omega t_2}\right) \\
+%     &= -\frac{i}{2\pi} \Theta(t-t_1)\Theta(t_2)\int \dd \omega \bm{\Sigma}_{pq}^c(\omega) \underbrace{\int \dd t_1 e^{-it_1\left(\omega - \epsilon_p\right)} \int \dd t_2 e^{-i t_2\left(\omega - \epsilon_q\right)}}_{4\pi^2 \delta(\omega - \epsilon_p)\delta(\omega - \epsilon_q)} \\
+%     &= -2\pi i \Theta(t-t_1)\Theta(t_2)\int \dd \omega \bm{\Sigma}_{pq}^c(\omega) \delta(\omega - \epsilon_p)\delta(\omega - \epsilon_q) \\
+%     &= -2\pi i \Theta(t-t_1)\Theta(t_2)\bm{\Sigma}_{pp}^c(\epsilon_p)\delta_{pq}
+% \end{align}
+The formula for the inverse Fourier transform is given by:
+\begin{equation}
+    f(t) = \int \frac{\dd \omega}{2\pi} e^{-i\omega t} f(\omega)
+\end{equation}
+which implies that
+\begin{align}
+    \bm{G}_{pp}^{0}(t-t_1) = \int \frac{\dd \omega}{2\pi} e^{-i\omega (t-t_1)} \bm{G}_{pp}^{0}(\omega)\\
+    \bm{\Sigma}_{pq}^c(t_1 - t_2) = \int \frac{\dd \omega'}{2\pi} e^{-i\omega' (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega')\\
+    \bm{G}_{qq}^{0}(t_2) = \int \frac{\dd \omega''}{2\pi} e^{-i\omega'' t_2} \bm{G}_{qq}^{0}(\omega'')
+\end{align}
+and plugging into the double time integral *, we get:
+\begin{align}
+    * &= \iint \dd t_1 \dd t_2 \left[\int \frac{\dd \omega}{2\pi} e^{-i\omega (t-t_1)} \bm{G}_{pp}^{0}(\omega)\right] \left[\int \frac{\dd \omega'}{2\pi} e^{-i\omega' (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega')\right] \left[\int \frac{\dd \omega''}{2\pi} e^{-i\omega'' t_2} \bm{G}_{qq}^{0}(\omega'')\right]\\
+    &= \underbrace{\int \dd t_1 e^{-i \left(\omega' -\omega\right)t_1} \int \dd t_2 e^{-i \left(\omega'' -\omega'\right)t_2}}_{4\pi^2 \delta(\omega' -\omega)\delta(\omega'' -\omega')} \iiint \dd \omega \dd \omega' \dd \omega'' \frac{e^{-i\omega t}}{8\pi^3} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega')\bm{G}_{qq}^{0}(\omega'')\\
+    &= \int \frac{\dd \omega}{2\pi} e^{-i\omega t} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega)\bm{G}_{qq}^{0}(\omega)
+\end{align}
+Multiplying both sides of eqn.~\ref{eqn:cumulant_connection} by $ie^{\epsilon_p t} $ and recalling that we are dealing with retarded quantities that vanish for negative times, we get:
+\begin{align}
+	C_{pq}(t) &= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} G_{pp}^{HF}(\omega) \Sigma_{pq}^c(\omega) G_{qq}^{HF}(\omega) \\
+&= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} \frac{\Sigma_{pq}^c(\omega)}{(\omega - \epsilon_p^{HF} + i\eta)(\omega - \epsilon_q^{HF} + i\eta)} 
+\label{eq:Cpp_m1}\\
+\implies C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+\label{eq:Cpp_0} \\
+&= i \int \frac{d\omega}{2\pi} \frac{1}{(\omega + i \eta)^2} e^{-i \omega t} \left[ \sum_{i\nu} \frac{M_{pi\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_i + \Omega_\nu + i \eta}_{-\Delta_{pi\nu}}} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_a - \Omega_\nu + i \eta}_{-\Delta_{pa\nu}}} \right] \\
+& =\mathrm{i} \sum_{i v} M_{p i v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p i v}} +\mathrm{i} \sum_{a v} M_{p a v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p a v}}
+\label{eq:Cpp_1}
+\\
+&= \sum_{i\nu} \zeta_{pi\nu} \left[ e^{-i\Delta_{pi\nu} t} - 1 + i\Delta_{pi\nu} t \right] + \sum_{a\nu} \zeta_{pa\nu} \left[ e^{-i\Delta_{pa\nu} t} - 1 + i\Delta_{pa\nu} t \right]
+\label{eq:Cpp_2}
+\end{align}
+where in going from eqn.~\ref{eq:Cpp_m1} to eqn.~\ref{eq:Cpp_0}, where we made a diagonal approximation for the self-energy and introduced the frequency shift $\omega \to \omega + \epsilon_p^{HF}$, and then from eqn.~\ref{eq:Cpp_1} to eqn.~\ref{eq:Cpp_2}, we have evaluated a contour integral. For the final expression, we have defined $\zeta_{pi\nu} = \left(\frac{M_{pi\nu}}{\Delta_{pi\nu}}\right)^2$ and $\zeta_{pa\nu} = \left(\frac{M_{pa\nu}}{\Delta_{pa\nu}}\right)^2$. This allows us to arrive at the something similar to the Landau form of the cumulant.
+\begin{tcolorbox}
+A few notes on how to evaluate this integral: there is a double pole at $\omega_1 = -i\eta$ and a simple pole at $\omega_2 = -\Delta - i\eta$. Closing the contour in the lower half-plane because $\operatorname{Im}\left(\omega_1\right), \operatorname{Im}\left(\omega_2\right)<0$, and applying Cauchy's residue theorem, leads to
+\begin{align}
+    \int \frac{\mathrm{d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{\left(\omega-\omega_1\right)^2} \frac{1}{\omega-\omega_2} & =(-\mathrm{i})\left\{\left[\partial_\omega\left(\frac{e^{-\mathrm{i} \omega t}}{\omega-\omega_2}\right)\right]_{\omega=\omega_1}+\left[\frac{e^{-\mathrm{i} \omega t}}{\left(\omega-\omega_1\right)^2}\right]_{\omega=\omega_2}\right\} \\
+    & =\frac{(-\mathrm{i})}{\left(\omega_1-\omega_2\right)^2}\left\{\left[(-\mathrm{i} t)\left(\omega_1-\omega_2\right)-1\right] e^{-\mathrm{i} \omega_1 t}+e^{-\mathrm{i} \omega_2 t}\right\}\\
+\implies \int \frac{\mathrm{d} \omega}{2 \pi} e^{-i \omega t} \frac{1}{[\omega-(0-\mathrm{i} \eta)]^2} \frac{1}{\omega-\Delta}&=\frac{-\mathrm{i}}{\Delta^2}\left(e^{-\mathrm{i} \Delta t}+\mathrm{i} \Delta t-1\right)
+\end{align}
+\end{tcolorbox}
+Now we plug in our derived expression for $C_{pp}(t)$ into the cumulant ansatz for the retarded Green's function:
+\begin{align}
+G_{pp}(t) & = G_{pp}^{HF}(t) e^{C_{pp}(t)} \\
+& = -i \Theta(t) e^{-i \epsilon_p^{HF} t + C_{pp}(t)} \\
+& = -i \Theta(t) e^{-i \epsilon_p^{HF} t + \sum_{i\nu} \zeta_{pi\nu}\left(e^{-i\Delta_{pi\nu} t} + i\Delta_{pi\nu} t - 1\right) + \sum_{a\nu} \zeta_{pa\nu} \left(e^{-i\Delta_{pa\nu} t} + i\Delta_{pa\nu} t - 1\right)}\\
+& = -i \Theta(t) \underbrace{e^{-\sum_{i\nu} \zeta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}}}_{Z_p^{QP}} e^{-i\overbrace{\left(\epsilon_p^{HF} - \sum_{i\nu} \zeta_{pi\nu}\Delta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}\Delta_{pa\nu}\right)}^{\epsilon_p^{QP}} t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} \\ 
+& = -i \Theta(t) Z_p^{QP} e^{-i \epsilon_p^{QP} t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} \\
+\end{align}
+where we have the weight of the quasiparticle peak $Z_p^{QP} = \exp\left(-\sum_{i\nu} \zeta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}\right)$ and the quasiparticle energy $\epsilon_p^{QP} = \epsilon_p^{HF} - \left(\sum_{i\nu} \zeta_{pi\nu} \Delta_{pi\nu} + \sum_{a\nu} \zeta_{pa\nu} \Delta_{pa\nu}\right)$. 
+\begin{tcolorbox}
+We pause to make some important connections. Notice
+\begin{align}
+\epsilon_p^{QP} & = \epsilon_p^{HF} - \left(\sum_{i\nu} \zeta_{pi\nu} \Delta_{pi\nu} + \sum_{a\nu} \zeta_{pa\nu} \Delta_{pa\nu}\right) \\
+& = \epsilon_p^{HF} - \left(\sum_{i\nu} \frac{M_{pi\nu}^2}{\Delta_{pi\nu}} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\Delta_{pa\nu}}\right) \\
+& = \epsilon_p^{HF} + \operatorname{Re} \Sigma_{pp}^c\left(\epsilon_p^{HF}\right)
+\end{align}
+and
+\begin{align}
+Z_p^{QP} & = \exp\left(-\sum_{i\nu} \zeta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}\right) \\
+& = \exp\left(-\sum_{i\nu} \left(\frac{M_{pi\nu}}{\Delta_{pi\nu}}\right)^2 - \sum_{a\nu} \left(\frac{M_{pa\nu}}{\Delta_{pa\nu}}\right)^2\right) \\
+& = \exp\left(\left[\frac{\partial \operatorname{Re} \Sigma_{pp}^c(\omega)}{\partial \omega}\right]_{\omega = \epsilon_p^{HF}}\right) \\
+\end{align}
+where we have used the fact that $\operatorname{Re} \Sigma_{pp}^c(\omega) = \sum_{i\nu} \frac{M_{pi\nu}^2}{\omega - \epsilon_i + \Omega_\nu} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\omega - \epsilon_a - \Omega_\nu} \implies \left[\frac{\partial \operatorname{Re} \Sigma_{pp}^c(\omega)}{\partial \omega}\right]_{\omega = \epsilon_p^{HF}} = -\sum_{i\nu} \left(\frac{M_{pi\nu}}{\Delta_{pi\nu}}\right)^2 - \sum_{a\nu} \left(\frac{M_{pa\nu}}{\Delta_{pa\nu}}\right)^2$.
+\end{tcolorbox}
+Next, we want to perform a Fourier transform.
+\begin{align}
+G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
+\label{Gpp1}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt e^{i(\omega - \epsilon_p^{QP}) t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} 
+\label{Gpp2}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt\, e^{i(\omega - \epsilon_p^{QP}) t} \left(1 + \sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t} + \ldots \right) \\
+&= -i Z_p^{QP} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP}) t]}\label{Gpp3} \\
+&\quad - i Z_p^{QP} \sum_{i\nu} \zeta_{pi\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pi\nu}) t]} \\
+&\quad - i Z_p^{QP} \sum_{a\nu} \zeta_{pa\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pa\nu}) t]} + \ldots \\
+&= \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_p^{QP} \zeta_{pi\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pi\nu} + i\eta} + \sum_{a\nu} \frac{Z_p^{QP} \zeta_{pa\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pa\nu} + i\eta} + \ldots\\
+% & =-i Z_p^{Q P} \int_0^{+\infty} d r e^{\left[-\eta+i\left(\omega-\varepsilon_p^{Q P}\right)\right]} \\
+% & -\mathrm{i} Z_p^{\mathrm{OP}} \sum_{i v} \zeta_{p i v} \int_0^{+\infty} \mathrm{d} r e^{\left\{-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p i v}\right)\right]\right\}^{\prime}}-\mathrm{i} Z_p^{\mathrm{OP}} \sum_{a v} \zeta_{p a v} \int_0^{+\infty} \mathrm{d} r e^{\left(-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p \omega v}\right)\right]\right\}^{\prime}} \\
+& = \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_{pi\nu}^{sat}}{\omega - \epsilon_{pi\nu}^{sat} + i\eta} + \sum_{a\nu} \frac{Z_{pa\nu}^{sat}}{\omega - \epsilon_{pa\nu}^{sat} + i\eta} + \ldots
+\end{align}
+In going from eqn.~\ref{Gpp1} to eqn.~\ref{Gpp2}, we used the step function to restrict the lower bound of the integral to $0$ and then we end by defining the satellite energies $\epsilon_{pi\nu}^{sat} = \epsilon_p^{QP} + \Delta_{pi\nu}$ and $\epsilon_{pa\nu}^{sat} = \epsilon_p^{QP} + \Delta_{pa\nu}$, as well as the satellite weights $Z_{pi\nu}^{sat} = Z_p^{QP} \zeta_{pi\nu}$ and $Z_{pa\nu}^{sat} = Z_p^{QP} \zeta_{pa\nu}$. 
+\subsubsection{Spectral function}
+The diagonal elements of the spectral function are obtained as (the virtual satellites spectral function, whose derivation will mirror that of the occupied satellites, are omitted for the sake of brevity)
+\begin{align}
+A_{pp}^{GW+C}(\omega) & = -\frac{1}{\pi} \operatorname{Im} G_{pp}(\omega) \\
+& = -\frac{1}{\pi} \operatorname{Im}\left[\frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_{pi\nu}^{sat}}{\omega - \epsilon_{pi\nu}^{sat} + i\eta} + \sum_{a\nu} \frac{Z_{pa\nu}^{sat}}{\omega - \epsilon_{pa\nu}^{sat} + i\eta}\right] \\
+& = -\frac{1}{\pi} \operatorname{Im}\left[\frac{\operatorname{Re} Z_p^{QP} + i \operatorname{Im} Z_p^{QP}}{\omega - \operatorname{Re} \epsilon_p^{QP} + i\left(\eta - \operatorname{Im} \epsilon_p^{QP}\right)} + \sum_{i\nu} \frac{\operatorname{Re} Z_{pi\nu}^{sat} + i \operatorname{Im} Z_{pi\nu}^{sat}}{\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat} + i\left(\eta - \operatorname{Im} \epsilon_{pi\nu}^{sat}\right)} + \ldots \right] \\
+& = -\frac{1}{\pi} \operatorname{Im}\left[\frac{\left(\operatorname{Re} Z_p^{QP} + i \operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP} - i\left(\eta - \operatorname{Im} \epsilon_p^{QP}\right)\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+& \left. + \sum_{i\nu} \frac{\left(\operatorname{Re} Z_{pi\nu}^{sat} + i \operatorname{Im} Z_{pi\nu}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat} - i\left(\eta - \operatorname{Im} \epsilon_{pi\nu}^{sat}\right)\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right)^2} + \ldots \right] \\
+& = -\frac{1}{\pi}\left[\frac{\left(\operatorname{Re} Z_p^{QP}\right)\left(\operatorname{Im} \epsilon_p^{QP}\right) + \left(\operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+& \left. + \sum_{i\nu} \frac{\left(\operatorname{Re} Z_{pi\nu}^{sat}\right)\left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right) + \left(\operatorname{Im} Z_{pi\nu}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right)^2} + \ldots \right]
+\end{align}
+% $$
+% \begin{aligned}
+% A_{p p}^{G W+\mathrm{C}}(\omega) & =-\frac{1}{\pi} \operatorname{Im} G_{p p}(\omega) \\
+% & =-\frac{1}{\pi} \operatorname{Im}\left[\frac{Z_p^{\mathrm{QP}}}{\omega-\epsilon_p^{\mathrm{QP}}+\mathrm{i} \eta}+\sum_{q v} \frac{Z_{p v r}^{\mathrm{at}}}{\omega-\epsilon_{p q v}^{\mathrm{at}}+\mathrm{i} \eta}\right] \\
+% & =-\frac{1}{\pi} \operatorname{Im}\left[\frac{\operatorname{Re} Z_p^{\mathrm{QP}}+\mathrm{i} \operatorname{Im} Z_p^{\mathrm{QP}}}{\omega-\operatorname{Re} \epsilon_p^{\mathrm{QP}}+\mathrm{i}\left(\eta-\operatorname{Im} \epsilon_p^{\mathrm{QP}}\right)}+\sum_{q v} \frac{\operatorname{Re} Z_{p q v}^{\mathrm{sat}}+\mathrm{i} \operatorname{Im} Z_{p q v}^{\mathrm{sat}}}{\omega-\operatorname{Re} \epsilon_{p q v}^{\mathrm{sat}}+\mathrm{i}\left(\eta-\operatorname{Im} \epsilon_{p q v}^{\mathrm{sat}}\right)}\right] \\
+% & =-\frac{1}{\pi} \operatorname{Im}\left[\frac{\left(\operatorname{Re} Z_p^{\mathrm{QP}}+\mathrm{i} \operatorname{Im} Z_p^{\mathrm{QP}}\right)\left(\omega-\operatorname{Re} \epsilon_p^{\mathrm{QP}}-\mathrm{i}\left(\eta-\operatorname{Im} \epsilon_p^{\mathrm{QP}}\right)\right)}{\left(\omega-\operatorname{Re} \epsilon_p^{\mathrm{QP}}\right)^2+\left(\operatorname{Im} \epsilon_p^{\mathrm{QP}}\right)^2}+\sum_{q v} \frac{\left(\operatorname{Re} Z_{p q v}^{\mathrm{sat}}+\mathrm{i} \operatorname{Im} Z_{p q v}^{\mathrm{sat}}\right)\left(\omega-\operatorname{Re} \epsilon_{p q v}^{\mathrm{sat}}-\mathrm{i}\left(\eta-\operatorname{Im} \epsilon_{p q v}^{\mathrm{sat}}\right)\right)}{\left(\omega-\operatorname{Re} \epsilon_{p q v}^{\mathrm{sat}}\right)^2+\left(\operatorname{Im} \epsilon_{p q v}^{\mathrm{sat}}\right)^2}\right] \\
+% & =-\frac{1}{\pi}\left[\frac{\left(\operatorname{Re} Z_p^{\mathrm{QP}}\right)\left(\operatorname{Im} \epsilon_p^{\mathrm{QP}}\right)+\left(\operatorname{Im} Z_p^{\mathrm{QP}}\right)\left(\omega-\operatorname{Re} \epsilon_p^{\mathrm{QP}}\right)}{\left(\omega-\operatorname{Re} \epsilon_p^{\mathrm{QP}}\right)^2+\left(\operatorname{Im} \epsilon_p^{\mathrm{QP}}\right)^2}+\sum_{q v} \frac{\left(\operatorname{Re} Z_{p q v}^{\mathrm{sat}}\right)\left(\operatorname{Im} \epsilon_{p q v}^{\mathrm{sat}}\right)+\left(\operatorname{Im} Z_{p q v}^{\mathrm{sat}}\right)\left(\omega-\operatorname{Re} \epsilon_{p q v}^{\mathrm{sat}}\right)}{\left(\omega-\operatorname{Re} \epsilon_{p q v}^{\mathrm{sat}}\right)^2+\left(\operatorname{Im} \epsilon_{p q v}^{\mathrm{sat}}\right)^2}\right]
+% \end{aligned}
+% $$
+
+
+% Therefore, defining 
+% \begin{equation}
+% 	\eps_p^\QP = \eps_p^\HF + \Delta\eps_p^\QP
+% \end{equation}
+% where
+% \begin{equation}
+% 	\Delta\eps_p^\QP 
+% 	= - \sum_{i\nu} \Delta_{pi\nu} \zeta_{pi\nu} - \sum_{a\nu} \Delta_{pa\nu} \zeta_{pa\nu} 
+% 	= \Sig_{pp}^\co\qty(\omega=\eps_p^\HF)
+% \end{equation}
+% is the quasiparticle shift, the diagonal elements of the Green's function in the frequency domain are given by
+% \begin{equation} \label{eq:Gpp_omega}
+% 	G_{pp}(\omega) 
+% 	= - \ii Z_p \int \dd{t} \Theta(t) e^{\ii \qty(\omega - \eps_p^\QP) t} 
+% 		e^{\sum_{i\nu} \zeta_{pq\nu} e^{-\ii \Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-\ii \Delta_{pa\nu} t}}
+% \end{equation}
+% where
+% \begin{equation} \label{eq:Zp_QP}
+% 	Z_p^\QP 
+% 	= \exp(- \sum_{i\nu} \zeta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}) 
+% 	= \exp(\eval{\pdv{\Sig_{pp}^\co(\omega)}{\omega}}_{\omega=\eps_p^\HF})
+% \end{equation}
+% is the quasiparticle weight (or renormalization factor) and the last term of Eq.~\eqref{eq:Gpp_omega} containing the double exponential is responsible for the appearance of satellites.
+% In the case of a $G_0W_0$ calculation where one linearizes the quasiparticle equation to obtain the quasiparticle energies, the $GW$+C renormalization factor associated with the quasiparticle peak and its $GW$ counterpart 
+% \begin{equation} \label{eq:Zp_GW}
+% 	Z_p^\GW 
+% 	= \frac{1}{1 - \eval{\pdv{\Sig_{pp}^\co(\omega)}{\omega}}_{\omega=\eps_p^\HF}}
+% \end{equation}
+% agree up to first order, as readily seen by comparing Eqs.~\eqref{eq:Zp_QP} and \eqref{eq:Zp_GW}.
+% Moreover, in this very specific case, it is easy to show that $\Re\qty( Z_p^\QP ) \le \Re\qty( Z_p^\GW )$, which evidences that the cumulant expansion systematically implies a redistribution of weights from the quasiparticle peak to the satellite structure. However, this is not always true in the general case.
+
+% Expanding the last term of Eq.~\eqref{eq:Gpp_omega} to first order, one obtains the following expression for the diagonal elements of the spectral function [see Eq.~\eqref{eq:Apq} for its definition]
+% \begin{equation} 
+% \begin{split} 
+% 	A_{pp}(\omega) 
+% 	\approx Z_p \delta\qty(\omega - \eps_p^\QP) 
+% 	& + \sum_{i\nu} Z_{pi\nu}^\sat \delta\qty(\omega - \eps_{pi\nu}^\sat) 
+% 	\\
+% 	& + \sum_{a\nu} Z_{pa\nu}^\sat \delta\qty(\omega - \eps_{pa\nu}^\sat) + \cdots
+% \end{split}
+% \end{equation}
+% which features two sets of satellites at energies
+% \begin{align}
+% 	\eps_{pi\nu}^\sat & = \eps_p^\QP + \Delta_{pi\nu} = \Delta \eps_p^\QP + \eps_i - \Om_\nu
+% 	\\
+% 	\eps_{pa\nu}^\sat & = \eps_p^\QP + \Delta_{pa\nu} = \Delta \eps_p^\QP + \eps_a + \Om_\nu
+% \end{align}
+% each located on a different branch and associated with the respective weights
+% \begin{align}
+% 	Z_{pi\nu}^\sat & = Z_{p}^\QP \zeta_{pi\nu}
+% 	&
+% 	Z_{pa\nu}^\sat & = Z_{p}^\QP \zeta_{pa\nu}
+% \end{align}
+% where one can readily see that they are directly proportional to the quasiparticle spectral weight.
+% Here, we limit our analysis to these two sets of satellite peaks (especially the satellite peaks on the hole branch) as expanding to second order would produce satellites with even smaller weights and further away from the quasiparticle peak.
