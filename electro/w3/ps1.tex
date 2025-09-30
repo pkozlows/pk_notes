@@ -1,0 +1,519 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{geometry}
+
+\geometry{
+    margin=1in,
+    textwidth=6.5in,
+    textheight=9in
+}
+
+\begin{document}
+\section*{Problem Set 1}
+Due: Wednesday 9/24/25 at the start of class\\
+Feel free to use any resource to work these problems, including books, websites, and your classmates. However, your problem set submission must be your own work.
+
+\section{Problem 1. Electrochemical potential}
+In class, we started our discussion of electrochemistry with a $\mathrm{Ag}_{2} \mathrm{O} / \mathrm{Zn}$ battery. Let's calculate the free energy change associated with the overall reaction by summing the chemical potentials (in this case the Gibbs Free Energies of formation) weighted with stoichiometric coefficients:
+
+$$
+\Delta G_{r x n}=\sum_{i} v_{i} \mu_{i}=\sum_{i} v_{i} \Delta G_{i}^{f}
+$$
+
+We can also consider applying this summation to the species that appear in both of the half reactions, rather than just the species that appear in the overall reaction. Use this approach, with appropriate assumptions, to write out an algebraic expression for the open-circuit potential of a $\mathrm{Ag}_{2} \mathrm{O} / \mathrm{Zn}$ battery in symbolic form.
+\subsection{Solution}
+The overall reaction for the $\mathrm{Ag}_{2} \mathrm{O} / \mathrm{Zn}$ battery is:
+\begin{equation}
+\mathrm{Ag}_{2} \mathrm{O}(s)+\mathrm{Zn}(s) \rightarrow 2 \mathrm{Ag}(s)+\mathrm{ZnO}(s)
+\end{equation}
+The half reactions are:
+\begin{equation}
+\text{Anode: } \mathrm{Zn}(s) \rightarrow \mathrm{Zn}^{2+}(aq)+2 e^{-}
+\end{equation}
+\begin{equation}
+\text{Cathode: } \mathrm{H_2O}(l)+\mathrm{Ag}_{2} \mathrm{O}(s)+2 e^{-} \rightarrow 2 \mathrm{Ag}(s)+2\mathrm{OH}^{-}(aq)
+\end{equation}
+Applying the formula for the Gibbs free energy change of reaction to the anode half reaction:
+\begin{equation}
+\Delta G_{anode} = \Delta G_{Zn^{2+}}^{f} - \Delta G_{Zn}^{f} = \Delta G_{Zn^{2+}}^{f} - 0 = \Delta G_{Zn^{2+}}^{f}
+\end{equation}
+Similarly, for the cathode half reaction:
+\begin{equation}
+\Delta G_{cathode} = \Delta G_{Ag}^{f} + 2\Delta G_{OH^{-}}^{f} - \Delta G_{Ag_{2}O}^{f} - 2\Delta G_{H_{2}O}^{f} = 2\Delta G_{OH^{-}}^{f} - \Delta G_{Ag_{2}O}^{f} - 2\Delta G_{H_{2}O}^{f}
+\end{equation}
+ Notice that the reaction is involving two moles of electrons, so we can use the relation between Gibbs free energy and cell potential:
+\begin{equation}
+\Delta G = -nFE_{cell}
+\end{equation}
+to arrive at 
+\begin{equation}
+E_{cell} = -\frac{\Delta G_{anode} + \Delta G_{cathode}}{2F}
+\end{equation}
+
+\section{Problem 2. Hall-Héroult Process}
+One of the few chemicals that is made via an electrochemical process at an industrial scale is aluminum, which is made via the Hall-Héroult process. The aluminum feedstock for the process is purified alumina, which is obtained from bauxite via the Bayer process. In the Hall-Héroult process, alumina is dissolved in molten cryolite ( $\mathrm{Na}_{3} \mathrm{AlF}_{6}$ ) at around $1000^{\circ} \mathrm{C}$. The alumina solution is then electrolyzed on carbonaceous electrodes at an applied voltage of approximately 5 V. Molten aluminum is removed from the cell, after which fresh alumina is added.
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Electricity Source & Lifecycle $\mathbf{C O}_{\mathbf{2}}$ Emissions, $\mathbf{g C O} \mathbf{2} / \mathbf{k W h}$ \\
+\hline
+Coal & 820 \\
+\hline
+Hydroelectric & 24 \\
+\hline
+Wind & 11 \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{}
+a) The coke anode (essentially a chunk of carbon) needs to be periodically replenished/replaced due to its complete oxidation. Knowing this, write down the half reactions occurring at the cathode and anode of the cell. Write down the net reaction over the entire cell.\\\subsubsection{Solution}
+The overall reaction for the Hall-Héroult process is:
+\begin{equation}
+2 \mathrm{Al}_{2} \mathrm{O}_{3}(l)+3 \mathrm{C}(s) \rightarrow 4 \mathrm{Al}(l)+3 \mathrm{CO}(g)
+\end{equation}
+The half reactions are:
+\begin{equation}
+\text{Cathode: } \mathrm{Al}^{3+}(l)+3 e^{-} \rightarrow \mathrm{Al}(l) \to 4 \mathrm{Al}^{3+}(l)+12 e^{-} \rightarrow 4 \mathrm{Al}(l)
+\end{equation}
+\begin{equation}
+\text{Anode: } \mathrm{O}^{2-}(l) + \mathrm{C}(s) \rightarrow \mathrm{CO}(g)+2 e^{-} \to 6 \mathrm{O}^{2-}(l) + 3 \mathrm{C}(s) \rightarrow 3 \mathrm{CO}(g)+12 e^{-}
+\end{equation}
+\subsection{}
+b) Compute the theoretical cell voltage based on the net reaction at the operating temperature. You may assume that the enthalpies and entropies of the reactants and products do not change with temperature, and that the aluminum remains solid.\\
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+ & $\mathrm{Al_{2}O_{3}}(s)$ & $\mathrm{C}(s)$ & $\mathrm{Al}(s)$ & $\mathrm{CO}(g)$ \\
+\hline
+$\Delta H_{f}^{\circ}$ (kJ/mol) & -1620.57 & 0 & 0 & -110.53 \\
+\hline
+$S^{\circ}$ (J/mol$\cdot$K) & 67.24 & 0 & 0 & 197.66 \\
+\hline
+\multicolumn{5}{|c|}{Reaction: $2 \mathrm{Al}_{2} \mathrm{O}_{3}(s)+3 \mathrm{C}(s) \rightarrow 4 \mathrm{Al}(s)+3 \mathrm{CO}(g)$} \\
+\hline
+\multicolumn{5}{|c|}{$\Delta H_{rxn}^{\circ}$ (kJ/mol) = $4 \cdot 0 + 3 \cdot (-110.53) - [2 \cdot (-1620.57) + 3 \cdot 0] =2909.55 $} \\
+\hline
+\multicolumn{5}{|c|}{$\Delta S_{rxn}^{\circ}$ (J/mol$\cdot$K) = $4 \cdot 0 + 3 \cdot 197.66 - [2 \cdot 67.24 + 3 \cdot 0] = 458.50$} \\
+\hline
+\end{tabular}\\
+We take the temperature to be $1000^{\circ} \mathrm{C}=1273 \mathrm{K}$, so we can compute $\Delta G_{rxn}^{\circ}$ at this temperature as follows:
+\begin{equation}
+\Delta G_{rxn}^{\circ} = \Delta H_{rxn}^{\circ} - 1273 \mathrm{K} \cdot \Delta S_{rxn}^{\circ} = 2909.55 - 1273 \cdot 458.50 \times 10^{-3} = 2326.25 \text{ kJ/mol}
+\end{equation}
+The cell voltage (for one mol) is then given by:
+\begin{equation}E_{cell} = -\frac{\Delta G_{rxn}^{\circ}}{nF} = -\frac{2326.25 \cdot 10^{3} \text{ J}}{12 \cdot 96485 \text{ C}} = -2.01 \text{ V}
+\end{equation}
+
+\end{center}
+\subsection{}
+c) Compute the $\mathrm{CO}_{2}$ emissions for aluminum production ( $\mathrm{kg} \mathrm{CO}_{2}$ per kg Al ) via the HallHéroult process for different sources of electricity. Assume that the cell voltage is your answer from part (b), i.e., we assume the cell voltage is the open circuit voltage (not valid in real systems). Hint: How many moles of Al are produced per Coulomb? How much mass of Al is produced per Coulomb?\\
+\subsubsection{Solution}
+Here we can do some dimensional analysis and we can use that $1 kWh = 3.6 \times 10^{6} J$. Let us start with the number
+\begin{equation}
+    2.01 \frac{\mathrm{J}}{\mathrm{C}} \cdot \frac{3 \cdot 96485 \mathrm{C}}{1 \mathrm{mol} \mathrm{Al}} \cdot \frac{1 \mathrm{mol} \mathrm{Al}}{26.98 \mathrm{g} \mathrm{Al}} \cdot \frac{1000 \mathrm{g}}{1 \mathrm{kg}} = 21,560,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+Then for coal we get
+\begin{equation}
+    21,560,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}} \cdot \frac{1 kWh}{3.6 \times 10^{6} J} \cdot 820 \frac{\mathrm{g} \mathrm{CO}_{2}}{kWh} \cdot \frac{1 kg}{1000 g} = 4.91 \frac{\mathrm{kg} \mathrm{CO}_{2}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+For hydroelectric we get
+\begin{equation}
+    21,560,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}} \cdot \frac{1 kWh}{3.6 \times 10^{6} J} \cdot 24 \frac{\mathrm{g} \mathrm{CO}_{2}}{kWh} \cdot \frac{1 kg}{1000 g} = 0.144 \frac{\mathrm{kg} \mathrm{CO}_{2}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+For wind we get
+\begin{equation}
+    21,560,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}} \cdot \frac{1 kWh}{3.6 \times 10^{6} J} \cdot 11 \frac{\mathrm{g} \mathrm{CO}_{2}}{kWh} \cdot \frac{1 kg}{1000 g} = 0.066 \frac{\mathrm{kg} \mathrm{CO}_{2}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+\subsection{}
+d) The Reffichs Lab has proposed to reduce carbon dioxide emissions by using flowing hydrogen gas at the anode, instead of using a sacrificial coke anode. Write down the half reactions at the anode and cathode for this proposed system. In addition, write down the net reaction and compute the theoretical cell voltage, assuming the operating temperature is the same.\\
+\subsubsection{Solution}
+The cathode half reaction remains the same:
+\begin{equation}
+\text{Cathode: } \mathrm{Al}^{3+}(l)+3 e
+^{-} \rightarrow \mathrm{Al}(l) \to 4 \mathrm{Al}^{3+}(l)+12 e^{-} \rightarrow 4 \mathrm{Al}(l)
+\end{equation}
+The anode half reaction is now:
+\begin{equation}
+\text{Anode: } O^{2-}(l) + H_{2}(g) \rightarrow H_{2}O(l) + 2 e^{-} \to 6 O^{2-}(l) + 3 H_{2}(g) \rightarrow 3 H_{2}O(l) + 12 e^{-}
+\end{equation}
+The overall reaction for the Reffichs process is:
+\begin{equation}
+2 \mathrm{Al}_{2} \mathrm{O}_{3}(l)+3 \mathrm{H}_{2}(g) \rightarrow 4 \mathrm{Al}(l)+3 \mathrm{H}_{2}O(l)
+\end{equation}
+Making a similar table as in part (b):
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+    & $\mathrm{Al_{2}O_{3}}(s)$ & $\mathrm{H_{2}}(g)$ & $\mathrm{Al}(s)$ & $\mathrm{H_{2}O}(l)$ \\
+\hline
+$\Delta H_{f}^{\circ}$ (kJ/mol) & -1620.57 & 0 & 0 & -285.83 \\
+\hline
+$S^{\circ}$ (J/mol$\cdot$K) & 67.24 & 130.68 & 0 & 69.95 \\
+\hline
+\multicolumn{5}{|c|}{Reaction: $2 \mathrm{Al
+}_{2} \mathrm{O}_{3}(s)+3 \mathrm{H}_{2}(g) \rightarrow 4 \mathrm{Al}(s)+3 \mathrm{H}_{2}O(l)$} \\
+\hline
+\multicolumn{5}{|c|}{$\Delta H_{rxn}^{\circ}$ (kJ/mol) = $4 \cdot 0 + 3 \cdot (-285.83) - [2 \cdot (-1620.57) + 3 \cdot 0] = 2383.65 $} \\
+\hline
+\multicolumn{5}{|c|}{$\Delta S_{rxn}^{\circ}$ (J/mol$\cdot$K) = $4 \cdot 0 + 3 \cdot 69.95 - [2 \cdot 67.24 + 3 \cdot 130.68] = -316.67$} \\
+\hline
+\end{tabular}\\
+\end{center}
+Then we can compute $\Delta G_{rxn}^{\circ}$ at this temperature as follows:
+\begin{equation}
+\Delta G_{rxn}^{\circ} = \Delta H_{rxn}^{\circ} - 1273 \mathrm{K} \cdot \Delta S_{rxn}^{\circ} = 2383.65 - 1273 \cdot -316.67 \times 10^{-3} = 2786.65 \text{ kJ/mol}
+\end{equation}
+The cell voltage (for one mol) is then given by:
+\begin{equation}E_{cell} = -\frac{\Delta G_{rxn}^{\circ}}{nF} = -\frac{2786.65 \cdot 10^{3} \text{ J}}{12 \cdot 96485 \text{ C}} = -2.41 \text{ V}
+\end{equation}
+\subsection{}
+e) Assuming that hydrogen is produced from methane via steam-methane reforming (including a water-gas shift stage), and that the applied voltage is the open circuit voltage (not valid in real life), compute the $\mathrm{CO}_{2}$ emissions per kg of Al for this new proposed process when using the cleanest and dirtiest electricity sources. Note that hydrogen production from methane is dominated by the stoichiometric $\mathrm{CO}_{2}$, so you can neglect $\mathrm{CO}_{2}$ emissions from the energy source for methane reforming.\\
+\subsubsection{Solution}
+If we can neglect the $\mathrm{CO}_{2}$ emissions from the energy source for methane reforming, then we only need to consider the electricity source. We can use the same dimensional analysis as in part (c), but with the new cell voltage, so first we calculate
+\begin{equation}
+    2.41 \frac{\mathrm{J}}{\mathrm{C}} \cdot \frac{3 \cdot 96485 \mathrm{C}}{1 \mathrm{mol} \mathrm{Al}} \cdot \frac{1 \mathrm{mol} \mathrm{Al}}{26.98 \mathrm{g} \mathrm{Al}} \cdot \frac{1000 \mathrm{g}}{1 \mathrm{kg}} = 25,870,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+Then for the dirtiest electricity source (coal) we get
+\begin{equation}
+    25,870,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}} \cdot \frac{1 kWh}{3.6 \times 10^{6} J} \cdot 820 \frac{\mathrm{g} \mathrm{CO}_{2}}{kWh} \cdot \frac{1 kg}{1000 g} = 5.90 \frac{\mathrm{kg} \mathrm{CO}_{2}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+For the cleanest electricity source (wind) we get
+\begin{equation}
+    25,870,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}} \cdot \frac{1 kWh}{3.6 \times 10^{6} J} \cdot 11 \frac{\mathrm{g} \mathrm{CO}_{2}}{kWh} \cdot \frac{1 kg}{1000 g} = 0.079 \frac{\mathrm{kg} \mathrm{CO}_{2}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+\subsection{}
+f) Repeat (e) assuming the hydrogen is sourced from water splitting, with a voltage of 1.23 V.\\
+\subsubsection{Solution}
+The water splitting reaction is:
+\begin{equation}
+2 H_{2}O(l) \rightarrow 2 H_{2}(g) + O_{2}(g)
+\end{equation}
+with half reactions:
+\begin{equation}
+\text{Anode: } 2 H_{2}O(l) \rightarrow O_{2}(g) + 4 H^{+}(aq) + 4 e^{-}
+\end{equation}
+\begin{equation}
+\text{Cathode: } 4 H^{+}(aq) + 4 e^{-} \rightarrow 2 H_{2}(g)
+\end{equation}
+So energy to produce 1 mole of $\mathrm{H}_{2}$ is given by
+\begin{equation}1.23 \frac{J}{C}\cdot \frac{2 \cdot 96485 C}{1 mol H_{2}} = 237,230 \frac{J}{mol H_{2}}
+\end{equation}
+Then we can calculate the energy to produce 1 mole of Al as
+\begin{equation}237,230 \frac{J}{mol H_{2}} \cdot \frac{3 mol H_{2}}{4 mol Al} = 177,920 \frac{J}{mol Al}
+\end{equation}
+Now, we also know that irregardless of the source of hydrogen, the energy to produce 1 mole of Al is $2.41 \frac{J}{C} \cdot \frac{3 \cdot 96485 C}{1 mol Al} = 697,000 \frac{J}{mol Al}$, so the total energy to produce 1 mole of Al via water splitting is
+\begin{equation}(177,920 + 697,000) \frac{J}{mol Al} = 874,920 \frac{J}{mol Al}
+\end{equation}
+Then we can calculate the energy to produce 1 kg of Al as
+\begin{equation}874,920 \frac{J}{mol Al} \cdot \frac{1 mol Al}{26.98 g Al} \cdot \frac{1000 g}{1 kg} = 32,420,000 \frac{J}{kg Al}
+\end{equation}
+Then for the dirtiest electricity source (coal) we get
+\begin{equation}    32,420,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}} \cdot \frac{1 kWh}{3.6 \times 10^{6} J} \cdot 820 \frac{\mathrm{g} \mathrm{CO}_{2}}{kWh} \cdot \frac{1 kg}{1000 g} = 9.03 \frac{\mathrm{kg} \mathrm{CO}_{2}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+For the cleanest electricity source (wind) we get
+\begin{equation}    32,420,000 \frac{\mathrm{J}}{\mathrm{kg} \mathrm{Al}} \cdot \frac{1 kWh}{3.6 \times 10^{6} J} \cdot 11 \frac{\mathrm{g} \mathrm{CO}_{2}}{kWh} \cdot \frac{1 kg}{1000 g} = 0.099 \frac{\mathrm{kg} \mathrm{CO}_{2}}{\mathrm{kg} \mathrm{Al}}
+\end{equation}
+\subsection{}
+
+
+
+
+g) Can the Reffichs process reduce carbon dioxide emissions from aluminum production? What engineering challenges can you envision with this proposed process? Materials, personnel, interfaces, safety, grid stability, weather, etc.
+\subsubsection{Solution}
+so the part that wasn't treated rigorously is that using coke in the anode often produces $\mathrm{CO}_{2}$ from the $CO$ product, while using hydrogen in the anode produces just $\mathrm{H}_{2} \mathrm{O}$ . So if a clean electricity source is used, then the Reffichs process can reduce carbon dioxide emissions from aluminum production because we are able to produce water instead of carbon dioxide at the anode. I envision safety would be a concern because hydrogen gas is explosive, so getting it to the site of electrochemistry would take care.
+
+\section{Problem 3. Nitrogen Cycle}
+Nitrogen-containing compounds are key to life on earth, and one of the most important chemical reactions is the conversion of dinitrogen to ammonia. When conducted thermochemically, this reaction is known as the Haber-Bosch reaction:
+
+$$
+\mathrm{N}_{2}(g)+3 \mathrm{H}_{2}(g) \rightarrow 2 \mathrm{NH}_{3}(g)
+$$
+
+In this problem, we will explore the thermodynamics of this reaction.\\
+\subsection{}
+a) Assuming a stoichiometric feed of nitrogen and hydrogen (1:3), what is the equilibrium conversion of nitrogen to ammonia at $25^{\circ} \mathrm{C}$ and 1 bar (i.e., what fraction of nitrogen will be converted to products)? Why is the Haber-Bosch reaction not operated near $25^{\circ} \mathrm{C}$ and 1 bar? What pressure is necessary to convert $50 \%$ of the input nitrogen to ammonia at the realistic operating temperature of $450^{\circ} \mathrm{C}$ (assume constant enthalpy of reaction)?
+\subsubsection{Solution}
+We can make a table similar to the ones before:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+    & $\mathrm{N_{2}}(g)$ & $\mathrm{H_{2}}(g)$ & $\mathrm{NH_{3}}(g)$ \\
+\hline
+$\Delta H_{f}^{\circ}$ (kJ/mol) & 0 & 0 & -45.90 \\
+\hline
+$S^{\circ}$ (J/mol$\cdot$K) & 191.6 & 130.7 & 192.77 \\
+\hline
+\multicolumn{4}{|c|}{Reaction: $\mathrm{N}_{2}(g)+3 \mathrm{H}_{2}(g) \rightarrow 2 \mathrm{NH}_{3}(g)$} \\
+\hline
+\multicolumn{4}{|c|}{$\Delta H_{rxn}^{\
+circ}$ (kJ/mol) = $2 \cdot (-45.90) - [1 \cdot 0 + 3 \cdot 0] = -91.80 $} \\
+\hline
+\multicolumn{4}{|c|}{$\Delta S_{rxn}^{\circ}$ (J/mol$\cdot$K) = $2 \cdot 192.
+77 - [1 \cdot 191.6 + 3 \cdot 130.7] = -198.2$} \\
+\hline
+\end{tabular}\\
+\end{center}
+Then we can compute $\Delta G_{rxn}^{\circ}$ at $25^{\circ} \mathrm{C}=298 \mathrm{K}$ as follows:
+\begin{equation}
+\Delta G_{rxn}^{\circ} = \Delta H_{rxn}^{\circ} - 298 \mathrm{K} \cdot \Delta S_{rxn}^{\circ} = -91.80 - 298 \cdot -198.2 \times 10^{-3} = -32.8 \text{ kJ/mol}
+\end{equation}
+The equilibrium constant is then given by:
+\begin{equation}
+K = e^{-\Delta G_{rxn}^{\circ}/RT} = e^{32.8 \times 10^{3}/(8.314 \cdot 298)} = 5.4 \times 10^{5}
+\end{equation}
+Now, we can set up an ICE table to find the equilibrium conversion of nitrogen to ammonia.
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+    & $\mathrm{N_{2}}(g)$ & $\mathrm{H_{2}}(g)$ & $\mathrm{NH_{3}}(g)$ \\
+\hline
+Initial (mol) & 1 & 3 & 0 \\
+\hline
+Change (mol) & -x & -3x & +2x \\
+\hline
+Equilibrium (mol) & $1-x$ & $3-3x$ & $2x$ \\
+\hline
+\end{tabular}\\
+\end{center}
+The equilibrium constant expression is:
+\begin{equation}
+5.4 \times 10^{5} = \frac{(2x)^{2}}{(1-x)(3-3x)^{3}}
+\end{equation}
+Solving this equation for $x$ gives a $97.7\%$ conversion of nitrogen to ammonia at $25^{\circ} \mathrm{C}$ and 1 bar.\\
+The Haber-Bosch reaction is not operated near $25^{\circ} \mathrm{C}$ and 1 bar because of the kinetics issue; a lot of energy is needed to break the triple bond in $\mathrm{N}_{2}$.
+To find the pressure necessary to convert $50 \%$ of the input nitrogen to ammonia at $450^{\circ} \mathrm{C}$, we first calculate $\Delta G_{rxn}^{\circ}$ at $450^{\circ} \mathrm{C}=723 \mathrm{K}$:
+\begin{equation}
+\Delta G_{rxn}^{\circ} = \Delta H_{rxn}^{\circ} - 723 \mathrm{K} \cdot \Delta S_{rxn}^{\circ} = -91.80 + 723 \cdot 198.2 \times 10^{-3} = 51.5 \text{ kJ/mol}
+\end{equation}
+The equilibrium constant at this temperature is:
+\begin{equation}
+K = e^{-\Delta G_{rxn}^{\circ}/RT} = e^{51.5 \times 10^{3}/(8.314 \cdot 723)} = 1.9 \times 10^{-4}
+\end{equation}
+Setting up the ICE table for $50 \%$ conversion ($x=0.5$):
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+    & $\mathrm{N_{2}}(g)$ & $\mathrm{H_{2}}(g)$ & $\mathrm{NH_{3}}(g)$ \\
+\hline
+Initial (mol) & 1 & 3 & 0 \\
+\hline
+Change (mol) & -0.5 & -1.5 & +1 \\
+\hline
+Equilibrium (mol) & $0.5$ & $1.5$ & $1$ \\
+\hline
+\end{tabular}\\
+\end{center}
+So the mole fractions at equilibrium are $x_{N_{2}} = 0.5/3 = 1/6$, $x_{H_{2}} = 1.5/3 = 1/2$, and $x_{NH_{3}} = 1/3$. The equilibrium constant expression in terms of partial pressures is:
+\begin{equation}
+1.9 \times 10^{-4} = \frac{(P \cdot 1/3)^{2}}{(P \cdot 1/6)(P \cdot 1/2)^{3}} = \frac{(1/3)^{2}}{(1/6)(1/2)^{3}} \cdot \frac{1}{P^{2}} = \frac{5.31}{P^{2}} \implies P = 167 \text{ bar}
+\end{equation} 
+So a pressure of 167 bar is necessary to convert $50 \%$ of the input nitrogen to ammonia at $450^{\circ} \mathrm{C}$.
+\subsection{}
+b) Unfortunately, one of the problems with the Haber-Bosch reaction is the hydrogen feed; the production of high purity hydrogen produces a lot of carbon dioxide. An intriguing idea would be to convert nitrogen to ammonia using water as a hydrogen source. Why is
+this reaction impossible at reasonable temperatures, under $1000^{\circ} \mathrm{C}$ ? You can assume the water is always a gas since it will be for the majority of the temperature range $25^{\circ} \mathrm{C}$ $1000^{\circ} \mathrm{C}$.\\
+\subsubsection{Solution}
+This is because water is a very stable molecule so splitting it requires a lot of energy. We can show this by calculating the Gibbs free energy change for the reaction.
+We can make a similar table as before:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+    & $\mathrm{H_{2}O}(g)$ & $\mathrm{H_{2}}(g)$ & $\mathrm{O_{2}}(g)$ \\
+\hline
+$\Delta H_{f}^{\circ}$ (kJ/mol) & -241.82 & 0 & 0 \\
+\hline
+$S^{\circ}$ (J/mol$\cdot$K) & 188.83 & 130.7 & 205.0 \\
+\hline
+\multicolumn{4}{|c|}{Reaction: $4 \mathrm{H_{2}O}(g) \rightarrow 4 \mathrm{H_{2}}(g)+2\mathrm{O_{2}}(g)$} \\
+\hline
+\multicolumn{4}{|c|}{$\Delta H_{rxn}^{\circ}$ (kJ/mol) = $4 \cdot 0 + 2 \cdot 0 - [4 \cdot (-241.82)] = 967 $} \\
+\hline
+\multicolumn{4}{|c|}{$\Delta S_{rxn}^{\circ}$ (J/mol$\cdot$K) = $4 \cdot 130.7 + 2 \cdot 205.0 - [4 \cdot 188.83] = 178$} \\
+\hline
+\end{tabular}\\
+\end{center}
+Let the temperature be represented by the variable $T$. For the water to be a reliable source of hydrogen, would need the splitting of water to be somewhat spontaneous, or in other words want the $\Delta G_{rxn}^{\circ}$ to be not too positive, so we can solve for the case where $\Delta G_{rxn}^{\circ} = 0$:
+\begin{equation}
+\Delta G_{rxn}^{\circ} = \Delta H_{rxn}^{\circ} - T \cdot \Delta S_{rxn}^{\circ} = 967
+    - T \cdot 178 \times 10^{-3} \text{ kJ/mol} =0 \implies T =  5348 \text{ K}
+\end{equation}
+This shows that the reaction is impossible with water as the hydrogen source at reasonable temperatures.
+\subsection{}
+c) Now, instead of reacting nitrogen to ammonia in a typical chemical reactor, you decide to use electrochemistry. Write out the half reactions in acidic electrolyte for the cathode and anode in the following two cases: (i) a nitrogen and hydrogen feed; (ii) a nitrogen and water feed. What do you notice about the cathode half reactions with the different feeds?\\
+\subsubsection{Solution}
+For a nitrogen and hydrogen feed, the half reactions are:
+\begin{equation}
+\text{Cathode: } \mathrm{N}_{2}(g) + 6 H^{+}(aq) + 6 e^{-} \rightarrow 2 \mathrm{NH}_{3}(g)
+\end{equation}
+\begin{equation}
+\text{Anode: } 3 H_{2}(g) \rightarrow 6 H^{+}(aq) + 6 e^{-}
+\end{equation}
+For a nitrogen and water feed, the half reactions are:
+\begin{equation}
+\text{Cathode: } 2\mathrm{N}_{2}(g) + 12 H^{+}(aq) + 12 e^{-} \rightarrow 4 \mathrm{NH}_{3}(g)
+\end{equation}
+\begin{equation}
+\text{Anode: } 6 H_{2}O(l) \rightarrow 12 H^{+}(aq) + 12 e^{-} + 3 O_{2}(g)
+\end{equation}
+We notice that the cathode half reaction is the same for both feeds under these acidic conditions.
+\subsection{}
+d) Repeat Part C for basic conditions.\\
+\subsubsection{Solution}
+For a nitrogen and hydrogen feed, the half reactions are:
+\begin{equation}
+\text{Cathode: } \mathrm{N}_{2}(g) + 6 H_{2}O(l) + 6 e^{-} \rightarrow 2 \mathrm{NH}_{3}(g) + 6 OH^{-}(aq)
+\end{equation}
+\begin{equation}
+\text{Anode: } 3 H_{2}(g) + 6 OH^{-}(aq) \rightarrow 6 H_{2}O(l) + 6 e^{-}
+\end{equation}
+For a nitrogen and water feed, the half reactions are:
+\begin{equation}
+\text{Cathode: } 2\mathrm{N}_{2}(g) +
+    12 H_{2}O(l) + 12 e^{-} \rightarrow 4 \mathrm{NH}_{3}(g) + 12 OH^{-}(aq)
+\end{equation}
+\begin{equation}
+\text{Anode: } 6 H_{2}O(l) + 12 OH^{-}(aq) \rightarrow 12 H_{2}O(l) + 3 O_{2}(g) + 12 e^{-}
+\end{equation}
+We notice that again the cathode half reaction is the same for both feeds under these basic conditions.
+\subsection{}
+e) For now, we are only interested in the overall reaction. Given a feed of nitrogen and water, what is the equilibrium potential at $25^{\circ} \mathrm{C}$ ? What other electrochemical reaction occurs near this potential? (hint: it involves one of the reactants) Why might this be a problem?\\
+\subsubsection{Solution}
+The overall reaction for a nitrogen and water feed is:
+\begin{equation}
+\mathrm{N}_{2}(g) + 3 H_{2}O(l) \rightarrow 2 \mathrm{NH}_{3}(g) + 3/2 O_{2}(g)
+\end{equation}
+We can make a similar table as before:
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+    & $\mathrm{N_{2}}(g)$ & $\mathrm{H_{2}O}(l)$ & $\mathrm{NH_{3}}(g)$ & $\mathrm{O_{2}}(g)$ \\
+\hline
+$\Delta H_{f}^{\circ}$ (kJ/mol) & 0 & -285.83 & -45.90 & 0 \\
+\hline
+$S^{\circ}$ (J/mol$\cdot$K) & 191.6 & 69.95 & 192.77 & 205.0 \\
+\hline
+\multicolumn{5}{|c|}{Reaction: $\mathrm{N}_{2}(g) + 3 \mathrm{H_{2}O}(l) \rightarrow 2 \mathrm{NH}_{3}(g) + 3/2 \mathrm{O_{2}}(g)$} \\
+\hline
+\multicolumn{5}{|c|}{$\Delta H_{rxn}^{\circ}$ (kJ/mol) = $2 \cdot (-45.90) + 3/2 \cdot 0 - [1 \cdot 0 + 3 \cdot (-285.83)] = 766 $} \\
+\hline
+\multicolumn{5}{|c|}{$\Delta S_{rxn}^{\circ}$ (J/mol$\cdot$K) = $2 \cdot 192.77 + 3/2 \cdot 205.0 - [1 \cdot 191.6 + 3 \cdot 69.95] = 292$} \\
+\hline
+\end{tabular}\\
+\end{center}
+Then we can compute $\Delta G_{rxn}^{\circ}$ at $25^{\circ} \mathrm{C}=298 \mathrm{K}$ as follows:
+\begin{equation}
+\Delta G_{rxn}^{\circ} = \Delta H_{rxn}^{\circ} - 298 \mathrm{K} \cdot \Delta S_{rxn}^{\circ} = 679 \text{ kJ/mol}
+\end{equation}
+The cell voltage (for one mol) is then given by:
+\begin{equation}E_{cell} = -\frac{\Delta G_{rxn}^{\circ}}{nF} = -\frac{679 \cdot 10^{3} \text{ J}}{6 \cdot 96485 \text{ C}} = -1.17 \text{ V}
+\end{equation}
+Another electrochemical reaction that occurs near this potential is the oxygen evolution reaction which involves water as a reactant, which occurs with a potential of around 1.23 V. And because the oxygen of solution reaction has much better kinetics than the desired nitrogen reduction reaction, this might be a problem because the OER can compete, leading to lower selectivity and efficiency for ammonia production.  
+\subsection{}
+f) Given a feed of nitrogen and hydrogen, what is the equilibrium potential at $25^{\circ} \mathrm{C}$ ? What does your result mean, physically, in particular when compared to the result from Part E?
+\subsubsection{Solution}
+The overall reaction for a nitrogen and hydrogen feed is:
+\begin{equation}
+\mathrm{N}_{2}(g) + 3 H_{2}(g) \rightarrow 2 \mathrm{NH}_{3}(g)
+\end{equation}
+We can make a similar table as before:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+    & $\mathrm{N_{2}}(g)$ & $\mathrm{H_{2}}(g)$ & $\mathrm{NH_{3}}(g)$ \\
+\hline
+$\Delta H_{f}^{\circ}$ (kJ/mol) & 0 & 0 & -45.90 \\
+\hline
+$S^{\circ}$ (J/mol$\cdot$K) & 191.6 & 130.7 & 192.77 \\
+\hline
+\multicolumn{4}{|c|}{Reaction: $\mathrm{N}_{2}(g) + 3 \mathrm{H_{2}}(g) \rightarrow 2 \mathrm{NH_{3}}(g)$} \\
+\hline
+\multicolumn{4}{|c|}{$\Delta H_{rxn}^{\circ}$ (kJ/mol) = $2 \cdot (-45.90) - [1 \cdot 0 + 3 \cdot 0] = -91.8 $} \\
+\hline
+\multicolumn{4}{|c|}{$\Delta S_{rxn}^{\circ}$ (J/mol$\cdot$K) = $2 \cdot 192.77 - [1 \cdot 191.6 + 3 \cdot 130.7] = -198$} \\
+\hline
+\end{tabular}\\
+\end{center}
+Then we can compute $\Delta G_{rxn}^{\circ}$ at $25^{\circ} \mathrm{C}=298 \mathrm{K}$ as follows:
+\begin{equation}
+\Delta G_{rxn}^{\circ} = \Delta H_{rxn}^{\circ} - 298 \mathrm{K} \cdot \Delta S_{rxn}^{\circ} = -32.8 \text{ kJ/mol}
+\end{equation}
+The cell voltage (for one mol) is then given by:
+\begin{equation}E_{cell} = -\frac{\Delta G_{rxn}^{\circ}}{nF} = -\frac{-32.8 \cdot 10^{3} \text{ J}}{6 \cdot 96485 \text{ C}} = 0.057 \text{ V}
+\end{equation}
+This result means that the reaction is now spontaneous, because we have flipped the sign of $\Delta G_{rxn}^{\circ}$ from part (e). This makes sense physically because we no longer have to split water, which is a very stable molecule.
+
+\section{Problem 4. Heavy Water Splitting}
+In heavy water ( $\mathrm{D}_{2} \mathrm{O}$ ), the deuterium atoms have a neutron and a proton in the nucleus, not just a proton. During water electrolysis, heavy water accumulates in the electrolyte as it is less prone to electrolysis than light water, $\mathrm{H}_{2} \mathrm{O}$. We will examine a reason for selective water splitting in this problem. Here, hydrogen refers collectively to both protium (H) and deuterium (D).
+
+You may find the following thermodynamic information useful:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Species & $\Delta G_{f}^{0}, \mathrm{~kJ} / \mathrm{mol}$ \\
+\hline
+$H_{2}$ & 0 \\
+\hline
+$D_{2}$ & 0 \\
+\hline
+$H_{2} O$ & -237.13 \\
+\hline
+$D_{2} O$ & -243.44 \\
+\hline
+\end{tabular}
+\end{center}
+
+For simplicity, you may assume that there is perfect isotope separation on a per molecule basis (i.e., $\mathrm{H}_{2} \mathrm{O}, \mathrm{H}_{3} \mathrm{O}^{+}, \mathrm{D}_{2} \mathrm{O}, \mathrm{D}_{3} \mathrm{O}^{+}$exist in solution, not HDO or similar combinations).\\
+\subsection{}
+a) What is the relative ratio of deuterium and protium in a natural aqueous electrolyte (i.e. an electrolyte that contains an entirely natural abundance of atoms)? The molar mass (on average) of natural hydrogen is 1.00811 , while the masses of a protium and deuterium are 1.00784 and 2.0141 respectively.\\
+\subsubsection{Solution}
+Let $x$ be the fraction of deuterium in natural hydrogen. Then we can set up the equation
+\begin{equation}
+1.00811 = x \cdot 2.0141 + (1-x) \cdot 1.00784
+\end{equation}
+Solving for $x$ gives $x = 2.68 \times 10^{-4}$, so the relative ratio of deuterium and protium in a natural aqueous electrolyte is $2.68 \times 10^{-4}: (1-2.68 \times 10^{-4}) \approx 1:3730$.
+\subsection{}
+b) As you may imagine, the thermodynamic properties of $\mathrm{D}_{2} \mathrm{O}$ and $\mathrm{H}_{2} \mathrm{O}$ are slightly different, and so thermodynamics can play a role in explaining the difference of electrolysis rates. Compute the difference in standard state OCVs for splitting $\mathrm{D}_{2} \mathrm{O}$ and $\mathrm{H}_{2} \mathrm{O}$.\\
+\subsubsection{Solution}
+Because we have the Gibbs free energy for both $\mathrm{D}_{2} \mathrm{O}$ and $\mathrm{H}_{2} \mathrm{O}$, we can compute the cell voltage for both reactions, first for $\mathrm{H}_{2} \mathrm{O}$:
+\begin{equation}
+E_{cell} = -\frac{\Delta G_{rxn}^{\circ}}{nF} = -\frac{-237.13 \cdot 10^{3} \text{ J}}{2 \cdot 96485 \text{ C}} = 1.229 \text{ V}
+\end{equation}
+Then for $\mathrm{D}_{2} \mathrm{O}$:
+\begin{equation}
+E_{cell} = -\frac{\Delta G_{rxn}^{\circ}}{nF} = -\frac{-243.44 \cdot 10^{3} \text{ J}}{2 \cdot 96485 \text{ C}} = 1.262 \text{ V}
+\end{equation}
+So the difference in standard state OCVs for splitting $\mathrm{D}_{2} \mathrm{O}$ and $\mathrm{H}_{2} \mathrm{O}$ is $1.262 - (1.229) = 0.033 \text{ V}$.
+\subsection{}
+c) Compute the difference in OCVs for splitting $\mathrm{D}_{2} \mathrm{O}$ and $\mathrm{H}_{2} \mathrm{O}$ based on their concentrations at natural abundance. Assume that the gas $\mathrm{D}_{2} / \mathrm{H}_{2}$ is at 1 bar .
+\subsubsection{Solution}
+We use the Nernst equation:
+\begin{equation}
+E = E^\circ - \frac{RT}{nF} \ln Q
+\end{equation}
+where for the splitting of water
+\begin{equation}
+Q = \frac{p_{\mathrm{H}_2} \, p_{\mathrm{O}_2}^{1/2}}{a_{\mathrm{H}_2O}}.
+\end{equation}
+At $p_{\mathrm{H}_2} = p_{\mathrm{D}_2} = 1 \,\mathrm{bar}$, the only difference comes from the activity of water, which is approximated by its mole fraction. In the earlier part, we found
+\begin{align}
+% a_{H_2O} &\approx 1 - 2.68 \times 10^{-4} \approx 0.9997, \\
+a_{D_2O} = 2.68 \times 10^{-4} \implies a_{H_2O} \approx 1 - 2.68 \times 10^{-4} \approx 0.9997,   
+\end{align}
+Thus, the difference in OCVs at $25^{\circ} \mathrm{C}$ is
+\begin{align}
+\Delta E &= \frac{RT}{nF} \ln\!\left(\frac{a_{H_2O}}{a_{D_2O}}\right) \\
+&= 0.01285 \frac{J}{C} \cdot \ln\!\left(3730\right) \\
+&= 0.106 \,\mathrm{V}
+\end{align}
+
+
+
+\end{document}

@@ -1,0 +1,144 @@
+
+\section{GW+C}
+\begin{frame}
+    \frametitle{Cumulant}
+
+We will highlight the key steps in the simplest approach to deriving the cumulant expansion for the retarded Green function. Equating the Dyson equation and the Taylor expansion of the exponential to first order gives
+\begin{align}
+    \bm{G}_{pp}^{0}(t) \bm{C}_{pq}(t) &= {\iint \dd t_1 \dd t_2 \bm{G}_{pp}^{0}(t-t_1) \bm{\Sigma}_{pq}^c(t_1 - t_2) \bm{G}_{qq}^{0}(t_2)} \\
+\implies C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+\end{align}
+Loos plugs in the $GW$ self-energy here to get
+\begin{equation}
+    C_{pp}(t) = \sum_{i\nu} \zeta_{pi\nu} \left[ e^{-i\Delta_{pi\nu} t} - 1 + i\Delta_{pi\nu} t \right] + \sum_{a\nu} \zeta_{pa\nu} \left[ e^{-i\Delta_{pa\nu} t} - 1 + i\Delta_{pa\nu} t \right]
+\end{equation}
+A second order form for the self-energy can be inserted instead, which we will explore later.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Green's function}
+Plugging back this form gives
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) Z_p^{QP} e^{-i \epsilon_p^{QP} t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}}
+\end{equation}
+The weight of the quasiparticle peak is
+\begin{equation}
+    Z_p^{QP} = e^{-\sum_{i\nu} \zeta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}} = \exp\left(\left[\frac{\partial \Sigma_{pp}^c(\omega)}{\partial \omega}\right]_{\omega = \epsilon_p^{HF}}\right)
+\end{equation}
+with the quasiparticle energy
+\begin{equation}
+    \epsilon_p^{QP} = \epsilon_p^{HF} - \left(\sum_{i\nu} \zeta_{pi\nu} \Delta_{pi\nu} + \sum_{a\nu} \zeta_{pa\nu} \Delta_{pa\nu}\right) = \epsilon_p^{HF} + \Sigma_{pp}^c\left(\epsilon_p^{HF}\right)
+\end{equation}
+With the Fourier transform and a first order expansion of the exponential:
+\begin{equation}
+    G_{pp}(\omega) = \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_p^{QP} \zeta_{pi\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pi\nu} + i\eta} + \sum_{a\nu}  \ldots
+\end{equation}
+
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Spectral function}
+The spectral function is
+\begin{align}
+    A_{pp}(\omega) &= -\frac{1}{\pi} \operatorname{Im} G_{pp}(\omega) \\
+&=-\frac{1}{\pi}\left[\frac{\left(\operatorname{Re} Z_p^{QP}\right)\left(\operatorname{Im} \epsilon_p^{QP}\right) + \left(\operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+& \left. + \sum_{i\nu} \frac{\left(\operatorname{Re} Z_{pi\nu}^{sat}\right)\left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right) + \left(\operatorname{Im} Z_{pi\nu}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right)^2} + \sum_{a\nu}\ldots \right]
+\end{align}
+
+\end{frame}
+\section{Cumulant with second order self-energy}
+\begin{frame}
+    \frametitle{Expression for the cumulant}
+With a frequency shift, the diagonal part of the second order self-energy is
+\begin{equation}
+    \Sigma_{pp}^{(2)}(\omega+\epsilon_p) =
+\frac{1}{2} \sum_{iab}
+\frac{\left< pi \left| \right| ab \right>^2}
+{\omega-\epsilon_{pi}^{ab}} + \frac{1}{2} \sum_{ija}
+\frac{\left< pa \left| \right| ij \right>^2}
+{\omega-\epsilon_{pa}^{ij}}
+\end{equation}
+Then the cumulant can be brought to the Landau form
+\begin{equation}
+    C_{pp}^{(2)}(t) = \int d\omega\, \beta(\omega) f(\omega)
+\end{equation}
+with $f(\omega) \equiv \frac{e^{-i \omega t}+i \omega t-1}{\omega^2} $ and
+\begin{align}
+    \beta(\omega) &= -\frac{1}{\pi} \operatorname{Im} \Sigma_{pp}^{(2)}\left(\omega+\epsilon_p\right) 
+\label{eq:beta_def}\\
+&=\frac{1}{2} \sum_{i a b}\langle p i \| a b\rangle^2 \delta\left(\omega-\epsilon_{p i}^{a b}\right)+\frac{1}{2} \sum_{i j a}\langle p a \| i j\rangle^2 \delta\left(\omega-\epsilon_{p a}^{i j}\right) \label{eq:beta_2nd}
+\end{align}
+This is similar to $\beta(\omega)=\sum_q g_q^2 \delta(\omega-\omega_q)$ kernel for electrons coupled to
+bosons at the frequencies $\omega_q\equiv \epsilon_{pq}^{rs}$
+with coupling coefficients $g_q \equiv \langle p q \| r s\rangle$.
+\end{frame}
+\begin{frame}
+    \frametitle{Connecting back to the Dyson equation}
+The CC GF can be written in frequency space as
+\begin{equation}
+    G_{pq}^R (\omega) = \left\langle \Phi \left| (1+\Lambda) \bar{a^{\dagger}_q}(\omega + \bar{H}_N + i\delta)^{-1} \bar{a_p} \right| \Phi \right\rangle + EA
+\end{equation}
+Truncating the CC expansion to doubles and introducing
+\begin{align}
+    X_p(\omega) & \equiv (\omega + \bar{H}_N + i\delta)^{-1} \bar{a_p} \\
+& =\sum_i x^i(\omega)_p a_i+\frac{1}{2!} \sum_{ij, a} x_a^{ij}(\omega)_p a_a^{\dagger} a_j a_i
+\end{align}
+and something analogous for the EA sector. By considering a perturbation series in the cluster amplitudes up to second order, we can get
+\begin{align}
+    G_{pq}^{(2)R}(\omega)
+&= G_{pq}^{R(0)} (\omega) + G_{pq}^{R(0)} (\omega) \Sigma_{pq}^{(2)}(\omega) G_{pq}^{R(0)} (\omega)
+\end{align}
+with the second order self-energy $\Sigma_{pq}^{(2)}(\omega)$ and $G_{pq}^{(0) R}(\omega)= \frac{1}{(\omega-\epsilon_q)}$.
+\end{frame}
+\section{Real-time EOM-CC Cumulant GF}
+\begin{frame}
+    \frametitle{Simplification from just considering the core hole GGF}
+For a given deep core level $p=c$:
+\begin{align}
+    G_{c}^{R}(t) &= -i \Theta(t-t')
+\left<0\left| \left\{a_c(t), a_c^\dagger(t') \right\} \right| 0 \right>\\
+&= -i \Theta(t) e^{-iE_0 t} \left<N-1 | N-1, t \right>
+\end{align}
+where $\left| 0
+\right> \simeq a_c^\dagger \left| N-1 \right>$ and $\left| N-1, t \right> =
+e^{iHt} \left| N-1 \right>\approx N(t) e^{T(t)} \left| \phi \right>$. Inserting the latter states and left multiplying by $e^{-T(t)}$ gives
+\begin{align}
+    -i \frac{d\left| N-1, t \right>}{dt} &= H \left| N-1, t \right> \\
+\implies -i \left( \frac{d\ln N(t)}{dt} + \frac{d T(t)}{dt} \right) \left| \phi \right>& = \left( \bar{H}_N(t) + E^{N-1} \right) \left| \phi \right>
+\end{align}
+Projection yields coupled DEs for $N(t)$ and $T(t)$, but we will just display here the former because it seems most relevant to the cumulant
+\begin{align}
+\label{eq-dlnndt}
+-i \frac{d \ln N(t)}{dt} = \left< \phi \left| \bar{H}_N(t) \right| \phi \right>
++ E^{N-1}
+\end{align}
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Continued}
+Assuming
+$\left| N-1 \right> \simeq a_c \left| \Phi \right> = \left| \phi \right> \implies \left<N-1\right| \left. N-1, t \right> = N(t)$, plugging back in gives
+\begin{align}
+    G_c^R(t) &= -i \Theta(t) e^{-i \epsilon_c t} e^{C_c^R(t)}
+\end{align}
+with $\epsilon_c = E^{N-1} - E_0$ and the Landau form of the cumulant is
+\begin{align}
+C_c^R(t) &= i \int_0^t \left< \phi \left| \bar{H}_N(t) \right| \phi\right> dt' \\   
+&= \int \dd \omega \beta_c(\omega) \frac{e^{-i\omega t} + i\omega t - 1}{\omega^2} 
+\end{align}
+with $\beta_c(\omega) = \frac{1}{\pi} \mathrm{Re} \int_0^{\infty} dt e^{-i\omega t} \left[-i \frac{d}{dt} \left< \phi \left| \bar{H}_N(t) \right| \phi \right> \right]$.
+So we see that the cumulant obeys the differential equation
+\begin{equation}
+\label{eqn:matel1}
+\begin{split}
+-i\frac{d C_c^R(t)}{dt} &= \left< \phi \left| \bar{H}_N(t) \right| \phi \right> \\
+&= \sum_{ia} f_{ia} t_i^a +
+\frac{1}{2} \sum_{ijab} v_{ij}^{ab} t_j^b t_i^a,
+\end{split}
+\end{equation}
+\end{frame}

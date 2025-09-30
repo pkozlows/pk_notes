@@ -643,15 +643,16 @@ where the coefficients are given by $a_n = \frac{(\mathcal{L} f_n, f_n)}{(f_n, f
 &= \mathcal{L}_0 |f_n\rangle + [V, |f_n\rangle] \\
 \end{align}
 where $H_0$ is the non-interacting Hamiltonian and $V$ is the interaction. We can also define a non-interacting Liouvillian $\mathcal{L}_0$ such that $\mathcal{L}_0 X = [H_0, X]$. So we can write
-\subsection{Annotation of Loos paper}
+\section{Annotation of Loos paper}
 The definition of the cumulant ansatz for the retarded Green's function is given by:
 \begin{equation}
     \bm{G}(t) = \bm{G}^0(t)e^{\bm{C}(t)}
 \end{equation}
-where $\bm{C}(t)$ is the retarded cumulant and $\bm{G}^0(t)$ is the retarded HF Green's function. By relating the Dyson equation to the Taylor series expansion of the exponential, we can write:
+where $\bm{C}(t)$ is the retarded cumulant and $\bm{G}^0(t)$ is the retarded HF Green's function. By relating the Dyson equation to the Taylor series expansion of the exponential (both to first order), we can write:
 \begin{equation}
     \bm{G}^0(t) \bm{C}(t) = \iint \dd t_1 \dd t_2 \bm{G}^0(t-t_1) \bm{\Sigma}^c(t_1 - t_2) \bm{G}^0(t_2)
 \end{equation}
+\textbf{This first order expansion is exact up to the first order in the screened Coulomb interaction $W$. If we choose instead to use a second order self-energy, now the cumulant will be exact to second order in the bare Coulomb interaction $v$.}
 Projecting to the spin-orbital basis and inserting the resolution of the identity, we get:
 \begin{align}
     \sum_{r}\bra{p}\bm{G}^0(t) \ket{r}\bra{r}\bm{C}(t)\ket{q} &= \sum_{rs}\iint \dd t_1 \dd t_2 \bra{p}\bm{G}^0(t-t_1)\ket{r} \bra{r}\bm{\Sigma}^c(t_1 - t_2)\ket{s} \bra{s}\bm{G}^0(t_2)\ket{q} \\
@@ -686,11 +687,129 @@ and plugging into the double time integral *, we get:
     &= \int \frac{\dd \omega}{2\pi} e^{-i\omega t} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega)\bm{G}_{qq}^{0}(\omega)
 \end{align}
 Multiplying both sides of eqn.~\ref{eqn:cumulant_connection} by $ie^{\epsilon_p t} $ and recalling that we are dealing with retarded quantities that vanish for negative times, we get:
+\emph{We are also interested in what happens if we use an exact self-energy in \ref{eq:Cpp_0} instead of the $GW$ one. Also can we get away with not using the diagonal approximation?} 
+\subsection{Using exact self-energy}
+We know that $\Sigma = G_0^{-1} - G^{-1}$, and inserting this gives\\ $G_0(\omega) \Sigma(\omega) G_0(\omega) = G_0(\omega) \left(G_0^{-1}(\omega) - G^{-1}(\omega)\right) G_0(\omega) = G_0(\omega) - G_0(\omega) G^{-1}(\omega) G_0(\omega)$
 \begin{align}
-	C_{pq}(t) &= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} G_{pp}^{HF}(\omega) \Sigma_{pq}^c(\omega) G_{qq}^{HF}(\omega) \\
+	C_{pq}(t) &= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} \left[G_0(\omega) \Sigma(\omega) G_0(\omega)\right]_{pq} \\
+&= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} \left[G_0(\omega) - G_0(\omega) G^{-
+1}(\omega) G_0(\omega)\right]_{pq} \\
+&= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} \left[\frac{1}{\omega - \epsilon_p^{HF} + i\eta} - \left[G_0(\omega) G^{-1}(\omega) G_0(\omega)\right]_{pq}\right] \\
+&= \theta(t) - i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t}  \left[G_0(\omega) G^{-1}(\omega) G_0(\omega)\right]_{pq}
+\label{restart} \\
+&= i \int \frac{d\omega}{2\pi}  \left[\frac{e^{-i(\omega-\epsilon_p^{HF})t}}{\omega - \epsilon_p^{HF} + i\eta} - \frac{e^{-i(\omega-\epsilon_p^{HF})t}G^{-1}_{pq}(\omega)}{(\omega - \epsilon_p^{HF} + i\eta)(\omega - \epsilon_q^{HF} + i\eta)}\right] \\
+&= \theta  (t) - i \int \frac{d\omega}{2\pi}  \frac{e^{-i(\omega-\epsilon_p^{HF})t}G^{-1}_{pq}(\omega)}{(\omega - \epsilon_p^{HF} + i\eta)(\omega - \epsilon_q^{HF} + i\eta)} 
+\end{align}
+Now we plug this into the ansatz for the retarded Green's function:
+\begin{align}
+    G_{pq}(t) &= G_{pp}^{HF}(t) e^{C_{pq}(t)} \\
+&= -i \theta(t) e^{- i \epsilon_p^{HF} t} \exp \left[\theta(t) - i \int \frac{d\omega}{2\pi}  \frac{e^{-i(\omega-\epsilon_p^{HF})t}G^{-1}_{pq}(\omega)}{(\omega - \epsilon_p^{HF} + i\eta)(\omega - \epsilon_q^{HF} + i\eta)}\right] \\
+&\approx -i \theta(t) e^{- i \epsilon_p^{HF} t} \left[1 - i \int \frac{d\omega}{2\pi}  \frac{e^{-i(\omega-\epsilon_p^{HF})t}G^{-1}_{pq}(\omega)}{(\omega - \epsilon_p^{HF} + i\eta)(\omega - \epsilon_q^{HF} + i\eta)}\right] 
+\end{align}
+This doesn't seem useful, so we can start again with eqn.~\ref{restart}.
+We can use a projection technique and split into a HF space where the projector is defined as $\hat{P}=\sum_p^{\text{HF}}\ket{p}\bra{p}$, which we can identify with $\begin{pmatrix}1 \\ 0\end{pmatrix}$ and the rest space with projector $\hat{Q}=1-\hat{P}$, which we can identify with $\begin{pmatrix}0 \\ 1\end{pmatrix}$. Then, using the fact that $G^{-1} = G_0^{-1} - \Sigma$ and assuming the HF reference, we can write:
+\begin{align}
+    G^{-1}_{pq}(\omega) 
+&= \left[\hat{P} G^{-1}(\omega) \hat{P} + \hat{P} G^{-1}(\omega) \hat{Q} + \hat{Q} G^{-1}(\omega) \hat{P} + \hat{Q} G^{-1}(\omega) \hat{Q}\right]_{pq} \\
+ &= \left(\left[\omega - \epsilon_p^{HF} \right] \delta _{pq}- \Sigma_{pq}(\omega)\right) \hat{P}\otimes \hat{P} - \left(\Sigma^c_{pQ}\right) \hat{P}\otimes \hat{Q} - \left(\Sigma^c_{Pq}\right) \hat{Q}\otimes \hat{P}\\
+& + \left( (\omega - \epsilon_P^{HF}) \delta _{PQ} - \Sigma_{PQ}(\omega)\right) \hat{Q}\otimes \hat{Q} \\
+&= \begin{pmatrix} \left[\omega - \epsilon_p^{HF} \right] \delta _{pq}- \Sigma_{pq}(\omega) & -\Sigma^c_{pQ} \\ -\Sigma^c_{Pq} & (\omega - \epsilon_P^{HF}) \delta _{PQ} - \Sigma_{PQ}(\omega) \end{pmatrix} \\
+\implies G _{pq}(\omega)&=  
+% \\
+% &= \left(\left[\omega - \epsilon_p^{HF} \right] \delta _{pq}- \Sigma_{pq}(\omega)\right)\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} - \left(\Sigma^c_{pQ}\right) \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} - \left(\Sigma^c_{Pq}\right) \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} + \left( (\omega - \epsilon_P^{HF}) \delta _{PQ} - \Sigma_{PQ}(\omega)\right) \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}
+\end{align}
+where lowercase letters indicate indices in the physical space, while uppercase letters indicate indices in the rest space.
+\subsection{Off-diagonal cumulant with GW self-energy}
+We can start with
+\begin{align}
+		C_{pq}(t) &= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} G_{pp}^{HF}(\omega) \Sigma_{pq}^c(\omega) G_{qq}^{HF}(\omega) \\
 &= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} \frac{\Sigma_{pq}^c(\omega)}{(\omega - \epsilon_p^{HF} + i\eta)(\omega - \epsilon_q^{HF} + i\eta)} 
 \label{eq:Cpp_m1}\\
-\implies C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+\end{align}
+At this point we make the frequency shift $\omega \to \omega + \epsilon_p^{HF}$, and then we can write
+\begin{align}
+    C_{pq}(t) &= i \int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{\Sigma_{pq}^c(\omega + \epsilon_p^{HF})}{(\omega + i\eta)(\omega + \underbrace{\epsilon_p^{HF} - \epsilon_q^{HF}}_{\Delta_{pq}} + i\eta)}
+\end{align}
+Now using the partial fractions we can write $\frac{1}{(\omega + i\eta)(\omega + \Delta_{pq} + i\eta)} = \frac{1}{\Delta_{pq}}\left(\frac{1}{\omega + i\eta} - \frac{1}{\omega + \Delta_{pq} + i\eta}\right)$ and we can plug in the full form for the retarded GW self-energy as 
+\begin{equation}
+    \Sigma_{pq}^{c, \mathrm{G}_0 \mathrm{~W}_0}(\omega)= \sum_{i \nu}\left[W_{p i \nu} \frac{1}{\omega-\left(\epsilon_i-\Omega_\nu\right)+\mathrm{i} \eta} W_{q i \nu}\right]+ \sum_{a \nu}\left[W_{p a \nu} \frac{1}{\omega-\left(\epsilon_a+\Omega_\nu\right)+\mathrm{i} \eta} W_{q a \nu}\right]
+\end{equation}
+to get
+\begin{align}
+    C_{pq}(t) &= \frac{i}{\Delta_{pq}} \int \frac{d\omega}{2\pi} e^{-i\omega t} \left[ \sum_{i \nu} \frac{W_{p i \nu} W_{q i \nu}}{\omega+\epsilon_p-\left(\epsilon_i-\Omega_\nu\right)+\mathrm{i} \eta} + \sum_{a \nu}  \frac{W_{p a \nu} W_{q a \nu}}{\omega+\epsilon_p-\left(\epsilon_a+\Omega_\nu\right)+\mathrm{i} \eta} \right] \\
+&\left(\frac{1}{\omega + i\eta} - \frac{1}{\omega + \left( \epsilon_p - \epsilon_q\right) + i \eta}\right) \notag \\ 
+& = i \sum_{i \nu} \frac{W_{p i \nu} W_{q i \nu}}{\Delta_{pq}} \int \frac{d\omega}{2\pi} e^{-i\omega t} \times \\
+&\left(\frac{1}{\left(\omega+\epsilon_p-\left(\epsilon_i-\Omega_\nu\right)+\mathrm{i} \eta\right)\left(\omega + i\eta\right)} - \frac{1}{\left(\omega+\epsilon_p-\left(\epsilon_i-\Omega_\nu\right)+\mathrm{i} \eta\right)\left(\omega + \left( \epsilon_p - \epsilon_q\right) + i\eta\right)}\right) \notag \\
+& + i \sum_{a \nu} \frac{W_{p a \nu} W_{q a \nu}}{\Delta_{pq}} \int \frac{d\omega}{2\pi} e^{-i\omega t} \times \notag \\
+&\left(\frac{1}{\left(\omega+\epsilon_p-\left(\epsilon_a+\Omega_\nu\right)+\mathrm{i} \eta\right)\left(\omega + i\eta\right)} - \frac{1}{\left(\omega+\epsilon_p-\left(\epsilon_a+\Omega_\nu\right)+\mathrm{i} \eta\right)\left(\omega + \left( \epsilon_p - \epsilon_q\right) + i\eta\right)}\right) \notag
+\end{align}
+To evaluate these contour integrals, recall that $\oint d\omega f(\omega) = \int_{-\infty}^{\infty} d\omega f(\omega) + \int_{\text{arc}} d\omega f(\omega)$, so in order to equate the real frequency integral to the contour integral, which will then allow us to use the residue theorem, we need to ensure that the integral over the arc vanishes. This only will happen (due to Jordan's Lemma) if the numerator $e^{-i\omega t}$ vanishes for $\omega \rightarrow \infty$ and $\omega \rightarrow -\infty$; because we have $t>0$, this is only true if $\operatorname{Im}(\omega) < 0$, and so we must close the contour in the lower half plane. 
+\begin{align}
+    &\int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{1}{\left(\omega+\epsilon_p-\left(\epsilon_i-\Omega_\nu\right)+\mathrm{i} \eta\right)\left(\omega + i\eta\right)} = i\left(\frac{e^{-i(\epsilon_i - \Omega_\nu-\epsilon_p)t} - 1}{\epsilon_i - \Omega_\nu-\epsilon_p}\right) \\
+    &\int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{1}{\left(\omega+\epsilon_p-\left(\epsilon_i-\Omega_\nu\right)+\mathrm{i} \eta\right)\left(\omega + \Delta_{pq} + i\eta\right)} = i\left(\frac{e^{i(\Delta_{pq})t} - e^{-i(\epsilon_i - \Omega_\nu-\epsilon_p)t}}{-\epsilon_i + \Omega_\nu+\epsilon_p - \Delta_{pq}}\right) \\
+&= i\left(\frac{e^{i(\epsilon_p - \epsilon_q)t} - e^{-i(\epsilon_i - \Omega_\nu-\epsilon_p)t}}{-\epsilon_i + \Omega_\nu+\epsilon_q}\right) \notag \\
+    &\int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{1}{\left(\omega+\epsilon_p-\left(\epsilon_a+\Omega_\nu\right)+\mathrm{i} \eta\right)\left(\omega + i\eta\right)} = i\left(\frac{e^{-i(\epsilon_a + \Omega_\nu-\epsilon_p)t} - 1}{\epsilon_a + \Omega_\nu-\epsilon_p}\right) \\
+    &\int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{1}{\left(\omega+\epsilon_p-\left(\epsilon_a+\Omega_\nu\right)+\mathrm{i} \eta\right)\left(\omega + \Delta_{pq} + i\eta\right)} = i\left(\frac{e^{i(\Delta_{pq})t} - e^{-i(\epsilon_a + \Omega_\nu-\epsilon_p)t}}{-\epsilon_a - \Omega_\nu+\epsilon_p - \Delta_{pq}}\right) \\
+&= i\left(\frac{e^{i(\epsilon_p - \epsilon_q)t} - e^{-i(\epsilon_a + \Omega_\nu-\epsilon_p)t}}{-\epsilon_a - \Omega_\nu+\epsilon_q}\right) \notag
+\end{align}
+To ease the notation, we can introduce $\Xi_{i\nu} \equiv \epsilon_i - \Omega_\nu$, $\Xi_{a\nu} \equiv \epsilon_a + \Omega_\nu$. Then we can write
+\begin{align}
+C_{pq}(t) &=  \left[ \sum_{i\nu} W_{p i \nu} W_{q i \nu} \left(\underbrace{\frac{1}{\Delta}\left[\frac{1- e^{-i\left(\Xi_{i\nu} - \epsilon_p\right) t}}{\Xi_{i\nu}-\epsilon_p} - \frac{e^{i\Delta t} - e^{-i\left(\Xi_{i\nu} - \epsilon_p\right) t}}{-\left(\Xi_{i\nu} - \epsilon_q\right)}\right] }_{T_{i\nu}(t)}\right)\right.\\
+& \left. + \sum_{a\nu} W_{p a \nu} W_{q a \nu} 
+\left(\underbrace{\frac{1}{\Delta}\left[{\frac{1- e^{-i\left(\Xi_{a\nu} - \epsilon_p\right) t}}{\Xi_{a\nu}-\epsilon_p} - \frac{e^{i\Delta t} - e^{-i\left(\Xi_{a\nu} - \epsilon_p\right) t}}{-\left(\Xi_{a\nu} - \epsilon_q\right)} } \right]}_{T_{a\nu}(t)} \right)\right] \\
+\end{align}
+Now we just work with
+\begin{align}
+    T_{i\nu}(t) &= \frac{ \left( \Xi_{i\nu} - \epsilon_q \right) \left[ 1 - e^{-i(\Xi_{i\nu} - \epsilon_p)t} \right] + \left( \Xi_{i\nu} - \epsilon_p \right) \left[ e^{i\left(\epsilon_p - \epsilon_q\right)t} - e^{-i(\Xi_{i\nu} - \epsilon_p)t} \right] }{ (\epsilon_p - \epsilon_q)(\Xi_{i\nu} - \epsilon_p)(\Xi_{i\nu} - \epsilon_q) } \\
+&= \frac{ \left( \Xi_{i\nu} - \epsilon_q \right) + \left( \Xi_{i\nu} - \epsilon_p \right) e^{i\left(\epsilon_p - \epsilon_q\right)t} + \left( \epsilon_q - \epsilon_p - 2\Xi_{i\nu} \right) e^{-i(\Xi_{i\nu} - \epsilon_p)t} }{ (\epsilon_p - \epsilon_q)(\Xi_{i\nu} - \epsilon_p)(\Xi_{i\nu} - \epsilon_q) } \\
+&= \frac{1}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_p\right)}+\frac{e^{i\left(\epsilon_p-\epsilon_q\right) t}}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_q\right)}-\frac{e^{-i\left(\Xi_{i\nu}-\epsilon_p\right) t}}{\left(\Xi_{i\nu}-\epsilon_p\right)\left(\Xi_{i\nu}-\epsilon_q\right)}-\frac{2 \Xi_{i\nu} e^{-i\left(\Xi_{i\nu}-\epsilon_p\right) t}}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_p\right)(\Xi_{i\nu}-\epsilon_q)} .
+\end{align}
+and we can do the analogous computation to get $T_{a\nu}(t)$.
+Now we can plug into the expression for the retarded Green's function to get
+\begin{align}
+    G_{pq}(t) & = G_{pq}^{HF}(t) e^{C_{pq}(t)} \\
+& = -i \Theta(t) e^{-i \epsilon_p t + C_{pq}(t)} \\
+& = -i \Theta(t) \exp\left[-i \epsilon_p t + \sum_{i\nu} W_{p i \nu} W_{q i \nu} T_{i\nu}(t) + \sum_{a\nu} W_{p a \nu} W_{q a \nu} T_{a\nu}(t) \right] \\
+\end{align}
+The Fourier transform to the frequency domain is given by
+\begin{align}
+    G_{pq}(\omega) &= \int dt e^{i\omega t} G_{pq}(t) \\
+&= -i \int_0^\infty dt e^{i(\omega - \epsilon_p) t} \exp{\sum_{i\nu} W_{p i \nu} W_{q i \nu} T_{i\nu}(t) + \sum_{a\nu} W_{p a \nu} W_{q a \nu} T_{a\nu}(t)} \\
+&\approx -i \int_0^\infty dt e^{i(\omega - \epsilon_p) t} \left[1 + \sum_{i\nu} W_{p i \nu} W_{q i \nu} T_{i\nu}(t) + \sum_{a\nu} W_{p a \nu} W_{q a \nu} T_{a\nu}(t) \right] \\
+\end{align}
+where in the last step we have made a Taylor expansion of the exponential, keeping just the 0th and 1st order terms. This is the right thing to do because in one of our first steps we chose to make the expression exact up to the first order in the screened Coulomb interaction $W$. If we were to expand beyond the first order, we would be including terms beyond first order in $W$.
+So the form for the off-diagonal GW+C spectral function would be
+\begin{align}
+    A_{pq}(\omega) &= -\frac{1}{\pi} \text{Im} G_{pq}(\omega) \\
+\end{align}
+so we would need to determine
+\begin{align}
+   \operatorname{Im}G_{pq}(\omega) &\approx - \operatorname{Re}\int_0^\infty dt \left[e^{i(\omega - \epsilon_p) t} \left(1 + \sum_{i\nu} W_{p i \nu} W_{q i \nu} T_{i\nu}(t) + \sum_{a\nu} W_{p a \nu} W_{q a \nu} T_{a\nu}(t) \right) \right] \\
+&= - \pi \delta(\omega - \epsilon_p) - \sum_{i\nu} W_{p i \nu} W_{q i \nu} \operatorname{Re}\int_0^\infty dt e^{i(\omega - \epsilon_p) t} T_{i\nu}(t) - \sum_{a\nu} W_{p a \nu} W_{q a \nu} \operatorname{Re}\int_0^\infty dt e^{i(\omega - \epsilon_p) t} T_{a\nu}(t)
+\end{align}
+which leaves us with the task of computing
+\begin{align}
+    \operatorname{Re}\int_0^\infty dt e^{i(\omega - \epsilon_p) t} T_{i\nu}(t) &= \frac{\pi\delta(\omega - \epsilon_p)}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_p\right)} + \frac{\pi\delta(\omega - \epsilon_q)}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_q\right)}\\
+&  - \frac{\pi\delta(\omega - \Xi_{i\nu})}{\left(\Xi_{i\nu}-\epsilon_p\right)\left(\Xi_{i\nu}-\epsilon_q\right)}-\frac{\pi2\Xi_{i\nu}\delta(\omega - \Xi_{i\nu})}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_p\right)\left(\Xi_{i\nu}-\epsilon_q\right)} \notag \\
+\end{align}
+and similarly for $T_{a\nu}(t)$. So
+\begin{align}
+    A_{pq}(\omega) &\approx \delta(\omega - \epsilon_p) + \sum_{i\nu} W_{p i \nu} W_{q i \nu} \left[\frac{\delta(\omega - \epsilon_p)}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_p\right)} + \frac{\delta(\omega - \epsilon_q)}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_q\right)} - \frac{\delta(\omega - \Xi_{i\nu})}{\left(\Xi_{i\nu}-\epsilon_p\right)\left(\Xi_{i\nu}-\epsilon_q\right)} \right. \\
+&\left. - \frac{2\Xi_{i\nu}\delta(\omega - \Xi_{i\nu})}{\left(\epsilon_p-\epsilon_q\right)\left(\Xi_{i\nu}-\epsilon_p\right)\left(\Xi_{i\nu}-\epsilon_q\right)}\right] + \sum_{a\nu} W_{p a \nu} W_{q a \nu} \left[\frac{\delta(\omega - \epsilon_p)}{\left(\epsilon_p-\epsilon_q\right)\left({\Xi}_{a\nu}-\epsilon_p\right)} + \frac{\delta(\omega - \epsilon_q)}{\left(\epsilon_p-\epsilon_q\right)\left({\Xi}_{a\nu}-\epsilon_q\right)} \right. \\
+& \left.- \frac{\delta(\omega - {\Xi}_{a\nu})}{\left({\Xi}_{a\nu}-\epsilon_p\right)\left({\Xi}_{a\nu}-\epsilon_q\right)}  - \frac{2{\Xi}_{a\nu}\delta(\omega - {\Xi}_{a\nu})}{\left(\epsilon_p-\epsilon_q\right)\left({\Xi}_{a\nu}-\epsilon_p\right)\left({\Xi}_{a\nu}-\epsilon_q\right)}\right] \notag
+\end{align}
+We can replace all of the delta functions with Lorentzians in practice.
+%     C_{pq}(t) &= \frac{i}{\Delta_{pq}} \int \frac{d\omega}{2\pi} e^{-i\omega t} \Sigma_{pq}^c(\omega + \epsilon_p^{HF}) \left(\frac{1}{\omega + i\eta} - \frac{1}{\omega + \Delta_{pq} + i\eta}\right) \\
+% \end{align}
+% Now, we can just plug this in to the expression for the retarded Green's function to get
+% \begin{align}
+%     G_{pq}(t) & = G_{pq}^{HF}(t) e^{C_{pq}(t)} \\
+% & = -i \Theta(t) e^{-i \epsilon_p^{HF} t + C_{pq}(t)} \\
+% & = -i \Theta(t) e^{-i \epsilon_p^{HF} t} \exp\left[\frac{i}{\Delta_{pq}} \int \frac{d\omega}{2\pi} e^{-i\omega t} \Sigma_{pq}^c(\omega + \epsilon_p^{HF}) \left(\frac{1}{\omega + i\eta} - \frac{1}{\omega + \Delta_{pq} + i\eta}\right)\right]
+% \end{align}
+\subsection{Standard route: diagonal cumulant with GW self-energy}
+\begin{align}
+	 C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
 \label{eq:Cpp_0} \\
 &= i \int \frac{d\omega}{2\pi} \frac{1}{(\omega + i \eta)^2} e^{-i \omega t} \left[ \sum_{i\nu} \frac{M_{pi\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_i + \Omega_\nu + i \eta}_{-\Delta_{pi\nu}}} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_a - \Omega_\nu + i \eta}_{-\Delta_{pa\nu}}} \right] \\
 & =\mathrm{i} \sum_{i v} M_{p i v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p i v}} +\mathrm{i} \sum_{a v} M_{p a v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p a v}}
@@ -722,15 +841,15 @@ We pause to make some important connections. Notice
 \begin{align}
 \epsilon_p^{QP} & = \epsilon_p^{HF} - \left(\sum_{i\nu} \zeta_{pi\nu} \Delta_{pi\nu} + \sum_{a\nu} \zeta_{pa\nu} \Delta_{pa\nu}\right) \\
 & = \epsilon_p^{HF} - \left(\sum_{i\nu} \frac{M_{pi\nu}^2}{\Delta_{pi\nu}} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\Delta_{pa\nu}}\right) \\
-& = \epsilon_p^{HF} + \operatorname{Re} \Sigma_{pp}^c\left(\epsilon_p^{HF}\right)
+& = \epsilon_p^{HF} + \Sigma_{pp}^c\left(\epsilon_p^{HF}\right)
 \end{align}
 and
 \begin{align}
 Z_p^{QP} & = \exp\left(-\sum_{i\nu} \zeta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}\right) \\
 & = \exp\left(-\sum_{i\nu} \left(\frac{M_{pi\nu}}{\Delta_{pi\nu}}\right)^2 - \sum_{a\nu} \left(\frac{M_{pa\nu}}{\Delta_{pa\nu}}\right)^2\right) \\
-& = \exp\left(\left[\frac{\partial \operatorname{Re} \Sigma_{pp}^c(\omega)}{\partial \omega}\right]_{\omega = \epsilon_p^{HF}}\right) \\
+& = \exp\left(\left[\frac{\partial \Sigma_{pp}^c(\omega)}{\partial \omega}\right]_{\omega = \epsilon_p^{HF}}\right) \\
 \end{align}
-where we have used the fact that $\operatorname{Re} \Sigma_{pp}^c(\omega) = \sum_{i\nu} \frac{M_{pi\nu}^2}{\omega - \epsilon_i + \Omega_\nu} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\omega - \epsilon_a - \Omega_\nu} \implies \left[\frac{\partial \operatorname{Re} \Sigma_{pp}^c(\omega)}{\partial \omega}\right]_{\omega = \epsilon_p^{HF}} = -\sum_{i\nu} \left(\frac{M_{pi\nu}}{\Delta_{pi\nu}}\right)^2 - \sum_{a\nu} \left(\frac{M_{pa\nu}}{\Delta_{pa\nu}}\right)^2$.
+where we have used the fact that $\Sigma_{pp}^c(\omega) = \sum_{i\nu} \frac{M_{pi\nu}^2}{\omega - \epsilon_i + \Omega_\nu} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\omega - \epsilon_a - \Omega_\nu} \implies \left[\frac{\partial \Sigma_{pp}^c(\omega)}{\partial \omega}\right]_{\omega = \epsilon_p^{HF}} = -\sum_{i\nu} \left(\frac{M_{pi\nu}}{\Delta_{pi\nu}}\right)^2 - \sum_{a\nu} \left(\frac{M_{pa\nu}}{\Delta_{pa\nu}}\right)^2$.
 \end{tcolorbox}
 Next, we want to perform a Fourier transform.
 \begin{align}
@@ -740,7 +859,7 @@ G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
 & = -i Z_p^{QP} \int_0^{\infty} dt e^{i(\omega - \epsilon_p^{QP}) t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} 
 \label{Gpp2}
 \\
-& = -i Z_p^{QP} \int_0^{\infty} dt\, e^{i(\omega - \epsilon_p^{QP}) t} \left(1 + \sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t} + \ldots \right) \\
+& = -i Z_p^{QP} \int_0^{\infty} dt\, e^{i(\omega - \epsilon_p^{QP}) t} \left(1 + \sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}4 \right) \\
 &= -i Z_p^{QP} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP}) t]}\label{Gpp3} \\
 &\quad - i Z_p^{QP} \sum_{i\nu} \zeta_{pi\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pi\nu}) t]} \\
 &\quad - i Z_p^{QP} \sum_{a\nu} \zeta_{pa\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pa\nu}) t]} + \ldots \\
@@ -749,7 +868,7 @@ G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
 % & -\mathrm{i} Z_p^{\mathrm{OP}} \sum_{i v} \zeta_{p i v} \int_0^{+\infty} \mathrm{d} r e^{\left\{-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p i v}\right)\right]\right\}^{\prime}}-\mathrm{i} Z_p^{\mathrm{OP}} \sum_{a v} \zeta_{p a v} \int_0^{+\infty} \mathrm{d} r e^{\left(-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p \omega v}\right)\right]\right\}^{\prime}} \\
 & = \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_{pi\nu}^{sat}}{\omega - \epsilon_{pi\nu}^{sat} + i\eta} + \sum_{a\nu} \frac{Z_{pa\nu}^{sat}}{\omega - \epsilon_{pa\nu}^{sat} + i\eta} + \ldots
 \end{align}
-In going from eqn.~\ref{Gpp1} to eqn.~\ref{Gpp2}, we used the step function to restrict the lower bound of the integral to $0$ and then we end by defining the satellite energies $\epsilon_{pi\nu}^{sat} = \epsilon_p^{QP} + \Delta_{pi\nu}$ and $\epsilon_{pa\nu}^{sat} = \epsilon_p^{QP} + \Delta_{pa\nu}$, as well as the satellite weights $Z_{pi\nu}^{sat} = Z_p^{QP} \zeta_{pi\nu}$ and $Z_{pa\nu}^{sat} = Z_p^{QP} \zeta_{pa\nu}$. 
+In going from eqn.~\ref{Gpp1} to eqn.~\ref{Gpp2}, we used the step function to restrict the lower bound of the integral to $0$ and then we end by defining the satellite energies $\epsilon_{pi\nu}^{sat} = \epsilon_p^{QP} + \Delta_{pi\nu}$ and $\epsilon_{pa\nu}^{sat} = \epsilon_p^{QP} + \Delta_{pa\nu}$, as well as the satellite weights $Z_{pi\nu}^{sat} = Z_p^{QP} \zeta_{pi\nu}$ and $Z_{pa\nu}^{sat} = Z_p^{QP} \zeta_{pa\nu}$. \emph{What happens when we treat the exponential more than just up to the first order? Is this useful?}
 \subsubsection{Spectral function}
 The diagonal elements of the spectral function are obtained as (the virtual satellites spectral function, whose derivation will mirror that of the occupied satellites, are omitted for the sake of brevity)
 \begin{align}
@@ -761,7 +880,220 @@ A_{pp}^{GW+C}(\omega) & = -\frac{1}{\pi} \operatorname{Im} G_{pp}(\omega) \\
 & = -\frac{1}{\pi}\left[\frac{\left(\operatorname{Re} Z_p^{QP}\right)\left(\operatorname{Im} \epsilon_p^{QP}\right) + \left(\operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
 & \left. + \sum_{i\nu} \frac{\left(\operatorname{Re} Z_{pi\nu}^{sat}\right)\left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right) + \left(\operatorname{Im} Z_{pi\nu}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right)^2} + \ldots \right]
 \end{align}
+\subsection{Annotation of CC Cumulant Green's function paper}
+\subsubsection{Cumulant from second order self-energy}
+The second order self-energy, which uses a HF reference, can be written as
+\begin{align}
+\Sigma_{pq}^{(2)}(\omega) =& \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
+\implies \Sigma_{pp}^{(2)}(\omega+\epsilon_p) =&
+\frac{1}{2} \sum_{iab}
+\frac{\left< pi \left| \right| ab \right>^2}
+{\omega-\epsilon_{pi}^{ab}} + \frac{1}{2} \sum_{ija}
+\frac{\left< pa \left| \right| ij \right>^2}
+{\omega-\epsilon_{pa}^{ij}}
+\end{align}
+where
+$\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
+and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. So we can write the diagonal cumulant\footnote{ 
+Note that in order to get from eqn.~\ref{eq:cumulant_2nd_1} to eqn.~\ref{eq:cumulant_2nd} we have used the identity $\int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon\right)} = \frac{1}{\epsilon^2} \left(e^{-i \epsilon t} +i \epsilon t -1 \right) \mathrm{sgn}(t)$, and since we are dealing with retarded quantities, we only care about $t>0$ so $\mathrm{sgn}(t) = 1$.} as
+\begin{align}
+C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+\implies C_{pp}^{(2)}(t) &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} 
+\label{eq:cumulant_2nd_1}
+\\
+&= \frac{1}{2}\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
++\frac{1}{2}\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\epsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) 
+\label{eq:cumulant_2nd}
+\\
+&= \frac{1}{2} \sum_{i a b}\langle p i \| a b\rangle^2 f\left(\epsilon_{p i}^{a b}\right)+\frac{1}{2} \sum_{i j a}\langle p a \| i j\rangle^2 f\left(\epsilon_{p a}^{i j}\right)\\
+&= \int d\omega\, \beta(\omega) f(\omega)
+\end{align}
+where $f(\omega) \equiv \frac{e^{-i \omega t}+i \omega t-1}{\omega^2} $ and we identify the cumulant kernel as
+\footnote{To get from eqn.~\ref{eq:beta_def} to eqn.~\ref{eq:beta_2nd}, we have used the identity $\operatorname{Im} \frac{1}{x + i \eta} = -\pi \delta(x)$ as $\eta \to 0^+$.}
+\begin{align}
+    \beta(\omega) &= -\frac{1}{\pi} \operatorname{Im} \Sigma_{pp}^{(2)}\left(\omega+\epsilon_p\right) 
+\label{eq:beta_def}\\
+\\
+&=\frac{1}{2} \sum_{i a b}\langle p i \| a b\rangle^2 \delta\left(\omega-\epsilon_{p i}^{a b}\right)+\frac{1}{2} \sum_{i j a}\langle p a \| i j\rangle^2 \delta\left(\omega-\epsilon_{p a}^{i j}\right) \label{eq:beta_2nd}
+\end{align}
+A connection can be made between the cumulant kernel $\beta(\omega)=\sum_q g_q^2 \delta(\omega-\omega_q)$ for the 2nd-order self energy  to that for electrons coupled to
+bosonic excitations at the frequencies $\omega_q\equiv \epsilon_{pq}^{rs}$ in the quasi-boson approximation
+with coupling coefficients $g_q \equiv \langle p q \| r s\rangle$.
+\subsubsection{Equivalence between the second order self-energy and the CC retarded Green's function}
+When both the IP and EA branches are included, the CC GF can be written in frequency space as
+\footnote{A diagrammatic analysis shows that only three non-zero terms when $p, q \in o c c$ survive, which allows us to move from eqn.~\ref{eq:ccgf_expanded_2} to eqn.~\ref{eq:ccgf_expanded_3}.}
+\begin{align}
+G_{pq}^R (\omega) &= \left\langle \Phi \left| (1+\Lambda) \bar{a^{\dagger}_q}
+(\omega + \bar{H}_N + i\delta)^{-1} \bar{a_p} \right| \Phi \right\rangle + \left\langle \Phi \left| (1+\Lambda) \bar{a_p}
+(\omega - \bar{H}_N + i\delta)^{-1} \bar{a^{\dagger}_q} \right| \Phi \right\rangle \\
+&\approx \langle\Phi|\left(1+\Lambda_2\right)\left(a_q^{\dagger}+\left(a_q^{\dagger} T_2\right)_C\right) X_p(\omega)|\Phi\rangle+\langle\Phi|\left(1+\Lambda_2\right)\left(a_p+\left(a_p T_2\right)_C\right) Y_q(\omega)|\Phi\rangle \label{eq:ccgf_expanded_2}\\
+&= \langle\Phi| a_q^{\dagger} X_{1, p}(\omega)|\Phi\rangle+\langle\Phi| \Lambda_2\left(a_q^{\dagger} T_2\right)_C X_{1, p}(\omega)|\Phi\rangle+\langle\Phi| \Lambda_2 a_p Y_{2, q}(\omega)|\Phi\rangle \label{eq:ccgf_expanded_3} \\
+&= x^q(\omega)_p-\frac{1}{2} \sum_{i j a b} \lambda_{i j}^{a b} t_{a b}^{q j} x^i(\omega)_p-\frac{1}{2} \sum_{i a b} \lambda_{p i}^{a b} y_{a b}^i(\omega)_q
+\end{align}
+where to get eqn.~\ref{eq:ccgf_expanded_2} we limited the CC expansion to doubles, i.e. $T\approx T_2=\frac{1}{4} \sum_{i j a b} t_{i j}^{a b} a_a^{\dagger} a_b^{\dagger} a_j a_i$ and $\Lambda\approx\Lambda_2=\frac{1}{4} \sum_{i j a b} \lambda_{i j}^{a b} a_i^{\dagger} a_j^{\dagger} a_b a_a$, and expanded the $\bar{a}_p = a_p + [a_p,T_2]$ and $\bar{a}_q^{\dagger} = a_q^{\dagger} + [a_q^{\dagger},T_2]$ operators into their connected forms. We also defined the $X_p(\omega)\equiv (\omega + \bar{H}_N + i\delta)^{-1} \bar{a_p}$ and $Y_q(\omega)\equiv (\omega - \bar{H}_N + i\delta)^{-1} \bar{a_q}^{\dagger}$ operators that have the components
+\begin{align}
+    X_p(\omega) & =\sum_i x^i(\omega)_p a_i+\frac{1}{2!} \sum_{i j, a} x_a^{i j}(\omega)_p a_a^{\dagger} a_j a_i=X_{1, p}(\omega)+X_{2, p}(\omega) \\
+Y_q(\omega) & =\sum_a y_a(\omega)_q a_a^{\dagger}+\frac{1}{2!} \sum_{i, a b} y_{a b}^i(\omega)_q a_a^{\dagger} a_b^{\dagger} a_i=Y_{1, q}(\omega)+Y_{2, q}(\omega)
+\end{align}
+\emph{This seems similar to second RPA theory, probably because it is.}
+At this point, we can form a perturbation series defined by a perturbation parameter $\xi$, e.g. $t_{p q}^{r s}=t_{p q}^{(0) r s}+\xi t_{p q}^{(1) r s}+\xi^2 t_{p q}^{(2) r s}$, etc. By keeping only terms up to second order we get:
+\begin{align}
+G_{p q}^{(2)R}(\omega) &= x^{(2) q}(\omega)_p-\frac{1}{2} \sum_{i j a b} \lambda_{i j}^{(1) a b} t_{a b}^{(1) q j} x^{(0) i}(\omega)_p-\frac{1}{2} \sum_{i a b}\left(\lambda_{p i}^{(1) a b} y_{a b}^{(1) i}(\omega)_q+\lambda_{p i}^{(2) a b} y_{a b}^{(0) i}(\omega)_q\right) \\
+&= x^{(0) p}(\omega)_p \delta_{p q}+x^{(2) q}(\omega)_p-\frac{1}{2} \sum_{i a b} \lambda_{p i}^{(1) a b}\left(t_{a b}^{(1) q i} x^{(0) p}(\omega)_p+y_{a b}^{(1) i}(\omega)_q\right) \\
+&= \frac{\delta_{pq}}{(\omega-\epsilon_p)} + \frac{1}{(\omega-\epsilon_p)} \left[ \frac{1}{2}\sum_{ija} \frac{v^{qa}_{ij}v^{pa}_{ij}}{(\omega+\epsilon_a-\epsilon_i-\epsilon_j)} + \frac{1}{2}\sum_{iab} \frac{v^{pi}_{ab}v^{qi}_{ab}}{(\omega+\epsilon_i-\epsilon_a-\epsilon_b)} \right] \frac{1}{(\omega-\epsilon_q)} \\
+&\equiv G_{pq}^{R(0)} (\omega) + G_{pq}^{R(0)} (\omega) \Sigma_{pq}^{(2)}(\omega) G_{pq}^{R(0)} (\omega)
+\end{align}
+ where we used the simplifications $x^{(1) q}(\omega)_p=0$ and $x^{(0) q}(\omega)_p=x^{(0) p}(\omega)_p \delta_{p q}$ and in the perturbation analysis, we identified that $G_{p q}^{(0) R}(\omega)=x^{(0) q}(\omega)_p= \frac{1}{(\omega-\epsilon_q)}$.
+% Here we skip the derivation of each of the coefficients in term of the two-particle integrals and HF eigenvalues and simply list expressions:
 % $$
+% \begin{gathered}
+% x^{(0) p}(\omega)_p=\frac{1}{\left(\omega-\epsilon_p\right)} \\
+% x^{(2) q}(\omega)_p=\frac{1}{2\left(\omega-\epsilon_q\right)}\left[\sum_{i j a} v_{i j}^{q a} x_a^{(1) i j}(\omega)_p+\frac{1}{\left(\omega-\epsilon_p\right)} \sum_{i a b} v_{a b}^{p i} t_{a b}^{(1) q i}\right] \\
+% x_a^{(1) i j}(\omega)_p=\frac{v_{p a}^{i j}}{\left(\omega-\epsilon_p\right)\left(\omega+\epsilon_a-\epsilon_i-\epsilon_j\right)} \\
+% t_{a b}^{(1) i j}=\lambda_{i j}^{(1) a b}=\frac{v_{a b}^{i j}}{\left(\epsilon_i+\epsilon_j-\epsilon_a-\epsilon_b\right)}=\frac{v_{a b}^{i j}}{\epsilon_{a b}^{i j}} \\
+% x_a^{(1) i j}(\omega)_p=\frac{v_{p a}^{i j}}{\left(\omega-\epsilon_p\right)\left(\omega+\epsilon_a-\epsilon_i-\epsilon_j\right)}
+% \end{gathered}
+% $$
+% \begin{align}
+% \implies G_{pq}^{R(2)} (\omega) &= \frac{\delta_{pq}}{(\omega-\epsilon_p)} + \frac{1}{(\omega-\epsilon_p)} \left[ \frac{1}{2}\sum_{ija} \frac{v^{qa}_{ij}v^{pa}_{ij}}{(\omega+\epsilon_a-\epsilon_i-\epsilon_j)} + \frac{1}{2}\sum_{iab} \frac{v^{pi}_{ab}v^{qi}_{ab}}{(\omega+\epsilon_i-\epsilon_a-\epsilon_b)} \right] \frac{1}{(\omega-\epsilon_q)}.
+% \end{align}
+
+\subsubsection{Real-time EOM-CC Cumulant GF}
+We restrict the discussion to the retarded
+core-hole Green's function for a given deep core level $p=c$, $G^R_c=G_{cc}$
+given by
+\begin{align}
+G_{c}^{R}(t) &= -i \Theta(t-t')
+\left<0\left| \left\{a_c(t), a_c^\dagger(t') \right\} \right| 0 \right>\\
+&= -i \Theta(t) 
+  e^{iE_0t} \left<0\left| a_c e^{-iHt} a_c^\dagger \right| 0 \right> + -i \Theta(t) 
+e^{-iE_0t}\left<0\left| a_c^\dagger e^{iHt} a_c \right| 0 \right> \\
+&= -i \Theta(t) 
+  e^{iE_0t} \left<N-1\left| a_c a_c e^{-iHt} a_c^\dagger a_c^\dagger \right| N-1 \right> + -i \Theta(t) 
+e^{-iE_0t}\left<N-1\left| a_c a_c^\dagger e^{iHt} a_c a_c^\dagger \right| N-1 \right> \\
+&= -i \Theta(t) 
+  e^{-iE_0t}\left<N-1\left| e^{iHt} \right| N-1 \right> \\
+&= -i \Theta(t) e^{-iE_0 t} \left<N-1 | N-1, t \right> 
+\label{eq:gc_t} 
+\end{align}
+where we have used the separable approximation to the ground state $\left| 0
+\right> \simeq a_c^\dagger \left| N-1 \right>$, which is reasonable for
+core excitations. And then at the end we have defined $\left| N-1, t \right> =
+e^{iHt} \left| N-1 \right>$, which is a solution to $-i \frac{d\left| N-1, t \right>}{dt} = H \left| N-1, t \right>$. The next step is to assume a time-dependent, CC ansatz for
+$\left| N-1, t \right> = N(t) e^{T(t)} \left| \phi \right>$, where $\left| \phi \right> = a_c \left| N \right>$ is the reference determinant with a core hole, $N(t)$ is a \emph{scalar} normalization factor, and $T(t)$ is the time-dependent cluster operator acting only on the $N-1$ electron Fock space. Inserting this ansatz into
+the differential equation for $\left| N-1, t \right>$ and left multiplying 
+by $e^{-T(t)}$, we obtain the coupled EOM 
+\footnote{%
+In going eqn.~\ref{de_1} to eqn.~\ref{de_2}, we used:
+\begin{align*}
+e^{-T(t)}\frac{d}{dt}\left( N(t) e^{T(t)} \right)
+&= e^{-T(t)}\left( \dot{N}(t) e^{T(t)} + N(t) \dot{T}(t) e^{T(t)} \right) \\
+&= \dot{N}(t) e^{-T(t)} e^{T(t)} + N(t) \left( \dot{T}(t) + \frac{1}{2!} [\dot{T}(t), T(t)] + \frac{1}{3!} [[\dot{T}(t), T(t)], T(t)] + \ldots \right) \\
+& \approx \dot{N}(t) + N(t) \dot{T}(t) \\
+&= N(t)\left( \frac{\dot{N}(t)}{N(t)} + \dot{T}(t) \right) \\
+&= N(t)\left( \frac{d}{dt}\ln N(t) + \dot{T}(t) \right)
+\end{align*}
+where we have used the Baker-Campbell-Hausdorff expansion and the truncation is consistent with CCSD.
+}
+\begin{align}
+    -i \frac{d\left[N(t) e^{T(t)} \left| \phi \right>\right]}{dt} & = H N(t) e^{T(t)} \left| \phi \right> \\
+    -i e^{-T(t)}{\frac{d\left[N(t) e^{T(t)} \right]}{dt}} \left| \phi \right>& = N(t) \underbrace{e^{-T(t)} H e^{T(t)}}_{\bar{H}(t)} \left| \phi \right> 
+\label{de_1}\\
+    -i N(t) \left( \frac{d\ln N(t)}{dt} + \frac{d T(t)}{dt} \right) \left| \phi \right>& = N(t) \bar{H}(t) \left| \phi \right> 
+\label{de_2}
+\\
+    -i \left( \frac{d\ln N(t)}{dt} + \frac{d T(t)}{dt} \right) \left| \phi \right>& = \left( \bar{H}_N(t) + E^{N-1} \right) \left| \phi \right>
+\label{de_3}
+\end{align}
+ where we have defined a normal-order, similarity transformed Hamiltonian as $\bar{H}_N(t) = \bar{H}(t) - E^{N-1}$, where $E^{N-1} = \left< \phi | \bar{H} | \phi \right>$. Projecting on the reference $\left< \phi \right|$ and excited determinants $\left< \phi_{ij}^{ab} \right|$, respectively, we obtain the coupled EOMs for the normalization factor and the cluster amplitudes, respectively:
+\begin{align}
+\label{eq-dlnndt}
+-i \frac{d \ln N(t)}{dt} = \left< \phi \left| \bar{H}_N(t) \right| \phi \right>
++ E^{N-1} \\
+\implies N(t) = e^{i E^{N-1} t} e^{i \int_0^t \left< \phi \left| \bar{H}_N(t') \right| \phi \right> dt'}
+\label{eq:nt}
+\end{align}
+\begin{equation}
+\label{eq-dtdt}
+-i \left< \phi_{ij...}^{ab...} \left| \frac{d T(t)}{dt} \right| \phi \right> =
+\langle \phi_{ij...}^{ab...} \left| \bar{H}_N(t) \right| \phi \rangle.
+\end{equation}
+In order to further evaluate, we need to introduce some additional approximations. First, we assume that the ground state is uncorrelated, i.e.
+$\left| N-1 \right> \simeq a_c \left| \Phi \right> = \left| \phi \right>$,
+so that
+\begin{equation}
+\begin{split}
+\left<N-1\right| \left. N-1, t \right> =&
+N(t) \left<N-1\left| e^{iHt}\right| \phi \right> \\
+=&N(t) \left< \phi \left| \left( 1+ iHt + \frac{(iHt)^2}{2!} + \ldots \right) \right| \phi \right> \\
+=&N(t) \left( 1+ \left< \phi \left| R(t) \right| \phi \right> \right) \\
+=&N(t).
+\end{split}
+\end{equation}
+where $R(t)$ is the excitation operator that collects all excited terms in the series expansion, so it has expectation value $\left< \phi \left| R(t) \right| \phi \right> = 0$. Now, if we insert eqn.~\ref{eq:nt} into eqn.~\ref{eq:gc_t}, we see that the Green's function is given by
+\begin{align}
+G_c^R(t) &= -i \Theta(t) e^{-iE_0 t} N(t) \\
+&= -i \Theta(t) e^{-i(E_0 - E^{N-1}) t} e^{i \int_0^t \left< \phi \left| \bar{H}_N(t') \right| \phi \right> dt'} \\
+&= -i \Theta(t) e^{-i \epsilon_c t} e^{C_c^R(t)}
+\label{eq:gc_final}
+\end{align}
+In the last line, we take $E_0 \equiv E_{HF}$ as the reference energy of the $N$ electron system and so we have $E_0-E^{N-1} \simeq \epsilon_c$, as expected from Koopmans' theorem. And importantly, we have identified the cumulant as
+\begin{equation}
+\label{eqn:cum_t_f}
+C_c^{R}(t) = i \int_0^t \left< \phi \left| \bar{H}_N(t) \right| \phi\right> dt'.
+\end{equation}
+\begin{tcolorbox}
+Now, the known Landau form for the cumulant is
+\begin{align}
+C_L(t) & = \int d\omega \frac{\beta(\omega)}{\omega^2} \left(e^{-i\omega t} + i\omega t - 1\right) \\
+\implies C_L''(t) & = -\int d\omega \beta(\omega) e^{-i\omega t} \\
+\end{align}
+But now if we do the same thing by differentiating eqn.~\ref{eqn:cum_t_f} twice, we have
+\begin{align}
+C_c'' (t) & = i \frac{d}{dt} \left< \phi \left| \bar{H}_N(t) \right| \phi \right> \\
+\end{align}
+So we can identify that
+\begin{equation}
+\int d\omega \beta(\omega) e^{-i\omega t} = -i \frac{d}{dt} \left< \phi \left| \bar{H}_N(t) \right| \phi \right>
+\end{equation}
+Taking the inverse Fourier transform, we find a form for the CC cumulant kernel as
+\begin{align}
+\beta(\omega) &= \frac{1}{2\pi} \int_{-\infty}^{\infty} dt e^{i\omega t} \left[-i \frac{d}{dt} \left< \phi \left| \bar{H}_N(t) \right| \phi \right> \right] \\
+&= \frac{1}{\pi} \mathrm{Re} \int_0^{\infty} dt e^{-i\omega t} \left[-i \frac{d}{dt} \left< \phi \left| \bar{H}_N(t) \right| \phi \right> \right]
+\end{align}
+\color{red}{The above relation is not derived yet.}
+\color{black}
+ Recall, that in the $GW$+C approach, we had $\beta(\omega)=\frac{1}{\pi}\left|\operatorname{Im} \Sigma_{p p}(\omega+\epsilon_p)\right|$. \emph{Therefore, we can identify that there is a connection, but it is unclear currently how to explore it.}
+\end{tcolorbox}
+So given the differential equation for the logarithm of the normalization factor in eqn.~\ref{eq-dlnndt} and comparing with eqn.~\ref{eq:gc_final}, we see that the cumulant obeys the differential equation
+\begin{equation}
+\label{eqn:matel1}
+\begin{split}
+-i\frac{d C_c^R(t)}{dt} &= \left< \phi \left| \bar{H}_N(t) \right| \phi \right> \\
+&= \sum_{ia} f_{ia} t_i^a +
+\frac{1}{2} \sum_{ijab} v_{ij}^{ab} t_j^b t_i^a,
+\end{split}
+\end{equation}
+\color{red} {The above relation is not derived yet. Supposedly it requires some tedious
+algebra and diagrammatic analysis.} \color{black} We can also use eqn.~\ref{eq-dtdt} to write the equation of motion for the cluster amplitudes, where for the singles, it is given by
+% \begin{equation}
+% \label{eq:rt_eom_ccs}
+% -i \dot {t}_i^a(t) = \left< \phi_{i}^{a} \left| \frac{d T(t)}{dt} \right| \phi \right>
+% = \left< \phi_{i}^{a} \right| \bar{H}_N(t) \left| \phi \right>.
+% \end{equation}
+% but shouldn't this be
+\begin{equation}
+\label{eq:rt_eom_ccs}
+-i \dot {t}_i^a(t) \equiv -i \left< \phi_{i}^{a} \left| \frac{d T(t)}{dt} \right| \phi \right>
+= \left< \phi_{i}^{a} \right| \bar{H}_N(t) \left| \phi \right>.
+\end{equation}
+I choose to not continue further for now.
+
+
+ 
 % \begin{aligned}
 % A_{p p}^{G W+\mathrm{C}}(\omega) & =-\frac{1}{\pi} \operatorname{Im} G_{p p}(\omega) \\
 % & =-\frac{1}{\pi} \operatorname{Im}\left[\frac{Z_p^{\mathrm{QP}}}{\omega-\epsilon_p^{\mathrm{QP}}+\mathrm{i} \eta}+\sum_{q v} \frac{Z_{p v r}^{\mathrm{at}}}{\omega-\epsilon_{p q v}^{\mathrm{at}}+\mathrm{i} \eta}\right] \\
