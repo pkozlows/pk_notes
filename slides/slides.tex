@@ -27,6 +27,22 @@
 }
 \setbeamertemplate{section in toc}[sections numbered]
 
+% Automatically create section title slides
+\AtBeginSection[]{
+  \begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+  \end{frame}
+}
+
+% Alternative: Simple section title slide
+% \AtBeginSection[]{
+%   \begin{frame}
+%   \centering
+%   \LARGE \insertsectionhead
+%   \end{frame}
+% }
+
 \begin{document}
 
 \begin{frame}

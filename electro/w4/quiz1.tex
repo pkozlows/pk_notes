@@ -1,0 +1,210 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+% \graphicspath{ {./images/} }
+\usepackage{caption}
+\usepackage{geometry}
+\geometry{
+    margin=1in,
+    textwidth=6.5in,
+    textheight=9in
+}
+
+\title{AP 236 Electrochemical Energy Systems }
+
+\author{Fall 2025 Harvard, Zachary Schiffer\\
+Thermodynamics Quiz\\
+October 3, 10:30am-11:45pm}
+\date{}
+
+
+\begin{document}
+\maketitle
+\captionsetup{singlelinecheck=false}
+This exam has 3 problems, which are worth 65 points total. Please answer each problem in a separate booklet and write your name on each booklet. This exam is open-book, which allows for use of all passive resources (including books, electronic), except those involving communication with others and use of the internet. Please be sure to show your work, especially for partial credit. Also, make and justify any assumptions necessary to solve the problems below. Note that we do not take off points for "double jeopardy", so please work subsequent parts of the problems even if you are stuck on an earlier part.
+
+\section{Problem 1. A Frog Battery [30 pts]}
+A well-known incident from the history of electrochemistry is the observation that a frog leg held down by a brass hook moves when touched with a silver scalpel, first seen by Luigi Galvani. After some experimentation, Galvani and others discovered that they got the best results when using pure copper and pure iron as insertions into the frog leg. In addition, pickling the frog in vinegar, which dropped the $\mathbf{p H}$ of the frog from $\mathbf{5 . 5}$ to $\mathbf{2 . 5}$, was found to be a better battery. Let's examine the chemistry of a frog battery using $21{ }^{\text {st }}$ century science.
+
+Assume that the pH of the frog is constant during cell operation due to natural buffers and assume the frog is a closed system. Use a pickled frog for the following parts ( $\mathbf{p H}=\mathbf{2 . 5}$ ), unless stated otherwise.\\[0pt]
+\subsection{}
+a) List possible half-reactions involving this system (total 6). Note that iron ions can have two oxidations states ( +2 and +3 ) whereas copper ions can only have one ( +2 ). [ 6 points]\\
+\subsubsection{Solution}
+Possible half-reactions include:\\
+1. Oxidation of iron metal to $\mathrm{Fe}^{2+}$:
+\[\mathrm{Fe} \rightarrow \mathrm{Fe}^{2+} + 2e^-\]
+2. Oxidation of iron metal to $\mathrm{Fe}^{3+}$:
+\[\mathrm{Fe} \rightarrow \mathrm{Fe}^{3+} + 3  e^-\]
+3. Reduction of $\mathrm{Fe}^{2+}$ to iron metal:
+\[\mathrm{Fe}^{2+} + 2e^- \rightarrow \mathrm{Fe}\]
+4. Reduction of $\mathrm{Fe}^{3+}$ to iron metal:
+\[\mathrm{Fe}^{3+} + 3e^- \rightarrow \mathrm{Fe}\]
+5. Reduction of $\mathrm{Cu}^{2+}$ to copper metal:
+\[\mathrm{Cu}^{2+} + 2e^- \rightarrow \mathrm{Cu}\]
+6. Oxidation of copper metal to $\mathrm{Cu}^{2+}$:
+\[\mathrm{Cu} \rightarrow \mathrm{Cu}^{2+} + 2e^-\]
+\subsection{}
+b) What are the most likely half reactions to actually be occurring at cathode (copper) and anode (iron), assuming you start with a freshly pickled frog (e.g., the initial electrolyte only has protons and supporting salts like sodium chloride in it)? Note that the standard potential for oxidizing $\mathrm{Fe}^{2+}$ to $\mathrm{Fe}^{3+}$ is significantly higher than the standard potential for oxidizing Fe metal to $\mathrm{Fe}^{2+}$. [4 pts]\\[0pt]
+\subsubsection{Solution}
+Because a higher potential implies a more negative $\Delta G$, and thus a more favorable reaction, the most likely anodic reaction is the oxidation of $\mathrm{Fe}^{2+}$ to $\mathrm{Fe}^{3+}$. The most likely cathodic reaction is the reduction of $\mathrm{Cu}^{2+}$ to copper metal.
+\subsection{}
+c) Based on the likely reactions, draw a schematic of the battery, clearly indicating motion of species, electrons, half reactions, and electrode identities. [5 pts]\\
+\subsubsection{Solution}
+I cannot draw the diagram, so instead I will state what is happening. The iron electrode is the anode, where $\mathrm{Fe}^{2+}$ is oxidized to $\mathrm{Fe}^{3+}$, releasing electrons that travel through the external circuit to the copper cathode. At the copper cathode, $\mathrm{Cu}^{2+}$ ions in the electrolyte gain these electrons and are reduced to copper metal, which plates onto the cathode. Protons from the acidic electrolyte may also participate in balancing the charge in the solution. The half reactions are as follows:
+Anode (Iron): \[H_2O + 2\mathrm{Fe}O \rightarrow \mathrm{Fe}_2O_3 + 2H^+ + 2e^-\]
+Cathode (Copper): \[\mathrm{Cu}O + 2H^+ + 2e^- \rightarrow \mathrm{Cu} + H_2O\]
+Balancing, the full reaction is:
+\[2\mathrm{Fe}O + \mathrm{Cu}O \rightarrow \mathrm{Fe}_2O_3 + \mathrm{Cu}\]
+\subsection{}
+d) Derive an expression for the equilibrium potential of the cell as a function of the pH of the electrolyte and concentrations and pressures of other relevant species. Assume that the standard reduction potentials of the cathode and anode are $E_{c}^{0}$ and $E_{a}^{0}$, respectively. [5 pts]\\[0pt]
+\subsubsection{Solution}
+The first thing we want to do is to device expressions for the equilibrium potentials of the cathode and anode using the Nernst equation. The Nernst equation is given by:
+\begin{equation}
+E = E^0 - \frac{RT}{nF} \sum_i \nu_i \ln a_i
+\end{equation}
+so for the cathode, we have:
+\begin{equation}
+E_c = E_c^0 - \frac{RT}{2F} \ln \left( \frac{1}{[\mathrm{Cu}^{2+}][H^+]^2} \right)
+\end{equation}
+and for the anode, we have:
+\begin{equation}
+E_a = E_a^0 - \frac{RT}{2F} \ln \left( \frac{[\mathrm{Fe}^{3+}][H^+]^2}{[\mathrm{Fe}^{2+}]^2} \right)
+\end{equation}
+The overall cell potential is given by:
+\begin{align}
+E_{cell} &= E_c - E_a \\
+&= \left( E_c^0 - \frac{RT}{2F} \ln \left( \frac{1}{[\mathrm{Cu}^{2+}][H^+]^2} \right) \right) - \left( E_a^0 - \frac{RT}{2F} \ln \left( \frac{[\mathrm{Fe}^{3+}][H^+]^2}{[\mathrm{Fe}^{2+}]^2} \right) \right) \\
+&= E_c^0 - E_a^0 - \frac{RT}{2F} \ln \left( \frac{1}{[\mathrm{Cu}^{2+}][H^+]^2} \right) + \frac{RT}{2F} \ln \left( \frac{[\mathrm{Fe}^{3+}][H^+]^2}{[\mathrm{Fe}^{2+}]^2} \right) \\
+&= E_c^0 - E_a^0 - \frac{RT}{2F} \ln \left( \frac{[\mathrm{Fe}^{3+}][H^+]^4[\mathrm{Cu}^{2+}]}{[\mathrm{Fe}^{2+}]^2} \right)
+\end{align}
+\subsection{}
+e) What is the value of the difference in equilibrium potential of the pickled and fresh frog batteries initially? Assume the same half reactions occur in both frogs. [5 pts]\\[0pt]
+\subsubsection{Solution}
+
+f) How will the equilibrium potential of the batteries change over time due to discharge? Describe the qualitative changes in the concentration of relevant species over time and the shifts in the half reaction potentials. [5 pts]
+
+\section{Problem 2. Pourbaix Diagram [10 pts]}
+\subsection{}
+a) We discussed Pourbaix diagrams in class, where we plot the different thermodynamically stable compounds on axes of potential versus pH . One of the most important systems in electrochemistry is the chlorine-water system. Please write out the reactions for each of the different colored lines on the Pourbaix diagram below. Note that not all of the reactions are electrochemical! There are 6 total reactions. Please be mindful of the pH and whether protons or hydroxides will participate in the reactions. [ 6 pts]\\[0pt]
+\subsubsection{Solution}
+The pink line is
+\begin{equation}
+    2H_2O \rightleftharpoons O_2 + 4H^+ + 4e^-
+\end{equation}
+Teal line has to be in basic conditions
+\begin{equation}
+    Cl^- + H_2O + 2e^- \rightleftharpoons OCl^- + 2OH^- 
+\end{equation}
+The blue lane has to be in acidic conditions
+\begin{equation}
+    Cl^- +H_2O \rightleftharpoons  2H^+ +OCl^- + 2e^-
+\end{equation}
+The korean line has to be also in acidic conditions
+\begin{equation}
+    2Cl^- +2H^+ \rightleftharpoons Cl_2 + H_2
+\end{equation}
+The red line also has to be in acidic conditions
+\begin{equation}
+    Cl_2 + 2H_2O \rightleftharpoons 2OCl^- + 4H^+ + 2e^-
+\end{equation}
+That yellow/brown line near the neutral pH is 
+\begin{equation}
+    HOCl \rightleftharpoons OCl^- + H^+
+\end{equation}
+\subsection{}
+b) Based on this diagram, which is a stronger oxidizer, chlorine ( $\mathrm{Cl}_{2}$ ) or bleach ( $\mathrm{ClO}^{-}$)? [2 pts]\\[0pt]
+\subsubsection{Solution}
+The bleach, because it has the higher vertical position on the Pourbaix diagram.
+\subsection{}
+c) What reaction competes with chloride oxidation? [2 pts]
+\subsubsection{Solution}
+The reduction of $Cl_2$ to $Cl^-$ competes with the oxidation of $Cl_2$ to $OCl^-$.
+
+\section{Problem 3. Using electrochemistry to measure entropy [25 pts]}
+We have discussed the temperature dependence of potential and how we can use the entropy of reaction to determine the potential as a function of temperature. This relies on being able to find the standard entropy for the chemical species involved, a task that is simple when looking at a\\
+hydrogen fuel cell but can be difficult for complex reactions. Here, we look at the reverse: using electrochemistry to measure the entropy and enthalpy of reaction for the following transformation: nickel hydroxide to nickel oxide hydroxide.
+
+$$
+?+\mathrm{Ni}(\mathrm{OH})_{2} \rightarrow ?+\mathrm{NiO}(\mathrm{OH})
+$$
+\subsection{}
+a. Write out the full, balanced reaction for the above conversion and the two half reactions in an alkaline (basic) electrolyte. How many electrons are required for this reaction? (i.e., what is "n")? [10 pts]\\
+\subsubsection{Solution}
+The balanced reaction is:
+\begin{equation}
+    12\mathrm{Ni}(\mathrm{OH})_{2} + 3O_2 \rightarrow 12\mathrm{NiO}(\mathrm{OH}) + 6H_2O 
+\end{equation}
+% The number of participating electrons is $n=1$.
+The half reactions are:
+Anode:
+\begin{equation}
+    6\mathrm{Ni}(\mathrm{OH})_{2} + 6OH^- \rightarrow 6\mathrm{NiO}(\mathrm{OH}) + 6H_2O + 6e^-
+\end{equation}
+Cathode:
+\begin{equation}
+    O_2 + 2H_2O + 4e^- \rightarrow 4OH^-
+\end{equation}
+The number of participating electrons is $n=12$.
+\subsection{}
+b. Given the open-circuit potential (also known as the equilibrium potential) for the full reaction as a function of temperature, $\operatorname{Eocv}(\mathrm{T})$, derive an expression for $\Delta S_{r x n}$ in terms of the enthalpy of reaction, $n$, and the open circuit potential or its derivatives. [5 pts]\\[0pt]
+\subsubsection{Solution}
+We are given the open-circuit potential as a function of temperature, $E_{ocv}(T)$. The first equation we can use is
+\begin{equation}
+    \frac{\partial E_{ocv}}{\partial T} = \frac{\Delta H_{rxn}}{nFT} + \frac{E_{ocv}}{T}
+\end{equation}
+Solving for $\Delta H_{rxn}$, we have
+\begin{equation}
+    \Delta H_{rxn} = nFT \left( \frac{\partial E_{ocv}}{\partial T} - \frac{E_{ocv}}{T} \right)
+\label{deltaH}
+\end{equation}
+Then we also know that
+\begin{equation}
+    \frac{\partial E_{ocv}}{\partial T} = \frac{\Delta S_{rxn}}{nF}
+\end{equation}
+Setting these two equations equal to each other, we have
+\begin{equation}
+    \frac{\Delta S_{rxn}}{nF} = \frac{\Delta H_{rxn}}{nFT} + \frac{E_{ocv}}{T}
+\end{equation}
+Multiplying both sides by $nF$, we get
+\begin{equation}
+    \Delta S_{rxn} = \frac{\Delta H_{rxn}}{T} + \frac{nFE_{ocv}}{T}
+\end{equation}
+\subsection{}
+c. Based on your result from (b), derive an expression for the absolute entropy of nickel oxide hydroxide; the final expression should contain the standard entropies of other relevant species and the equilibrium potential or its derivatives. [5 pts]\\
+\subsubsection{Solution}
+We can also derive an expression for the $\Delta S_{rxn}$ in terms of the standard entropies of the relevant species. The expression would be
+\begin{equation}
+    \Delta S_{rxn} = 12S^0_{NiO(OH)} + 6S^0_{H_2O} - 12S^0_{Ni(OH)_2} - 3S^0_{O_2}
+\end{equation}
+Setting this equal to our previous expression for $\Delta S_{rxn}$, we have
+\begin{equation}
+    12S^0_{NiO(OH)} + 6S^0_{H_2O} - 12S^0_{Ni(OH)_2} - 3S^0_{O_2} = \frac{\Delta H_{rxn}}{T} + \frac{nFE_{ocv}}{T}
+\end{equation}
+Rearranging to solve for $S^0_{NiO(OH)}$, we get
+\begin{align}
+    S^0_{NiO(OH)} &= \frac{1}{12} \left( \frac{\Delta H_{rxn}}{T} + \frac{nFE_{ocv}}{T} - 6S^0_{H_2O} + 12S^0_{Ni(OH)_2} + 3S^0_{O_2} \right) \\
+    &= \frac{1}{12} \left( \frac{nFT \left( \frac{\partial E_{ocv}}{\partial T} - \frac{E_{ocv}}{T} \right)}{T} + \frac{nFE_{ocv}}{T} - 6S^0_{H_2O} + 12S^0_{Ni(OH)_2} + 3S^0_{O_2} \right) \\
+    &= \frac{1}{12} \left( nF \frac{\partial E_{ocv}}{\partial T} - nF \frac{E_{ocv}}{T} + \frac{nFE_{ocv}}{T} - 6S^0_{H_2O} + 12S^0_{Ni(OH)_2} + 3S^0_{O_2} \right) \\
+    &= \frac{1}{12} \left( nF \frac{\partial E_{ocv}}{\partial T} - 6S^0_{H_2O} + 12S^0_{Ni(OH)_2} + 3S^0_{O_2} \right)
+\end{align}
+d. You measure the following OCV values as a function of temperature (see table below). Assuming the OCV reflects the reaction of nickel hydroxide to nickel oxide hydroxide, what is the $\Delta S_{r x n}$ ? You can assume Faraday's constant is $100000 \mathrm{C} / \mathrm{mol}$. [5 pts]
+
+\begin{center}
+\begin{tabular}{llll}
+\hline\hline
+Temperature (K) & 298 & 323 & 348 \\
+\hline
+OCV (V vs RHE) & 1.5 & 1.525 & 1.55 \\
+\hline\hline
+\end{tabular}
+\end{center}
+If we plot all of these points with the temperature on the horizontal axis and the OCV on the vertical axis, we can find the slope of the line, which is $\frac{\partial E_{ocv}}{\partial T}$, which we know is equal to $\frac{\Delta S_{rxn}}{nF}$.
+
+\end{document}

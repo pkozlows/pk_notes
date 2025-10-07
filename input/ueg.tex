@@ -1,0 +1,97 @@
+\section{MF}
+Even before doing HF, I generate my basis of plain waves, and they're we vectors in 3d are just a list of anteaters, three entries long. 
+From HF, I get a set of MO coefficients $C_{\mu p}$ and orbital energies $\epsilon_p$. 
+\section{RPA}
+I am most familiar with doing this by just diagonalizing the Casida equation, which in the UEG looks like
+\begin{equation}
+    \begin{pmatrix}
+        \bm{A} & \bm{B} \\
+        -\bm{B} & -\bm{A}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{X} & \bm{Y} \\
+        \bm{Y} & \bm{X}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{\Omega} & \bm{0} \\
+        \bm{0} & -\bm{\Omega}
+    \end{pmatrix}
+    = \begin{pmatrix}
+        \bm{X} & \bm{Y} \\
+        \bm{Y} & \bm{X}
+    \end{pmatrix}
+    \label{eqn:casida_eq}
+\end{equation}
+The $\bm{A}$ and $\bm{B}$ matrices are defined as
+\begin{align}
+    A_{i a, j b} &= \left(\epsilon_a-\epsilon_i\right) \delta_{i j} \delta_{a b}+\mathcal{K}_{i a, b j} \\
+    B_{i a, j b} &= \mathcal{K}_{i a, j b}
+\end{align}
+Is it not going to be enough to loop overall the occupied states $i,j$ and then for each occupied state, loop over all the virtual states $a,b$? This would determine the momentum index $\bm{q}$, which is the difference between the virtual and occupied states, $\bm{q}=\bm{k}_a-\bm{k}_i=\bm{k}_b-\bm{k}_j$. So after this procedure, I would in effect be sampling all $\bm{q}$. If I do it this way do I have to build a Casida matrix for each $\bm{q}$ separately, or can I just build one big Casida matrix. If so, then why? If I don't do this, I would just get a set of excitation energies and transition densities over all of the $\bm{q}$ values, but I wouldn't know which excitation energy corresponds to which $\bm{q}$. And then it is process sly these excitation enteritis and transition densities that go into building the GW correlation self-energy as:
+\begin{equation}
+    \Sigma_{pp}^{\text{corr}}(\omega) = \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{w_{pi}^{\mu }w_{ip}^{\mu }}{\omega -(\epsilon _{i}-\Omega  _{\mu })}+ \sum_{a}^{\text{virtual}} \frac{w_{pa}^{\mu }w_{ap}^{\mu }}{\omega -(\epsilon _{a}+\Omega  _{\mu })}\right)
+\end{equation}
+I know that for the UEG, I really would be interested in $\Sigma_{pp}^{\text{corr}}(\bm{k},\omega)$, but if I am interested in getting the spectral function $A(\bm{k},\omega)$ for a certain $\bm{k}$ point, then I think I only need to compute $\Sigma_{pp}^{\text{corr}}(\bm{k},\omega)\rightarrow G_{pp}(\bm{k},\omega)\rightarrow A(\bm{k},\omega)$ for that certain $\bm{k}$ point. 
+
+How do I determine $\mathcal{K}$ for UEG? In the ab-initio case, I just computed the ERIs in MO basis, and then selected the appropriate OV elements.
+% In the molecular case, I took the direct approximation, which corresponded to setting $\mathcal{K}_{i a, j b}=(i a \mid j b)=\mathcal{K}_{i a, b j}$, but I don't know if this is still justified for the UEG.
+\subsubsection{UEG}
+I am not sure for the UEG how to compute the occupied $i,j$ and virtual indices $a,b$. I am interested in computing the spectral function for a certain state $p$ with wavevector $\bm{q}$, so I think I only have to solve the above Casida eigenproblem at $\bm{q}$. And then while I construct the $A(\bm{q})$ and $B(\bm{q})$ matrices, I choose an occupied index $i$ by simply looping over the occupied plane wave states in my basis, but I am not sure how to select the appropriate virtual state $a$. Do my choices of $i$ and $p$ uniquely determine what value the virtual index $a$ is going to be, or do I have to manually loop over the virtual index $a$? If it is uniquely determined, how? Let's say that I have access to the k-space wave vectors of the HOMO index and the occupied orbital of interest. And then I am also unsure about how to compute the Coulomb Interaction Kernel that appears in the $A(\bm{q})$ and $B(\bm{q})$ matrices alike, but with the $J$ and $B$ parts of the ERIs in the Ab-Initio case flipped. What is the value of the Interaction Kernel in the UEG case for the RPA? And then, I want to do this first the brute force way, by actually denoting and adding or subtracting the plane wave indices instead of doing the fancy lookup table and things like that. I guess we can move to that once I have my base implementation solidified.
+Does it make any sense to make this direct approximation in the case of the UEG? As
+where $\chi_{\text{RPA}}(\omega)=\left(\chi_0(\omega)^{-1}-\mathcal{K}\right)^{-1}$, where $\chi_0(\omega)$ is the irreducible polarizability of the reference state.
+
+% Therefore, defining 
+% \begin{equation}
+% 	\eps_p^\QP = \eps_p^\HF + \Delta\eps_p^\QP
+% \end{equation}
+% where
+% \begin{equation}
+% 	\Delta\eps_p^\QP 
+% 	= - \sum_{i\nu} \Delta_{pi\nu} \zeta_{pi\nu} - \sum_{a\nu} \Delta_{pa\nu} \zeta_{pa\nu} 
+% 	= \Sig_{pp}^\co\qty(\omega=\eps_p^\HF)
+% \end{equation}
+% is the quasiparticle shift, the diagonal elements of the Green's function in the frequency domain are given by
+% \begin{equation} \label{eq:Gpp_omega}
+% 	G_{pp}(\omega) 
+% 	= - \ii Z_p \int \dd{t} \Theta(t) e^{\ii \qty(\omega - \eps_p^\QP) t} 
+% 		e^{\sum_{i\nu} \zeta_{pq\nu} e^{-\ii \Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-\ii \Delta_{pa\nu} t}}
+% \end{equation}
+% where
+% \begin{equation} \label{eq:Zp_QP}
+% 	Z_p^\QP 
+% 	= \exp(- \sum_{i\nu} \zeta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}) 
+% 	= \exp(\eval{\pdv{\Sig_{pp}^\co(\omega)}{\omega}}_{\omega=\eps_p^\HF})
+% \end{equation}
+% is the quasiparticle weight (or renormalization factor) and the last term of Eq.~\eqref{eq:Gpp_omega} containing the double exponential is responsible for the appearance of satellites.
+% In the case of a $G_0W_0$ calculation where one linearizes the quasiparticle equation to obtain the quasiparticle energies, the $GW$+C renormalization factor associated with the quasiparticle peak and its $GW$ counterpart 
+% \begin{equation} \label{eq:Zp_GW}
+% 	Z_p^\GW 
+% 	= \frac{1}{1 - \eval{\pdv{\Sig_{pp}^\co(\omega)}{\omega}}_{\omega=\eps_p^\HF}}
+% \end{equation}
+% agree up to first order, as readily seen by comparing Eqs.~\eqref{eq:Zp_QP} and \eqref{eq:Zp_GW}.
+% Moreover, in this very specific case, it is easy to show that $\Re\qty( Z_p^\QP ) \le \Re\qty( Z_p^\GW )$, which evidences that the cumulant expansion systematically implies a redistribution of weights from the quasiparticle peak to the satellite structure. However, this is not always true in the general case.
+
+% Expanding the last term of Eq.~\eqref{eq:Gpp_omega} to first order, one obtains the following expression for the diagonal elements of the spectral function [see Eq.~\eqref{eq:Apq} for its definition]
+% \begin{equation} 
+% \begin{split} 
+% 	A_{pp}(\omega) 
+% 	\approx Z_p \delta\qty(\omega - \eps_p^\QP) 
+% 	& + \sum_{i\nu} Z_{pi\nu}^\sat \delta\qty(\omega - \eps_{pi\nu}^\sat) 
+% 	\\
+% 	& + \sum_{a\nu} Z_{pa\nu}^\sat \delta\qty(\omega - \eps_{pa\nu}^\sat) + \cdots
+% \end{split}
+% \end{equation}
+% which features two sets of satellites at energies
+% \begin{align}
+% 	\eps_{pi\nu}^\sat & = \eps_p^\QP + \Delta_{pi\nu} = \Delta \eps_p^\QP + \eps_i - \Om_\nu
+% 	\\
+% 	\eps_{pa\nu}^\sat & = \eps_p^\QP + \Delta_{pa\nu} = \Delta \eps_p^\QP + \eps_a + \Om_\nu
+% \end{align}
+% each located on a different branch and associated with the respective weights
+% \begin{align}
+% 	Z_{pi\nu}^\sat & = Z_{p}^\QP \zeta_{pi\nu}
+% 	&
+% 	Z_{pa\nu}^\sat & = Z_{p}^\QP \zeta_{pa\nu}
+% \end{align}
+% where one can readily see that they are directly proportional to the quasiparticle spectral weight.
+% Here, we limit our analysis to these two sets of satellite peaks (especially the satellite peaks on the hole branch) as expanding to second order would produce satellites with even smaller weights and further away from the quasiparticle peak.

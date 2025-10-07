@@ -1,0 +1,41 @@
+We start with the definition of the action functional:
+\begin{equation}
+    S=\int_{t_1}^{t_2} d t L(\psi, \bar{\psi})
+\end{equation}
+where Dirac took the Lagrangian as $L(\psi, \bar{\psi})=\langle\psi(t)| i \frac{\partial}{\partial t}-H|\psi(t)\rangle$. It can be shown that taking arbitrary independent variations of $S$ with respect to $|\psi\rangle$ and $\langle\psi|$ and demanding that the functional be stationary yields the time-dependent Schrödinger equation (and its complex conjugate). This Lagrangian is real if the wave function is normalized, but it is convenient to not habe this restriction, but in that case the Lagrangian becomes complex. To avoid this complication, we define a new real Lagrangian
+\begin{equation}
+    L(\psi, \bar{\psi})=\frac{i}{2} \frac{\langle\psi \mid \dot{\psi}\rangle-\langle\dot{\psi} \mid \psi\rangle}{\langle\psi \mid \psi\rangle}-\frac{\langle\psi| H|\psi\rangle}{\langle\psi \mid \psi\rangle}
+\end{equation}
+Note that this knew Lagrangian reduces to the old one one the wave function is normalized. We can now derive the equations of motion obtained from requiring the action with the new Lagrangian $L$ to be stationary,
+\begin{align}
+0 =\delta S= & \int \delta L d t=\int d t\left(\frac{1}{2} \frac{\{\langle\delta \psi \mid \dot{\psi}\rangle+\langle\psi \mid \delta \dot{\psi}\rangle-\langle\delta \dot{\psi} \mid \psi\rangle-\langle\dot{\psi} \mid \delta \psi\rangle\}}{\langle\psi \mid \psi\rangle}\right. \\
+& \left.-\frac{\delta\langle\psi| H|\psi\rangle}{\langle\psi \mid \psi\rangle}-\left(\frac{i}{2} \frac{\langle\psi \mid \dot{\psi}\rangle-\langle\dot{\psi} \mid \psi\rangle}{\langle\psi \mid \psi\rangle}-\frac{\langle\psi| H|\psi\rangle}{\langle\psi \mid \psi\rangle}\right) \frac{\delta\langle\psi \mid \psi\rangle}{\langle\psi \mid \psi\rangle}\right) \notag\\
+&= \int d t\left(\frac{i\langle\delta \psi \mid \dot{\psi}\rangle-\langle\delta \psi| H|\psi\rangle}{\langle\psi \mid \psi\rangle}-\frac{\langle\psi| i \partial / \partial t-H|\psi\rangle}{\langle\psi \mid \psi\rangle^2}\langle\delta \psi \mid \psi\rangle\right) + \text{c.c.} \\
+&\implies \left(i \frac{\partial}{\partial t}-H\right)|\psi\rangle=\frac{\langle\psi| i \partial / \partial t-H|\psi\rangle}{\langle\psi \mid \psi\rangle}|\psi\rangle
+\label{eq:tdvp1}
+\end{align}
+Briefly, doing some integration by parts allowed us to go from the first to the second step, and then by assuming that the variations of the bra and cat can be arbitrary and independent we get the third equation. 
+Now, if we tack on a time-dependent phase factor to the wave function to get
+\begin{equation}
+    |\phi(t)\rangle = |\psi(t)\rangle \, \exp\left[i \int^t d\tau \, 
+\frac{\langle \psi | i \partial_\tau - H | \psi \rangle}{\langle \psi | \psi \rangle} \right]
+\end{equation}
+it is normalized and satisfies the TDSE.
+\footnote{We can start by computing the time derivative as
+\begin{align}
+i \frac{\partial}{\partial t} |\phi\rangle 
+&= i \frac{\partial}{\partial t} \Big( |\psi\rangle \, e^{i \int^t \frac{\langle \psi | i \partial_\tau - H | \psi \rangle}{\langle \psi | \psi \rangle} d\tau} \Big) \\
+&= i (\partial_t |\psi\rangle) e^{i \int^t \dots} 
+   + |\psi\rangle \underbrace{i \partial_t e^{i \int^t \dots}}_{- \frac{\langle \psi | i \partial_t - H | \psi \rangle}{\langle \psi | \psi \rangle} e^{i \int^t \dots}} \\
+&= e^{i \int^t \dots} \left[ i \partial_t |\psi\rangle - \frac{\langle \psi | i \partial_t - H | \psi \rangle}{\langle \psi | \psi \rangle} |\psi\rangle \right] \\
+&= e^{i \int^t \dots} \left[ H |\psi\rangle \right] = H |\phi\rangle
+\end{align}
+}
+ So we have shown that this new Lagrangian formulation allows us to work with wave functions that are not normalized and can differ by a phase.
+
+
+% If $|\delta \psi\rangle$ and $\langle\delta \psi|$ are formally considered to be independent and completely arbitrary, we obtain the operator equation
+% $$
+% \left(i \frac{\partial}{\partial t}-H\right)|\psi\rangle=\frac{\langle\psi| i \partial / \partial t-H|\psi\rangle}{\langle\psi \mid \psi\rangle}|\psi\rangle
+% $$
+% together with the adjoint equation. Notice that this equation as
