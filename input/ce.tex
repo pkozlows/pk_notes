@@ -568,13 +568,13 @@ where $k_j = k + \sum_{i=j+1}^n q_i$ and $\sum_i q_i=0$. The interpretation of t
 \end{equation}
 where our $B$ is linear in the bosonic operators $A_q$, so the identity applies. Then, 
 \begin{align}
-    \ln \left\langle T e^B\right\rangle & =\frac{1}{2}\left\langle T B^2\right\rangle \\
+\left\langle T e^S\right\rangle & \equiv \left\langle T e^B\right\rangle = \exp\left(\frac{1}{2}\left\langle T B^2\right\rangle\right) \\
+\implies S & =\frac{1}{2}\left\langle T B^2\right\rangle \\
 & =\frac{1}{2}(-i)^2 \sum_{q q^{\prime}} \int_0^t d \tau \int_0^t d \tau^{\prime} \Gamma_{q k}(\tau) \Gamma_{q^{\prime} k}\left(\tau^{\prime}\right)\left\langle T A_q(\tau) A_{q^{\prime}}\left(\tau^{\prime}\right)\right\rangle \\
 & =-\frac{1}{2} \sum_{q q^{\prime}} \int_0^t d \tau \int_0^t d \tau^{\prime} \Gamma_{q k}(\tau) \Gamma_{q^{\prime} k}\left(\tau^{\prime}\right)\left[i D_q^{(0)}\left(\tau-\tau^{\prime}\right) \delta_{q,-q^{\prime}}\right] \\
-& =-\frac{i}{2} \sum_q \int_0^t d \tau \int_0^t d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \Gamma_{q k}(\tau) \Gamma_{-q, k}\left(\tau^{\prime}\right) \\
-& = -i \sum_q \int_0^t d \tau \int_0^t d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \Gamma_{-q k}(\tau) \Gamma_{q k}\left(\tau^{\prime}\right) \equiv S
+& = -i \sum_q \int_0^t d \tau \int_0^t d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \Gamma_{-q k}(\tau) \Gamma_{q k}\left(\tau^{\prime}\right) 
 \end{align}
-To find a self consistent expression for $S$, we use the Feynman operator ordering theorem, which states that given a functional (the Green's function) of time-dependent operators (vertices) $F[\hat{A}(\tau), \hat{B}(\tau), \ldots]$,  where $\tau \in[0, t]$ and with a unitary operator of the form $\hat{U}\left(\tau^{\prime}\right)=T \exp \left[\int_0^{\tau^{\prime}} d \tau \hat{P}(\tau)\right]$, then
+To find a self consistent expression for $S$, we use the Feynman operator ordering theorem, which states that given a functional of time-dependent operators $F[\hat{A}(\tau), \hat{B}(\tau), \ldots]$ with $\tau \in[0, t]$, which in our case is $e^{S[\Gamma (\tau)]}$, and with a unitary operator of the form $\hat{U}\left(\tau^{\prime}\right)=T \exp \left[\int_0^{\tau^{\prime}} d \tau \hat{P}(\tau)\right]$, then
 \begin{equation}
 \hat{U}(t) F[\hat{A}(\tau), \hat{B}(\tau), \ldots] =T\left[\exp \left(\int_0^t d \tau \hat{P}(\tau)\right) F\left[\hat{U}(\tau) \hat{A}(\tau) \hat{U}^{-1}(\tau), \ldots\right]\right] .
 \end{equation}
@@ -588,6 +588,7 @@ with the transformed vertex operators $\bar{\Gamma}_{q k}(\tau)\equiv  \hat{U}(\
 \begin{align}
     \mathcal{G}_k(t)&=i\Theta(t) e^{i \phi_k(t)} T \left[\exp (-i \int_0^t d \tau(\epsilon_k+\frac{d}{d \tau} \phi_k(\tau)))\right. \\
 & \left.\times \exp \left(-i \sum_q \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \bar{\Gamma}_{-q k}(\tau) \bar{\Gamma}_{q k}\left(\tau^{\prime}\right)\right)\right] \notag \\
+&=i\Theta(t) e^{i \phi_k(t)} \exp\left(\sum_{n=1}^{\infty} \frac{1}{n!} T\left[\bar{S}^n\right]_c\right) \\
 &=i\Theta(t) e^{C_k(t)}
 \end{align}
 where
@@ -606,7 +607,7 @@ with the bare phonon propagator $D_q^{(0)}(t)= -i\left[\left(1+N_q\right) e^{-i 
 &= \dot{C_k}(t) \mathcal{G}_k(t) \\
 &= -i \epsilon_k \mathcal{G}_k(t) - i \frac{g^2}{N} \sum_q \int_0^t d \tau \mathcal{G}_k(t) D_q^{(0)}(t-\tau) e^{-C_k(t)+C_{k-q}(t)-C_{k-q}(\tau)+C_k(\tau)} \\
 &= -i \epsilon_k \mathcal{G}_k(t) - i \frac{g^2}{N} \sum_q \int_0^t d \tau \mathcal{G}_k(t) D_q^{(0)}(t-\tau) \frac{\mathcal{G}_{k-q}(t) \mathcal{G}_k(\tau)}{\mathcal{G}_{k-q}(\tau) \mathcal{G}_k(t)} \\
-&=-i \epsilon_k \mathcal{G}_k(t) - i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_k(\tau) \mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)}\\
+&=-i \epsilon_k \mathcal{G}_k(t) - i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_k(\tau) \mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)}\label{a9}\\
 \implies \frac{1}{\mathcal{G}_k(t)} \frac{d \mathcal{G}_k(t)}{d t}&={-i \epsilon_k} - i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)} \frac{\mathcal{G}_k(\tau)}{\mathcal{G}_k(t)} \label{a8} \\
 \implies \frac{d \ln \mathcal{G}_k(t)}{d t}-\frac{d \ln \mathcal{G}_k^{(0)}(t)}{d t}&=- i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)} \frac{\mathcal{G}_k(\tau)}{\mathcal{G}_k(t)} \\
 \implies \frac{d \ln \left[\mathcal{G}_k(t) / \mathcal{G}_k^{(0)}(t)\right]}{d t}&=- i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)} \frac{\mathcal{G}_k(\tau)}{\mathcal{G}_k(t)} \\
@@ -633,77 +634,372 @@ For $n=1$, we have
     \mathcal{G}_k^{(2)}(t)&=\mathcal{G}_k^{(0)}(t) \exp \left[i \sum_q \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2 D_q^{(0)}(\sigma-\tau) \frac{\mathcal{G}_{k-q}^{(1)}(\sigma)}{\mathcal{G}_{k-q}^{(1)}(\tau)} \frac{\mathcal{G}_k^{(1)}(\tau)}{\mathcal{G}_k^{(1)}(\sigma)}\right] \label{iterative_step} \\
 &=\mathcal{G}_k^{(0)}(t) \exp \left[i \sum_q \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2 D_q^{(0)}(\sigma-\tau) \frac{\mathcal{G}_{k-q}^{(0)}(\sigma)}{\mathcal{G}_{k-q}^{(0)}(\tau)} \frac{\mathcal{G}_k^{(0)}(\tau)}{\mathcal{G}_k^{(0)}(\sigma)}\right. \notag \\
 &\left.\times e^{C_2(k, \tau)+C_2(k-q, \sigma)-C_2(k, \sigma)-C_2(k-q, \tau)}\right] \\
-&=\mathcal{G}_k^{(0)}(t) \exp \left[\sum_{n=0}^{\infty} \frac{-i}{n!} \sum_q \int_0^t d \sigma \int_0^\sigma d \tau \left|g_{q k}\right|^2 D_q^{(0)}(\sigma-\tau) \mathcal{G}_{k-q}^{(0)}(\sigma-\tau) \mathcal{G}_k^{(0)}(\tau-\sigma)\right. \\
-& \left.\times\left[C_2(k, \tau)+C_2(k-q, \sigma)-C_2(k, \sigma)-C_2(k-q, \tau)\right]^n\right]\\
+&=\mathcal{G}_k^{(0)}(t) \exp \left[\sum_{n=0}^{\infty} \frac{-i}{n!} \sum_q \int_0^t d \sigma \int_0^\sigma d \tau \left|g_{q k}\right|^2 D_q^{(0)}(\sigma-\tau) \mathcal{G}_{k-q}^{(0)}(\sigma-\tau) \mathcal{G}_k^{(0)}(\tau-\sigma)\right. \label{moment_expansion}\\
+& \left.\times\left[C_2(k, \tau)+C_2(k-q, \sigma)-C_2(k, \sigma)-C_2(k-q, \tau)\right]^n\right] \notag \\
 &=\mathcal{G}_k^{(0)}(t) \exp \left(\sum_{m=1}^{\infty} C_{2n}^{(2)}(k, t)\right)
 \end{align}
-where $C_{2n}^{(2)}(k, t)$ is the approximation to the $2n$th order cumulant produced by the second iteration.
+where $C_{2n}^{(2)}(k, t)$ is the approximation to the $2n$th cumulant produced by the second iteration.
 Because the second iteration produces cumulants of all orders, further iterations require expanding the exponent into moments. For iterations $n \geq 2$, we use
 \begin{align}
     \mathcal{G}_{\mathbf{k}}^{(n+1)}(t)= & \mathcal{G}_{\mathbf{k}}^{(0)}(t) \exp \left(-i \sum_{\mathbf{q}} \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2\right. \\
 & \left.\times D_{\mathbf{q}}^0(\sigma-\tau) \mathcal{G}_{\mathbf{k}}^{(0)}(\tau-\sigma) \mathcal{G}_{\mathbf{k}-\mathbf{q}}^{(0)}(\sigma-\tau) e^{F^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)}\right) \notag
 \end{align}
-introducing the notation $F^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) = F_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+F_4^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+\cdots$ where $F_i^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) = C_i^{(n)}(\mathbf{k}-\mathbf{q}, \sigma)-C_i^{(n)}(\mathbf{k}-\mathbf{q}, \tau) -C_i^{(n)}(\mathbf{k}, \sigma)+C_i^{(n)}(\mathbf{k}, \tau)$.
-The procedure for constructing the approximation to the $n$th iteration of the $m$ th cumulant is given by the moment expansion
-$$
-\sum_{m=0}^{\infty} \lambda^{2 m} W_{2 m}^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=e^{\sum_{m-1}^{\infty}, \lambda^{2 m}, F_{2 m}^{(2)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)},
-$$
-where the first few moments are given by
-$$
-\begin{gathered}
-W_0^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=1, \\
-W_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=F_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau), \\
-W_4^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=F_4^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+\frac{1}{2}\left(F_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)\right)^2 .
-\end{gathered}
-$$
-
-Because each iteration introduces another power of $g^2$ to all of the approximated cumulants, and the $n$ th-order cumulant is defined as being proportional to $g^n$, the $n$th iteration cannot alter any of the approximated cumulants of order lower than $n$. Because of this, and the fact that the approximate cumulant for a given order is an integral over lower-order approximations, the iterative method is actually recursive. Dropping the superscripts indicating iteration, the general form for the SC-CE approximation to the $n$th cumulant is
-$$
-\begin{aligned}
-C_{2 n}^{\mathrm{SC}-\mathrm{CE}}(\mathbf{k}, t)= & -\left.i \sum_{\mathbf{q}} \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{\mathbf{q}}\right|\right|^2 D_{\mathbf{q}}(\sigma-\tau) \\
-& \times \mathcal{G}_{\mathbf{k}}^{(0)}(\tau-\sigma) \mathcal{G}_{\mathbf{k}-\mathbf{q}}^{(0)}(\sigma-\tau) W_{2 n-2}(\mathbf{k}, \mathbf{q}, \sigma, \tau)
+introducing the notation 
+\begin{equation}
+    F^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) = F_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+F_4^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+\cdots
+\end{equation}
+where
+\begin{equation}
+    F_i^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) = C_i^{(n)}(\mathbf{k}-\mathbf{q}, \sigma)-C_i^{(n)}(\mathbf{k}-\mathbf{q}, \tau) -C_i^{(n)}(\mathbf{k}, \sigma)+C_i^{(n)}(\mathbf{k}, \tau)
+\end{equation}
+The procedure for constructing the approximation to the $n$th iteration of the $m$th cumulant is given by the moment expansion
+\begin{equation}
+    \sum_{m=0}^{\infty} \lambda^{2 m} W_{2 m}^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)=\exp \left(\sum_{m=1}^{\infty} \lambda^{2 m} F_{2 m}^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)\right)
+% ^{\sum_{m-1}^{\infty}, \lambda^{2 m}, F_{2 m}^{(2)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)},
+\end{equation}
+where we can get explicit expressions by matching the orders of $\lambda$ on both sides.
+Our experience with equation \eqref{moment_expansion} suggests that each iteration introduces another power of $g^2$ to all of the approximated cumulants, and since the $n$th-order cumulant is defined as being proportional to $g^n$, the $n$th iteration cannot alter any of the approximated cumulants of order lower than $n$. Because of this, and the fact that the approximate cumulant for a given order is an integral over lower-order approximations, the iterative method is actually recursive. So alternatively, we can write
+\begin{equation}
+    C_{2 n}^{\mathrm{SC}-\mathrm{CE}}(\mathbf{k}, t)= -i \sum_{\mathbf{q}} \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2 D_{\mathbf{q}}^{(0)}(\sigma-\tau) \mathcal{G}_{\mathbf{k}}^{(0)}(\tau-\sigma) \mathcal{G}_{\mathbf{k}-\mathbf{q}}^{(0)}(\sigma-\tau) W_{2 n-2}(\mathbf{k}, \mathbf{q}, \sigma, \tau)
+\end{equation}
+To determine what is actually solved, at this point consider again equation \eqref{a9}, where, if we define $y_k(t)=e^{C_k(t)}$, we can rewrite it as
+\begin{align}
+\frac{d y_k(t)}{d t}= & -i \sum_q \int_0^t d \tau\left|g_{q k}\right|^2 D_q^{(0)}(t-\tau) e^{i(\epsilon_k-\epsilon_{k-q})(t-\tau)} \frac{y_k(\tau) y_{k-q}(t)}{y_{k-q}(\tau)} \label{C1}
+\end{align}
+This is a VIDE, which can be solved numerically using the appropriate methods.
+\subsection{Annotation of Littlewood's CE paper}
+\subsubsection{Power series ansatze}
+They use a power series expansion of the cumulant, instead of the usual exponential ansatz. This has the function of making sure that the term involving the $g^{2n}$ EPI constant can only be found in the $n$th-order cumulant. So the retarded Green's function is given by
+\begin{equation}
+    G(n,t) = G_o(n,t) \mathcal{P}(n,t) = G_o(n,t)\sum_{k=0}^\infty g^{2k} C_k(n,t)
+\end{equation}
+To properly construct the electron self energy, they replace it by power series ansatz in order to re-introduce self-consistency from the start.
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+    \begin{aligned}
+        -i\Sigma(t) &= g^2 \sum_{n=\pm}\,\sum_{N= \pm} \mathcal{D}(N,t)\underbrace{G_0(n, t)\mathcal{P}(n,t)}_{G(n,t)}\\
+    &=g^2 \sum_{n=\pm}-i\Sigma_0(n,t)\mathcal{P}(n,t)
 \end{aligned}
-$$
+\label{Power corrected self energy}
+\end{equation}
+where $\Sigma _0(n,t) \equiv -i\mathcal{D}(N,t)G_0(n, t)$.
+\subsubsection{Plugging into the Dyson equation}
+ Now, we can plug into the temporal Dyson equation:
+\begin{align}
+G(m,t-t_0) &= G_0(m,t-t_0) + \iint dt_1 dt_2 \, G_0(m,t-t_2) \, \Sigma(t_2-t_1) \, G(m,t_1-t_0)\\
+G_0(m,t-t_0) \mathcal{P}(m,t-t_0) &= G_0(m,t-t_0) -ig^2 \sum_{n=\pm}\iint dt_1 dt_2 \, G_0(m,t-t_2) \, \Sigma_0(n, t_2-t_1) \\
+&\times \mathcal{P}(n,t_2-t_1) \, G_0(m,t_1-t_0) \, \mathcal{P}(m,t_1-t_0) \notag \\
+G_0(m,t) \mathcal{P}(m,t) &= G_0(m,t) -ig^2 \sum_{n=\pm}\iint dt_1 dt_2 \,G_0\left(m, t\right) e^{i \varepsilon_m\left(t_2-t_1\right)}  \, \Sigma_0(n, t_2-t_1) \\
+&\times \mathcal{P}(n,t_2-t_1) \mathcal{P}(m,t_1-t_0) \notag \\
+\mathcal{P}(m,t) &= 1 -ig^2 \sum_{n=\pm}\int_0^t dt_2 \int_0^{t_2} d\tau e^{i \varepsilon_m \tau}  \, \Sigma_0(n, \tau) \mathcal{P}(n,\tau) \mathcal{P}(m,t_2 - \tau) \notag \\
+\end{align}
+where in the final line we have defined $\tau = t_2 - t_1$ and set $t_0=0$. Also, the temporal contraction property due to the boundary value dependence on time is used, which is only valid when the diagonal approximation is made.
+There are two distinct terms in this equation: a self correction term $P_{SC}$ that occurs when $n=m$ and an inter-band scattering term $P_{IC}$ that occurs when $n\neq m$. The contraction property is valid for the former but not the latter. So\
+\begin{equation}
+    \mathcal{P}(m,t) =  1 + P_{SC} + P_{IC}
+\end{equation}
+with
+\begin{align}
+    P_{SC}&=-ig^2\int\displaylimits_{0}^{t}dt_2 \int\displaylimits_{0}^{t_2}d{\tau}\, e^{i\varepsilon_{m}\tau}\Sigma_0(m,\tau)\mathcal{P}(m,t_2)\\
+    P_{IC}&= -ig^2\int\displaylimits_{0}^{t}dt_2 \int\displaylimits_{0}^{t_2}d\tau\, e^{i\varepsilon_{m}\tau} \,\Sigma_0(n,\tau)\mathcal{P}(n,\tau)\mathcal{P}(m,t_2-\tau)
+\end{align}
+For numerical solution, they start with an initial guess of $\mathcal{P} = 1$ on the right and self consistently compute better values for $\mathcal{P}$ on the left until it converges. It also might be useful to know that we can write
+\begin{equation}
+    \begin{aligned}
+    &C_{k}(m,t) = -i\int\displaylimits_{0}^{t}dt_2 \int\displaylimits_{0}^{t_2}d\tau \Bigg[\!e^{i\varepsilon_m\tau}\, \Sigma_o(m,\tau)C_{k-1}(m,t_2) +\sum_{n\neq m}\sum_{l=0}^{k}  e^{i\varepsilon_{m}\tau}\,\Sigma_o(n,\tau)\,C_{l}(n,\tau)\,C_{k-1-l}(m,t_2-\tau)\Bigg]\\
+    \end{aligned}
+    \label{recursive equation}
+\end{equation}
+\subsection{Annotation of Dunn paper}
+\subsubsection{Time evolution}
+The given Hamiltonian is 
+\begin{align}
+    H &= \sum_k \epsilon_k a_k^\dagger a_k + \frac{1}{2} \sum_q (P_q^\dagger P_q + \omega_q^2 Q_q^\dagger Q_q) + \sum_{q} \gamma_q Q_q \rho_q^\dagger \\
+&= H_{\mathrm{el}} + H_{\mathrm{ph}} + H_{\mathrm{int}} \\
+&= \sum_k \epsilon_k a_k^\dagger a_k + \sum_q \omega_q \left(b_q^\dagger b_q + \frac{1}{2}\right) + \sum_{qk} \gamma_q \sqrt{\frac{1}{2\omega_q}} (b_q + b_{-q}^\dagger) a_k^\dagger a_{k+q} \langle k | e^{-i q \cdot r} | k+q \rangle \\
+&= \sum_k \epsilon_k a_k^\dagger a_k + \sum_q \omega_q b_q^\dagger b_q + \sum_{qk} g_{qk} (b_q + b_{-q}^\dagger) a_k^\dagger a_{k+q}
+\end{align}
+where we have introduced bosonic second quantization operators $Q_q= \sqrt{\frac{1}{2 \Omega_q}}\left(b_q+b_{-q}^{\dagger}\right)$ and $P_q=i \sqrt{\frac{\Omega_q}{2}}\left(b_{-q}^{\dagger}-b_q\right)$, which respond to the position and momentum, respectively, of a harmonic oscillator with frequency $\Omega_q$. The electron density operator is given by $\rho_q=\sum_k a_{k+q}^{\dagger} a_k \langle k+q| e^{i q \cdot r}|k\rangle$, where the matrix element is between Bloch states. The electron-boson coupling constant is then given by $g_{q k}=\gamma_q \sqrt{\frac{1}{2 \Omega_q}}\langle k| e^{-i q \cdot r}|k+q\rangle$. \emph{Garnet started with search and electron boson he molto nan to start his AB theory, so maybe we want to do something similar.} In the present of this interaction, the EOM for the electron annihilation operator is given by
+\begin{align}
+    \frac{d a_k(t)}{d t} &= -i \epsilon_k a_k(t) - i \sum_q g_{q k} Q_q(t) a_{k+q}(t) \\
+\implies a_k(t) &= e^{-i \epsilon_k t} T \exp \left[-i \int_0^t d \tau \sum_q Q_q(\tau) \Gamma_{q k}(\tau)\right] a_k \\
+\end{align} 
+So the idea is that as time evolves when we are including the interaction, The electronic and botanic processes become inseparable.
+\begin{tcolorbox}
+The of both is derived. Start by introducing a rotated operator 
+\begin{align}
+    \tilde{a}_k(t)&=e^{i \epsilon_k t} a_k(t) \\
+\implies \frac{d \tilde{a}_k(t)}{d t}&=i \epsilon_k e^{i \epsilon_k t} a_k(t)+e^{i \epsilon_k t} \frac{d a_k(t)}{d t} \\
+&=i \epsilon_k e^{i \epsilon_k t} a_k(t)+e^{i \epsilon_k t}\left(-i \epsilon_k a_k(t)-i \sum_q g_{q k} Q_q(t) a_{k+q}(t)\right) \\
+&=-i \sum_q g_{q k} e^{i \epsilon_k t} Q_q(t) a_{k+q}(t) \\
+&=-i \sum_q g_{q k} Q_q(t) e^{i\left(\epsilon_k-\epsilon_{k+q}\right) t} \tilde{a}_{k+q}(t) \\
+&=-i \sum_q g_{q k} Q_q(t) e^{i\left(\epsilon_k-\epsilon_{k+q}\right) t} e^{q \cdot \frac{d}{d k}} \tilde{a}_k(t) \\
+&= -i \sum_q Q_q(t) \Gamma_{q k}(t) \tilde{a}_k(t) \\
+\implies \tilde{a}_k(t)&=T \exp \left[-i \int_0^t d \tau \sum_q Q_q(\tau) \Gamma_{q k}(\tau)\right] \tilde{a}_k \\
+\implies a_k(t)&=e^{-i \epsilon_k t} T \exp \left[-i \int_0^t d \tau \sum_q Q_q(\tau) \Gamma_{q k}(\tau)\right] a_k
+\end{align}
+where we defined the vertex operator $\Gamma_{q k}(t)=g_{q k} e^{i \epsilon_k t} e^{q \cdot \frac{d}{d k}} e^{-i \epsilon_k t} = g_{q k} e^{i\left(\epsilon_k-\epsilon_{k+q}\right) t} e^{q \cdot \frac{d}{d k}} $, which uses
+$f(k+q)=\sum_{n=0}^{\infty} \frac{\left(q \cdot \nabla_k\right)^n}{n!} f(k)=e^{q \cdot \nabla_k} f(k)$ so thatt $e^{q \cdot \frac{d}{d k}}$ can be understood as a translation operator in $k$-space.
+\end{tcolorbox}
+\subsubsection{Retarded green's function}
+At this point, they specialized to a greens function for a single electron, which can be simplified as
+\begin{align}
+    G_k(t)&= -i \Theta(t) \langle \{a_k(t), a_k^\dagger\} \rangle \\
+&= -i \Theta(t) \langle a_k(t) a_k^\dagger \rangle \\
+&= -i \Theta(t) e^{-i \epsilon_k t} \langle T \exp \left[-i \int_0^t d \tau \sum_q Q_q(\tau) \Gamma_{q k}(\tau)\right] a_k a_k^\dagger \rangle \\
+&= -i \Theta(t) e^{-i \epsilon_k t} \langle T \exp \left[-i \int_0^t d \tau \sum_q Q_q(\tau) \Gamma_{q k}(\tau)\right] \rangle \\
+&= -i \Theta(t) e^{-i \epsilon_k t} \exp \left[i \sum_q \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q(\tau-\tau^{\prime}) \Gamma_{q k}(\tau) \Gamma_{-q k}\left(\tau^{\prime}\right)\right]
+\end{align}
+% $\Gamma_{q \Delta}(\tau)$ operates not only on $a_k$ but also on all the other $\Gamma_{q \Delta}\left(\tau^{\prime}\right)$ which occur at earlier times.
+% This result shows that as time evolves the processes of electron annihilation and phonon creation and annihilation become inseparable.
+% 2.2 The Electron Green Function
 
-APPENDIX C: NUMERICAL VIDE SOLUTION
-Equation (13) is not convenient for numerical calculations. Instead, we define $y_k(t)=e^{C_\lambda(t)}$ and solve directly for $y_k(t)$,
-$$
-\begin{aligned}
-\frac{d y_k(t)}{d t}= & -i \sum_q \int_0^t d \tau\left|g_{q k}\right|^2 D_q^{(0)}(t-\tau) \\
-& \times e^{d\left(\epsilon-\epsilon \epsilon_{k-q}\right)(t-\tau)} \frac{y_k(\tau) y_{k-q}(t)}{y_{k-q}(\tau)}
-\end{aligned}
-$$
+% The most convenient way of determining the properties of an electron is by means of the Green function
+% [8]
+% $$
+% G_{\mathrm{a}}(t)=i \operatorname{Tr}\left[\rho T\left(a_{\mathrm{A}}(t) a_{\mathrm{k}}{ }^*\right)\right]
+% $$
 
-Numerical solutions to Eq. (C1) were carried out with a multistep predictor corrector method as derived by Linz [55]. His method is general for first-order Volterra integrodifferential equations (VIDEs) of the form
-$$
-y^{\prime}(x)=F\left(x, y(x), \int_0^x d t K[x, t, y(t)]\right)
-$$
+% This is the causal Green function and the trace is over any complete set of states of the electron-phonon system, $\rho$ being the statistical operator.
 
-The form of Eq. (Cl) implies that $F$ can be written purely as a function of $\int_0^x d t K[x, t, y(t)]$. We used an Adams-Bashforth second-order predictor step and a third-order Adams-Moulton corrector step. Following Linz, for the starting procedure of the Holstein model we applied the self-consistent Simpson's method iterated five times [55].
+% In case of a wide gap insulator the probability of an electron conduction state being occupied (in thermal equilibrium) is negligible and so the trace need only be taken over no electron states. On such states the operator $a_k{ }^* a_k$ is identically zero and the operator $a_k a_k{ }^*$ is $\delta_{k k^*}$.
 
-Because each iteration introduces another power of $g^2$ to all of the approximated cumulants, and the $n$ th-order cumulant is defined as being proportional to $g^{\prime \prime}$, the $n$th iteration cannot alter any of the approximated cumulants of order lower than $n$. Because of this, and the fact that the approximate cumulant for a given order is an integral over lower-order approximations, the iterative method is actually recursive. Dropping the superscripts indicating iteration, the general form for the SC-CE approximation to the $n$th cumulant is
-$$
-\begin{aligned}
-C_{2 n}^{\mathrm{SCCE}}(\mathbf{k}, t)= & -i \sum_{\mathbf{q}} \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q \mathbf{k}}\right|^2 D_{\mathbf{q}}(\sigma-\tau) \\
-& \times \mathcal{G}_{\mathbf{k}}^{(0)}(\tau-\sigma) \mathcal{G}_{\mathbf{k}-\mathbf{q}}^{(0)}(\sigma-\tau) W_{2 n-2}(\mathbf{k}, \mathbf{q}, \sigma, \tau)
-\end{aligned}
-$$
-APPENDIX C: NUMERICAL VIDE SOLUTION
-Equation (13) is not convenient for numerical calculations. Instead, we define $y_k(t)=e^{C_\lambda(t)}$ and solve directly for $y_k(t)$,
-$$
-\begin{aligned}
-\frac{d y_k(t)}{d t}= & -i \sum_q \int_0^t d \tau\left|g_{q k}\right|^2 D_q^{(0)}(t-\tau) \\
-& \times e^{i(\epsilon-\epsilon-\epsilon-q)(t-\tau)} \frac{y_k(\tau) y_{k-q}(t)}{y_{k-q}(\tau)}
-\end{aligned}
-$$
+% If these results and the explicit expression for $a_k(t)$ are used then the Green function reduces to the form
+% $$
+% G_{\mathrm{k}}(t)=i \theta(t) \mathrm{e}^{-i \epsilon_{\mathrm{k}^{\prime}}} \operatorname{Tr}\left[\rho T \exp \left(-i \sum_{\mathrm{q}} \int_0^t \mathrm{~d} \tau Q_{\mathrm{q}}(\tau) \Gamma_{\mathrm{q} \mathrm{t}}(\tau)\right)\right]_0
+% $$
 
-Numerical solutions to Eq. (C1) were carried out with a multistep predictor corrector method as derived by Linz [55]. His method is general for first-order Volterra integrodifferential equations (VIDEs) of the form
-$$
-y^{\prime}(x)=F\left(x, y(x), \int_0^x d t K[x, t, y(t)]\right)
-$$
+% The subscript 0 is to indicate that the trace is taken over no electron states only.
+% Both the statistical operator $\rho$ and the phonon coordinate $Q_q(\tau)$ involve the Hamiltonian but when restricted to the no electron states this reduces to the free phonon Hamiltonian:
+% $$
+% H \rightarrow \frac{1}{2} \sum_q\left(P_q^* P_q+\Omega_q Q_q^* Q_q\right)
+% $$
+% 324
+% CAN. J. PHYS. VOL. 53, 1975
 
-The form of Eq. (Cl) implies that $F$ can be written purely as a function of $\int_0^x d t K[x, t, y(t)]$. We used an Adams-Bashforth second-order predictor step and a third-order Adams-Moulton corrector step. Following Linz, for the starting procedure of the Holstein model we applied the self-consistent Simpson's method iterated five times [55].
+% The electron operators have therefore been eliminated and [9] involves simply the evaluation of a trace over free phonon states.
+
+% This trace can be evaluated and the method of doing this is described in Appendix A. The resulting expression for the Green function is
+% $$
+% G_{\mathrm{A}}(t)=i \theta(t) \mathrm{e}^{-i \epsilon_{\mathrm{A}^t}} T \exp \left[i \sum_q \int_0^t \mathrm{~d} \tau \int_0^\tau \mathrm{d} \tau^{\prime} D_q\left(\tau-\tau^{\prime}\right) \Gamma_{q \mathrm{~A}}(\tau) \Gamma_{-q \mathrm{~A}}\left(\tau^{\prime}\right)\right]
+% $$
+% where $D_4\left(\tau-\tau^{\prime}\right)$ is the free phonon Green function
+% $$
+% D_q\left(\tau-\tau^{\prime}\right)=\frac{i}{2 \Omega_q}\left(\left(1+N\left(\Omega_q\right)\right) \mathrm{e}^{-i \Omega_q\left|\tau-\tau^{\prime}\right|}+N\left(\Omega_q\right) \mathrm{e}^{+\left|\Omega_q\right| \tau-\tau^{\prime} \mid}\right)
+% $$
+% and $N\left(\Omega_q\right)$ is the phonon occupation number
+% $$
+% N\left(\Omega_q\right)=\left(\exp \left(\Omega_q / k T\right)-1\right)^{-1}
+% $$
+
+% Although the restriction to no electron states is strictly an approximation the error incurred for a typical insulator is infinitesimal. For example for an energy gap of 2 eV the probability of a conduction state being occupied is about $4 \times 10^{-18}$. So for all practical purposes the above result is exact and it will be referred to as such.
+% 3. An Approximation Procedure
+% 3.1 The Action Function and a Cluster Theorem
+
+% The approximation procedure is essentially an expansion of the logarithm of the Green function and to this end is defined the action function $A_{\mathrm{A}}(t)$ :
+% $$
+% G_{\mathrm{k}}(t)=i \theta(t) \exp \left(i A_{\mathrm{k}}(t)\right)
+% $$
+
+% The name is chosen by analogy with the classical action function since in both cases the time derivative is the negative of the (time dependent) energy.
+
+% The exact result for the Green function is
+% $$
+% G_{\mathrm{a}}(t)=i \theta(t) \mathrm{e}^{-i \sigma_{\mathrm{k}} t} T[\exp (S)]
+% $$
+% where $S$ denotes the differential operator in [11] and by comparison the action function is given by
+% $$
+% A_k(t)=-\ell_k t-i \log [T \exp (S)]
+% $$
+
+% This result can be put into a more useful form by the use of a cluster theorem (compare the cluster expansion for the grand partition function; Percus (1964)). This cluster theorem is as follows:
+% $$
+% A_k(t)=-\mathscr{E}_k t-i \sum_{k=1}^{\infty} \frac{1}{n!} T\left[S^n\right]_c
+% $$
+% and $T\left[S^n\right]_c$ is defined by the recursion formula
+% $$
+% T\left[S^{\mathrm{s}}\right]_c=T\left[S^{\mathrm{s}}\right]-\sum_{m=1}^{\mathrm{n}-1} \frac{(n-1)!}{m!(n-m-1)!} T\left[S^{\mathrm{m}}\right] T\left[S^{n-\mathrm{m}}\right]_c ; \quad T[S]_c=T[S]
+% $$
+
+% This can be proved by expanding the logarithm and the exponential in [16].
+% The cluster approximation for the action function consists of evaluating the series in [17] to some finite order.
+% 3.2 The Cluster Expansion
+
+% In the Nth order cluster expansion the Green function is given by
+% $$
+% G_k(t)=i O(t) \mathrm{e}^{-i G_{k^{\prime}}} \prod_{n=1}^N \mathrm{e}^{r\left(S^n\right]_e}
+% $$
+
+% The result in the case $N=1$ coincides with that derived by Mahan (1966).
+% If we compare the first order approximation with the exact result of [15] we see that it corresponds to replacing $T\left[\mathrm{e}^s\right]$ by $\mathrm{e}^{T(s)}$.
+
+% In order to see the significance of this approximation it is useful to compare the perturbation series for the exact and the approximate results. The details of the perturbation theoretic diagrams are given in Pines (1962) and Puff and Whitfield (1962).
+
+% In the first order expansion, $N=1$, every perturbation diagram is included but some, in fact most, are treated in an approximate way. The infinite series of diagrams which are treated exactly are shown in Fig. 1a. In the remaining infinity of diagrams the correlations between successive phonon emissions (or absorptions) are ignored so that every individual phonon emission and reabsorption is taken to be independent of every other. This is the physical implication of the replacement of $T\left[e^s\right]$ by $e^{T[s]}$. The practical result is that in some of the internal lines of the diagrams the electron energy $\mathscr{C}_k$ and the interaction $g_{q k}$ are approximated. As an example we consider the fourth order perturbation diagram of Fig. 2 which is given exactly by
+% $$
+% \begin{aligned}
+% -\frac{1}{2} \sum_{q_1} \sum_{q_2}\left|g_{q_1} g_{q_2}{ }^k+q_1\right|^2 \int_0^t \mathrm{~d} t_1 \int_0^{t_1} \mathrm{~d} t_2 \int_0^{t_2} \mathrm{~d} t_3 & \int_0^{t_3} \mathrm{~d} t_4 D_{q_1}\left(t_1-t_4\right) D_{q_2}\left(t_2-t_3\right) \\
+% & \times \mathrm{e}^{i\left(\delta_k-\delta_{k+q_1}\right)\left(t_1-t_4\right)} \mathrm{e}^{i\left(\epsilon_{k+q_1}-\delta_{k+q_1+q_2}\right)\left(t_2-t_3\right)}
+% \end{aligned}
+% $$
+
+% In the first order expansion the two phonon processes are considered uncorrelated and this uncoupling is achieved by making the substitutions
+% [21]
+% $$
+% \mathscr{E}_{k+q_1+q_2} \rightarrow \mathscr{E}_{k+q_1}+\mathscr{E}_{k+q_2}-\mathscr{E}_k ; \quad g_{q_2 k+q} \rightarrow g_{q_2 k}
+% $$
+
+% If the electron energy band is parabolic with band mass $m$ then the error incurred in making this
+% substitution is $\left(\boldsymbol{q}_1 \cdot \boldsymbol{q}_2\right) / m$ and so effectively $\exp \left(i\left(t_2-t_3\right)\left(\boldsymbol{q}_1 \cdot \boldsymbol{q}_2\right) / m\right)$ is replaced by 1 inside the integral.
+
+% The corresponding substitution for the electron energy in higher order diagrams (still for the first order cluster expansion) is
+% $$
+% \mathscr{E}_{k+q_1+q_2 \ldots+q_p}=\mathscr{E}_{k+q_1}+\ldots+\mathscr{E}_{k+q_p}-(p-1) \mathscr{E}_k
+% $$
+
+% If the cluster expansion is taken to $N$ th order then $N$ phonon correlations are included and ( $N+1$ ) and higher order correlations are neglected. The diagram in Fig. 2 is therefore evaluated exactly if $N \geqslant 2$.
+
+% The infinite subset of diagrams which are evaluated exactly for $N=2$ is shown in Fig. 1c.
+% The $N$ th order cluster expansion therefore treats a particular infinite subset of diagrams in an exact way and evaluates all other diagrams in an approximate way.
+
+% This is in sharp contrast to the usual procedures. Most procedures involve the exact summation of an infinite subset of the perturbation diagrams and this is usually facilitated by working with the self energy function rather than with the Green function itself. The lowest order approximation for the self energy (called the Tamm-Dancoff approximation by Puff and Whitfield (1962)) sums the infinite set of diagrams of Fig. I $a$ which is just the set of diagrams evaluated exactly by the first order cluster expansion. But while the cluster expansion then goes on to make some attempt at evaluating every other diagram, in the Tamm-Dancoff approximation, these are simply discarded.
+
+% The Hartree-Fock approximation (Pines 1962; Puff and Whitfield 1962) is a much better procedure in which, however, the self energy function has to be determined in a self-consistent way. This usually results in an integral equation which can only be easily solved in very simple models (Dunn 1968, 1969). The diagrams summed in the Hartree-Fock approximation are shown in Fig. 1b. Again, unlike the cluster approximation, no account at all is taken of the infinity of remaining diagrams.
+
+% In what circumstances is the above method valid?
+% As we have seen the approximations in the $N$ th order cluster expansion involve the above substitutions for the electron energy. This should be valid if ( $i$ ) the $\boldsymbol{q}$ values of importance are small (as in the case of the polaron and the piezoelectric interactions) or the band mass $m$ is large (as in the case of an impurity band). It is generally assumed that $g_{q k}$ is only weakly dependent on $k$ and so the substitutions made for this quantity should present no problems.
+
+% The substitutions for the energy occur in expressions of the form $\exp \left(i \delta_k \cdot t^{\prime}\right)$ where $t^{\prime} \leqslant t$ and so for very short times the procedure for evaluating $G_k(t)$ should be valid even if the criterion ( $i$ ) is not satisfied. However, in order to evaluate $G_\alpha(\omega)$ which is our aim we need to know $G_\alpha(t)$ for all times. In the long time limit we expect $A_{\mathrm{a}}(t)$ to assume the form
+% $$
+% A_k(t) \rightarrow-t\left(E_k-i \Gamma_k\right)+\Delta_k
+% $$
+% where $E_k$ is the renormalized energy and $\Gamma_k$ the inverse lifetime. The $N$ th order cluster expansion for $A_2(t)$ yields the ( $2 N$ )th perturbation theory result for the energy and inverse lifetime and so the long time limit is correct only if ( $2 N$ )th order perturbation theory gives sufficiently accurate results.
+
+% The contribution of the asymptotic region to $G_k(\omega)$ is of the form
+% $$
+% \frac{\mathrm{e}^{i \Delta_k} \mathrm{e}^{-i I_0\left(E_k-i \Gamma_k\right)}}{E_k-i \Gamma_k-\omega}
+% $$
+% where $t_0$ is the smallest time for which [22] is valid. If $\Gamma_k$ is large then this contribution which is concentrated near $\omega=E_k$ is negligible and so in this case it is irrelevant whether it is accurate or not.
+
+% And so an a posteriori criterion for the validity of the $N$ th order cluster expansion is (ii) either ( $2 N$ )th order perturbation theory is good for $E_k$ and $\Gamma_k$ or $\Gamma_k$ is large.
+
+% It turns out that both $\Gamma_k$ and $\operatorname{Im} \Delta_k$ increase with increasing interaction strength and temperature and so in the case of a strong interaction and a high temperature the contribution from the asymptotic region is likely to be negligible and consequently the errors unimportant.
+
+% In the case of weak interaction and a low temperature the contribution [23] is likely to form a major part of $G_A(\omega)$ and consequently errors are important. If this is the case the method has to be modified to take proper account of the asymptotic region. This is done in Sect. 5.
+% DUNN: ELECTRON-PHONON INTERACTIONS
+% 327
+
+% In either case $G_k(\omega)$ should be determined accurately by the cluster expansion if $\omega$ is far from the region of the renormalized energy.
+
+% The explicit expressions for the first and second order terms in the cluster expansion for the action function are
+% $$
+% A_k^{(1)}(t)=\sum_q\left|g_{q k}\right|^2 \int_0^t \mathrm{~d} \tau \int_0^t \mathrm{~d} \tau^{\prime} D_q\left(\tau-\tau^{\prime}\right) \mathrm{e}^{f\left(\tau-\tau^{\prime}\right)\left(\delta_k-\delta_{k+q}\right)}
+% $$
+% [25]
+% $$
+% \begin{aligned}
+% & A_k^{(2)}(t)=i \sum_{q!} \sum_{q 2} \int_0^t \mathrm{~d} \tau_1 \int_0^{\tau 1} \mathrm{~d} \tau_2 \int_0^{\tau 2} \mathrm{~d} \tau_3 \int_0^{\tau 3} \mathrm{~d} \tau_4\left[D_{q 1}\left(\tau_1-\tau_3\right) D_{q 2}\left(\tau_2-\tau_4\right)\right. \\
+% & \times\left(g_{q 1} g_{q 2} k+q_1 g_{q, k} k g_{q, k+q_2}{ }^* \mathrm{e}^{\left(\left\{\delta_k\left(\tau_1-\tau_4\right)-\delta_{k+q_1}\left(t_1-\tau_2\right)-\delta_{k+q_1}+q_2\left(\tau_2-\tau_3\right)-\varepsilon_{k+q_2}\left(\tau_3-\tau_4\right)\right)\right.}\right. \\
+% & \left.-\left|g_{q, k} g_{q, k}\right|^2 \mathrm{e}^{i\left(\left(\delta_k-\delta_{k+q_1}\right)\left(\tau_1-\tau_3\right)+\left(\delta_k-\delta_{k+q_2}\right)\left(\tau_2-\tau_4\right)\right)}\right)+D_{q,}\left(\tau_1-\tau_4\right) D_{q, 2}\left(\tau_2-\tau_3\right) \\
+% & \times\left(\left|g_{q, k} g_{q, k}+q_1\right|^2 \mathrm{e}^{i\left(\delta_k\left(\tau_1-\tau_4\right)-\delta_{k+q_1}\left(\tau_1-\tau_2\right)-\delta_{k+q_1}+q_2\left(\tau_2-\tau_3\right)-\varepsilon_{k+q_1}\left(\tau_3-\tau_4\right)\right)}\right. \\
+% & \left.\left.-\left|g_{q, k} g_{q, k}\right|^2 \mathrm{e}^{i\left(\left(\delta_k-\delta_{k+q_2}\right)\left(\tau_1-\tau_4\right)+\left(\delta_k-\delta_{k-q_2}\right)\left(\tau_2-\tau_3\right)\right)}\right)\right]
+% \end{aligned}
+% $$
+
+% The above discussion shows that these expressions for $A_k(t)$ should produce an accurate $G_k(\omega)$ for the whole range of $\omega$ providing the contribution from the asymptotic region ([23]) is either negligible or is treated correctly. ${ }^1$
+
+% In the second order cluster approximation $G_k(\omega)$ is then given by
+% $$
+% G_k(\omega)=i \int_0^{\infty} \mathrm{d} t \mathrm{e}^{i \omega t} \exp \left[i\left(-\mathscr{G}_k t+A_k^{(t)}(t)+A_k^{(2)}(t)\right)\right]
+% $$
+% 3.3 An Example: a Localized State
+
+% The model of a localized electron state in interaction with phonons has been solved many times and in many ways (Duke and Mahan 1965; Toyozawa 1967; Dunn 1969; Langreth 1970) but it is considered again to demonstrate the power of the above formalism.
+
+% In the case of a localized state both the energy $\mathscr{E}_k$ and the interaction constant $g_{q k}$ are independent of $\boldsymbol{k}$. This means that the 'approximations' of the first order cluster expansion, represented by [21] are not approximations at all: the first order cluster expansion gives the exact result. The same conclusion can be reached using the exact formal expression [11] since in this case the $\Gamma$ operators all commute and the time ordering is therefore irrelevant.
+
+% This exact result for the Green function of the localized state is
+% [27] $G(t)=i \theta(t) \mathrm{e}^{-i E^t} \exp \left[-\sum_q \frac{\left|g_q\right|^2}{2-\Omega_q}\left(N\left(\Omega_q\right)\left(1-\mathrm{e}^{i \Omega_q t}\right)+\left(1+N\left(\Omega_q\right)\right)\left(1-\mathrm{e}^{-i \Omega_q t}\right)\right)\right]$ where $\overline{\mathcal{E}}$ is the renormalized energy
+% $$
+% g^g-\sum_q\left|g_q\right|^2 / 2 \Omega_q^2
+% $$
+
+% In the case of optical phonons it is often quite a good approximation to neglect the phonon dispersion and the result then becomes very simple: ${ }^2$
+% $$
+% G(t)=i \theta(t) \mathrm{e}^{-i t Z} \mathrm{e}^{-\xi(1+2 N(\Omega))} \exp \left[\xi\left(N(\Omega) \mathrm{e}^{i \Omega t}+(1+N(\Omega)) \mathrm{e}^{-i \Omega t}\right)\right]
+% $$
+% where $\xi$ is the Huang-Rhys parameter
+% ${ }^1$ Two cases in which the asymptotic region is treated accurately are considered below: for the localized state the asymptotic region is important but in fact is treated exactly: in the case of a stationary polaron the energy renormalization, which determines the asymptotic behavior, is evaluated quite well by the second order cluster approximation if $a \leqslant 6$.
+% ${ }^2$ In the limit $t \rightarrow \infty$ the action function in this case does not tend to a limit of the form [22]. This is caused by the extreme simplicity of the model: even a small amount of phonon dispersion causes the oscillations in the action function to decay and the form [22] is restored.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{My derivations}
+\subsection{Taking advantage of connection between EOMs}
+We use the formula $\mathcal{L}\{(f*g)(t)\}(s)=\mathcal{L}\{f(t)\}(s) \mathcal{L}\{g(t)\}(s)$ for the Laplace transform of a convolution in the below.
+\subsubsection{EOM with the retarded self energy}
+We know the retarded Green's function satisfies the equation of motion in the time domain:
+\begin{align}
+    (i\partial_t - \epsilon_0) G^R(t) - \int_0^t d\tau\, \Sigma^R(t - \tau)\, G^R(\tau) &= 0 \label{eq:eom_retarded} \\
+\implies i\mathcal{L}\{ \partial_t G^R(t)\}(s) - \epsilon_0 \mathcal{L} \{ G^R(t)\}(s) - \mathcal{L}\left\{\int_0^t d\tau\, \Sigma^R(t - \tau)\, G^R(\tau)\right\}(s) &= 0 \\
+ i \left( s \mathcal{L} \{ G^R(t)\}(s) -G^R(0)\right)- \epsilon_0 \mathcal{L} \{ G^R(t)\}(s) - \mathcal{L}\{\Sigma^R(t)\}(s) \mathcal{L}\{G^R(t)\}(s) &= 0\\
+\left[s + i\epsilon_0 + i\mathcal{L}\{\Sigma^R(t)\}(s)\right] \mathcal{L}\{G^R(t)\}(s) &= -i \\
+\end{align}
+where we used the boundary condition $G^R(0) = -i$.
+This implies that
+\begin{equation}
+    \mathcal{L}\{G^R(t)\}(s) = \frac{-i}{s + i\epsilon_0 + i\mathcal{L}\{\Sigma^R(t)\}(s)}.
+\end{equation}
+With the standard analytic continuation $s \rightarrow -i\omega + \eta$, we find
+\begin{align}
+    G^R(-i\omega + \eta) &= \frac{-i}{-i\omega + \eta + i\epsilon_0 + i\mathcal{L}\{\Sigma^R(t)\}(-i\omega + \eta)} \times \frac{i}{i}\\
+    &= \frac{1}{\omega - \epsilon_0 - \mathcal{L}\{\Sigma^R(t)\}(-i\omega + \eta) + i\eta} \\
+   \implies  G^R(\omega) &= \frac{1}{\omega - \epsilon_0 - \Sigma^R(\omega) + i0^+}
+\end{align}
+\subsubsection{EOM with the retarded cumulant}
+It is also valid to replace the convolution term in \eqref{eq:eom_retarded} with the time derivative of the cumulant. Considering the Laplace transform of just this term, we have
+\begin{align}
+\mathcal{L}\left\{\dot{C}^R(t)G^R(t)\right\}(s)
+&=\int_0^\infty dt\, e^{-s t} \dot{C}^R(t) \left(-i e^{-i \epsilon_0 t} e^{C^R(t)}\right) \\
+&= -i \int_0^\infty e^{-t(s + i\epsilon_0)} \frac{d}{dt}\big(e^{C^R(t)}\big)\, dt \label{eq:integration_by_parts}\\
+&= i - i(s + i\epsilon_0)\int_0^\infty e^{t(s + i\epsilon_0)} e^{C^R(t)}\,dt \label{id}\\
+&= i - i(s + i\epsilon_0)\mathcal{L}\{G^R(t)\}(s)
+\end{align}
+where we used integration by parts.
+\footnote{\begin{align}
+\int_0^\infty e^{-t(s + i\epsilon_0)} \frac{d}{dt}e^{C^R(t)}\,dt
+&= \left[e^{-t(s + i\epsilon_0)} e^{C^R(t)}\right]_0^\infty 
++ (s + i\epsilon_0)\int_0^\infty e^{-t(s + i\epsilon_0)} e^{C^R(t)}\,dt \\
+&= -1 + (s + i\epsilon_0)\int_0^\infty e^{-t(s + i\epsilon_0)} e^{C^R(t)}\,dt
+\end{align}}
+\subsubsection{EOM from Nakajima-Zwanzig}
+The Nakajima-Zwanzig equation for a correlation function $\mathcal{A}(t)$ is given by
+\begin{equation}
+\dot{\mathcal{A}}(t) = \mathcal{A}(t) {\Omega_1} - \int_{0}^{t} d \tau\, \mathcal{A}(t - \tau) \mathcal{K}_1(\tau) + D(t)
+\label{eq:GQME}
+\end{equation}
+So it is useful to consider the term involving the memory kernel. Its Laplace transform is
+\begin{align}
+\mathcal{L}\left\{\mathcal{A}(t)*\mathcal{K}_1(t)\right\}(s) &= \mathcal{L}\{\mathcal{A}(t)\}(s) \mathcal{L}\{\mathcal{K}_1(t)\}(s)
+\end{align}
+In order to make more progress, we would want to equate
+\begin{align}
+\mathcal{L}\left\{\mathcal{A}(t)*\mathcal{K}_1(t)\right\}(s) &= \mathcal{L}\left\{\dot{C}^R(t)G^R(t)\right\}(s) \\
+\implies \mathcal{L}\{\mathcal{A}(t)\}(s) \mathcal{L}\{\mathcal{K}_1(t)\}(s) &= i - i(s + i\epsilon_0)\mathcal{L}\{G^R(t)\}(s) 
+\end{align}
+It would be nice to solve for $\mathcal{L}\{G^R(t)\}(s) $ in terms of $\mathcal{L}\{\mathcal{K}_1(t)\}(s)$ now, but to do so, we would need to establish a relationship between $\mathcal{L}\{G^R(t)\}(s)$ and $\mathcal{L}\{\mathcal{A}(t)\}(s)$. We know that the relationship between the fermionic retarded Green function $G^R(t) = -i \theta(t) \langle \{ \hat{\mu}(t), \hat{\mu}(0) \} \rangle$ and the autocorrelation function $\mathcal{A}(t)= \langle\hat{\mu}(t) \hat{\mu}(0)\rangle$ of Nakajima-Zwanzig is given by
+\begin{align}
+G^R(t) &= -i \theta(t) \left[\mathcal{A}(t) + \mathcal{A}(-t)\right]\\
+\implies \mathcal{L}\{G^R(t)\}(s) &= -i \mathcal{L}\{ \left[\mathcal{A}(t) + \mathcal{A}(-t)\right]\}(s) \\
+&= -i \left[\mathcal{L}\{\mathcal{A}(t)\}(s) + \mathcal{L}\{\mathcal{A}(-t)\}(s)\right] \\
+ &\overset{?}{=} -i \mathcal{L}\{ \left[\mathcal{A}(t) + \mathcal{A}^*(t)\right]\}(s) \label{eq:questionable_step}\\
+&= -2i \mathcal{L}\{\Re[\mathcal{A}(t)]\}(s) 
+% & = -i \theta(t) \left[\mathcal{A}(t) + \mathcal{A}^*(t)\right] \\
+% &= -i \theta(t) \left[ \Re\left[\mathcal{A}(t)\right] + i \Im\left[\mathcal{A}(t)\right] + \Re\left[\mathcal{A}^*(t)\right] - i \Im\left[\mathcal{A}(t)\right]\right] \\
+% &= -2i \theta(t) \Re\left[\mathcal{A}(t)\right] \\
+% \implies \mathcal{L}\{\frac{iG^R(t)}{2}\}(s) &=  \mathcal{L}\{ \Re\left[\mathcal{A}(t)\right]\}(s) \quad \forall t>0 \\
+% \frac{i}{2} \int_0^\infty dt\, e^{-s t} G^R(t) &= \int_0^\infty dt\, e^{-s t} \Re\left[\mathcal{A}(t)\right] \\
+\end{align}
+The last two equalities only hold if the operators $\hat{\mu}(t)$ that make up the autocorrelation function $\mathcal{A}(t)$ are Hermitian. The fermionic second quantization operators are not Hermitian though. Only observables are Hermitian, which is why they were able to use the property leading to equation \eqref{eq:questionable_step} in Eq. 35-36 of \emph{Any type of spectroscopy can be efficiently simulated on a quantum computer}.
 \subsection{SC-CE}
 
 \subsubsection{My derivation}
@@ -745,7 +1041,9 @@ Equating the two gives an expression for the cumulant derivative:
 \begin{align}
 \dot{C}^R(t)G^R(t) = \int_0^t d \tau G^R(t-\tau) \Sigma^R(\tau)
 \end{align}
-From here there are two directions I have in mind. Firstly, the Kowalski paper gave the EOM for the retarded core-hole cumulant as $-i\frac{d C_c^R(t)}{dt} = \left< \phi \left| \bar{H}_N(t) \right| \phi \right> = \sum_{ia} f_{ia} t_i^a + \frac{1}{2} \sum_{ijab} v_{ij}^{ab} t_j^b t_i^a$. I could plug this in and see. Secondly, we also know that 
+From here there are two directions I have in mind. Firstly, the Kowalski paper gave the EOM for the retarded core-hole cumulant as $-i\frac{d C_c^R(t)}{dt} = \left< \phi \left| \bar{H}_N(t) \right| \phi \right> = \sum_{ia} f_{ia} t_i^a + \frac{1}{2} \sum_{ijab} v_{ij}^{ab} t_j^b t_i^a$. I could plug this in and see.
+
+ Secondly, we also know that 
 \begin{align}
 i \dot{C}^R(t) G^R(t) &= \int_{0}^{t} d \tau\, \mathcal{A}(t - \tau) \mathcal{K}_1(\tau)  \\  
 \implies \mathcal{L}\left\{i \dot{C}^R(t) G^R(t)\right\}(s) &= \mathcal{L}\left\{\int_{0}^{t} d \tau\, \mathcal{A}(t - \tau) \mathcal{K}_1(\tau)\right\}(s)
@@ -922,8 +1220,67 @@ Now, consider the inverse Fourier transform to get back to the time domain:
     C^{R}_0(t) &= \int_{-\infty}^{\infty} d\omega\, e^{-i\omega t} C^{R}_0(\omega) \\
     &= \int_{-\infty}^{\infty} d\omega\, e^{-i\omega t} \left(-\frac{\Sigma^R(\omega+\epsilon_0)}{(\omega + i\eta)^2}\right)
 \end{align}
+\subsection{Fundamental properties of the cumulant}
+
+The interacting Green's function can be written as either a Dyson series
+\begin{equation}
+    G = G_0 + G_0 \Sigma G_0 + G_0 \Sigma G_0 \Sigma G_0 + G_0 \Sigma G_0 \Sigma G_0 \Sigma G_0 + \ldots
+\end{equation}
+or using the cumulant ansatz $G = G_0 e^{C}$, where we can formally expand the cumulant $C$ in powers of the interaction strength as $C = \lambda C +\lambda ^2 C + \lambda ^3 C + \mathcal{O}(\lambda^4) \equiv C^{(1)} + C^{(2)} + C^{(3)} + \mathcal{O}(\lambda^4)$. Expanding the exponential gives
+\begin{align}
+      G&= G_0 \left( 1 + C + \frac{C^2}{2!} + \frac{C^3}{3!} + \ldots \right)\\
+&= G_0 \left( 1+C^{(1)}+\frac{1}{2!}\left[\left(C^{(1)}\right)^2+2 C^{(2)}\right]+\frac{1}{3!}\left[\left(C^{(1)}\right)^3+3 C^{(1)} C^{(2)}+3 C^{(2)} C^{(1)}+6 C^{(3)}\right] + \mathcal{O}(\lambda^4) \right) 
+\end{align}
+To form a relationship between the two, we can connect them order by order in powers of $\lambda$, where the standard PT convention tells us that a $\Sigma $ carries with it a $\lambda$, to get
+\paragraph{Zeroth order:}
+\begin{align}
+    G_{\text{Dyson}}^{(0)} &= G_{\text{Cumulant}}^{(0)} \\
+\implies M^{(0)} \equiv G_0 &= G_0 \\
+\implies C^{(0)} &= 0
+\end{align}
+
+\paragraph{First order:}
+\begin{align}
+G^{(1)}_{\text{Dyson}} &= G^{(1)}_{\text{Cumulant}} \\
+    \implies G_0 \Sigma G_0 &= G_0 C^{(1)} \\
+\implies C^{(1)} &= \Sigma G_0 \equiv M^{(1)}
+\end{align}
+Beyond the first order, we will have to consider products of lower-order terms as well.
+\paragraph{Second order:}
+\begin{align}
+    G^{(2)}_{\text{Dyson}} &= G^{(2)}_{\text{Cumulant}} \\
+    \implies G_0 \Sigma G_0 \Sigma G_0 &= G_0 \left( C^{(2)} + \frac{1}{2!}(C^{(1)})^2 \right) \\
+&= G_0 \left( C^{(2)} + \frac{1}{2!}M^{(1)} \right) \\
+\implies C^{(2)} &= \underbrace{\Sigma G_0 \Sigma G_0}_{M^{(2)}} - \frac{1}{2}(M^{(1)})^2
+\end{align}
+\paragraph{Third order:}
+\begin{align}
+    G^{(3)}_{\text{Dyson}} &= G^{(3)}_{\text{Cumulant}} \\
+    \implies G_0 \Sigma G_0 \Sigma G_0 \Sigma G_0 &= G_0 \left( C^{(3)} + \frac{1}{2}C^{(1)} C^{(2)} + \frac{1}{2}C^{(2)} C^{(1)} + \frac{1}{6}(C^{(1)})^3 \right) \\
+&= G_0 \left( C^{(3)} + \frac{1}{2}M^{(1)} \left( M^{(2)} - \frac{1}{2}(M^{(1)})^2 \right) + \frac{1}{2}\left( M^{(2)} - \frac{1}{2}(M^{(1)})^2 \right) M^{(1)} + \frac{1}{6}(M^{(1)})^3 \right) \\
+\implies C^{(3)} &= \underbrace{\Sigma G_0 \Sigma G_0 \Sigma G_0}_{M^{(3)}} - \frac{1}{2}\left( M^{(1)} M^{(2)} + M^{(2)} M^{(1)} \right) + \frac{1}{3}(M^{(1)})^3
+\end{align}
+This mirrors the third cumulant in statistics:
+\[
+\kappa_3 = \mu_3' - 3\mu_2'\mu_1' + 2(\mu_1')^3.
+\]
 \subsection{GW+C}
 \subsubsection{Using exact self-energy}
+If you give me the exact self-energy, like $\Sigma = G_0^{-1} - G^{-1}$, this means all my terms in the Dyson expansion are exact; i.e. $G = G_0 + G_0 \Sigma G_0 + G_0 \Sigma G_0 \Sigma G_0 + \ldots$ will give the exact $G$. In other words, I have the exact moments $\mu_{n,k}$ of the interacting Green's function, which in the retarded framework can be written as
+\begin{align}
+G_k^R(t)&=-i \theta(t)\left\langle\left\{c_k(t), c_k^{\dagger}(0)\right\}\right\rangle \\
+&=-i \theta(t)\left\langle\left\{e^{i H t} c_k e^{-i H t}, c_k^{\dagger}\right\}\right\rangle \\
+&=-i \theta(t)\left\langle\left\{\sum_{n=0}^{\infty} \frac{(-i t)^n}{n!} \mathcal{L}^n c_k, c_k^{\dagger}\right\}\right\rangle \\
+% &=-i \theta(t)\left( \left\langle\left\{c_k, c_k^{\dagger}\right\}\right\rangle+i t\left\langle\left\{\left[H, c_k\right], c_k^{\dagger}\right\}\right\rangle+\frac{(i t)^2}{2}\left\langle\left\{\left[H,\left[H, c_k\right]\right], c_k^{\dagger}\right\}\right\rangle+\cdots \right)\\
+&=-i \theta(t)\left( \mu_{0,k}- t\mu_{1,k}+\frac{t^2}{2}\mu_{2,k}+O(t^3) \right)
+\end{align}
+where we have defined the moments $\mu_{n,k}=\left\langle\left\{\left(i \mathcal{L} \right)^n c_k, c_k^{\dagger}\right\}\right\rangle$ and the Liouvillian superoperator $\mathcal{L} O=[H,O]$. Then, it becomes the mathematical exercise of determining the cumulant $C_k(t)$ in terms of the moments, such that the Taylor expansion of the exponential in $G_k^R(t) = G_{0,k}^R(t) e^{C_k(t)}$ matches the Dyson expansion of the exact $G_k^R(t)$ up to order $n$. Given that the exact cumulant can be expanded as $C_k^R(t) = \kappa_{1,k} t + \kappa_{2,k} t^2 + O(t^3)$, we can Taylor expand the exponential $e^{C_k^R(t)}$ and then match coefficients with the above expression for $R_k(t)$ to plug into the usual relations between the cumulants $\kappa _{n,k}$ and moments $\alpha_{n,k}$, to get
+\begin{align}
+    \kappa_{1,k} = \alpha_{1,k} &= -\left(\mu_{1,k}-\mu_{1,k}^0\right)\\
+    \kappa_{2,k} = \alpha_{2,k} - \frac{\alpha_{1,k}^2}{2} &= \frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)-\mu_{1,k}\mu_{1,k}^0+\left(\mu_{1,k}^0\right)^2 -\frac{1}{2}{\left[-\left(\mu_{1,k}-\mu_{1,k}^0\right)\right]^2}\\
+&= \frac{1}{2}\left(\mu_{2,k}-\mu_{2,k}^0\right)-\mu_{1,k}\mu_{1,k}^0+\left(\mu_{1,k}^0\right)^2 -\frac{1}{2}\left(\mu_{1,k}-\mu_{1,k}^0\right)^2\\
+&= \frac{1}{2}\left[\left( \mu_{2,k} - \mu_{2,k}^0 \right) +\left( \mu_{1,k} \right)^2 + \left( \mu_{1,k}^0 \right)^2 \right]
+\end{align}
 We know that $\Sigma = G_0^{-1} - G^{-1}$, and inserting this gives\\ $G_0(\omega) \Sigma(\omega) G_0(\omega) = G_0(\omega) \left(G_0^{-1}(\omega) - G^{-1}(\omega)\right) G_0(\omega) = G_0(\omega) - G_0(\omega) G^{-1}(\omega) G_0(\omega)$
 \begin{align}
 	C_{pq}(t) &= i \int \frac{d\omega}{2\pi} e^{-i(\omega-\epsilon_p^{HF})t} \left[G_0(\omega) \Sigma(\omega) G_0(\omega)\right]_{pq} \\

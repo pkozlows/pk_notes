@@ -50,10 +50,17 @@ Possible half-reactions include:\\
 \[\mathrm{Cu}^{2+} + 2e^- \rightarrow \mathrm{Cu}\]
 6. Oxidation of copper metal to $\mathrm{Cu}^{2+}$:
 \[\mathrm{Cu} \rightarrow \mathrm{Cu}^{2+} + 2e^-\]
+We can also consider reactions involving protons at cathode , such as:
+7. Reduction of protons to hydrogen gas:
+\[2H^+ + 2e^- \rightarrow H_2\]
+and then the anodic counterpart in water splitting:
+8. Oxidation of water to oxygen gas:
+\[H_2O \rightarrow \frac{1}{2}O_2 + 2H^+ + 2e^-\]
+
 \subsection{}
 b) What are the most likely half reactions to actually be occurring at cathode (copper) and anode (iron), assuming you start with a freshly pickled frog (e.g., the initial electrolyte only has protons and supporting salts like sodium chloride in it)? Note that the standard potential for oxidizing $\mathrm{Fe}^{2+}$ to $\mathrm{Fe}^{3+}$ is significantly higher than the standard potential for oxidizing Fe metal to $\mathrm{Fe}^{2+}$. [4 pts]\\[0pt]
 \subsubsection{Solution}
-Because a higher potential implies a more negative $\Delta G$, and thus a more favorable reaction, the most likely anodic reaction is the oxidation of $\mathrm{Fe}^{2+}$ to $\mathrm{Fe}^{3+}$. The most likely cathodic reaction is the reduction of $\mathrm{Cu}^{2+}$ to copper metal.
+Because a higher potential implies a more negative $\Delta G$, and thus a more favorable reaction, which implies a more favorable cathodic reactions and so a less favorable anodic reaction. So we will actually be oxidizing the arion metal to $\mathrm{Fe}^{2+}$, at the anode and then at the cathode we will have the reduction of protons to hydrogen gas happening.
 \subsection{}
 c) Based on the likely reactions, draw a schematic of the battery, clearly indicating motion of species, electrons, half reactions, and electrode identities. [5 pts]\\
 \subsubsection{Solution}
@@ -100,7 +107,7 @@ The pink line is
 \end{equation}
 Teal line has to be in basic conditions
 \begin{equation}
-    Cl^- + H_2O + 2e^- \rightleftharpoons OCl^- + 2OH^- 
+    Cl^- + 2OH^- \rightleftharpoons OCl^- + H_2O + 2e^- 
 \end{equation}
 The blue lane has to be in acidic conditions
 \begin{equation}
@@ -108,7 +115,7 @@ The blue lane has to be in acidic conditions
 \end{equation}
 The korean line has to be also in acidic conditions
 \begin{equation}
-    2Cl^- +2H^+ \rightleftharpoons Cl_2 + H_2
+    2Cl^- \rightleftharpoons Cl_2 + 2e^-
 \end{equation}
 The red line also has to be in acidic conditions
 \begin{equation}
@@ -121,11 +128,11 @@ That yellow/brown line near the neutral pH is
 \subsection{}
 b) Based on this diagram, which is a stronger oxidizer, chlorine ( $\mathrm{Cl}_{2}$ ) or bleach ( $\mathrm{ClO}^{-}$)? [2 pts]\\[0pt]
 \subsubsection{Solution}
-The bleach, because it has the higher vertical position on the Pourbaix diagram.
+The chlorine, because it has the higher vertical position on the Pourbaix diagram.
 \subsection{}
 c) What reaction competes with chloride oxidation? [2 pts]
 \subsubsection{Solution}
-The reduction of $Cl_2$ to $Cl^-$ competes with the oxidation of $Cl_2$ to $OCl^-$.
+The water splitting reaction would compete because it is easier to oxidize the water than it is the chloride ion because the pink line is lower on the pourbaix diagram.
 
 \section{Problem 3. Using electrochemistry to measure entropy [25 pts]}
 We have discussed the temperature dependence of potential and how we can use the entropy of reaction to determine the potential as a function of temperature. This relies on being able to find the standard entropy for the chemical species involved, a task that is simple when looking at a\\
@@ -168,6 +175,30 @@ Then we also know that
 \begin{equation}
     \frac{\partial E_{ocv}}{\partial T} = \frac{\Delta S_{rxn}}{nF}
 \end{equation}
+but we can derive this from the fundamental relations. The Gibbs free energy is given by
+\begin{equation}
+    \Delta G_{rxn} = \Delta H_{rxn} - T \Delta S_{rxn}
+\end{equation}
+Taking the diver active with respect to temperature gives
+\begin{equation}
+    \frac{\partial \Delta G_{rxn}}{\partial T} = \frac{\partial \Delta H_{rxn}}{\partial T} - \Delta S_{rxn} - T \frac{\partial \Delta S_{rxn}}{\partial T}
+\end{equation}
+The first term on the vet hand site represents the change in heat capacity for the reaction, which we assume is zebra. The last term is also proportional to the change in heat capacity, so we can also assume it is zero. This leaves us with
+\begin{equation}
+    \frac{\partial \Delta G_{rxn}}{\partial T} = - \Delta S_{rxn}
+\end{equation}
+We also know that
+\begin{equation}
+    \Delta G_{rxn} = -nFE_{ocv}
+\end{equation}
+Taking the derivative with respect to temperature gives
+\begin{align}
+    \frac{\partial \Delta G_{rxn}}{\partial T} &= -nF \frac{\partial E_{ocv}}{\partial T} \\
+    -\Delta S_{rxn} &= -nF \frac{\partial E_{ocv}}{\partial T} \\
+    \frac{\partial E_{ocv}}{\partial T} &= \frac{\Delta S_{rxn}}{nF}
+\end{align}
+
+
 Setting these two equations equal to each other, we have
 \begin{equation}
     \frac{\Delta S_{rxn}}{nF} = \frac{\Delta H_{rxn}}{nFT} + \frac{E_{ocv}}{T}

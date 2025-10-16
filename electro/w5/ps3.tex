@@ -1,0 +1,224 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{
+    margin=1in,
+    textwidth=6.5in,
+    textheight=9in
+}
+
+\begin{document}
+\section*{Problem Set 2}
+Due: Wednesday $10 / 15 / 25$ at the start of class\\
+Feel free to use any resource to work these problems, including books, websites, and your classmates. However, your problem set submission must be your own work.
+
+\section{Problem 1. Tafel Derivation}
+\subsection{}
+a. You have a mechanism that involves $n+q$ electron transfers to convert from reactant to product. For simplicity, let us assume that your reactant is an aqueous species $A^{(n+q)+}$ and your product is $A\left(A^{(n+q)+}\right.$ is reduced during this process). This process will take place through $n$ single electron transfers, with the final rate-determining step (RDS) being a transfer of $q$ electrons (in practice, $q$ will be either 1 or 0 , representing an electron transfer RDS or a thermochemical RDS). Write out the reaction equations as reductions for first electron transfer, the $i^{\text {th }}$ electron transfer $(1 \leq i \leq n)$, the $n^{\text {th }}$ electron transfer, and the RDS with $\boldsymbol{q}$ electrons transferred.\\
+\subsubsection{Solution}
+For the first electron transfer:
+\begin{equation}
+A^{(n+q)+} + e^- \rightleftharpoons A^{(n+q-1)+}
+\end{equation}
+For the $i^{\text{th}}$ electron transfer ($1 \leq i \leq n$):
+\begin{equation}
+A^{(n+q-i+1)+} + e^- \rightleftharpoons A^{(n+q-i)+}
+\end{equation}
+For the $n^{\text{th}}$ electron transfer:
+\begin{equation}
+A^{(q+1)+} + e^- \rightleftharpoons A^{q+}
+\end{equation}
+For the rate-determining step (RDS) with $q$ electrons transferred:
+\begin{equation}    
+A^{q+} + q e^- \rightarrow A
+\end{equation}
+where as was noted, $q$ can be either 1 (for an electron transfer RDS) or 0 (for a thermochemical RDS).
+\subsection{}
+b. Following our derivation of the Butler-Volmer equation in class (with the same assumptions), write an expression for the current density given the RDS from part (a). In this expression, leave the exchange current density (io) explicit in terms of the concentration of $A^{q+}$. Assume that the reductive direction of the RDS has a rate constant of $k_{R}=k_{0, R} e^{-\frac{E_{a, R}}{R T}}$ and the oxidative direction of the RDS has a rate constant of $k_{O}= k_{0, O x} e^{-\frac{E_{a, O x}}{R T}}$ at zero applied potential. Your answer should be in terms of $F,\left[A^{q+}\right], k_{0, R}$, $E_{a, R}, q, R, T, \varphi_{e q}, \beta$, and $\varphi_{a p p}$. Hint: define your current density as $i=i_{O}-i_{R}$ and remember that by definition, a reductive current is negative. Ignore any surface adsorbate or surface coverage effects. What is the current density in the limit of large reductive overpotentials? Use the expression for current density in the large overpotential limit for the rest of this problem.\\
+\subsubsection{Solution}
+Quoting from the lecture notes, we know that the exchange current density can be written as
+\begin{align}
+    i_0 &= [A^{q+}] k_{R} \exp \left( -\frac{\beta q F}{RT} \varphi_{eq} \right) \\
+&= [A^{q+}] k_{0,R} \exp \left( -\frac{E_{a,R}}{RT} \right) \exp \left( -\frac{\beta q F}{RT} \varphi_{eq} \right)
+\end{align}
+Now, we can write the current density as
+\begin{align}
+    i &= i_O - i_R \\
+&= i_0 \left( \exp \left( -\frac{\beta q F}{RT} \left[\varphi_{app} - \varphi_{eq}\right] \right) - \exp \left( \frac{(1-\beta) q F}{RT} \left[\varphi_{app} - \varphi_{eq}\right] \right) \right) \\
+&= [A^{q+}] k_{0,R} \exp \left( -\frac{E_{a,R}}{RT} \right) \exp \left( -\frac{\beta q F}{RT} \varphi_{eq} \right) \left( \exp \left( -\frac{\beta q F}{RT} \left[\varphi_{app} - \varphi_{eq}\right] \right) - \exp \left( \frac{(1-\beta) q F}{RT} \left[\varphi_{app} - \varphi_{eq}\right] \right) \right)
+\end{align}
+A large reductive overpotential means that $\eta_r \equiv \varphi_{app} - \varphi_{eq} \ll 0$, so in the limit of large $\eta_r$, we have
+\begin{align}
+    i &\approx -[A^{q+}] k_{0,R} \exp \left( -\frac{E_{a,R}}{RT} \right) \exp \left( -\frac{\beta q F}{RT} \varphi_{eq} \right) \exp \left( -\frac{\beta q F}{RT} \left[\varphi_{app} - \varphi_{eq}\right] \right) \\
+&= -[A^{q+}] k_{0,R} \exp \left( -\frac{E_{a,R}}{RT} \right)  \exp \left( -\frac{\beta q F}{RT} \varphi_{app} \right)
+\end{align}
+\subsection{}
+c. Assuming all non-rate determining steps are at equilibrium and ignoring surface adsorbate or surface coverage effects, write out an expression for the equilibrium constant in terms of chemical species, the applied potential, and additional constants ( F , $\mathrm{R}, \mathrm{T})$ for the $i^{\text {th }}$ chemical reaction. Use $K_{i}$ to represent the equilibrium constant. Note that $1 \leq i \leq n$.\\
+\subsubsection{Solution}
+For the $i^{\text{th}}$ electron transfer reaction:
+\begin{equation}
+A^{(n+q-i+1)+} + e^- \rightleftharpoons A^{(n+q-i)+}
+\end{equation}
+The equilibrium constant $K_i$ can be expressed as a fraction of the activities of the species involved in the reaction. Assuming ideal behavior, we can use concentrations instead of activities:
+\begin{equation}
+K_i = \frac{a_{A^{(n+q-i)+}}}{a_{A^{(n+q-i+1)+}} a_{e^-}} \approx \frac{[A^{(n+q-i)+}]}{[A^{(n+q-i+1)+}]a_{e^-}}
+\end{equation}
+Now come in order to solve for the activity of the electron, consider the definition of the electrochemical potential of the electron:
+\begin{equation}
+\mu_{e^-} = \mu_{e^-}^0 + RT \ln a_{e^-}
+\end{equation}
+Rearranging gives
+\begin{equation}
+a_{e^-} = \exp \left( \frac{\mu_{e^-} - \mu_{e^-}^0}{RT} \right)
+\end{equation}
+but we also know the definition
+\begin{equation}
+\mu_{e^-} = \mu_{e^-}^0 - F \varphi_{app}
+\end{equation}
+so substituting this in gives
+\begin{equation}
+a_{e^-} = \exp \left( -\frac{F \varphi_{app}}{RT} \right)
+\end{equation}
+Substituting this back into the expression for $K_i$ gives
+\begin{equation}
+K_i = \frac{[A^{(n+q-i)+}]}{[A^{(n+q-i+1)+}]} \exp \left( \frac{F \varphi_{app}}{RT} \right)
+\end{equation}
+\subsection{}
+d. Combine the equilibrium expressions from part (c) with the RDS from part (b) to derive an expression that does not contain any concentrations except $\left[\mathrm{A}^{(\mathrm{n}+\mathrm{q})+}\right]$. Hint: begin by writing $\left[\mathrm{A}^{\mathrm{q}+}\right]$ in terms of $\left[\mathrm{A}^{(\mathrm{n}+\mathrm{q})+}\right]$.\\
+\subsubsection{Solution}
+Rearranging what we found above, we have
+\begin{equation}
+[A^{(n+q-i)+}] = K_i [A^{(n+q-i+1)+}] \exp \left( -\frac{F \varphi_{app}}{RT} \right)
+\end{equation}
+and then we have
+\begin{equation}
+[A^{(n+q-i+1)+}] = K_{i-1} [A^{(n+q-i+2)+}] \exp \left( -\frac{F \varphi_{app}}{RT} \right)
+\end{equation}
+Continuing this way, we can write
+\begin{equation}
+[A^{q+}] = \left( \prod_{i=1}^{n} K_i \right) [A^{(n+q)+}] \exp \left( -\frac{n F \varphi_{app}}{RT} \right)
+\end{equation}
+Substituting this into the expression for current density from part (b) gives
+\begin{align}
+    i &\approx -[A^{(n+q)+}] \left( \prod_{i=1}^{n} K_i \right) k_{0,R} \exp \left( -\frac{E_{a,R}}{RT} \right) \exp \left( -\frac{(n+\beta q) F}{RT} \varphi_{app} \right) \label{final_current}
+\end{align}
+\subsection{}
+e. Derive an expression for the Tafel slope, $\left|\frac{\partial \phi_{\text {app }}}{\partial \log _{10}|\mathrm{i}|}\right|$, in terms of the number of electron transfers before the RDS ( n ) and the number of electrons transferred during the RDS ( q ). You may assume that $\beta=\frac{1}{2}$.\\
+\subsubsection{Solution}
+From the expression in equation \ref{final_current}, let us define
+\begin{align}
+C &= [A^{(n+q)+}] \left( \prod_{i=1}^{n} K_i \right) k_{0,R} \exp\left(-\frac{E_{a,R}}{RT}\right) \\
+\implies |i| &\approx C \exp \left( -\frac{(n+\beta q) F}{RT} \varphi_{app} \right) \label{current_magnitude}
+\end{align}
+where $C$ is independent of the potential. We know that the Tafel slope is defined as
+\begin{equation}
+\left|\frac{\partial \varphi_{app}}{\partial \log_{10}|i|} \right|
+\end{equation}
+We can start by taking the base-10 logarithm of $|i|$:
+\begin{equation}
+\log_{10}|i| = \log_{10} C - \frac{(n+\beta q) F}{RT \ln 10} \varphi_{app}
+\end{equation}
+Therefore, 
+\begin{equation}
+\frac{\partial \log_{10}|i|}{\partial \varphi_{\text{app}}} = - \frac{(n+\beta q) F}{RT \ln 10}
+\end{equation}
+Inverting this expression gives the Tafel slope:
+\begin{equation}
+\left| \frac{\partial \varphi_{\text{app}}}{\partial \log_{10}|i|} \right| = \frac{RT \ln 10}{(n+\beta q) F}
+\end{equation}
+Assuming $\beta = \frac{1}{2}$, we have
+\begin{equation}
+\left| \frac{\partial \varphi_{\text{app}}}{\partial \log_{10}|i|} \right| = 60 \, \text{mV/decade} \cdot \frac{1}{n + \frac{q}{2}}
+\end{equation}
+\subsection{}
+f. What is the maximum possible Tafel slope given the above derivation? What would such a Tafel slope tell you about the mechanism?\\
+\subsubsection{Solution}
+The maximum possible Tafel slope occurs when $n = 0$ and $q = 1$, which corresponds to a single electron transfer being the rate-determining step with no preceding electron transfers. In this case, the Tafel slope is:
+\begin{equation}
+\left| \frac{\partial \varphi_{\text{app}}}{\partial \log_{10}|i|} \right| = 120 \, \text{mV/decade}
+\end{equation}
+The RDS depends on the concentration of the reactant $A^{q+}$ that is present. But we showed in the earlier part that we can express $[A^{q+}]$ in terms of the concentration of the original reactant $[A^{(n+q)+}]$ and in the wing so $\exp \left( -\frac{n F \varphi_{\text{app}}}{RT} \right)$ tagged along. But in this case, $n=0$, so the concentration of $A^{q+}$ does not depend on the applied potential, and so the current is responding slower to the increase in voltage. Thus, we need a larger increase in voltage, like 120 mV, to affect an increase in current by a factor of 10.
+\subsection{}
+g. For the hydrogen evolution reaction in acidic media, there are three relevant reactions:
+
+Volmer: $\mathrm{H}^{+}+e^{-} \rightarrow H_{a d s}$\\
+Heyrovsky: $H_{a d s}+H^{+}+e^{-} \rightarrow H_{2}$\\
+Tafel: $H_{a d s}+H_{a d s} \rightarrow H_{2}$\\
+One can imagine hydrogen evolution occurring via a combination of the above steps. For each of the following reaction pathways and rate-determining steps, what is the Tafel slope?
+
+Pathway 1: Volmer-Heyrovsky (Volmer limiting)\\
+Pathway 2: Volmer-Heyrovsky (Heyrovsky limiting)\\
+Pathway 3: Volmer-Tafel (Volmer limiting)\\
+Pathway 4: Volmer-Tafel (Tafel limiting)
+\subsubsection{Solution}
+For these we will still assume a value of $\beta = \frac{1}{2}$; this is a reasonable value between the typical range of 0.3 to 0.7.\\
+For pathway 1: Volmer-Heyrovsky (Volmer limiting), there is no electron transfer before the RDS, and the RDS involves 1 electron transfer. Thus, $n=0$ and $q=1$, giving a Tafel slope of 120 mV/decade.\\
+For pathway 2: Volmer-Heyrovsky (Heyrovsky limiting), there is 1 electron transfer before the RDS, and the RDS involves 1 electron transfer. Thus, $n=1$ and $q=1$, giving a Tafel slope of 40 mV/decade.\\
+For pathway 3: Volmer-Tafel (Volmer limiting), there is no electron transfer before the RDS, and the RDS involves 1 electron transfer. Thus, $n=0$ and $q=1$, giving a Tafel slope of 120 mV/decade.\\
+For pathway 4: Volmer-Tafel (Tafel limiting), there is 1 electron transfer before the RDS, and the RDS involves no electron transfer. Thus, $n=1$ and $q=0$, giving a Tafel slope of 60 mV/decade.\\
+
+
+\section{Problem 2. Tafel Practicalities}
+Instead of using the Butler-Volmer equation, it is also possible to use simplified forms in certain potential regimes. At room temperature, for $\alpha_{a}=0.5$ and $\alpha_{c}=0.5$, as well as $\alpha_{a}=$ 0.1 and $\alpha_{c}=0.9$, calculate the error in using the following approximations for the ButlerVollmer equation, as both an explicit equation and a numerical value at the given overpotentials.\\
+\subsection{}
+a. The linear i vs. $\eta$ characteristic of small overpotentials, for overpotentials of 10,20 , and 50 mV .\\
+\subsubsection{Solution}
+For small over potentials, we can do a Taylor expansion of the Butler-Volmer equation around $\eta = 0$. The Butler-Volmer equation is given by:
+\begin{equation}
+i = i_0 \left( \exp \left( \frac{\alpha_a F \eta}{RT} \right) - \exp \left( -\frac{\alpha_c F \eta}{RT} \right) \right)
+\end{equation}
+Expanding the exponentials to first order gives:
+\begin{equation}
+i_\text{approx} = i_0 \left( 1 + \frac{\alpha_a F \eta}{RT} - 1 + \frac{\alpha_c F \eta}{RT} \right) = i_0 \frac{(\alpha_a + \alpha_c) F \eta}{RT}
+\end{equation}
+Now, we can compute the numerical values for the different situations. The computations are done in my notebook.\\
+\textbf{Case 1:} $\alpha_a = 0.5$, $\alpha_c = 0.5$\\
+Here, $\alpha_a + \alpha_c = 1$. The linear approximation becomes:
+\begin{equation}
+i_\text{approx} = i_0 \frac{F \eta}{RT}
+\end{equation}
+At $\eta = 10$ mV the error is 0.63\%, at $\eta = 20$ mV the error is 2.48\%, and at $\eta = 50$ mV the error is 14.20\%.\\
+\textbf{Case 2:} $\alpha_a = 0.1$, $\alpha_c = 0.9$\\
+Here, $\alpha_a + \alpha_c = 1$. The linear approximation remains the same but the exact result is different. At $\eta = 10$ mV the error is 16.11\%, at $\eta = 20$ mV the error is 33.14\%, and at $\eta = 50$ mV the error is 86.89\%.\\
+Here the split between the transfer coefficients does matter. In particular, if we choose the larger split with $\alpha_a = 0.1$ and $\alpha_c = 0.9$, the error is much larger; in the tailor expansion for the exponential up to first order, we are always just considering the sum of $\alpha_a + \alpha_c = 1$ in the formula, but in the exact BV, the split matters. If one of the transfer coefficients is much larger than the other, then one of the exponentials will dominate in BV, but the linear tailor expansion feels to take this into account.
+% Alpha_a: 0.5, Alpha_c: 0.5, Eta: 0.01 V, Error: 0.63%
+% Alpha_a: 0.5, Alpha_c: 0.5, Eta: 0.02 V, Error: 2.48%
+% Alpha_a: 0.5, Alpha_c: 0.5, Eta: 0.05 V, Error: 14.20%
+% Alpha_a: 0.1, Alpha_c: 0.9, Eta: 0.01 V, Error: -16.11%
+% Alpha_a: 0.1, Alpha_c: 0.9, Eta: 0.02 V, Error: -33.14%
+% Alpha_a: 0.1, Alpha_c: 0.9, Eta: 0.05 V, Error: -86.89%
+\subsection{}
+
+b. the Tafel (totally irreversible) relationship which is used for large overpotentials, for overpotentials of 50,100 , and 200 mV .
+\subsubsection{Solution}
+For large reductive overpotentials ($\eta \ll 0$), the Butler-Volmer equation simplifies to:
+\begin{equation}
+i_\text{approx} = -i_0 \exp \left( -\frac{\alpha_c F \eta}{RT} \right)
+\end{equation}
+\textbf{Case 1:} $\alpha_a = 0.5$, $\alpha_c = 0.5$\\
+For $\eta = -50$ mV the error is -16.66\%, for $\eta = -100$ mV the error is -2.08\%, and for $\eta = -200$ mV the error is -0.04\%.\\
+\textbf{Case 2:} $\alpha_a = 0.1$, $\alpha_c = 0.9$\\
+For $\eta = -50$ mV the error is -16.66\%, for $\eta = -100$ mV the error is -2.08\%, and for $\eta = -200$ mV the error is -0.04\%.\\
+Here, the split Between the transfer coefficients does not matter. This is because there is now consistency between the approximate and exact formulas in the sense that both are dominated by the same exponential term, $\exp \left( -\frac{\alpha_c F \eta}{RT} \right)$. So we should select as large as possible of a value for the over potential when collecting data on the slopes experimentally in order to minimize error from using the Tafel approximation instead of the full Butler-Volmer equation.\\
+
+% Alpha_a: 0.5, Alpha_c: 0.5, Eta: -0.05 V, Error: -16.66%
+% Alpha_a: 0.5, Alpha_c: 0.5, Eta: -0.1 V, Error: -2.08%
+% Alpha_a: 0.5, Alpha_c: 0.5, Eta: -0.2 V, Error: -0.04%
+% Alpha_a: 0.1, Alpha_c: 0.9, Eta: -0.05 V, Error: -16.66%
+% Alpha_a: 0.1, Alpha_c: 0.9, Eta: -0.1 V, Error: -2.08%
+% Alpha_a: 0.1, Alpha_c: 0.9, Eta: -0.2 V, Error: -0.04%
+\subsection{}
+Also, describe qualitatively how the value of the apparent transfer coefficient influences the error in the approximations, and how one should select values of the overpotential for collecting data on Tafel slopes in an experimental system.
+\subsubsection{Solution}
+See my responses above.
+
+
+\end{document}
