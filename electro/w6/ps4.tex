@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{
+    margin=1in,
+    textwidth=6.5in,
+    textheight=9in
+}
+
+\begin{document}
+% \captionsetup{singlelinecheck=false}
+\section*{Problem Set 4}
+Due: Wednesday $10 / 22 / 25$ at the start of class\\
+Feel free to use any resource to work these problems, including books, websites, and your classmates. However, your problem set submission must be your own work.
+
+\section*{Problem 1: Oxygen Reduction Intermediates}
+The performance of proton exchange membrane fuel cells is limited by the sluggish oxygen reduction reaction (ORR) occurring at the cathode, which is typically catalyzed by platinum nanoparticles. Therefore, it is very important to study the reaction mechanism of the ORR reaction. The reaction mechanism on certain metals has been proposed to be the following [1], which involves the sequential addition of a proton and electron in each elementary step:
+
+
+\begin{gather*}
+O_{2}(g)+H^{+}+e^{-}+* \rightleftharpoons O O H^{*}(1)  \tag{1}\\
+O O H^{*}+H^{+}+e^{-} \rightleftharpoons O^{*}+H_{2} O(l)(2) \\
+O^{*}+H^{+}+e^{-} \rightleftharpoons O H^{*}(3) \\
+O H^{*}+H^{+}+e^{-} \rightleftharpoons *+H_{2} O(l) \text { (4) } \tag{4}
+\end{gather*}
+
+
+[1] Viswanathan, Venkatasubramanian, et al. "Universality in oxygen reduction electrocatalysis on metal surfaces." ACS Catalysis 2.8 (2012): 1654-1660.\\
+The Gibbs free energy of each intermediate state relative to the final state ( $2 \mathrm{H}_{2} \mathrm{O}$ ) can be determined from Density Functional Theory (DFT) calculations:
+
+$$
+\Delta G=\Delta E-T \Delta S+\Delta Z P E
+$$
+
+Where $\Delta E$ is the binding energy of the surface intermediate $\left(O O H^{*}, O^{*}\right.$ or $\left.O H^{*}\right)$ at the metal surface in the electrolyte environment. $T \Delta S$ is the entropy contribution of the reactants and products. $\triangle Z P E$ is zeropoint energy correction to the DFT calculation.
+
+\begin{table}[h]
+\begin{center}
+% \captionsetup{labelformat=empty}
+\caption{Table 1. Gibbs free energy of each intermediate state relative to the final products at an electrode potential of 0 V vs SHE on a particular platinum surface known as the (111) facet.}
+\begin{tabular}{|l|l|}
+\hline
+Intermediate & $\Delta G=G-G\left(2 H_{2} O\right)(\mathrm{eV}) @ \mathrm{U}=0 \mathrm{~V}$ vs SHE \\
+\hline
+$O_{2}(g)+4 H^{+}+4 e^{-}$ & 4.92 \\
+\hline
+OOH* $+3 H^{+}+3 e^{-}$ & 4.11 \\
+\hline
+$O^{*}+2 H^{+}+2 e^{-}+H_{2} O$ & 1.56 \\
+\hline
+$\mathrm{OH}^{*}+\mathrm{H}^{+}+e^{-}+\mathrm{H}_{2} \mathrm{O}$ & 0.78 \\
+\hline
+$2 \mathrm{H}_{2} \mathrm{O}$ & 0 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Taking the values given in table 1 , we can plot the Gibbs free energy diagram at 0 V vs SHE as shown in Figure 1.
+
+
+The above diagram provides a physical picture of the free energy landscape at a particular potential. Note that in this problem, we neglect the reaction barriers that exist between the thermodynamic states for each intermediate, for simplicity. Below, we seek to develop a clear picture of how application of potential to an electrode shifts the thermodynamic landscape for intermediates in the proposed mechanism.\\
+(a) Write down the overall reaction for oxygen reduction. What is the equilibrium potential ( $E_{\text {eq }}$ ) of the oxygen reduction reaction (steps $1-4$, together) at standard state vs SHE? At 0 V vs SHE, is the reaction under a reductive or oxidative potential compared with the equilibrium potential? How is this physically reflected in Figure 1?\\
+(b) The Gibbs free energy for each intermediate plotted in Figure 1 shifts with electrode potential. Under an applied potential $E$ vs SHE, how does the free energy of each intermediate change? From the free energies given in Table 1, derive the free energy of each intermediate at $E=E_{e q}$. Plot a similar potential diagram as Figure 1 by adding a new pathway under applied potential $E=E_{e q}$.\\
+(c) Describe why the plotted free energy landscape at $E=E_{e q}$ is consistent with what you would expect for an electrode poised at the equilibrium potential with respect to the free energies of the reactants and products. Then, compare the free energy diagram at 0 V and $E=E_{e q}$. What are the most difficult steps in the forward direction (oxygen reduction reaction) and reverse direction (oxygen evolution reaction) at $E=E_{\text {eq }}$ ?\\
+(d) What is maximum value of the electrode potential that is required to be applied to the electrode in order to have the ORR reaction pathway be thermodynamically downhill for all the intermediates? What is the corresponding value of the surface overpotential? The surface overpotential is defined as $\eta_{s}=E-E_{e q}$ assuming that there are no other losses in the system. Plot the free energy diagram at the potential corresponding to this condition that the pathway be thermodynamically downhill for all the intermediates.\\
+(e) If we assume the rate determining step is the first step due to high activation energy of oxygen adsorption and all the other steps are at equilibrium, then the overall reaction rate from the proposed mechanism can be derived to be:
+
+$$
+\begin{aligned}
+\theta_{*}(\phi)=\frac{i=i_{0} \frac{\theta_{*}}{\theta_{*, e q}}\left(\exp \left(-\frac{\beta_{1} F \eta_{s}}{R T}\right)-\exp \left(\frac{\left(4-\beta_{1}\right) F \eta_{s}}{R T}\right)\right)}{1+\frac{\theta_{O H}}{\theta_{*}}+\frac{\theta_{O}}{\theta_{*}}+\frac{\theta_{O O H}}{\theta_{*}}} & 1 \\
+= & \frac{1}{1+K_{4} \exp \left(\frac{F \phi}{R T}\right) \frac{c_{H_{2} O}}{c_{H^{+}}}+K_{3} K_{4} \exp \left(\frac{2 F \phi}{R T}\right) \frac{c_{H_{2} O}}{c_{H^{+}}^{2}}+K_{2} K_{3} K_{4} \exp \left(\frac{3 F \phi}{R T}\right) \frac{c_{H_{2} O}^{2}}{c_{H^{+}}^{3}}}
+\end{aligned}
+$$
+
+$\theta_{*}$ is the surface coverage of unoccupied sites, which is a function of the applied potential $\phi$ and other thermodynamic parameters. $\theta_{*, e q}$ is the surface coverage of unoccupied sites at the equilibrium potential. $\beta_{1}$ is the transfer coefficient for step 1. Compare this equation with the classical Butler-Volmer expression. What is the difference in terms of the factors outside the exponential (the exchange current density)? What are the apparent transfer coefficients $\alpha_{a}$ and $\alpha_{c}$ ? Can you rationalize why the value of four appears in ( $4-\beta_{1}$ ) in the second exponential?
+
+\section*{Problem 2. d-Band Theory with CO}
+Carbon monoxide is one of the most extensively studied adsorbates on metal surfaces. Let us use a molecular orbital theory perspective to understand how carbon monoxide bonds to a transition metal surface.\\
+(a) Draw an atomic orbital diagram for carbon and oxygen, separately, which shows the orbitals and their electron filling as a function of energy.\\
+(b) Construct a molecular orbital diagram for carbon monoxide. Note that the diagram for carbon monoxide is more similar to that of dinitrogen than dioxygen in terms of the relative position of energy levels - can you rationalize this based on the position of these atoms on the periodic table?\\
+(c) When the CO is adsorbed to a transition metal surface, describe the various bonding and antibonding interactions and how they impact the strength of CO binding to transition metals.\\
+(d) How does the bond strength between carbon and oxygen change within a carbon monoxide molecule due to adsorption of carbon monoxide at a transition metal surface?
+
+\section*{Problem 3. Vanadium Flow Battery Revisited}
+In problem set 2, you calculated the open circuit potential of a Vanadium flow battery as a function of concentration:\\
+% \includegraphics[max width=\textwidth, center]{2025_10_17_e90f1bdb25229e42e1d0g-3}
+
+$$
+\begin{aligned}
+V O_{2}^{+}+2 H^{+}+e^{-} & \rightleftarrows V O^{2+}+\mathrm{H}_{2} O \\
+V^{2+} & \rightleftarrows V^{3+}+e^{-} \\
+\hline V^{2+}+V O_{2}^{+}+2 H^{+} & \rightleftarrows V O^{2+}+V^{3+}+\mathrm{H}_{2} O
+\end{aligned}
+$$
+
+$$
+\begin{gathered}
+E_{e q}[V]=E_{e q}^{0}-\frac{R T}{F} \ln \left\{\left(\frac{C_{V O^{2+}}}{C_{V O 2^{+}} \cdot C_{H^{+}}^{2}}\right)\left(\frac{C_{V^{3+}}}{C_{V^{2+}}}\right)\right\} \\
+c_{i}(t)=c_{0, i}+\frac{I v_{i}}{F V} t
+\end{gathered}
+$$
+
+Assume the initial concentrations of $\mathrm{V}^{2+}, \mathrm{V}^{3+}, \mathrm{VO}^{2+}$, and $\mathrm{VO}_{2}{ }^{+}$are $0.1,0.1,1$, and 1 M , respectively, and the pH of the electrolyte is 1 , calculate the actual open circuit potential of the vanadium flow battery.\\
+(a) Assume Butler-Volmer kinetics, charge transfer coefficients of $\frac{1}{2}$, an exchange current density for each electrode equal to $0.5 \mathrm{~A} / \mathrm{m}^{2}$ (a constant independent of concentration), and an electrode area of $1 \mathrm{~m}^{2}$. Plot the potential of the cell during a 1 hour discharge at 1 A as function of time. Note that the full cell potential will be defined as: $E=E_{\text {eq }}+\eta_{\text {cathode }}-\eta_{\text {anode }}$\\
+(b) You now take your "discharged" cell and charge it back to the initial state described in part a with 1 A of current. What is the overall power efficiency of this cell? Power efficiency is defined as: $P_{\text {efficiency }}=\frac{\int I V_{\text {discharge }} d t}{\int I V_{\text {charge }} d t}$.
+
+
+\end{document}

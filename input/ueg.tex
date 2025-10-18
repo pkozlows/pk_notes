@@ -37,6 +37,12 @@ Now, I have a list of excitation energies $\Omega$ and corresponding right eigen
     \rho_{\nu}(\bm{k}_q) = \sum_{\bm{k}_i \bm{k}_a} \left(X_{\bm{k}_i \bm{k}_a}^\nu(\bm{k}_q) + Y_{\bm{k}_i \bm{k}_a}^\nu(\bm{k}_q)\right).
 \end{equation}
 So to get them, I just need to contract over the indices $\bm{k}_i, \bm{k}_a$.
+\subsubsection{Verification}
+We can compute the RPA correlation energy via the plasmon formula:
+\begin{align}
+    E_c^{RPA} & = \frac{1}{2} \operatorname{Tr}(\sum_{\bm{q}} \bm{\Omega }(\bm{q}) -\bm{A}(\bm{q})) \\
+\end{align}
+and then we just have to divide by the number of electrons to get the correlation energy per electron.
 \section{GW}
 
 % Now, I can determine the transition densities $w_{\bm{k}_p \bm{k}_r}^\nu(\bm{k}_q)$. In the Ab-Initio case, these are given by
@@ -57,11 +63,42 @@ So to get them, I just need to contract over the indices $\bm{k}_i, \bm{k}_a$.
 % The second Kronecker delta in the first line is redundant because we have already enforced that condition (I defined earlier that $\bm{k}_i - \bm{k}_q = \bm{k}_a$), but now we can see that the external indices $(\bm{k}_p,\bm{k}_r)$ must also differ by the same $\bm{k}_q$.
 
 \subsection{Correlation self energy}
-Because I am only interested in computing the diagonal spectral function for a certain index $\bm{k}_p$, I only need to compute the diagonal correlation self energy $\Sigma^{\text{corr}}(\bm{k}_p,\omega)$, for the given frequency $\omega$, which is given by
+\subsubsection{Derivation from scratch}
+We can start from the definition of the GW self energy, which is a convolution of the Green's function and the screened Coulomb interaction:
+\begin{align}
+    \Sigma(\mathbf{k}, \omega)&=\frac{i}{2 \pi} \int d \omega^{\prime} \frac{d^3 q}{(2 \pi)^3} G\left(\mathbf{k}-\mathbf{q}, \omega-\omega^{\prime}\right) W\left(\mathbf{q}, \omega^{\prime}\right)
+\end{align}
+ The screened Coulomb interaction in the RPA is given by 
+\begin{align}
+W(\mathbf{q}, \omega)&= v(\mathbf{q}) + v(\mathbf{q}) \chi_0(\mathbf{q}, \omega) v(\mathbf{q})  + \ldots \\
+&= \frac{v(\mathbf{q})}{1-v(\mathbf{q}) \chi_0{(\mathbf{q}, \omega)}} \equiv \frac{v(\mathbf{q})}{\varepsilon(\mathbf{q}, \omega)}  \\
+&= v(\mathbf{q}) + v^2(\mathbf{q}) \chi_{RPA}(\mathbf{q}, \omega)\\
+\implies W_{p}(\mathbf{q}, \omega) \equiv W(\mathbf{q}, \omega) - v(\mathbf{q}) &= v^2(\mathbf{q}) \chi_{RPA}(\mathbf{q}, \omega) \\
+&= \sum_{\nu} \frac{2 \omega_\nu v^2(\mathbf{q}) |\rho_\nu(\mathbf{q})|^2}{\omega^2 - \omega_\nu^2}
+% &= \frac{v(\mathbf{q})}{1 - v(\mathbf{q}) \sum_{\bm{k}} \frac{f_{\bm{k}+\bm{q}}-f_{\bm{k}}}{\omega+\epsilon _{\bm{k}+q}-\epsilon _{\bm{k}}+i \eta}} \\
+% &= \frac{v(\mathbf{q})}{1 - \frac{1}{2}v(\mathbf{q}) \sum_k\left(f_{k+q}-f_k\right)\left[\frac{1}{\omega+\Delta_{k, q}+i \eta}-\frac{1}{\omega-\Delta_{k, q}+i \eta}\right]  }\\
+% &= \frac{v(\mathbf{q})}{1 - v(\mathbf{q}) \sum_k\left(f_{k+q}-f_k\right)\frac{\Delta_{k, q}}{(\omega+i \eta)^2-\Delta_{k, q}^2}}\\
+\end{align}
+where it can be shown that $\varepsilon^{-1}(\mathbf{q}, \omega) = 1 + v(\mathbf{q}) \chi_{RPA}(\mathbf{q}, \omega)$. At this point, we can just quote the final result of Hedin for a retarded self energy in the $GW$ approximation:
+\begin{align}
+\Sigma_{p o l}\left(x, x^{\prime} ; \omega\right)&=\sum_{i, s \neq 0} \frac{V^s(\boldsymbol{r}) V^s\left(\boldsymbol{r}^{\prime}\right) \phi_i(x) \phi_i^*\left(x^{\prime}\right)}{\omega+\omega_s \operatorname{sgn}\left(\mu-\varepsilon_i\right)-\varepsilon_i} \\
+\implies
+    \Sigma (\bm{k}, \omega) 
+    &=\sum_{q, \nu} \frac{ v^2(\mathbf{q}) |\rho_\nu(\mathbf{q})|^2}{\omega + \Omega_\nu \operatorname{sgn}(\mu - \epsilon_{\bm{k}-\bm{q}}) - \epsilon_{\bm{k}-\bm{q}} + i \eta}
+\end{align}
+since we know that we will have a diagonal self energy in momentum space for the UEG. We defined
+\begin{align}
+    V^s(\mathbf{r}) \rightarrow V^\nu(\mathbf{q}) &= v(\mathbf{q}) \rho_\nu(\mathbf{q}) , \\
+    \omega_s \rightarrow \Omega_\nu 
+\end{align}
+In relation to our Casida eigenproblem, we can identify that the excitation energies $\Omega_\nu$ are just the eigenvalues from Eqn. \ref{eqn:casida_eq}, and the transition densities $\rho_\nu(\bm{q})$ are given by
+\begin{equation}
+    \rho_{\nu}(\bm{q}) = \sum_{\bm{k}_i \bm{k}_a} (X_{\bm{k}_i \bm{k}_a}^\nu(\bm{q}) + Y_{\bm{k}_i \bm{k}_a}^\nu(\bm{q})).
+\end{equation}
+So the expression I find has one more factor of the ERI then the one I have written below.
 \begin{equation}
     \Sigma^{\text{corr}}(\bm{k}_p,\omega) = \sum_{\bm{k}_q}\sum_{\nu }^{\text{RPA}} \frac{4\pi}{|\bm{k}_q|^2} |\rho_\nu(\bm{k}_q)|^2 \left[ \frac{f_{\bm{k}_p - \bm{k}_q}}{\omega + \Omega_\nu(\bm{k}_q) - \epsilon_{\bm{k}_p - \bm{k}_q} + i\eta} + \frac{1 - f_{\bm{k}_p - \bm{k}_q}}{\omega - \Omega_\nu(\bm{k}_q) - \epsilon_{\bm{k}_p - \bm{k}_q} + i\eta} \right]
 \end{equation}
-where $f_{\bm{k}}$ is the Fermi occupation (1 for occupied, 0 for virtual). The terms correspond to hole and particle contributions, respectively. Note that all of the $\bm{k}_q$ may not be taken into account in this summation. To generate the $\bm{k}_q$ list, our criterion was that it needs to connect an occupied state $\bm{k}_i$ to a virtual state $\bm{k}_a$. Suppose $\bm{k}_i = [-1,-1,-1]$ and $\bm{k}_a = [0,0,2]$, then $\bm{k}_q = \bm{k}_i - \bm{k}_a = [-1,-1,-3]$. But if we now consider the state $\bm{k}_p = [0,0,1]$, then $\bm{k}_p -\bm{k}_q = [1,1,4]$, which may be beyond the KE cutoff, and thus not in our basis. So we must skip this $\bm{k}_q$ in the summation for the correlation self energy.
 \subsection{Spectral function}
 Finally, the spectral function is given by
 \begin{equation}
