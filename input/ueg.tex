@@ -1,5 +1,34 @@
 Throughout, I am working in the retarded time formalism. We are working with a plane wave basis, where each state has its own wavevector.
 \section{MF}
+\subsection{Basic relationships}
+The Wigner-Seitz radius $r_s$ is defined as the radius of a sphere that contains one electron on average. In a finite simulation cell of length $L$ containing $N$ electrons, we can relate $r_s$ to $L$ and $N$ via the following steps.
+\begin{align}
+    \frac{4 \pi}{3} r_s^3&=\frac{1}{n}=\frac{L^3}{N}\\
+\implies n&=\frac{3}{4 \pi r_s^3} \\
+\end{align}
+We know that the Fermi wavevector of a uniform 3D gas has the definition:
+\begin{align}
+    k_F&=\left(3 \pi^2 n\right)^{1 / 3}\\
+&=\frac{(9 \pi / 4)^{1 / 3}}{r_s}
+\end{align}
+For periodic boundary conditions, the allowed single-particle wavevectors are:
+\begin{equation}
+    \mathbf{k}=\frac{2 \pi}{L} \mathbf{n}, \quad \mathbf{n}=\left(n_x, n_y, n_z\right), \quad n_i \in \mathbb{Z}
+\end{equation}
+So the spacing of the $k$-grid is $\Delta k=2 \pi / L$. Using the definition that at $T=0$, all states with $|\mathbf{k}| \leq k_F$ are occupied, with two electrons (spin up/down) per $k$-point, the number of electrons is
+\begin{align}
+    N&=2 \times \frac{L^3}{(2 \pi)^3} \times \frac{4 \pi}{3} k_F^3\\
+&= \frac{L^3}{3 \pi^2} k_F^3 \\
+\implies \frac{L^3}{3 \pi^2} k_F^3 &= \frac{3 L^3}{4 \pi r_s^3} \\
+\implies k_F &= \left(\frac{9 \pi}{4 r_s^3}\right)^{1 / 3}
+\end{align}
+This implies that the following definition should hold in my code:
+\begin{equation}
+    \frac{2 \pi}{L}\left|\mathbf{n}_{\max }\right|=\frac{(9 \pi / 4)^{1 / 3}}{r_s}, \quad \mathbf{n}_{\max }=\left(n_{x, \max }, n_{y, \max }, n_{z, \max }\right) \quad n_{i, \max } \in \mathbb{Z}
+\end{equation}
+where $\mathbf{n}_{\max }$ is the highest occupied wavevector in my plane wave basis.
+
+This is the algebraic identity your assert is verifying.
 Even before doing HF, I generate my basis of plane waves, and their wave vectors in 3D are just a list of integers, three entries long. From HF, I get a set of MO coefficients $C_{\bm{k}_\mu \bm{k}_p}$ and orbital energies $\epsilon_{\bm{k}_p}$.
 \section{RPA}
 For the UEG, I am first looping over all momentum transfer vectors $\bm{k}_q$. To learn which excitations are valid for the given $\bm{k}_q$, we first loop over occupied states $\bm{k}_i$. Virtual states $\bm{k}_a$ are already determined by that point; we compute $\bm{k}_a \equiv \bm{k}_i + \bm{k}_q$, and based of of whether it is a valid virtual index, we either add it to our list or continue. The criterion for validity is that the wave vector must be outside the Fermi sphere, but still within our plane wave basis, i.e. within the KE cutoff. We do the same for the second pair of indices $\bm{k}_j, \bm{k}_b$. Then, we can form the Casida eigenproblem for each $\bm{k}_q$.
@@ -37,6 +66,13 @@ Now, I have a list of excitation energies $\Omega$ and corresponding right eigen
     \rho_{\nu}(\bm{k}_q) = \sum_{\bm{k}_i \bm{k}_a} \left(X_{\bm{k}_i \bm{k}_a}^\nu(\bm{k}_q) + Y_{\bm{k}_i \bm{k}_a}^\nu(\bm{k}_q)\right).
 \end{equation}
 So to get them, I just need to contract over the indices $\bm{k}_i, \bm{k}_a$.
+\subsubsection{Analytic dielectric function}
+The expression is:
+\begin{align}
+    \epsilon (\mathbf{q}, \omega)&=1 - v(\mathbf{q}) \chi_0(\mathbf{q}, \omega) \\
+&= 1+\frac{\alpha r_s}{8 \pi q^3}[H(q+u / q)-H(q-u / q)]
+\end{align}
+where $H(q)=2 q+\left(1-q^2\right) \ln [(q+1) /(q-1)], \alpha= (4 / 9 \pi)^{1 / 3}$. Here we followed the notation of Ref. 9 where $q$ denotes momenta in units of $2 k_{\mathrm{F}}$ and $u$ are energies in units of $4 \mu$; thus, $q=|\mathbf{q}| /(2 k_{\mathrm{F}})$ and $u=\omega /(4 \mu)$. The Wigner-Seitz radius $r_s$ is defined by $4 \pi r_s^3 / 3=1 / n$, where $n$ is the electron density.
 \subsubsection{Verification}
 We can compute the RPA correlation energy via the plasmon formula:
 \begin{align}
@@ -99,6 +135,7 @@ So the expression I find has one more factor of the ERI then the one I have writ
 \begin{equation}
     \Sigma^{\text{corr}}(\bm{k}_p,\omega) = \sum_{\bm{k}_q}\sum_{\nu }^{\text{RPA}} \frac{4\pi}{|\bm{k}_q|^2} |\rho_\nu(\bm{k}_q)|^2 \left[ \frac{f_{\bm{k}_p - \bm{k}_q}}{\omega + \Omega_\nu(\bm{k}_q) - \epsilon_{\bm{k}_p - \bm{k}_q} + i\eta} + \frac{1 - f_{\bm{k}_p - \bm{k}_q}}{\omega - \Omega_\nu(\bm{k}_q) - \epsilon_{\bm{k}_p - \bm{k}_q} + i\eta} \right]
 \end{equation}
+
 \subsection{Spectral function}
 Finally, the spectral function is given by
 \begin{equation}

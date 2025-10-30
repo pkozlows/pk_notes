@@ -1,0 +1,202 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+% \graphicspath{ {./images/} }
+\usepackage{caption}
+\usepackage{geometry}
+\geometry{
+    margin=1in,
+    textwidth=6.5in,
+    textheight=9in
+}
+\title{AP 236 Electrochemical Energy Systems }
+
+\author{Fall 2025 Harvard, Zachary Schiffer\\
+Kinetics Quiz}
+\date{}
+
+
+\begin{document}
+\maketitle
+
+
+\section*{October 24, 10:30am -11:45pm}
+This exam has 3 problems, which are worth 55 points total. Please answer each problem in a separate booklet and write your name on each booklet. This exam is open-book, which allows for use of all passive resources (including books, electronic), except those involving communication with others and use of the internet. Please be sure to show your work, especially for partial credit. Also, make and justify any assumptions necessary to solve the problems below. Note that we do not take off points for "double jeopardy", so please work subsequent parts of the problems even if you are stuck on an earlier part.
+
+\section{Problem 1. Ammonia Fuel Cells [23 pts]}
+Ammonia is often lauded as a potential liquid fuel because of its high energy density and the fact that we already produce large quantities of it at scale, transporting it around the world as a fertilizer. While producing ammonia is difficult, a seldom-addressed problem is actually getting the energy back from ammonia. Here, we are proposing an ammonia fuel cell, where the cathode reaction is oxygen reduction (like a hydrogen fuel cell), and the anode reaction is ammonia oxidation to nitrogen:
+
+$$
+2 \mathrm{NH}_{3} \rightarrow \mathrm{~N}_{2}+6 \mathrm{H}^{+}+6 e^{-}
+$$
+\subsection{}
+a) Initially, you find ammonia oxidation can occur on Ir and Au , and the exchange current densities on these metals are essentially equal. Given that Pt is between Ir and Au on the periodic table, would you expect the exchange current density on Pt to be larger, smaller, or the same as the exchange current densities on Ir and Au? Why? [3 points]
+\subsubsection{Solution}
+The exchange current density counter vise the amount of electrons flowing forwards and backwards at equal Lebens. In class, we learned that as you go from left to right for the transition metals across the periodic table, if that transition metal is used as the alloc trod in the electrochemical reaction, whatever adsorbs to it will be bound more tightly because we will have more protons in the nuclease. At the same time though, we know that we gain more electrons as we go from left to right and on the periodic table and from our experience with the volcano plots, we know that a given metal in the transition metal sequence will provide an optimal binding energy for the adsorbate to the electrode. Platinum will be in this Goldilocks zone between Ir and Au, so we can expect that the banding of ammonia to platinum will be optimal and therefore the exchange current density will be higher on platinum than on Ir or Au.
+\subsection{}
+
+You synthesize catalysts $\mathrm{A}, \mathrm{B}, \mathrm{C}$ and measure the following exchange current densities and Tafel slopes (note these numbers are made up for this quiz):
+
+\begin{center}
+\begin{tabular}{c|ccl}
+ & A & B & C \\
+\hline
+Exchange Current & 1 & 10 & 1 \\
+Density $\left(\mathrm{mA} / \mathrm{cm}^{2}\right)$ &  &  &  \\
+\hline
+Tafel Slope $(\mathrm{mV} / \mathrm{dec})$ & 80 & 100 & 60 \\
+\hline
+\end{tabular}
+\end{center}
+
+b) Assuming the reaction obeys Tafel kinetics, what overpotentials are required to achieve $100 \mathrm{~mA} / \mathrm{cm}^{2}$ for each catalyst. Which catalyst will require the lowest overpotential to achieve $100 \mathrm{~mA} / \mathrm{cm}^{2}$ ? [6 points]\\
+\subsubsection{Solution}
+For this question, we can use the formula
+$$
+\eta=m_T \ln \frac{i}{i_0}
+$$
+where $m_T$ is the Tafel slope, $i$ is the current density we want to achieve, and $i_0$ is the exchange current density. Plugging in the numbers for each catalyst, we get:
+For catalyst A:
+\begin{equation}
+\eta_A=80 \mathrm{mV} / \mathrm{dec} \cdot \ln \frac{100 \mathrm{~mA} / \mathrm{cm}^{2}}{1 \mathrm{~mA} / \mathrm{cm}^{2}}=368.4 \mathrm{mV} / \mathrm{dec}
+\end{equation}
+For catalyst B:
+\begin{equation}
+\eta_B=100 \mathrm{mV} / \mathrm{dec} \cdot \ln \frac{100 \mathrm{~mA} / \mathrm{cm}^{2}}{10 \mathrm{~mA} / \mathrm{cm}^{2}}=230.3 \mathrm{mV} / \mathrm{dec}
+\end{equation}
+For catalyst C:
+\begin{equation}
+\eta_C=60 \mathrm{mV} / \mathrm{dec} \cdot \ln \frac{100 \mathrm{~mA} / \mathrm{cm}^{2}}{1 \mathrm{~mA} / \mathrm{cm}^{2}}=276.3 \mathrm{mV} / \mathrm{dec}
+\end{equation}
+Therefore, catalyst B requires the lowest overpotential to achieve $100 \mathrm{~mA} / \mathrm{cm}^{2}$.
+\subsection{}
+c) Assuming the reaction obeys Tafel kinetics, what overpotentials are required to achieve $1000 \mathrm{~mA} / \mathrm{cm}^{2}$ for each catalyst. Which catalyst will require the lowest overpotential to achieve $1000 \mathrm{~mA} / \mathrm{cm}^{2}$ ? [4 points]\\
+\subsubsection{Solution}
+Using the same formula as above, we can calculate the overpotentials for each catalyst at $1000 \mathrm{~mA} / \mathrm{cm}^{2}$:
+For catalyst A:
+\begin{equation}
+\eta_A=80 \mathrm{mV} / \mathrm{dec} \cdot \ln \frac{1000 \mathrm{~mA} / \mathrm{cm}^{2}}{1 \mathrm{~mA} / \mathrm{cm}^{2}}=552.6 \mathrm{mV} / \mathrm{dec}
+\end{equation}
+For catalyst B:
+\begin{equation}
+\eta_B=100 \mathrm{mV} / \mathrm{dec} \cdot \ln \frac{1000 \mathrm{~mA} / \mathrm{cm}^{2}}{10 \mathrm{~mA} / \mathrm{cm}^{2}}=460.5 \mathrm{mV} / \mathrm{dec}
+\end{equation}
+For catalyst C:
+\begin{equation}
+\eta_C=60 \mathrm{mV} / \mathrm{dec} \cdot \ln \frac{1000 \mathrm{~mA} / \mathrm{cm}^{2}}{1 \mathrm{~mA} / \mathrm{cm}^{2}}=414.4 \mathrm{mV} / \mathrm{dec}
+\end{equation}
+Therefore, now catalyst C requires the lowest overpotential to achieve $1000 \mathrm{~mA} / \mathrm{cm}^{2}$.
+\subsection{}
+d) Assuming that your counter electrode (oxygen reduction) is much more efficient than ammonia oxidation and requires negligible overpotential to achieve $1000 \mathrm{~mA} / \mathrm{cm}^{2}$, what is the fuel cell efficiency when operating at $100 \mathrm{~mA} / \mathrm{cm}^{2}$ and $1000 \mathrm{~mA} / \mathrm{cm}^{2}$ for catalyst $\mathbf{B}$ ? The equilibrium potential for $2 \mathrm{NH}_{3}+1.5 \mathrm{O}_{2} \rightarrow \mathrm{~N}_{2}+3 \mathrm{H}_{2} \mathrm{O}$ is: 1.13 V . Efficiency is defined as actual voltage over thermodynamic voltage. [3 points]\\
+\subsubsection{Solution}
+We know that the actual open circuit potential is defined as
+\begin{align}
+V_{\text{actual}}&=V_{\text{equilibrium}}+\eta_{\text{cathode}}-\eta_{\text{anode}} \\
+\approx & V_{\text{equilibrium}}-\eta_{\text{anode}} \\
+&=1.13 \mathrm{~V}-\eta_{\text{anode}}
+\end{align}
+From part b, we found that the overpotential for catalyst B at $100 \mathrm{~mA} / \mathrm{cm}^{2}$ is $230.3 \mathrm{mV}$ , so the actual voltage is:
+\begin{equation}
+V_{\text{actual}}=1.13 \mathrm{~V}-0.2303 \mathrm{~V}=0.90 \mathrm{~V}
+\end{equation}
+Therefore, the efficiency at $100 \mathrm{~mA} / \mathrm{cm}^{2}$ is:
+\begin{equation}
+\text{Efficiency}=\frac{V_{\text{actual}}}{V_{\text{equilibrium}}}=\frac{0.90 \mathrm{~V}}{1.13 \mathrm{~V}}=0.796 \text{ or } 79.6 \%
+\end{equation}
+From part c, we found that the overpotential for catalyst B at $1000 \mathrm{~mA} / \mathrm{cm}^{2}$ is $460.5 \mathrm{mV}$ , so the actual voltage is:
+\begin{equation}
+V_{\text{actual}}=1.13 \mathrm{~V}-0.4605 \mathrm{~V}=0.67 \mathrm{~V}
+\end{equation}
+Therefore, the efficiency at $1000 \mathrm{~mA} / \mathrm{cm}^{2}$ is:
+\begin{equation}
+\text{Efficiency}=\frac{V_{\text{actual}}}{V_{\text{equilibrium}}}=\frac{0.67 \mathrm{~V}}{1.13 \mathrm{~V}}=0.593 \text{ or } 59.3 \%
+\end{equation}
+\subsection{}
+e) In general, qualitatively (ca. 2 sentences) describe how catalyst choice and operating current influences cell efficiency and power density ( $P=I V[=] W / \mathrm{cm}^{2}$ ). [4 points]\\[0pt]
+\subsubsection{Solution}
+Fundamentally, as the anodic overpotential increases, the actual voltage of the fuel cell decreases, which decreases the efficiency of the fuel cell. Looking at the expression
+\begin{equation}
+    \eta=m_T \ln \frac{i}{i_0}
+\end{equation}
+we can see that the catalyst choice will determine $m_T$ and $i_0$. The choice of our permitting current is a bit turkey because we naively see that $P=I V$ , so one would conclude that the power density should increase with current, but actually the expression should read $P=IV(I)$ to reflect that a larger or puritan current can also decrease the actual voltage, which is then reflected in a decrease in power density.
+\subsection{}
+f) You are curious about how the solvent affects this process. Instead of an aqueous ammonia fuel cell, where the catalysts can be easily poisoned by trace NOx species, you try to do ammonia oxidation in a non-aqueous solvent, acetonitrile. In this solvent, you find that the exchange currents and Tafel slopes for A, B, and C are all the same. Moreover, you find that ammonia oxidation on glassy carbon has the same exchange current and Tafel slope as on the three metal-based catalysts. What conclusion can you draw about the oxidation process in non-aqueous media? [3 points]
+\subsubsection{Solution}
+I can conclude that this is due to an outer sphere mechanism Because the glassy carbon does not have any binding sites for ammonia to adsorb to, so the fact that the exchange current and Tafel slopes are the same across all catalysts indicates that the reaction is not dependent on the catalyst surface, which is characteristic of an outer sphere mechanism.
+
+\section{Problem 2. Chlorine Oxidation [32 pts]}
+The chlor-alkali process is one of the most important electrochemical processes done at large scales. Key to this process is the oxidation of chloride ions to chlorine gas. Assume that the following two oxidation steps occur in this system:
+
+
+\begin{gather*}
+C l^{-}+\theta \rightarrow \theta_{C l}+e^{-}  \tag{1}\\
+C l^{-}+\theta_{C l} \rightarrow C l_{2}+\theta+e^{-} \tag{2}
+\end{gather*}
+
+
+Assume that any reactions other than the rate-determining step are in equilibrium with equilibrium constant $K_{i}$ and that the rate-determining step has a forward rate constant of $k_{f i}$ where $i$ is the reaction number ( 1 or 2 ). Because the reaction produces heat, this system operates at $\mathbf{8 0}^{\circ} \mathbf{C}$, not room temperature!
+
+For this reaction, there are two possible scenarios:\\
+(I) Reaction (1) is the rate-determining step and reaction (2) is in equilibrium\\
+a. Find an expression for the equilibrium chlorine surface coverage $\theta_{C l}$ and free sites $\theta$. [5 points]\\
+\subsection{}
+b. Derive an expression for the current density ( $i=2 F r$ where $r$ is the rate of reaction because it is a 2 electron process). Your answer may include the following constants:\\
+$F, c_{C l^{-}}, P_{C l_{2}}, K_{1}, K_{2}, k_{f 1}, k_{f 2}, R, T$. You may assume the transfer coefficient is 0.5 for the rate determining step. [4 points]\\[0pt]
+\subsubsection{Solution}
+To solve this problem, we need to determine the rate of the rate-determining step, which is reaction (1). Once we are able to do that we can plug into $i=2 F r$ to get the current density.
+\subsection{}
+c. What is the Tafel slope in the limit of low and high surface coverages? Remember the temperature is not room temperature. [4 points]\\
+\subsubsection{Solution}
+We know that the reaction rate is given by
+\begin{align}
+    r=\frac{k_{f 1} c_{C l^{-}} K_{2} ^2 }{K_{2} ^2 +P_{C l_{2}}^2\exp\left(-\frac{2 F \eta}{R T}\right)} = \frac{i}{2 F}
+\end{align}
+In the limit of low surface coverage, $P_{C l_{2}}^2\exp\left(-\frac{2 F \eta}{R T}\right) \gg K_{2} ^2$ , so the rate of reaction simplifies to:
+\begin{equation}
+r \approx \frac{k_{f 1} c_{C l^{-}} K_{2} ^2 }{P_{C l_{2}}^2\exp\left(-\frac{2 F \eta}{R T}\right)} 
+\end{equation}
+Taking the natural logarithm of both sides, we get:
+\begin{equation}
+\ln r \approx \ln\left(\frac{k_{f 1} c_{C l^{-}} K_{2} ^2 }{P_{C l_{2}}^2}\right) + \frac{2 F \eta}{R T}
+\end{equation}
+Differentiating with respect to $\eta$, we find:
+\begin{equation}
+\frac{d \ln r}{d \eta} \approx \frac{2 F}{R T}
+\end{equation}
+but $ d \ln r=d \ln i$ , so the Tafel slope is:
+\begin{equation}
+m_T=\left(\frac{d \log_{10} i}{d \eta}\right)^{-1}=\frac{R T}{2 F \ln 10}
+\end{equation}
+At the operating temperature of $80^{\circ} \mathrm{C}$ (or $353 \mathrm{~K}$ ), this gives:
+\begin{equation}
+m_T=\frac{8.314 \mathrm{~J} / \mathrm{mol} \cdot \mathrm{K} \cdot 353 \mathrm{~K}}{2 \cdot 96485 \mathrm{C} / \mathrm{mol} \cdot \ln 10}=65.7 \mathrm{mV} / \mathrm{dec}
+\end{equation}
+% \begin{equation}
+In the limit of high surface coverage, the rate of reaction retains no dependence on the potential, so the Tafel slope approaches infinity.
+(II) Reaction (1) is in equilibrium and reaction (2) is the rate-determining step.\\
+d. Find an expression for the equilibrium chlorine surface coverage $\theta_{C l}$ and free sites $\theta$. [5 points]\\
+\subsection{}
+e. Derive an expression for the current density ( $i=2 F r$ where $r$ is the rate of reaction because it is a 2 electron process). Your answer may include the following constants: $F, c_{C l^{-}}, P_{C l_{2}}, K_{1}, K_{2}, k_{f 1}, k_{f 2}, R, T$. You may assume the transfer coefficient is 0.5 for the rate determining step. [4 points]\\[0pt]
+\subsubsection{Solution}
+To solve this problem, we need to determine the rate of the rate-determining step, which will now be reaction (2). Once we are able to do that we can plug into $i=2 F r$ to get the current density.
+\subsection{}
+f. What is the Tafel slope in the limit of low and high surface coverages? Remember the temperature is not room temperature. [4 points]\\
+\subsubsection{Solution}
+Now, the situation will be reversed, so at the low surface coverage, the Tafel slope will approach infinity because the rate of reaction retains no dependence on the potential. In the limit of high surface coverage, we can use a similar approach as in part c.  I am not sure what the expression for the rat will be, but we can again take the derivative with respect to the overpotential to find the Tafel slope.
+\subsection{}
+g. Experimentally, you measure a Tafel slope of $46.6 \mathrm{mV} /$ dec. Which two possible scenarios (rate-determining step and surface coverage) can result in this Tafel slope? [4 pts]\\[0pt]
+\subsubsection{Solution}
+\subsection{}
+h. How could you experimentally determine which mechanism is the correct one? E.g., what other reaction parameter can you control that results in different changes in the reaction rate. [2 pts]
+\subsubsection{Solution}
+I can control the concentration of chloride ion to determine which is the correct mechanism.
+
+
+\end{document}
