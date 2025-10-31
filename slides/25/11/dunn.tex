@@ -1,0 +1,239 @@
+
+\section{Dunn}
+
+
+\begin{frame}
+    \frametitle{Setup}
+We will work with an electron-boson Hamiltonian of the form
+\begin{equation}
+     H = \sum_k \epsilon_k a_k^\dagger a_k + \frac{1}{2} \sum_q (P_q^\dagger P_q + \omega_q^2 Q_q^\dagger Q_q) + \sum_{q} \gamma_q Q_q \rho_q^\dagger
+\end{equation}
+with HO position $Q_q= \sqrt{\frac{1}{2 \Omega_q}}\left(b_q+b_{-q}^{\dagger}\right)$, momentum $P_q=i \sqrt{\frac{\Omega_q}{2}}\left(b_{-q}^{\dagger}-b_q\right)$, and density $\rho_q=\sum_k a_{k+q}^{\dagger} a_k \langle k+q| e^{i q \cdot r}|k\rangle$.  In the presence of this interaction, the EOM for the electron annihilation operator is given by
+\begin{align}
+    \frac{d a_k(t)}{d t} &= -i \epsilon_k a_k(t) - i \sum_q g_{q k} Q_q(t) a_{k+q}(t) \\
+\implies a_k(t) &= e^{-i \epsilon_k t} T \exp \left[-i \int_0^t d \tau \sum_q Q_q(\tau) \Gamma_{q k}(\tau)\right] a_k
+\end{align} 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Proof}
+Start by introducing a rotated operator.
+\begin{align}
+    \tilde{a}_k(t)&=e^{i \epsilon_k t} a_k(t) \\
+\implies \frac{d \tilde{a}_k(t)}{d t}&=i \epsilon_k e^{i \epsilon_k t} a_k(t)+e^{i \epsilon_k t} \frac{d a_k(t)}{d t} \\
+% &=i \epsilon_k e^{i \epsilon_k t} a_k(t)+e^{i \epsilon_k t}\left(-i \epsilon_k a_k(t)-i \sum_q g_{q k} Q_q(t) a_{k+q}(t)\right) \\
+&=-i \sum_q g_{q k} e^{i \epsilon_k t} Q_q(t) a_{k+q}(t) \\
+&=-i \sum_q g_{q k} Q_q(t) e^{i\left(\epsilon_k-\epsilon_{k+q}\right) t} \tilde{a}_{k+q}(t) \\
+% &=-i \sum_q g_{q k} Q_q(t) e^{i\left(\epsilon_k-\epsilon_{k+q}\right) t} e^{q \cdot \frac{d}{d k}} \tilde{a}_k(t) \\
+&= -i \sum_q Q_q(t) \Gamma_{q k}(t) \tilde{a}_k(t) \\
+% \implies \tilde{a}_k(t)&=T \exp \left[-i \int_0^t d \tau \sum_q Q_q(\tau) \Gamma_{q k}(\tau)\right] \tilde{a}_k \\
+\implies a_k(t)&=e^{-i \epsilon_k t} T \exp \left[-i \int_0^t d \tau \sum_q Q_q(\tau) \Gamma_{q k}(\tau)\right] a_k
+\end{align}
+with $\Gamma_{q k}(t)=g_{q k} e^{i \epsilon_k t} e^{q \cdot \frac{d}{d k}} e^{-i \epsilon_k t} = g_{q k} e^{i\left(\epsilon_k-\epsilon_{k+q}\right) t} e^{q \cdot \frac{d}{d k}} $, where $e^{q \cdot \frac{d}{d k}}$ can be understood as a translation operator in $k$-space.
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Retarded Green's function for an insulator}
+\begin{align}
+%     G_k(t) &= i \operatorname{Tr}\left[\rho T\left(a_k(t) a_k^\dagger\right)\right] \\
+% &= i \Theta(t) \operatorname{Tr}\left[\rho a_k(t) a_k^\dagger\right] + i \Theta(-t) \operatorname{Tr}\left[\rho a_k^\dagger a_k(t)\right] \\
+% G_k(t)&= i \Theta(t) \operatorname{Tr}\left[\rho a_k(t) a_k^\dagger\right] \\
+% G_k(t)&= i \Theta(t) e^{-i \epsilon_k t} \operatorname{Tr}\left[\rho T \exp \left(-i \sum_q \int_0^t d \tau Q_q(\tau) \Gamma_{q k}(\tau)\right)\right]_0 \\
+% &= i \Theta(t) e^{-i \epsilon_k t} \operatorname{Tr}\left[\rho T \left(\exp \left(-i \sum_q \int_0^t d \tau b_q e^{-i \Omega_q \tau} \Gamma_{q k}(\tau)\left(2 \Omega_q\right)^{-1 / 2}\right)\right.\right. \\
+G_k(t)&= i \Theta(t) e^{-i \epsilon_k t} \operatorname{Tr}\left[\rho T \left(\exp \left(-i \sum_q \int_0^t d \tau \frac{b_q (\tau) + b_{-q}^\dagger (\tau)}{\sqrt{2 \Omega_q}} \Gamma_{q k}(\tau)\right)\right)\right]_0 \\
+% &= i \Theta(t) e^{-i \epsilon_k t} \operatorname{Tr}\left[\rho T \left(\exp \left(\underbrace{-i \sum_q \int_0^t d \tau \frac{b_q(\tau) \Gamma_{q k}(\tau)}{\sqrt{2 \Omega_q}}}_{A}\right)\right.\right. \\
+% &\left.\left.\quad \times \exp \left(\underbrace{-i \sum_q \int_0^t d \tau \frac{b_{-q}^\dagger(\tau) \Gamma_{-q k}(\tau)}{\sqrt{2 \Omega_q}}}_{B}\right)\right)\right]_0  \\
+% &= i \Theta(t) e^{-i \epsilon_k t} \left\langle 1 +T(A+B) + \frac{1}{2} T(A^2 + 2AB + B^2) + \cdots \right\rangle_\rho \quad \text{with} \quad \rho \propto e^{-\beta H_{\text{ph}}}  \\
+&= i \Theta(t) e^{-i \epsilon_k t} \left\langle 1+T AB + \ldots \right\rangle_\rho \quad \text{(disconnected terms vanish)} \label{ce:exp} \\
+&= i \Theta(t) e^{-i \epsilon_k t} T \exp \left[ \underbrace{i \sum_q \int_0^t d \tau \int_0^\tau d \tau' D_q(\tau - \tau') \Gamma_{q k}(\tau) \Gamma_{-q k}(\tau')} \right] \label{final_ce}
+% &= i \Theta(t) e^{-i \epsilon_k t} \exp \left[ \sum_q \int_0^t d \tau \int_0^t d \tau' D_q(\tau - \tau') \Gamma_{q k}(\tau) \Gamma_{-q k}(\tau') \right]
+% &= - i \Theta(t) e^{-i \epsilon_k t} \sum_{q,q'} \int_0^t d \tau \int_0^t d \tau'\; \frac{1}{\sqrt{2\Omega_q 2\Omega_{q'}}} \Gamma_{qk}(\tau)\Gamma_{-q'k}(\tau') \, \langle T\, b_q(\tau)\, b_{-q'}^\dagger(\tau') \rangle_\rho  \\
+% &= i \Theta(t) e^{-i \epsilon_k t} \exp\!\left[
+% \sum_q \int_0^t d\tau \int_0^t d\tau'\;
+% \frac{\Gamma_{qk}(\tau)\Gamma_{-qk}(\tau')}{2\Omega_q e^{i\Omega_q(\tau-\tau')}}\,
+% \Big((1+N_q)\Theta(\tau-\tau') + N_q\Theta(\tau'-\tau)\Big)
+% \right]
+\end{align}
+with $D_q(\tau - \tau') = \frac{i}{2 \Omega_q} \left( (1 + N(\Omega_q)) e^{-i \Omega_q |\tau - \tau'|} + N(\Omega_q) e^{+i \Omega_q |\tau - \tau'|} \right)$
+and the phonon occupation number $N(\Omega_q) = \frac{1}{e^{\frac{\Omega_q}{k T}} - 1}$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Approximation procedure}
+So with the underbraced differential operator as $S$
+\begin{align}
+    % G_k(t)&= i \Theta(t) e^{-i \epsilon_k t} T \exp \left[ S \right] \label{eq:exact_G} \\
+% &= i \Theta(t) \exp \left( -i \epsilon_k t - i \log [T \exp (S)] \right) \\
+G_k(t)&= i \Theta(t) \exp \left( -i \epsilon_k t - i \sum_{n=1}^{\infty} \frac{1}{n!} T\left[S^n\right]_c \right)\\
+&= i \Theta(t) \exp \left( i A_k(t) \right) 
+% &= i O(t) \mathrm{e}^{-i G_{k^{\prime}}} \prod_{n=1}^N \mathrm{e}^{r\left(S^n\right]_e}
+\end{align}
+with $T\left[S^n\right]_c = T\left[S^n\right]-\sum_{m=1}^{n-1} \frac{(n-1)!}{m!(n-m-1)!} T\left[S^{m}\right] T\left[S^{n-m}\right]_c$, where $T[S]_c=T[S]$. To Nth order, we can write
+\begin{equation}
+G_k(t) = i \Theta(t) e^{-i \epsilon_k t} \prod_{n=1}^N e^{T\left[S^n\right]_c}
+\end{equation}
+but thinking about it in this way does not lead to self-consistency.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Notions of self-consistency}
+The action function can be written as
+\begin{align}
+    A_k(t) 
+&= \phi_k(t) - i \sum_{n=1}^{\infty} \frac{1}{n!} T\left[\bar{S}^n\right]_c
+\end{align}
+where $\phi_k(t)$ can be chosen so as to improve the approximation with 
+\begin{equation}
+    \bar{S} = -i \int_0^t d \tau\left(\epsilon_k+\frac{d}{d \tau} \phi_k(\tau)\right) -i \sum_q \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q\left(\tau-\tau^{\prime}\right) \bar{\Gamma}_{-q k}(\tau) \bar{\Gamma}_{q k}\left(\tau^{\prime}\right)
+\end{equation}
+ using the transformed vertex operators
+\begin{align}
+    \bar{\Gamma}_{q k}(\tau)&\equiv  \hat{U}(\tau)\Gamma_{q k}(\tau)\hat{U}^{-1}(\tau)=g_{q k} e^{-i \phi_k(\tau)} e^{q \cdot \frac{d}{d k}} e^{+i \phi_k(\tau)}
+\end{align}
+ 
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dunn's choice}
+ Dunn chooses $\phi_k(t)= -\epsilon_k t$, giving (to first order)
+\begin{align}
+    A_k(t) &\equiv \phi_k(t) - i T[\bar{S}]_c \\
+% &= -\epsilon_k t - i \langle \bar{S} \rangle \\
+% &= -\epsilon_k t - \sum_q \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \langle \bar{\Gamma}_{-q k}(\tau) \bar{\Gamma}_{q k}\left(\tau^{\prime}\right) \rangle  \\
+% &= -\epsilon_k t - \sum_q \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \langle g_{-q k} g_{q k} e^{-i \phi_k(\tau)} e^{-q \cdot \frac{d}{d k}} e^{+i \phi_k(\tau)} e^{-i \phi_k\left(\tau^{\prime}\right)} e^{+q \cdot \frac{d}{d k}} e^{+i \phi_k\left(\tau^{\prime}\right)} \rangle \\
+% &= -\epsilon_k t - \sum_q |g_{qk}|^2 \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) e^{i \epsilon_k \tau} e^{-i \epsilon_{k-q} \tau} e^{i \epsilon_{k-q} \tau^{\prime}} e^{-i \epsilon_k \tau^{\prime}}  \\
+% &= -\epsilon_k t - \sum_q |g_{qk}|^2 \int_0^t d \tau \int_0^\tau d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) e^{i\left(\epsilon_k-\epsilon_{k-q}\right)\left(\tau-\tau^{\prime}\right)} \\
+% &= -\epsilon_k t + i \sum_q |g_{qk}|^2 \int_0^t d \Delta (t - \Delta) \left[ \left(1 + N_q \right) e^{i\left(\epsilon_k - \epsilon_{k - q} - \Omega_q\right) \Delta} + N_q e^{i\left(\epsilon_k - \epsilon_{k - q} + \Omega_q\right) \Delta} \right] \\
+&= -\epsilon_k t + i \sum_q |g_{qk}|^2 \left[ \left(1 + N_q \right) \frac{e^{i t b_{-}} - 1 - i t b_{-}}{b_{-}^2} + N_q \frac{e^{i t b_{+}} - 1 - i t b_{+}}{b_{+}^2} \right]
+\end{align}
+where $b_{\mp} = \epsilon_k - \epsilon_{k - q} \mp \Omega_q$. Clearly, this resembles the Landau form of the cumulant, which is $C(t)=\int d \omega \frac{\beta(\omega)}{\omega^2}\left[e^{-i \omega t}+i \omega t-1\right]$. Then,
+\begin{align}
+    \epsilon_k &\equiv -\lim_{t \rightarrow \infty} \frac{d}{d t} \operatorname{Re} \left( A_k(t) \right) \\
+% &= -\lim_{t \rightarrow \infty} \operatorname{Re} \left( \frac{d}{d t} \left[ -\epsilon_k t + i \sum_q |g_{qk}|^2 \left[ \left(1 + N_q \right) \frac{e^{i t b_{-}} - 1 - i t b_{-}}{b_{-}^2} + N_q \frac{e^{i t b_{+}} - 1 - i t b_{+}}{b_{+}^2} \right] \right] \right) \\
+% &= -\lim_{t \rightarrow \infty} \left[ -\epsilon_k^{(0)}-\sum_q\left|g_{q k}\right|^2\left[\left(1+N_q\right) \Re\left(\frac{e^{i t b_{-}}-1}{b_{-}}\right)+N_q \Re\left(\frac{e^{i t b_{+}}-1}{b_{+}}\right)\right] \right] \\
+% &= \epsilon_k^{(0)} - \sum_q\left|g_{q k}\right|^2\left[\left(1+N_q\right) \mathcal{P}\left(\frac{1}{b_{-}}\right)+N_q \mathcal{P}\left(\frac{1}{b_{+}}\right)\right] \\
+% &= \epsilon_k - \lim_{t \rightarrow \infty} \frac{d}{d t} \operatorname{Re} \left[ i \sum_q |g_{qk}|^2 \left[ \left(1 + N_q \right) \frac{e^{i t b_{-}} - 1 - i t b_{-}}{b_{-}^2} + N_q \frac{e^{i t b_{+}} - 1 - i t b_{+}}{b_{+}^2} \right] \right] \\
+% &= \epsilon_k - \operatorname{Re} \sum_q |g_{qk}|^2 \left[ \left(1 + N_q \right) \frac{- e^{i t b_{-}} +1}{b_{-}} + N_q \frac{- e^{i t b_{+}} + 1}{b_{+}} \right]_{t \rightarrow \infty} \\
+&= \epsilon_k^{(0)} - \mathcal{P} \sum_q\left|g_{q k}\right|^2\left[\frac{1+N_q}{\epsilon_k-\epsilon_{k+q}-\Omega_q}+\frac{N_q}{\epsilon_k-\epsilon_{k+q}+\Omega_q}\right]
+\end{align}
+
+
+which gives an energy self-consistency condition.
+
+\end{frame}
+
+\section{PJ}
+
+\begin{frame}
+    \frametitle{PJ's choice}
+He had $G_k(t) = i \Theta(t) e^{C_k(t)}$ and chose $\phi_k(t)=C_k(t)$, which gave
+\begin{align}
+\frac{d \mathcal{G}_k(t)}{d t}&= \frac{d}{d t}\left[-i \Theta(t) e^{C_k(t)}\right] \\
+&= \dot{C_k}(t) \mathcal{G}_k(t) 
+% &= -i \epsilon_k \mathcal{G}_k(t) - i \frac{g^2}{N} \sum_q \int_0^t d \tau \mathcal{G}_k(t) D_q^{(0)}(t-\tau) e^{-C_k(t)+C_{k-q}(t)-C_{k-q}(\tau)+C_k(\tau)} \\
+% &= -i \epsilon_k \mathcal{G}_k(t) - i \frac{g^2}{N} \sum_q \int_0^t d \tau \mathcal{G}_k(t) D_q^{(0)}(t-\tau) \frac{\mathcal{G}_{k-q}(t) \mathcal{G}_k(\tau)}{\mathcal{G}_{k-q}(\tau) \mathcal{G}_k(t)} \\
+% &=-i \epsilon_k \mathcal{G}_k(t) - i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_k(\tau) \mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)}\label{a9}\\
+% \implies \frac{1}{\mathcal{G}_k(t)} \frac{d \mathcal{G}_k(t)}{d t}&={-i \epsilon_k} - i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)} \frac{\mathcal{G}_k(\tau)}{\mathcal{G}_k(t)} \label{a8} \\
+% \implies \frac{d \ln \mathcal{G}_k(t)}{d t}-\frac{d \ln \mathcal{G}_k^{(0)}(t)}{d t}&=- i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)} \frac{\mathcal{G}_k(\tau)}{\mathcal{G}_k(t)} \\
+% \implies \frac{d \ln \left[\mathcal{G}_k(t) / \mathcal{G}_k^{(0)}(t)\right]}{d t}&=- i \frac{g^2}{N} \sum_q \int_0^t d \tau D_q^{(0)}(t-\tau) \frac{\mathcal{G}_{k-q}(t)}{\mathcal{G}_{k-q}(\tau)} \frac{\mathcal{G}_k(\tau)}{\mathcal{G}_k(t)} \\
+% \implies ln \left[\mathcal{G}_k(t) / \mathcal{G}_k^{(0)}(t)\right] &=- i \frac{g^2}{N} \sum_q \int_0^t d \sigma \int_0^\sigma d \tau D_q^{(0)}(\sigma-\tau) \frac{\mathcal{G}_{k-q}(\sigma)}{\mathcal{G}_{k-q}(\tau)} \frac{\mathcal{G}_k(\tau)}{\mathcal{G}_k(\sigma)} \\
+% \implies \mathcal{G}_k(t) &=\mathcal{G}_k^{(0)}(t) \exp \left[i \sum_q \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2 D_q^{(0)}(\sigma-\tau) \frac{\mathcal{G}_{k-q}(\sigma)}{\mathcal{G}_{k-q}(\tau)} \frac{\mathcal{G}_k(\tau)}{\mathcal{G}_k(\sigma)}\right] \\
+% \implies \mathcal{G}_k^{(n+1)}(t)
+% &=\mathcal{G}_k^{(0)}(t)
+% \exp\!\left[
+% i\!\sum_q
+% \int_0^t d\sigma\!\!\int_0^\sigma d\tau\,
+% \left|g_{q k}\right|^2 D_q^{(0)}(\sigma\!-\!\tau)
+% \frac{\mathcal{G}_{k-q}^{(n)}(\sigma)}{\mathcal{G}_{k-q}^{(n)}(\tau)}
+% \frac{\mathcal{G}_k^{(n)}(\tau)}{\mathcal{G}_k^{(n)}(\sigma)}
+% \right]
+\end{align}
+so
+\begin{equation}
+    \mathcal{G}_k^{(n+1)}(t)
+=\mathcal{G}_k^{(0)}(t)
+\exp\!\left[
+i\!\sum_q
+\int_0^t d\sigma\!\!\int_0^\sigma d\tau\,
+\left|g_{q k}\right|^2 D_q^{(0)}(\sigma\!-\!\tau)
+\frac{\mathcal{G}_{k-q}^{(n)}(\sigma)}{\mathcal{G}_{k-q}^{(n)}(\tau)}
+\frac{\mathcal{G}_k^{(n)}(\tau)}{\mathcal{G}_k^{(n)}(\sigma)}
+\right]
+\end{equation}
+which for iterations $n \geq 2$, we use
+\begin{align}
+    \mathcal{G}_{\mathbf{k}}^{(n+1)}(t)= & \mathcal{G}_{\mathbf{k}}^{(0)}(t) \exp \left(-i \sum_{\mathbf{q}} \int_0^t d \sigma \int_0^\sigma d \tau\left|g_{q k}\right|^2\right. \\
+& \left.\times D_{\mathbf{q}}^0(\sigma-\tau) \mathcal{G}_{\mathbf{k}}^{(0)}(\tau-\sigma) \mathcal{G}_{\mathbf{k}-\mathbf{q}}^{(0)}(\sigma-\tau) e^{F^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)}\right) \notag
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{PJ's Solution}
+We introduce the notation 
+\begin{equation}
+    F^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) = F_2^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+F_4^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau)+\cdots
+\end{equation}
+where
+\begin{equation}
+    F_i^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) = C_i^{(n)}(\mathbf{k}-\mathbf{q}, \sigma)-C_i^{(n)}(\mathbf{k}-\mathbf{q}, \tau) -C_i^{(n)}(\mathbf{k}, \sigma)+C_i^{(n)}(\mathbf{k}, \tau)
+\end{equation}
+So his self-consistency for the Greens function is recursive; involving higher order cumulants at each successive iteration. Past the second order cumulants, you began double counting diagrams, which explains the negative spectral weight.
+Now, if we define $y_k(t)=e^{C_k(t)}$, the EOM is
+\begin{align}
+\frac{d y_k(t)}{d t}= & -i \sum_q \int_0^t d \tau\left|g_{q k}\right|^2 D_q^{(0)}(t-\tau) e^{i(\epsilon_k-\epsilon_{k-q})(t-\tau)} \frac{y_k(\tau) y_{k-q}(t)}{y_{k-q}(\tau)} \label{C1}
+\end{align}
+which is a VIDE, and they solved it numerically using the appropriate methods.
+
+\end{frame}
+\section{Littlewood}
+\begin{frame}
+    \frametitle{Littlewood}
+PJ showed that this method reduces to self-consistent Migdal, analogous to scGW, in the TDL, so this method does not seem useful for our purposes.
+\end{frame}
+\section{Our ideas}
+\begin{frame}
+    \frametitle{Determining Fock matrix}
+$\bm{F}_{pq}$ is determined by $D_{pq}$. Then,
+\begin{equation}
+    D_{pq} = \int_{-\infty}^{\infty} f(\omega - \mu) A_{pq}(\omega) d \omega
+\end{equation}
+with the Fermi-Dirac distribution $f(\omega - \mu) = \frac{1}{e^{\beta(\omega - \mu)} + 1}$, and the spectral function $A_{pq}(\omega) = -\frac{1}{\pi} \operatorname{Im} G^R_{pq}(\omega)$. So we need to get $G^R_{pq}(\omega)$. This can be achieved by accumulating data for $G^R_{pq}(t)$ at different time steps, and then performing a numerical Fourier transform.
+\begin{equation}
+    G^R_{pq}(t) = -i \Theta(t) e^{-i \epsilon_p t} e^{C_{pq}^{(2)}(t)}
+\label{eq:sc_cumulant_greens_time}
+\end{equation}
+So we need to evaluate $C_{pp}^{(2)}(t_n)$ at each time step $t_n$. Note that after we determine $\bm{F}_{pq}$ for a given iteration, we can update the single particle energies $\epsilon_p$ in $G^0_{pp}(\omega)$ for the next iteration.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Evaluating the cumulant}
+\begin{align}
+C_{pq}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pq}^{(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+\implies C_{pq}^{(2)}(t) &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right> \left< ab \left| \right| qi \right> \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)}\\
+&+ \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right> \left< ij \left| \right| qa \right> \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)}
+\label{eq:cumulant_2nd_1}
+\end{align}
+where
+$\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
+and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. This is exact up to second order in the bare Coulomb interaction because the improper $\tilde{\Sigma}$ and proper $\Sigma$ second-order self-energy are equivalent in MP partitioning, so the former has the form
+\begin{align}
+    \tilde{\Sigma}_{pq}^{(2)}(\omega) &= \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
+% \implies \tilde{\Sigma}_{pp}^{(2)}(\omega+\epsilon_p) &= \frac{1}{2} \sum_{iab}
+% \frac{\left< pi \left| \right| ab \right>^2}
+% {\omega-\epsilon_{pi}^{ab}} + \frac{1}{2} \sum_{ija}
+% \frac{\left< pa \left| \right| ij \right>^2}
+% {\omega-\epsilon_{pa}^{ij}}
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Scaling analysis}
+In order to evaluate \ref{eq:cumulant_2nd_1} with Fock self-consistency in mind, this would require the maximum scaling of $N_O N_V^2$ for the summations, $N_\omega$ points for the frequency integration, and (not exploiting symmetry) $N_{\text{orb}}^2$ for runs through $p$ and $q$, leading to a total scaling of $O(N_O N_V^2 N_\omega N_{\text{orb}}^2)$. For a given iteration, we accumulate data for the value of the interacting Green's function for all $N_T$ time steps, with the intention of performing a numerical Fourier transform to obtain $G_{pq}(\omega)$.
+\end{frame}
