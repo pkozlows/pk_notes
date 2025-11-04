@@ -1020,27 +1020,75 @@ which gives a self-consistent condition for $\epsilon_k$. \footnote{This is only
 % We have not yet attempted to solve this equation.
 \section{My derivations}
 \subsection{Self-consistent cumulant with second-order self-energy}
-We can start with the equation
+We want to get the interacting Green's function in the time domain from the cumulant expansion as
 \begin{equation}
     G_{pp}(t) = -i \Theta(t) e^{-i \epsilon_p t} e^{C_{pp}^{(2)}(t)}
 \label{eq:sc_cumulant_greens_time}
 \end{equation}
-We have the desire to build an updated Fock matrix for each iteration, so we need to evaluate \ref{eq:sc_cumulant_greens_time} for $N_{\text{orb}}$ orbitals, indexed by $p$. This means that we need to evaluate $C_{pp}^{(2)}(t_n)$ at each time step $t_n$. Now, it can be shown that we can get a cumulant correct up to second order in the bare Coulomb interaction as
+To derive a form for $C_{pp}^{(2)}(t)$, start by equating the cumulant ansatz for the Green's function the Dyson equation, which gives
 \begin{align}
-C_{pp}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pp}^{(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
-\implies C_{pp}^{(2)}(t) &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} 
-\label{eq:cumulant_2nd_1}
+C_{pp}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pp}^{c,(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+ &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
+% \label{eq:cumulant_2nd_1}
+&= \frac{1}{2}\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
++\frac{1}{2}\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\epsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) 
+\label{eq:cumulant_2nd_final}
 \end{align}
-where we have used the fact that in terms of the MP partitioning, the improper $\tilde{\Sigma}$ and proper $\Sigma$ second-order self-energy are equivalent, so the former has the form
+where
+$\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
+and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$.
+In summary, the workflow is:
+\begin{enumerate}
+    \item Start with HF orbital energies $\epsilon_p$ and coefficients $C_{\mu p}$ 
+    \item Get $G_{pp}(t) = -i \Theta(t) e^{-i \epsilon_p t} e^{C_{pp}^{(2)}(t)}$ with $C_{pp}^{(2)}(t)$ from \ref{eq:cumulant_2nd_final}
+    \item $G_{pp}(\omega) = FFT\left[ G_{pp}(t) \right]$
+    \item $A_{pp}(\omega) = -\frac{1}{\pi} \operatorname{Im} \left[ G_{pp}(\omega) \right]$
+    \item $n_p = \int_{-\infty}^{\infty} f(\omega-\mu) A_{pp}(\omega) d\omega$ with $f(\omega-\mu)$ the Fermi-Dirac distribution at chemical potential $\mu$ (so just a step function at zero temperature)
+    \item $P_{\mu \nu} = 2\sum_p C_{\mu p} n_p C_{p \nu}^{T}$
+    \item $F_{\mu \nu}=h_{\mu \nu}+\sum_{\rho \sigma}\left(\langle \mu \rho \mid \nu \sigma\rangle-\frac{1}{2}\langle \mu \rho \mid \sigma \nu\rangle\right) P_{\rho \sigma}$
+    \item Diagonalize $F_{\mu \nu}$ to get new orbital energies $\epsilon_p$ and coefficients $C_{\mu p}$
+    \item Update orbital energies and coefficients within step 2, and repeat until convergence
+\end{enumerate}
+In order to evaluate \ref{eq:cumulant_2nd_1} with numerical self-consistency in mind, this would require the maximum scaling of $N_O N_V^2$ for the summations, and $N_\omega$ points for the frequency integration, leading to a total scaling of $O(N_O N_V^2 N_\omega)$. In an iteration, we can accumulate data for the value of the interacting Green's function for all $N_T$ time steps, and then by performing a numerical Fourier transform, we go from $G_{pp}(t)\rightarrow G_{pp}(\omega)$, which can then be used to build a new Fock matrix. How do we move from the interacting Green's function in frequency space to the Fock matrix? Then, in the next iteration will use the single particle energy from the updated Fock matrix to determine the $C_{pp}^{(2)}(t)$ for the next iteration as well as for $G^0_{pp}(\omega)$. So we want to compute
 \begin{align}
-    \tilde{\Sigma}_{pq}^{(2)}(\omega) &= \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
-\implies \tilde{\Sigma}_{pp}^{(2)}(\omega+\epsilon_p) &= \frac{1}{2} \sum_{iab}
-\frac{\left< pi \left| \right| ab \right>^2}
-{\omega-\epsilon_{pi}^{ab}} + \frac{1}{2} \sum_{ija}
-\frac{\left< pa \left| \right| ij \right>^2}
-{\omega-\epsilon_{pa}^{ij}}
+G_{pp}(\omega)
+&= \int_{-\infty}^{\infty} dt\, e^{i \omega t} G_{pp}(t) \\
+&= \int_{-\infty}^{\infty} dt\, e^{i \omega t} \left( -i\, \Theta(t)\, e^{-i \epsilon_p t}\, e^{C_{pp}^{(2)}(t)} \right) \\
+&= -i \int_0^\infty dt\,
+\exp\!\Biggl[
+  i(\omega - \epsilon_p)t
+  + \tfrac{1}{2}
+  \Biggl(
+    \sum_{iab}
+      \langle pi \Vert ab \rangle^2
+      \int \frac{d\omega'}{2\pi}\,
+      \frac{i\, e^{-i \omega' t}}
+           {(\omega')^2\!\left(\omega' - \epsilon_{pi}^{ab}\right)}
+    + 
+    \sum_{ija}
+      \langle pa \Vert ij \rangle^2
+      \int \frac{d\omega'}{2\pi}\,
+      \frac{i\, e^{-i \omega' t}}
+           {(\omega')^2\!\left(\omega' - \epsilon_{pa}^{ij}\right)}
+  \Biggr)
+\Biggr] \\
+&= -i \int_0^\infty dt\,
+\exp\!\Biggl[
+  i(\omega - \epsilon_p)t
+  + \tfrac{1}{2}
+  \Biggl(
+\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)+\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\epsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) 
+  \Biggr)
+\Biggr]
+\label{eq:sc_cumulant_greens_freq} \\
 \end{align}
-In order to evaluate \ref{eq:cumulant_2nd_1} with numerical self-consistency in mind, this would require the maximum scaling of $N_O N_V^2$ for the summations, and $N_\omega$ points for the frequency integration, leading to a total scaling of $O(N_O N_V^2 N_\omega)$. In an iteration, we can accumulate data for the value of the interacting Green's function for all $N_T$ time steps, and then by performing a numerical Fourier transform, we go from $G_{pp}(t)\rightarrow G_{pp}(\omega)$, which can then be used to build a new Fock matrix. How do we move from the interacting Green's function in frequency space to the Fock matrix? Then, in the next iteration will use the single particle energy from the updated Fock matrix to determine the $C_{pp}^{(2)}(t)$ for the next iteration as well as for $G^0_{pp}(\omega)$.
+
+
 \subsection{Taking advantage of connection between EOMs}
 
 We use the formula $\mathcal{L}\{(f*g)(t)\}(s)=\mathcal{L}\{f(t)\}(s) \mathcal{L}\{g(t)\}(s)$ for the Laplace transform of a convolution in the below.

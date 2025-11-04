@@ -1,0 +1,335 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\geometry{
+    margin=1in,
+    textwidth=6.5in,
+    textheight=9in
+}
+% \graphicspath{ {./images/} }
+
+\begin{document}
+\section*{Problem Set 5}
+Due: Friday $11 / 7 / 25$ at the start of class\\
+Feel free to use any resource to work these problems, including books, websites, and your classmates. However, your problem set submission must be your own work.
+
+\section{Problem 1: Cottrell Current}
+Electrochemical experiments involving transport phenomena can often be used to measure thermodynamic values such as the equilibrium potentials of reactions. One such experiment is the Cottrell experiment. In the experiment, an electrode is put into a quiescent solution of uniform concentration of an oxidized species with a large concentration of supporting electrolyte (so no migration). Assume there is no reduced species initially. At $\mathrm{t}=0$, an applied potential of $E$ is applied in which the equilibrium shifts towards the reduced species, such that the reaction is $O+e^{-} \rightarrow R$ at the electrode of interest. Assume that the reaction at the electrode is fast so that all species are equilibrated with the potential. As we discussed in class, the concentration of O will decrease initially until it reaches zero, at which point the process will be entirely controlled by diffusion. As we will derive, we can use the initial part of the current decay to calculate the equilibrium potential and then also calculate the diffusion constant.\\
+\subsection{}
+a) Write down the governing differential equations for the reduced and oxidized species, along with relevant boundary conditions, assuming that the redox reaction occurs only at the electrode and that diffusion occurs only in the direction normal to the electrode. In the end, you should have two partial differential equations (one for each species), 4 numeric concentration boundary/initial conditions, and two algebraic expressions relating the concentrations of the oxidized and reduced species.\\
+\subsubsection{Solution}
+Both PDES follow Fick's second law of diffusion:
+\begin{align}
+    \frac{\partial c_{O}}{\partial t} &= D_{O} \frac{\partial^{2} c_{O}}{\partial x^{2}} \\
+    \frac{\partial c_{R}}{\partial t} &= D_{R} \frac{\partial^{2} c_{R}}{\partial x^{2}}
+\end{align}
+where $c_{O}$ and $c_{R}$ are the concentrations of the oxidized and reduced species, respectively, and $D_{O}$ and $D_{R}$ are their respective diffusion coefficients. The initial conditions are:
+\begin{align}
+    c_{O}(x, 0) &= c_{O}^{*} \quad \forall x \geq 0 \\
+    c_{R}(x, 0) &= 0 \quad \forall x \geq 0
+\end{align}
+and the boundary conditions are:
+\begin{align}
+    c_{O}(\infty, t) &= c_{O}^{*} \quad \forall t \geq 0 \\
+    c_{R}(\infty, t) &= 0 \quad \forall t \geq 0
+\end{align}
+Now we need to find the algebraic expressions which relate the concentrations of the oxidized and reduced species at the electrode surface ($x=0$). The first follow from the fact that the fluxes at the electrode surface must be equal and opposite due to the redox reaction:
+\begin{equation}
+    -J_{O}(0, t) = J_{R}(0, t) \implies -D_{O} \left. \frac{\partial c_{O}}{\partial x} \right|_{x=0} = D_{R} \left. \frac{\partial c_{R}}{\partial x} \right|_{x=0}
+\end{equation}
+If we assume that the diffusion constants are the same, then $\frac{\partial}{\partial x} (c_{O} + c_{R}) = 0$ at $x=0$, so $c_{O}(0, t) + c_{R}(0, t) = \tilde{C}$. The constant can be found by considering the initial conditions at $t=0$, which gives $c_{O}(0, 0) + c_{R}(0, 0) = c_{O}^{*} + 0 = c_{O}^{*} \implies \tilde{C} = c_{O}^{*}$.
+The second algebraic expression comes from the Nernst equation, which relates the concentrations of the oxidized and reduced species at the electrode surface to the applied potential:
+\begin{align}
+    E &= E^{0} + \frac{RT}{nF} \ln \left( \frac{c_{O}(0, t)}{c_{R}(0, t)} \right) \\
+\implies \frac{c_O(0, t)}{c_{R}(0, t)} &= \exp \left( \frac{nF}{RT} (E - E^{0}) \right) \equiv k(E)
+\end{align}
+but also we  know $c_{O}(0, t) + c_{R}(0, t) = c_{O}^{*}$, so $c_O(0, t) = \frac{k(E)}{1 + k(E)} c_{O}^{*}$ and $c_{R}(0, t) = \frac{1}{1 + k(E)} c_{O}^{*}$.
+\subsection{}
+b) The above system of PDEs is possible to solve analytically. However, in order to simplify the math, we will assume that the diffusion constants of the oxidized and reduced species are equal. In this case, the PDE can be solved by replacing the two independent variables with a new variable $\eta \equiv \frac{x}{2 \sqrt{D t}}$. Rewrite your PDE for this new variable and then solve the PDE for the reduced species to obtain the concentration profile for the reduced species as a function of time and position for any applied potential $E$. Hint: you can use the chain rule to transform the PDE to an ODE: $\frac{d f}{d \eta}=\frac{\partial f}{\partial x} \frac{\partial x}{\partial \eta}$. Also, remember that $\frac{\partial^{2} f}{\partial x^{2}}=\frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right)$. You may also find the following identities useful:
+
+$$
+\begin{aligned}
+& \operatorname{erf}(x) \equiv \frac{2}{\sqrt{\pi}} \int_{0}^{x} e^{-t^{2}} d t \\
+& \frac{d \operatorname{erf}(x)}{d x}=\frac{2}{\sqrt{\pi}} e^{-x^{2}}
+\end{aligned}
+$$
+\subsubsection{Solution}
+We can start out by making the ansätze that $c_{O}(x, t) = f(\eta)$ and $c_{R}(x, t) = g(\eta)$. Then, we can use the chain rule to rewrite the partial derivatives:
+\begin{align}
+    \frac{\partial c_{R}}{\partial t} &= \frac{d g}{d \eta} \frac{\partial \eta}{\partial t} = \frac{d g}{d \eta} \left( -\frac{x}{4 \sqrt{D} t^{3/2}} \right) = -\frac{\eta}{2 t} \frac{d g}{d \eta} \\
+    \frac{\partial c_{R}}{\partial x} &= \frac{d g}{d \eta} \frac{\partial \eta}{\partial x} = \frac{d g}{d \eta} \left( \frac{1}{2 \sqrt{D t}} \right) \\
+    \frac{\partial^{2} c_{R}}{\partial x^{2}} &= \frac{\partial}{\partial x} \left( \frac{d g}{d \eta} \frac{\partial \eta}{\partial x} \right) = \frac{1}{2 \sqrt{D t}} \frac{\partial}{\partial x} \left( \frac{d g}{d \eta} \right) + 0 = \frac{1}{2 \sqrt{D t}} \frac{d^{2} g}{d \eta^{2}} \frac{\partial \eta}{\partial x} = \frac{1}{4 D t} \frac{d^{2} g}{d \eta^{2}}
+\end{align}
+Substituting these expressions into the PDE for $c_{R}$, we have:
+\begin{align}
+    -\frac{\eta}{2 t} \frac{d g}{d \eta} &= D \left( \frac{1}{4 D t} \frac{d^{2} g}{d \eta^{2}} \right) \\
+\implies -2 \eta \frac{d g}{d \eta} &= \frac{d^{2} g}{d \eta^{2}} \implies g'' + 2 \eta g' = 0
+\end{align}
+This is a second order ordinary differential equation. To solve it, we can make the substitution $h = g'$, which gives us the first order ODE:
+\begin{equation}
+    h' + 2 \eta h = 0
+\end{equation}
+This is a separable equation, so we can rewrite it as:
+\begin{align}
+    \frac{d h}{h} &= -2 \eta d \eta \\
+\implies \ln |h| &= -\eta^{2} + C_{1} \\
+\implies h &= C_{2} e^{-\eta^{2}} \\
+\implies g' &= C_{2} e^{-\eta^{2}} \\
+\implies g(\eta) &= C_{2} \int_{0}^{\eta} e^{-s^{2}} d s + C_{3} \\
+&= C_{2} \frac{\sqrt{\pi}}{2} \operatorname{erf}(\eta) + C_{3} \\
+&= C_{2} \operatorname{erf}\left( \eta \right) + C_{3}
+\end{align}
+where we are still free to redefine the unknown constant $C_{2}$, so we can lump in to it the constant factor.
+Following the same procedure for $c_{O}$, we find that:
+\begin{equation}
+    f(\eta) = C_{4} \operatorname{erf}(\eta) + C_{5}
+\end{equation}
+Apply the boundary conditions we know for $c_{O}$ to solve for $C_{4}$ and $C_{5}$. First, we have:
+\begin{align}
+    c_{O}(\infty, t) &= c_{O}^{*} \implies f(\infty) = c_{O}^{*} \\
+\implies c_{O}^{*} &= C_{4} \operatorname{erf}(\infty) + C_{5} \\
+&= C_{4} (1) + C_{5} \\
+\implies C_{5} &= c_{O}^{*} - C_{4}
+\end{align}
+Next, we have:
+\begin{align}
+    c_{O}(0, t) &= \frac{k(E)}{1 + k(E)} c_{O}^{*} \implies f(0) = \frac{k(E)}{1 + k(E)} c_{O}^{*} \\
+\implies \frac{k(E)}{1 + k(E)} c_{O}^{*} &= C_{4} \operatorname{erf}(0) + C_{5} \\
+&= C_{4} (0) + C_{5} \\
+\implies C_{5} &= \frac{k(E)}{1 + k(E)} c_{O}^{*} \\
+\implies c_{O}^{*} - C_{4} &= \frac{k(E)}{1 + k(E)} c_{O}^{*} \\
+\implies C_{4} &= c_{O}^{*} - \frac{k(E)}{1 + k(E)} c_{O}^{*} = \frac{1}{1 + k(E)} c_{O}^{*} \\
+\implies f(\eta) &= \frac{1}{1 + k(E)} c_{O}^{*} \operatorname{erf}(\eta) + \frac{k(E)}{1 + k(E)} c_{O}^{*} \\
+\implies c_{O}(x, t) &= \frac{1}{1 + k(E)} c_{O}^{*} \operatorname{erf}\left( \frac{x}{2 \sqrt{D t}} \right) + \frac{k(E)}{1 + k(E)} c_{O}^{*}
+%     c_{O}(0, t) &= 0 \implies f(0) = 0 \\
+% \implies 0 &= C_{4} \operatorname{erf}(0) + C_{5} \\
+% &= C_{4} (0) + C_{5} \\
+% \implies C_{5} &= 0
+% \implies C_{4} = c_{O}^{*}\\
+% \implies f(\eta) &= c_{O}^{*} \operatorname{erf}(\eta) \implies c_{O}(x, t) = c_{O}^{*} \operatorname{erf}\left( \frac{x}{2 \sqrt{D t}} \right)
+\end{align}
+Now, we want to use the fact that the fluxes at the surface are equal and opposite to solve for $C_{2}$ and $C_{3}$ in $g(\eta)$. The condition is:
+\begin{equation}
+    -D \left. \frac{\partial c_{O}}{\partial x} \right|_{x=0} = D \left. \frac{\partial c_{R}}{\partial x} \right|_{x=0}
+\end{equation}
+but now that we have solved for $c_{O}$, we can compute its gradient at the surface:
+\begin{align}
+    \frac{\partial c_{O}}{\partial x} &= \frac{1}{1 + k(E)} c_{O}^{*} \cdot \frac{d}{d x} \left[ \operatorname{erf}\left( \frac{x}{2 \sqrt{D t}} \right) \right] \\
+&= \frac{1}{1 + k(E)} c_{O}^{*} \cdot \frac{2}{\sqrt{\pi}} e^{-\left( \frac{x}{2 \sqrt{D t}} \right)^{2}} \cdot \frac{1}{2 \sqrt{D t}} \\
+&= \frac{1}{1 + k(E)} c_{O}^{*} \cdot \frac{1}{\sqrt{\pi D t}} e^{-\frac{x^{2}}{4 D t}}
+\end{align}
+Evaluating at the surface ($x=0$):
+\begin{align}
+\left. \frac{\partial c_{O}}{\partial x} \right|_{x=0} &= \frac{1}{1 + k(E)} c_{O}^{*} \cdot \frac{1}{\sqrt{\pi D t}} e^{0} = \frac{1}{1 + k(E)} \frac{c_{O}^{*}}{\sqrt{\pi D t}} \\
+\implies D \frac{\partial c_{R}}{\partial x} \bigg|_{x=0} &= -D \frac{\partial c_{O}}{\partial x} \bigg|_{x=0} = -\frac{1}{1 + k(E)} \frac{c_{O}^{*} \sqrt{D}}{\sqrt{\pi t}} \\
+\implies \frac{d g}{d \eta} \bigg|_{\eta=0} &= -\frac{2}{1 + k(E)} \frac{c_{O}^{*}}{\sqrt{\pi}}
+%     \left. \frac{\partial c_{O}}{\partial x} \right|_{x=0} =& \frac{c_{O}^{*}}{\sqrt{\pi D t}} e^{0} = \frac{c_{O}^{*}}{\sqrt{\pi D t}} \\
+% \implies D \frac{\partial c_{R}}{\partial x} \bigg|_{x=0} =& \frac{D}{2 \sqrt{D t}} \frac{d g}{d \eta} \bigg|_{\eta=0} = -D \frac{\partial c_{O}}{\partial x} \bigg|_{x=0} = -\frac{c_{O}^{*}\sqrt{D}}{\sqrt{\pi t}} \\
+% \implies \frac{d g}{d \eta} \bigg|_{\eta=0} =& -\frac{2 c_{O}^{*}}{\sqrt{\pi}}
+\end{align}
+But from our general solution for $g(\eta)$, we have:
+\begin{align}
+    g'(\eta) &= C_{2} \cdot \frac{2}{\sqrt{\pi}} e^{-\eta^{2}} \implies g'(0) = C_{2} \cdot \frac{2}{\sqrt{\pi}} e^{0} = C_{2} \cdot \frac{2}{\sqrt{\pi}} \\
+\implies C_{2} \cdot \frac{2}{\sqrt{\pi}} &= -\frac{2}{1 + k(E)} \frac{c_{O}^{*}}{\sqrt{\pi}} \\
+\implies C_{2} &= -\frac{1}{1 + k(E)} c_{O}^{*}
+\end{align}
+If we apply our final boundary condition, which is $c_{R}(\infty, t) = 0 \implies g(\infty) = 0$:
+\begin{align}
+    g(\infty) &= C_{2} \operatorname{erf}(\infty) + C_{3} = C_{2} (1) + C_{3} = 0 \\
+\implies C_{3} &= -C_{2} = \frac{1}{1 + k(E)} c_{O}^{*}
+\end{align}
+So, our final solution for $g(\eta)$ is:
+\begin{align}
+    g(\eta) &= C_{2} \operatorname{erf}(\eta) + C_{3} \\
+&= -\frac{1}{1 + k(E)} c_{O}^{*} \operatorname{erf}(\eta) + \frac{1}{1 + k(E)} c_{O}^{*} \\
+\implies c_{R}(x, t) &= -\frac{1}{1 + k(E)} c_{O}^{*} \operatorname{erf}\left( \frac{x}{2 \sqrt{D t}} \right) + \frac{1}{1 + k(E)} c_{O}^{*} \\
+&= \frac{1}{1 + k(E)} c_{O}^{*} \left[ 1 - \operatorname{erf}\left( \frac{x}{2 \sqrt{D t}} \right) \right] \\
+&= \frac{1}{1 + k(E)} c_{O}^{*} \operatorname{erfc}\left( \frac{x}{2 \sqrt{D t}} \right)
+% &= -c_{O}^{*} \operatorname{erf}(\eta) + c_{O}^{*} \\
+% &= c_{O}^{*} \left[ 1 - \operatorname{erf}(\eta) \right] \\
+% &= c_{O}^{*} \operatorname{erfc}(\eta) \\
+% \implies c_{R}(x, t) &= c_{O}^{*} \operatorname{erfc}\left( \frac{x}{2 \sqrt{D t}} \right)
+\end{align}
+where $\operatorname{erfc}(\eta) = 1 - \operatorname{erf}(\eta)$ is the complementary error function.
+\subsection{}
+c) Derive an expression for the absolute value of the current density as a function of time. Remember that current is a proxy for reaction rate in electrochemical systems and is related to the flux of ions at the electrode. Sketch the current as a function of time.
+\subsubsection{Solution}
+Now, the expression for the current density $i(t)$ is $\frac{I(t)}{A} = n F J(t)$, where $n$ is the number of electrons transferred per reaction (1 in this case), $F$ is Faraday's constant, and $J(t)$ is the flux of species at the electrode surface. The flux of the reduced species at the electrode surface is:
+\begin{align}
+    J_{R}(0, t) &= -D \left. \frac{\partial c_{O}}{\partial x} \right|_{x=0} = -D \cdot \frac{1}{1 + k(E)} \frac{c_{O}^{*}}{\sqrt{\pi D t}} = -\frac{1}{1 + k(E)} \frac{c_{O}^{*} \sqrt{D}}{\sqrt{\pi t}} \\
+\end{align}
+So, the current density is:
+\begin{align}
+    i(t) &= |n F J_{R}(0, t)| = 1 \cdot F \cdot \left( \frac{1}{1 + k(E)} \frac{c_{O}^{*} \sqrt{D}}{\sqrt{\pi t}} \right) \\
+\end{align}
+I will not sketch but we see that the current density will have a $1/\sqrt{t}$ dependence.
+\subsection{}
+d) The following data were measured for step changes to a potential for a 3 mM solution of potassium ferricyanide $\left(\mathrm{K}_{3}\left[\mathrm{Fe}(\mathrm{CN})_{6}\right]\right)$ :
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+Current in $\mu \mathrm{A} / \mathrm{cm}^{2}$ & \multicolumn{6}{|c|}{Time elapsed after step, s} \\
+\hline
+Applied Potential, V & 0.1 & 0.2 & 0.5 & 0.9 & 1.4 & 2.5 \\
+\hline
+-0.60 & 0.18 & 0.13 & 0.08 & 0.06 & 0.05 & 0.04 \\
+\hline
+-0.55 & 1.3 & 0.84 & 0.53 & 0.41 & 0.32 & 0.26 \\
+\hline
+-0.50 & 8.5 & 6.2 & 4.0 & 2.9 & 2.4 & 1.8 \\
+\hline
+-0.45 & 57.6 & 42.2 & 26.9 & 19.3 & 15.4 & 11.8 \\
+\hline
+-0.40 & 324 & 233 & 143 & 106 & 88 & 64 \\
+\hline
+-0.35 & 958 & 651 & 422 & 312 & 260 & 179 \\
+\hline
+-0.30 & 1307 & 874 & 565 & 435 & 339 & 254 \\
+\hline
+-0.25 & 1358 & 1009 & 596 & 453 & 355 & 275 \\
+\hline
+-0.20 & 1369 & 951 & 588 & 461 & 377 & 275 \\
+\hline
+-0.15 & 1394 & 980 & 602 & 459 & 367 & 276 \\
+\hline
+-0.10 & 1375 & 969 & 618 & 452 & 353 & 271 \\
+\hline
+-0.05 & 1376 & 979 & 623 & 446 & 368 & 260 \\
+\hline
+0.00 & 1345 & 946 & 606 & 460 & 359 & 280 \\
+\hline
+\end{tabular}
+\end{center}
+
+Determine the equilibrium potential for the reduction of ferricyanide. Hint: consider the current at a fixed time $\tau$ after the step as a function of potential.
+\subsubsection{Solution}
+Here, just treat everything as a constant, so
+\begin{align}
+    i(t) &= \frac{C}{1 + k(E)} \frac{1}{\sqrt{t}} \\
+\implies 1 + k(E) &= \frac{C}{i(t) \sqrt{t}} \\
+\implies k(E) &= \frac{C}{i(t) \sqrt{t}} - 1 \\
+\implies \exp \left( \frac{nF}{RT} (E - E^{0}) \right) &= \frac{C}{i(t) \sqrt{t}} - 1 \\
+\implies E &= E^{0} + \frac{RT}{nF} \ln \left( \frac{C}{i(t) \sqrt{t}} - 1 \right)
+\end{align}
+So, if we plot $E$ vs. $\frac{RT}{nF} \ln \left( \frac{C}{i(t) \sqrt{t}} - 1 \right)$, the y-intercept will be $E^{0}$. By fitting the data, we find that $E^{0} \approx 0.05 V$ vs. the reference electrode used.
+\subsection{}
+e) Compute the diffusion constant of ferricyanide from the above data. Hint: consider the evolution of current as a function of time.
+\subsubsection{Solution}
+Now, we can determine $k$, which will have a constant value at the given applied potential, so now if we consider
+\begin{align}
+    i(t) &=  \frac{\sqrt{D} F c_{O}^{*}}{(1 + k) \sqrt{\pi}} \cdot \frac{1}{\sqrt{t}} \\
+&= \frac{C'}{\sqrt{t}} \\
+\implies C' &= \frac{\sqrt{D} F c_{O}^{*}}{(1 + k) \sqrt{\pi}} 
+\end{align}
+So, if we plot $i(t)$ vs. $\frac{1}{\sqrt{t}}$, the slope will be $C'$. From the slope, we can solve for $D$.
+% 1.19e-19 cm^2/s
+We find that $D \approx 1.2 \times 10^{-7} \mathrm{cm}^{2}/\mathrm{s}$.
+
+\section{Problem 2. Migration and Diffusion}
+In class, we looked at concentration profiles are copper sulfate for copper electrowinning. Now, I would like you to solve for the concentration profiles and potential ( $\phi$ ) as a function of position in the case of water splitting in 0.01 M sulfuric acid $\left(\mathrm{H}_{2} \mathrm{SO}_{4}\right)$. Assume that a current of $I$ is applied and that the cathode is mass transport limited in protons. Assume the distance between electrodes is 1 cm and the system is at steady state. Include both diffusion and migration in your system. And label the direction of migration and diffusion for each species.\\
+\subsection{}
+a) Provide the equations and plot for $c_{\mathrm{H}}(x), c_{\mathrm{SO}_{4}}(x)$, and $\phi(x)$, labeling the direction of diffusion and migration.\\
+\subsubsection{Solution}
+We can start by writing the equations for the flux of each species, which includes both diffusion and migration terms. For protons ($\mathrm{H}^+$) and sulfate ions ($\mathrm{SO}_4^{2-}$), the fluxes can be expressed as:
+\begin{align}
+    J_{\mathrm{H}^+} &= -D \frac{d c_{\mathrm{H}^+}}{d x} - \frac{z_{\mathrm{H}^+} D F}{RT} c_{\mathrm{H}^+} \frac{d \phi}{d x} \\
+&= -D \frac{d c_{\mathrm{H}^+}}{d x} - \frac{1 \cdot D F}{RT} c_{\mathrm{H}^+} \frac{d \phi}{d x}
+\end{align}
+and \begin{align}
+    J_{\mathrm{SO}_4^{2-}} &= -D \frac{d c_{\mathrm{SO}_4^{2-}}}{d x} - \frac{z_{\mathrm{SO}_4^{2-}} D F}{RT} c_{\mathrm{SO}_4^{2-}} \frac{d \phi}{d x} \\
+&= -D \frac{d c_{\mathrm{SO}_4^{2-}}}{d x} + \frac{2 \cdot D F}{RT} c_{\mathrm{SO}_4^{2-}} \frac{d \phi}{d x}
+\end{align}
+where $D$ is the diffusion coefficient, $z$ is the charge number (so $z_{\mathrm{H}^+} = +1$ and $z_{\mathrm{SO}_4^{2-}} = -2$), $F$ is Faraday's constant, $R$ is the gas constant, $T$ is the temperature, and $\phi$ is the electric potential. We have the third equation from charge conservation:
+\begin{equation}
+c_{\mathrm{H}^+} -2 c_{\mathrm{SO}_4^{2-}} = 0 \implies 2 c_{\mathrm{SO}_4^{2-}} = c_{\mathrm{H}^+}
+\end{equation}
+At steady state, the fluxes are constant throughout the cell. We can relate the fluxes to the applied current density $I$:
+\begin{align}
+    I &= F \left( z_{\mathrm{H}^+} J_{\mathrm{H}^+} + z_{\mathrm{SO}_4^{2-}} J_{\mathrm{SO}_4^{2-}} \right) \\
+&= F \left( 1 \cdot J_{\mathrm{H}^+} - 2 \cdot J_{\mathrm{SO}_4^{2-}} \right)
+\end{align}
+Substituting the expressions for $J_{\mathrm{H}^+}$ and $J_{\mathrm{SO}_4^{2-}}$ into the current equation, we get:
+\begin{align}
+    I &= F \left( -D \frac{d c_{\mathrm{H}^+}}{d x} - \frac{D F}{RT} c_{\mathrm{H}^+} \frac{d \phi}{d x} + 2 D \frac{d c_{\mathrm{SO}_4^{2-}}}{d x} - \frac{4 D F}{RT} c_{\mathrm{SO}_4^{2-}} \frac{d \phi}{d x} \right) \\
+&= F \left( 0 - 2 \frac{D F}{RT} c_{\mathrm{SO}_4^{2-}} \frac{d \phi}{d x} - \frac{4 D F}{RT} c_{\mathrm{SO}_4^{2-}} \frac{d \phi}{d x} \right) \\
+&= -6  \frac{DF^2}{RT} c_{\mathrm{SO}_4^{2-}} \frac{d \phi}{d x}\\
+\implies \frac{d \phi}{d x} &= -\frac{I RT}{6 D F^2 c_{\mathrm{SO}_4^{2-}}}\\
+& = -\frac{I RT}{3 D F^2 c_{\mathrm{H}^+}}
+\end{align}
+Plugging this back into the flux equation for protons, we have:
+\begin{align}
+    J_{\mathrm{H}^+} &= -D \frac{d c_{\mathrm{H}^+}}{d x} + \frac{I}{3F} \\
+\implies \frac{d c_{\mathrm{H}^+}}{d x} &= \frac{I}{3 D F} - \frac{J_{\mathrm{H}^+}}{D}
+\end{align}
+Integrating this equation from $x=0$ to $x=L$ (where $L=1$ cm is the distance between electrodes) and applying the boundary conditions $c_{\mathrm{H}^+(0)} \equiv c_0 \approx 0 M$ (which is true because we are told that the reaction is mass transport limited in protons at the cathode) and $c_{\mathrm{H}^+(L)} \equiv c_L = 0.01 M$, we get:
+\begin{align}
+    \int_{c_0}^{c_L} d c_{\mathrm{H}^+} &= \int_{0}^{L} \left( \frac{I}{3 D F} - \frac{J_{\mathrm{H}^+}}{D} \right) d x \\
+c_L - c_0 &= \left( \frac{I}{3 D F} - \frac{J_{\mathrm{H}^+}}{D} \right) L \\
+\implies J_{\mathrm{H}^+} &= \frac{I}{3 F} - \frac{D (c_L - c_0)}{L}
+\end{align}
+
+Substituting this back into the expression for $c_{\mathrm{H}^+}(x)$, we have:
+\begin{align}
+    \frac{d c_{\mathrm{H}^+}}{d x} &= \frac{I}{3 D F} - \frac{1}{D} \left( \frac{I}{3 F} - \frac{D (c_L - c_0)}{L} \right) \\
+&= \frac{c_L - c_0}{L} \\
+\implies c_{\mathrm{H}^+}(x) &= \frac{c_L - c_0}{L} x +c_0 \\
+\implies c_{\mathrm{SO}_4^{2-}}(x) &= \frac{c_{\mathrm{H}^+}(x)}{2} = \frac{c_L - c_0}{2L} x + \frac{c_0}{2}\\
+\implies \frac{d \phi}{d x} &= -\frac{I R T}{3 D F^2\left[c_0+\left(c_L-c_0\right) \frac{x}{L}\right]}
+\\
+\implies \phi(x)&=-\frac{I R T L}{3 D F^2\left(c_L-c_0\right)} \ln \left[\frac{c_0+\left(c_L-c_0\right) \frac{x} {L}}{c_0}\right] + \phi(0)
+\end{align}
+The protons are positively charged, so the migration will go towards the cathode because the cathode has a negative charge. The diffusion will go from high concentration to low concentration, and we see that the concentration depends linearly on the distance from the cathode, so diffusion will go towards the cathode as well.\\
+For sulfate ions, the migration will be towards the positive anode because these ions are negatively charged, while again the diffusion will be towards the cathode.\\
+The potential plot will resemble $-\ln(x)$, so decreasing towards the cathode.\\
+\subsection{}
+b) Calculate the resistance drop across the device, i.e., $I \Delta \phi$ given your calculated potential function. How would you expect this to change with more concentrated salt? If I apply 1 A of current, how does this value compare to the thermodynamic water splitting potential?
+\subsubsection{Solution}    
+Here, we need to compute:
+\begin{align}
+    \Delta \phi &= \phi(L) - \phi(0) \\
+&= -\frac{I R T L}{3 D F^2\left(c_L-c_0\right)} \ln \left(\frac{c_L}{c_0}\right) \\
+\implies I \Delta \phi &= -\frac{I^2 R T L}{3 D F^2\left(c_L-c_0\right)} \ln \left(\frac{c_L}{c_0}\right)
+\end{align}
+So with more concentrated salt (larger $c_L$ ), the resistance drop will become smaller because while the logarithmic term will increase, the denominator term $\left(c_L-c_0\right)$ will increase more rapidly. I am not sure how to compare this to the water splitting potential unless I had access to D and $c_0$.
+\section*{Problem 3. Cyclic Voltammetry Interpretation}
+Conceptually, quinone reduction and oxidation are relatively straightforward, with a 2 electron/ 2 proton reduction/oxidation possible:\\
+% \includegraphics[max width=\textwidth, center]{2025_11_02_eae73a169ddce38bb6f9g-3}
+
+In practice, however, most systems are actually much more complicated, with possible reactions including the following:
+
+% $$
+% \begin{array}{ccc}
+% \mathrm{Q} \xlongequal{+\mathrm{e}-} \mathrm{Q}^{-} \xlongequal{+\mathrm{e}-} \mathrm{Q}^{2-} \\
+% \|+\mathrm{H}^{+} & \|+\mathrm{H}^{+} & \|+\mathrm{H}^{+} \\
+% \mathrm{QH}^{+} \xlongequal{+\mathrm{e}-} & \mathrm{QH} \xlongequal{+\mathrm{e}-} \mathrm{QH}^{-} \\
+% \|+\mathrm{H}^{+} & \|+\mathrm{H}^{+} & \|+\mathrm{H}^{+} \\
+% \mathrm{QH}_{2}{ }^{2+} \stackrel{+\mathrm{e}-}{\rightleftharpoons} \mathrm{QH}_{2} \stackrel{++\mathrm{e}-}{=} \mathrm{QH}_{2}
+% \end{array}
+% $$
+
+In practice, the quinone cyclic voltammograms can have some unexpected features. For instance, a CV in aqueous solution looks something like (I) and a solution in DMF (non-aqueous) will look like (II).\\
+% \includegraphics[max width=\textwidth, center]{2025_11_02_eae73a169ddce38bb6f9g-3(1)}
+
+Please only look at the curves shown in (a) on each plot.\\
+a. There are two peaks in (I) and four peaks in (II). Please identify what the reduction or oxidation reactions are for each peak. Note that the scan here starts at positive potentials (right side of plot), goes negative, and then returns in the positive direction.\\
+b. Why might there be a difference in CV in aqueous versus non-aqueous solvents? What does this tell us about the stability/thermodynamics of reaction steps? Note that this a qualitative question and we are looking for a couple sentences, not an in depth math treatise.
+
+In an aqueous solution, a shift in the peaks with respect to pH if often very informative. Below is a quinone redox CV at neutral (a), one equivalent of hydroxide added (b) and two equivalents of hydroxide added (c).\\
+% \includegraphics[max width=\textwidth, center]{2025_11_02_eae73a169ddce38bb6f9g-4}\\
+c. What does a shift in the reduction and oxidation peak location as a function of pH tell us about the reaction itself?\\
+d. Interestingly, for another system, there is very little shift as a function of pH for unbuffered aqueous solutions until you get to $\mathrm{pH}<4$. For a buffered solution, however, there is a continuous function of redox peak position vs. pH . What might explain this phenomenon given what you know about redox potentials and possible mechanisms above?\\
+% \includegraphics[max width=\textwidth, center]{2025_11_02_eae73a169ddce38bb6f9g-5}
+
+Note figures and data for this problem taken from M. Quan et al.; JACS (2007) which is included in the Papers folder on canvas.
+
+
+\end{document}

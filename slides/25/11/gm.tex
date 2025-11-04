@@ -1,0 +1,140 @@
+\section{GW}
+
+\begin{frame}
+    \frametitle{Introduction}
+    The Dyson equation is
+\begin{equation}
+    G = G_0 + G_0 \Sigma G
+\end{equation}
+where $G$ is the interacting Green's function, $G_0$ is the non-interacting Green's function, and $\Sigma$ is the proper self-energy.
+\pause
+The $GW$ approximation for the self-energy is
+
+\begin{align}
+    \Sigma &= iGW\Gamma \\
+    &\approx iGW
+\end{align}
+
+\end{frame}
+\begin{frame}
+    \frametitle{Hedin's Equations \cite{article}}
+ \begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{figs/hedin_pentagon.png}
+ \end{figure}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Frequency Integral \cite{Zhu2020-nt}}
+Practically, 
+\begin{align}
+    \Sigma ^{GW}(\mathbf{r}, \mathbf{r}^{\prime} ; \omega)&=\frac{i}{2 \pi} \int_{-\infty}^{\infty} d \omega^{\prime} G\left(\mathbf{r}, \mathbf{r}^{\prime} ; \omega+\omega^{\prime}\right) W\left(\mathbf{r}, \mathbf{r}^{\prime} ; \omega^{\prime}\right) \\
+&\equiv \Sigma ^x(\mathbf{r}, \mathbf{r}^{\prime}) + \color{red}{\Sigma ^{c}(\mathbf{r}, \mathbf{r}^{\prime} ; \omega)}
+\end{align}
+\pause
+\begin{figure}
+    \centering
+    {\setlength{\fboxrule}{2pt}\setlength{\fboxsep}{3pt}% border thickness and padding
+        \fcolorbox{red}{white}{\includegraphics[width=0.5\textwidth]{figs/gw_contour.jpeg}}%
+    }
+\end{figure}
+% requires xcolor (beamer loads it by default)
+
+\end{frame}
+
+    \begin{frame}
+    \frametitle{How to deal with the poles?}
+    \begin{table}
+        \centering
+        \small
+        \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Method} & \textbf{Scaling} & \textbf{Comments} \\
+        \hline
+        Fully analytic & $O(N^6)$ & \parbox{4cm}{Integrate along real frequency axis, and when you encounter a pole, apply Cauchy's residue theorem.} \\
+        \hline
+        \pause
+        Analytic continuation & $O(N^4)$ & \parbox{4cm}{Avoid poles by integrating along imaginary frequency axis, and then analytically continue to real frequencies.} \\
+        \hline
+        \pause
+        Contour deformation & $O(N^5)$ & \parbox{4cm}{Deform the contour to do the integral in a piecewise fashion. Accurate for deep core orbitals.} \\
+        \hline
+        \pause
+        Frequency-free & $O(N^4)$ & \parbox{4cm}{Eliminate frequency variable in the convolution, so we are not constrained by the poles.} \\
+        \hline
+        \end{tabular}
+    \end{table}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Solving the quasi-particle (QP) equation}
+In $GW$, we can compute QP energies by solving:
+\begin{equation}
+    \epsilon ^{QP}_p = \color{yellow}{\epsilon^{HF}_p} \color{black}+ \Sigma_{pq} ^c (\omega)\delta_{pq}
+\end{equation}
+with
+\begin{equation}
+    \Sigma_{pq}^{c}(\omega) = \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{\color{purple}{w_{pi}^{\mu }w_{iq}^{\mu }}}{\color{red}{\omega -(\epsilon _{i}-\Omega  _{\mu })+i\eta}}+ \sum_{a}^{\text{virtual}} \frac{\color{green}{w_{pa}^{\mu }w_{aq}^{\mu }}}{\color{blue}{\omega -(\epsilon _{a}+\Omega  _{\mu })-i\eta}}\right)
+\end{equation}
+Using Lowdin partitioning we can recast this as a matrix problem
+\begin{equation}
+    \bm{H}^{GW} = \begin{pmatrix} \color{yellow}{\bm{F}} & \color{purple}{\bm{W}^<} & \color{green}{\bm{W}^>} \\ \color{purple}{\bm{W}^{<,\dagger}} & \color{red}{\bm{d}^<} & 0 \\ \color{green}{\bm{W}^{>, \dagger}} & 0 & \color{blue}{\bm{d}^>} \end{pmatrix}
+\label{eq:booth_hamiltonian}
+\end{equation}
+where the QP energies are the eigenvalues of $\bm{H}^{GW}$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Moment-conserving GW \cite{scott2023moment}}
+\begin{enumerate}
+    \item Devises a Lanczos procedure to iteratively diagonalize equation \ref{eq:booth_hamiltonian}.
+    \item In the limit of a large number of Lanczos iterations, eigenvalues do not converge to the exact answer.
+\end{enumerate}
+\pause
+\begin{figure}
+    \centering
+    \includegraphics[width=0.85\textwidth]{../images/mcgw_issues.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why?}
+\begin{enumerate}
+    \item A Krylov subspace is never explicitly constructed.
+     \pause
+    \item Therefore, it cannot be reorthogonalized, so there is no guarantee that the Ritz values will converge to the true eigenvalues.
+\end{enumerate} 
+\end{frame}
+
+\section{Cumulant Expansion}
+
+\begin{frame}
+    \frametitle{How it is derived}
+    The cumulant expansion is a technique used to improve the description of electron correlation effects in many-body systems. It provides a way to go beyond the GW approximation by including higher-order interactions and capturing satellite features in spectral functions.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Analytical self-consistency}
+    The analytical self-consistency condition in the cumulant expansion framework ensures that the Green's function and the self-energy are mutually consistent. This is achieved by iteratively updating the self-energy based on the current Green's function and vice versa.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Current project}
+    Our current project focuses on implementing the cumulant expansion in the context of the GW approximation. We aim to develop a computational framework that can efficiently handle the increased complexity of the self-energy calculations while maintaining the accuracy of the results.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Summary}
+    In summary, the GW approximation and cumulant expansion are powerful tools for studying electronic structures in materials. By incorporating electron correlation effects more accurately, these methods provide deeper insights into the properties of complex systems.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Thank for listening!}
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+    \frametitle{References}
+    \bibliography{../src/citations}  % Path to your .bib file (no .bib extension)
+\end{frame}

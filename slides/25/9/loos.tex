@@ -79,3 +79,122 @@ We can instead consider (with $\Xi_{i\nu} \equiv \epsilon_i - \Omega_\nu$, $\Xi_
 We can replace all of the delta functions with Lorentzians in practice.
 
 \end{frame}
+
+\section{Cumulant with second order self-energy}
+
+
+
+\begin{frame}
+    \frametitle{Expression for the cumulant}
+With a frequency shift, the diagonal part of the second order self-energy is
+\begin{equation}
+    \Sigma_{pp}^{(2)}(\omega+\epsilon_p) =
+\frac{1}{2} \sum_{iab}
+\frac{\left< pi \left| \right| ab \right>^2}
+{\omega-\epsilon_{pi}^{ab}} + \frac{1}{2} \sum_{ija}
+\frac{\left< pa \left| \right| ij \right>^2}
+{\omega-\epsilon_{pa}^{ij}}
+\end{equation}
+Then the cumulant can be brought to the Landau form
+\begin{equation}
+    C_{pp}^{(2)}(t) = \int d\omega\, \beta(\omega) f(\omega)
+\end{equation}
+with $f(\omega) \equiv \frac{e^{-i \omega t}+i \omega t-1}{\omega^2} $ and
+\begin{align}
+    \beta(\omega) &= -\frac{1}{\pi} \operatorname{Im} \Sigma_{pp}^{(2)}\left(\omega+\epsilon_p\right) 
+\label{eq:beta_def}\\
+&=\frac{1}{2} \sum_{i a b}\langle p i \| a b\rangle^2 \delta\left(\omega-\epsilon_{p i}^{a b}\right)+\frac{1}{2} \sum_{i j a}\langle p a \| i j\rangle^2 \delta\left(\omega-\epsilon_{p a}^{i j}\right) \label{eq:beta_2nd}
+\end{align}
+This is similar to $\beta(\omega)=\sum_q g_q^2 \delta(\omega-\omega_q)$ kernel for electrons coupled to
+bosons at the frequencies $\omega_q\equiv \epsilon_{pq}^{rs}$
+with coupling coefficients $g_q \equiv \langle p q \| r s\rangle$.
+\end{frame}
+\begin{frame}
+    \frametitle{Connecting back to the Dyson equation}
+The CC GF can be written in frequency space as
+\begin{equation}
+    G_{pq}^R (\omega) = \left\langle \Phi \left| (1+\Lambda) \bar{a^{\dagger}_q}(\omega + \bar{H}_N + i\delta)^{-1} \bar{a_p} \right| \Phi \right\rangle + EA
+\end{equation}
+Truncating the CC expansion to doubles and introducing
+\begin{align}
+    X_p(\omega) & \equiv (\omega + \bar{H}_N + i\delta)^{-1} \bar{a_p} \\
+& =\sum_i x^i(\omega)_p a_i+\frac{1}{2!} \sum_{ij, a} x_a^{ij}(\omega)_p a_a^{\dagger} a_j a_i
+\end{align}
+and something analogous for the EA sector. By considering a perturbation series in the cluster amplitudes up to second order, we can get
+\begin{align}
+    G_{pq}^{(2)R}(\omega)
+&= G_{pq}^{R(0)} (\omega) + G_{pq}^{R(0)} (\omega) \Sigma_{pq}^{(2)}(\omega) G_{pq}^{R(0)} (\omega)
+\end{align}
+with the second order self-energy $\Sigma_{pq}^{(2)}(\omega)$ and $G_{pq}^{(0) R}(\omega)= \frac{1}{(\omega-\epsilon_q)}$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Connecting back to the Dyson equation}
+\color{orange}
+We can start with the CC GF in frequency space as
+\begin{equation}
+    G_{pq}^R (\omega) = \left\langle \Phi \left| (1+\Lambda) \bar{a^{\dagger}_q}(\omega + \bar{H}_N + i\delta)^{-1} \bar{a_p} \right| \Phi \right\rangle + EA
+\end{equation}
+Because in CC, the exact grand state can be written as $|\Psi_0\rangle = e^T |\Phi\rangle$ and $\langle \Psi_0| = \langle \Phi | (1+\Lambda) e^{-T}$ and also by decomposing the similarity-transformed operators, we can arrive at 
+\begin{equation}
+    G_{pq}^R(t-t') = -i \, \Theta(t-t') 
+    \langle 0 | \{ a_p(t), a_q^\dagger(t') \} |0\rangle .
+\label{spgf}
+\end{equation}
+The retarded Green's function for one core orbital $c$ is diagonal as
+\begin{align}
+    G_{c}^{R}(t) & = -i \Theta(t) e^{iE_0t} \left<0\left| a_c e^{-iHt} a_c^\dagger \right| 0 \right> -i \Theta(t) e^{-iE_0t}\left<0\left| a_c^\dagger e^{iHt} a_c \right| 0 \right> \\
+\end{align}
+We could only do this because via the separable approximation to the ground state $\left| 0 \right> \simeq a_c^\dagger \left| N-1 \right>$, which is justified for core states, but not for valence states.
+\end{frame}
+\section{Real-time EOM-CC Cumulant GF}
+
+
+\begin{frame}
+    \frametitle{Simplification from just considering the core hole GGF}
+For a given deep core level $p=c$:
+\begin{align}
+    G_{c}^{R}(t) &= -i \Theta(t-t')
+\left<0\left| \left\{a_c(t), a_c^\dagger(t') \right\} \right| 0 \right>\\
+&= -i \Theta(t) e^{-iE_0 t} \left<N-1 | N-1, t \right>
+\end{align}
+where $\left| 0
+\right> \simeq a_c^\dagger \left| N-1 \right>$ and $\left| N-1, t \right> =
+e^{iHt} \left| N-1 \right>\approx N(t) e^{T(t)} \left| \phi \right>$. Inserting the latter states and left multiplying by $e^{-T(t)}$ gives
+\begin{align}
+    -i \frac{d\left| N-1, t \right>}{dt} &= H \left| N-1, t \right> \\
+\implies -i \left( \frac{d\ln N(t)}{dt} + \frac{d T(t)}{dt} \right) \left| \phi \right>& = \left( \bar{H}_N(t) + E^{N-1} \right) \left| \phi \right>
+\end{align}
+Projection yields coupled DEs for $N(t)$ and $T(t)$, but we will just display here the former because it seems most relevant to the cumulant
+\begin{align}
+\label{eq-dlnndt}
+-i \frac{d \ln N(t)}{dt} = \left< \phi \left| \bar{H}_N(t) \right| \phi \right>
++ E^{N-1}
+\end{align}
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Continued}
+Assuming
+$\left| N-1 \right> \simeq a_c \left| \Phi \right> = \left| \phi \right> \implies \left<N-1\right| \left. N-1, t \right> = N(t)$, plugging back in gives
+\begin{align}
+    G_c^R(t) &= -i \Theta(t) e^{-i \epsilon_c t} e^{C_c^R(t)}
+\end{align}
+with $\epsilon_c = E^{N-1} - E_0$ and the Landau form of the cumulant is
+\begin{align}
+C_c^R(t) &= i \int_0^t \left< \phi \left| \bar{H}_N(t) \right| \phi\right> dt' \\   
+&= \int \dd \omega \beta_c(\omega) \frac{e^{-i\omega t} + i\omega t - 1}{\omega^2} 
+\end{align}
+with $\beta_c(\omega) = \frac{1}{\pi} \mathrm{Re} \int_0^{\infty} dt e^{-i\omega t} \left[-i \frac{d}{dt} \left< \phi \left| \bar{H}_N(t) \right| \phi \right> \right]$.
+So we see that the cumulant obeys the differential equation
+\begin{equation}
+\label{eqn:matel1}
+\begin{split}
+-i\frac{d C_c^R(t)}{dt} &= \left< \phi \left| \bar{H}_N(t) \right| \phi \right> \\
+&= \sum_{ia} f_{ia} t_i^a +
+\frac{1}{2} \sum_{ijab} v_{ij}^{ab} t_j^b t_i^a,
+\end{split}
+\end{equation}
+\end{frame}

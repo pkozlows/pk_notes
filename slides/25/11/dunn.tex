@@ -80,7 +80,7 @@ but thinking about it in this way does not lead to self-consistency.
 
 \begin{frame}
     \frametitle{Notions of self-consistency}
-The action function can be written as
+Action function is introduced, which can be written as
 \begin{align}
     A_k(t) 
 &= \phi_k(t) - i \sum_{n=1}^{\infty} \frac{1}{n!} T\left[\bar{S}^n\right]_c
@@ -182,7 +182,7 @@ where
 \begin{equation}
     F_i^{(n)}(\mathbf{k}, \mathbf{q}, \sigma, \tau) = C_i^{(n)}(\mathbf{k}-\mathbf{q}, \sigma)-C_i^{(n)}(\mathbf{k}-\mathbf{q}, \tau) -C_i^{(n)}(\mathbf{k}, \sigma)+C_i^{(n)}(\mathbf{k}, \tau)
 \end{equation}
-So his self-consistency for the Greens function is recursive; involving higher order cumulants at each successive iteration. Past the second order cumulants, you began double counting diagrams, which explains the negative spectral weight.
+So his self-consistency for the Greens function is recursive, involving higher order cumulants at each successive iteration. Past the second order cumulants, you begin double counting diagrams, which explains the negative spectral weight.
 Now, if we define $y_k(t)=e^{C_k(t)}$, the EOM is
 \begin{align}
 \frac{d y_k(t)}{d t}= & -i \sum_q \int_0^t d \tau\left|g_{q k}\right|^2 D_q^{(0)}(t-\tau) e^{i(\epsilon_k-\epsilon_{k-q})(t-\tau)} \frac{y_k(\tau) y_{k-q}(t)}{y_{k-q}(\tau)} \label{C1}
@@ -207,7 +207,7 @@ with the Fermi-Dirac distribution $f(\omega - \mu) = \frac{1}{e^{\beta(\omega - 
     G^R_{pq}(t) = -i \Theta(t) e^{-i \epsilon_p t} e^{C_{pq}^{(2)}(t)}
 \label{eq:sc_cumulant_greens_time}
 \end{equation}
-So we need to evaluate $C_{pp}^{(2)}(t_n)$ at each time step $t_n$. Note that after we determine $\bm{F}_{pq}$ for a given iteration, we can update the single particle energies $\epsilon_p$ in $G^0_{pp}(\omega)$ for the next iteration.
+So we need to evaluate $C_{pq}^{(2)}(t_n)$ at each time step $t_n$. Note that after we determine $\bm{F}_{pq}$ for a given iteration, we can update the single particle energies $\epsilon_p$ in $G^0_{pp}(\omega)$ for the next iteration.
 \end{frame}
 
 \begin{frame}
@@ -235,5 +235,5 @@ $\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. This
 
 \begin{frame}
     \frametitle{Scaling analysis}
-In order to evaluate \ref{eq:cumulant_2nd_1} with Fock self-consistency in mind, this would require the maximum scaling of $N_O N_V^2$ for the summations, $N_\omega$ points for the frequency integration, and (not exploiting symmetry) $N_{\text{orb}}^2$ for runs through $p$ and $q$, leading to a total scaling of $O(N_O N_V^2 N_\omega N_{\text{orb}}^2)$. For a given iteration, we accumulate data for the value of the interacting Green's function for all $N_T$ time steps, with the intention of performing a numerical Fourier transform to obtain $G_{pq}(\omega)$.
+In order to evaluate \ref{eq:cumulant_2nd_1} with Fock self-consistency in mind, this would require the maximum scaling of $N_O N_V^2$ for the summations and (not exploiting symmetry) $N_{\text{orb}}^2$ for runs through $p$ and $q$, leading to a total scaling of $O(N_O N_V^2 N_{\text{orb}}^2)$. Additionally, we need $N_\omega$ points for the frequency integration. For a given iteration, we accumulate data for the value of the interacting Green's function for all $N_T$ time steps, with the intention of performing a numerical Fourier transform to obtain $G_{pq}(\omega)$. So we incur the prefactor of $N_T N_\omega$. Thus, the total scaling is $O(N_O N_V^2 N_{\text{orb}}^2 N_T N_\omega)$. 
 \end{frame}
