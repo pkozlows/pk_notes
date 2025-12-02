@@ -1,0 +1,49 @@
+
+\section{Troubleshooting spectral functions}
+
+\begin{frame}
+    \frametitle{General considerations for the UEG}
+A broadening parameter of $\eta = 0.2$ eV is used. Because my HF single particle energies do not take into account the Madelung correction, Joonho's paper tells us that for the spectral function of these occupied orbitals, we need to apply a constant frequency shift of
+\begin{equation}
+\Delta _{IP} = -\frac{\xi}{2}    
+\end{equation}
+where $\xi=-2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}$ Hartrees. For my system, this means that $\Delta_{IP} = +4.97$ eV, which is counter-intuitive, as it would imply that the HF peak for the Fermi state occurs at a positive frequency. \emph{So instead, I assume that this was a typo, and instead apply a shift of $-\Delta_{IP} = +\frac{\xi}{2} = -4.97$ eV to the occupied orbitals in my plots.}
+
+\end{frame}
+\begin{frame}
+    \frametitle{Formulas for retarded Green's functions}
+In the non-interacting case, I have
+\begin{equation}
+    G^R_{0,p}(t) = -i \Theta(t) e^{-i \left(\epsilon_p - \varepsilon_F \right)t}
+\end{equation}
+where $\varepsilon_F$ is the Fermi energy. For the interacting case, I use something analogous as
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) e^{-i \left(\epsilon_p - \varepsilon_F \right)t} e^{C_{pp}(t)}
+\end{equation}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Formula for second order self-energy used in Cumulant}
+Because I do RHF, the formula is
+\begin{align}
+{\Sigma}^{c,(2),R}(p, \omega) &= \frac{1}{2} \sum_{iab} \frac{\left( 2\left<pi|ab\right> - \left<pi|ba\right>\right)^2}{\omega - \epsilon_{a} - \epsilon_{b} + \epsilon_{i} + i \eta} + \frac{1}{2} \sum_{ija} \frac{\left( 2\left<pa|ij\right> - \left<pa|ji\right>\right)^2}{\omega - \epsilon_{j} - \epsilon_{i} + \epsilon_{a} + i \eta}\\
+& = \frac{2\pi}{V} \left( \sum_{\mathbf{k}_i \in O; \,\mathbf{k}_a , \mathbf{k}_b \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_a , \mathbf{k}_b - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_a|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_b , \mathbf{k}_a - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_b|^2} \right]^2 }{\omega - \epsilon_{\mathbf{k}_a} - \epsilon_{\mathbf{k}_b} + \epsilon_{\mathbf{k}_i} + i \eta}\right.\\
+  &\left.+ \sum_{\mathbf{k}_i,\mathbf{k}_j \in O;\, \mathbf{k}_a \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_i , \mathbf{k}_j - \mathbf{k}_a}}{|\mathbf{k}_p-\mathbf{k}_i|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_j , \mathbf{k}_i - \mathbf{k}_a}}{|\mathbf{k}_p - \mathbf{k}_j|^2} \right]^2 }{\omega - \epsilon_{\mathbf{k}_i} - \epsilon_{\mathbf{k}_j} + \epsilon_{\mathbf{k}_a} + i \eta} \right) \nonumber
+\label{eq:self_energy_2nd_order}
+\end{align}
+ I am not sure if Madelung correction needs to be applied to the energy denominator. Also, as written, it seems like the Coloumb and exchange terms have seperate delta functions, so I should expand the square, and then there are seperate energy denominators for each term.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Formula for Cumulant}
+This leads to
+\begin{align}
+&C_{pp}^{(2)}(t)\\
+ &= \frac{2\pi}{V} \left( \sum_{\mathbf{k}_i \in O; \,\mathbf{k}_a , \mathbf{k}_b \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_a , \mathbf{k}_b - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_a|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_b , \mathbf{k}_a - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_b|^2} \right]^2 }{\left(\varepsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \varepsilon_{pi}^{ab} t} +i \varepsilon_{pi}^{ab} t -1 \right) \right. \\
+& \left. + \sum_{\mathbf{k}_i,\mathbf{k}_j \in O;\, \mathbf{k}_a \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_i , \mathbf{k}_j - \mathbf{k}_a}}{|\mathbf{k}_p-\mathbf{k}_i|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_j , \mathbf{k}_i - \mathbf{k}_a}}{|\mathbf{k}_p - \mathbf{k}_j|^2} \right]^2 }{\left(\varepsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \varepsilon_{pa}^{ij} t} +i \varepsilon_{pa}^{ij} t -1 \right) \right)
+\label{eq:cumulant_2nd_final}
+\end{align}
+where $\varepsilon_{pi}^{ab} = \epsilon_{\mathbf{k}_a} + \epsilon_{\mathbf{k}_b} - \epsilon_{\mathbf{k}_p} - \epsilon_{\mathbf{k}_i}$ and $\varepsilon_{pa}^{ij} = \epsilon_{\mathbf{k}_i} + \epsilon_{\mathbf{k}_j} - \epsilon_{\mathbf{k}_p} - \epsilon_{\mathbf{k}_a}$.
+\end{frame}

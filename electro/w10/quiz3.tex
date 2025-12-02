@@ -1,0 +1,192 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+% \graphicspath{ {./images/} }
+\usepackage{caption}
+\usepackage{geometry}
+\geometry{
+    margin=1in,
+    textwidth=6.5in,
+    textheight=9in
+}
+
+\title{AP 236 Electrochemical Energy Systems }
+
+\author{Fall 2025 Harvard, Zachary Schiffer\\
+Transport Quiz}
+\date{}
+
+
+\begin{document}
+\maketitle
+November 14, 10:30am -11:45pm\\
+This exam has 3 problems, which are worth $\mathbf{5 0}$ points total. Please answer each problem in a separate booklet and write your name on each booklet. This exam is open-book, which allows for use of all passive resources (including books, electronic), except those involving communication with others and use of the internet. Please be sure to show your work, especially for partial credit. Also, make and justify any assumptions necessary to solve the problems below. Note that we do not take off points for "double jeopardy", so please work subsequent parts of the problems even if you are stuck on an earlier part.
+
+\section{Problem 1. Diffusion Limited Current [15 points]}
+\subsection{}
+a. Identify which reaction goes with each feature indicated on the plot, (A), (B), and (C). [3 points]
+
+$$
+\begin{gathered}
+\mathrm{Mn}_{2} \mathrm{O}_{3}+\mathrm{H}_{2} \mathrm{O} \rightarrow 2 \mathrm{MnO}_{2}+2 e^{-}+2 \mathrm{H}^{+} \\
+2 \mathrm{MnO}_{2}+2 e^{-}+2 \mathrm{H}^{+} \rightarrow \mathrm{Mn}_{2} \mathrm{O}_{3}+\mathrm{H}_{2} \mathrm{O} \\
+2 \mathrm{H}_{2} \mathrm{O} \rightarrow \mathrm{O}_{2}+4 e^{-}+4 \mathrm{H}^{+}
+\end{gathered}
+$$
+\subsubsection{Solution}
+We can start by separating the reactions into the reductive ones and the oxidative ones.  The first and the third one are oxidative while the second one is reductive. As we scan from left to right on the plot we see that we have two peaks corresponding to oxidation and then one peak responding to reduction. So pig B has to be reductive and so it corresponds to the second reaction. The difference between the first and third reactions is the amount of electrons used, and we see that the third one ribs of more electrons, and so it will occur at a more oxidative potential, so we can label the third reaction with peak C. Therefore peak A corresponds to the first reaction.
+
+% \includegraphics[max width=\textwidth, center]{2025_11_14_d232c17b8169c2a905d6g-1}\\[0pt]
+\subsection{}
+b. The peak current in a cyclic voltammagram redox peak will increase with which of the following variable(s): [2 points]
+
+Diffusion constant\\
+Concentration\\
+Scan Rate\\
+Reduction potential\\
+Electrode surface area\\[0pt]
+\subsubsection{Solution}
+We see that the pig current is directly proportional to the diffusion constant the concentration, the scan rate, and the electrode surface area. The reduction potential does not affect the peak current. Therefore the answer is all of the above except for reduction potential.\\
+\subsection{}
+c. True of False: Transport of reactive ions via migration is most important in solutions with large supporting electrolytes (> 1M salt). [1 point]\\[0pt]
+\subsubsection{Solution}
+False, we know that in bulk modeling of electoral chemistry, the electrolyte screen the charge, so people often neglect migration.
+\subsection{}
+d. Draw qualitatively how you would expect a cyclic voltammagram to look for a reversible electron transfer and an irreversible electron transfer. [3 points]\\[0pt]
+\subsubsection{Solution}
+For a reversible process, I would expect there to be an equal amount of positive and negative peaks such that the reaction can pursue in both oxidative and reductive but an reversible electron transferred, once this electron is transferred in the forward direction, it cannot be transferred back, so I would expect to see only one peak.
+\subsection{}
+e. In the electric double layer, are you more likely to see lengths in nanometers or micrometers? [1 point]\\[0pt]
+\subsubsection{Solution}
+I think it would be similar to the debi length, which we know is on the order of nanometers.
+\subsection{}
+f. Label the following terms in the system of equations: Diffusion, Convection, Migration, Electroneutrality. [2 points]
+
+$$
+\begin{gathered}
+\frac{d c}{d t}=-D \nabla^{2} c-\frac{z F D}{R T} \nabla \cdot(c \nabla \phi)+\nabla c \cdot \vec{v} \\
+\sum_{i} z_{i} c_{i}=0
+\end{gathered}
+$$
+\subsubsection{Solution}
+In the first equation, the first term on the right hand side is due to diffusion, the second term is due to migration, and the third term is due to convection. The second equation is due to electroneutrality.
+\subsection{}
+
+g. In one sentence, describe when I would use electroneutrality versus Poisson's equation. [1 point]\\[0pt]
+\subsubsection{Solution}
+For length scales much larger than the Debye length, I would use electroneutrality, like over 100 nm.
+\subsection{}
+h. True of False: A rotating disk electrode allows you to separate out contributions from mass transport and kinetics in your current. [1 point]\\[0pt]
+\subsubsection{Solution}
+We saw that this is true because when you use the rotating disk and it rotates very fast you're at some point the current becomes dominated by the kinetics, so this method allows one to distinguish the two.
+\subsection{}
+i. Will I expect to see capacitive current when holding at a constant voltage or when changing voltage with time? [1 point]
+\subsubsection{Solution}
+When changing voltage with time, because capacitive current is defined as due to the change in voltage with time.
+
+
+\section{Problem 2. Diffusion Limited Current [14 points]}
+You have a planar electrode of area, A , and a bulk solution where the concentration of your reactant is $c_{b u l k}$. The boundary layer (where no fluid is moving via convection) has a thickness of $\delta$, after which the bulk mixing keeps the concentration at the bulk concentration value.\\
+\subsection{}
+a. What is the maximum, diffusion-limited current you can achieve in your system. Assume your reaction involves a single electron transfer and that the diffusion constant for your reactant is $D$. Assume no migration and steady state. [10 points]
+\subsubsection{Solution}
+The current is related to the flux by the following equation, where we are able to simplify because we are only doing 1 electron transfer:
+\begin{equation}
+I=n F A N =F A N
+\end{equation}
+where N is the flux of the reactant to the electrode and F is Faraday's constant. Fick's second law, at steadt state, says that:
+\begin{equation}
+0 = D \frac{d^{2} c}{d x^{2}}
+\end{equation}
+This implies that the concentration profile is linear, so we can write:
+\begin{equation}
+c(x) = c_{surface} + \left( \frac{c_{bulk} - c_{surface}}{\delta} \right) x
+\end{equation}
+At the surface of the electrode, we assume that the reactant is fully consumed, so $c_{surface} = 0$. Therefore, the concentration profile becomes:
+\begin{equation}
+c(x) = \frac{c_{bulk}}{\delta} x
+\label{concentration_profile}
+\end{equation}
+The flux at the surface of the electrode is given by Fick's first law:
+\begin{equation}
+N = -D \frac{d c}{d x} \bigg|_{x=0} = -D \left( \frac{c_{bulk}}{\delta} \right) = -\frac{D c_{bulk}}{\delta}
+\end{equation}
+Plugging this flux into the current equation gives a maximum reductive current of:
+\begin{equation}
+I_{max} = F A \left( -\frac{D c_{bulk}}{\delta} \right) = -\frac{F A D c_{bulk}}{\delta}
+\end{equation}
+\subsection{}
+
+
+Assume the electrode is at $\mathrm{x}=0$, and draw qualitatively on axes like those below (in your blue book) what the concentration profile looks like in a cell with:\\[0pt]
+\subsection{}
+b. Very high mixing [2 points]\\[0pt]
+\subsubsection{Solution}
+As we see there is a linear relationship between the concentration and the distance from the electrode, with the concentration being zero at the electrode and increasing to the bulk concentration at the edge of the boundary layer. A higher mixing will tell us that the length of the boundary layer $\delta $ is smaller, so the slope of the line will be steeper. Because the concentration at the electrode will vanish, we know that on this plot the line will start at the origin.
+\subsection{}
+c. Very low mixing [2 points]\\
+\subsubsection{Solution}
+In the case of low mixing, the boundary layer will be thicker, so the slope of the line will be smaller than in the high mixing case. Again, the line will start at the origin because the concentration at the electrode is zero.
+
+\section{Problem 3. Junction Potentials in Membranes [ $\mathbf{2 1} \boldsymbol{+} \mathbf{5}$ points]}
+Consider a container of salt water separated by a cation exchange membrane that only allows sodium ions to move through it. You are going to use electrochemistry to move sodium ions from the right to left (see figure). This process is used in water desalination, generation of acid and base, and carbon capture. You initially set up your cell as shown in the figure with 0.5 M NaCl in the left compartment and 1 M NaCl in the right compartment. To drive ion movement, you will evolve hydrogen at the cathode and oxygen at the anode (this will also preserve charge balance as ions move between compartments). For this problem, neglect any protons and hydroxides in the system.\\
+% \includegraphics[max width=\textwidth, center]{2025_11_14_d232c17b8169c2a905d6g-3(1)}\\
+\subsection{}
+a. Assume each compartment is well mixed and take the concentration of sodium ions to be $c_{N a}(x)$. The membrane is $100 \%$ selective for the sodium, meaning that only sodium will cross over and no chloride. Focusing on ion movement in the membrane itself, write out expressions for the migration and diffusional fluxes of sodium ions in the membrane. What directions will these fluxes move the cations at initial times? Write your answer in terms of $\phi(x), c_{N a}(x)$ and their derivatives, as well as, $x, D^{+}, \mathrm{R}, \mathrm{T}$, and F. [6 points]\\[0pt]
+\subsubsection{Solution}
+The diffusional flux of sodium ions in the membrane is given by Fick's first law:
+\begin{equation}
+N_{diffusion} = -D^{+} \frac{d c_{Na}}{d x}
+\end{equation}
+The migration flux of sodium ions in the membrane is given by:
+\begin{equation}
+N_{migration} = -\frac{ F D^{+}}{R T} c_{Na} \frac{d \phi}{d x}
+\end{equation}
+If we define x as the length from the cathode, $\frac{d c_{Na}}{d x}$ will be positive because the concentration is higher on the right side, so the diffusional flux will be negative, meaning it will move from right to left. At inertial times, the there is no potential difference yet, so $\frac{d \phi}{d x} = 0$, and so the migration flux will be zero.
+\subsection{}
+b. When you apply a current, sodium ion concentrations will change. Still assuming that each compartment is well-mixed, qualitatively describe how the diffusion and migration fluxes will change (or do not change) over time, e.g., the magnitudes and directions. Note which side is the cathode and anode in the figure to determine the net direction of current. [3 points]\\
+\subsubsection{Solution}
+The diffusion flux will decrease in magnitude over time because as sodium ions move from the right to the left, so there will be less of a concentration gradient. The direction of the diffusion flux will remain the same, going from right to left. The migration flux will increase in magnitude over time because as sodium ions move from right to left, there will become a charge imbalance across the membrane, which will result in a potential gradient, and so the migration flux will star to push sodium ions from left to right. 
+\subsection{}
+c. In the long term, in which compartment do the sodium ions end up? [ $\mathbf{2}$ points]\\
+\subsubsection{Solution}
+The left compartment because the cathode will be negatively charged.
+\subsection{}
+d. Will you need to apply more or less voltage over time to drive this process? [ $\mathbf{2}$ points]\\
+\subsubsection{Solution}
+Over time, we will need to apply more voltage because as sodium ions continue moving from right to left, we will get $\frac{d c_{Na}}{d x}$ as negative, which will cause the diffusion flux to go from left to right, opposing the migration flux. Therefore, we will need to apply more voltage to overcome this.
+\subsection{}
+e. Using your expressions from (a), when migration and diffusion are perfectly balanced (total flux is zero), what is the steady state potential drop across the membrane, $\boldsymbol{\Delta} \boldsymbol{\phi}_{\text {membrane }}$ ? Hint: the result should look like a familiar thermodynamic expression, even though we derive it using transport. Your answer should be in terms of $c_{N a, l e f t}$, $c_{\text {Na,right }}, \mathrm{R}, \mathrm{T}, \mathrm{F}$ only. In your derivation, use the fact that the solution to the indefinite integral equation: $\int \frac{1}{y} \frac{d y}{d x} d x=\int \frac{d z}{d x} d x$ is $\ln y=\mathrm{z}+$ constant. [8 points]\\
+\subsubsection{Solution}
+At steady state, the total flux is zero, so we can set the diffusional and migration fluxes equal to each other:
+\begin{equation}-D^{+} \frac{d c_{Na}}{d x} = -\frac{ F D^{+}}{R T} c_{Na} \frac{d \phi}{d x}
+\end{equation}
+Rearranging gives:
+\begin{equation}\frac{d \phi}{d x} = \frac{R T}{F} \frac{1}{c_{Na}} \frac{d c_{Na}}{d x}
+\end{equation}
+We can integrate both sides across the membrane from left to right:
+\begin{equation}
+\int_{left}^{right} \frac{d \phi}{d x} d x = \frac{R T}{F} \int_{left}^{right} \frac{1}{c_{Na}} \frac{d c_{Na}}{d x} d x
+\end{equation}
+The left side becomes the potential drop across the membrane, $\Delta \phi_{membrane}$, and using the hint, the right side becomes:
+\begin{equation}
+\Delta \phi_{membrane} = \frac{R T}{F} \left( \ln c_{Na,right} - \ln c_{Na,left} \right)
+\end{equation}
+This can be simplified to:
+\begin{equation}
+\Delta \phi_{membrane} = \frac{R T}{F} \ln \left( \frac{c_{Na,right}}{c_{Na,left}} \right)
+\end{equation}
+f. BONUS: Assuming a linear concentration profile in the membrane $(c(x)= \frac{c_{\text {right }}-c_{\text {left }}}{\delta} x+c_{\text {left }}$ ), calculate the potential drop across the membrane under an applied current, $I$. Hint: start by writing the current in terms of the total flux of diffusion and migration, and then plug in for the known concentration profile and solve via integration. In your derivation, use the fact that the solution to the indefinite integral equation: $\int \frac{d y}{d x} d x=\int \frac{1}{a x+b} d x$ is $y=\frac{1}{\mathrm{a}} \ln (\mathrm{ax}+\mathrm{b})+$ constant. [5 points]\\
+% \includegraphics[max width=\textwidth, center]{2025_11_14_d232c17b8169c2a905d6g-4}
+
+The solution to (f) is a basic form of a junction potential, which essentially comes from the fact that in non-equilibrium cases, the potential drop across the membrane can be very complicated and difficult to predict.
+
+
+\end{document}

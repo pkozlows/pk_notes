@@ -289,18 +289,18 @@ Substituting this back into the expression for $c_{\mathrm{H}^+}(x)$, we have:
 \end{align}
 The protons are positively charged, so the migration will go towards the cathode because the cathode has a negative charge. The diffusion will go from high concentration to low concentration, and we see that the concentration depends linearly on the distance from the cathode, so diffusion will go towards the cathode as well.\\
 For sulfate ions, the migration will be towards the positive anode because these ions are negatively charged, while again the diffusion will be towards the cathode.\\
-The potential plot will resemble $-\ln(x)$, so decreasing towards the cathode.\\
+The potential plot will resemble $-\ln(1+x)$, so going to $\phi(0)$ as we approach the cathode.
 \subsection{}
-b) Calculate the resistance drop across the device, i.e., $I \Delta \phi$ given your calculated potential function. How would you expect this to change with more concentrated salt? If I apply 1 A of current, how does this value compare to the thermodynamic water splitting potential?
-\subsubsection{Solution}    
-Here, we need to compute:
+What happens to $\phi(x)$ near the electrode as $x \rightarrow 0$ ? Can you intuitively explain it based on concentrations?
+\subsubsection{Solution}
+As $x \rightarrow 0$,
 \begin{align}
-    \Delta \phi &= \phi(L) - \phi(0) \\
-&= -\frac{I R T L}{3 D F^2\left(c_L-c_0\right)} \ln \left(\frac{c_L}{c_0}\right) \\
-\implies I \Delta \phi &= -\frac{I^2 R T L}{3 D F^2\left(c_L-c_0\right)} \ln \left(\frac{c_L}{c_0}\right)
+    \lim_{x \to 0} \phi(x) &= -\frac{I R T L}{3 D F^2\left(c_L-c_0\right)} \ln \left[\frac{c_0+\left(c_L-c_0\right) \frac{x} {L}}{c_0}\right] + \phi(0) \\
+&= -\frac{I R T L}{3 D F^2\left(c_L-c_0\right)} \ln(1) + \phi(0) \\
+&= \phi(0)
 \end{align}
-So with more concentrated salt (larger $c_L$ ), the resistance drop will become smaller because while the logarithmic term will increase, the denominator term $\left(c_L-c_0\right)$ will increase more rapidly. I am not sure how to compare this to the water splitting potential unless I had access to D and $c_0$.
-\section*{Problem 3. Cyclic Voltammetry Interpretation}
+This means that there will no longer be any concentration layer screening the charge from the electrode, So the potential that is experienced will become the bare potential of the electrode.
+\section{Problem 3. Cyclic Voltammetry Interpretation}
 Conceptually, quinone reduction and oxidation are relatively straightforward, with a 2 electron/ 2 proton reduction/oxidation possible:\\
 % \includegraphics[max width=\textwidth, center]{2025_11_02_eae73a169ddce38bb6f9g-3}
 
@@ -320,14 +320,27 @@ In practice, the quinone cyclic voltammograms can have some unexpected features.
 % \includegraphics[max width=\textwidth, center]{2025_11_02_eae73a169ddce38bb6f9g-3(1)}
 
 Please only look at the curves shown in (a) on each plot.\\
-a. There are two peaks in (I) and four peaks in (II). Please identify what the reduction or oxidation reactions are for each peak. Note that the scan here starts at positive potentials (right side of plot), goes negative, and then returns in the positive direction.\\
+\subsection{}
+a. There are two peaks in (I) and four peaks in (II). Please identify what the reduction or oxidation reactions are for each peak. Note that the scan here starts at positive potentials (right side of the plot), goes negative, and then returns in the positive direction.\\
+\subsubsection{Solution}
+Given that we are starting with positive potentials on the right side of the plot, this suggests that we are following the IUPAC convention; so, this means that the first positive peak in current response is due to oxidation and the negative peak is due to reduction. The shape of the diagram in I corresponds to a reversible chemical reaction, which mediates an electron transfer. Because we are operating in an aqueous solvent, where there is access to protons, this means that we start at the bottom right with $QH_2$, move way up to $Q^{2-}$, and then left to $Q$, yielding the first oxidation peak. The second reduction peak corresponds to this process running in reverse. The shape of the diagram in II corresponds to a reversible electron transfer followed by another reversible electron transfer. But because there are no protons available, this starts with $Q^{2-}$, moving all the way left to $Q$ (one electron transfer at a time leading to the two separate peaks), and then back again, reducing back to $Q^{2-}$.\\
+\subsection{}
 b. Why might there be a difference in CV in aqueous versus non-aqueous solvents? What does this tell us about the stability/thermodynamics of reaction steps? Note that this a qualitative question and we are looking for a couple sentences, not an in depth math treatise.
+\subsubsection{Solution}
+The difference in CVs between aqueous and non-aqueous solvents is due to the possibility of doing hydrogen bonding and protonation in aqueous solvents. This leads to a single oxidation and reduction peak in the aqueous solution. In non-aqueous solvents, there are no protons available, so the electron transfers must occur one at a time, leading to two separate peaks for oxidation and reduction.
+\subsection{}
 
 In an aqueous solution, a shift in the peaks with respect to pH if often very informative. Below is a quinone redox CV at neutral (a), one equivalent of hydroxide added (b) and two equivalents of hydroxide added (c).\\
 % \includegraphics[max width=\textwidth, center]{2025_11_02_eae73a169ddce38bb6f9g-4}\\
 c. What does a shift in the reduction and oxidation peak location as a function of pH tell us about the reaction itself?\\
+\subsubsection{Solution}
+When we are adding hydroxide, we are removing protons. Then hydrogen bonding begins to play a larger role in stabilizing the reduced intermediates, which affects the redox potential, and thus the peak locations in the CV.
+\subsection{}
 d. Interestingly, for another system, there is very little shift as a function of pH for unbuffered aqueous solutions until you get to $\mathrm{pH}<4$. For a buffered solution, however, there is a continuous function of redox peak position vs. pH . What might explain this phenomenon given what you know about redox potentials and possible mechanisms above?\\
 % \includegraphics[max width=\textwidth, center]{2025_11_02_eae73a169ddce38bb6f9g-5}
+\subsubsection{Solution}
+For the unbuffered solution there is going to be significant stabilization via hydrogen bonding until the pH gets very low, at which point we do not have enough water molecules to stabilize the reduced intermediates, leading to an abrupt shift in redox potential. In the buffered solution, however, the buffer can provide protons to stabilize the reduced intermediates across a wider pH range, leading to a more continuous shift in redox potential as a function of pH.
+
 
 Note figures and data for this problem taken from M. Quan et al.; JACS (2007) which is included in the Papers folder on canvas.
 

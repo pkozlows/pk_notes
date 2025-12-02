@@ -1,0 +1,13 @@
+For self-consistent MP2, do we mean 
+\begin{enumerate}
+    \item Start with HF reference orbitals and energies.
+    \item Solve the QP equation for each orbital using the MP2 self-energy, as given in equation \ref{eq:mp2_se}.
+    \item Update all the orbital energies in \ref{eq:mp2_se}, keeping the numerator fixed.
+    \item Repeat steps 2-3 until convergence in the orbital energies of interest.
+\end{enumerate}
+\begin{align}
+    \Sigma^{(2)}_{pp}(\omega) 
+    & = \sum_{iab} \frac{(pa|ib)\Big(2(qa|ib) - (qb|ia)\Big)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{ (pi|aj)\Big(2(qi|aj) - (qj|ai)\Big)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta} 
+\label{eq:mp2_se}
+\end{align}
+Note that scGF2, by virtue of operating on the imaginary frequency axis, can also update the orbitals, but in this real time method we cannot.

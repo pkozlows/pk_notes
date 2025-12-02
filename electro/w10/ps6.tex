@@ -1,0 +1,150 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\geometry{
+    margin=1in,
+    textwidth=6.5in,
+    textheight=9in
+}
+\begin{document}
+\section*{Problem Set 6}
+Due: Wednesday $11 / 12 / 25$ at the start of class\\
+Feel free to use any resource to work these problems, including books, websites, and your classmates. However, your problem set submission must be your own work.
+
+\section{Problem 1: Mass transport and kinetics}
+We have individually discussed diffusion and kinetics, but what do they look like together? One example is the Koutecky-Levich equation, which we discussed in class with regards to rotating disk electrodes. In this problem, you will derive a similar equation and show that the measured current can be related to the diffusion-limiting current and the kinetic current through simple diffusion boundary layer analysis.\\
+\subsection{}
+a. Let's assume that a cathodic reaction $A+e^{-} \rightarrow B$. In the bulk, the concentration of A is $c_{A}^{0}$. What is the diffusion limited current, $i_{M T}$, if the diffusion constant is $D$ and the boundary layer thickness is $\delta$ ?\\
+\subsubsection{Solution}
+In one dimension, the total diffusive flux is defined as
+\begin{equation}
+    J_A = -D \frac{d c_A}{d x} = -D \frac{c_A^0 - 0}{\delta} = -\frac{D c_A^0}{\delta}
+\end{equation}
+where we have assumed that the concentration of A at the electrode surface is zero, $c_A(x=0) = 0$, which is valid under diffusion-limited conditions and it is reasonable that $\frac{d c_A}{d x} = \frac{c_A^0 - 0}{\delta}$, since we are at steady state. The current density is related to the flux by
+\begin{equation}
+    i_{MT} = n F J_A = -n F \frac{D c_A^0}{\delta}
+\end{equation}
+where $n$ is the number of electrons transferred in the reaction (in this case, $n=1$) and $F$ is Faraday's constant. Thus, the diffusion-limited current is
+\begin{equation}
+    i_{MT} = -F \frac{D c_A^0}{\delta}
+\end{equation}
+\subsection{}
+b. Let's assume that the reaction kinetics obey the Tafel equation:
+
+$$
+i=F k c_{A} e^{-\frac{\alpha F E}{R T}}
+$$
+
+Normally, we treat the concentration term, $c_{A}$ as a constant representing bulk concentration. However, a more accurate representation would be where $c_{A}$ is actually the concentration at the electrode surface. In this situation, $c_{A}(x=0) \neq 0$. Instead, $c_{A}(x=0)$ takes the value that satisfies the boundary conditions for Fick's laws of diffusion. Write out the diffusion equation you must solve for the steady state concentration profile and the two boundary conditions needed.\\
+\subsubsection{Solution}
+At steady state, Fick's second law reduces to
+\begin{equation}
+    \frac{d^2 c_A}{d x^2} = 0
+\end{equation}
+This is a second order ordinary differential equation, so we need two boundary conditions to solve it. Because we are diffusion limited, the concentration that the kinetics have to work with is $c_A(x=0)$, so our first boundary condition is due to the kinetics at the surface:
+\begin{align}
+    i &= F k c_A(x=0) e^{-\frac{\alpha F E}{R T}} \\
+    \Rightarrow c_A(x=0) &= \frac{i}{F k} e^{\frac{\alpha F E}{R T}}
+\end{align}
+The second boundary condition is at the edge of the diffusion layer ($x=\delta$), where the concentration of A is equal to the bulk concentration:
+\begin{equation}
+    c_A(x=\delta) = c_A^0
+\end{equation}
+\subsection{}
+c. Solve for the concentration profile.\\
+\subsubsection{Solution}
+Integrating Fick's second law at steady state gives:
+\begin{equation}
+    c_A(x) = C_1 x + C_2
+\end{equation}
+where $C_1$ and $C_2$ are constants to be determined by the boundary conditions. Applying the first boundary condition at $x=0$:
+\begin{equation}
+    c_A(0) = C_2 = \frac{i}{F k} e^{\frac{\alpha F E}{R T}}
+\end{equation}
+Applying the second boundary condition at $x=\delta$:
+\begin{equation}
+    c_A(\delta) = C_1 \delta + C_2 = c_A^0
+\end{equation}
+Substituting for $C_2$:
+\begin{equation}
+    C_1 \delta + \frac{i}{F k} e^{\frac{\alpha F E}{R T}} = c_A^0
+\end{equation}
+Solving for $C_1$:
+\begin{equation}
+    C_1 = \frac{c_A^0 - \frac{i}{F k} e^{\frac{\alpha F E}{R T}}}{\delta}
+\end{equation}
+Thus, the concentration profile is:
+\begin{equation}
+    c_A(x) = \left( \frac{c_A^0 - \frac{i}{F k} e^{\frac{\alpha F E}{R T}}}{\delta} \right) x + \frac{i}{F k} e^{\frac{\alpha F E}{R T}}
+\end{equation}
+\subsection{}
+d. Using your results from above and taking $i_{k}=F k c_{A}^{0} e^{-\frac{\alpha F E}{R T}}$ is the kinetic current in terms of the bulk concentration, derive an equation for $i$ in terms of $i_{k}$ and $i_{M T}$.\\
+\subsubsection{Solution}
+From the concentration profile, we can find the flux at the electrode surface ($x=0$):
+\begin{equation}
+    J_A(0) = -D \frac{d c_A}{d x} \bigg|_{x=0} = -D \left( \frac{c_A^0 - \frac{i}{F k} e^{\frac{\alpha F E}{R T}}}{\delta} \right)
+\end{equation}
+The current density is related to the flux by:
+\begin{equation}
+    i = |n F J_A(0)| = F J_A(0) = -F D \left( \frac{c_A^0 - \frac{i}{F k} e^{\frac{\alpha F E}{R T}}}{\delta} \right)
+\end{equation}
+Rearranging gives:
+\begin{equation}
+    i = -\frac{F D c_A^0}{\delta} + \frac{D}{\delta k} e^{\frac{\alpha F E}{R T}} i
+\end{equation}
+Bringing all terms involving $i$ to one side:
+\begin{equation}
+    i \left( 1 - \frac{D}{\delta k} e^{\frac{\alpha F E}{R T}} \right) = -\frac{F D c_A^0}{\delta}
+\end{equation}
+Solving for $i$:
+\begin{equation}
+    i = \frac{-\frac{F D c_A^0}{\delta}}{1 - \frac{D}{\delta k} e^{\frac{\alpha F E}{R T}}}
+\end{equation}
+Substituting $i_{MT} = -\frac{F D c_A^0}{\delta}$ and $i_k = F k c_A^0 e^{-\frac{\alpha F E}{R T}}$:
+\begin{equation}
+    i = \frac{i_{MT}}{1 - \frac{i_{MT}}{i_k}}
+\end{equation}
+Rearranging gives:
+\begin{equation}
+    \frac{1}{i} = \frac{1}{i_k} + \frac{1}{i_{MT}}
+\end{equation}
+\subsection{}
+e. Instead of the current, we can rewrite your result from (d) in terms of resistance. Show that the total resistance can be expressed as the sum of a mass transport resistance and a kinetic resistance. That is, given Ohm's law where both the mass transport and kinetic processes can be represented as currents and resistances with the same applied voltage, E :
+
+$$
+E=i_{i} R_{i}
+$$
+
+Show that:
+
+$$
+R=R_{k}+R_{M T}
+$$
+\subsubsection{Solution}
+From the result in (d), we have:
+\begin{equation}
+    \frac{1}{i} = \frac{1}{i_k} + \frac{1}{i_{MT}}
+\end{equation}
+Using Ohm's law, we can express the resistances as:
+\begin{align}
+    R_k &= \frac{E}{i_k} \implies \frac{1}{i_k} = \frac{R_k}{E} \\
+    R_{MT} &= \frac{E}{i_{MT}} \implies \frac{1}{i_{MT}} = \frac{R_{MT}}{E}
+\end{align}
+Substituting these expressions into the equation from (d):
+\begin{equation}
+    \frac{1}{i} \equiv \frac{R}{E} = \frac{R_k}{E} + \frac{R_{MT}}{E}
+\end{equation}
+Multiplying through by $E$ gives:
+\begin{equation}
+    R = R_k + R_{MT}
+\end{equation}
+
+\end{document}

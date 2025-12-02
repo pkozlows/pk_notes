@@ -1,0 +1,106 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{tikz}
+\usepackage{simpler-wick}
+\usepackage{cancel}
+\usepackage{geometry}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[numbers]{natbib}
+\bibliographystyle{plainnat}  % or another style like 'apsrev4-2'
+\usepackage{hyperref}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tikz}
+\graphicspath{{figs/}}
+% \bibfile{../src/citations.bib}
+\title{Excited state methods for electronic structure in the Green's function formalism}
+\author{Patryk Kozlowski}
+\date{\today}
+
+\hypersetup{
+    colorlinks=true,    % false: boxed links; true: colored links
+    linkcolor=blue,     % color of internal links
+    urlcolor=cyan       % color of external links
+}
+\setbeamertemplate{section in toc}[sections numbered]
+
+% % Automatically create section title slides
+% \AtBeginSection[]{
+%   \begin{frame}
+%   \frametitle{Outline}
+%   \tableofcontents[currentsection]
+%   \end{frame}
+% }
+
+% Alternative: Simple section title slide
+% \AtBeginSection[]{
+%   \begin{frame}
+%   \centering
+%   \LARGE \insertsectionhead
+%   \end{frame}
+% }
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+\section{Motivation}
+\begin{frame}
+    \frametitle{Why the status quo is not enough}
+    \begin{figure}
+        \centering
+        % Try the image in the figs/ directory (graphicspath set above); if it's missing, show a placeholder box instead of failing compilation.
+        \IfFileExists{figs/ro_vs_echem.jpeg}{%
+            \includegraphics[width=0.6\textwidth]{ro_vs_echem.jpeg}%
+        }{%
+            \fbox{\parbox[b][0.4\textheight][c]{0.7\textwidth}{\centering Image `ro_vs_echem.jpeg' not found}}%
+        }
+    \end{figure}
+\end{frame}
+\section{Thermodynamic efficiency of different methods}
+\begin{frame}
+    \frametitle{Thermodynamic efficiency of different methods}
+We can plot $\mathcal{P}=\frac{V_{\mathrm{D}}}{n A}$ vs. $\eta=\Delta \hat{G} / \hat{E}$
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{thermo.jpeg}
+    \end{figure}
+\end{frame}
+\begin{frame}
+    \frametitle{What electrosorption looks like}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{sorp.png}
+    \end{figure}
+\end{frame}
+\section{Kinetics of capacitive deionization}
+
+\begin{frame}
+    \frametitle{A coupled ion-electron transfer mechanism for CDI}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{marcus.jpg}
+    \end{figure}
+$\lambda_{\mathrm{o}}=\frac{e^2}{8 \pi \varepsilon_0 k_{\mathrm{B}} T}\left(\frac{1}{a_0}-\frac{1}{2 d}\right)\left(\frac{1}{\varepsilon_{\mathrm{op}}}-\frac{1}{\varepsilon_{\mathrm{s}}}\right)$
+\end{frame}
+\section{Transport: Identifying mechanisms of electrosorption}
+\begin{frame}
+    \frametitle{Identifying Faradaic vs. electrostatic electrosorption}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{volt.jpg}
+    \end{figure}
+\end{frame}
+
+\end{document}
