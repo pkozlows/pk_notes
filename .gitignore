@@ -17,6 +17,7 @@ images/
 *.nav
 *.snm
 *.vrb
+*.h5
 
 
 # Keep only these files
