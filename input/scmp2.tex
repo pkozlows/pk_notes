@@ -11,3 +11,12 @@ For self-consistent MP2, do we mean
 \label{eq:mp2_se}
 \end{align}
 Note that scGF2, by virtue of operating on the imaginary frequency axis, can also update the orbitals, but in this real time method we cannot.
+\section{Why it is bad for the UEG}
+The VASP paper by Kresse and Grunes proves that scMP2 consists of terminating the Dyson equation for the interacting polarizability to lowest order, so setting $\chi(\omega ) \approx \chi_0(\omega )$. This implies that the MP2 self-energy is only reliable if the polarizability of the system is small, so the neglect of higher order terms does not matter so much. I believe this is why the MP2 pole at $r_s=4$ is bad. This can be proven analytically be examining the magnitude of the Linhard function.
+% \subsection{Suggestions for improvement}
+% Inclusion of Thomas-Fermi screening, as proposed by Kresse
+\section{Notes}
+David Tew's recent paper investigates the performance of this quasiparticle MP2 for finite systems, but they only do small molecules and the Hubbard model.
+\section{Decisions to make}
+\subsection{Basis choice}
+I think def2-TZVPP-RIFIT would be good and then all-electron?

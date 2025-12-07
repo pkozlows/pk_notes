@@ -1,0 +1,62 @@
+\section{Why UEG MP2 poles are bad}
+\begin{frame}
+\frametitle{Why UEG MP2 poles are bad}
+    The VASP paper by Kresse (2012) proves that QP MP2 consists of terminating the Dyson equation for the $\chi$ to lowest order, so MP2 self-energy sets
+\begin{equation}
+    \chi(\omega ) \approx \chi_0(\omega )
+\end{equation}
+\pause
+So MP2 self-energy is only reliable if the $\chi_0(\omega )$ is small, and thus the MP2 pole at $r_s=4$ is bad. \pause When we do this large scale study of molecular IP/EAs, we should find a way to quantify the $\chi_0(\omega )$, so we can see if this trend gets reproduced.
+\end{frame}
+\section{Implementation of QP MP2}
+\begin{frame}
+\frametitle{Algorithm for QP MP2}
+Likely, we want to do:
+\begin{enumerate}
+    \item Start with HF reference orbitals and energies.
+    \item Solve QP equation for each orbital using MP2 self-energy of \ref{eq:mp2_se}.
+    \item Update \emph{some} orbital energies in \ref{eq:mp2_se}, keeping the numerator fixed.
+    \item Repeat steps 2-3 until convergence in the orbital energies \emph{of interest}.
+\end{enumerate}
+\begin{align}
+    \Sigma^{(2)}_{pp}(\omega) 
+    & = \sum_{iab} \frac{(pa|ib)\Big(2(qa|ib) - (qb|ia)\Big)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{ (pi|aj)\Big(2(qi|aj) - (qj|ai)\Big)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta} 
+\label{eq:mp2_se}
+\end{align}
+\pause
+When solving the QP equation, we can linearize, so do 
+\begin{equation}
+    \epsilon_p^i=\epsilon_p^{i-1}+Z_p \Sigma_{p p}^{\mathrm{c}}\left(\omega=\epsilon_p^{i-1}\right)
+\end{equation}
+where $\epsilon_p^{i}\equiv \epsilon_p^{HF}$ at $i=0$ and
+\begin{equation}
+    Z_p=\left[1-\left.\frac{\partial \Sigma_{p p}^{\mathrm{c}}(\omega)}{\partial \omega}\right|_{\omega=\epsilon_p^{i-1}}\right]^{-1}
+\end{equation}
+\end{frame}
+\begin{frame}
+\frametitle{Choices to make}
+\begin{enumerate}
+    \item Basis choice: I think def2-TZVPP-RIFIT would be good and then all-electron?
+    \pause
+    \item Orbital energy updates: Do we update all orbital energies in \ref{eq:mp2_se}, just HOMO/LUMO, or all occupied plus some virtuals?
+    \pause
+    \item Is GW100 the right test set? They compare to some $\Delta CCSD(T)$ results. Do we want to use that reference or do something else?
+\end{enumerate}
+
+\end{frame}
+\section{Comparison to evGW}
+\begin{frame}
+\frametitle{Comparison to evGW}
+We could try to 
+\begin{enumerate}
+    \item Implement $G_0W_0$ with AC for periodic systems, as suggested by Tianyu
+    \item Then, translate into miniqc for molecules
+    \item Add partial self consistency, to do  evGW for molecules
+\end{enumerate}
+\pause
+Note that we can do $evGW$ and/or $evGW_0$. To understand the difference, consider the GW self-energy
+\begin{equation}
+    \Sigma_{p q}^{\mathrm{c}}(\omega)=\sum_{i m} \frac{\color{red}M_{p i, m} M_{q i, m}}{\omega-\color{green}\epsilon_i+\color{red}\Omega_m\color{black}-\mathrm{i} \eta}+\sum_{a m} \frac{\color{red}M_{p a, m} M_{q a, m}}{\omega-\color{green}\epsilon_a-\color{red}\Omega_m\color{black}+\mathrm{i} \eta}
+\end{equation}
+In $evGW_0$, we update only green, while in $evGW$ we update both green and red.
+\end{frame}
