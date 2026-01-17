@@ -1,16 +1,406 @@
-For self-consistent MP2, do we mean 
+\section{Self-consistent schemes for QPMP2}
+I can envision the following self-consistency schemes for this QPMP2 using
+\begin{align}
+    \Sigma^{(2)}_{pp}(\omega) 
+    & = \sum_{iab} \frac{(pa|ib)\Big(2(pa|ib) - (pb|ia)\Big)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{ (pi|aj)\Big(2(pi|aj) - (pj|ai)\Big)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta} 
+\label{eq:mp2_se}
+\end{align}
+\subsection{No self consistency (1shotQPMP2)}
+This just comprises of solving the QP equation using the self energy defined in \ref{eq:mp2_se} with the HF orbitals and MO energies in a one-shot fashion. So for each orbital $p$ we solve
+\begin{align}
+    \epsilon_p^{\text{QP}} = \epsilon_p^{\text{HF}} + Z_p \Sigma^{(2)}_{pp}(\epsilon_p^{\text{HF}})
+\label{eq:qp_eq}
+\end{align}
+where $Z_p = \Big(1 - \frac{\partial \Sigma^{(2)}_{pp}(\omega)}{\partial \omega}\big|_{\omega = \epsilon_p^{\text{HF}}}\Big)^{-1}$ is the renormalization factor. 
+\subsection{Eigenvalue self-consistency (evQPMP2)}
+\label{sec:evqpmp2}
 \begin{enumerate}
     \item Start with HF reference orbitals and energies.
-    \item Solve the QP equation for each orbital using the MP2 self-energy, as given in equation \ref{eq:mp2_se}.
+    \item Solve the QP equation \ref{eq:qp_eq} for each orbital using the MP2 self-energy, as given in equation \ref{eq:mp2_se}.
     \item Update all the orbital energies in \ref{eq:mp2_se}, keeping the numerator fixed.
     \item Repeat steps 2-3 until convergence in the orbital energies of interest.
 \end{enumerate}
+\section{Exploring the similarity renormalization group approach to quasi-particle self-consistency}
+The unrestricted form for the MP2 self-energy is
 \begin{align}
-    \Sigma^{(2)}_{pp}(\omega) 
-    & = \sum_{iab} \frac{(pa|ib)\Big(2(qa|ib) - (qb|ia)\Big)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{ (pi|aj)\Big(2(qi|aj) - (qj|ai)\Big)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta} 
-\label{eq:mp2_se}
+    \Sigma_{pq}^{(2)}(\omega) =& \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
 \end{align}
-Note that scGF2, by virtue of operating on the imaginary frequency axis, can also update the orbitals, but in this real time method we cannot.
+To derive the restricted form, consider just the 2p1h sector and expand the antisymmetrized integrals. We can associate spin variables $\sigma_p, \sigma_q, \sigma_i, \sigma_a, \sigma_b$ to each of the orbitals $p,q,i,a,b$. Then, with $\Delta_{iab} \equiv \epsilon_a + \epsilon_b - \epsilon_i$, we have
+\begin{align}
+    \Sigma_{pq}^{(2p1h)}(\omega)
+&= \frac{1}{2} \sum_{iab} \frac{\left( \langle pi | ab \rangle - \langle pi | ba \rangle \right) \left( \langle ab | qi \rangle - \langle ab | iq \rangle \right)}{\omega - \Delta_{iab}} \\
+\implies \Sigma_{p \sigma_p, q \sigma_q}^{(2p1h)}(\omega)
+&= \frac{1}{2} \sum_{\sigma_i, \sigma_a, \sigma_b} \sum_{iab} \frac{\left( (p\sigma_p a\sigma_a | i\sigma_i b\sigma_b) - (p\sigma_p b\sigma_b | i\sigma_i a\sigma_a) \right) \left( (a\sigma_a b\sigma_b | q\sigma_q i\sigma_i) - (a\sigma_a b\sigma_b | i\sigma_i q\sigma_q) \right)}{\omega - \Delta_{iab}} \\
+\end{align}
+% and the corresponding coupling blocks read [see eq 5]
+% $$
+% W_{p, i \nu}^{2 \mathrm{hlp}}=W_{p i}^\nu, \quad W_{p, a \nu}^{2 \mathrm{pp}}=W_{p a}^\nu
+% $$
+
+% The usual $G W$ nonlinear equation can be obtained by applying the Löwdin partitioning technique ${ }^{192}$ to eq 21 yielding ${ }^{190}$
+% $$
+% \begin{aligned}
+% \boldsymbol{\Sigma}(\omega)= & \boldsymbol{W}^{2 \mathrm{hlp}}\left(\omega \mathbf{1}-\boldsymbol{C}^{2 \mathrm{hlp}}\right)^{-1}\left(\boldsymbol{W}^{2 \mathrm{hlp}}\right)^{\dagger} \\
+% & +\boldsymbol{W}^{2 \mathrm{plh}}\left(\omega \mathbf{1}-\boldsymbol{C}^{2 \mathrm{plh}}\right)^{-1}\left(\boldsymbol{W}^{2 \mathrm{plh}}\right)^{\dagger}
+% \end{aligned}
+% $$
+% which can be further developed to recover exactly eq us
+.
+\subsection{Downfolding the QPMP2 Hamiltonian}
+If we use that Lowdin partitioning we are able to recast the QPMP2 equation into a frequency independent Hamiltonian of the form
+\begin{align}
+    H^{\text{QPMP2}}= \begin{pmatrix}
+        \bm{F} & \bm{W}^{2h1p} & \bm{W}^{2p1h} \\
+        (\bm{W}^{2h1p})^\dagger & \bm{C}^{2h1p} & 0 \\
+        (\bm{W}^{2p1h})^\dagger & 0 & \bm{C}^{2p1h}
+    \end{pmatrix}
+\end{align}
+where now the 2h1p and 2p1h blocks are defined as
+\begin{align}
+    C^{2h1p}_{ija, klb} & = (\epsilon_k - \epsilon_l + \epsilon_b) \delta_{ik} \delta_{jl} \delta_{ab} \\
+    C^{2p1h}_{abi, cdj} & = (\epsilon_c + \epsilon_d - \epsilon_j) \delta_{ac} \delta_{bd} \delta_{ij}
+\end{align}
+and the coupling blocks are
+\begin{align}
+    W^{2h1p}_{p, ija} & = \frac{\sqrt{2}}{2} \langle pa || ij \rangle \\
+    W^{2p1h}_{p, abi} & = \frac{\sqrt{2}}{2} \langle pi || ab \rangle
+\end{align}
+Now, we can multiply this matrix by a trial vector $\Psi = (\bm{X}^{1h1p}, \bm{X}^{2h1p}, \bm{X}^{2p1h})^T$ to obtain the following set of coupled equations
+\begin{align}
+    \bm{F} \bm{X}^{1h1p} + \bm{W}^{2h1p} \bm{X}^{2h1p} + \bm{W}^{2p1h} \bm{X}^{2p1h} & = E \bm{X}^{1h1p} \\
+    (\bm{W}^{2h1p})^\dagger \bm{X}^{1h1p} + \bm{C}^{2h1p} \bm{X}^{2h1p} & = E \bm{X}^{2h1p} \\
+    (\bm{W}^{2p1h})^\dagger \bm{X}^{1h1p} + \bm{C}^{2p1h} \bm{X}^{2p1h} & = E \bm{X}^{2p1h}
+\end{align}
+From the last two equations we can solve for $\bm{X}^{2h1p}$ and $\bm{X}^{2p1h}$ as
+\begin{align}
+    \bm{X}^{2h1p} & = (E \bm{1} - \bm{C}^{2h1p})^{-1} (\bm{W}^{2h1p})^\dagger \bm{X}^{1h1p} \\
+    \bm{X}^{2p1h} & = (E \bm{1} - \bm{C}^{2p1h})^{-1} (\bm{W}^{2p1h})^\dagger \bm{X}^{1h1p}
+\end{align}
+Substituting these expressions back into the first equation we obtain an effective eigenvalue equation for the 1h1p space
+\begin{align}
+    \Bigg[ \bm{F} + \bm{W}^{2h1p} (E \bm{1} - \bm{C}^{2h1p})^{-1} (\bm{W}^{2h1p})^\dagger + \bm{W}^{2p1h} (E \bm{1} - \bm{C}^{2p1h})^{-1} (\bm{W}^{2p1h})^\dagger \Bigg] \bm{X}^{1h1p} = E \bm{X}^{1h1p}
+\end{align}
+where we recognize the terms in square brackets as a sum of the Fock matrix and the MP2 self-energy evaluated at energy $E$.
+\subsection{SRG approach}
+ Now, we define, within the SRG formalism, the diagonal and off-diagonal parts of the $\bm{H}^{\text{QPMP2}}$ as
+\begin{align}
+\bm{H}^{\text{d}}(s) &= 
+\begin{pmatrix}
+\bm{F}	&	\bm{0}	                	&     \bm{0}		\\
+\bm{0}	&	\bm{C}^{\text{2h1p}}		&	\bm{0}			\\
+\bm{0}    &	\bm{0}				&	\bm{C}^{\text{2p1h}}	\\
+\end{pmatrix} \equiv \begin{pmatrix}
+\bm{F}	&	\bm{0}\\
+\bm{0}	&	\bm{C}    \\
+\end{pmatrix},
+\\  \bm{H}^{\text{od}}(s)  &= 
+\begin{pmatrix}
+\bm{0}			                &     \bm{W}^{\text{2h1p}} &     \bm{W}^{\text{2p1h}} \\
+(\bm{W}^{\text{2h1p}})^\dag	&	\bm{0}	   	        &	\bm{0}                    	\\
+(\bm{W}^{\text{2p1h}})^\dag	&	\bm{0}		        &	\bm{0}	                \\
+\end{pmatrix} \equiv \begin{pmatrix}
+\bm{0}	&	\bm{W}	\\
+\bm{W}^\dag	&	\bm{0}    \\
+\end{pmatrix}
+\end{align}
+where we omit the $s$ dependence of the matrices for the sake of brevity.
+Then, our aim is to solve, order by order, the flow equation 
+\begin{equation}
+    \dv{\bm{H}(s)}{s} = [\boldsymbol{\eta}(s), \bm{H}(s)]
+\label{eq:flowEquation}
+\end{equation}
+% \begin{equation}
+%   \label{eq:flowEquation}
+%   \dv{\bH(s)}{s} = \comm{\boldsymbol{\eta}(s)}{\bH(s)},
+% \end{equation}
+ knowing that the initial conditions are
+\begin{align}
+    \bm{H}_d^{(0)}(0)  = \begin{pmatrix}
+        \bm{F} & \bm{0} \\
+        \bm{0} & \bm{C} \\
+    \end{pmatrix},& \bm{H}_{od}^{(0)}(0) = \bm{0}, \\
+    \bm{H}_d^{(1)}(0) = \bm{0},& \bm{H}_{od}^{(1)}(0) = \begin{pmatrix}
+        \bm{0} & \bm{W} \\
+        \bm{W}^\dag & \bm{0} \\
+    \end{pmatrix}
+\end{align}
+Once the closed-form expressions of the low-order perturbative expansions are known, they can be inserted into the downfolded self-energy to define a renormalized version of the quasiparticle equation. 
+\subsection{Order by order expansion}
+Now, Wegner's generator is
+\begin{align}
+    \boldsymbol{\eta}(s) &= [\bm{H}^d(s), \bm{H}^{od}(s)] \\
+    & =[ \bm{H}^{d(0)}(s) + \lambda \bm{0}+ \lambda^2 \bm{H}^{d(2)}(s) + \order*{\lambda^3}, \bm{0} + \lambda \bm{H}^{od(1)}(s) + \lambda^2 \bm{H}^{od(2)}(s) + \order*{\lambda^3}] \\
+    & = \underbrace{\bm{H}_d^{(0)}(s)}_{\eta^{(0)}(s)} + \lambda \underbrace{[\bm{H}_d^{(0)}(s), \bm{H}_{od}^{(1)}(s)]}_{\eta^{(1)}(s)} + \lambda^2 \underbrace{\Big( [\bm{H}_d^{(0)}(s), \bm{H}_{od}^{(2)}(s)] \Big)}_{\eta^{(2)}(s)} + \order*{\lambda^3}
+\end{align}
+and the flow equation \ref{eq:flowEquation} can also be expanded order by order in $\lambda$ as
+\begin{align}
+    \dv{\bm{H}(s)}{s} & = [\boldsymbol{\eta}(s), \bm{H}(s)] \\
+\text{LHS} & = \dv{\Big( \bm{H}^{(0)}(s) + \lambda \bm{H}^{(1)}(s) + \lambda^2 \bm{H}^{(2)}(s) + \order*{\lambda^3} \Big)}{s}\\
+\text{RHS} & = \lambda [\boldsymbol{\eta}^{(1)}(s), \bm{H}^{(0)}(s)] + \lambda^2 \Big( [\boldsymbol{\eta}^{(1)}(s), \bm{H}^{(1)}(s)] + [\boldsymbol{\eta}^{(2)}(s), \bm{H}^{(0)}(s)] \Big) + \order*{\lambda^3}
+\end{align}
+\subsubsection{Equating to zeroth order}
+From the expansion of the flow equation, we get
+\begin{equation}
+    \dv{\bm{H}^{(0)}(s)}{s} = \bm{0}
+\end{equation}
+and then using our initial condition gives
+\begin{equation}
+%   \bH^{(0)}(s) = \bH^{(0)}(0).
+\bm{H}^{(0)}(s) = \bm{H}^{(0)}(0) = \begin{pmatrix}
+        \bm{F} & \bm{0} \\
+        \bm{0} & \bm{C} \\
+    \end{pmatrix}
+\end{equation}
+\subsubsection{Equating to first order}
+At first order we have
+\begin{align}
+    &\dv{\bm{H}^{(1)}(s)}{s} = [\boldsymbol{\eta}^{(1)}(s), \bm{H}^{(0)}(s)] \\
+\text{LHS} &= \begin{pmatrix}
+    \dv{\bm{F}^{(1)}(s)}{s}	&	\dv{\bm{W}^{(1)}(s)}{s}	\\
+    \dv{(\bm{W}^{(1)}(s))^\dag}{s}	& \dv{\bm{C}^{(1)}(s)}{s}  \\
+\end{pmatrix} \\
+\text{RHS} &= [ [\bm{H}_d^{(0)}(s), \bm{H}_{od}^{(1)}(s)], \bm{H}_d^{(0)}(s)] \\
+&= [\bm{H}_d^{(0)}(s) \bm{H}_{od}^{(1)}(s) - \bm{H}_{od}^{(1)}(s) \bm{H}_d^{(0)}(s), \bm{H}_d^{(0)}(s)] \\
+&= \bm{H}_d^{(0)}(s) \bm{H}_{od}^{(1)}(s) \bm{H}_d^{(0)}(s) - \bm{H}_{od}^{(1)}(s) \bm{H}_d^{(0)}(s) \bm{H}_d^{(0)}(s) - \bm{H}_d^{(0)}(s) \bm{H}_d^{(0)}(s) \bm{H}_{od}^{(1)}(s) + \bm{H}_d^{(0)}(s) \bm{H}_{od}^{(1)}(s) \bm{H}_d^{(0)}(s)\\
+&= \begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{0} & \bm{W} \\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix} 
+ - \begin{pmatrix}
+    \bm{0} & \bm{W} \\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix} \\
+& - \begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{0} & \bm{W} \\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix} + \begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{0} & \bm{W} \\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+    \bm{0} & 2 \bm{F} \bm{W} \bm{C} - \bm{F}^2 \bm{W} - \bm{W} \bm{C}^2 \\
+    2 \bm{C} \bm{W}^\dag \bm{F} - \bm{C}^2 \bm{W}^\dag - \bm{W}^\dag \bm{F}^2 & \bm{0}
+\end{pmatrix}
+\end{align}
+which implies that the first-order flow equations are
+\begin{align}
+    \dv{\bm{F}^{(0)}(s)}{s} = \bm{0}, & \dv{\bm{C}^{(0)}(s)}{s} = \bm{0} \\
+    \implies \bm{F}^{(0)}(s) = \bm{F}^{(0)}(0), & \bm{C}^{(0)}(s) = \bm{C}^{(0)}(0) \\
+\end{align}
+Now, we know that in the canonical HF basis both $\bm{F}$ and $\bm{C}$ are diagonal, so really we have found that
+\begin{align}
+    \dv{W_{pq,ia}^{(1)}(s)}{s} & = 2 F_{pp} W_{pq,ia}^{(1)}(s) C_{ia,ia} - F_{pp}^2 W_{pq,ia}^{(1)}(s) - W_{pq,ia}^{(1)}(s) C_{ia,ia}^2 \\
+    &= \left[ 2 F_{pp} C_{ia,ia} - F_{pp}^2 - C_{ia,ia}^2 \right] W_{pq,ia}^{(1)}(s) \\
+&= \left[ 2 \epsilon_p (\epsilon_i - \epsilon_a) - \epsilon_p^2 - (\epsilon_i - \epsilon_a)^2 \right] W_{pq,ia}^{(1)}(s) \\
+&= -(\epsilon_p - \epsilon_i + \epsilon_a)^2 W_{pq,ia}^{(1)}(s) \\
+\implies
+    W_{pq,ia}^{(1)}(s) & = W_{pq,ia}^{(1)}(0) e^{-(\epsilon_p - \epsilon_i + \epsilon_a)^2 s}
+\end{align}
+so we get that $W_{pq,ia}^{(1)}(0) = W_{pq,ia}$ and $\lim_{s \to \infty} W_{pq,ia}^{(1)}(s) = 0$.
+\subsubsection{Equating to second order}
+At second order we have
+\begin{align}
+    &\dv{\bm{H}^{(2)}(s)}{s} = [\boldsymbol{\eta}^{(1)}(s), \bm{H}^{(1)}(s)] + [\boldsymbol{\eta}^{(2)}(s), \bm{H}^{(0)}(s)] = [\boldsymbol{\eta}^{(1)}(s), \bm{H}^{(1)}(s)] \\
+\text{LHS} & = \begin{pmatrix}
+    \dv{\bm{F}^{(2)}(s)}{s}	&    \dv{\bm{W}^{(2)}(s)}{s}	\\
+    \dv{(\bm{W}^{(2)}(s))^\dag}{s}	& \dv{\bm{C}^{(2)}(s)}{s}  \\
+\end{pmatrix} \\
+\text{RHS} & = [ [\bm{H}_d^{(0)}(s), \bm{H}_{od}^{(1)}(s)], \bm{H}^{(1)}(s)] \\
+&= [\bm{H}_d^{(0)}(s) \bm{H}_{od}^{(1)}(s) - \bm{H}_{od}^{(1)}(s) \bm{H}_d^{(0)}(s), \bm{H}^{(1)}_{od}(s)] \\
+&= \bm{H}_d^{(0)}(s) \bm{H}_{od}^{(1)}(s) \bm{H}_{od}^{(1)}(s) - \bm{H}_{od}^{(1)}(s) \bm{H}_d^{(0)}(s) \bm{H}_{od}^{(1)}(s) - \bm{H}_{od}^{(1)}(s) \bm{H}_{d}^{(0)}(s) \bm{H}_{od}^{(1)}(s) + \bm{H}_{od}^{(1)}(s) \bm{H}_{od}^{(1)}(s) \bm{H}_d^{(0)}(s)\\
+&= \begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{0} & \bm{W}\\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{0} & \bm{W}\\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix} 
+ - \begin{pmatrix}
+    \bm{0} & \bm{W}\\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{0} & \bm{W}\\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix} \\
+& - \begin{pmatrix}
+    \bm{0} & \bm{W}\\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{0} & \bm{W}\\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix} + \begin{pmatrix}
+    \bm{0} & \bm{W}\\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{0} & \bm{W}\\
+    \bm{W}^\dag & \bm{0}
+\end{pmatrix}
+\begin{pmatrix}
+    \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+    \bm{F} \bm{W} \bm{W}^\dag -2 \bm{W} \bm{C} \bm{W}^\dag + \bm{W} \bm{W}^\dag \bm{F} & \bm{0} \\
+    \bm{0} & \bm{C} \bm{W}^\dag \bm{W} - 2 \bm{W}^\dag \bm{F} \bm{W} + \bm{W}^\dag \bm{W} \bm{C}
+\end{pmatrix}
+\end{align}
+which implies that the second-order flow equations are
+\begin{align}
+    \dv{\bm{F}^{(2)}(s)}{s} & = \bm{F} \bm{W} \bm{W}^\dag -2 \bm{W} \bm{C} \bm{W}^\dag + \bm{W} \bm{W}^\dag \bm{F} \\
+    \dv{\bm{C}^{(2)}(s)}{s} & = \bm{C} \bm{W}^\dag \bm{W} - 2 \bm{W}^\dag \bm{F} \bm{W} + \bm{W}^\dag \bm{W} \bm{C}
+\end{align}
+Continuing with this approach yields the desired result.
+
+% %-----------------------------------------------
+% \paragraph{Zeroth-order blocks.}
+% %-----------------------------------------------
+
+% Because the diagonal blocks of Wegner’s generator vanish,
+% \begin{equation}
+%   \eta^{(1)}_{11} = 0, \qquad \eta^{(1)}_{22} = 0,
+% \end{equation}
+% the diagonal blocks of the flow equation satisfy
+% \begin{equation}
+%   \dv{\bF^{(1)}}{s} = \bO,
+%   \qquad
+%   \dv{\bC^{(1)}}{s} = \bO.
+% \end{equation}
+% Using the initial conditions $\bF^{(1)}(0)=\bO$ and $\bC^{(1)}(0)=\bO$, we obtain
+% \begin{subequations}
+% \begin{align}
+%   \bF^{(1)}(s) &= \bO, \\
+%   \bC^{(1)}(s) &= \bO.
+% \end{align}
+% \end{subequations}
+
+% %-----------------------------------------------
+% \paragraph{First-order flow for the coupling block.}
+% %-----------------------------------------------
+
+% The first-order generator has the off-diagonal blocks
+% \begin{equation}
+%   \eta_{12}^{(1)} = \bF^{(0)}\bW^{(1)} - \bW^{(1)}\bC^{(0)},
+%   \qquad
+%   \eta_{21}^{(1)} = \bC^{(0)}\bW^{(1)\dagger} - \bW^{(1)\dagger}\bF^{(0)}.
+% \end{equation}
+
+% The $(1,2)$ block of the first-order flow equation becomes
+% \begin{align}
+%   \dv{\bW^{(1)}}{s}
+%   &= \eta^{(1)}_{12}\,\bC^{(0)} - \bF^{(0)} \eta^{(1)}_{12} \\[4pt]
+%   &= \left(\bF^{(0)}\bW^{(1)} - \bW^{(1)}\bC^{(0)}\right)\bC^{(0)}
+%    - \bF^{(0)}\left(\bF^{(0)}\bW^{(1)} - \bW^{(1)}\bC^{(0)}\right)
+%    \\[6pt]
+%   &= 2 \bF^{(0)}\bW^{(1)}\bC^{(0)}
+%    - (\bF^{(0)})^2 \bW^{(1)}
+%    - \bW^{(1)} (\bC^{(0)})^2.
+% \end{align}
+
+% This is precisely the differential equation quoted in the reference:
+% \begin{equation}
+%   \label{eq:W1}
+%   \dv{\bW^{(1)}}{s}
+%    = 2 \bF^{(0)}\bW^{(1)}\bC^{(0)}
+%     - (\bF^{(0)})^2 \bW^{(1)}
+%     - \bW^{(1)}(\bC^{(0)})^2.
+% \end{equation}
+
+% %-----------------------------------------------
+% \paragraph{Solution using diagonal F and C.}
+% %-----------------------------------------------
+
+% In the Hartree--Fock orbital basis, both $\bF^{(0)}$ and $\bC^{(0)}$ are diagonal:
+% \begin{equation}
+%   F^{(0)}_{pp'} = \epsilon_p \delta_{pp'}, \qquad
+%   C^{(0)}_{\nu\nu'} = E_\nu \delta_{\nu\nu'}.
+% \end{equation}
+
+% Therefore each matrix element $W^{(1)}_{pq,\nu}(s)$ obeys
+% \begin{equation}
+%   \dv{}{s} W^{(1)}_{pq,\nu}(s)
+%   = -(\epsilon_{pq} - E_\nu)^2 \, W^{(1)}_{pq,\nu}(s),
+% \end{equation}
+% where we define the energy difference
+% \begin{equation}
+%   \Delta_{pq}^{\nu} = \epsilon_{pq} - E_\nu.
+% \end{equation}
+
+% The solution is
+% \begin{equation}
+%   W_{pq}^{\nu(1)}(s)
+%   = W_{pq}^{\nu(1)}(0)\,
+%     e^{-(\Delta_{pq}^{\nu})^2 s}.
+% \end{equation}
+
+% Identifying $W_{pq}^{\nu(1)}(0) = W_{pq}^{\nu}$ (the screened integral at $s=0$), we obtain the final compact expression
+% \begin{equation}
+%   W_{pq}^{\nu(1)}(s) = W_{pq}^{\nu} \, e^{-(\Delta_{pq}^{\nu})^2 s},
+% \end{equation}
+% with the limits
+% \begin{equation}
+%   W_{pq}^{\nu(1)}(0) = W_{pq}^{\nu},
+%   \qquad
+%   \lim_{s\to\infty} W_{pq}^{\nu(1)}(s) = 0.
+% \end{equation}
+
+\subsection{Quasiparticle self-consistency (qpQPMP2)}
+We can follow what is done in the GW literature to define a quasiparticle self-consistent scheme for QPMP2. In GW, it involves implementing an off-diagonal self-energy 
+\begin{align}
+    \Sigma^{qsGW}_{pq}(\omega) &= \frac{1}{2} \Big( \Sigma_{pq}(\epsilon_p) + \Sigma_{pq}(\epsilon_q) \Big) \\
+&= \frac{1}{2} \sum_\nu \Bigg[ \sum_{i} \left[ \frac{\Delta_{p i}^\nu}{(\Delta_{p i}^\nu)^2 + \eta^2} + \frac{\Delta_{q i}^\nu}{(\Delta_{q i}^\nu)^2 + \eta^2} \right] W_{p i}^\nu W_{q i}^\nu\\ & + \sum_{a} \left[ \frac{\Delta_{p a}^\nu}{(\Delta_{p a}^\nu)^2 + \eta^2} + \frac{\Delta_{q a}^\nu}{(\Delta_{q a}^\nu)^2 + \eta^2} \right] W_{p a}^\nu W_{q a}^\nu \Bigg] \\
+% &= \frac{1}{2} \sum_\nu \Bigg[ \sum_{i} \frac{\Delta_{p i}^\nu}{(\Delta_{p i}^\nu)^2 + \eta^2} W_{p i}^\nu W_{q i}^\nu + \sum_{a} \frac{\Delta_{p a}^\nu}{(\Delta_{p a}^\nu)^2 + \eta^2} W_{p a}^\nu W_{q a}^\nu \Bigg] \\
+\end{align}
+with $\Delta_{p i}^\nu = \epsilon_p - \epsilon_i - \Omega_\nu$ and $\Delta_{p a}^\nu = \epsilon_p - \epsilon_a + \Omega_\nu$. In QPMP2, it will be analogous, and the expression will be
+
+
 \section{Why it is bad for the UEG}
 The VASP paper by Kresse and Grunes proves that scMP2 consists of terminating the Dyson equation for the interacting polarizability to lowest order, so setting $\chi(\omega ) \approx \chi_0(\omega )$. This implies that the MP2 self-energy is only reliable if the polarizability of the system is small, so the neglect of higher order terms does not matter so much. I believe this is why the MP2 pole at $r_s=4$ is bad. This can be proven analytically be examining the magnitude of the Linhard function.
 % \subsection{Suggestions for improvement}

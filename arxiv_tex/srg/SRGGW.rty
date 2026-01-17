@@ -1,0 +1,145 @@
+%============================================================%
+%%% NEWCOMMANDS %%%
+% ============================================================%
+
+%%% This latex gather all the latex commands that I use to facilitate the writing of electronic structure manuscript, report...
+%%% You can import these commands by adding the following line in you .text
+%%% \input{commands}
+
+\newcommand{\mc}{\multicolumn}
+\newcommand{\fnm}{\footnotemark}
+\newcommand{\fnt}{\footnotetext}
+\newcommand{\mcc}[1]{\multicolumn{1}{c}{#1}}
+
+%%% Latin %%%
+
+\newcommand{\ie}{\textit{i.e.}\xspace}
+\newcommand{\eg}{\textit{e.g.}\xspace}
+\newcommand{\etal}{\textit{et al.}\xspace}
+
+%%% Operators %%%
+
+\newcommand{\hH}{\Hat{H}} % Hamiltonian operator
+\newcommand{\HN}{\Hat{\mathnormal{H}}_{\text{N}}} % Normal ordered Hamiltonian
+\newcommand{\Hsim}{\hat{\bar{H}}} % Similarity transformed Hamiltonian
+\newcommand{\hC}{\Hat{C}} % CI operator
+\newcommand{\hT}{\Hat{T}} % Cluster operator
+\newcommand{\T}[1]{#1^{\intercal}}
+\newcommand{\hsig}{\Hat{\sigma}} % Unitary cluster operator
+\newcommand{\hK}{\Hat{K}} % Anti-hermitian orbital rotation operator
+\newcommand{\hS}{\Hat{S}} % Anti-hermitian CI coefficients rotation operator
+\newcommand{\hP}[1]{\Hat{\mathnormal{P}}_{#1}} % Permutation operators
+
+\newcommand{\hE}{\Hat{E}} % Spin averaged single excitation operator
+\newcommand{\cre}[1]{a_{#1}^\dagger} % Creation operator
+\newcommand{\ani}[1]{a_{#1}} % Annihilation operator
+\newcommand{\bcre}[1]{b_{#1}^\dagger} % Boson creation operator
+\newcommand{\bani}[1]{b_{#1}} % Boson annihilation operator
+\newcommand{\no}[2]{\mleft\{ \hat{a}_{#1}^{#2}\mright\} }
+
+%%% Matrices %%%
+
+\newcommand{\bA}{\boldsymbol{A}}
+\newcommand{\bB}{\boldsymbol{B}}
+\newcommand{\bC}{\boldsymbol{C}}
+\newcommand{\bD}{\boldsymbol{D}}
+\newcommand{\bE}{\boldsymbol{E}}
+\newcommand{\bF}{\boldsymbol{F}}
+\newcommand{\bG}{\boldsymbol{G}}
+\newcommand{\bH}{\boldsymbol{H}}
+\newcommand{\bJ}{\boldsymbol{J}}
+\newcommand{\bK}{\boldsymbol{K}}
+\newcommand{\bL}{\boldsymbol{L}}
+\newcommand{\bM}{\boldsymbol{M}}
+\newcommand{\bN}{\boldsymbol{N}}
+\newcommand{\bP}{\boldsymbol{P}}
+\newcommand{\bQ}{\boldsymbol{Q}}
+\newcommand{\bR}{\boldsymbol{R}}
+\newcommand{\bS}{\boldsymbol{S}}
+\newcommand{\bT}{\boldsymbol{T}}
+\newcommand{\bU}{\boldsymbol{U}}
+\newcommand{\bV}{\boldsymbol{V}}
+\newcommand{\bW}{\boldsymbol{W}}
+\newcommand{\bX}{\boldsymbol{X}}
+\newcommand{\bY}{\boldsymbol{Y}}
+\newcommand{\bZ}{\boldsymbol{Z}}
+
+\newcommand{\bO}{\boldsymbol{0}}
+\newcommand{\bI}{\boldsymbol{1}}
+
+\newcommand{\bc}{\boldsymbol{c}}
+\newcommand{\br}{\boldsymbol{r}}
+\newcommand{\bx}{\boldsymbol{x}}
+
+\newcommand{\bSig}{\boldsymbol{\Sigma}}
+\newcommand{\bSigC}{\boldsymbol{\Sigma}^{\text{c}}}
+\newcommand{\be}{\boldsymbol{\epsilon}}
+\newcommand{\bOm}{\boldsymbol{\Omega}}
+\newcommand{\bEta}[1]{\boldsymbol{\eta}^{(#1)}(s)}
+
+\newcommand{\bHd}[1]{\bH_\text{d}^{(#1)}}
+\newcommand{\bHod}[1]{\bH_\text{od}^{(#1)}}
+\newcommand{\FC}[1]{F_{#1}^{\text{C}}} % Core Fock matrix
+\newcommand{\FA}[1]{F_{#1}^{\text{A}}} % Active Fock matrix
+
+%%% Wave functions %%%
+
+\newcommand{\MO}[1]{\phi_{#1}}
+\newcommand{\SO}[1]{\psi_{#1}}
+
+%%% Matrix and tensor elements %%%
+\newcommand{\oa}{O_{\alpha}}
+\newcommand{\ob}{O_{\beta}}
+\newcommand{\eri}[2]{\braket{#1}{#2}} % Electron repulsion integral physician notation
+\newcommand{\ceri}[2]{\mleft(#1|#2\mright)} % Electron repulsion integral chemist notation
+\newcommand{\aeri}[2]{\mel{#1}{}{#2}} % Double bar integral
+\newcommand{\kron}[1]{\delta_{#1}} % Kronecker delta
+\newcommand{\cbra}[1]{(#1|} % Chemist bra
+\newcommand{\cket}[1]{|#1)} % Chemist ket
+
+%%% Mathematics %%%
+
+\newcommand{\ii}{\mathrm{i}}
+
+%%% Text acronyms and abbreviations %%%
+
+\newcommand{\FCI}{\text{FCI}}
+\newcommand{\HF}{\text{HF}}
+\newcommand{\MCSCF}{\text{MCSCF}}
+\newcommand{\occ}{\text{occ}}
+\newcommand{\vir}{\text{vir}}
+\newcommand{\HOMO}{\text{HOMO}}
+\newcommand{\LUMO}{\text{LUMO}}
+\newcommand{\nuc}{\text{nuc}}
+\newcommand{\KS}{\text{KS}}
+\newcommand{\RPA}{\text{RPA}}
+\newcommand{\phRPA}{\text{ph-RPA}}
+\newcommand{\ppRPA}{\text{pp-RPA}}
+\newcommand{\h}{\text{1h}}
+\newcommand{\p}{\text{1p}}
+\newcommand{\hp}{\text{1h+1p}}
+\newcommand{\hhp}{\text{2h1p}}
+\newcommand{\pph}{\text{2p1h}}
+\newcommand{\dRPA}{\text{dRPA}}
+\newcommand{\TDA}{\text{TDA}}
+\newcommand{\RPAx}{\text{RPAx}}
+\newcommand{\QP}{\textsc{quantum package}}
+\newcommand{\Hxc}{\text{Hxc}}
+\newcommand{\xc}{\text{xc}}
+\newcommand{\x}{\text{x}}
+
+\newcommand{\GW}{GW}
+\newcommand{\GF}{\text{GF(2)}}
+\newcommand{\GT}{GT}	
+\newcommand{\evGW}{\text{ev}GW}	
+\newcommand{\qsGW}{\text{qs}GW}
+\newcommand{\SRGGW}{\text{SRG-}GW}
+\newcommand{\SRGqsGW}{\text{SRG-qs}GW}
+\newcommand{\GOWO}{G_0W_0}
+
+%%% Notations %%%
+
+\newcommand{\Ne}{N}
+\newcommand{\Norb}{K}
+\newcommand{\Nocc}{O}
+\newcommand{\Nvir}{V}

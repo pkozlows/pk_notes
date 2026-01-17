@@ -1,0 +1,81 @@
+  %--------------------
+% Packages
+% -------------------
+\documentclass[10pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+%\usepackage{gentium}
+\usepackage{mathptmx} % Use Times Font
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage[pdftex]{graphicx} % Required for including pictures
+\usepackage[pdftex,linkcolor=black,pdfborder={0 0 0}]{hyperref} % Format links for pdf
+\usepackage{calc} % To reset the counter in the document after title page
+\usepackage{enumitem} % Includes lists
+
+\frenchspacing % No double spacing between sentences
+\linespread{1.2} % Set linespace
+\usepackage[a4paper, lmargin=0.1\paperwidth, rmargin=0.1\paperwidth, tmargin=0.08\paperheight, bmargin=0.08\paperheight]{geometry} %margins
+\usepackage{parskip}
+\usepackage{dsfont}
+\usepackage{braket}
+\usepackage[all]{nowidow} % Tries to remove widows
+\usepackage[protrusion=true,expansion=true]{microtype} % Improves typography, load after fontpackage is selected
+
+\usepackage{titlesec}
+\titlelabel{\thetitle.\quad}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[capitalise]{cleveref}
+
+\usepackage[
+backend=biber,
+style=chem-acs,
+citestyle=chem-acs
+]{biblatex}       %use the biblatex package
+
+\addbibresource{references.bib}
+
+%-----------------------
+% Begin document
+%-----------------------
+
+\title{
+\vspace{-2.0cm}
+\large{\textbf{Regularized perturbation theory for periodic quantum chemistry}}
+\vspace{-10pt}
+}
+% \author{Nemo Chen, Joonho Lee}
+\date{}
+\begin{document} 
+
+\maketitle
+\vspace{-15pt}
+In 2005, Nørskov et al. \cite{norskov2005trends} introduced what are now known as volcano plots. These plots illustrate the Sabatier principle, which states that an optimal catalyst binds reaction intermediates neither too strongly nor too weakly. In particular, volcano plots show a qualitative correlation between experimentally measured and theoretically calculated exchange currents for the hydrogen evolution reaction (HER), plotted as a function of the calculated hydrogen chemisorption energy per atom, $\Delta E_{H}$, and the free energy for hydrogen adsorption, $\Delta G_{H}$, shown in the top and bottom panels of \cref{fig:volcano}, respectively, on different metal surfaces. Note that $\Delta G_{H^*} = \Delta E_{\mathrm{H}} + 0.24\ \mathrm{eV}$ for the HER, so the top and bottom panels are meant to be compared. This volcano plot suggests that platinum is the best catalyst for HER. However, to design more efficient catalysts, we want to understand why a given metal appears at the apex of the volcano.
+
+The theoretical predictions underlying these volcano plots rely on semi-local density functional theory (DFT), which is inherently limited by self-interaction error. This leads to underestimated band gaps—quantities that are instrumental in describing chemisorption accurately. Because chemisorption involves excited-state character, there is growing interest in quantum chemistry methods capable of treating such processes more reliably.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.4\textwidth]{volcano.png}
+    \label{fig:volcano}
+    \caption{Reproduced from \cite{norskov2005trends}.}
+\end{figure}
+
+Quasiparticles, which describe the collective behavior of interacting electrons, play a central role in our understanding of excited states. Accurately computing quasiparticle energies is therefore a major target of electronic structure theory. Nørskov's work relied on DFT, which scales as $O(N^3)$ with system size $N$, to estimate the quasiparticle energies used in producing his volcano plots. As discussed above, this choice is problematic.
+
+By contrast, the equation-of-motion coupled-cluster (EOM-CC) formalism provides the state-of-the-art excited-state method, but it scales as $O(N^6)$. The GW approximation, a Green's function-based many-body method, is often used as a compromise, reducing the scaling to $O(N^4)$. However, GW is also known to exhibit systematic accuracy deficiencies.
+
+This motivates the exploration of alternative perturbative approaches. One such method is Møller-Plesset perturbation theory (MP2), which scales as $O(N^5)$. However, MP2 contains energy denominators that approach zero in metallic systems, causing divergences and limiting its applicability to surface phenomena. Recent years have seen the development of regularized MP2 methods that mitigate these divergences. One possibility is to regularize the MP2 denominator via a self-consistent loop that ensures the denominator never vanishes. This approach was first investigated by Kresse et al. \cite{Gruneis2010-mr} and more recently expanded upon by Tew et al. \cite{Coveney2023-fq}. However, the former study focused on a small number of solid-state systems, while the latter examined only a limited set of small molecules. Additionally, neither study explored the full range of possible self-consistent formulations.
+
+Our goal is to analyze the performance of self-consistent regularized MP2 methods in computing accurate quasiparticle energies for the robust molecular benchmark set GW100 \cite{van-Setten2015-tk}, which has been widely used in the GW community. Because this benchmark comprises a sizable number of molecules, abundant access to high-performance computing resources is essential for this work.
+
+
+
+
+\printbibliography
+
+
+
+\end{document}

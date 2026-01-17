@@ -1036,7 +1036,24 @@ where $\xi=-2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 /
 & = \frac{2\pi}{V} \left( \sum_{\mathbf{k}_i \in O; \,\mathbf{k}_a , \mathbf{k}_b \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_a , \mathbf{k}_b - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_a|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_b , \mathbf{k}_a - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_b|^2} \right]^2 }{\omega - \epsilon_{\mathbf{k}_a} - \epsilon_{\mathbf{k}_b} + \epsilon_{\mathbf{k}_i} + i \eta}  + \sum_{\mathbf{k}_i,\mathbf{k}_j \in O;\, \mathbf{k}_a \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_i , \mathbf{k}_j - \mathbf{k}_a}}{|\mathbf{k}_p-\mathbf{k}_i|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_j , \mathbf{k}_i - \mathbf{k}_a}}{|\mathbf{k}_p - \mathbf{k}_j|^2} \right]^2 }{\omega - \epsilon_{\mathbf{k}_i} - \epsilon_{\mathbf{k}_j} + \epsilon_{\mathbf{k}_a} + i \eta} \right)
 \label{eq:self_energy_2nd_order}
 \end{align}
-where $\mathbf{k}_b = \mathbf{k}_p  + \mathbf{k}_i - \mathbf{k}_a$ in the first sum and $\mathbf{k}_j = \mathbf{k}_p - \mathbf{k}_i + \mathbf{k}_a$ in the second sum due to momentum conservation. This means we can write down the second order cumulant in the time domain as
+where $\mathbf{k}_b = \mathbf{k}_p  + \mathbf{k}_i - \mathbf{k}_a$ in the first sum and $\mathbf{k}_j = \mathbf{k}_p - \mathbf{k}_i + \mathbf{k}_a$ in the second sum due to momentum conservation. 
+\subsubsection{GW spectral function}
+Consider
+\begin{align}
+    \Sigma_k (\omega ) &= G_{0,k}^{-1}(\omega ) - G_k^{-1}(\omega ) \\
+    \implies G_k(\omega ) &= \frac{1}{G_{0,k}^{-1}(\omega ) - \Sigma_k(\omega )} \\
+    &= \frac{1}{\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) - i \operatorname{Im} \Sigma_k (\omega )} \times \frac{\left( \omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )\right)}{\left( \omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )\right)} \\
+    &= \frac{\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2}
+\end{align}
+We want $-\frac{1}{\pi} \operatorname{Im} G_k(\omega )$, so
+\begin{align}
+    \operatorname{Im} G_k(\omega ) &= \frac{\operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2} \\
+\end{align}
+Thus, the spectral function is
+\begin{equation}
+    A(\omega ) = -\frac{1}{\pi} \operatorname{Im} G_k(\omega ) = -\frac{1}{\pi} \frac{\operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2}
+\end{equation}
+This means we can write down the second order cumulant in the time domain as
 \begin{align}
 C_{pp}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pp}^{c,(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
  &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
@@ -1060,55 +1077,171 @@ Now, the form for the retarded interacting Green's function in the time domain i
 \begin{equation}
     G_{pp}(t) = -i \Theta(t) e^{-i \left(\epsilon_p - \varepsilon_F \right)t} e^{C_{pp}(t)}
 \end{equation}
-\subsection{Self-consistent cumulant with second-order self-energy}
-We can try to avoid the numerical for year transform by operating directly in the frequency domain. 
-We want to get the interacting Green's function in the time domain from the cumulant expansion as
+\subsubsection{Explanation of one-shot plots}
+Recall
+\begin{align}
+G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
+\label{Gpp1}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt e^{i(\omega - \epsilon_p^{QP}) t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} 
+\label{Gpp2}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt\, e^{i(\omega - \epsilon_p^{QP}) t} \left(1 + \sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t} +\ldots \right) \\
+% &= -i Z_p^{QP} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP}) t]}\label{Gpp3} \\
+% &\quad - i Z_p^{QP} \sum_{i\nu} \zeta_{pi\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pi\nu}) t]} \\
+% &\quad - i Z_p^{QP} \sum_{a\nu} \zeta_{pa\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pa\nu}) t]} + \ldots \\
+&= \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_p^{QP} \zeta_{pi\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pi\nu} + i\eta} + \sum_{a\nu} \frac{Z_p^{QP} \zeta_{pa\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pa\nu} + i\eta} + \ldots\\
+% & =-i Z_p^{Q P} \int_0^{+\infty} d r e^{\left[-\eta+i\left(\omega-\varepsilon_p^{Q P}\right)\right]} \\
+% & -\mathrm{i} Z_p^{\mathrm{OP}} \sum_{i v} \zeta_{p i v} \int_0^{+\infty} \mathrm{d} r e^{\left\{-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p i v}\right)\right]\right\}^{\prime}}-\mathrm{i} Z_p^{\mathrm{OP}} \sum_{a v} \zeta_{p a v} \int_0^{+\infty} \mathrm{d} r e^{\left(-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p \omega v}\right)\right]\right\}^{\prime}} \\
+& \approx \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_{pi\nu}^{sat}}{\omega - \epsilon_{pi\nu}^{sat} + i\eta} + \sum_{a\nu} \frac{Z_{pa\nu}^{sat}}{\omega - \epsilon_{pa\nu}^{sat} + i\eta}
+\label{Gpp4}
+\end{align}
+ $G_{pp}(\omega)$ is computed via \ref{Gpp4} in the schemes which I call first order. On the other hand, $G_{pp}(\omega)$ is computed via \ref{Gpp2} in the schemes which I call to infinite order. As you can see, there are two different flavors of infinite order, which only differ in how the real-time cumulant is computed. Analytic to infinite order does
+\begin{align}
+	 C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+\label{eq:Cpp_0} \\
+% &= i \int \frac{d\omega}{2\pi} \frac{1}{(\omega + i \eta)^2} e^{-i \omega t} \left[ \sum_{i\nu} \frac{M_{pi\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_i + \Omega_\nu + i \eta}_{-\Delta_{pi\nu}}} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_a - \Omega_\nu + i \eta}_{-\Delta_{pa\nu}}} \right] \\
+% & =\mathrm{i} \sum_{i v} M_{p i v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p i v}} +\mathrm{i} \sum_{a v} M_{p a v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p a v}}
+% \label{eq:Cpp_1}
+% \\
+&= \sum_{i\nu} \zeta_{pi\nu} \left[ e^{-i\Delta_{pi\nu} t} - 1 + i\Delta_{pi\nu} t \right] + \sum_{a\nu} \zeta_{pa\nu} \left[ e^{-i\Delta_{pa\nu} t} - 1 + i\Delta_{pa\nu} t \right]
+\label{eq:Cpp_2}
+\end{align}
+whereas numerical to infinite order computes using the Landau form
 \begin{equation}
-    G_{pp}(t) = -i \Theta(t) e^{-i \epsilon_p t} e^{C_{pp}^{(2)}(t)}
-\label{eq:sc_cumulant_greens_time}
+    C_{pp}(t) = \int d \omega \frac{\beta_{pp}(\omega)}{\omega^2} \left( e^{-i \omega t} + i \omega t -1 \right)
+\label{eq:cumulant_beta_repeat}
 \end{equation}
+with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega + \epsilon_p^{HF})|$ using the basic Riemann sum for the frequency integration. In both cases, we then plug the cumulant into
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) e^{-t \left(i\epsilon_p + \eta\right)t} e^{C_{pp}(t)}
+\end{equation}
+and then use the DFT to get $A_{pp}(\omega)$.
+\subsection{Self-consistent cumulant with second-order self-energy}\
+\subsubsection{Basis transformation}
+We want to evaluate the quantities in the sine-cosine basis, as this is simpler. But in the end, we will want the spectral function in the plane wave basis, and thus we need the Green's function in that basis. Now, the retarded Greens function in the time domain with the broadening factor $\eta$ can be written as
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) e^{-t(i \epsilon_p +\eta)} e^{C_{pp}(t)}
+\end{equation}
+where the cumulant is defined as
+\begin{align}
+    C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+ &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
+% \label{eq:cumulant_2nd_1}
+&\overset{RHF}{=} \sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
+\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2} \left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right)
+\end{align}
+with $\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
+and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. 
+\subsubsection{Self-consistency}
+Everything I present in the plots is one-shot. When I speak of GF2+C with analytic frequency integration, I am building the cumulant as
+\begin{align}
+    C_{pp}(t) &=\sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
+\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2} \left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) \nonumber
+\end{align}
+with $\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$ and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$.
+ As can be seen, this gives qualitatively the same result as GF2+C with numerical frequency integration, where I instead build the cumulant as
+\begin{equation}
+    C_{pp}(t) = \int d \omega \frac{\beta_{pp}(\omega)}{\omega^2} \left( e^{-i \omega t} + i \omega t -1 \right)
+\label{eq:cumulant_beta}
+\end{equation}
+with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega + \epsilon_p)|$ with the self-energy defined as
+\begin{align}
+    \Sigma^{(2)}_{pq}(\omega)
+    & = \sum_{iab} \frac{(pa|ib)\Big(2(qa|ib) - (qb|ia)\Big)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left( (pi|aj)(2(qi|aj) - (qj|ai)) \right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta} 
+\end{align}
+If I remember correctly, our idea for a self consistent scheme was to solve equation \ref{eq:cumulant_beta} using
+\begin{equation}
+    \Sigma_{pp}(\omega) = \frac{1}{G^0_{pp}(\omega)} - \frac{1}{G_{pp}(\omega)}
+% \left(G^0_{pp}(\omega)\right)^{-1} - \left(G_{pp}(\omega)\right)^{-1}
+\end{equation}
+In the initial trials, I have not been getting any useful results with the above. However, I notice that I only use under 1e4 frequency grid points. Should I try to get this scheme to work with something like 1e6 grid points or were you thinking of something different?
+\newpage
+This self-energy can then be used to compute a new cumulant $C_{pp}(t)$ as
+\begin{align}
+    C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+&= i \int \frac{d\omega}{2\pi} \frac{\omega + i \eta - \frac{1}{G_{pp}(\omega + \epsilon_p)}}{(\omega + i \eta)^2} e^{-i \omega t} \\
+&= i \int \frac{d\omega}{2\pi} \frac{\omega + i \eta}{(\omega + i \eta)^2} e^{-i \omega t} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t} \\
+&= i \int \frac{d\omega}{2\pi} \frac{e^{-i \omega t}}{\omega + i \eta} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t} \\
+&= \Theta(t)e^{-\eta t} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t}
+\end{align}
+where we can use some quadrature to perform the latter integral. This cumulant can then be used to compute $G_{pp}(t)$ using the usual recipe, and then Fourier transformed to obtain $G_{pp}(\omega)$, which can then be used to compute a new self-energy, and so on, until convergence is reached. We still need to determine what measure will be used to determine if self-consistency has been reached.
+\begin{equation}
+    \begin{pmatrix}
+|{\bm{K}_p}\rangle \\
+|{\bm{-K}_p}\rangle
+    \end{pmatrix}
+= \frac{1}{\sqrt{2}} \begin{bmatrix}
+1 & i \\
+1 & -i
+\end{bmatrix}
+\begin{pmatrix}
+|\alpha_p\rangle \\
+|\beta_p\rangle
+\end{pmatrix}
+\implies |\bm{K}_p\rangle = \frac{1}{\sqrt{2}} \left( |\alpha_p\rangle + i |\beta_p\rangle \right)
+\end{equation} 
+So the self energy (and also the cumulant as well as the Green's function) can be expressed as
+\begin{align}
+    \Sigma_{p p}(\omega)&\equiv\langle p| \hat{\Sigma}(\omega)|p\rangle \\
+&= \frac{1}{2} \left( \langle \alpha_p| + -i \langle \beta_p| \right) \hat{\Sigma}(\omega) \left( |\alpha_p\rangle + i |\beta_p\rangle \right) \\
+&= \frac{1}{2} \left( \Sigma_{\alpha_p \alpha_p}(\omega) + \Sigma_{\beta_p \beta_p}(\omega) + i \Sigma_{\alpha_p \beta_p}(\omega) - i \Sigma_{\beta_p \alpha_p}(\omega) \right)
+\end{align}
+Suppose that $p$ is the Fermi state, which in our case has wavevector $(1,0,0)$ and the complement is $(-1,0,0)$; in the plane wave basis, they may have non-consecutive indices, like 6 and 1, respectively. The sine-cosine basis is expressed as linear combinations of the two, so the sine and cosine states will now be in a consecutive order, say 5 and 6. I need to check that nothing changes if instead they occupy indices 1 and 2. Also, it is worth checking whether $\Sigma_{\alpha\beta} = \Sigma_{\beta\alpha}$ in the sine-cosin basis. If so, check if $\Sigma_{\alpha\alpha}=\Sigma_{\beta\beta}$ because, if so, that means the self-energy in the plane-wave basis might be equivalent to the self-energy in thee sine-cosine basis. 
 To derive a form for $C_{pp}^{(2)}(t)$, start by equating the cumulant ansatz for the Green's function the Dyson equation, which gives
 \begin{align}
 C_{pp}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pp}^{c,(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
  &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
 % \label{eq:cumulant_2nd_1}
-&\overset{RHF}{=} \sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
+&\overset{RHF}{=} \sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
 \left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
-+\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\epsilon_{pa}^{ij}\right)^2}
-\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) 
+\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) \\
+&\overset{SC}{=} \sum_{\tilde{p}}^{p_{\bm{K}}, p_{\bm{-K}}} \Bigg(\sum_{iab} \frac{(\tilde{p}i|ab)\left(2(\widetilde{p}i|ab)- (\widetilde{p}b|ia)\right)}{\left(\epsilon_{\widetilde{p}i}^{ab}\right)^2}
+\left(e^{-i \epsilon_{\widetilde{p}i}^{ab} t} +i \epsilon_{\widetilde{p}i}^{ab} t -1 \right) \\& + \sum_{ija} \frac{(\tilde{p}i|aj)\left(2(\widetilde{p}i|aj)- (\widetilde{p}j|ai)\right)}{\left(\epsilon_{\widetilde{p}a}^{ij}\right)^2}
+\left(e^{-i \epsilon_{\widetilde{p}a}^{ij} t} +i \epsilon_{\widetilde{p}a}^{ij} t -1 \right)\Bigg)  
 \label{eq:cumulant_2nd_final}
 \end{align}
 where
 $\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
 and
-$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$.
-In summary, the workflow is:
-\begin{enumerate}
-    \item Start with HF orbital energies $\epsilon_p$ and coefficients $C_{\mu p}$ 
-    \item Get $G_{pp}(t) = -i \Theta(t) e^{-i \epsilon_p t} e^{C_{pp}^{(2)}(t)}$ with $C_{pp}^{(2)}(t)$ from \ref{eq:cumulant_2nd_final}
-    \item $G_{pp}(\omega) = FFT\left[ G_{pp}(t) \right]$
-    \item $A_{pp}(\omega) = -\frac{1}{\pi} \operatorname{Im} \left[ G_{pp}(\omega) \right]$
-    \item $n_p = \int_{-\infty}^{\infty} f(\omega-\mu) A_{pp}(\omega) d\omega$ with $f(\omega-\mu)$ the Fermi-Dirac distribution at chemical potential $\mu$ (so just a step function at zero temperature)
-    \item $P_{\mu \nu} = 2\sum_p C_{\mu p} n_p C_{p \nu}^{T}$
-    \item $F_{\mu \nu}=h_{\mu \nu}+\sum_{\rho \sigma}\left(\langle \mu \rho \mid \nu \sigma\rangle-\frac{1}{2}\langle \mu \rho \mid \sigma \nu\rangle\right) P_{\rho \sigma}$
-    \item Diagonalize $F_{\mu \nu}$ to get new orbital energies $\epsilon_p$ and coefficients $C_{\mu p}$
-    \item Update orbital energies and coefficients within step 2, and repeat until convergence
-\end{enumerate}
-In order to evaluate \ref{eq:cumulant_2nd_1} with numerical self-consistency in mind, this would require the maximum scaling of $N_O N_V^2$ for the summations, and $N_\omega$ points for the frequency integration, leading to a total scaling of $O(N_O N_V^2 N_\omega)$. In an iteration, we can accumulate data for the value of the interacting Green's function for all $N_T$ time steps, and then by performing a numerical Fourier transform, we go from $G_{pp}(t)\rightarrow G_{pp}(\omega)$, which can then be used to build a new Fock matrix. 
-\subsection{Second-order self-energy using RHF reference}
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. At this point we can stop and notice that if we want to determine use the sine-cosine basis for the evaluation of the self energy in the definition of the cumualant, we just need to do
+\begin{equation}
+    \Sigma_{p p}(\omega)=\langle p| \hat{\Sigma}(\omega)|p\rangle=\sum_{\alpha, \beta} U_{p \alpha} \Sigma_{\alpha \beta}^{(\mathrm{sc})}(\omega) U_{p \beta}^*,
+\end{equation}
+Now, we are told that this unitary transformation that allows us to move between the plane wave and sine-cosine basis is given by
+\begin{align}
+\mathbf{U} &= \frac{1}{\sqrt{2}} \begin{bmatrix}
+1 & 1 \\
+ -i & i
+\end{bmatrix}
+\implies
+\begin{bmatrix}|\mathbf{K},s \rangle \\
+|\mathbf{K},c \rangle
+\end{bmatrix} = \mathbf{U}^\dag \begin{bmatrix} |\mathbf{K} \rangle \\
+|-\mathbf{K} \rangle
+\end{bmatrix}
+\end{align}
+for a $\mathbf{K}\neq 0$ state from the plane wave basis.
+\subsection{Derivation of second-order self-energy using RHF reference}
 To derive this, we can start with the definition (we will just deal with the 2p1h channel for simplicity)
 \begin{align}
     \Sigma_{pp}^{(2)}(\omega) =& \frac{1}{2}\sum_{iab} \frac{\langle pi || ab \rangle \langle ab || pi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \ldots \\
 &= \frac{1}{2}\sum_{iab} \frac{\left( \langle pi | ab \rangle - \langle pi | ba \rangle \right)\left( \langle ab | pi \rangle - \langle ab | ip \rangle \right)}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \ldots \\
 &= \frac{1}{2}\sum_{iab} \frac{\langle pi | ab \rangle \langle ab | pi \rangle - \langle pi | ab \rangle \langle ab | ip \rangle - \langle pi | ba \rangle \langle ab | pi \rangle + \langle pi | ba \rangle \langle ab | ip \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \ldots 
 \end{align}
+% But if we swap the dummy indices for the third term, we see that $\langle pi | ba \rangle \langle ab | qi \rangle = \langle qi | ab \rangle \langle ba | pi \rangle=\langle qi | ab \rangle \langle ab | ip \rangle$, which we can group together with the second term. Similarly, for the fourth term, we can swap $a \leftrightarrow b$ to get $\langle pi | ba \rangle \langle ab | ip \rangle = \langle pi | ab \rangle \langle ba | ip \rangle = \langle pi | ab \rangle \langle ab | pi \rangle$, which we can group together with the first term. Now assigning a spin variable to each center, this gives
 But if we swap the dummy indices for the third term, we see that $\langle pi | ba \rangle \langle ab | pi \rangle = \langle pi | ab \rangle \langle ba | pi \rangle=\langle pi | ab \rangle \langle ab | ip \rangle$, which we can group together with the second term. Similarly, for the fourth term, we can swap $a \leftrightarrow b$ to get $\langle pi | ba \rangle \langle ab | ip \rangle = \langle pi | ab \rangle \langle ba | ip \rangle = \langle pi | ab \rangle \langle ab | pi \rangle$, which we can group together with the first term. Now assigning a spin variable to each center, this gives
 \begin{align}
     \Sigma_{p^{+ }p^{+ }}^{(2)}(\omega) =& \frac{1}{2}\sum_{iab} \sum_{\beta\gamma \sigma }\frac{2 \langle p^{+} i^{\beta} | a^{\gamma } b^{\sigma } \rangle \langle a^{\gamma} b^{\sigma} | p^{+} i^{\beta} \rangle - 2 \langle p^{+} i^{\beta} | a^{\gamma} b^{\sigma} \rangle \langle b^{\sigma } a^{\gamma} | p^{+} i^{\beta} \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \ldots \\
     =& \sum_{iab} \frac{2 \langle p i | a b \rangle \langle a b | p i \rangle - \langle p i | a b \rangle \langle b a | p i \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \ldots \\
     =& \sum_{iab} \frac{\langle p i | a b \rangle \left( 2 \langle a b | p i \rangle - \langle b a | p i \rangle \right)}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \ldots
 \end{align}
-where in the first expression, because to start with the index $p$ is already constrained to have spin $+$, so $a$ must be $+$ as well, and we can accept 2 combinations of spin for the two-electron integrals ($\beta , \gamma = +,-$), while in the second expression, we can only accept 1 combinations of $\beta , \gamma = +$.
+where in the first expression, because to start with the index $p$ is already constrained to have spin $+$, so $a$ must be $+$ as well, and we can accept 2 combinations of spin for the two-electron integrals ($\beta , \gamma = +,-$), while in the second expression, we can only accept 1 combinations of $\beta , \gamma = +$. For the expression of the off-diagonal self-energy, we can just accept Szabo's form in 3.79.
 % &= \sum_{iab} \frac{\left( \langle pi | ab \rangle - \langle pi | ba \rangle \right)\left( \langle ab | pi \rangle - \langle ab | ip \rangle \right)}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \sum_{ija} \frac{\left( \langle pa | ij \rangle - \langle pa | ji \rangle \right)\left( \langle ij | pa \rangle - \langle ij | ap \rangle \right)}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
 In Joonho's paper, they say that 
 % $$
@@ -1130,56 +1263,7 @@ Making this change, also makes the MP2 energy match that obtained from the sine-
     i+j=a+b \implies i-a = b - j
 \end{equation}
 To make things simpler, instead of working in the plan wave bases, we can transform to the sine-cosine basis. I need to make sure that I am consistent with this basis choice, though. Below, I go through the logic, to ensure consistency.
-\subsubsection{Sine-cosine basis}
-We know that for any plane wave state with $\mathbf{K} \neq 0$, it has the partner $-\mathbf{K}$, and the sine-coosine basis generates the linear combinations
-\begin{align}
-|\mathbf{K}, s \rangle &= \frac{1}{\sqrt{2}} \left( |\mathbf{K} \rangle + |-\mathbf{K} \rangle \right) \\
-|\mathbf{K}, c \rangle &= \frac{1}{\sqrt{2}} \left( -i |\mathbf{K} \rangle + i |-\mathbf{K} \rangle \right)
-\end{align}
-where $s$ and $c$ denote the sine and cosine functions, respectively. This can be written in matrix form as
-\begin{align}
-&
-\begin{bmatrix}|\mathbf{K},s \rangle \\
-|\mathbf{K},c \rangle
-\end{bmatrix} = \mathbf{U} \begin{bmatrix} |\mathbf{K} \rangle \\
-|-\mathbf{K} \rangle
-\end{bmatrix}
-\quad \text{with} \quad
-\mathbf{U} = \frac{1}{\sqrt{2}} \begin{bmatrix}
-1 & 1 \\
--i & i
-\end{bmatrix}\\
-\end{align}
-for a $\mathbf{K}\neq 0$ state from the plane wave basis.
 
-\subsubsection{HF is the same in both bases}
-When I do
-\begin{lstlisting}[language=Python]
-    mol = gto.M()
-    mol.nelectron = n_elec
-    n = nbsf
-    mf = scf.RHF(mol)
-    U = ueg.compute_real_transformation()
-    transformed_hcore = np.einsum("ip,ij,jq->pq", U.conj(), hcore, U, optimize=True)
-    mf._eri = ao2mo.restore(4, finite_eriao8, n)
-    mf.get_hcore = lambda *args: transformed_hcore
-    transformed_ovlp = np.einsum("ip,ij,jq->pq", U.conj(), ovlp, U, optimize=True)
-    mf.get_ovlp = lambda *args: transformed_ovlp
-    mf.verbose = 4
-    mf.kernel()
-\end{lstlisting}
-
-I reproduce the result from the pyqcpbc fock builder, which uses the Cholesky vectors in the plane wave basis.
-\subsubsection{Checking MP2 energy}
-the first thing that we can to validate this basis change is to check is whether my MP2 energy is correct. as suggested by Szabo, the expression that we want for a closed shelf system is
-\begin{align}
-    E_0^{(2)}&=\sum_{i j a b}^{N / 2} \frac{\langle i j \mid a b\rangle \Big( 2\langle a b \mid i j\rangle - \langle a b \mid j i\rangle\Big)}{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b} \\
-    & = \sum_{i j a b}^{N / 2} \frac{(ia|jb)\Big(2(ia|jb) - (ja|ib)\Big)}{\epsilon_i + \epsilon_j - \epsilon_a - \epsilon_b}
-\end{align}
-It is invariant to the choice of basis, so when I compute this expression in the sine-cosine basis, I match with the answer given by a reference, such as PySCF. Shu Fay's equation say 
-\begin{align}
-    \left(p_{\vec{k}} q_{\vec{k}} \mid i_{\vec{k}^{\prime}} j_{\overrightarrow{k^{\prime}}}\right) & =\int_{\Omega} d^2 \vec{r} d^2 r^{\prime} \phi_{p \vec{k}}^*(\vec{r}) \phi_{q k}(\vec{r}) \frac{1}{\left|\vec{r}-r^{\prime}\right|} \phi_{i \vec{k}^{\prime}}^*\left(r^{\prime}\right) \phi_{j \overrightarrow{k^{\prime}}}\left(r^{\prime}\right) \\ & =\frac{1}{\Omega} \int d^2 \vec{r} \phi_{p \vec{k}}^*(\vec{r}) \phi_{q \vec{k}}(\vec{r})\left[\int d^2 r^{\prime} \frac{1}{\left|\vec{r}-r^{\prime}\right|} e^{i\left(\vec{G}_j-\vec{G}_i\right) \cdot r^{\prime}}\right] \\ & =\frac{1}{\Omega} \int_{\Omega} d^2 \vec{r} \phi_{p \vec{k}}^*(\vec{r}) \phi_{q k}(\vec{r}) e^{i\left(\vec{G}_j-\vec{G}_i\right) \cdot \vec{r}} \underbrace{\left[\int_{\Omega} d^2 r^{\prime} \frac{1}{\left|r^{\prime}-\vec{r}\right|} e^{i\left(G_j-\vec{G}_i\right) \cdot\left(r^{\prime}-\vec{r}\right)}\right]}_{\frac{2 \pi}{\left|G_j-G_i\right|}} \\ & =\frac{1}{\Omega^2} \int_{\Omega} d^2 \vec{r} e^{i\left[\left(G_q-\vec{G}_p\right)+\left(\vec{G}_j-\vec{G}_i\right)\right] \cdot \vec{r}} \cdot \frac{2 \pi}{\left|\vec{G}_j-\vec{G}_i\right|} \\ & =\frac{1}{\Omega} \cdot \delta\left(\vec{G}_j+\vec{G}_q-\vec{G}_i-\vec{G}_p\right) \cdot \frac{2 \pi}{\left|\vec{G}_j-\vec{G}_i\right|} \\ & =\frac{2 \pi}{\Omega\left|\vec{G}_j-\vec{G}_i\right|} \underbrace{\delta\left[\left(\vec{G}_j+\vec{G}_q\right)-\left(\vec{G}_i+\vec{G}_p\right)\right]}_{\text {momentum conservation }}
-\end{align}
 
 \subsubsection{Second-order self-energy in sine-cosine basis}
 The retarded, closed shell expression given by Szabo is
@@ -1191,20 +1275,7 @@ Now, for the purposes of the diagonal cumulant, we want to be able to compute $\
 \begin{align}
 {\Sigma}^{(2),R}_{pq}(\omega) & = \sum_{m n} U_{p m} {\Sigma}^{(2),R}_{mn}(\omega) U_{n q}^{\dagger} \\
 \end{align}
-\begin{align}
-{\Sigma}^{(2),R}_{pq}(\omega) &\overset{\text{UHF}}{=} \frac{1}{2}\sum_{iab} \frac{\left( \left<pi||ab\right>\left<ab||qi\right>\right)}{\omega - \epsilon_{a} - \epsilon_{b} + \epsilon_{i} + i \eta} + \frac{1}{2}\sum_{ija} \frac{\left( \left<pa||ij\right>\left<ij||qa\right>\right)}{\omega - \epsilon_{j} - \epsilon_{i} + \epsilon_{a} + i \eta} \\
-\implies {\Sigma}^{(2),R}(p, \omega) &= \sum_{iab} \frac{\left( 2\left<pi|ab\right> - \left<pi|ba\right>\right)^2}{\omega - \epsilon_{a} - \epsilon_{b} + \epsilon_{i} + i \eta} + \sum_{ija} \frac{\left( 2\left<pa|ij\right> - \left<pa|ji\right>\right)^2}{\omega - \epsilon_{j} - \epsilon_{i} + \epsilon_{a} + i \eta} \label{init_sose}\\
-% & =  \sum_{\mathbf{K}_i \in O; \,\mathbf{K}_a , \mathbf{K}_b \in V} \frac{\left[ 2\left(
-% \frac{4\pi\delta_{\mathbf K_p - \mathbf K_a, \mathbf K_i - \mathbf K_b}}{\Omega|\mathbf K_p - \mathbf K_a|^2}
-% \times(1-\delta_{\mathbf K_p,\mathbf K_a})\right) - \left( \frac{4\pi\delta_{\mathbf K_p - \mathbf K_b, \mathbf K_i - \mathbf K_a}}{\Omega|\mathbf K_p - \mathbf K_b|^2} \times(1-\delta_{\mathbf K_p,\mathbf K_b})\right) \right]^2 }{\omega - \epsilon_{\mathbf{K}_a} - \epsilon_{\mathbf{K}_b} + \epsilon_{\mathbf{K}_i} + i \eta}\nonumber \\
-%  &  + \sum_{\mathbf{K}_i,\mathbf{K}_j \in O;\, \mathbf{K}_a \in V} \frac{\left[ 2\left(\frac{4\pi\delta_{\mathbf K_p - \mathbf K_i, \mathbf K_j - \mathbf K_a}}{\Omega|\mathbf K_p-\mathbf K_i|^2} \times(1-\delta_{\mathbf K_p,\mathbf K_i})\right) - \left(\frac{4\pi\delta_{\mathbf K_p - \mathbf K_j, \mathbf K_i - \mathbf K_a}}{\Omega|\mathbf K_p - \mathbf K_j|^2} \times(1-\delta_{\mathbf K_p,\mathbf K_j})\right) \right]^2 }{\omega - \epsilon_{\mathbf{K}_i} - \epsilon_{\mathbf{K}_j} + \epsilon_{\mathbf{K}_a} + i \eta} \\
-&= \left(\frac{4\pi}{\Omega}\right)^2 \left( \sum_{\mathbf{K}_i \in O; \,\mathbf{K}_a , \mathbf{K}_b \in V} \frac{\left[ \frac{2\delta_{\mathbf{K}_p - \mathbf{K}_a , \mathbf{K}_b - \mathbf{K}_i}}{|\mathbf{K}_p - \mathbf{K}_a|^2}\times(1-\delta_{\mathbf K_p,\mathbf K_a})\right]^2 }{\omega - \epsilon_{\mathbf{K}_a} - \epsilon_{\mathbf{K}_b} + \epsilon_{\mathbf{K}_i} + i \eta}  + \frac{\left[ \frac{\delta_{\mathbf{K}_p - \mathbf{K}_b , \mathbf{K}_a - \mathbf{K}_i}}{|\mathbf{K}_p - \mathbf{K}_b|^2}\times(1-\delta_{\mathbf K_p,\mathbf K_b})\right]^2 }{\omega - \epsilon_{\mathbf{K}_a} - \epsilon_{\mathbf{K}_b} + \epsilon_{\mathbf{K}_i} + i \eta} \right. \\
-& \left. - \frac{4\delta_{\mathbf{K}_p - \mathbf{K}_a , \mathbf{K}_b - \mathbf{K}_i}\delta_{\mathbf{K}_p - \mathbf{K}_b , \mathbf{K}_a - \mathbf{K}_i}}{|\mathbf{K}_p - \mathbf{K}_a|^2 |\mathbf{K}_p - \mathbf{K}_b|^2}\times(1-\delta_{\mathbf K_p,\mathbf K_a})(1-\delta_{\mathbf K_p,\mathbf K_b}) \times \frac{1}{\omega - \epsilon_{\mathbf{K}_a} - \epsilon_{\mathbf{K}_b} + \epsilon_{\mathbf{K}_i} + i \eta} \right. \nonumber \\
-& \left. + \sum_{\mathbf{K}_i,\mathbf{K}_j \in O;\, \mathbf{K}_a \in V} \frac{\left[ \frac{2\delta_{\mathbf{K}_p - \mathbf{K}_i , \mathbf{K}_j - \mathbf{K}_a}}{|\mathbf{K}_p-\mathbf{K}_i|^2}\times(1-\delta_{\mathbf K_p,\mathbf K_i})\right]^2 }{\omega - \epsilon_{\mathbf{K}_i} - \epsilon_{\mathbf{K}_j} + \epsilon_{\mathbf{K}_a} + i \eta} + \frac{\left[ \frac{\delta_{\mathbf{K}_p - \mathbf{K}_j , \mathbf{K}_i - \mathbf{K}_a}}{|\mathbf{K}_p - \mathbf{K}_j|^2}\times(1-\delta_{\mathbf K_p,\mathbf K_j})\right]^2 }{\omega - \epsilon_{\mathbf{K}_i} - \epsilon_{\mathbf{K}_j} + \epsilon_{\mathbf{K}_a} + i \eta}  \right. \nonumber\\
-& \left. - \frac{4\delta_{\mathbf{K}_p - \mathbf{K}_i , \mathbf{K}_j - \mathbf{K}_a}\delta_{\mathbf{K}_p - \mathbf{K}_j , \mathbf{K}_i - \mathbf{K}_a}}{|\mathbf{K}_p-\mathbf{K}_i|^2 |\mathbf{K}_p - \mathbf{K}_j|^2}\times(1-\delta_{\mathbf K_p,\mathbf K_i})(1-\delta_{\mathbf K_p,\mathbf K_j}) \times \frac{1}{\omega - \epsilon_{\mathbf{K}_i} - \epsilon_{\mathbf{K}_j} + \epsilon_{\mathbf{K}_a} + i \eta} \right) \nonumber
-\label{eq:self_energy_2nd_order}
-\end{align}
-We can also work in the sine-cosine basis, where we can directly implement \ref{init_sose} in a standard quantum chemistry approach, because now the ERIs have 8-fold symmetry. But we must take into account the correct mapping between the plane wave and sine-cosine basis, leading to
+But we must take into account the correct mapping between the plane wave and sine-cosine basis, leading to
 \begin{equation}
 {\Sigma}^{(2),R}(p, \omega)\equiv{\Sigma}^{(2),R}_{pp}(\omega)=\frac{1}{2}\left( \Sigma ^{(2),R}_{c c}(\omega )+\Sigma^{(2),R}_{s s}(\omega )\right)+\frac{i}{2}\left(\Sigma^{(2),R}_{s c}(\omega )-\Sigma^{(2),R}_{c s}(\omega )\right)
 % \Sigma_{c c}^{\prime}+\Sigma_{s s}^{\prime}\right)+\frac{i}{2}\left(\Sigma_{s c}^{\prime}-\Sigma_{c s}^{\prime}\right)
@@ -1251,20 +1322,20 @@ After some algebra, we are left with the fact that
 \begin{equation}
 {\Sigma}^{c,(2),R}(p, \omega)=\frac{1}{2}\left(\Sigma_{c c}^{\prime}+\Sigma_{s s}^{\prime}\right)+\frac{i}{2}\left(\Sigma_{s c}^{\prime}-\Sigma_{c s}^{\prime}\right)
 \end{equation}
-\subsubsection{GF2 Poles}
-To determine this, we want to solve the QP equation, which involves optimizing the objective function defined as
-\begin{equation}
-\omega - \varepsilon_p - \operatorname{Re}\left[\Sigma^{c,(2),R}(p, \omega)\right] = 0
-\end{equation}
-But due to the Madelung correction, we actually want to solve
-\begin{equation}
-\omega - \left( \varepsilon_p - \frac{v_M}{2} \right) - \operatorname{Re}\left[\Sigma^{c,(2),R}(p, \left(\omega + \frac{v_M}{2}\right)\right] = 0
-\end{equation}
-It can be shown that the frequency dependent spectral function can be expressed in terms of the self-energy as follows:
-\begin{align}
-A(p, \omega) &= \frac{1}{\pi} \frac{\left|\Sigma^{\prime \prime}(p, \omega)\right|}{\left[\omega+\mu-\varepsilon_{p}-\Sigma^{\prime}(p, \omega)\right]^2+\left[\Sigma^{\prime \prime}(p, \omega)\right]^2}
-\end{align}
-where $\Sigma ^c (p, \omega) = \Sigma^{\prime}(p, \omega) + i \Sigma^{\prime \prime}(p, \omega)$.
+% \subsubsection{GF2 Poles}
+% To determine this, we want to solve the QP equation, which involves optimizing the objective function defined as
+% \begin{equation}
+% \omega - \varepsilon_p - \operatorname{Re}\left[\Sigma^{c,(2),R}(p, \omega)\right] = 0
+% \end{equation}
+% But due to the Madelung correction, we actually want to solve
+% \begin{equation}
+% \omega - \left( \varepsilon_p - \frac{v_M}{2} \right) - \operatorname{Re}\left[\Sigma^{c,(2),R}(p, \left(\omega + \frac{v_M}{2}\right)\right] = 0
+% \end{equation}
+% It can be shown that the frequency dependent spectral function can be expressed in terms of the self-energy as follows:
+% \begin{align}
+% A(p, \omega) &= \frac{1}{\pi} \frac{\left|\Sigma^{\prime \prime}(p, \omega)\right|}{\left[\omega+\mu-\varepsilon_{p}-\Sigma^{\prime}(p, \omega)\right]^2+\left[\Sigma^{\prime \prime}(p, \omega)\right]^2}
+% \end{align}
+% where $\Sigma ^c (p, \omega) = \Sigma^{\prime}(p, \omega) + i \Sigma^{\prime \prime}(p, \omega)$.
 \subsection{Derivation of the analytic form for GF2+C}
 We can start with
 \begin{equation}
@@ -1333,29 +1404,6 @@ How is this connected to the standard result for the non-interacting Green's fun
 \begin{equation}
     G^0_{pp}(\omega) = \frac{1}{\omega - \epsilon_p + i \eta}
 \end{equation}
-\subsection{HF spectral functions}
-We can define $\xi=-2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}$ Hartrees.
-\subsubsection{Blue solid curve}
-\label{sec:blue_curve}
-The blue curve is obtained by using a retarded greens function of the form
-\begin{equation}
-    G^R(p, \omega) = \frac{1}{\omega - \epsilon_p + i \eta}
-\end{equation}
-with $\epsilon_p$ the HF orbital energies that I have obtained with an SCF procedure, which never takes into account the Madelung correction. Then, I am plotting the spectral function $A(p, \omega) = -\frac{1}{\pi} \operatorname{Im} \left[ G^R(p, \omega + \frac{\xi}{2}) \right]$. 
-\subsubsection{Orange dotted curve}
-This one is obtained again by using a retarded greens function of the form
-\begin{equation}
-    G^R(p, \omega) = \frac{1}{\omega + \varepsilon_p + i \eta}
-\end{equation}
-where now the $\varepsilon_p$ are the HF orbital energies that you sent yesterday. Remember that you negated them, which is why the sign is reversed above. Then, I am plotting the spectral function $A(p, \omega) = -\frac{1}{\pi} \operatorname{Im} \left[ G^R(p, \omega + \frac{\xi}{4}) \right]$. Note that this is a perfect match for the one above for these two cases of the GPT and HOMO.
-\subsubsection{Green dashed curve}
-For this one, I took the exact same approach as in section \ref{sec:blue_curve}, with the only difference being that I defined
-\begin{equation}
-    G^R(p, \omega) = \frac{1}{\omega - (\epsilon_p-\varepsilon_F) + i \eta}
-\end{equation}
-where $\varepsilon_F$ is the Fermi energy (or the energy of my HOMO in HF) from my code, which is due to iPie.
-\subsubsection{Note about the virtuals}
-I gave 1.5 hour of effort to figuring out the connection between your virtual poles and mine, but I was not able to get them to match yet. Is it important that I get them to match now? I know it would be good, but all of the references just report the spectral functions for occupied orbitals, so I am not sure if this should be a priority.
 
 \subsection{Taking advantage of connection between EOMs}
 
