@@ -1,0 +1,8 @@
+# dipole moments (Debye) calculated with HF and the SRG-qsGF2 flavors
+# use "comment='#'" when reading with pandas to ignore these lines
+mol,HF,SRG-qsGF2,SRG-SCS-qsGF2,SRG-SOS-qsGF2
+HF,1.922042,1.787733,1.794627,1.812815
+CO,-0.265116,0.234011,0.210350,0.146464
+H2O,1.983745,1.864239,1.864413,1.876167
+NH3,1.593310,1.522623,1.519986,1.525047
+H2S,1.068845,1.009935,1.002910,0.994616

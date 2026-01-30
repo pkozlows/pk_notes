@@ -1,0 +1,593 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, filecolor=magenta, urlcolor=cyan,}
+\urlstyle{same}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\graphicspath{ {./images/} }
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{caption}
+\usepackage{multirow}
+
+\title{Second order many-body perturbation approximations to the coupled cluster Green's function }
+
+\author{Marcel Nooijen\\
+Quantum Theory Project, University of Florida, Gainesville, Florida 32611-8435\\
+Jaap G. Snijders\\
+Department of Theoretical Chemistry, Vrije Universiteit, De Boelelaan 1083, 1081 HV Amsterdam, The Netherlands}
+\date{}
+
+
+\begin{document}
+\maketitle
+\captionsetup{singlelinecheck=false}
+\section*{Second order many-body perturbation approximations to the coupled cluster Green's function}
+Marcel Nooijen; Jaap G. Snijders\\
+Check for updates\\
+J. Chem. Phys. 102, 1681-1688 (1995)\\
+\href{https://doi.org/10.1063/1.468900}{https://doi.org/10.1063/1.468900}
+
+% \section*{Articles You May Be Interested In}
+% Real-time equation-of-motion CC cumulant and CC Green's function simulations of photoemission spectra of water and water dimer\\
+% J. Chem. Phys. (August 2022)
+
+% Vertical valence ionization potential benchmarks from equation-of-motion coupled cluster theory and QTP functionals\\
+% J. Chem. Phys. (February 2019)
+
+% A non-Dyson third-order approximation scheme for the electron propagator\\
+% J. Chem. Phys. (September 1998)\\
+% \includegraphics[max width=\textwidth, center]{659f64c0-9204-4f4b-8824-59866f2d8272-1_417_414_2236_443}
+
+% \section*{AIP Advances}
+% \section*{Why Publish With Us?}
+% 21DAYS\\
+% OVER 4 MILLION average time to 1st decision views in the last year
+
+% INCLUSIVE scope
+
+(Received 23 August 1994; accepted 17 October 1994)
+
+\begin{abstract}
+The time-consuming step in coupled cluster Green's function or equivalently equation of motion coupled cluster calculations of ionization potentials is the solution of the CCSD equations. We investigate here the accuracy that can be obtained if the CCSD coefficients are replaced by their MBPT(2) analogs. We discuss some additional diagonal approximations that might prove especially useful in polymer calculations, and compare with traditional Green's function calculations based on a second order approximation to the irreducible self-energy. © 1995 American Institute of Physics.
+\end{abstract}
+
+\section*{I. INTRODUCTION}
+In previous publications we developed the so-called coupled cluster Green's function (CCGF) method, ${ }^{1,2}$ which has the prime characteristic that the ionization part and the electron attachment parts of the one-particle Green's function are completely decoupled. The CCGF scheme to calculate ionization potentials and electron affinities is completely identical to the equation of motion coupled cluster (EOMCC) method ${ }^{3-5}$ for the $\mathrm{IP}^{6,7}$ and EA sectors ${ }^{8}$ and it is similarly equivalent to coupled cluster linear response theory (CCLRT) ${ }^{9-15}$ as far as energy differences are concerned. Moreover the IP-EOMCC and EA-EOMCC approaches are intimately connected to the Fock space coupled cluster (FSCC) approaches for the ( 0,1 ) and ( 1,0 ) sectors. ${ }^{16-26}$ FSCC, EOMCC, CCLRT, and CCGF results for primary ionization potentials and electron attachment energies are all identical. ${ }^{27,28}$ The coupled cluster Green's function formulation in addition leads in a natural way to a definition of Feynman-Dyson amplitudes and polestrengths which are related to intensities in a photo-electron spectrum. ${ }^{1}$
+
+The CCSD-GF method has been applied to calculate ionization potentials for a selection of moderately sized molecules and the results (with an average error of 0.12 eV for the outer valence IP's) were found to be quite satisfactory. ${ }^{2}$ The most time-consuming step in a CCSD-GF calculation is the solution of the CCSD equations. The subsequent calculation of ionization potentials requires negligible computation time (at least for relatively small molecules) as only a few roots of a moderately sized matrix are required. Therefore it seems natural to replace the CCSD coefficients by their MBPT(2) analogs. This poses no formal problems with decoupling as the MBPT(2)-GF method defines an implicit summation over a selection of connected perturbation diagrams all contributing exclusively to the ionization part of the single particle Green's function (this follows immediately from the diagrammatic derivation of the CCGF method ${ }^{1}$ ).
+
+In this paper we investigate the performance of the MBPT(2)-GF [or alternatively IP-EOM-MBPT(2)] approach comparing with full CCSD-GF results and experiment. We will also consider additional approximations in which we\\
+replace the $2 h p-2 h p$ block of the matrix that needs to be diagonalized by a diagonal form. We expect that such an approach might be very suitable to investigate a correlated band structure for polymers and possibly three-dimensional periodic systems. The diagonal second order Green's function approach is closely related to the second order Dyson approach, in which a second order approximation is made for the irreducible self-energy. These approaches differ in various aspects, however, and we examine through numerical experiment which of these aspects are important for the accuracy of the final results.
+
+\section*{II. THEORY}
+In CCSD-GF the ionization potentials (our main objective in this paper) are obtained by diagonalizing a matrix $\mathbf{A}$ with matrix elements
+
+
+\begin{align*}
+A_{\lambda \mu} & =\left\langle\Phi_{0}\right| \hat{\Omega}_{\lambda}^{\dagger} e^{-\hat{T}}\left[\hat{H}, \hat{\Omega}_{\mu}\right] e^{\hat{T}}\left|\Phi_{0}\right\rangle \\
+& =\left\langle\Phi_{\lambda}\right| e^{-\hat{T}}\left(\hat{H}-E_{\mathrm{CC}}\right) e^{\hat{T}}\left|\Phi_{\mu}\right\rangle \tag{1}
+\end{align*}
+
+
+Here, $\lambda$ and $\mu$ run over all $h$ and $2 h p$ configurations:
+
+
+\begin{equation*}
+\left\{\hat{\Omega}_{\lambda}\right\}=\left\{\hat{a}_{i}, \hat{a}_{i} \hat{a}_{b}^{\dagger} \hat{a}_{j}\right\}, \tag{2}
+\end{equation*}
+
+
+where $i, j, k, l$ label occupied orbitals and $a, b, c, d$ label unoccupied orbitals with respect to the reference determinant $\left|\Phi_{0}\right\rangle$. In Eq. (1) $T$ is the so-called cluster operator, which is obtained by solving the CCSD equations (see, e.g., Refs. 29 and 30). It follows that in CCSD-GF the ionization potentials are given by the eigenvalues (relative to the CCSD ground state energy) of the transformed Hamiltonian
+
+
+\begin{equation*}
+\overline{\hat{H}}=e^{-\hat{T}} \hat{H} e^{\hat{T}} \tag{3}
+\end{equation*}
+
+
+projected on the space of $h$ and $2 h p$ configurations. The scheme described here is completely equivalent to the EOMCC or CCLRT method for ionization potentials, ${ }^{8,10-12,28,31}$ while the approach has also been shown to yield identical results as the Fock space CC method ${ }^{16-19}$ for the principal IP sector. ${ }^{27,28,32}$
+
+The computational cost of a CCSD-GF or IP-EOMCC calculation is almost completely determined by the CCSD\\
+step and to a lesser extent the calculation of the matrix elements of the transformed Hamiltonian. The cost of finding a few roots of the moderately sized matrix $\mathbf{A}$ is completely negligible if a direct diagonalization procedure for nonsymmetric matrices ${ }^{33}$ is used, analogous to the Davidson method ${ }^{34}$ for symmetric matrices. A natural approximation to make the method more widely applicable is to replace the costly CCSD coefficients by their MBPT(2) analogs. If we assume a closed shell Hartree-Fock solution as the reference determinant the $t$ coefficients simplify to
+
+
+\begin{align*}
+& t_{i}^{a}=0 \\
+& t_{i j}^{a b}=\frac{V_{a b i j}}{\epsilon_{i}+\epsilon_{j}-\epsilon_{a}-\epsilon_{b}}, \tag{4}
+\end{align*}
+
+
+where $V_{a b i j}$ denotes a nonantisymmetrized two-electron integral in "1212" notation and the $\epsilon_{p}$ denote canonical Hartree-Fock orbital eigenvalues. The explicit formulas for the matrix $\mathbf{A}^{2}$ are expressed in intermediate quantities [derived from Eq. (3)] which simplify greatly over the original formulas ${ }^{35}$ because the single excitation coefficients vanish in the RHF-MBPT(2) case. Below we give explicit formulas for the intermediates that are used to construct the matrix A within the present approximation
+
+
+\begin{align*}
+& U_{k i}=\epsilon_{i} \delta_{k i}+\sum_{c, d, l} V_{k l c d}\left(2 t_{i l}^{c d}-t_{i l}^{d c}\right),  \tag{5}\\
+& U_{a c}=\epsilon_{a} \delta_{a c}-\sum_{k, l, d} V_{k l c d}\left(2 t_{k l}^{a d}-t_{l k}^{a d}\right), \\
+& W_{k l i d}=V_{k l i d}, \\
+& W_{k a c i}=V_{k a c i}+\sum_{l, d} V_{k l c d}\left(2 t_{i l}^{a d}-t_{l i}^{a d}\right)-\sum_{l, d} V_{k l d c} t_{i l}^{a d}, \\
+& W_{k b i d}=V_{k b i d}-\sum_{c, l} V_{k l c d} t_{i l}^{c b},  \tag{6}\\
+& W_{k l i j}=V_{k l i j}+\sum_{c, d} V_{k l c d} t_{i j}^{c d}, \\
+& W_{k b i j}=V_{k b i j}+\sum_{l, d} V_{k l i d}\left(2 t_{l j}^{d b}-t_{j l}^{d b}\right)-\sum_{l, d} V_{l k i d} t_{l j}^{d b} \\
+& \quad+\sum_{c, d} V_{b k d c} t_{j i}^{d c}-\sum_{l, c} V_{l k j c} t_{l i}^{b c} .
+\end{align*}
+
+
+It can be seen that there is no intermediate that contains three or more unoccupied indices. Moreover, there is only one contribution in the construction of these intermediates that requires integrals with three unoccupied labels. It is possible to evaluate this contribution partially in the atomic basis. If we use greek indices to label atomic orbitals and use $X_{\gamma c}$ to denote the transformation matrix from atomic to virtual orbitals, we can write
+
+
+\begin{equation*}
+\sum_{c, d} V_{b k d c} t_{i j}^{c d}=\sum_{c, d} \sum_{\gamma, \delta} V_{b k \delta \gamma} X_{\delta d} X_{\gamma c} t_{i j}^{c d}=\sum_{\gamma, \delta} V_{b k \delta \gamma} t_{i j}^{\gamma \delta}, \tag{7}
+\end{equation*}
+
+
+where the virtual indices of the $t$ coefficients are transformed to the atomic basis. It follows that to calculate IP's one only needs to perform partial four-index transformations. Each two-electron integral used contains at least two unoccupied indices. The term described above is most costly to evaluate and scales as $n^{3} m(n+m)^{2}$ where $n$ and $m$ are the number of occupied and virtual orbitals, respectively.
+
+The direct diagonalization of matrix $\mathbf{A}$ only requires matrix-vector multiplications. Explicit expressions for the matrix A in the closed-shell CCSD-GF approximation have been presented ${ }^{2}$ and these expressions remain virtually the same in the MBPT(2)-GF approach making use of the modified intermediate interactions. Here, we give the expressions for the matrix-vector multiplication in the MBPT(2)-GF approximation. If we denote the input $h$ and $2 h p$ coefficients that specify the eigenvectors by $S_{k}, S_{k l}^{d}$ the expressions for the coefficients after multiplication are given by
+
+
+\begin{align*}
+(\mathbf{A S})_{i}= & -\sum_{k} U_{i k} S_{k}-\sum_{k, l, d}\left(2 W_{k l i d}-W_{l k i d}\right) S_{k l}^{d}  \tag{8}\\
+(\mathbf{A S})_{i j}^{b}= & -W_{k b i j} S_{k}-\sum_{k} U_{k i} S_{k j}^{b}-\sum_{l} U_{l j} S_{i l}^{b} \\
+& +\sum_{d} U_{b d} S_{i j}^{d}+\sum_{l, d}\left(2 W_{l b d j}-W_{l b j d}\right) S_{i l}^{d} \\
+& -\sum_{k, d} W_{k b d j} S_{k i}^{d}-\sum_{k, d} W_{k b i d} S_{k j}^{d}+\sum_{k, l} W_{k l i j} S_{k l}^{b} \\
+& -\sum_{c} t_{i j}^{c b}\left(\sum_{k, l, d}\left(2 V_{k l c d}-V_{k l d c}\right) S_{k l}^{d}\right) \tag{9}
+\end{align*}
+
+
+The most expensive multiplications scale as $n^{3} m^{2}$. To evaluate the last term one uses the factorization as indicated, such that this term scales as $2 m^{2} n^{2}$. These calculations can in principle be carried out for very large molecules.
+
+We have investigated some further possibilities in which we replace the most demanding $2 h p-2 h p$ block of the matrix by a diagonal form. The diagonal can either consist of the orbital energies (analogous to a Møller-Plesset partitioning) or it can consist of the full diagonal of matrix $\mathbf{A}$. We denote these two forms as DSO-GF and FDSO-GF [(full) diagonal second order] approximations to the Green's function. If we denote the diagonal by $D$, we find explicitly
+
+
+\begin{equation*}
+{ }^{\mathrm{DSO}} D_{i j}^{b}=-\epsilon_{i}-\epsilon_{j}+\epsilon_{b} \tag{10}
+\end{equation*}
+
+
+and
+
+
+\begin{align*}
+\text { FDSO }_{i j}^{b}= & -U_{i i}-U_{j j}+U_{b b}+W_{i j i j}-W_{i b i b}+W_{j b b j}\left(1-\delta_{i j}\right) \\
+& -\sum_{c} t_{i j}^{c b}\left(2 V_{i j c b}-V_{i j b c}\right) \tag{11}
+\end{align*}
+
+
+There are of course many more possibilities for the definition of the diagonal. For example, one can think of an Epstein-
+
+Nesbet partitioning using bare two-electron integrals and orbital energies. Let us note here that the FDSO approach is not invariant under Unitary transformations of the occupied or unoccupied orbitals among themselves, and therefore size consistency of the approach is not guaranteed. ${ }^{36}$ The DSO approach is invariant in the sense that upon transformation the diagonal orbital energies have to be replaced by a nondiagonal $H_{0}$ which couples configurations that differ in at most one orbital. It follows that the matrix $\mathbf{A}$ is only diagonal in the $2 h p-2 h p$ block if canonical Hartree-Fock orbitals are used. For the above reasons we do not recommend modifying the diagonal with respect to the Møller-Plesset partitioning. We have included FDSO-GF results to examine possible numerical improvements compared to DSO-GF.
+
+Above we sketched an efficient implementation of the MBPT(2)-GF method. In this paper our goal is to explore the accuracy that can be obtained using these approaches, by comparing with full CCSD-GF results and experiment. We have made no attempt to make an efficient implementation of the above computational schemes, but instead made small changes to our existing CCGF program. Therefore results are limited to a selection of fairly small molecules that have been considered in earlier work. ${ }^{2}$
+
+\section*{III. RESULTS I: COMPARISON OF VARIOUS SECOND ORDER GREEN'S FUNCTION APPROACHES TO FULL CCSD-GF}
+In the tables below we report vertical ionization potentials for a subset of molecules that has been considered in our earlier work ${ }^{2}$ (notably HF, $\mathrm{N}_{2}, \mathrm{CO}, \mathrm{F}_{2}, \mathrm{H}_{2} \mathrm{O}$, and $\mathrm{C}_{2} \mathrm{H}_{4}$ ). The geometries of the nuclear framework and the basis sets used, $[13 s 8 p 2 d / 7 s 4 p 2 d]$ on the second row atoms $\mathrm{C}, \mathrm{N}, \mathrm{O}$, and F and $[5 s 1 p / 3 s 1 p]$ for H , are the same as before. Results are shown for four variants of the same computational scheme: DSO-GF, FDSO-GF, MBPT(2)-GF, and CCSD-GF. In the first three approaches the matrix $\mathbf{A}$ is defined by second order RHF-MBPT(2) coefficients as described in the previous section. In MBPT(2)-GF the complete matrix $\mathbf{A}$ is constructed and diagonalized to obtain the ionization potentials. In the diagonal approximations the $2 h p-2 h p$ block of the matrix $\mathbf{A}$ is assumed diagonal with diagonal matrix elements given by Eq. (10) or Eq. (11) for the DSO-GF and FDSO-GF approaches, respectively. In the fourth approach CCSD-GF, the matrix $\mathbf{A}$ is defined by the CCSD coefficients and diagonalized completely. In Table I, we also report the ground state energies as obtained by the MBPT(2) and CCSD approaches. These differences are usually moderate $(0.1-0.2 \mathrm{eV})$. The difference is relatively large for the $\mathrm{C}_{2} \mathrm{H}_{4}$ molecule where it amounts to 0.7 eV .
+
+The discussion of the results in this section is facilitated by distinguishing three categories of ionization potentials. We will briefly consider core and inner valence ionization potentials, but our main interest concerns the outer valence ionization potentials.
+
+Core-ionization potentials are calculated for $\mathrm{HF}, \mathrm{N}_{2}$, and $\mathrm{H}_{2} \mathrm{O}$. In our other calculations the core orbitals are excluded from the calculation. We do not expect to find accurate values for the ionization of these deeply lying core levels as large relaxation effects occur upon ionization, which cannot\\
+be accurately represented by a limited expansion in configurations. Full CCSD-GF results are in error by about $1-1.5$ eV . The results from MBPT(2)-GF are very similar to the CCSD-GF results for the HF and $\mathrm{H}_{2} \mathrm{O}$ molecules (difference $<0.2 \mathrm{eV}$ ) but in the case of $\mathrm{N}_{2}$ the difference is substantially larger ( 0.8 eV ). The results from the diagonal second order approximations differ more from the CCSD-GF results (up to 1.0 eV for HF and $\mathrm{H}_{2} \mathrm{O}$, 2.5 eV for $\mathrm{N}_{2}$ ) with the DSO-GF results being closer than FDSO-GF. As there is a substantial mixing from $2 h p$ derived configurations (and a corresponding rich shake-up structure ${ }^{37}$ ) one expects these results to be different. The situation for $\mathrm{N}_{2}$ is more extreme because at the Hartree-Fock level the core-hole is completely delocalized. Therefore the core-ionized state in $\mathrm{N}_{2}$ is highly correlated: for example, the $\sigma_{g}^{-1}$ determinant mixes very strongly with the $\sigma_{u}^{-1} \pi_{u}^{-1} \pi_{g}$ configuration in order to localize the corehole while preserving the symmetry of the state. This explains that the results are not stable if only up to $2 h p$ configurations are included, which is reflected in the relatively large differences between CCSD-GF and the MBPT(2) derived approximations for $\mathrm{N}_{2}$.
+
+Inner valence ionization potentials typically have values of 25 to 50 eV for the systems considered here and they are characterized by a fairly low intensity (pole strength $<0.8$ say). These states are usually accompanied by satellite lines corresponding to states with a comparable energy and a substantial pole strength ( $\sim 0.01-0.2$ ). The eigenvectors that correspond to the inner valence ionization potentials are often strong mixtures of $h$ and $2 h p$ configurations. One cannot expect therefore the CCSD-GF or MBPT(2)-GF results to be reasonably accurate without consideration of $3 h 2 p$ configurations and so forth. Somewhat surprising the CCSD-GF and MBPT(2)-GF results are usually very close, showing that these ionization potentials are not very sensitive to the ground state correlation coefficients. The diagonal approaches are, of course, not capable to provide an accurate quantitative picture of the inner valence structure, yet they qualitatively reveal the main features of this part of the spectrum. Differences between CCSD-GF and (F)DSO-GF amount frequently to up to 3 eV .
+
+Outer valence ionization potentials usually fall below 20 eV , have large pole strengths ( $>0.85$ ) and can qualitatively be described in an MO picture (Koopmans’ theorem). In our previous work we showed that the CCSD-GF approach usually yields quite accurate results for the outer valence part of ionization spectra. This we find to be true also for the MBPT(2) derived approximations. The mean errors for the various approaches over the valence ionization potentials ( 19 samples in total) are 0.35 eV for DSO, 0.29 for FDSO, 0.18 eV for the complete second order MBPT-GF approach, while the error is reduced to only 0.13 eV for the CCSD-GF approach. The differences between the DSO-GF and FDSO-GF approaches is often minor (e.g., $\mathrm{H}_{2} \mathrm{O}, \mathrm{C}_{2} \mathrm{H}_{4}$ ). If the difference is more substantial (see, e.g., HF) the FDSO-GF result is found to be higher than the DSO-GF value and closer to the more accurate MBPT(2)-GF results. Interestingly the low level diagonal second order Green's function approaches are about as accurate as the traditional third order equation of motion Green's function ${ }^{38-40}$ results, ${ }^{2}$ which are in error\\
+by 0.30 eV in the mean over the same set of data and using the same atomic basis sets. The EOM(3)-GF method uses the MBPT(2) approximation for the ground state like our MBPT(2) derived approximations, is formally exact up to third order in the perturbation, and diagonalizes a full matrix\\
+that extends over the $h, 2 h p, p$ and $2 p h$ configurations. The coupling to $2 p h$ configurations makes the approach computationally much more expensive than the MBPT(2)-GF approximation. From the results obtained it is clear that high order contributions, which are included implicitly in all ap-
+
+\begin{table}[h]
+\begin{center}
+\captionsetup{labelformat=empty}
+\caption{TABLE I. Vertical ionization potentials for a selection of molecules. A comparison between CCSD-GF and various MBPT(2) derived approximations.}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{7}{|c|}{Hydrogen fluoride (HF)} \\
+\hline
+\multirow{2}{*}{} & Ground state energy & \multicolumn{4}{|c|}{\begin{tabular}{l}
+SCF:-100.0668 \\
+$\Delta E(\mathrm{CCSD}):-0.2762$ \\
+\end{tabular}} & \multirow[b]{3}{*}{Expt. (eV)} \\
+\hline
+ &  & \multicolumn{4}{|c|}{} &  \\
+\hline
+\begin{tabular}{l}
+IP \\
+IP \\
+\end{tabular} & Koopmans & DSO & FDSO & MBPT(2) & CCSD &  \\
+\hline
+$1 \sigma$ & \multirow[t]{3}{*}{\begin{tabular}{l}
+715.47 \\
+43.55 \\
+43.55 \\
+\end{tabular}} & \multirow{2}{*}{\begin{tabular}{l}
+695.19 \\
+39.55 \\
+695.19 \\
+\end{tabular}} & \multirow[b]{2}{*}{\begin{tabular}{l}
+39.29 \\
+39.29 \\
+\end{tabular}} &  & 695.33 & \begin{tabular}{l}
+694.22 \\
+694.22 \\
+\end{tabular} \\
+\hline
+\multirow[b]{2}{*}{\includegraphics[max width=\textwidth]{659f64c0-9204-4f4b-8824-59866f2d8272-5_37_42_862_176}
+} &  &  &  & 39.00 & 39.17 & \multirow[t]{2}{*}{\begin{tabular}{l}
+39.70 \\
+39.70 \\
+\end{tabular}} \\
+\hline
+ &  & 38.27 &  & \includegraphics[max width=\textwidth]{659f64c0-9204-4f4b-8824-59866f2d8272-5_37_28_862_1324}
+ &  &  \\
+\hline
+$\sigma$ & \begin{tabular}{l}
+20.91 \\
+20.91 \\
+\end{tabular} & \multicolumn{3}{|l|}{\multirow[t]{10}{*}{\begin{tabular}{l}
+19.32 \\
+19.54 \\
+19.72 \\
+15.25 \\
+15.54 \\
+15.75 \\
+19.54 \\
+\end{tabular}}} & 19.85 & \begin{tabular}{l}
+19.90 \\
+19.90 \\
+\end{tabular} \\
+\hline
+$1 \pi$ & 17.66 &  &  &  & 15.85 & 16.10 \\
+\hline
+\multicolumn{7}{|c|}{\multirow{5}{*}{}} \\
+\hline
+ &  & \multicolumn{2}{|c|}{\multirow[b]{6}{*}}{} & \multicolumn{2}{|c|}{\multirow[b]{6}{*}}{} &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+\multirow{6}{*}{} &  &  & \multicolumn{2}{|c|}{\multirow{6}{*}}{} &  & \multirow[b]{7}{*}{} \\
+\hline
+ &  & \multicolumn{4}{|c|}{} &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ & Ground state energy &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ & \multirow{2}{*}{} &  &  &  &  &  \\
+\hline
+IP & \multirow[t]{5}{*}{} & \begin{tabular}{l}
+DSO \\
+DSO \\
+\end{tabular} &  & MBPT(2) & \begin{tabular}{l}
+CCSD \\
+CCSD \\
+\end{tabular} &  \\
+\hline
+$1 \sigma_{g}$ &  & 413.16 &  & 411.61 & 410.81 & 409.9 \\
+\hline
+\multirow[t]{3}{*}{$2 \sigma_{g}$} &  & 35.66 &  & 38.71 & 38.50 & 38.0 \\
+\hline
+ &  &  &  & 32.69 & 32.32 &  \\
+\hline
+ &  & 43.30 & 42.94 & 42.39 & 42.43 &  \\
+\hline
+$3 \sigma_{g}$ & 17.28 & 15.72 & 15.78 & 15.76 & 15.53 & 15.60 \\
+\hline
+$1 \sigma_{u}$ & 426.73 & 413.06 & 413.18 & 411.51 & 410.72 & 409.9 \\
+\hline
+$2 \sigma_{u}$ & 21.19 & 19.04 & 19.13 & 18.89 & 18.74 & 18.78 \\
+\hline
+$1 \pi_{u}$ & 16.71 & 17.29 & 17.38 & 17.36 & 17.14 & 16.98 \\
+\hline
+\multicolumn{7}{|c|}{Carbon monoxide (CO)} \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+ &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\captionsetup{labelformat=empty}
+\caption{TABLE I. (Continued.)}
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\multicolumn{7}{|c|}{Water ( $\mathrm{H}_{2} \mathrm{O}$ )} \\
+\hline
+\multicolumn{2}{|c|}{Ground state energy} &  &  & SCF:-76.0447 $\Delta E(\mathrm{CCSD}):-0.2702$ & $\Delta E(\mathrm{CCSD}):-0.2702$ & \multirow{3}{*}{} \\
+\hline
+\multirow{2}{*}{} & (a.u.) & \multicolumn{4}{|c|}{\multirow{2}{*}{\begin{tabular}{l}
+$\Delta E$ (MBPT2): -0.2636 \\
+Green's function calculations \\
+\end{tabular}}} &  \\
+\hline
+ & \multirow{2}{*}{} &  &  &  &  &  \\
+\hline
+IP &  & DSO & FDSO & MBPT(2) & CCSD & Expt. (eV) \\
+\hline
+$1 a_{1}$ & 559.30 & 541.83 & \multirow[t]{3}{*}{\begin{tabular}{l}
+542.17 \\
+32.97 \\
+32.97 \\
+\end{tabular}} & 541.20 & 541.02 & 539.70 \\
+\hline
+$2 a_{1}$ & \multirow[t]{2}{*}{\begin{tabular}{l}
+35.39 \\
+35.39 \\
+\end{tabular}} & 32.96 &  & 32.35 & 32.49 & 32.61 \\
+\hline
+ &  &  &  & 34.70 & 34.81 &  \\
+\hline
+$3 a_{1}$ & 15.87 & 14.25 & 14.31 & 14.52 & 14.61 & 14.74 \\
+\hline
+$1 b_{2}$ & 19.50 & 18.51 & 18.52 & 18.73 & 18.86 & 18.51 \\
+\hline
+$1 b_{1}$ & 13.80 & 11.96 & 12.00 & 12.25 & 12.32 & 12.62 \\
+\hline
+\multicolumn{7}{|c|}{Ethylene $\left(\mathrm{C}_{2} \mathrm{H}_{4}\right)$} \\
+\hline
+\multicolumn{2}{|c|}{Ground state energy} & \multicolumn{2}{|c|}{SCF:-78.0429} & \multicolumn{2}{|c|}{$\Delta E$ (CCSD):-0.2984} & \multirow{3}{*}{} \\
+\hline
+\multirow{2}{*}{} & (a.u.) & \multicolumn{4}{|c|}{\multirow{2}{*}{\begin{tabular}{l}
+$\Delta E$ (MBPT2):-0.2720 \\
+Green's function calculations \\
+\end{tabular}}} &  \\
+\hline
+ & \multicolumn{5}{|c|}{} &  \\
+\hline
+IP & Koopmans & DSO & FDSO & MBPT(2) & CCSD & Expt.(eV) \\
+\hline
+\multirow[t]{2}{*}{$2 a_{g}$} & \multirow[t]{2}{*}{28.14} & \multirow[t]{2}{*}{25.01} & \multirow[t]{2}{*}{24.99} & 24.21 & 24.24 & 23.65 \\
+\hline
+ &  &  &  & 30.13 & 30.23 &  \\
+\hline
+$3 a_{g}$ & 15.89 & 14.64 & 14.66 & 14.65 & 14.62 & 14.66 \\
+\hline
+$2 b_{1 u}$ & 21.46 & 19.58 & 19.60 & 19.21 & 19.29 & 19.23 \\
+\hline
+$b_{3 u}$ & 17.63 & 16.27 & 16.24 & 16.13 & 16.21 & 15.87 \\
+\hline
+$b_{2 g}$ & 13.90 & 12.95 & 12.93 & 12.88 & 12.96 & 12.85 \\
+\hline
+$b_{2 u}$ & 10.24 & 10.41 & 10.44 & 10.44 & 10.51 & 10.51 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+proaches, are quite important to obtain accurate results. Apparently such higher order contributions are included in a more balanced way in the CCSD- or MBPT-GF framework than in Green’s function approaches based on Dyson’s equation or the superoperator formalism. This conclusion was anticipated in our earlier work ${ }^{2}$ and we provided a possible explanation in the concluding section of that paper.
+
+\section*{IV. COMPARISON BETWEEN DSO-GF AND SECOND ORDER SELF-ENERGY APPROXIMATION}
+In this section we will draw a comparison between the lowest order approximation to the coupled cluster Green's function (DSO-GF) and the traditional lowest order approximation to the one-particle Green's function, which proceeds by using the second order approximation to the irreducible self-energy, $\Sigma(\omega)$, and solving Dyson's equation.
+
+In the second order Dyson formulation one diagonalizes a frequency dependent matrix
+
+
+\begin{align*}
+A_{p q}^{\text {SO-Dyson }}(\omega)= & \epsilon_{p} \delta_{p q}+\Sigma_{p q}^{(2)}(\omega) \\
+= & \epsilon_{p} \delta_{p q}+\frac{1}{2} \sum_{l, c, d} \frac{V_{p l[c d]} V_{c d[q l]}}{\omega+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}} \\
+& -\frac{1}{2} \sum_{k, l, d} \frac{V_{p d[k l]} V_{k l[q d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} . \tag{12}
+\end{align*}
+
+
+In the above formulation the labels correspond to spin orbitals. Labels $p$ and $q$ are used to denote general orbitals (either\\
+occupied or unoccupied). The ionization potentials $\lambda_{i}$ are obtained by an iterative process: $\lambda_{i}$ is required to be an eigenvalue of $\mathbf{A}^{\text {SO-Dyson }}\left(\lambda_{i}\right)$.
+
+Using a partitioning technique the matrix in DSO-GF can be brought in similar form:
+
+
+\begin{align*}
+A_{i j}^{\mathrm{DSO}-\mathrm{GF}}(\omega)= & U_{i j}-\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} W_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+= & \epsilon_{i} \delta_{i j}+\frac{1}{2} \sum_{l, c, d} V_{i l[c d]} t_{j l}^{[c d]} \\
+& -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+= & \epsilon_{i} \delta_{i j}+\frac{1}{2} \sum_{l, c, d} V_{i l[c d]} \frac{V_{c d[j l]}}{\epsilon_{j}+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}} \\
+& -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} . \tag{13}
+\end{align*}
+
+
+The ionization potentials may then be found from a similar iterative sequence as above. Convergence is reached if $\lambda_{i}$ is an eigenvalue of $\mathbf{A}^{\mathrm{DSO}-\mathrm{GF}}\left(\lambda_{i}\right)$. The difference between DSO-GF and the second order Dyson approach is threefold.\\
+(i) In DSO-GF the matrix is defined in the space of occupied orbitals, in SO-Dyson the matrix is diagonalized over the complete orbital space.\\
+(ii) The frequency dependent part in DSO-GF contains a
+
+\begin{table}[h]
+\begin{center}
+\captionsetup{labelformat=empty}
+\caption{TABLE II. Comparison between second order Dyson and diagonal second order GF approaches for vertical outer valence ionization potentials for a selection of small molecules. MBPT(2)-GF and CCSD-GF results are included for completeness. The calculations are carried out in a TZ2P basis set.}
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\multirow[b]{2}{*}{State} & \multicolumn{2}{|c|}{Self-energy} & \multicolumn{3}{|r|}{Green’s function calculations} &  & \multirow[b]{2}{*}{Expt.} \\
+\hline
+ & Dyson(2) & $h h$-Dyson & m-DSO & DSO & MBPT(2) & CCSD &  \\
+\hline
+\multicolumn{8}{|c|}{Hydrogen fluoride} \\
+\hline
+$3 \sigma$ & 18.82 & 18.78 & 18.75 & 19.34 & 19.71 & 19.82 & 19.90 \\
+\hline
+$1 \pi$ & 14.60 & 14.54 & 14.51 & 15.28 & 15.75 & 15.83 & 16.1 \\
+\hline
+\multicolumn{8}{|c|}{Nitrogen} \\
+\hline
+$3 \sigma_{g}$ & 14.96 & 14.94 & 14.90 & 15.73 & 15.74 & 15.49 & 15.60 \\
+\hline
+$2 \sigma_{u}$ & 18.05 & 18.00 & 17.96 & 18.97 & 18.81 & 18.66 & 18.78 \\
+\hline
+$1 \pi_{u}$ & 17.08 & 17.06 & 17.07 & 17.30 & 17.35 & 17.12 & 16.98 \\
+\hline
+\multicolumn{8}{|c|}{Carbon monoxide} \\
+\hline
+$4 \sigma$ & 18.42 & 18.37 & 18.32 & 19.40 & 19.65 & 19.67 & 19.72 \\
+\hline
+$5 \sigma$ & 13.94 & 13.93 & 13.91 & 14.34 & 14.15 & 14.08 & 14.01 \\
+\hline
+$1 \pi$ & 16.43 & 16.35 & 16.32 & 16.81 & 17.01 & 16.95 & 16.91 \\
+\hline
+\multicolumn{8}{|c|}{Fluorine} \\
+\hline
+$3 \sigma_{g}$ & 20.16 & 20.12 & 20.12 & 20.58 & 20.82 & 20.93 & 21.1 \\
+\hline
+$1 \pi_{u}$ & 17.01 & 16.91 & 16.86 & 18.21 & 18.56 & 18.59 & 18.80 \\
+\hline
+$1 \pi_{g}$ & 14.07 & 14.03 & 13.98 & 15.16 & 15.49 & 15.48 & 15.83 \\
+\hline
+\multicolumn{8}{|c|}{Ethylene} \\
+\hline
+$2 a_{g}$ & 24.36 & 24.35 & 24.32 & 25.02 & 24.25 & 24.28 & 23.65 \\
+\hline
+$3 a_{g}$ & 14.25 & 14.23 & 14.20 & 14.70 & 14.72 & 14.67 & 14.66 \\
+\hline
+$2 b_{1 u}$ & 19.33 & 19.32 & 19.29 & 19.85 & 19.47 & 19.54 & 19.23 \\
+\hline
+$1 b_{3 u}$ & 15.99 & 15.97 & 15.95 & 16.46 & 16.32 & 16.40 & 15.87 \\
+\hline
+$1 b_{2 g}$ & 12.91 & 12.91 & 12.89 & 13.28 & 13.20 & 13.27 & 12.85 \\
+\hline
+$1 b_{2 u}$ & 10.18 & 10.17 & 10.17 & 10.45 & 10.48 & 10.53 & 10.51 \\
+\hline
+\multicolumn{8}{|c|}{Water} \\
+\hline
+$3 a_{1}$ & 13.73 & 13.69 & 13.65 & 14.32 & 14.60 & 14.64 & 14.74 \\
+\hline
+$1 b_{1}$ & 11.44 & 11.39 & 11.36 & 12.06 & 12.36 & 12.38 & 12.62 \\
+\hline
+$1 b_{2}$ & 18.13 & 18.11 & 18.09 & 18.57 & 18.81 & 18.88 & 18.51 \\
+\hline
+\multicolumn{8}{|c|}{Average deviation from experiment} \\
+\hline
+ &  &  &  &  &  &  &  \\
+\hline
+ & 0.76 (0.96) & 0.79 (1.00) & 0.81 (1.03) & 0.41 (0.43) & 0.21 (0.21) & 0.19 (0.17) &  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+modified two-electron matrix element $W_{i d[k l]}$. This introduces non-Hermitean contributions in the DSO-GF matrix. The leading term in this matrix element is $V_{i d[k l]}$ as in SO-Dyson.\\
+(iii) The frequency dependent $2 p h$ contribution in SODyson is replaced by a frequency independent contribution in DSO-GF by replacing $\omega$ by $\epsilon_{j}$ in the matrix element $A_{i j}^{\text {DSO-GF }}(\omega)$. This substitution is reminiscent of degenerate perturbation theory formulations and it also introduces non-Hermitean contributions to $\mathbf{A}^{\mathrm{DSO}-\mathrm{GF}}$.
+
+In order to analyze which of these differences is mainly responsible for the difference between the two methods we define the following four approximations:\\
+(1) The complete second order Dyson approach as defined in Eq. (12).\\
+(2) The $h h$-SO-Dyson approach in which we only calculate and diagonalize the $h h$-part (occupied-occupied block) of the full second order Dyson matrix.\\
+(3) The complete diagonal second order Green's function (DSO-GF) approach.\\
+(4) A modified DSO-GF ( $m$-DSO-GF) approach in which\\
+the effective matrix element $W_{i d[k l]}$ is replaced by the leading term $V_{i d[k l]}$.
+
+The latter $m$-DSO-GF approach is computationally least demanding. In particular, compared to the second order Dyson schemes, the most demanding iterative inclusion of the $2 p h$ part of the irreducible self-energy is avoided. We think that each of the above diagonal approximations should be tractable computationally for extended nonmetallic systems in one-dimension and possibly for two- and threedimensional periodic systems.
+
+In Table II, we present vertical outer valence ionization potentials for the same set of molecules as in Sec. III. The basis set that we employed is slightly smaller than in the previous calculations and is derived from Dunning. ${ }^{41}$ We have used a $[11 s 6 p 3 d / 5 s 3 p 2 d]$ contracted Gaussian basis set on the first row atoms and a [ $5 s 3 p / 3 s 2 p$ ] basis set on hydrogen. Results included are obtained from SO-Dyson, $h h$-SO-Dyson, $m$-DSO-GF, and DSO-GF calculations as described above, while we also obtained the full MBPT(2)-GF and CCSD-GF results for comparison. These latter results also allow us to investigate the sensitivity of the results with respect to the basis set used.
+
+Comparing the results from DSO-GF, MBPT[2]-GF, and CCSD-GF calculations in Table I (obtained using a $7 s 4 p 2 d$ basis set) with the corresponding results in Table II ( $5 s 3 p 2 d$ basis set) we see that the findings are in general in very close agreement (usually within 0.05 eV ). The more extensive basis set yields only slightly more accurate results in the mean. A notable exception is the ethylene molecule where for example the difference for the calculated $b_{2 g}$ ionization amounts to 0.3 eV . Also the $\mathrm{F}_{2}$ molecule shows somewhat larger deviations.
+
+The results in Table II give a clear picture of the important aspects in the calculation of outer valence ionization potentials. We see hardly any significant difference (the difference is always $<0.1 \mathrm{eV}$ ) between the results from SODyson, $h h$-SO-Dyson, and $m$-DSO-GF calculations, compared to the overall accuracy of the results (a mean error of about 0.8 eV ). This indicates that the results are not very sensitive to the precise coupling between the $h, 2 h p$ and $p$, $2 p h$ configurations. Neither the iteration of the frequency in the attachment part of the self-energy nor the inclusion of other blocks than the $h h$ block in the irreducible self-energy seem important. From the success of the so-called quasiparticle approximation ${ }^{42,43}$ it follows that the self-energy is dominantly diagonal and therefore $A_{i i}\left(\omega_{i}\right)$ will already be an excellent approximation to the relevant eigenvalue of the full matrix A. The overall accuracy of the above three approximations is not very high and depends very much on the system of interest. Errors of 1.0 to 1.5 eV (see, for example, $\mathrm{F}_{2}$ ) are quite common, but certain results, in particular for ethylene, are quite accurate and sometimes significantly better than even the CCSD-GF results. We think the good ( $h h$-)SO-Dyson and $m$-DSO-GF results for ethylene are largely fortuitous and might be a basis set effect as we discussed above. If we exclude ethylene from the sample of calculations the mean error increases by 0.2 eV for these low level calculations. (the resulting mean error is indicated in brackets in Table II).
+
+The ionization potentials obtained from DSO-GF calculations always turn out to be significantly larger than the ( $h h$-)-SO-Dyson or $m$-DSO-GF results. Replacing $V_{i d[k l]}$ with $W_{i d[k l]}$ in the definition of matrix $\mathbf{A}$ [see points (ii) and (4) above] amounts primarily to the inclusion of ground state correlation and this increases the ionization potential. The mean error of DSO-GF is 0.4 eV over the present sample of results, which is quite impressive considering the simplicity of the approximation. Results continue to improve when the off-diagonal matrix elements in the $2 h p-2 h p$ block of the matrix are taken into account. The mean error is reduced to about 0.2 eV in both MBPT(2)-GF and CCSD-GF calculations. Interestingly there are quite some cases where the sequence DSO-GF-MBPT(2)-GF-CCSD-GF shows a definite trend towards an increasing value of ionization potentials. Notable examples in Tables I and II are given by the outer valence IP's in the $\mathrm{HF}, \mathrm{F}_{2}$, and $\mathrm{H}_{2} \mathrm{O}$ molecules. In all these cases (except the $1 b_{2}$ ionization for water) the experimental value is even higher than that obtained in the CCSD-GF approximation. It seems therefore that we can get a better idea of the accuracy of a calculation and the limiting value for the ionization potential by looking at this sequence\\
+of results from related calculations of improving accuracy.
+
+\section*{V. CONCLUSION}
+We have shown that the MBPT(2)-GF [an alternative acronym might be IPEOM-MBPT(2)] is capable of yielding accurate results for ionization potentials. The mean error over a sample of 19 outer valence IP's was found to be 0.17 eV using extensive basis sets, which is only slightly less accurate than the corresponding CCSD-GF (or EOMIPCCSD) results (average error 0.13 eV ). This conclusion presumably breaks down if the reference state is highly correlated as one expects large differences then between the CCSD and MBPT(2) coefficients. The computational effort in MBPT(2)-GF is substantially reduced compared to CCSD-GF as the most expensive CCSD step is avoided. Also disk space requirements are highly reduced as there is no need for transformed two-electron integrals corresponding to three or four virtual orbitals. This obviously also reduces the time spent in the integral transformation step. The actual calculation of ionization potentials is negligible relative to other steps, even in the MBPT(2)-GF approximation, at least for the selection of molecules considered. The calculation of integrals proved to be the most time-consuming step in the present MBPT(2)-GF calculations.
+
+This should be contrasted to the traditional Green's function approaches based upon Dyson's equation or the superoperator formalism. In these approaches the expansion space includes $2 p h$ configurations and the dimension of this space frequently is an order of magnitude larger than the $2 h p$ space if extended basis sets are used. The calculation of ionization potentials in, for example, the EOM(3)-GF or the extended $2 p h$-TDA approximation in general requires an appreciable amount of computer time and soon becomes computationally untractable unless additional approximations are introduced.
+
+We have also investigated some other approximations in which the $2 h p-2 h p$ block is replaced by a diagonal form and made a comparison with the traditional second order Dyson approach. It was found that the different treatment of the attachment or $2 p h$ part of the irreducible self-energy in the Dyson and $m$-DSO-GF approaches did not make a substantial difference. The inclusion of additional ground state correlation effects as in DSO-GF was found to reduce the average error by more than a factor of 2 (the mean error reduced from about $0.8-1.0$ to 0.4 eV ). Such ground state correlation effects can similarly be introduced on top of the second order Dyson approach but we have not investigated this possibility. We think that the DSO-GF method is a very promising approach for very large and periodic systems.
+
+The present investigation must be considered preliminary as we restricted ourselves to a selection of fairly small molecular systems. We plan on improving the implementation of the method along the lines suggested in this paper and results for larger systems will be reported in the future.
+
+\section*{ACKNOWLEDGMENTS}
+We would like to thank Dr. J. F. Stanton for a close reading of the manuscript and Dr. R. J. Bartlett for his support and the use of the ACES II program package during the completion of this work.\\
+${ }^{1}$ M. Nooijen and J. G. Snijders, Int. J. Quantum Chem. Symp. 26, 55 (1992).\\
+${ }^{2}$ M. Nooijen and J. G. Snijders, Int. J. Quantum Chem. 48, 15 (1993).\\
+${ }^{3}$ H. Sekino and R. J. Bartlett, Int. J. Quantum Chem. Symp. 18, 255 (1984).\\
+${ }^{4}$ J. Geertsen, M. Rittby, and R. J. Bartlett, Chem. Phys. Lett. 164, 57 (1989).\\
+${ }^{5}$ J. F. Stanton and R. J. Bartlett, J. Chem. Phys. 98, 7029 (1993).\\
+${ }^{6}$ J. F. Stanton and J. Gauss, J. Chem. Phys. 101, 8938 (1994).\\
+${ }^{7}$ R. Mattie and R. J. Bartlett, to be submitted (1994).\\
+${ }^{8}$ M. Nooijen and R. J. Bartlett, J. Chem. Phys. (to be published).\\
+${ }^{9}$ H. Monkhorst, Int. J. Quantum Chem. Symp. 11, 421 (1977).\\
+${ }^{10}$ D. Mukherjee and P. Mukherjee, Chem. Phys. 39, 325 (1979).\\
+${ }^{11}$ S. Ghosh, D. Mukherjee, and S. Bhattacharyya, Mol. Phys. 43, 173 (1981).\\
+${ }^{12}$ S. Ghosh, D. Mukherjee, and S. Bhattacharyya, Chem. Phys. 72, 161 (1982).\\
+${ }^{13}$ E. Dalgaard and H. J. Monkhorst, Phys. Rev. A 28, 1217 (1983).\\
+${ }^{14}$ H. Koch and P. Jorgensen, J. Chem. Phys. 93, 3333 (1990).\\
+${ }^{15}$ H. Koch, H. A. Jensen, P. Jorgensen, and T. Helgaker, J. Chem. Phys. 93, 3345 (1990).\\
+${ }^{16}$ I. Lindgren, Int. J. Quantum Chem. Symp. 12, 33 (1978).\\
+${ }^{17}$ M. Haque and D. Mukherjee, J. Chem. Phys. 80, 5058 (1984).\\
+${ }^{18}$ L. Stolarczyk and H. J. Monkhorst, Phys. Rev. A 32, 725 (1985).\\
+${ }^{19}$ D. Mukherjee and S. Pal, Adv. Quantum Chem. 20, 292 (1989).\\
+${ }^{20}$ S. Pal, M. Rittby, R. J. Bartlett, D. Sinha, and D. Mukherjee, Chem. Phys. Lett. 137, 273 (1987).\\
+${ }^{21}$ M. Rittby, S. Pal, and R. J. Bartlett, J. Chem. Phys. 90, 3214 (1989).\\
+${ }^{22}$ J. D. Watts, M. Rittby, and R. J. Bartlett, J. Am. Chem. Soc. 111, 4155 (1989).\\
+${ }^{23}$ U. Kaldor, Chem. Phys. Lett. 185, 131 (1991).\\
+${ }^{24}$ C. L. M. Rittby and R. J. Bartlett, Theor. Chim. Acta 80, 469 (1991).\\
+${ }^{25}$ M. Barysz, H. Monkhorst, and L. Z. Stolarczyk, Theor. Chim. Acta 80, 483 (1991).\\
+${ }^{26}$ J. F. Stanton, R. J. Bartlett, and C. M. L. Rittby, J. Chem. Phys. 97, 5560 (1992).\\
+${ }^{27}$ D. Sinha, S. K. Mukhopadhyay, R. Chauduri, and D. Mukherjee, Chem. Phys. Lett. 154, 544 (1989).\\
+${ }^{28}$ D. Mukhopadhyay, S. Mukhopadhyay, R. Chaudhuri, and D. Mukherjee, Theor. Chim. Acta 80, 441 (1991).\\
+${ }^{29}$ G. D. Purvis III and R. J. Bartlett, J. Chem. Phys. 76, 1910 (1982).\\
+${ }^{30}$ G. E. Scuseria, A. C. Scheiner, T. J. Lee, J. E. Rice, and H. F. Schaefer III, J. Chem. Phys. 86, 2881 (1987).\\
+${ }^{31}$ L. Meissner and R. J. Bartlett, J. Chem. Phys. (to be published, 1994).\\
+${ }^{32}$ L. Meissner and R. J. Bartlett, J. Chem. Phys. 94, 6670 (1991).\\
+${ }^{33}$ K. Hirao and H. Nakatsuji, J. Comput. Phys. 45, 246 (1982).\\
+${ }^{34}$ E. R. Davidson, J. Comput. Phys. 17, 87 (1975).\\
+${ }^{35}$ M. Nooijen and J. G. Snijders, Int. J. Quantum Chem. 47, 3 (1993).\\
+${ }^{36}$ M. Deleuze, J. Delhalle, B. T. Pickup, and J. L. Calais, Adv. Quantum Chem. (to be published, 1994).\\
+${ }^{37}$ K. Siegbahn, C. Nordling, G. Johansson, J. Hedman, P. F. Heden, K. Hamrin, U. Gelius, T. Bergmark, L. O. Werme, R. Manne, and Y. Baer, ESCA Applied to Free Molecules (North-Holland, Amsterdam, 1969).\\
+${ }^{38}$ J. Baker and B. T. Pickup, Mol. Phys. 49, 651 (1983).\\
+${ }^{39}$ J. Baker, Chem. Phys. Lett. 101, 106 (1983).\\
+${ }^{40}$ J. Baker, Chem. Phys. 79, 117 (1983).\\
+${ }^{41}$ T. H. Dunning, J. Chem. Phys. 53, 2823 (1970).\\
+${ }^{42}$ L. S. Cederbaum and W. Domcke, Adv. Chem. Phys. 36, 205 (1977).\\
+${ }^{43}$ W. Von Niessen, J. Schirmer, and L. S. Cederbaum, Comput. Phys. Rep. 1, 57 (1984).
+
+
+\end{document}

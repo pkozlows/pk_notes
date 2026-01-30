@@ -1,0 +1,221 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "main.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI.pdf"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/Fig_I.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/GW100_res.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/SRG-QP-GF2-0.525.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/SRG-QP-GF2-0.7-0.6-1.0.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/SRG-QP-GF2-1.4-0.0-1.0.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/Tab_I.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/Tab_III.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/Tab_II_Fig_2.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/Tab_IV_S3.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/acetaldehyde.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/aceticacid.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/acetone.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/acetonitrile.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/c3h8.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/ch3f.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/chlorobenzene.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/co.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/cytosine.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/dimethylamine.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/dimethylether.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/dimethylsulfide.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/dimethylsulfone.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/ethanol.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/fluorobenzene.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/furan.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/h2o.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/h2s.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/imidazole.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/isobutene.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/methanol.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/methylacetate.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/methylformate.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/nh3.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/nmethylacetamide.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/no.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/pentene.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/ph3.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/phenol.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/pyrazole.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/pyridine.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/pyrrole.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/so.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/so2.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/thiophene.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/toluene.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/dipole_geometries/trimethylamine.xyz"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/fig1.py"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/srgGW50_EA_res.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/srgGW50_IP_res.csv"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/srgGW50_violinplots.png"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "SI_data/values.csv"
+      }
+   ],
+   "spec_version" : 1,
+   "texlive_version" : "2025",
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

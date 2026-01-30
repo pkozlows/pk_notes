@@ -1,0 +1,115 @@
+\section{How to do larger UEG supercell}
+\begin{frame}
+\frametitle{How to do larger UEG supercell}
+\begin{itemize}
+    \item python vs. cpp
+    \item using Choleskies with G=0 included to implement my methods
+\end{itemize}
+\end{frame}
+\section{PT2 variants}
+\begin{frame}
+\frametitle{Review of what I do with the PT2+C spectral functions}
+I presented two varieties of cumulants. The Landau form is
+\begin{align}
+    C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+E_p\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+\label{eq:Cpp_0_updated}
+\end{align}
+and the time domain Green's function in the cumulant ansatz is
+\begin{equation}
+    G_{pp}(t) = \underbrace{-i \Theta(t) e^{-t(i E_p +\eta)}}_{\bm{G}_0} e^{C_{pp}(t)}
+\label{eq:Gpp_time_updated}
+\end{equation}
+In '$G_0$ via HF', $E_p\equiv \epsilon_p^{HF},\{\epsilon_p^{HF}\}\rightarrow\Sigma _{pp}(\omega)$, while in '$G_0$ via SRG', $E_p\equiv \epsilon_p^{SRG-MP2},\{\epsilon_p^{SRG-MP2}\}\rightarrow \Sigma _{pp}(\omega)$. I understand this through
+\begin{equation}
+    \bm{G}(\omega ) = \bm{G}_0(\omega ) + \bm{G}_0(\omega ) \bm{\Sigma}(\omega ) \bm{G}(\omega )
+\end{equation}
+so in \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, the former approach sets $\bm{G}_0\equiv \bm{G}_{HF}$ and the latter sets $\bm{G}_0\equiv \bm{G}_{SRG-MP2}$. \emph{Loos found that for small molecules, SRG-GW+C can be worse than $G_0W_0$+C.}
+\end{frame}
+\begin{frame}
+\frametitle{How SRG-MP2 comes about}
+Derivation can be done, but the final expression is most relevant:
+\begin{align}
+    F_{pq}^{(2)}(s)  &= \frac{1}{2}\sum_{ija}\frac{\Delta^{pa}_{ij} + \Delta^{qa}_{ij}}{\left(\Delta^{pa}_{ij}\right)^2+\left(\Delta^{qa}_{ij}\right)^2} \bra{pa}\ket{ij}\bra{ij}\ket{qa}
+    \nonumber \\
+    &\times\left[1-e^{-\left[\left(\Delta^{pa}_{ij}\right)^2+\left(\Delta^{qa}_{ij}\right)^2\right]s}\right] \nonumber \\
+    &+ \frac{1}{2}\sum_{abi}\frac{\Delta^{pi}_{ab} + \Delta^{qi}_{ab}}{\left(\Delta^{pi}_{ab}\right)^2+\left(\Delta^{qi}_{ab}\right)^2} \bra{pi}\ket{ab}\bra{ab}\ket{qi}
+    \nonumber \\
+    &\times\left[1-e^{-\left[\left(\Delta^{pi}_{ab}\right)^2+\left(\Delta^{qi}_{ab}\right)^2\right]s}\right]\label{eq:qsGF2SE}.
+\end{align}
+The idea is to add this to your HF Fock matrix and iterate to self-consistency. Tolle found that it is optimal to choose $s=1e3$ in his IP/EA tests, so that's what I use.
+\end{frame}
+\begin{frame}
+\frametitle{Nooijen's approach}
+MP2 tells us that we have to diagonalize:
+\begin{align}
+A_{p q}^{\text {MP2 }}(\omega)
+= & \epsilon_{p} \delta_{p q}+\frac{1}{2} \sum_{l, c, d} \frac{V_{p l[c d]} V_{c d[q l]}}{\omega+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}}
+-\frac{1}{2} \sum_{k, l, d} \frac{V_{p d[k l]} V_{k l[q d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega}
+\end{align}
+Nooijen starts with CCSD-GF, but then approximates CC amplitudes with MBPT(2) analogues as
+\begin{align*}
+& t_{i}^{a}=0 \\
+& t_{i j}^{a b}=\frac{V_{a b i j}}{\epsilon_{i}+\epsilon_{j}-\epsilon_{a}-\epsilon_{b}}
+\end{align*}
+They call this MBPT(2)-GF and it leads to $A^{\mathrm{MBPT(2)}}(\omega)$. The paper is not about this theory though, but rather they use it as a starting point for further approximations that reduce cost.
+\end{frame}
+\begin{frame}
+\frametitle{Starting point for DSO-GF}
+They first replace the most demanding 2h1p block of $A^{\mathrm{MBPT(2)}}(\omega)$ by a diagonal form, but this is not size-consistent. But it is when the diagonal is approximated with a MP partitioning as
+
+\begin{equation*}
+{ }^{\mathrm{DSO}} D_{i j}^{b}=-\epsilon_{i}-\epsilon_{j}+\epsilon_{b} \tag{10}
+\end{equation*}
+leading to
+
+\begin{align}
+A_{i j}^{\mathrm{DSO}-\mathrm{GF}}(\omega)=& U_{i j}-\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} W_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+= & \epsilon_{i} \delta_{ij}+\sum_{c, d, l} V_{i l c d}\left(2 t_{j l}^{c d}-t_{j l}^{d c}\right) -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+% = & \epsilon_{i} \delta_{ij}+\sum_{c, d, l} V_{i l c d}\left(t_{j l}^{c d}\right) -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+% = & \epsilon_{i} \delta_{ij}+\sum_{c, d, l} \Biggl(\left< i l | cd\right> - \left< il |dc\right>\Biggr)\Biggl(2 \frac{\Bigl(\left< cd | jl\right> - \left< cd |lj\right>\Bigr)}{\epsilon_{j}+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}} - \frac{\Bigl(\left< dc | jl\right> - \left< dc|lj\right>\Bigr)}{\epsilon_{j}+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}}\Biggr)\\
+% & -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+% = & \epsilon_{i} \delta_{i j}+\frac{1}{2} \sum_{l, c, d} V_{i l[c d]} t_{j l}^{[c d]}  -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+= & \epsilon_{i} \delta_{i j}+\frac{1}{2} \sum_{l, c, d} \frac{V_{i l[c d]} V_{c d[j l]}}{\epsilon_{j}+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}} -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega}
+\label{eq:dso_gf}
+\end{align}
+% where the CC doubles amplitudes are replaced by MBPT(2) values:
+% \begin{align*}
+% & t_{i j}^{a b}=\frac{V_{a b i j}}{\epsilon_{i}+\epsilon_{j}-\epsilon_{a}-\epsilon_{b}}
+% \end{align*}
+% and $V_{a b i j}$ denotes a nonantisymmetrized two-electron integral in "1212" notation and the $\epsilon_{p}$ denote canonical Hartree-Fock orbital eigenvalues. The brackets indicate antisymmetrization. 
+\end{frame}
+
+\begin{frame}
+\frametitle{Approximations they propose}
+The intermediates which are used to get \ref{eq:dso_gf} are defined as
+\begin{align}
+& U_{k i}=\epsilon_{i} \delta_{k i}+\sum_{c, d, l} V_{k l c d}\left(2 t_{i l}^{c d}-t_{i l}^{d c}\right) \\
+% & U_{a c}=\epsilon_{a} \delta_{a c}-\sum_{k, l, d} V_{k l c d}\left(2 t_{k l}^{a d}-t_{l k}^{a d}\right), \\
+& W_{k l i d}=V_{k l i d} \\
+% & W_{k a c i}=V_{k a c i}+\sum_{l, d} V_{k l c d}\left(2 t_{i l}^{a d}-t_{l i}^{a d}\right)-\sum_{l, d} V_{k l d c} t_{i l}^{a d}, \\
+% & W_{k b i d}=V_{k b i d}-\sum_{c, l} V_{k l c d} t_{i l}^{c b},  \tag{6}\\
+% & W_{k l i j}=V_{k l i j}+\sum_{c, d} V_{k l c d} t_{i j}^{c d}, \\
+& W_{k b i j}=V_{k b i j}+\sum_{l, d} V_{k l i d}\left(2 t_{l j}^{d b}-t_{j l}^{d b}\right)-\sum_{l, d} V_{l k i d} t_{l j}^{d b}
+\label{eq:w_k_b_i_j} \\
+& \quad+\sum_{c, d} V_{b k d c} t_{j i}^{d c}-\sum_{l, c} V_{l k j c} t_{l i}^{b c} \notag
+\end{align}
+As can be seen, \ref{eq:dso_gf} has a $W_{i d[k l]}$ remaining, which is obtained via \ref{eq:w_k_b_i_j}. They try to approximate this by just the leading term $V_{i d[k l]}$ to reduce cost; this is m-DSO-GF in the paper. But their data suggests keeping the full $W_{i d[k l]}$ in \ref{eq:dso_gf} leads to good results. 
+\end{frame}
+
+\begin{frame}
+\frametitle{Thoughts}%Idea for a comprehensive PT2 one-shot cumulant study}
+
+\begin{itemize}
+    \item Would it make sense to do self consistency in Nooijen's schemes?
+    \item Would a paper on the full hierarchy of PT2 methods for one-shot cumulant be useful; we have
+    \begin{itemize}
+        \item MP2
+        \item SRG-MP2
+        \item DSO-GF
+        \item m-DSO-GF
+        \item MBPT(2)-GF
+        \item CCSD-GF
+        \end{itemize}
+    \item Is it useful to study UEG for intermediate supercell sizes?
+    \end{itemize}
+\end{frame}

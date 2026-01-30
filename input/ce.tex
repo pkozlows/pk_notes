@@ -544,6 +544,46 @@ algebra and diagrammatic analysis.} \color{black} We can also use eqn.~\ref{eq-d
 = \left< \phi_{i}^{a} \right| \bar{H}_N(t) \left| \phi \right>.
 \end{equation}
 I choose to not continue further for now.
+\subsection{Annotating Noojien DSO-GF paper}
+In the supermatrix formulation, MP2 tells us that we have to diagonalize:
+\begin{align}
+A_{p q}^{\text {MP2 }}(\omega)= & \epsilon_{p} \delta_{p q}+\Sigma_{p q}^{(2)}(\omega) \\
+= & \epsilon_{p} \delta_{p q}+\frac{1}{2} \sum_{l, c, d} \frac{V_{p l[c d]} V_{c d[q l]}}{\omega+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}}
+-\frac{1}{2} \sum_{k, l, d} \frac{V_{p d[k l]} V_{k l[q d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega}
+\end{align}
+whereas in their diagonal second-order Green's function (DSO-GF) approach, they diagonalize:
+\begin{align}
+A_{i j}^{\mathrm{DSO}-\mathrm{GF}}(\omega)=& U_{i j}-\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} W_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+= & \epsilon_{i} \delta_{ij}+\sum_{c, d, l} V_{i l c d}\left(2 t_{j l}^{c d}-t_{j l}^{d c}\right) -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+% = & \epsilon_{i} \delta_{ij}+\sum_{c, d, l} V_{i l c d}\left(t_{j l}^{c d}\right) -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+% = & \epsilon_{i} \delta_{ij}+\sum_{c, d, l} \Biggl(\left< i l | cd\right> - \left< il |dc\right>\Biggr)\Biggl(2 \frac{\Bigl(\left< cd | jl\right> - \left< cd |lj\right>\Bigr)}{\epsilon_{j}+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}} - \frac{\Bigl(\left< dc | jl\right> - \left< dc|lj\right>\Bigr)}{\epsilon_{j}+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}}\Biggr)\\
+% & -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+= & \epsilon_{i} \delta_{i j}+\frac{1}{2} \sum_{l, c, d} V_{i l[c d]} t_{j l}^{[c d]}  -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega} \\
+= & \epsilon_{i} \delta_{i j}+\frac{1}{2} \sum_{l, c, d} V_{i l[c d]} \frac{V_{c d[j l]}}{\epsilon_{j}+\epsilon_{l}-\epsilon_{c}-\epsilon_{d}} -\frac{1}{2} \sum_{k, l, d} \frac{W_{i d[k l]} V_{k l[j d]}}{\epsilon_{k}+\epsilon_{l}-\epsilon_{d}-\omega}
+\end{align}
+where the CC doubles amplitudes are replaced by MBPT(2) values:
+\begin{align*}
+& t_{i j}^{a b}=\frac{V_{a b i j}}{\epsilon_{i}+\epsilon_{j}-\epsilon_{a}-\epsilon_{b}}
+\end{align*}
+and $V_{a b i j}$ denotes a nonantisymmetrized two-electron integral in "1212" notation and the $\epsilon_{p}$ denote canonical Hartree-Fock orbital eigenvalues. The brackets indicate antisymmetrization. 
+
+% intermediates
+% \begin{align*}
+% & U_{k i}=\epsilon_{i} \delta_{k i}+\sum_{c, d, l} V_{k l c d}\left(2 t_{i l}^{c d}-t_{i l}^{d c}\right),  \tag{5}\\
+% & U_{a c}=\epsilon_{a} \delta_{a c}-\sum_{k, l, d} V_{k l c d}\left(2 t_{k l}^{a d}-t_{l k}^{a d}\right), \\
+% & W_{k l i d}=V_{k l i d}, \\
+% & W_{k a c i}=V_{k a c i}+\sum_{l, d} V_{k l c d}\left(2 t_{i l}^{a d}-t_{l i}^{a d}\right)-\sum_{l, d} V_{k l d c} t_{i l}^{a d}, \\
+% & W_{k b i d}=V_{k b i d}-\sum_{c, l} V_{k l c d} t_{i l}^{c b},  \tag{6}\\
+% & W_{k l i j}=V_{k l i j}+\sum_{c, d} V_{k l c d} t_{i j}^{c d}, \\
+% & W_{k b i j}=V_{k b i j}+\sum_{l, d} V_{k l i d}\left(2 t_{l j}^{d b}-t_{j l}^{d b}\right)-\sum_{l, d} V_{l k i d} t_{l j}^{d b} \\
+% & \quad+\sum_{c, d} V_{b k d c} t_{j i}^{d c}-\sum_{l, c} V_{l k j c} t_{l i}^{b c} .
+% \end{align*}
+% and also we have
+
+
+
+
+
 
 
 \section{Cumulant expansion for electron-phonon interactions}
@@ -1096,7 +1136,7 @@ G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
 & \approx \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_{pi\nu}^{sat}}{\omega - \epsilon_{pi\nu}^{sat} + i\eta} + \sum_{a\nu} \frac{Z_{pa\nu}^{sat}}{\omega - \epsilon_{pa\nu}^{sat} + i\eta}
 \label{Gpp4}
 \end{align}
- $G_{pp}(\omega)$ is computed via \ref{Gpp4} in the schemes which I call first order. On the other hand, $G_{pp}(\omega)$ is computed via \ref{Gpp2} in the schemes which I call to infinite order. As you can see, there are two different flavors of infinite order, which only differ in how the real-time cumulant is computed. Analytic to infinite order does
+ $G_{pp}(\omega)$ is computed via \ref{Gpp4} in the schemes which I call first order. This is what Loos does. On the other hand, $G_{pp}(\omega)$ is computed via \ref{Gpp2} in the schemes which I call to infinite order. As you can see, there are two different flavors of infinite order, which only differ in how the real-time cumulant is computed. Analytic to infinite order does
 \begin{align}
 	 C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
 \label{eq:Cpp_0} \\
@@ -1117,6 +1157,44 @@ with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega +
     G_{pp}(t) = -i \Theta(t) e^{-t \left(i\epsilon_p + \eta\right)t} e^{C_{pp}(t)}
 \end{equation}
 and then use the DFT to get $A_{pp}(\omega)$.
+\subsubsection{Choosing the right shift for my spectral functions}
+My interpretation of your discussion is that when I have included the G=0 component in my HF reference, all I have to do is to plot $A_{pp}(\omega+\xi/2)$ for HF, MP2, and MP2+C alike, since I am only computing the spectral function for occupied states. Is that correct?
+\subsubsection{Updated results}
+As we discussed on Friday, now, I have a RHF reference which includes the G=0 component. I fixed the bug and now it matches with the G=0 excluded reference exactly. Therefore, now the MP2 correlation energy is the same, irrespective of whether G=0 is included or not. I am plotting $A_{pp}(\omega+\xi/2)$ for all my spectral functions. This is because I needed to plot $A_{pp}(\omega+\xi/2)$ for HF in order to match the reference, so I do the same for MP2 and MP2+C; other than this, nothing else gets shifted. 
+\subsubsection{Update}
+If we choose
+\begin{align}
+    \xi = -2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}
+\end{align}
+then I implemented the direct term of my ERIs as 
+\begin{equation}
+    v(\mathbf{q}) = \begin{cases} \frac{4 \pi}{\mathbf{q}^2 V} & \mathbf{q} \neq 0 \\ 0 & \mathbf{q} = 0 \end{cases}
+\end{equation}
+and the exchange terms as
+\begin{equation}
+    v(\mathbf{q}) = \begin{cases} \frac{4 \pi}{\mathbf{q}^2 V} & \mathbf{q} \neq 0 \\ -\xi & \mathbf{q} = 0 \end{cases}
+\end{equation}
+for use in the self energy as
+\begin{align}
+    \Sigma^{(2)}_{pp}(\omega)
+    & = \sum_{iab} \frac{\left<pi|ab\right>\left(2\left<pi|ab\right> - \left<pi|ba\right>\right)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left<pa|ij\right>\left(2\left<pa|ij\right> - \left<pa|ji\right>\right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta}
+\end{align}
+\subsubsection{Correct poles with G=0 included}
+I have changed the definition of $\xi$ to
+\begin{align}
+    \xi = -1 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}
+\end{align}
+so omitting the factor of 2 as was suggested. This produces the results that I provide with no manual shift ever done. I present two varieties of cumulants. The Landau form of the cumulant is
+\begin{align}
+    C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\varepsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+\label{eq:Cpp_0_updated} \\
+\end{align}
+Then the cumulant ansatz for the time domain interacting Green's function is
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) e^{-t(i \varepsilon_p +\eta)} e^{C_{pp}(t)}
+\label{eq:Gpp_time_updated}
+\end{equation}
+When I present MP2+C; $G_0$ via HF, $\varepsilon _p\equiv \epsilon_p^{HF}$ in both \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, and $\Sigma _{pp}(\omega)$ is built from the set $\{\epsilon_p^{HF}\}$. When I present MP2+C; $G_0$ via SRG-MP2, $\varepsilon _p\equiv \epsilon_p^{SRG-MP2}$ in both \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, and $\Sigma _{pp}(\omega)$ is built from the set $\{\epsilon_p^{SRG-MP2}\}$. So the former does not solve Dyson's equation before adding the cumulant correction (it is a true one shot scheme), while the latter solves Dyson's equation at the SRG-MP2 level before adding the cumulant correction.
 \subsection{Self-consistent cumulant with second-order self-energy}\
 \subsubsection{Basis transformation}
 We want to evaluate the quantities in the sine-cosine basis, as this is simpler. But in the end, we will want the spectral function in the plane wave basis, and thus we need the Green's function in that basis. Now, the retarded Greens function in the time domain with the broadening factor $\eta$ can be written as
@@ -1149,10 +1227,15 @@ $\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$.
     C_{pp}(t) = \int d \omega \frac{\beta_{pp}(\omega)}{\omega^2} \left( e^{-i \omega t} + i \omega t -1 \right)
 \label{eq:cumulant_beta}
 \end{equation}
-with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega + \epsilon_p)|$ with the self-energy defined as
+with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega + \epsilon_p)|$ with the self-energy defined in chemists notation as
 \begin{align}
     \Sigma^{(2)}_{pq}(\omega)
     & = \sum_{iab} \frac{(pa|ib)\Big(2(qa|ib) - (qb|ia)\Big)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left( (pi|aj)(2(qi|aj) - (qj|ai)) \right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta} 
+\end{align}
+or in physicists notation as
+\begin{align}
+    \Sigma^{(2)}_{pq}(\omega)
+    & = \sum_{iab} \frac{\left<pi|ab\right>\left(2\left<qi|ab\right> - \left<qi|ba\right>\right)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left<pa|ij\right>\left(2\left<qa|ij\right> - \left<qa|ji\right>\right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta}
 \end{align}
 If I remember correctly, our idea for a self consistent scheme was to solve equation \ref{eq:cumulant_beta} using
 \begin{equation}
