@@ -1195,7 +1195,91 @@ Then the cumulant ansatz for the time domain interacting Green's function is
 \label{eq:Gpp_time_updated}
 \end{equation}
 When I present MP2+C; $G_0$ via HF, $\varepsilon _p\equiv \epsilon_p^{HF}$ in both \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, and $\Sigma _{pp}(\omega)$ is built from the set $\{\epsilon_p^{HF}\}$. When I present MP2+C; $G_0$ via SRG-MP2, $\varepsilon _p\equiv \epsilon_p^{SRG-MP2}$ in both \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, and $\Sigma _{pp}(\omega)$ is built from the set $\{\epsilon_p^{SRG-MP2}\}$. So the former does not solve Dyson's equation before adding the cumulant correction (it is a true one shot scheme), while the latter solves Dyson's equation at the SRG-MP2 level before adding the cumulant correction.
-\subsection{Self-consistent cumulant with second-order self-energy}\
+\subsubsection{Why we need the G=0 component in the ERIs of the MP2 self-energy}
+It is instructive to start by understanding why having the G=0 component in the ERIs is irrelevant for computing the MP2 correlation energy. The MP2 correlation energy can be written as
+\begin{align}
+    E_{c}^{MP2} = \frac{1}{4} \sum_{ijab} \frac{|\left<\bm{k}_i \bm{k}_j|\bm{k}_a \bm{k}_b\right> - \left<\bm{k}_i \bm{k}_j|\bm{k}_b \bm{k}_a\right>|^2}{\epsilon_{\bm{k}_i} + \epsilon_{\bm{k}_j} - \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_b}}
+\end{align}
+Because $i,j$ are occupied and $a,b$ are virtual, and the correlation energy always has an OV pair at a ERI center, we will never encounter a zero momentum transfer at any center. Now, the MP2 self-energy is given by
+\begin{align}
+    % \Sigma_{pq}^{(2)}(\omega) =& \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
+    \Sigma^{(2)}_{pq}(\omega) = \frac{1}{2} \sum_{iab} \frac{\langle \bm{k}_p \bm{k}_i|\bm{k}_a \bm{k}_b \rangle \langle \bm{k}_a \bm{k}_b|\bm{k}_q \bm{k}_i \rangle}{\omega + \epsilon_{\bm{k}_i} - \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_b}} + \frac{1}{2} \sum_{ija} \frac{\langle \bm{k}_p \bm{k}_a|\bm{k}_i \bm{k}_j \rangle \langle \bm{k}_i \bm{k}_j|\bm{k}_q \bm{k}_a \rangle}{\omega + \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_i} - \epsilon_{\bm{k}_j}}
+\end{align}
+If you take a look at the second summation (the 2h1p one), you can see that if $p$ is occupied, then it is possible, for example, to have $\bm{k}_p = \bm{k}_i$, and hence a zero momentum transfer at the ERI center. Thus, if we do not include the G=0 component from the ouset in HF, we mistreat the situation where there might be a zero momentum transfer at an ERI center, and thus miss contributions to the self-energy.
+\subsubsection{Solution to the problem of the shifted poles}
+Tim's notes write that the many-body Hamiltonian based on the Ewald potential can be re-written as
+\begin{align}
+H= & -\sum_{i=1}^N \frac{1}{2} \nabla_i^2-\sum_{i=1}^N \sum_{A=1}^M z_A\left[v_{\mathrm{E}}\left(r_i, R_A\right)-v_{\mathrm{M}}\right] +\sum_{i=1}^N \sum_{j>i}^N\left[v_{\mathrm{E}}\left(r_i, r_j\right)-v_{\mathrm{M}}\right] 
+\label{H_ewald} \\
+& +\sum_{A=1}^M \sum_{B>A}^M z_A z_B\left[v_{\mathrm{E}}\left(R_A, R_B\right)-v_{\mathrm{M}}\right] +\frac{v_{\mathrm{M}}}{2}\left(N-\sum_A z_A\right)^2 \notag
+\end{align}
+where the final term vanishes for a neutral system. The shifted Ewald potential $v_{\mathrm{s}}(r) \equiv v_{\mathrm{E}}(r)-v_{\mathrm{M}}$ has the Fourier components
+\begin{equation}
+    v_{\mathrm{s}}(G)= \begin{cases}4 \pi / \Omega G^2 & G \neq 0 \\ -v_{\mathrm{M}} & G=0\end{cases}.
+\label{vs_G}
+\end{equation}
+Because this is the homogeneous electron gas, there are no nuclei, so the second and fourth and last part of the final parentheses in \eqref{H_ewald} vanish. Thus, the Hamiltonian reduces to
+\begin{equation}
+H= -\sum_{i=1}^N \frac{1}{2} \nabla_i^2 +\sum_{\bm{G}} v_{\mathrm{s}}(G) + \frac{v_{\mathrm{M}}}{2} N^2
+\label{H_ewald_simplified}
+\end{equation}
+Now, the IP is defined as the energy difference between the N and N-1 electron systems, so if the final term in \ref{H_ewald_simplified} did not exist, we could say that the IPs are equivalent to the occupied MO energies by Koopmans' theorem. However, because of the final term, we have that
+\begin{equation}
+    IP = -\left(E(N-1) - E(N)\right) = \epsilon_{\mathrm{i}}  - \frac{v_{\mathrm{M}}}{2}
+\end{equation}
+So the IPs should be shifted by $-v_{\mathrm{M}}/2$ to get the correct result. This is what I was doing to get the good looking results before this conversation all started.
+\subsection{What are the implications of including the G=0 component for spectral functions?}
+\subsubsection{Deriving orbital energies}
+We know the form when G=0 is excluded, so with respect to that we don't modify the Coulomb matrix at all, but just the exchange matrix.
+% The exchange potential is defined with
+% \begin{align}
+% K_{n \vec{k}}^\sigma(\vec{r}) \underbrace{\phi_{j k^*}(\vec{r})}_{A O} & =\left\{\int d^2 \vec{r}^{\vec{r}} \psi_{n \vec{k}}^{\sigma *}\left(\overrightarrow{r^*}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\vec{r}}\right|} \phi_{j k^*}\left(\overrightarrow{r^*}\right)\right\} \underbrace{\psi_{n \vec{k}}^\sigma(\vec{r})}_{M O} \\
+% K^\sigma(\vec{r}) & =\sum_{\vec{k}} \sum_{n, o c c} K_{n \vec{k}}^\sigma(\vec{r}) . \quad \text { (total exchange potential) }
+% \end{align}
+We are at the GPT, so we can neglect the $\vec{k}$ dependence of quantities. Thus, in the plane wave basis, we have
+\begin{align}
+K_{ p q}^\sigma & =\int_{\Omega} d^2 \vec{r} \phi_{p}^*(\vec{r}) K^\sigma(\vec{r}) \phi_{q }(\vec{r}) \\
+& =\int_{\Omega} d^2 \vec{r} \phi_{p}^*(\vec{r}) \sum_{n, o c c}\left\{\int d^2 \vec{r}^{\prime} \psi_{n}^{\sigma *}\left(\vec{r^{\prime}}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} \phi_{q}\left(\vec{r^{\prime}}\right)\right\} \psi_{n}^\sigma(\vec{r}) \\
+& =\int_{\Omega} d^2 \vec{r} \phi_{p }^*(\vec{r}) \sum_{n, o c c}\left\{\int d^2 \vec{r}^{\prime} \phi_{n }^{\sigma *}\left(\vec{r^{\prime}}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} \phi_{q }\left(\vec{r^{\prime}}\right)\right\} \phi_{n }^\sigma(\vec{r})
+\label{K_exchange_initial} \\
+&=\sum_{ij} P_{ ji}^\sigma \underbrace{\left< p_{} i_{} | j_{} q_{} \right>}_{*} \label{K_exchange_final} 
+\end{align}
+where we can do the simplification that leads to \ref{K_exchange_initial} because for the UEG, the MOs are the AOs. Now,
+\begin{align}
+* 
+% &= \frac{1}{\Omega^2} \int_{\Omega} d^2 \vec{r} e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\left\{\int d^2 \vec{r}^{\prime} \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}^{\prime}}\right\} \\
+&= \frac{1}{\Omega^2} \int_{\Omega} d^2 \vec{r}  e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\left\{e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}}\right\}\left\{\int d^2 \vec{r}^{\prime} \frac{1}{\left|\vec{r}^{\prime}-\vec{r}\right|} e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot |\vec{r}^{\prime}-\vec{r}|}\right\} \\
+&= \frac{1}{\Omega^2} \int_{\Omega} d^2 \vec{r}\left\{e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\right\}\left\{e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}}\right\} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|}\left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + v_{\mathrm{M}}\Omega\delta_{\vec{G}_q,\vec{G}_i}\right) \\
+% &= \frac{1}{\Omega^2} \cdot \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} + \Omega v_{\mathrm{M}}\right) \int_{\Omega} d^2 \vec{r} e^{i\left(\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right) \cdot \vec{r}} \\
+% &= \frac{1}{\Omega^2} \cdot \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \int_{\Omega} d^2 \vec{r} e^{i\left(\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right) \cdot \vec{r}} \\
+% &= \frac{4 \pi}{\Omega\left|\vec{G}_q-\vec{G}_i\right|} \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right].
+&= \frac{1}{\Omega} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \\
+% &= \frac{1}{\Omega} \left(\frac{4 \pi}{\left|\vec{Q}\right|} \left(1-\delta_{\vec{Q},0}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{Q},0}\right) 
+\end{align}
+% where to get to the final line, we define the momentum transfer vector $\vec{Q}$ and demand that $\vec{Q}\equiv\vec{G}_q-\vec{G}_i = \vec{G}_p - \vec{G}_j$.
+ Thus, the exchange matrix elements become
+\begin{align}
+% K_{ p q}^\sigma&= \frac{1}{\Omega}  \sum_{i j} P_{j i}^\sigma \frac{1}{\left|\left(\vec{G}_q-\vec{G}_i\right)\right|} \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \label{K_exchange_inter} \\
+K_{ p q}^\sigma&= \frac{1}{\Omega}  \sum_{i j} P_{j i}^\sigma \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \label{K_exchange_inter} \\
+% &  =\frac{4 \pi}{\Omega} \sum_{\vec{Q}} P_{ p-\vec{Q}, q-\vec{Q}}^q \label{K_exchange_final}
+&= \frac{1}{\Omega}  \sum_{i j} P_{p-(q-i), q -(q-i)}^\sigma \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] 
+% &  =\frac{1}{\Omega} \sum_{\vec{Q}} P_{ p-\vec{Q}, q-\vec{Q}}^\sigma \left(\frac{4 \pi}{\left|\vec{Q}\right|} \left(1-\delta_{\vec{Q},0}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{Q},0}\right)
+\end{align}
+% where in the final line, we have defined the momentum transfer vector $\vec{Q}$, demanding that $\vec{Q}\equiv\vec{G}_q-\vec{G}_i = \vec{G}_p - \vec{G}_j$. 
+Given that the kinetic and Coulomb matrices are unchanged, we can write the Fock matrix for the UEG as
+\begin{align}
+F_{ p q}^\sigma & = H_{ p q}^{\mathrm{kin}} + J_{ p q}^\sigma + K_{ p q}^\sigma \\
+& = \delta_{ p q} \frac{|\vec{G}_p|^2}{2} +\frac{\delta_{pq}}{\Omega} \sum_{q-i} n^\sigma_{p-(q-i)} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \\
+& = \delta_{ p q} \frac{|\vec{G}_p|^2}{2} +\frac{\delta_{pq}}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) 
+\end{align}
+where we have defined $n^\sigma_{p} \equiv P_{pp}^\sigma$ as the occupation number of orbital $p$ with spin $\sigma$, but because we are at zero temperature, $n^\sigma_{p}=0$ (unoccupied) or $1$ (occupied). Because the Fock matrix is diagonal, we can read off the orbital energies as
+\begin{align}
+\epsilon_{ p}^\sigma & = \frac{|\vec{G}_p|^2}{2} +\frac{1}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) \\
+& = \frac{|\vec{G}_p|^2}{2} +\frac{1}{\Omega} \sum_{i\in occ} \frac{4 \pi }{\left|\vec{G}_p-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + v_{\mathrm{M}}n^\sigma_{p}
+\end{align}
+Thus, occupied orbitals get a shift of $v_{\mathrm{M}}$, while unoccupied orbitals are unchanged.
+\subsubsection{Deriving IPs}
+\subsection{Self-consistent cumulant with second-order self-energy}
 \subsubsection{Basis transformation}
 We want to evaluate the quantities in the sine-cosine basis, as this is simpler. But in the end, we will want the spectral function in the plane wave basis, and thus we need the Green's function in that basis. Now, the retarded Greens function in the time domain with the broadening factor $\eta$ can be written as
 \begin{equation}
