@@ -1,5 +1,507 @@
 Throughout, I am working in the retarded time formalism. We are working with a plane wave basis, where each state has its own wavevector.
-\section{MF}
+\section{HF}
+\subsection{Writing spectral functions for the UEG}
+\subsubsection{Noninteracting case}
+We can start by writing down the form for the retarded non-interacting Green's function of a state $p$ in time domain as
+\begin{equation}
+    G^R_{0,p}(t) = -i \Theta(t) e^{-i \left(\epsilon_p - \varepsilon_F \right)t}
+\end{equation}
+where $\varepsilon_F$ is the Fermi energy. I am operating at zero temperature, so in my HF code, this means that $\varepsilon_F$ is just the energy of the highest occupied molecular orbital; for this system of the UEG at $r_s = 4$ with 14 electrons in 19 orbitals it is just the energy of orbital 6 (with orbitals numbered from 0). A broadening parameter of $\eta = 0.2$ eV is used (this coincides with what Joonho and Garnet used). The HF single particle energies I get from my code do not take the Madelung correction into account. In that case, Joonho's paper tells us that for the spectral function of these occupied orbitals, we need to apply a constant frequency shift of
+\begin{equation}
+\Delta _{IP} = -\frac{\xi}{2}    
+\end{equation}
+where $\xi=-2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}$ Hartrees. For my system, this means that $\frac{\xi}{2} = -4.97$ eV. But this is confusing because it would mean that the shift for the occupied orbitals is positive $+4.97$ eV, which is counter-intuitive, as this would imply that the HF peak for the Fermi state occurs at a positive frequency. To obtain my plots, I assume that this was a typo, and instead apply a shift of $-\Delta_{IP} = +\frac{\xi}{2} = -4.97$ eV to the occupied orbitals. In RHF, the retarded second order self-energy in the frequency domain is given by
+\begin{align}
+{\Sigma}^{c,(2),R}(p, \omega) &= \frac{1}{2} \sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\omega - \epsilon_{a} - \epsilon_{b} + \epsilon_{i} + i \eta} + \frac{1}{2} \sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\omega - \epsilon_{i} - \epsilon_{j} + \epsilon_{a} + i \eta}\\
+&\overset{\text{RHF}}{=} \frac{1}{2} \sum_{iab} \frac{\left( 2\left<pi|ab\right> - \left<pi|ba\right>\right)^2}{\omega - \epsilon_{a} - \epsilon_{b} + \epsilon_{i} + i \eta} + \frac{1}{2} \sum_{ija} \frac{\left( 2\left<pa|ij\right> - \left<pa|ji\right>\right)^2}{\omega - \epsilon_{j} - \epsilon_{i} + \epsilon_{a} + i \eta}\\
+& = \frac{2\pi}{V} \left( \sum_{\mathbf{k}_i \in O; \,\mathbf{k}_a , \mathbf{k}_b \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_a , \mathbf{k}_b - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_a|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_b , \mathbf{k}_a - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_b|^2} \right]^2 }{\omega - \epsilon_{\mathbf{k}_a} - \epsilon_{\mathbf{k}_b} + \epsilon_{\mathbf{k}_i} + i \eta}  + \sum_{\mathbf{k}_i,\mathbf{k}_j \in O;\, \mathbf{k}_a \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_i , \mathbf{k}_j - \mathbf{k}_a}}{|\mathbf{k}_p-\mathbf{k}_i|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_j , \mathbf{k}_i - \mathbf{k}_a}}{|\mathbf{k}_p - \mathbf{k}_j|^2} \right]^2 }{\omega - \epsilon_{\mathbf{k}_i} - \epsilon_{\mathbf{k}_j} + \epsilon_{\mathbf{k}_a} + i \eta} \right)
+\label{eq:self_energy_2nd_order}
+\end{align}
+where $\mathbf{k}_b = \mathbf{k}_p  + \mathbf{k}_i - \mathbf{k}_a$ in the first sum and $\mathbf{k}_j = \mathbf{k}_p - \mathbf{k}_i + \mathbf{k}_a$ in the second sum due to momentum conservation. 
+\subsubsection{GW spectral function}
+Consider
+\begin{align}
+    \Sigma_k (\omega ) &= G_{0,k}^{-1}(\omega ) - G_k^{-1}(\omega ) \\
+    \implies G_k(\omega ) &= \frac{1}{G_{0,k}^{-1}(\omega ) - \Sigma_k(\omega )} \\
+    &= \frac{1}{\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) - i \operatorname{Im} \Sigma_k (\omega )} \times \frac{\left( \omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )\right)}{\left( \omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )\right)} \\
+    &= \frac{\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2}
+\end{align}
+We want $-\frac{1}{\pi} \operatorname{Im} G_k(\omega )$, so
+\begin{align}
+    \operatorname{Im} G_k(\omega ) &= \frac{\operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2} \\
+\end{align}
+Thus, the spectral function is
+\begin{equation}
+    A(\omega ) = -\frac{1}{\pi} \operatorname{Im} G_k(\omega ) = -\frac{1}{\pi} \frac{\operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2}
+\end{equation}
+This means we can write down the second order cumulant in the time domain as
+\begin{align}
+C_{pp}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pp}^{c,(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+ &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
+% \label{eq:cumulant_2nd_1}
+&= \frac{1}{2}\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
++\frac{1}{2}\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\epsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) \\
+&= \frac{2\pi}{V} \left( \sum_{\mathbf{k}_i \in O; \,\mathbf{k}_a , \mathbf{k}_b \in V} \frac{\left[ \frac{2}{|\mathbf{k}_p - \mathbf{k}_a|^2} - \frac{1}{|\mathbf{k}_p - \mathbf{k}_b|^2} \right]^2 }{\left(\varepsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \varepsilon_{pi}^{ab} t} +i \varepsilon_{pi}^{ab} t -1 \right) \right. \\
+& \left. + \sum_{\mathbf{k}_i,\mathbf{k}_j \in O;\, \mathbf{k}_a \in V} \frac{\left[ \frac{2}{|\mathbf{k}_p-\mathbf{k}_i|^2} - \frac{1}{|\mathbf{k}_p - \mathbf{k}_j|^2} \right]^2 }{\left(\varepsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \varepsilon_{pa}^{ij} t} +i \varepsilon_{pa}^{ij} t -1 \right) \right)
+\label{eq:cumulant_2nd_final}
+\end{align}
+where
+$\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
+and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$, but for the UEG, $\varepsilon_{pi}^{ab} = \epsilon_{\mathbf{k}_a} + \epsilon_{\mathbf{k}_b} - \epsilon_{\mathbf{k}_p} - \epsilon_{\mathbf{k}_i}$ and $\varepsilon_{pa}^{ij} = \epsilon_{\mathbf{k}_i} + \epsilon_{\mathbf{k}_j} - \epsilon_{\mathbf{k}_p} - \epsilon_{\mathbf{k}_a}$. When we took the single particle energies from HF, the Madelung correction was never included, so I need to find out if we need to include it here.
+\subsubsection{Interacting case}
+Now, the form for the retarded interacting Green's function in the time domain is
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) e^{-i \left(\epsilon_p - \varepsilon_F \right)t} e^{C_{pp}(t)}
+\end{equation}
+\subsubsection{Explanation of one-shot plots}
+Recall
+\begin{align}
+G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
+\label{Gpp1}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt e^{i(\omega - \epsilon_p^{QP}) t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} 
+\label{Gpp2}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt\, e^{i(\omega - \epsilon_p^{QP}) t} \left(1 + \sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t} +\ldots \right) \\
+% &= -i Z_p^{QP} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP}) t]}\label{Gpp3} \\
+% &\quad - i Z_p^{QP} \sum_{i\nu} \zeta_{pi\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pi\nu}) t]} \\
+% &\quad - i Z_p^{QP} \sum_{a\nu} \zeta_{pa\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pa\nu}) t]} + \ldots \\
+&= \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_p^{QP} \zeta_{pi\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pi\nu} + i\eta} + \sum_{a\nu} \frac{Z_p^{QP} \zeta_{pa\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pa\nu} + i\eta} + \ldots\\
+% & =-i Z_p^{Q P} \int_0^{+\infty} d r e^{\left[-\eta+i\left(\omega-\varepsilon_p^{Q P}\right)\right]} \\
+% & -\mathrm{i} Z_p^{\mathrm{OP}} \sum_{i v} \zeta_{p i v} \int_0^{+\infty} \mathrm{d} r e^{\left\{-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p i v}\right)\right]\right\}^{\prime}}-\mathrm{i} Z_p^{\mathrm{OP}} \sum_{a v} \zeta_{p a v} \int_0^{+\infty} \mathrm{d} r e^{\left(-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p \omega v}\right)\right]\right\}^{\prime}} \\
+& \approx \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_{pi\nu}^{sat}}{\omega - \epsilon_{pi\nu}^{sat} + i\eta} + \sum_{a\nu} \frac{Z_{pa\nu}^{sat}}{\omega - \epsilon_{pa\nu}^{sat} + i\eta}
+\label{Gpp4}
+\end{align}
+ $G_{pp}(\omega)$ is computed via \ref{Gpp4} in the schemes which I call first order. This is what Loos does. On the other hand, $G_{pp}(\omega)$ is computed via \ref{Gpp2} in the schemes which I call to infinite order. As you can see, there are two different flavors of infinite order, which only differ in how the real-time cumulant is computed. Analytic to infinite order does
+\begin{align}
+	 C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+\label{eq:Cpp_0} \\
+% &= i \int \frac{d\omega}{2\pi} \frac{1}{(\omega + i \eta)^2} e^{-i \omega t} \left[ \sum_{i\nu} \frac{M_{pi\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_i + \Omega_\nu + i \eta}_{-\Delta_{pi\nu}}} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_a - \Omega_\nu + i \eta}_{-\Delta_{pa\nu}}} \right] \\
+% & =\mathrm{i} \sum_{i v} M_{p i v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p i v}} +\mathrm{i} \sum_{a v} M_{p a v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p a v}}
+% \label{eq:Cpp_1}
+% \\
+&= \sum_{i\nu} \zeta_{pi\nu} \left[ e^{-i\Delta_{pi\nu} t} - 1 + i\Delta_{pi\nu} t \right] + \sum_{a\nu} \zeta_{pa\nu} \left[ e^{-i\Delta_{pa\nu} t} - 1 + i\Delta_{pa\nu} t \right]
+\label{eq:Cpp_2}
+\end{align}
+whereas numerical to infinite order computes using the Landau form
+\begin{equation}
+    C_{pp}(t) = \int d \omega \frac{\beta_{pp}(\omega)}{\omega^2} \left( e^{-i \omega t} + i \omega t -1 \right)
+\label{eq:cumulant_beta_repeat}
+\end{equation}
+with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega + \epsilon_p^{HF})|$ using the basic Riemann sum for the frequency integration. In both cases, we then plug the cumulant into
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) e^{-t \left(i\epsilon_p + \eta\right)t} e^{C_{pp}(t)}
+\end{equation}
+and then use the DFT to get $A_{pp}(\omega)$.
+\subsubsection{Choosing the right shift for my spectral functions}
+My interpretation of your discussion is that when I have included the G=0 component in my HF reference, all I have to do is to plot $A_{pp}(\omega+\xi/2)$ for HF, MP2, and MP2+C alike, since I am only computing the spectral function for occupied states. Is that correct?
+\subsubsection{Updated results}
+As we discussed on Friday, now, I have a RHF reference which includes the G=0 component. I fixed the bug and now it matches with the G=0 excluded reference exactly. Therefore, now the MP2 correlation energy is the same, irrespective of whether G=0 is included or not. I am plotting $A_{pp}(\omega+\xi/2)$ for all my spectral functions. This is because I needed to plot $A_{pp}(\omega+\xi/2)$ for HF in order to match the reference, so I do the same for MP2 and MP2+C; other than this, nothing else gets shifted. 
+\subsubsection{Update}
+If we choose
+\begin{align}
+    \xi = -2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}
+\end{align}
+then I implemented the direct term of my ERIs as 
+\begin{equation}
+    v(\mathbf{q}) = \begin{cases} \frac{4 \pi}{\mathbf{q}^2 V} & \mathbf{q} \neq 0 \\ 0 & \mathbf{q} = 0 \end{cases}
+\end{equation}
+and the exchange terms as
+\begin{equation}
+    v(\mathbf{q}) = \begin{cases} \frac{4 \pi}{\mathbf{q}^2 V} & \mathbf{q} \neq 0 \\ -\xi & \mathbf{q} = 0 \end{cases}
+\end{equation}
+for use in the self energy as
+\begin{align}
+    \Sigma^{(2)}_{pp}(\omega)
+    & = \sum_{iab} \frac{\left<pi|ab\right>\left(2\left<pi|ab\right> - \left<pi|ba\right>\right)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left<pa|ij\right>\left(2\left<pa|ij\right> - \left<pa|ji\right>\right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta}
+\end{align}
+\subsubsection{Correct poles with G=0 included}
+I have changed the definition of $\xi$ to
+\begin{align}
+    \xi = -1 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}
+\end{align}
+so omitting the factor of 2 as was suggested. This produces the results that I provide with no manual shift ever done. I present two varieties of cumulants. The Landau form of the cumulant is
+\begin{align}
+    C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\varepsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+\label{eq:Cpp_0_updated} \\
+\end{align}
+Then the cumulant ansatz for the time domain interacting Green's function is
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) e^{-t(i \varepsilon_p +\eta)} e^{C_{pp}(t)}
+\label{eq:Gpp_time_updated}
+\end{equation}
+When I present MP2+C; $G_0$ via HF, $\varepsilon _p\equiv \epsilon_p^{HF}$ in both \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, and $\Sigma _{pp}(\omega)$ is built from the set $\{\epsilon_p^{HF}\}$. When I present MP2+C; $G_0$ via SRG-MP2, $\varepsilon _p\equiv \epsilon_p^{SRG-MP2}$ in both \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, and $\Sigma _{pp}(\omega)$ is built from the set $\{\epsilon_p^{SRG-MP2}\}$. So the former does not solve Dyson's equation before adding the cumulant correction (it is a true one shot scheme), while the latter solves Dyson's equation at the SRG-MP2 level before adding the cumulant correction.
+\subsubsection{Why we need the G=0 component in the ERIs of the MP2 self-energy}
+It is instructive to start by understanding why having the G=0 component in the ERIs is irrelevant for computing the MP2 correlation energy. The MP2 correlation energy can be written as
+\begin{align}
+    E_{c}^{MP2} = \frac{1}{4} \sum_{ijab} \frac{|\left<\bm{k}_i \bm{k}_j|\bm{k}_a \bm{k}_b\right> - \left<\bm{k}_i \bm{k}_j|\bm{k}_b \bm{k}_a\right>|^2}{\epsilon_{\bm{k}_i} + \epsilon_{\bm{k}_j} - \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_b}}
+\end{align}
+Because $i,j$ are occupied and $a,b$ are virtual, and the correlation energy always has an OV pair at a ERI center, we will never encounter a zero momentum transfer at any center. Now, the MP2 self-energy is given by
+\begin{align}
+    % \Sigma_{pq}^{(2)}(\omega) =& \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
+    \Sigma^{(2)}_{pq}(\omega) = \frac{1}{2} \sum_{iab} \frac{\langle \bm{k}_p \bm{k}_i|\bm{k}_a \bm{k}_b \rangle \langle \bm{k}_a \bm{k}_b|\bm{k}_q \bm{k}_i \rangle}{\omega + \epsilon_{\bm{k}_i} - \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_b}} + \frac{1}{2} \sum_{ija} \frac{\langle \bm{k}_p \bm{k}_a|\bm{k}_i \bm{k}_j \rangle \langle \bm{k}_i \bm{k}_j|\bm{k}_q \bm{k}_a \rangle}{\omega + \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_i} - \epsilon_{\bm{k}_j}}
+\end{align}
+If you take a look at the second summation (the 2h1p one), you can see that if $p$ is occupied, then it is possible, for example, to have $\bm{k}_p = \bm{k}_i$, and hence a zero momentum transfer at the ERI center. Thus, if we do not include the G=0 component from the ouset in HF, we mistreat the situation where there might be a zero momentum transfer at an ERI center, and thus miss contributions to the self-energy.
+\subsubsection{Solution to the problem of the shifted poles}
+Tim's notes write that the many-body Hamiltonian based on the Ewald potential can be re-written as
+\begin{align}
+H= & -\sum_{i=1}^N \frac{1}{2} \nabla_i^2-\sum_{i=1}^N \sum_{A=1}^M z_A\left[v_{\mathrm{E}}\left(r_i, R_A\right)-v_{\mathrm{M}}\right] +\sum_{i=1}^N \sum_{j>i}^N\left[v_{\mathrm{E}}\left(r_i, r_j\right)-v_{\mathrm{M}}\right] 
+\label{H_ewald} \\
+& +\sum_{A=1}^M \sum_{B>A}^M z_A z_B\left[v_{\mathrm{E}}\left(R_A, R_B\right)-v_{\mathrm{M}}\right] +\frac{v_{\mathrm{M}}}{2}\left(N-\sum_A z_A\right)^2 \notag
+\end{align}
+where the final term vanishes for a neutral system. The shifted Ewald potential $v_{\mathrm{s}}(r) \equiv v_{\mathrm{E}}(r)-v_{\mathrm{M}}$ has the Fourier components
+\begin{equation}
+    v_{\mathrm{s}}(G)= \begin{cases}4 \pi / \Omega G^2 & G \neq 0 \\ -v_{\mathrm{M}} & G=0\end{cases}.
+\label{vs_G}
+\end{equation}
+Because this is the homogeneous electron gas, there are no nuclei, so the second and fourth and last part of the final parentheses in \eqref{H_ewald} vanish. Thus, the Hamiltonian reduces to
+\begin{equation}
+H= -\sum_{i=1}^N \frac{1}{2} \nabla_i^2 +\sum_{\bm{G}} v_{\mathrm{s}}(G) + \frac{v_{\mathrm{M}}}{2} N^2
+\label{H_ewald_simplified}
+\end{equation}
+Now, the IP is defined as the energy difference between the N and N-1 electron systems, so if the final term in \ref{H_ewald_simplified} did not exist, we could say that the IPs are equivalent to the occupied MO energies by Koopmans' theorem. However, because of the final term, we have that
+\begin{equation}
+    IP = -\left(E(N-1) - E(N)\right) = \epsilon_{\mathrm{i}}  - \frac{v_{\mathrm{M}}}{2}
+\end{equation}
+So the IPs should be shifted by $-v_{\mathrm{M}}/2$ to get the correct result. This is what I was doing to get the good looking results before this conversation all started.
+\subsection{What are the implications of including the G=0 component for spectral functions?}
+\subsubsection{Deriving orbital energies}
+We know the form when G=0 is excluded, so with respect to that we don't modify the Coulomb matrix at all, but just the exchange matrix.
+% The exchange potential is defined with
+% \begin{align}
+% K_{n \vec{k}}^\sigma(\vec{r}) \underbrace{\phi_{j k^*}(\vec{r})}_{A O} & =\left\{\int d^2 \vec{r}^{\vec{r}} \psi_{n \vec{k}}^{\sigma *}\left(\overrightarrow{r^*}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\vec{r}}\right|} \phi_{j k^*}\left(\overrightarrow{r^*}\right)\right\} \underbrace{\psi_{n \vec{k}}^\sigma(\vec{r})}_{M O} \\
+% K^\sigma(\vec{r}) & =\sum_{\vec{k}} \sum_{n, o c c} K_{n \vec{k}}^\sigma(\vec{r}) . \quad \text { (total exchange potential) }
+% \end{align}
+We are at the GPT, so we can neglect the $\vec{k}$ dependence of quantities. Thus, in the plane wave basis, we have
+\begin{align}
+K_{ p q}^\sigma & =\int_{\Omega} d^2 \vec{r} \phi_{p}^*(\vec{r}) K^\sigma(\vec{r}) \phi_{q }(\vec{r}) \\
+% & =\int_{\Omega} d^2 \vec{r} \phi_{p}^*(\vec{r}) \sum_{n, o c c}\left\{\int d^2 \vec{r}^{\prime} \psi_{n}^{\sigma *}\left(\vec{r^{\prime}}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} \phi_{q}\left(\vec{r^{\prime}}\right)\right\} \psi_{n}^\sigma(\vec{r}) \\
+% & =\int_{\Omega} d^2 \vec{r} \phi_{p }^*(\vec{r}) \sum_{n, o c c}\left\{\int d^2 \vec{r}^{\prime} \phi_{n }^{\sigma *}\left(\vec{r^{\prime}}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} \phi_{q }\left(\vec{r^{\prime}}\right)\right\} \phi_{n }^\sigma(\vec{r})
+% \label{K_exchange_initial} \\
+&=\sum_{ij} P_{ ji}^\sigma \underbrace{\left< p_{} i_{} | j_{} q_{} \right>}_{*} \label{K_exchange_final} 
+\end{align}
+% where we can do the simplification that leads to \ref{K_exchange_initial} because for the UEG, the MOs are the AOs. 
+Now,
+\begin{align}
+* 
+% &= \frac{1}{\Omega^2} \int_{\Omega} d^2 \vec{r} e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\left\{\int d^2 \vec{r}^{\prime} \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}^{\prime}}\right\} \\
+&= \frac{1}{\Omega^2} \int_{\Omega} d^3 \vec{r}  e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\left\{e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}}\right\}\left\{\int d^3 \vec{r}^{\prime} \frac{1}{\left|\vec{r}^{\prime}-\vec{r}\right|} e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot |\vec{r}^{\prime}-\vec{r}|}\right\} \\
+&= \frac{1}{\Omega^2} \int_{\Omega} d^3 \vec{r}\left\{e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\right\}\left\{e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}}\right\} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|^2}\left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) - v_{\mathrm{M}}\Omega\delta_{\vec{G}_q,\vec{G}_i}\right) \\
+% &= \frac{1}{\Omega^2} \cdot \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} + \Omega v_{\mathrm{M}}\right) \int_{\Omega} d^2 \vec{r} e^{i\left(\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right) \cdot \vec{r}} \\
+% &= \frac{1}{\Omega^2} \cdot \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \int_{\Omega} d^2 \vec{r} e^{i\left(\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right) \cdot \vec{r}} \\
+% &= \frac{4 \pi}{\Omega\left|\vec{G}_q-\vec{G}_i\right|} \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right].
+&= \frac{1}{\Omega} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \\
+% &= \frac{1}{\Omega} \left(\frac{4 \pi}{\left|\vec{Q}\right|} \left(1-\delta_{\vec{Q},0}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{Q},0}\right) 
+\end{align}
+% where to get to the final line, we define the momentum transfer vector $\vec{Q}$ and demand that $\vec{Q}\equiv\vec{G}_q-\vec{G}_i = \vec{G}_p - \vec{G}_j$.
+ Thus, the exchange matrix elements become
+\begin{align}
+% K_{ p q}^\sigma&= \frac{1}{\Omega}  \sum_{i j} P_{j i}^\sigma \frac{1}{\left|\left(\vec{G}_q-\vec{G}_i\right)\right|} \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \label{K_exchange_inter} \\
+K_{ p q}^\sigma&= \frac{1}{\Omega}  \sum_{i j} P_{j i}^\sigma \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \label{K_exchange_inter} \\
+% &  =\frac{4 \pi}{\Omega} \sum_{\vec{Q}} P_{ p-\vec{Q}, q-\vec{Q}}^q \label{K_exchange_final}
+&= \frac{1}{\Omega}  \sum_{i j} P_{p-(q-i), q -(q-i)}^\sigma \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] 
+% &  =\frac{1}{\Omega} \sum_{\vec{Q}} P_{ p-\vec{Q}, q-\vec{Q}}^\sigma \left(\frac{4 \pi}{\left|\vec{Q}\right|} \left(1-\delta_{\vec{Q},0}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{Q},0}\right)
+\end{align}
+% where in the final line, we have defined the momentum transfer vector $\vec{Q}$, demanding that $\vec{Q}\equiv\vec{G}_q-\vec{G}_i = \vec{G}_p - \vec{G}_j$. 
+Given that the kinetic and Coulomb matrices are unchanged, we can write the Fock matrix for the UEG as
+\begin{align}
+F_{ p q}^\sigma & = H_{ p q}^{\mathrm{kin}} + J_{ p q}^\sigma - K_{ p q}^\sigma \\
+& = \delta_{ p q} \frac{|\vec{G}_p|^2}{2} -\frac{\delta_{pq}}{\Omega} \sum_{q-i} n^\sigma_{p-(q-i)} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \\
+& = \delta_{ p q} \frac{|\vec{G}_p|^2}{2} -\frac{\delta_{pq}}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) 
+\end{align}
+where we have defined $n^\sigma_{p} \equiv P_{pp}^\sigma$ as the occupation number of orbital $p$ with spin $\sigma$, but because we are at zero temperature, $n^\sigma_{p}=0$ (unoccupied) or $1$ (occupied). Because the Fock matrix is diagonal, we can read off the orbital energies as
+\begin{align}
+\epsilon_{ p}^\sigma & = \frac{|\vec{G}_p|^2}{2} -\frac{1}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) \\
+& = \frac{|\vec{G}_p|^2}{2} -\frac{1}{\Omega} \sum_{i\in occ} \frac{4 \pi }{\left|\vec{G}_p-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + v_{\mathrm{M}}n^\sigma_{p}
+\end{align}
+Thus, occupied orbitals get a shift of $v_{\mathrm{M}}$, while unoccupied orbitals are unchanged. In my plot I suggest two different definitions of $v_{\mathrm{M}}$; they both are proportional to 
+\begin{align}
+    \xi = -2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}
+\end{align}
+\subsubsection{Derivation specific to RHF}
+Given that the kinetic and Coulomb matrices are unchanged, we can write the Fock matrix in RHF for the UEG as
+\begin{align}
+F_{ p q} & = 2H_{ p q}^{\mathrm{kin}} + 2J_{ p q} - K_{ p q} \\
+& = \delta_{ p q} |\vec{G}_p|^2 -\frac{\delta_{pq}}{\Omega} \sum_{q-i} n_{p-(q-i)} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \\
+& = \delta_{ p q} |\vec{G}_p|^2 -\frac{\delta_{pq}}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) 
+\end{align}
+where we have defined $n_{p} \equiv P_{pp}$ as the occupation number of orbital $p$, but because we are at zero temperature, $n_{p}=0$ (unoccupied) or $1$ (occupied). Because the Fock matrix is diagonal, we can read off the orbital energies as
+\begin{align}
+\epsilon_{ p} & = |\vec{G}_p|^2 -\frac{1}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) \\
+& = |\vec{G}_p|^2 -\frac{1}{\Omega} \sum_{i\in occ} \frac{4 \pi }{\left|\vec{G}_p-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + v_{\mathrm{M}}n_{p}
+\end{align}
+Thus, occupied orbitals get a shift of $v_{\mathrm{M}}$, while unoccupied orbitals are unchanged. In my plot I suggest two different definitions of $v_{\mathrm{M}}$; they both are proportional to 
+\begin{align}
+    \xi = -2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}
+\end{align}
+\subsubsection{Deriving total energy}
+Earlier, we found that the value of the ERI is
+\begin{align}
+\left< p_{} q_{} | r_{} s_{} \right> & = \frac{1}{\Omega} \left(\frac{4 \pi}{\left|\vec{G}_s-\vec{G}_q\right|^2} \left(1-\delta_{\vec{G}_s,\vec{G}_q}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_s,\vec{G}_q}\right) \delta\left[\left(\vec{G}_r-\vec{G}_p\right)+\left(\vec{G}_s-\vec{G}_q\right)\right] .
+\end{align}
+Let us now determine the magnitude of the Madelung correction, given the the expression for the RHF energy in physicist's notation as
+\begin{align}
+E^{(0)}&=2 \sum_i h_{i i}+\sum_{i j}\left(2 \left<ij|ij\right> - \left<ij|ji\right> \right) \label{eq:RHFE0} \\
+&= \ldots + \sum_i^{N/2} \sum_j^{N/2} \left( \delta_{ij} v_{\mathrm{M}} \right) \label{eq:RHFE1} \\
+&= \ldots + \frac{N}{2} v_{\mathrm{M}}
+\end{align}
+Since it is RHF, we don't need to worry about spin orthogonality. Then, we know that for the UEG, by defintion, the direct term vanishes.
+Finally, in the exchange term, a zero momentum transfer only happens when $i=j$, and we only get a $v_{\mathrm{M}}$ contribution in that case. 
+
+From Szabo, we know that the total HF energy is the sum of occupied orbital energies minus a correction term to avoid double counting the two-electron interactions:
+\begin{align}
+E_{HF} & = \sum_{i\in occ} \epsilon_i - \frac{1}{2} \sum_{i\in occ} \sum_{j\in occ} \left( \left<ij|ij\right> - \left<ij|ji\right> \right) \\
+&= \sum_{i\in occ} \left[ \frac{|\vec{G}_i|^2}{2} -\frac{1}{\Omega} \sum_{j\in occ} \frac{4 \pi }{\left|\vec{G}_i-\vec{G}_j\right|^2} \left(1-\delta_{\vec{G}_i,\vec{G}_j}\right) \right] + N v_{\mathrm{M}} \\
+&- \frac{1}{2} \sum^{2N} \left(- v_{\mathrm{M}}\right) + \frac{1}{2} \sum_{i\neq j\in occ} \frac{1}{\Omega} \frac{4 \pi }{\left|\vec{G}_i-\vec{G}_j\right|^2} + \frac{1}{2} \sum^N \left( - v_{\mathrm{M}}\right) \\
+&= \ldots + \frac{3N v_{\mathrm{M}}}{2}
+\end{align}
+\subsubsection{Deriving IPs}
+ Now, the total HF energy for a general system can be written as a functional of
+occupation numbers $\{n_i\}$ for a fixed orthonormal orbital set
+$\{\phi_i\}$:
+\begin{equation}
+E[\{n\}]
+=
+\sum_i n_i\, h_{ii}
++
+\frac{1}{2}
+\sum_i
+\sum_j
+n_i n_j\, G_{ij},
+\label{eq:HF_energy_occ}
+\end{equation}
+where the one-body term and two-body terms are $h_{ii}$ and $G_{ij}$,
+respectively, and the factor of $\tfrac{1}{2}$ avoids double counting of the two-body terms. We know that ionization consists of removing an electron from an occupied orbital $p$; we assume this happens via a vertical process, where other occupations and orbitals are frozen. 
+In the $N$-electron reference state, $n_p=1$, while in the $(N-1)$-electron
+state, $n_p=0$. This motivates us to take a closer look at the double sum, separating terms involving orbital $p$,
+\begin{align}
+\sum_{ij} n_i n_j G_{ij}
+&=
+\sum_{i\neq p}\sum_{j\neq p} n_i n_j G_{ij}
++ 2 n_p \sum_{j\neq p} n_j G_{pj}
++ n_p^2 G_{pp}.
+\label{eq:double_sum_decomp}
+\end{align}
+Using the decomposition in \ref{eq:double_sum_decomp}, we compute the frozen-orbital energy difference as
+\begin{equation}
+E(N) - E(N-1)
+=
+h_{pp}+ \frac{1}{2} \left(2\sum_{j\neq p} n_j G_{pj}+G_{pp} \right).
+\label{eq:EN_diff}
+\end{equation}
+We found the HF orbital energy of orbital $p$ to be
+\begin{align}
+\epsilon_p
+=
+h_{pp}
++
+\sum_j n_j G_{pj}
+&=h_{pp}+\sum_{j\neq p} n_j G_{pj}+G_{pp} \\
+&\equiv  \frac{|\vec{G}_p|^2}{2} +\frac{1}{\Omega} \sum_{i\in occ} \frac{4 \pi }{\left|\vec{G}_p-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + v_{\mathrm{M}}n^\sigma_{p}
+\end{align}
+where the first, second, and third terms are meant to be compared, respectively, and we can identify $G_{pp}\equiv v_{\mathrm{M}}$ for occupied orbitals. Comparing with \ref{eq:EN_diff} yields
+\begin{align}
+E(N) - E(N-1) &= \varepsilon_p - \frac{v_{\mathrm{M}}}{2}\\ \implies IP_{p} \equiv E(N-1) - E(N) &= -\varepsilon_p + \frac{v_{\mathrm{M}}}{2}.
+\end{align}
+\section{Determining IPs in simulation with periodic boundary conditions (PBCs)}
+\subsection{Physical intuition when using PBCs}
+ When we simulate with PBCs, we are repeating a N-electron unit cell across the entire lattice. Therefore, when we model the ionization process, PBCs force us to create a hole in every cell across the lattice. These periodically repeated holes interact with each other, but this is not physical, because the ionization process was just supposed to remove one electron from a single cell. This spurious interaction should not contribute to the IP.
+\subsubsection{How to resolve the issue of spurious interactions}
+Physically, N-1 and N+1 electrons systems both have an excess of one charge unit. But, as described before, PBCs are not able to place this excess of charge in just the unit cell where it belongs. Instead, the PBCs force us to put this same excess of charge in \emph{every} cell across the lattice, leading to spurious interactions between the periodically repeating charges. This spurious interaction has the function of raising the energy for the charged systems, relative to the N electron system, by $|\frac{v_{\mathrm{M}}}{2}|$. This is why it is said that the Madelung constant is twice the energy of a periodic array of unit point charges with a compensating background charge density.
+\subsection{The IP/EA problem}
+\subsubsection{What are IPs?}
+Ionization involves the removal of an electron from a single location. The ionization potential (IP) quantifies the energy you have to pay to remove the electron. It is a positive quantity if the electron is bound or, in other words, if the electron removal has raised the energy. Thus, 
+\begin{equation}
+    \text{IP} \equiv E(N-1) - E(N).
+\label{eq:IP_def}
+\end{equation} We know that the shifted Ewald approach predicts
+
+\subsubsection{What are EAs?}
+Electron attachment involves the addition of an electron to a single location. The electron affinity (EA) quantifies the energy released when an electron is added. It is a positive quantity if the extra electron is bound or, in other words, if the electron attachment has lowered the energy. Thus,
+\begin{equation}
+    \text{EA} \equiv E(N) - E(N+1).
+\label{eq:EA_def}
+\end{equation}
+\subsubsection{Why Koopmans' theorem holds with PBCs}
+Koopmans' theorem tells us that IP$=-\epsilon_{\text{HOMO}}$ and EA$=-\epsilon_{\text{LUMO}}$. We know that the shifted Ewald approach, which is designed to be free from finite-size effects, predicts
+\begin{equation}
+    \epsilon_{\text{HOMO}} = (\ldots) + |v_{\mathrm{M}}|
+\end{equation}
+and
+\begin{equation}
+    \epsilon_{\text{LUMO}} = (\ldots)
+\end{equation}
+where $(\ldots)$ denotes uncorrected quantities. If we start with the fundamental definition of IP and EA, we should get the same answer.
+% \begin{align}
+%     \text{IP} &\equiv E(N-1) - E(N) \\
+%     &= (\ldots) + \left[ 
+% \end{align}
+\subsubsection{Implication for the IP and EA}
+In the last section, we described why simulation with PBCs gives a positive shift of $|\frac{v_{\mathrm{M}}}{2}|$ for the total energy of both N-1 and N+1 systems. Comparing with the definitions \ref{eq:IP_def} and \ref{eq:EA_def}, PBCs \emph{artificially} subtract from the EA and add to the IP, in both situations by $|\frac{v_{\mathrm{M}}}{2}|$. We can correct for this spurious contribution \emph{after} simulation with PBCs has been completed, now adding to the EA and subtracting from the IP by $|\frac{v_{\mathrm{M}}}{2}|$. %Simulation with PBCs does not account for these shifts, so the answer that is computed for the EA is too small by $|\frac{v_{\mathrm{M}}}{2}|$, while the answer that is computed for the IP is too large by $|\frac{v_{\mathrm{M}}}{2}|$.
+The spectral function interrogates the density of states in a system, but there are no states at the PBC IPs, because the PBC IPs include spurious interactions.  This is why my PBC simulated IPs were shifted from the HF peaks of the spectral function (which plots $\epsilon_{\text{HOMO}}\equiv -\text{IP}$) by exactly $-|\frac{v_{\mathrm{M}}}{2}|$. So we need to shift all spectral function peaks by $+|\frac{v_{\mathrm{M}}}{2}|$.
+\subsection{Computing band gaps}
+\subsubsection{What QCPBC does}
+The Coulomb kernel in QCPBC includes divergent contributions from the start, which is equivalent to shifted Ewald. Concretely, if $\{\epsilon_i\}$ and $\{\epsilon_a\}$ are the set of occupied and virtual MO energies, respectively, due to shifted Ewald and QCPBC alike, then
+\begin{align}
+\epsilon_i &= T_{i i}+V_{i i}+\sum_j[\overline{\langle i j | i j\rangle}-\overline{\langle i j | j a\rangle}]+v_{\mathrm{M}} 
+\label{eq:eps_i}\\
+\epsilon_a &= T_{a a}+V_{a a}+\sum_j[\overline{\langle a j | a j\rangle}-\overline{\langle a j | j a\rangle}]
+\end{align}
+where the overline indicates that the ERIs exclude the divergent component. Now, QCPBC computes band gaps as $E_{\text{Gap}}=\epsilon_{\text{LUMO} } - \epsilon_{\text{HOMO}} + |v_{\mathrm{M}}|$. \textbf{Note that this Madelung correction is completely separate from what we added to \ref{eq:eps_i}, where we were just trying to correct for the fact that we excluded the divergent component in the ERIs.} Because the promotion of an electron from the valence to the conduction band is localized to the unit cell and creates no excess charge, one might expect that no \emph{a posteriori} correction should have been needed to obtain the band gap, in a seeming contradiction. However, this is okay because the MO energies are not observable quantities.
+\subsubsection{The IP/EA perspective}
+The fundamental definition of the band gap is
+\begin{equation}
+    E_{\text{Gap}} = \text{IP} - \text{EA}
+\end{equation}
+which comes from that fact that the IP/EA are observable quantities. As found in a previous section, we need to correct PBC computed EAs and IPs by a shift of $+|\frac{v_{\mathrm{M}}}{2}|$ and $-|\frac{v_{\mathrm{M}}}{2}|$, respectively. So if we do a HF simulation with PBCs and the IP (EA) that we get from Koopmans' is $-\epsilon_{\text{HOMO}}$ ($-\epsilon _{\text{LUMO}}$) this means we get $E_{\text{Gap}} = \epsilon _{\text{LUMO}} - \epsilon _{\text{HOMO}} + |v_{\mathrm{M}}|$. This is consistent with what QCPBC does.
+
+\subsection{Implications for the numerics}
+\subsubsection{What shifted Ewald can and can't do}
+We know that in PBC simulations, shifted Ewald summation is unique in the sense that unlike other approaches, such as standard Ewald summation, it does not neglect the divergent component of the Coulomb potential. Concretely, the shifted Ewald potential is
+\begin{equation}
+    v_{\mathrm{s}}(G)= \begin{cases}4 \pi / \Omega G^2 & G \neq 0 \\ -v_{\mathrm{M}} & G=0\end{cases},
+\end{equation}
+where the Madelung potential $v_{\mathrm{M}}=-2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}$. Even though shifted Ewald treats the divergent component of the Coulomb potential, it is not able to remedy the unphysical interaction between the periodically repeated holes created during ionization. 
+
+\subsubsection{When Koopmans' theorem does hold, but why we don't use this paradigm}
+Formally, we can define the Hamiltonian in the shifted Ewald formalism as
+\begin{align}
+H= & -\sum_{i=1}^{\hat{N}} \frac{1}{2} \nabla_i^2-\sum_{i=1}^{\hat{N}} \sum_{A=1}^M z_A\left[v_{\mathrm{E}}\left(r_i, R_A\right)-v_{\mathrm{M}}\right] +\sum_{i=1}^{\hat{N}} \sum_{j>i}^{\hat{N}}\left[v_{\mathrm{E}}\left(r_i, r_j\right)-v_{\mathrm{M}}\right] 
+\label{H_ewald} \\
+& +\sum_{A=1}^M \sum_{B>A}^M z_A z_B\left[v_{\mathrm{E}}\left(R_A, R_B\right)-v_{\mathrm{M}}\right] +\frac{v_{\mathrm{M}}}{2}\left(\hat{N}-\sum_A z_A\right)^2 \notag
+\end{align}
+As indicated, really $\hat{N}$ is a one-body operator; if we treated it as such, this would mitigate the issue described in the previous section and then Koopmans' theorem would hold. However, Tim showed that this approach leads to poor convergence of the orbital energies towards the TDL as $L^{-1}$. The other option is to approximate $\hat{N}$ as a constant $N$. Then Koopmans' theorem does not hold for the aforementioned reasons, but we get superior convergence to the TDL as $L^{-3}$. Since we are working in a finite basis, it is necessary have the latter feature.
+\subsubsection{Why this is compatible with the way to compute band gaps}
+Both the N-1 and N+1 systems have an excess of charge and so they both deal with unphysical interactions between the images of the periodically repeating charges. This interaction always has the function of raising the energy for the charged systems relative to the N electron system, which is charge neutral. This leads to a positive shift of $-\frac{v_{\mathrm{M}}}{2}$ both N-1 and N+1 systems. Therefore, the EA gets a shift of $-\frac{v_{\mathrm{M}}}{2}$, because $EA\equiv E(N+1)-E(N)$ and the IP gets a shift of $+\frac{v_{\mathrm{M}}}{2}$, because $IP\equiv -\left(E(N-1)-E(N)\right)$. If band gaps are the difference between the IP and EA, this means band gaps in periodic simulations should be $|v_{\mathrm{M}}|$ larger than if we were in a finite system. Nemo explained to me that QCPBC does compute band gaps by considering the difference between the lowest virtual and highest occupied orbitals. But then he also explained the Madelung shift they do in the K build has the function of shifting the occupied energies down by $|v_{\mathrm{M}}|$, but leaving the virtuals unchanged. This is consistent with what I described above.
+\subsubsection{Conclusion}
+So this is why we should always get that the calculated IPs are off from the poles by $-\frac{v_{\mathrm{M}}}{2}$, which is what I have observed. Because this is equivalent to always shifting by $+\frac{v_{\mathrm{M}}}{2}$ relative to the frequency variable, I hypothesize that we should continue doing this in the Landau form for the cumulant, where recall that inside of the integral, we are always computing some product between the self energy and frequency variable.
+
+
+\subsection{Simulating the quasi-particle with periodic boundary conditions}
+\subsubsection{Definition of the Madelung potential}
+It is known that the potential arising
+\subsubsection{Mean-field theory}
+To start simple, let us start by considering how mean-field theories, such as HF, describe the quasi-particle. HF involves a self energy contribution, the exchange one, but this is static.
+\subsection{Self-consistent cumulant with second-order self-energy}
+\subsubsection{Basis transformation}
+We want to evaluate the quantities in the sine-cosine basis, as this is simpler. But in the end, we will want the spectral function in the plane wave basis, and thus we need the Green's function in that basis. Now, the retarded Greens function in the time domain with the broadening factor $\eta$ can be written as
+\begin{equation}
+    G_{pp}(t) = -i \Theta(t) e^{-t(i \epsilon_p +\eta)} e^{C_{pp}(t)}
+\end{equation}
+where the cumulant is defined as
+\begin{align}
+    C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+ &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
+% \label{eq:cumulant_2nd_1}
+&\overset{RHF}{=} \sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
+\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2} \left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right)
+\end{align}
+with $\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
+and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. 
+\subsubsection{Self-consistency}
+Everything I present in the plots is one-shot. When I speak of GF2+C with analytic frequency integration, I am building the cumulant as
+\begin{align}
+    C_{pp}(t) &=\sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
+\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2} \left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) \nonumber
+\end{align}
+with $\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$ and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$.
+ As can be seen, this gives qualitatively the same result as GF2+C with numerical frequency integration, where I instead build the cumulant as
+\begin{equation}
+    C_{pp}(t) = \int d \omega \frac{\beta_{pp}(\omega)}{\omega^2} \left( e^{-i \omega t} + i \omega t -1 \right)
+\label{eq:cumulant_beta}
+\end{equation}
+with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega + \epsilon_p)|$ with the self-energy defined in chemists notation as
+\begin{align}
+    \Sigma^{(2)}_{pq}(\omega)
+    & = \sum_{iab} \frac{(pa|ib)\Big(2(qa|ib) - (qb|ia)\Big)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left( (pi|aj)(2(qi|aj) - (qj|ai)) \right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta} 
+\end{align}
+or in physicists notation as
+\begin{align}
+    \Sigma^{(2)}_{pq}(\omega)
+    & = \sum_{iab} \frac{\left<pi|ab\right>\left(2\left<qi|ab\right> - \left<qi|ba\right>\right)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left<pa|ij\right>\left(2\left<qa|ij\right> - \left<qa|ji\right>\right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta}
+\end{align}
+If I remember correctly, our idea for a self consistent scheme was to solve equation \ref{eq:cumulant_beta} using
+\begin{equation}
+    \Sigma_{pp}(\omega) = \frac{1}{G^0_{pp}(\omega)} - \frac{1}{G_{pp}(\omega)}
+% \left(G^0_{pp}(\omega)\right)^{-1} - \left(G_{pp}(\omega)\right)^{-1}
+\end{equation}
+In the initial trials, I have not been getting any useful results with the above. However, I notice that I only use under 1e4 frequency grid points. Should I try to get this scheme to work with something like 1e6 grid points or were you thinking of something different?
+\newpage
+This self-energy can then be used to compute a new cumulant $C_{pp}(t)$ as
+\begin{align}
+    C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+&= i \int \frac{d\omega}{2\pi} \frac{\omega + i \eta - \frac{1}{G_{pp}(\omega + \epsilon_p)}}{(\omega + i \eta)^2} e^{-i \omega t} \\
+&= i \int \frac{d\omega}{2\pi} \frac{\omega + i \eta}{(\omega + i \eta)^2} e^{-i \omega t} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t} \\
+&= i \int \frac{d\omega}{2\pi} \frac{e^{-i \omega t}}{\omega + i \eta} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t} \\
+&= \Theta(t)e^{-\eta t} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t}
+\end{align}
+where we can use some quadrature to perform the latter integral. This cumulant can then be used to compute $G_{pp}(t)$ using the usual recipe, and then Fourier transformed to obtain $G_{pp}(\omega)$, which can then be used to compute a new self-energy, and so on, until convergence is reached. We still need to determine what measure will be used to determine if self-consistency has been reached.
+\begin{equation}
+    \begin{pmatrix}
+|{\bm{K}_p}\rangle \\
+|{\bm{-K}_p}\rangle
+    \end{pmatrix}
+= \frac{1}{\sqrt{2}} \begin{bmatrix}
+1 & i \\
+1 & -i
+\end{bmatrix}
+\begin{pmatrix}
+|\alpha_p\rangle \\
+|\beta_p\rangle
+\end{pmatrix}
+\implies |\bm{K}_p\rangle = \frac{1}{\sqrt{2}} \left( |\alpha_p\rangle + i |\beta_p\rangle \right)
+\end{equation} 
+So the self energy (and also the cumulant as well as the Green's function) can be expressed as
+\begin{align}
+    \Sigma_{p p}(\omega)&\equiv\langle p| \hat{\Sigma}(\omega)|p\rangle \\
+&= \frac{1}{2} \left( \langle \alpha_p| + -i \langle \beta_p| \right) \hat{\Sigma}(\omega) \left( |\alpha_p\rangle + i |\beta_p\rangle \right) \\
+&= \frac{1}{2} \left( \Sigma_{\alpha_p \alpha_p}(\omega) + \Sigma_{\beta_p \beta_p}(\omega) + i \Sigma_{\alpha_p \beta_p}(\omega) - i \Sigma_{\beta_p \alpha_p}(\omega) \right)
+\end{align}
+Suppose that $p$ is the Fermi state, which in our case has wavevector $(1,0,0)$ and the complement is $(-1,0,0)$; in the plane wave basis, they may have non-consecutive indices, like 6 and 1, respectively. The sine-cosine basis is expressed as linear combinations of the two, so the sine and cosine states will now be in a consecutive order, say 5 and 6. I need to check that nothing changes if instead they occupy indices 1 and 2. Also, it is worth checking whether $\Sigma_{\alpha\beta} = \Sigma_{\beta\alpha}$ in the sine-cosin basis. If so, check if $\Sigma_{\alpha\alpha}=\Sigma_{\beta\beta}$ because, if so, that means the self-energy in the plane-wave basis might be equivalent to the self-energy in thee sine-cosine basis. 
+To derive a form for $C_{pp}^{(2)}(t)$, start by equating the cumulant ansatz for the Green's function the Dyson equation, which gives
+\begin{align}
+C_{pp}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pp}^{c,(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+ &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
+% \label{eq:cumulant_2nd_1}
+&\overset{RHF}{=} \sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
+\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) \\
+&\overset{SC}{=} \sum_{\tilde{p}}^{p_{\bm{K}}, p_{\bm{-K}}} \Bigg(\sum_{iab} \frac{(\tilde{p}i|ab)\left(2(\widetilde{p}i|ab)- (\widetilde{p}b|ia)\right)}{\left(\epsilon_{\widetilde{p}i}^{ab}\right)^2}
+\left(e^{-i \epsilon_{\widetilde{p}i}^{ab} t} +i \epsilon_{\widetilde{p}i}^{ab} t -1 \right) \\& + \sum_{ija} \frac{(\tilde{p}i|aj)\left(2(\widetilde{p}i|aj)- (\widetilde{p}j|ai)\right)}{\left(\epsilon_{\widetilde{p}a}^{ij}\right)^2}
+\left(e^{-i \epsilon_{\widetilde{p}a}^{ij} t} +i \epsilon_{\widetilde{p}a}^{ij} t -1 \right)\Bigg)  
+\label{eq:cumulant_2nd_final}
+\end{align}
+where
+$\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
+and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. At this point we can stop and notice that if we want to determine use the sine-cosine basis for the evaluation of the self energy in the definition of the cumualant, we just need to do
+\begin{equation}
+    \Sigma_{p p}(\omega)=\langle p| \hat{\Sigma}(\omega)|p\rangle=\sum_{\alpha, \beta} U_{p \alpha} \Sigma_{\alpha \beta}^{(\mathrm{sc})}(\omega) U_{p \beta}^*,
+\end{equation}
+Now, we are told that this unitary transformation that allows us to move between the plane wave and sine-cosine basis is given by
+\begin{align}
+\mathbf{U} &= \frac{1}{\sqrt{2}} \begin{bmatrix}
+1 & 1 \\
+ -i & i
+\end{bmatrix}
+\implies
+\begin{bmatrix}|\mathbf{K},s \rangle \\
+|\mathbf{K},c \rangle
+\end{bmatrix} = \mathbf{U}^\dag \begin{bmatrix} |\mathbf{K} \rangle \\
+|-\mathbf{K} \rangle
+\end{bmatrix}
+\end{align}
+for a $\mathbf{K}\neq 0$ state from the plane wave basis.
 \subsection{Basic relationships}
 The Wigner-Seitz radius $r_s$ is defined as the radius of a sphere that contains one electron on average. In a finite simulation cell of length $L$ containing $N$ electrons, we can relate $r_s$ to $L$ and $N$ via the following steps.
 \begin{align}

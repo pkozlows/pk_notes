@@ -1,0 +1,51 @@
+\section{SRG-MP2 Update}
+\begin{frame}
+\frametitle{Derivation starting with the electron-boson Hamiltonian}
+The core hole approximation allows us to write
+\begin{align}
+\hat{c}_p^\dagger \ket{N} &\equiv \hat{c}_p^\dagger \Bigl( |N_F\rangle \otimes |0_B\rangle \Bigr) \approx \hat{c}_p^\dagger \Bigl( |\Phi_0^N\rangle \otimes |0_B\rangle \Bigr)
+\label{eq:core_hole_approx_1}\\
+& = |\Phi_0^{N-1}\rangle \otimes |0_B\rangle
+% & \approx |\Phi_0^{N-1}\rangle \otimes |0_B\rangle \label{eq:core_hole_approx_2} \\
+\equiv \ket{\Psi_p}
+\end{align}
+so with $
+    \hat{H}_{\text{eB}} = \underbrace{\epsilon_{p} + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu}_{\hat{H}_0} + \underbrace{\sum_{\nu} W_{p\nu} \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right)}_{\hat{V}}$
+, we get
+\begin{align}
+G_{pp}^R(t) &= -i \theta(t) \bra{N} \hat{c}_p e^{-i\hat{H} t} \hat{c}_p^\dagger \ket{N} \\
+%  &\approx -i \theta(t) \bra{\Psi_p} e^{-i\hat{H}_{\text{eB}} t} \ket{\Psi_p} \\
+% &= -i \theta(t) \bra{\Psi_p} e^{-i\left( \hat{H}_0 + \hat{V} \right) t} \ket{\Psi_p} \\
+% &\approx -i \theta(t) \bra{\Psi_p} e^{-i\hat{H}_0 t} \mathcal{T} \exp \left( -i \int_0^t dt' e^{i\hat{H}_0 t'} \hat{V} e^{-i\hat{H}_0 t'} \right) \ket{\Psi_p} \\
+&\approx -i \theta(t) e^{-i\epsilon_p t} {\bra{\Psi_p}  \mathcal{T} \exp \left( -i \int_0^t dt' V_I(t') \right) \ket{\Psi_p}} \\
+&=
+-i\,\theta(t)\,e^{-i\epsilon_p t} [1-\sum_\nu |W_{p\nu}|^2\left(\frac{t}{i\Omega_\nu}+\frac{1-e^{-i\Omega_\nu t}}{\Omega_\nu^2}\right) + O(W^4)]
+\end{align}
+and we identify $C_2(t) = -\sum_\nu |W_{p\nu}|^2\left(\frac{t}{i\Omega_\nu}+\frac{1-e^{-i\Omega_\nu t}}{\Omega_\nu^2}\right)$.
+\end{frame}
+\begin{frame}
+\frametitle{Why this is compatible with SRG-MP2}
+The Landau form that I have been using is
+\begin{equation}
+C(t) = \int d\omega \frac{\beta(\omega)}{\omega^2} \left( e^{-i\omega t} + i\omega t - 1 \right)
+\end{equation}
+where $\beta(\omega) = -\frac{1}{\pi} \text{Im} \Sigma_{pp}^{(2)}(\omega + \epsilon_p)$. $\Sigma^2$ has 2p1h poles at
+ \begin{equation} \epsilon_{pi}^{ab} = \epsilon_a + \epsilon_b - \epsilon_i\end{equation} So $\Sigma^2$ is a linear combination of delta functions located at $\epsilon_{pi}^{ab}$. The QBA tells us that these can be thought of as bosonic frequencies.
+
+
+\end{frame}
+\begin{frame}
+\frametitle{Technical issues with SRG-MP2}
+\begin{align}
+    F_{pq}^{(2)}(s)  &= \frac{1}{2}\sum_{ija}\frac{\Delta^{pa}_{ij} + \Delta^{qa}_{ij}}{\left(\Delta^{pa}_{ij}\right)^2+\left(\Delta^{qa}_{ij}\right)^2} \bra{pa}\ket{ij}\bra{ij}\ket{qa}
+    \nonumber \\
+    &\times\left[1-e^{-\left[\left(\Delta^{pa}_{ij}\right)^2+\left(\Delta^{qa}_{ij}\right)^2\right]s}\right] \nonumber \\
+    &+ \frac{1}{2}\sum_{abi}\frac{\Delta^{pi}_{ab} + \Delta^{qi}_{ab}}{\left(\Delta^{pi}_{ab}\right)^2+\left(\Delta^{qi}_{ab}\right)^2} \bra{pi}\ket{ab}\bra{ab}\ket{qi}
+    \nonumber \\
+    &\times\left[1-e^{-\left[\left(\Delta^{pi}_{ab}\right)^2+\left(\Delta^{qi}_{ab}\right)^2\right]s}\right]\label{eq:qsGF2SE}.
+\end{align}
+\begin{itemize}
+    \item $\downarrow s \to \uparrow reg. \downarrow \Delta HF; \uparrow s \to \downarrow reg. \uparrow \Delta HF$
+    \item How to do self-consistency numerically with fixed pt. and/or  DIIS?
+\end{itemize}
+\end{frame}

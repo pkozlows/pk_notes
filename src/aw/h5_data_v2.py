@@ -8,9 +8,9 @@ os.chdir(script_dir)
 
 # make the first row of the txt indicates that it is eip data
 with open("eip.txt", "w") as f:
-    # f.write("This is EIP data\n")
-    # with h5py.File("h_40.h5", "r") as h5f:
-    #     np.savetxt(f, h5f["eip"][:]*HARTREE_TO_EV)
+    f.write("This is EIP data\n")
+    with h5py.File("h_40.h5", "r") as h5f:
+        np.savetxt(f, h5f["eip"][:])
     f.write("These are observed poles\n")
     # scan through Aw_hf to find the index where it is max and match the omegas_hf
     with h5py.File("plot_ready_spectra_rs40.h5", "r") as h5f:

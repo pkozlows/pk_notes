@@ -215,6 +215,87 @@ and plugging into the double time integral *, we get:
 \end{align}
 Multiplying both sides of eqn.~\ref{eqn:cumulant_connection} by $ie^{\epsilon_p t} $ and recalling that we are dealing with retarded quantities that vanish for negative times, we get:
 \emph{We are also interested in what happens if we use an exact self-energy in \ref{eq:Cpp_0} instead of the $GW$ one. Also can we get away with not using the diagonal approximation?} 
+\subsection{Notes for BWs2+C}
+The definition of the cumulant ansatz for the retarded Green's function is given by:
+\begin{equation}
+    \bm{G}(t) = \bm{G}^0(t)e^{\bm{C}(t)}
+\end{equation}
+where $\bm{C}(t)$ is the retarded cumulant and $\bm{G}^0(t)$ is the retarded BWs2 Green's function. By relating the Dyson equation to the Taylor series expansion of the exponential, we can write:
+\begin{align}
+\bm{G}^0(t) + \bm{G}^0(t) \bm{C}(t) + O(v^4) &= \bm{G}^0(t) + \iint \dd t_1 \dd t_2 \bm{G}^0(t-t_1) \bm{\Sigma}^c(t_1 - t_2) \bm{G}^0(t_2) + O(v^4) \\
+    \implies \bm{G}^0(t) \bm{C}(t) &= \iint \dd t_1 \dd t_2 \bm{G}^0(t-t_1) \bm{\Sigma}^c(t_1 - t_2) \bm{G}^0(t_2) \quad \text{(up to second order in $v$)}
+\end{align}
+{If we use the second order self-energy, the cumulant will be exact to second order in the bare Coulomb interaction $v$.} \textbf{Will this also be the case for BWs2?}
+Projecting to the spin-orbital basis and inserting the resolution of the identity, we get:
+\begin{align}
+    \sum_{r}\bra{p}\bm{G}^0(t) \ket{r}\bra{r}\bm{C}(t)\ket{q} &= \sum_{rs}\iint \dd t_1 \dd t_2 \bra{p}\bm{G}^0(t-t_1)\ket{r} \bra{r}\bm{\Sigma}^c(t_1 - t_2)\ket{s} \bra{s}\bm{G}^0(t_2)\ket{q} \\
+    \implies \sum_{r}\bm{G}_{pr}^0(t) \bm{C}_{rq}(t) &= \sum_{rs}\iint \dd t_1 \dd t_2 \bm{G}_{ps}^0(t-t_1) \bm{\Sigma}_{sr}^c(t_1 - t_2) \bm{G}_{rq}^0(t_2)\\
+    \implies \bm{G}_{pp}^{0}(t) \bm{C}_{pq}(t) &= \underbrace{\iint \dd t_1 \dd t_2 \bm{G}_{pp}^{0}(t-t_1) \bm{\Sigma}_{pq}^c(t_1 - t_2) \bm{G}_{qq}^{0}(t_2)}_{*}
+    \label{eqn:cumulant_connection}
+\end{align}
+where $\bm{G}^0(t)$ is the retarded BWs2 Green's function, which is diagonal in the spin-orbital basis, as $\bm{G}_{pp}^{0}(t) = -i\Theta(t)e^{-i\epsilon_p t}$, where $\epsilon_p$ is the dressed, single-particle energy of the $p$-th spin-orbital.
+The formula for the inverse Fourier transform is given by:
+\begin{equation}
+    f(t) = \int \frac{\dd \omega}{2\pi} e^{-i\omega t} f(\omega)
+\end{equation}
+which implies that
+\begin{align}
+    \bm{G}_{pp}^{0}(t-t_1) = \int \frac{\dd \omega}{2\pi} e^{-i\omega (t-t_1)} \bm{G}_{pp}^{0}(\omega)\\
+    \bm{\Sigma}_{pq}^c(t_1 - t_2) = \int \frac{\dd \omega'}{2\pi} e^{-i\omega' (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega')\\
+    \bm{G}_{qq}^{0}(t_2) = \int \frac{\dd \omega''}{2\pi} e^{-i\omega'' t_2} \bm{G}_{qq}^{0}(\omega'')
+\end{align}
+and plugging into the double time integral *, we get:
+\begin{align}
+    * &= \iint \dd t_1 \dd t_2 \left[\int \frac{\dd \omega}{2\pi} e^{-i\omega (t-t_1)} \bm{G}_{pp}^{0}(\omega)\right] \left[\int \frac{\dd \omega'}{2\pi} e^{-i\omega' (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega')\right] \left[\int \frac{\dd \omega''}{2\pi} e^{-i\omega'' t_2} \bm{G}_{qq}^{0}(\omega'')\right]\\
+    &= \underbrace{\int \dd t_1 e^{-i \left(\omega' -\omega\right)t_1} \int \dd t_2 e^{-i \left(\omega'' -\omega'\right)t_2}}_{4\pi^2 \delta(\omega' -\omega)\delta(\omega'' -\omega')} \iiint \dd \omega \dd \omega' \dd \omega'' \frac{e^{-i\omega t}}{8\pi^3} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega')\bm{G}_{qq}^{0}(\omega'')\\
+    &= \int \frac{\dd \omega}{2\pi} e^{-i\omega t} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega)\bm{G}_{qq}^{0}(\omega)
+\end{align}
+With $\eta \to 0^+$, we get
+\begin{align}
+    -i \Theta(t) e^{-i\epsilon_p t} \bm{C}_{pq}(t) &= \int \frac{\dd \omega}{2\pi} e^{-i\omega t} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega)\bm{G}_{qq}^{0}(\omega) \\
+\implies {C}_{pp}(t) &=  i\int \frac{\dd \omega}{2\pi} e^{-i(\omega - \epsilon_p) t} \frac{{\Sigma}_{pp}^c(\omega)}{(\omega - \epsilon_p + i\eta)^2} \quad \forall t>0\\ 
+&=  i\int  \frac{\dd \omega'}{2\pi} e^{-i\omega' t} \frac{{\Sigma}_{pp}^c(\omega' + \epsilon_p)}{(\omega' + i\eta)^2} \label{eq:Cpp_0}
+\end{align}
+The second order self-energy, which uses a HF reference, can be written as
+\begin{align}
+\Sigma_{pq}^{(2)}(\omega) =& \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
+\implies \Sigma_{pp}^{(2)}(\omega+\epsilon_p) =&
+\frac{1}{2} \sum_{iab}
+\frac{\left< pi \left| \right| ab \right>^2}
+{\omega-\epsilon_{pi}^{ab}} + \frac{1}{2} \sum_{ija}
+\frac{\left< pa \left| \right| ij \right>^2}
+{\omega-\epsilon_{pa}^{ij}}
+\end{align}
+where
+$\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
+and
+$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. So we can write the diagonal cumulant\footnote{ 
+Note that in order to get from eqn.~\ref{eq:cumulant_2nd_1} to eqn.~\ref{eq:cumulant_2nd} we have used the identity $\int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon\right)} = \frac{1}{\epsilon^2} \left(e^{-i \epsilon t} +i \epsilon t -1 \right) \mathrm{sgn}(t)$, and since we are dealing with retarded quantities, we only care about $t>0$ so $\mathrm{sgn}(t) = 1$.} as
+\begin{align}
+C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+\implies C_{pp}^{(2)}(t) &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} 
+\label{eq:cumulant_2nd_1}
+\\
+&= \frac{1}{2}\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
++\frac{1}{2}\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\epsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) 
+\label{eq:cumulant_2nd}
+\\
+&= \frac{1}{2} \sum_{i a b}\langle p i \| a b\rangle^2 f\left(\epsilon_{p i}^{a b}\right)+\frac{1}{2} \sum_{i j a}\langle p a \| i j\rangle^2 f\left(\epsilon_{p a}^{i j}\right)\label{eq:cumulant_2nd_2}\\
+&= \int d\omega\, \beta(\omega) f(\omega)
+\end{align}
+where $f(\omega) \equiv \frac{e^{-i \omega t}+i \omega t-1}{\omega^2} $ and we identify the cumulant kernel as
+\footnote{To get from eqn.~\ref{eq:beta_def} to eqn.~\ref{eq:beta_2nd}, we have used the identity $\operatorname{Im} \frac{1}{x + i \eta} = -\pi \delta(x)$ as $\eta \to 0^+$.}
+\begin{align}
+    \beta(\omega) &= -\frac{1}{\pi} \operatorname{Im} \Sigma_{pp}^{(2)}\left(\omega+\epsilon_p\right) 
+\label{eq:beta_def}\\
+\\
+&=\frac{1}{2} \sum_{i a b}\langle p i \| a b\rangle^2 \delta\left(\omega-\epsilon_{p i}^{a b}\right)+\frac{1}{2} \sum_{i j a}\langle p a \| i j\rangle^2 \delta\left(\omega-\epsilon_{p a}^{i j}\right) \label{eq:beta_2nd}
+\end{align}
+A connection can be made between the cumulant kernel $\beta(\omega)=\sum_q g_q^2 \delta(\omega-\omega_q)$ for the 2nd-order self energy  to that for electrons coupled to
+bosonic excitations at the frequencies $\omega_q\equiv \epsilon_{pq}^{rs}$ in the quasi-boson approximation (QBA)
+with coupling coefficients $g_q \equiv \langle p q \| r s\rangle$. \textbf{I feel that everything up to \ref{eq:Cpp_0} holds generally. It needs to be determined how to proceed through \ref{eq:beta_2nd} with BWs2.}
 \subsection{Standard route: diagonal cumulant with GW self-energy}
 \begin{align}
 	 C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
@@ -588,18 +669,28 @@ and $V_{a b i j}$ denotes a nonantisymmetrized two-electron integral in "1212" n
 
 \section{Cumulant expansion for electron-phonon interactions}
 \subsection{Annotating PJ's SC-CE paper}
+We can define the electron boson Hamiltonian as
+\begin{equation}
+\hat{H}=\sum_k \epsilon_k a_k^{\dagger} a_k + \sum_q \omega_q b_q^{\dagger} b_q + \sum_{q k} g_{q k} a_{k+q}^{\dagger} a_k \left(b_q + b_{-q}^{\dagger}\right)
+\end{equation}
+where $a_k$ and $a_k^{\dagger}$ are the annihilation and creation operators for an electron of momentum $k$ and energy $\epsilon_k$, and $b_q$ and $b_q^{\dagger}$ are the annihilation and creation operators for a phonon of momentum $q$ and frequency $\omega_q$. The electron-phonon coupling is given by $g_{q k}$. We can split the Hamiltonian into a non-interacting part $\hat{H}_0 = \sum_k \epsilon_k a_k^{\dagger} a_k + \sum_q \omega_q b_q^{\dagger} b_q$ and an interaction part $V = \sum_{q k} g_{q k} a_{k+q}^{\dagger} a_k \left(b_q + b_{-q}^{\dagger}\right)$. In the interaction picture, we have $V_I(t) = e^{i \hat{H}_0 t} V e^{-i \hat{H}_0 t}$.
 \label{sec:pj_ce}
  The time-ordered form of the electron Green's function for one electron can be written as the power series expansion of an exponential ansatz
 \begin{align}
-\mathcal{G}_k(t)&=\mathcal{G}_k^{(0)}(t)\left\langle a_k T e^{-i \int_0^t d \tau V({\tau})} a_k^\dag\right\rangle
-\label{6.5}\\
-&=\mathcal{G}_k^{(0)}(t)\left\langle T e^{-i \int_0^t d \tau V({\tau})}\right\rangle \\
-&=\mathcal{G}_k^{(0)}(t) \left\langle \sum_{n=0}^{\infty} \frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n T\left[V ( t _ { 1 } ) \cdots V \left(t_n\right)\right] \right\rangle \\
+\mathcal{G}_k(t)&=-i \theta(t) \left\langle a_k e^{-i\hat{H} t} a_k^\dag\right\rangle \\
+&=-i \theta(t) \left\langle a_k e^{-i(\hat{H}_0 + V) t} a_k^\dag\right\rangle \\
+&=-i \theta(t) \left\langle a_k e^{-i\hat{H}_0 t} \mathcal{T} e^{-i \int_0^t d \tau e^{i \hat{H}_0 \tau} V e^{-i \hat{H}_0 \tau}} a_k^\dag\right\rangle \\
+% &=\mathcal{G}_k^{(0)}(t)\left\langle a_k T e^{-i \int_0^t d \tau V_I({\tau})} a_k^\dag\right\rangle \\
+% \label{6.5}\\
+&=\mathcal{G}_k^{(0)}(t)\left\langle a_k T e^{-i \int_0^t d \tau V_I({\tau})} a_k^\dag\right\rangle \\
+&=\mathcal{G}_k^{(0)}(t) \left\langle a_k\sum_{n=0}^{\infty} \frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n T\left[V_I ( t _ { 1 } ) \cdots V_I \left(t_n\right)\right] a_k^\dag\right\rangle \\
+% &=\mathcal{G}_k^{(0)}(t) \left\langle a_k\sum_{n=0}^{\infty} \frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n T\left[e^{i\hat{H}_0 t_1} V e^{-i\hat{H}_0 t_1} \cdots e^{i\hat{H}_0 t_n} V e^{-i\hat{H}_0 t_n}\right] a_k^\dag\right\rangle \\
 % &=\mathcal{G}_k^{(0)}(t) \left\langle \sum_{n=0}^{\infty} \frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n T\left[ V\left(t_j\right)\right] \right\rangle \\
-&=\mathcal{G}_k^{(0)}(t) \left\langle \sum_{n=0}^{\infty} \frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n T\left[\prod_{j=1}^n \sum_{q_j} g_{q_j, k_j} a_{k_j+q_j}^{\dagger}\left(t_j\right) a_{k_j}\left(t_j\right) A_{q_j}\left(t_j\right)\right] \right\rangle \\
-&=\mathcal{G}_k^{(0)}(t) \left\langle \sum_{n=0}^{\infty} T \left[\frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n \prod_{j=1}^n \sum_{q_j} g_{q_j, k_j} a_{k_j+q_j}^{\dagger} a_{k_j}e^{-it_j(\epsilon_{k_j}-\epsilon_{k_j + q_j})} A_{q_j}\left(t_j\right)\right] \right\rangle 
+&=\mathcal{G}_k^{(0)}(t) \left\langle a_k \sum_{n=0}^{\infty} \frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n T\left[\prod_{j=1}^n \sum_{q_j} g_{q_j, k_j} a_{k_j+q_j}^{\dagger}\left(t_j\right) a_{k_j}\left(t_j\right) A_{q_j}\left(t_j\right)\right] a_k^\dag \right\rangle \\
+&=\mathcal{G}_k^{(0)}(t) \left\langle a_k \sum_{n=0}^{\infty} T \left[\frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n \prod_{j=1}^n \sum_{q_j} g_{q_j, k_j} a_{k_j+q_j}^{\dagger} a_{k_j}e^{-it_j(\epsilon_{k_j}-\epsilon_{k_j + q_j})} A_{q_j}\left(t_j\right)\right] a_k^\dag \right\rangle \\
+&=\mathcal{G}_k^{(0)}(t) \left\langle \sum_{n=0}^{\infty} T \left[\frac{(-i)^n}{n!} \int_0^t d t_1 \cdots \int_0^t d t_n \prod_{j=1}^n \sum_{q_j} g_{q_j, k_j} e^{-it_j(\epsilon_{k_j}-\epsilon_{k_j + q_j})} \left( b_{q_j} e^{-i \omega_{q_j} t}+b_{-q_j}^\dagger e^{i \omega_{q_j} t}\right)\right] \right\rangle 
 \end{align}
-where $k_j = k + \sum_{i=j+1}^n q_i$ and $\sum_i q_i=0$. The interpretation of the above expression is that the electron starts in state $k$ at time $0$, and then scatters off $n$ phonons, each with momentum $q_j$, before returning to state $k$ at time $t$. $A_q(t)=b_q e^{-i \omega_q t}+b_{-q}^\dagger e^{i \omega_q t}$, where $b_q$ and $b_q^\dagger$ are the annihilation and creation operators for a phonon of momentum $q$ and frequency $\omega_q$ with $[b_q, b_{q^{\prime}}^{\dagger}]=\delta_{q q^{\prime}}$. If we define the vertex operator $\Gamma_{q k}(t)=g_{q k} e^{-i t \epsilon_k} e^{q \cdot \frac{d}{d k}} e^{i t \epsilon_k}$ we can rewrite the electron Green's function as an exponential,
+where $k_j = k + \sum_{i=j+1}^n q_i$, $\sum_i q_i=0$, and $[b_q, b_{q^{\prime}}^{\dagger}]=\delta_{q q^{\prime}}$. The interpretation of the above expression is that the electron starts in state $k$ at time $0$, and then scatters off $n$ phonons, each with momentum $q_j$, before returning to state $k$ at time $t$. Also, $A_q(t)=b_q e^{-i \omega_q t}+b_{-q}^\dagger e^{i \omega_q t}$, where $b_q$ and $b_q^\dagger$ are the annihilation and creation operators for a phonon of momentum $q$ and frequency $\omega_q$. If we define the vertex operator $\Gamma_{q k}(t)=g_{q k} e^{-i t \epsilon_k} e^{q \cdot \frac{d}{d k}} e^{i t \epsilon_k}$ we can rewrite the electron Green's function again as an exponential,
 \begin{equation}
 \mathcal{G}_k(t)=\mathcal{G}_k^{(0)}(t)\left\langle T e^{-i \sum_q \int_0^t d \tau \Gamma_{q k}(\tau) A_q(\tau)}\right\rangle
 \end{equation}
@@ -607,14 +698,15 @@ where $k_j = k + \sum_{i=j+1}^n q_i$ and $\sum_i q_i=0$. The interpretation of t
 \begin{equation}
     B=-i \sum_q \int_0^t d \tau \Gamma_{q k}(\tau) A_q(\tau)
 \end{equation}
-where our $B$ is linear in the bosonic operators $A_q$, so the identity applies. Then, 
+where our $B$ is linear in the bosonic operators $b_q$, so the identity applies. Then, 
 \begin{align}
-\left\langle T e^S\right\rangle & \equiv \left\langle T e^B\right\rangle = \exp\left(\frac{1}{2}\left\langle T B^2\right\rangle\right) \\
+\left\langle T e^B\right\rangle & \equiv \left\langle  e^{T[B]}\right\rangle = \exp\left(\frac{1}{2}\left\langle T B^2\right\rangle\right) \\
 \implies S & =\frac{1}{2}\left\langle T B^2\right\rangle \\
 & =\frac{1}{2}(-i)^2 \sum_{q q^{\prime}} \int_0^t d \tau \int_0^t d \tau^{\prime} \Gamma_{q k}(\tau) \Gamma_{q^{\prime} k}\left(\tau^{\prime}\right)\left\langle T A_q(\tau) A_{q^{\prime}}\left(\tau^{\prime}\right)\right\rangle \\
 & =-\frac{1}{2} \sum_{q q^{\prime}} \int_0^t d \tau \int_0^t d \tau^{\prime} \Gamma_{q k}(\tau) \Gamma_{q^{\prime} k}\left(\tau^{\prime}\right)\left[i D_q^{(0)}\left(\tau-\tau^{\prime}\right) \delta_{q,-q^{\prime}}\right] \\
 & = -i \sum_q \int_0^t d \tau \int_0^t d \tau^{\prime} D_q^{(0)}\left(\tau-\tau^{\prime}\right) \Gamma_{-q k}(\tau) \Gamma_{q k}\left(\tau^{\prime}\right) 
 \end{align}
+where the non-interacting bosonic Green's function is $D_q^{(0)}\left(\tau-\tau^{\prime}\right)=-i \left[(1+N_q) e^{-i \omega_q |\tau-\tau^{\prime}|} + N_q e^{i \omega_q |\tau-\tau^{\prime}|}\right]$ with $N_q$ the Bose-Einstein distribution $N_q = \frac{1}{e^{\beta \omega_q}-1}$. 
 To find a self consistent expression for $S$, we use the Feynman operator ordering theorem, which states that given a functional of time-dependent operators $F[\hat{A}(\tau), \hat{B}(\tau), \ldots]$ with $\tau \in[0, t]$, which in our case is $e^{S[\Gamma (\tau)]}$, and with a unitary operator of the form $\hat{U}\left(\tau^{\prime}\right)=T \exp \left[\int_0^{\tau^{\prime}} d \tau \hat{P}(\tau)\right]$, then
 \begin{equation}
 \hat{U}(t) F[\hat{A}(\tau), \hat{B}(\tau), \ldots] =T\left[\exp \left(\int_0^t d \tau \hat{P}(\tau)\right) F\left[\hat{U}(\tau) \hat{A}(\tau) \hat{U}^{-1}(\tau), \ldots\right]\right] .
@@ -1059,341 +1151,7 @@ which gives a self-consistent condition for $\epsilon_k$. \footnote{This is only
 
 % We have not yet attempted to solve this equation.
 \section{My derivations}
-\subsection{Writing spectral functions for the UEG}
-\subsubsection{Noninteracting case}
-We can start by writing down the form for the retarded non-interacting Green's function of a state $p$ in time domain as
-\begin{equation}
-    G^R_{0,p}(t) = -i \Theta(t) e^{-i \left(\epsilon_p - \varepsilon_F \right)t}
-\end{equation}
-where $\varepsilon_F$ is the Fermi energy. I am operating at zero temperature, so in my HF code, this means that $\varepsilon_F$ is just the energy of the highest occupied molecular orbital; for this system of the UEG at $r_s = 4$ with 14 electrons in 19 orbitals it is just the energy of orbital 6 (with orbitals numbered from 0). A broadening parameter of $\eta = 0.2$ eV is used (this coincides with what Joonho and Garnet used). The HF single particle energies I get from my code do not take the Madelung correction into account. In that case, Joonho's paper tells us that for the spectral function of these occupied orbitals, we need to apply a constant frequency shift of
-\begin{equation}
-\Delta _{IP} = -\frac{\xi}{2}    
-\end{equation}
-where $\xi=-2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}$ Hartrees. For my system, this means that $\frac{\xi}{2} = -4.97$ eV. But this is confusing because it would mean that the shift for the occupied orbitals is positive $+4.97$ eV, which is counter-intuitive, as this would imply that the HF peak for the Fermi state occurs at a positive frequency. To obtain my plots, I assume that this was a typo, and instead apply a shift of $-\Delta_{IP} = +\frac{\xi}{2} = -4.97$ eV to the occupied orbitals. In RHF, the retarded second order self-energy in the frequency domain is given by
-\begin{align}
-{\Sigma}^{c,(2),R}(p, \omega) &= \frac{1}{2} \sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\omega - \epsilon_{a} - \epsilon_{b} + \epsilon_{i} + i \eta} + \frac{1}{2} \sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\omega - \epsilon_{i} - \epsilon_{j} + \epsilon_{a} + i \eta}\\
-&\overset{\text{RHF}}{=} \frac{1}{2} \sum_{iab} \frac{\left( 2\left<pi|ab\right> - \left<pi|ba\right>\right)^2}{\omega - \epsilon_{a} - \epsilon_{b} + \epsilon_{i} + i \eta} + \frac{1}{2} \sum_{ija} \frac{\left( 2\left<pa|ij\right> - \left<pa|ji\right>\right)^2}{\omega - \epsilon_{j} - \epsilon_{i} + \epsilon_{a} + i \eta}\\
-& = \frac{2\pi}{V} \left( \sum_{\mathbf{k}_i \in O; \,\mathbf{k}_a , \mathbf{k}_b \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_a , \mathbf{k}_b - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_a|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_b , \mathbf{k}_a - \mathbf{k}_i}}{|\mathbf{k}_p - \mathbf{k}_b|^2} \right]^2 }{\omega - \epsilon_{\mathbf{k}_a} - \epsilon_{\mathbf{k}_b} + \epsilon_{\mathbf{k}_i} + i \eta}  + \sum_{\mathbf{k}_i,\mathbf{k}_j \in O;\, \mathbf{k}_a \in V} \frac{\left[ \frac{2\delta_{\mathbf{k}_p - \mathbf{k}_i , \mathbf{k}_j - \mathbf{k}_a}}{|\mathbf{k}_p-\mathbf{k}_i|^2} - \frac{\delta_{\mathbf{k}_p - \mathbf{k}_j , \mathbf{k}_i - \mathbf{k}_a}}{|\mathbf{k}_p - \mathbf{k}_j|^2} \right]^2 }{\omega - \epsilon_{\mathbf{k}_i} - \epsilon_{\mathbf{k}_j} + \epsilon_{\mathbf{k}_a} + i \eta} \right)
-\label{eq:self_energy_2nd_order}
-\end{align}
-where $\mathbf{k}_b = \mathbf{k}_p  + \mathbf{k}_i - \mathbf{k}_a$ in the first sum and $\mathbf{k}_j = \mathbf{k}_p - \mathbf{k}_i + \mathbf{k}_a$ in the second sum due to momentum conservation. 
-\subsubsection{GW spectral function}
-Consider
-\begin{align}
-    \Sigma_k (\omega ) &= G_{0,k}^{-1}(\omega ) - G_k^{-1}(\omega ) \\
-    \implies G_k(\omega ) &= \frac{1}{G_{0,k}^{-1}(\omega ) - \Sigma_k(\omega )} \\
-    &= \frac{1}{\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) - i \operatorname{Im} \Sigma_k (\omega )} \times \frac{\left( \omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )\right)}{\left( \omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )\right)} \\
-    &= \frac{\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega ) + i \operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2}
-\end{align}
-We want $-\frac{1}{\pi} \operatorname{Im} G_k(\omega )$, so
-\begin{align}
-    \operatorname{Im} G_k(\omega ) &= \frac{\operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2} \\
-\end{align}
-Thus, the spectral function is
-\begin{equation}
-    A(\omega ) = -\frac{1}{\pi} \operatorname{Im} G_k(\omega ) = -\frac{1}{\pi} \frac{\operatorname{Im} \Sigma_k (\omega )}{\left(\omega - \epsilon_k - \operatorname{Re} \Sigma_k (\omega )\right)^2 + \left(\operatorname{Im} \Sigma_k (\omega )\right)^2}
-\end{equation}
-This means we can write down the second order cumulant in the time domain as
-\begin{align}
-C_{pp}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pp}^{c,(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
- &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
-% \label{eq:cumulant_2nd_1}
-&= \frac{1}{2}\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
-\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
-+\frac{1}{2}\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\epsilon_{pa}^{ij}\right)^2}
-\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) \\
-&= \frac{2\pi}{V} \left( \sum_{\mathbf{k}_i \in O; \,\mathbf{k}_a , \mathbf{k}_b \in V} \frac{\left[ \frac{2}{|\mathbf{k}_p - \mathbf{k}_a|^2} - \frac{1}{|\mathbf{k}_p - \mathbf{k}_b|^2} \right]^2 }{\left(\varepsilon_{pi}^{ab}\right)^2}
-\left(e^{-i \varepsilon_{pi}^{ab} t} +i \varepsilon_{pi}^{ab} t -1 \right) \right. \\
-& \left. + \sum_{\mathbf{k}_i,\mathbf{k}_j \in O;\, \mathbf{k}_a \in V} \frac{\left[ \frac{2}{|\mathbf{k}_p-\mathbf{k}_i|^2} - \frac{1}{|\mathbf{k}_p - \mathbf{k}_j|^2} \right]^2 }{\left(\varepsilon_{pa}^{ij}\right)^2}
-\left(e^{-i \varepsilon_{pa}^{ij} t} +i \varepsilon_{pa}^{ij} t -1 \right) \right)
-\label{eq:cumulant_2nd_final}
-\end{align}
-where
-$\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
-and
-$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$, but for the UEG, $\varepsilon_{pi}^{ab} = \epsilon_{\mathbf{k}_a} + \epsilon_{\mathbf{k}_b} - \epsilon_{\mathbf{k}_p} - \epsilon_{\mathbf{k}_i}$ and $\varepsilon_{pa}^{ij} = \epsilon_{\mathbf{k}_i} + \epsilon_{\mathbf{k}_j} - \epsilon_{\mathbf{k}_p} - \epsilon_{\mathbf{k}_a}$. When we took the single particle energies from HF, the Madelung correction was never included, so I need to find out if we need to include it here.
-\subsubsection{Interacting case}
-Now, the form for the retarded interacting Green's function in the time domain is
-\begin{equation}
-    G_{pp}(t) = -i \Theta(t) e^{-i \left(\epsilon_p - \varepsilon_F \right)t} e^{C_{pp}(t)}
-\end{equation}
-\subsubsection{Explanation of one-shot plots}
-Recall
-\begin{align}
-G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
-\label{Gpp1}
-\\
-& = -i Z_p^{QP} \int_0^{\infty} dt e^{i(\omega - \epsilon_p^{QP}) t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} 
-\label{Gpp2}
-\\
-& = -i Z_p^{QP} \int_0^{\infty} dt\, e^{i(\omega - \epsilon_p^{QP}) t} \left(1 + \sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t} +\ldots \right) \\
-% &= -i Z_p^{QP} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP}) t]}\label{Gpp3} \\
-% &\quad - i Z_p^{QP} \sum_{i\nu} \zeta_{pi\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pi\nu}) t]} \\
-% &\quad - i Z_p^{QP} \sum_{a\nu} \zeta_{pa\nu} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \Delta_{pa\nu}) t]} + \ldots \\
-&= \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_p^{QP} \zeta_{pi\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pi\nu} + i\eta} + \sum_{a\nu} \frac{Z_p^{QP} \zeta_{pa\nu}}{\omega - \epsilon_p^{QP} - \Delta_{pa\nu} + i\eta} + \ldots\\
-% & =-i Z_p^{Q P} \int_0^{+\infty} d r e^{\left[-\eta+i\left(\omega-\varepsilon_p^{Q P}\right)\right]} \\
-% & -\mathrm{i} Z_p^{\mathrm{OP}} \sum_{i v} \zeta_{p i v} \int_0^{+\infty} \mathrm{d} r e^{\left\{-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p i v}\right)\right]\right\}^{\prime}}-\mathrm{i} Z_p^{\mathrm{OP}} \sum_{a v} \zeta_{p a v} \int_0^{+\infty} \mathrm{d} r e^{\left(-\eta+i\left[\omega-\left(\epsilon_p^{\mathrm{OP}}+\Delta_{p \omega v}\right)\right]\right\}^{\prime}} \\
-& \approx \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_{pi\nu}^{sat}}{\omega - \epsilon_{pi\nu}^{sat} + i\eta} + \sum_{a\nu} \frac{Z_{pa\nu}^{sat}}{\omega - \epsilon_{pa\nu}^{sat} + i\eta}
-\label{Gpp4}
-\end{align}
- $G_{pp}(\omega)$ is computed via \ref{Gpp4} in the schemes which I call first order. This is what Loos does. On the other hand, $G_{pp}(\omega)$ is computed via \ref{Gpp2} in the schemes which I call to infinite order. As you can see, there are two different flavors of infinite order, which only differ in how the real-time cumulant is computed. Analytic to infinite order does
-\begin{align}
-	 C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p^{HF}\right)}{(\omega + i \eta)^2} e^{-i \omega t}
-\label{eq:Cpp_0} \\
-% &= i \int \frac{d\omega}{2\pi} \frac{1}{(\omega + i \eta)^2} e^{-i \omega t} \left[ \sum_{i\nu} \frac{M_{pi\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_i + \Omega_\nu + i \eta}_{-\Delta_{pi\nu}}} + \sum_{a\nu} \frac{M_{pa\nu}^2}{\omega + \underbrace{\epsilon_p^{HF} - \epsilon_a - \Omega_\nu + i \eta}_{-\Delta_{pa\nu}}} \right] \\
-% & =\mathrm{i} \sum_{i v} M_{p i v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p i v}} +\mathrm{i} \sum_{a v} M_{p a v}^2 \int \frac{\mathrm{~d} \omega}{2 \pi} e^{-\mathrm{i} \omega t} \frac{1}{[\omega+\mathrm{i} \eta]^2} \frac{1}{\omega-\Delta_{p a v}}
-% \label{eq:Cpp_1}
-% \\
-&= \sum_{i\nu} \zeta_{pi\nu} \left[ e^{-i\Delta_{pi\nu} t} - 1 + i\Delta_{pi\nu} t \right] + \sum_{a\nu} \zeta_{pa\nu} \left[ e^{-i\Delta_{pa\nu} t} - 1 + i\Delta_{pa\nu} t \right]
-\label{eq:Cpp_2}
-\end{align}
-whereas numerical to infinite order computes using the Landau form
-\begin{equation}
-    C_{pp}(t) = \int d \omega \frac{\beta_{pp}(\omega)}{\omega^2} \left( e^{-i \omega t} + i \omega t -1 \right)
-\label{eq:cumulant_beta_repeat}
-\end{equation}
-with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega + \epsilon_p^{HF})|$ using the basic Riemann sum for the frequency integration. In both cases, we then plug the cumulant into
-\begin{equation}
-    G_{pp}(t) = -i \Theta(t) e^{-t \left(i\epsilon_p + \eta\right)t} e^{C_{pp}(t)}
-\end{equation}
-and then use the DFT to get $A_{pp}(\omega)$.
-\subsubsection{Choosing the right shift for my spectral functions}
-My interpretation of your discussion is that when I have included the G=0 component in my HF reference, all I have to do is to plot $A_{pp}(\omega+\xi/2)$ for HF, MP2, and MP2+C alike, since I am only computing the spectral function for occupied states. Is that correct?
-\subsubsection{Updated results}
-As we discussed on Friday, now, I have a RHF reference which includes the G=0 component. I fixed the bug and now it matches with the G=0 excluded reference exactly. Therefore, now the MP2 correlation energy is the same, irrespective of whether G=0 is included or not. I am plotting $A_{pp}(\omega+\xi/2)$ for all my spectral functions. This is because I needed to plot $A_{pp}(\omega+\xi/2)$ for HF in order to match the reference, so I do the same for MP2 and MP2+C; other than this, nothing else gets shifted. 
-\subsubsection{Update}
-If we choose
-\begin{align}
-    \xi = -2 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}
-\end{align}
-then I implemented the direct term of my ERIs as 
-\begin{equation}
-    v(\mathbf{q}) = \begin{cases} \frac{4 \pi}{\mathbf{q}^2 V} & \mathbf{q} \neq 0 \\ 0 & \mathbf{q} = 0 \end{cases}
-\end{equation}
-and the exchange terms as
-\begin{equation}
-    v(\mathbf{q}) = \begin{cases} \frac{4 \pi}{\mathbf{q}^2 V} & \mathbf{q} \neq 0 \\ -\xi & \mathbf{q} = 0 \end{cases}
-\end{equation}
-for use in the self energy as
-\begin{align}
-    \Sigma^{(2)}_{pp}(\omega)
-    & = \sum_{iab} \frac{\left<pi|ab\right>\left(2\left<pi|ab\right> - \left<pi|ba\right>\right)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left<pa|ij\right>\left(2\left<pa|ij\right> - \left<pa|ji\right>\right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta}
-\end{align}
-\subsubsection{Correct poles with G=0 included}
-I have changed the definition of $\xi$ to
-\begin{align}
-    \xi = -1 \times 2.837297 \times\left(\frac{3}{4 \pi}\right)^{1 / 3} N^{-1 / 3} r_{\mathrm{s}}^{-1}
-\end{align}
-so omitting the factor of 2 as was suggested. This produces the results that I provide with no manual shift ever done. I present two varieties of cumulants. The Landau form of the cumulant is
-\begin{align}
-    C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\varepsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t}
-\label{eq:Cpp_0_updated} \\
-\end{align}
-Then the cumulant ansatz for the time domain interacting Green's function is
-\begin{equation}
-    G_{pp}(t) = -i \Theta(t) e^{-t(i \varepsilon_p +\eta)} e^{C_{pp}(t)}
-\label{eq:Gpp_time_updated}
-\end{equation}
-When I present MP2+C; $G_0$ via HF, $\varepsilon _p\equiv \epsilon_p^{HF}$ in both \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, and $\Sigma _{pp}(\omega)$ is built from the set $\{\epsilon_p^{HF}\}$. When I present MP2+C; $G_0$ via SRG-MP2, $\varepsilon _p\equiv \epsilon_p^{SRG-MP2}$ in both \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, and $\Sigma _{pp}(\omega)$ is built from the set $\{\epsilon_p^{SRG-MP2}\}$. So the former does not solve Dyson's equation before adding the cumulant correction (it is a true one shot scheme), while the latter solves Dyson's equation at the SRG-MP2 level before adding the cumulant correction.
-\subsubsection{Why we need the G=0 component in the ERIs of the MP2 self-energy}
-It is instructive to start by understanding why having the G=0 component in the ERIs is irrelevant for computing the MP2 correlation energy. The MP2 correlation energy can be written as
-\begin{align}
-    E_{c}^{MP2} = \frac{1}{4} \sum_{ijab} \frac{|\left<\bm{k}_i \bm{k}_j|\bm{k}_a \bm{k}_b\right> - \left<\bm{k}_i \bm{k}_j|\bm{k}_b \bm{k}_a\right>|^2}{\epsilon_{\bm{k}_i} + \epsilon_{\bm{k}_j} - \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_b}}
-\end{align}
-Because $i,j$ are occupied and $a,b$ are virtual, and the correlation energy always has an OV pair at a ERI center, we will never encounter a zero momentum transfer at any center. Now, the MP2 self-energy is given by
-\begin{align}
-    % \Sigma_{pq}^{(2)}(\omega) =& \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j} \\
-    \Sigma^{(2)}_{pq}(\omega) = \frac{1}{2} \sum_{iab} \frac{\langle \bm{k}_p \bm{k}_i|\bm{k}_a \bm{k}_b \rangle \langle \bm{k}_a \bm{k}_b|\bm{k}_q \bm{k}_i \rangle}{\omega + \epsilon_{\bm{k}_i} - \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_b}} + \frac{1}{2} \sum_{ija} \frac{\langle \bm{k}_p \bm{k}_a|\bm{k}_i \bm{k}_j \rangle \langle \bm{k}_i \bm{k}_j|\bm{k}_q \bm{k}_a \rangle}{\omega + \epsilon_{\bm{k}_a} - \epsilon_{\bm{k}_i} - \epsilon_{\bm{k}_j}}
-\end{align}
-If you take a look at the second summation (the 2h1p one), you can see that if $p$ is occupied, then it is possible, for example, to have $\bm{k}_p = \bm{k}_i$, and hence a zero momentum transfer at the ERI center. Thus, if we do not include the G=0 component from the ouset in HF, we mistreat the situation where there might be a zero momentum transfer at an ERI center, and thus miss contributions to the self-energy.
-\subsubsection{Solution to the problem of the shifted poles}
-Tim's notes write that the many-body Hamiltonian based on the Ewald potential can be re-written as
-\begin{align}
-H= & -\sum_{i=1}^N \frac{1}{2} \nabla_i^2-\sum_{i=1}^N \sum_{A=1}^M z_A\left[v_{\mathrm{E}}\left(r_i, R_A\right)-v_{\mathrm{M}}\right] +\sum_{i=1}^N \sum_{j>i}^N\left[v_{\mathrm{E}}\left(r_i, r_j\right)-v_{\mathrm{M}}\right] 
-\label{H_ewald} \\
-& +\sum_{A=1}^M \sum_{B>A}^M z_A z_B\left[v_{\mathrm{E}}\left(R_A, R_B\right)-v_{\mathrm{M}}\right] +\frac{v_{\mathrm{M}}}{2}\left(N-\sum_A z_A\right)^2 \notag
-\end{align}
-where the final term vanishes for a neutral system. The shifted Ewald potential $v_{\mathrm{s}}(r) \equiv v_{\mathrm{E}}(r)-v_{\mathrm{M}}$ has the Fourier components
-\begin{equation}
-    v_{\mathrm{s}}(G)= \begin{cases}4 \pi / \Omega G^2 & G \neq 0 \\ -v_{\mathrm{M}} & G=0\end{cases}.
-\label{vs_G}
-\end{equation}
-Because this is the homogeneous electron gas, there are no nuclei, so the second and fourth and last part of the final parentheses in \eqref{H_ewald} vanish. Thus, the Hamiltonian reduces to
-\begin{equation}
-H= -\sum_{i=1}^N \frac{1}{2} \nabla_i^2 +\sum_{\bm{G}} v_{\mathrm{s}}(G) + \frac{v_{\mathrm{M}}}{2} N^2
-\label{H_ewald_simplified}
-\end{equation}
-Now, the IP is defined as the energy difference between the N and N-1 electron systems, so if the final term in \ref{H_ewald_simplified} did not exist, we could say that the IPs are equivalent to the occupied MO energies by Koopmans' theorem. However, because of the final term, we have that
-\begin{equation}
-    IP = -\left(E(N-1) - E(N)\right) = \epsilon_{\mathrm{i}}  - \frac{v_{\mathrm{M}}}{2}
-\end{equation}
-So the IPs should be shifted by $-v_{\mathrm{M}}/2$ to get the correct result. This is what I was doing to get the good looking results before this conversation all started.
-\subsection{What are the implications of including the G=0 component for spectral functions?}
-\subsubsection{Deriving orbital energies}
-We know the form when G=0 is excluded, so with respect to that we don't modify the Coulomb matrix at all, but just the exchange matrix.
-% The exchange potential is defined with
-% \begin{align}
-% K_{n \vec{k}}^\sigma(\vec{r}) \underbrace{\phi_{j k^*}(\vec{r})}_{A O} & =\left\{\int d^2 \vec{r}^{\vec{r}} \psi_{n \vec{k}}^{\sigma *}\left(\overrightarrow{r^*}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\vec{r}}\right|} \phi_{j k^*}\left(\overrightarrow{r^*}\right)\right\} \underbrace{\psi_{n \vec{k}}^\sigma(\vec{r})}_{M O} \\
-% K^\sigma(\vec{r}) & =\sum_{\vec{k}} \sum_{n, o c c} K_{n \vec{k}}^\sigma(\vec{r}) . \quad \text { (total exchange potential) }
-% \end{align}
-We are at the GPT, so we can neglect the $\vec{k}$ dependence of quantities. Thus, in the plane wave basis, we have
-\begin{align}
-K_{ p q}^\sigma & =\int_{\Omega} d^2 \vec{r} \phi_{p}^*(\vec{r}) K^\sigma(\vec{r}) \phi_{q }(\vec{r}) \\
-& =\int_{\Omega} d^2 \vec{r} \phi_{p}^*(\vec{r}) \sum_{n, o c c}\left\{\int d^2 \vec{r}^{\prime} \psi_{n}^{\sigma *}\left(\vec{r^{\prime}}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} \phi_{q}\left(\vec{r^{\prime}}\right)\right\} \psi_{n}^\sigma(\vec{r}) \\
-& =\int_{\Omega} d^2 \vec{r} \phi_{p }^*(\vec{r}) \sum_{n, o c c}\left\{\int d^2 \vec{r}^{\prime} \phi_{n }^{\sigma *}\left(\vec{r^{\prime}}\right) \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} \phi_{q }\left(\vec{r^{\prime}}\right)\right\} \phi_{n }^\sigma(\vec{r})
-\label{K_exchange_initial} \\
-&=\sum_{ij} P_{ ji}^\sigma \underbrace{\left< p_{} i_{} | j_{} q_{} \right>}_{*} \label{K_exchange_final} 
-\end{align}
-where we can do the simplification that leads to \ref{K_exchange_initial} because for the UEG, the MOs are the AOs. Now,
-\begin{align}
-* 
-% &= \frac{1}{\Omega^2} \int_{\Omega} d^2 \vec{r} e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\left\{\int d^2 \vec{r}^{\prime} \frac{1}{\left|\vec{r}-\vec{r}^{\prime}\right|} e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}^{\prime}}\right\} \\
-&= \frac{1}{\Omega^2} \int_{\Omega} d^2 \vec{r}  e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\left\{e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}}\right\}\left\{\int d^2 \vec{r}^{\prime} \frac{1}{\left|\vec{r}^{\prime}-\vec{r}\right|} e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot |\vec{r}^{\prime}-\vec{r}|}\right\} \\
-&= \frac{1}{\Omega^2} \int_{\Omega} d^2 \vec{r}\left\{e^{i\left(\vec{G}_j-\vec{G}_p\right) \cdot \vec{r}}\right\}\left\{e^{i\left(\vec{G}_q-\vec{G}_i\right) \cdot \vec{r}}\right\} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|}\left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + v_{\mathrm{M}}\Omega\delta_{\vec{G}_q,\vec{G}_i}\right) \\
-% &= \frac{1}{\Omega^2} \cdot \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} + \Omega v_{\mathrm{M}}\right) \int_{\Omega} d^2 \vec{r} e^{i\left(\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right) \cdot \vec{r}} \\
-% &= \frac{1}{\Omega^2} \cdot \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \int_{\Omega} d^2 \vec{r} e^{i\left(\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right) \cdot \vec{r}} \\
-% &= \frac{4 \pi}{\Omega\left|\vec{G}_q-\vec{G}_i\right|} \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right].
-&= \frac{1}{\Omega} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \\
-% &= \frac{1}{\Omega} \left(\frac{4 \pi}{\left|\vec{Q}\right|} \left(1-\delta_{\vec{Q},0}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{Q},0}\right) 
-\end{align}
-% where to get to the final line, we define the momentum transfer vector $\vec{Q}$ and demand that $\vec{Q}\equiv\vec{G}_q-\vec{G}_i = \vec{G}_p - \vec{G}_j$.
- Thus, the exchange matrix elements become
-\begin{align}
-% K_{ p q}^\sigma&= \frac{1}{\Omega}  \sum_{i j} P_{j i}^\sigma \frac{1}{\left|\left(\vec{G}_q-\vec{G}_i\right)\right|} \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \label{K_exchange_inter} \\
-K_{ p q}^\sigma&= \frac{1}{\Omega}  \sum_{i j} P_{j i}^\sigma \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] \label{K_exchange_inter} \\
-% &  =\frac{4 \pi}{\Omega} \sum_{\vec{Q}} P_{ p-\vec{Q}, q-\vec{Q}}^q \label{K_exchange_final}
-&= \frac{1}{\Omega}  \sum_{i j} P_{p-(q-i), q -(q-i)}^\sigma \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \delta\left[\left(\vec{G}_j-\vec{G}_p\right)+\left(\vec{G}_q-\vec{G}_i\right)\right] 
-% &  =\frac{1}{\Omega} \sum_{\vec{Q}} P_{ p-\vec{Q}, q-\vec{Q}}^\sigma \left(\frac{4 \pi}{\left|\vec{Q}\right|} \left(1-\delta_{\vec{Q},0}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{Q},0}\right)
-\end{align}
-% where in the final line, we have defined the momentum transfer vector $\vec{Q}$, demanding that $\vec{Q}\equiv\vec{G}_q-\vec{G}_i = \vec{G}_p - \vec{G}_j$. 
-Given that the kinetic and Coulomb matrices are unchanged, we can write the Fock matrix for the UEG as
-\begin{align}
-F_{ p q}^\sigma & = H_{ p q}^{\mathrm{kin}} + J_{ p q}^\sigma + K_{ p q}^\sigma \\
-& = \delta_{ p q} \frac{|\vec{G}_p|^2}{2} +\frac{\delta_{pq}}{\Omega} \sum_{q-i} n^\sigma_{p-(q-i)} \left(\frac{4 \pi}{\left|\vec{G}_q-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_q,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_q,\vec{G}_i}\right) \\
-& = \delta_{ p q} \frac{|\vec{G}_p|^2}{2} +\frac{\delta_{pq}}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) 
-\end{align}
-where we have defined $n^\sigma_{p} \equiv P_{pp}^\sigma$ as the occupation number of orbital $p$ with spin $\sigma$, but because we are at zero temperature, $n^\sigma_{p}=0$ (unoccupied) or $1$ (occupied). Because the Fock matrix is diagonal, we can read off the orbital energies as
-\begin{align}
-\epsilon_{ p}^\sigma & = \frac{|\vec{G}_p|^2}{2} +\frac{1}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) \\
-& = \frac{|\vec{G}_p|^2}{2} +\frac{1}{\Omega} \sum_{i\in occ} \frac{4 \pi }{\left|\vec{G}_p-\vec{G}_i\right|} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + v_{\mathrm{M}}n^\sigma_{p}
-\end{align}
-Thus, occupied orbitals get a shift of $v_{\mathrm{M}}$, while unoccupied orbitals are unchanged.
-\subsubsection{Deriving IPs}
-\subsection{Self-consistent cumulant with second-order self-energy}
-\subsubsection{Basis transformation}
-We want to evaluate the quantities in the sine-cosine basis, as this is simpler. But in the end, we will want the spectral function in the plane wave basis, and thus we need the Green's function in that basis. Now, the retarded Greens function in the time domain with the broadening factor $\eta$ can be written as
-\begin{equation}
-    G_{pp}(t) = -i \Theta(t) e^{-t(i \epsilon_p +\eta)} e^{C_{pp}(t)}
-\end{equation}
-where the cumulant is defined as
-\begin{align}
-    C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
- &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
-% \label{eq:cumulant_2nd_1}
-&\overset{RHF}{=} \sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
-\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
-\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2} \left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right)
-\end{align}
-with $\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
-and
-$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. 
-\subsubsection{Self-consistency}
-Everything I present in the plots is one-shot. When I speak of GF2+C with analytic frequency integration, I am building the cumulant as
-\begin{align}
-    C_{pp}(t) &=\sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
-\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
-\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2} \left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) \nonumber
-\end{align}
-with $\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$ and
-$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$.
- As can be seen, this gives qualitatively the same result as GF2+C with numerical frequency integration, where I instead build the cumulant as
-\begin{equation}
-    C_{pp}(t) = \int d \omega \frac{\beta_{pp}(\omega)}{\omega^2} \left( e^{-i \omega t} + i \omega t -1 \right)
-\label{eq:cumulant_beta}
-\end{equation}
-with $\beta_{pp}(\omega) = \frac{1}{\pi} |\operatorname{Im} \Sigma_{pp}(\omega + \epsilon_p)|$ with the self-energy defined in chemists notation as
-\begin{align}
-    \Sigma^{(2)}_{pq}(\omega)
-    & = \sum_{iab} \frac{(pa|ib)\Big(2(qa|ib) - (qb|ia)\Big)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left( (pi|aj)(2(qi|aj) - (qj|ai)) \right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta} 
-\end{align}
-or in physicists notation as
-\begin{align}
-    \Sigma^{(2)}_{pq}(\omega)
-    & = \sum_{iab} \frac{\left<pi|ab\right>\left(2\left<qi|ab\right> - \left<qi|ba\right>\right)}{\omega - \epsilon_a - \epsilon_b + \epsilon_i + i \eta} + \sum_{ija} \frac{\left<pa|ij\right>\left(2\left<qa|ij\right> - \left<qa|ji\right>\right)}{\omega - \epsilon_i - \epsilon_j + \epsilon_a + i \eta}
-\end{align}
-If I remember correctly, our idea for a self consistent scheme was to solve equation \ref{eq:cumulant_beta} using
-\begin{equation}
-    \Sigma_{pp}(\omega) = \frac{1}{G^0_{pp}(\omega)} - \frac{1}{G_{pp}(\omega)}
-% \left(G^0_{pp}(\omega)\right)^{-1} - \left(G_{pp}(\omega)\right)^{-1}
-\end{equation}
-In the initial trials, I have not been getting any useful results with the above. However, I notice that I only use under 1e4 frequency grid points. Should I try to get this scheme to work with something like 1e6 grid points or were you thinking of something different?
-\newpage
-This self-energy can then be used to compute a new cumulant $C_{pp}(t)$ as
-\begin{align}
-    C_{pp}(t) &= i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
-&= i \int \frac{d\omega}{2\pi} \frac{\omega + i \eta - \frac{1}{G_{pp}(\omega + \epsilon_p)}}{(\omega + i \eta)^2} e^{-i \omega t} \\
-&= i \int \frac{d\omega}{2\pi} \frac{\omega + i \eta}{(\omega + i \eta)^2} e^{-i \omega t} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t} \\
-&= i \int \frac{d\omega}{2\pi} \frac{e^{-i \omega t}}{\omega + i \eta} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t} \\
-&= \Theta(t)e^{-\eta t} - i \int \frac{d\omega}{2\pi} \frac{1}{G_{pp}(\omega + \epsilon_p)(\omega + i \eta)^2} e^{-i \omega t}
-\end{align}
-where we can use some quadrature to perform the latter integral. This cumulant can then be used to compute $G_{pp}(t)$ using the usual recipe, and then Fourier transformed to obtain $G_{pp}(\omega)$, which can then be used to compute a new self-energy, and so on, until convergence is reached. We still need to determine what measure will be used to determine if self-consistency has been reached.
-\begin{equation}
-    \begin{pmatrix}
-|{\bm{K}_p}\rangle \\
-|{\bm{-K}_p}\rangle
-    \end{pmatrix}
-= \frac{1}{\sqrt{2}} \begin{bmatrix}
-1 & i \\
-1 & -i
-\end{bmatrix}
-\begin{pmatrix}
-|\alpha_p\rangle \\
-|\beta_p\rangle
-\end{pmatrix}
-\implies |\bm{K}_p\rangle = \frac{1}{\sqrt{2}} \left( |\alpha_p\rangle + i |\beta_p\rangle \right)
-\end{equation} 
-So the self energy (and also the cumulant as well as the Green's function) can be expressed as
-\begin{align}
-    \Sigma_{p p}(\omega)&\equiv\langle p| \hat{\Sigma}(\omega)|p\rangle \\
-&= \frac{1}{2} \left( \langle \alpha_p| + -i \langle \beta_p| \right) \hat{\Sigma}(\omega) \left( |\alpha_p\rangle + i |\beta_p\rangle \right) \\
-&= \frac{1}{2} \left( \Sigma_{\alpha_p \alpha_p}(\omega) + \Sigma_{\beta_p \beta_p}(\omega) + i \Sigma_{\alpha_p \beta_p}(\omega) - i \Sigma_{\beta_p \alpha_p}(\omega) \right)
-\end{align}
-Suppose that $p$ is the Fermi state, which in our case has wavevector $(1,0,0)$ and the complement is $(-1,0,0)$; in the plane wave basis, they may have non-consecutive indices, like 6 and 1, respectively. The sine-cosine basis is expressed as linear combinations of the two, so the sine and cosine states will now be in a consecutive order, say 5 and 6. I need to check that nothing changes if instead they occupy indices 1 and 2. Also, it is worth checking whether $\Sigma_{\alpha\beta} = \Sigma_{\beta\alpha}$ in the sine-cosin basis. If so, check if $\Sigma_{\alpha\alpha}=\Sigma_{\beta\beta}$ because, if so, that means the self-energy in the plane-wave basis might be equivalent to the self-energy in thee sine-cosine basis. 
-To derive a form for $C_{pp}^{(2)}(t)$, start by equating the cumulant ansatz for the Green's function the Dyson equation, which gives
-\begin{align}
-C_{pp}^{(2)}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \tilde{\Sigma}_{pp}^{c,(2)}\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
- &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} \\
-% \label{eq:cumulant_2nd_1}
-&\overset{RHF}{=} \sum_{iab} \frac{(pa|ib)\left(2(pa|ib)- (pb|ia)\right)}{\left(\epsilon_{pi}^{ab}\right)^2}
-\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
-\\&+\sum_{ija} \frac{(pi|aj)\left(2(pi|aj)- (pj|ai)\right)}{\left(\epsilon_{pa}^{ij}\right)^2}
-\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) \\
-&\overset{SC}{=} \sum_{\tilde{p}}^{p_{\bm{K}}, p_{\bm{-K}}} \Bigg(\sum_{iab} \frac{(\tilde{p}i|ab)\left(2(\widetilde{p}i|ab)- (\widetilde{p}b|ia)\right)}{\left(\epsilon_{\widetilde{p}i}^{ab}\right)^2}
-\left(e^{-i \epsilon_{\widetilde{p}i}^{ab} t} +i \epsilon_{\widetilde{p}i}^{ab} t -1 \right) \\& + \sum_{ija} \frac{(\tilde{p}i|aj)\left(2(\widetilde{p}i|aj)- (\widetilde{p}j|ai)\right)}{\left(\epsilon_{\widetilde{p}a}^{ij}\right)^2}
-\left(e^{-i \epsilon_{\widetilde{p}a}^{ij} t} +i \epsilon_{\widetilde{p}a}^{ij} t -1 \right)\Bigg)  
-\label{eq:cumulant_2nd_final}
-\end{align}
-where
-$\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i}$
-and
-$\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a}$. At this point we can stop and notice that if we want to determine use the sine-cosine basis for the evaluation of the self energy in the definition of the cumualant, we just need to do
-\begin{equation}
-    \Sigma_{p p}(\omega)=\langle p| \hat{\Sigma}(\omega)|p\rangle=\sum_{\alpha, \beta} U_{p \alpha} \Sigma_{\alpha \beta}^{(\mathrm{sc})}(\omega) U_{p \beta}^*,
-\end{equation}
-Now, we are told that this unitary transformation that allows us to move between the plane wave and sine-cosine basis is given by
-\begin{align}
-\mathbf{U} &= \frac{1}{\sqrt{2}} \begin{bmatrix}
-1 & 1 \\
- -i & i
-\end{bmatrix}
-\implies
-\begin{bmatrix}|\mathbf{K},s \rangle \\
-|\mathbf{K},c \rangle
-\end{bmatrix} = \mathbf{U}^\dag \begin{bmatrix} |\mathbf{K} \rangle \\
-|-\mathbf{K} \rangle
-\end{bmatrix}
-\end{align}
-for a $\mathbf{K}\neq 0$ state from the plane wave basis.
+
 \subsection{Derivation of second-order self-energy using RHF reference}
 To derive this, we can start with the definition (we will just deal with the 2p1h channel for simplicity)
 \begin{align}
@@ -2225,3 +1983,696 @@ where the coefficients are given by $a_n = \frac{(\mathcal{L} f_n, f_n)}{(f_n, f
 &= \mathcal{L}_0 |f_n\rangle + [V, |f_n\rangle] \\
 \end{align}
 where $H_0$ is the non-interacting Hamiltonian and $V$ is the interaction. We can also define a non-interacting Liouvillian $\mathcal{L}_0$ such that $\mathcal{L}_0 X = [H_0, X]$. So we can write
+\section{Derivation of the cumulant starting from the electron-boson Hamiltonian}
+% As suggested by Kowalski, there is a clear connection between these two theories for the core hole problem, so we will pursue that. In particular, for the core hole problem, the ground state wavefunction $|\Psi_0\rangle$ can be separated into fermionic and bosonic parts as:
+% \begin{align}
+% |\Psi_0\rangle &\approx |0\rangle_F \otimes |0\rangle_B \\
+% &= |\Phi_0\rangle \otimes |\nu_0\rangle
+% \end{align}
+% where the fermionic and bosonic vacuums are given by the HF wavefunction $|\Phi_0\rangle$ (Fermi vacuum) and RPA ground state $|\nu_0\rangle$, respectively. In order to apply dCC, we need a complete set of approximate excited states. These are given by the set
+% \begin{equation}
+% c_i^\dagger |\Phi_0\rangle \otimes \sum_\nu \hat{Q}_\nu^\dag|\nu_0\rangle
+% \end{equation}
+% where $c_i^\dagger$ creates a hole in the core state $i$ and $\hat{Q}_\nu^\dag$ is the RPA excitation operator given by $\hat{Q}_\nu^\dag = \sum_{j\neq i,a} X_{ja}^\nu c_j c_a^\dag - \sum_{j\neq i, a}Y_{ja}^\nu c_a c_j^\dag$, where $X_{ja}^\nu$ and $Y_{ja}^\nu$ are the RPA excitation and deexcitation amplitudes, respectively.
+%  Note that because we removed the core state $i$, $j\neq i$ in the RPA excitation manifold.
+% \subsubsection{Overlaps}
+% We need to be able to evaluate overlaps of the form:
+% % \begin{align}
+% % \langle \Psi_0| c_i \hat{Q}_\nu^\dagger |\nu_0\rangle &= \langle \Phi_0| c_i \sum_{j\neq i,a} X_{ja}^\nu c_j c_a^\dag |\nu_0\rangle - \langle \Phi_0| c_i \sum_{j\neq i, a}Y_{ja}^\nu c_a c_j^\dag |\nu_0\rangle \\
+% % &= \sum_{j\neq i,a} X_{ja}^\nu \langle \Phi_0| c_i c_j c_a^\dag |\nu_0\rangle - \sum_{j\neq i, a}Y_{ja}^\nu \langle \Phi_0| c_i c_a c_j^\dag |\nu_0\rangle \\
+% % &= \sum_{j\neq i,a} X_{ja}^\nu \langle \Phi_0| c_i c_j c_a^\dag |\nu_0\rangle
+% % \end{align}
+% \begin{align}
+% \left( \langle \Phi_0| \otimes \langle \nu_0| \right) c_i \left( \hat{Q}_\nu^\dagger |\nu_0\rangle \otimes c_i^\dagger |\Phi_0\rangle \right) &= \langle \Phi_0| c_i c_i^\dagger |\Phi_0\rangle \otimes \langle \nu_0|c_i \hat{Q}_\nu^\dagger |\nu_0\rangle \\
+% &= 1 \otimes \left( \sum_{j\neq i,a} X_{ja}^\nu \langle \nu_0| c_i c_j c_a^\dag |\nu_0\rangle - \sum_{j\neq i, a}Y_{ja}^\nu \langle \nu_0| c_i c_a c_j^\dag |\nu_0\rangle \right) \\
+% \end{align}
+% where the second term vanishes because we cannot annihilate a virtual index in the Fermi vacuum.
+% We can start by setting equal to each other the definition of the retarded Green's function in the cumulant and CC frameworks in the diagonal approximation for a given state $p$:
+% \begin{align}
+%  -i \theta(t) e^{-i \epsilon_p t} e^{C_p(t)} &= -i \theta(t) e^{-i E_0 t} \langle 0 | (1 + \Lambda ) e^{-\hat{T}} a_p^\dagger e^{-i H t} a_p e^{\hat{T}}| 0 \rangle \\
+% G^0_p(t) e^{C_p(t)} &= G_p^{CC}(t) \\
+% \end{align}
+
+
+The retarded one-particle Green's function for a state $p$ can be expressed as 
+\begin{equation}
+G_{pp}^R(t) = -i \theta(t) \bra{N} \hat{c}_p e^{-i\hat{H} t} \hat{c}_p^\dagger \ket{N}
+\end{equation}
+where $\ket{N}$ is the exact ground state and $\hat{H}$ is the Hamiltonian, both of the N-electron system.
+\subsubsection{Core hole approximation}
+The exact ground state $\ket{N}\equiv |N_F\rangle \otimes |0_B\rangle$, where $|N_F\rangle$ is the exact fermionic ground state and $|0_B\rangle$ is the bosonic vacuum. $\hat{c}_p$ and $\hat{c}_p^\dagger$ will be the annihilation and creation operators for the fermionic hole state $p$. So, we can write
+\begin{align}
+\hat{c}_p^\dagger \ket{N} &= \hat{c}_p^\dagger \Bigl( |N_F\rangle \otimes |0_B\rangle \Bigr) \\
+&\approx \hat{c}_p^\dagger \Bigl( |\Phi_0^N\rangle \otimes |0_B\rangle \Bigr)
+\label{eq:core_hole_approx_1}\\
+& = |\Phi_0^{N-1}\rangle \otimes |0_B\rangle \\
+% & \approx |\Phi_0^{N-1}\rangle \otimes |0_B\rangle \label{eq:core_hole_approx_2} \\
+&\equiv \ket{\Psi_p}
+\end{align}
+where in \ref{eq:core_hole_approx_1} we approximated the exact vacuum by the Fermi vacuum. \emph{My hypothesis is that by instead approximating the exact ground state by the CC ground state, we would be able to recover the CC Green's function for this problem of the core hole.}
+%  and in \ref{eq:core_hole_approx_2} we approximated the bosonic vacuum as unaffected by the removal of the core electron (this would be true for plasmons because the excitation of a core state would only occur at high energies). 
+\subsection{Specifying the effective Hamiltonian}
+We can choose the electronic-bosonic Hamiltonian $\hat{H}_p^{\text{eB}}$ for the N-1 electron system with a hole in core state $p$. $\epsilon_p$ is the energy of the state $p$, $\Omega_\nu$ are the bosonic excitation energies, and $W_{p\nu}$ are the coupling matrix elements between the fermionic hole state and the bosonic excitations
+\begin{align}
+    \hat{H}_{\text{eB}} &= \epsilon_{p} \hat{n}_p + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu + \sum_{\nu} W_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right) \\
+    % \hat{H}_p^{\text{eB}} &= \epsilon_{p} \hat{n}_p + \sum_{\mu\nu} \Biggl( A_{\mu\nu} \hat{b}_\mu^\dagger \hat{b}_\nu + \frac{1}{2}B_{\mu\nu} \Bigl(\hat{b}_\mu^\dagger \hat{b}_\nu^\dagger + \hat{b}_\mu \hat{b}_\nu \Bigr) \Biggr) + \sum_{\nu} V_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right) \label{eq:effective_hamiltonian} \\
+    % & = \hat{H}_0 + \hat{V},
+    & = \hat{H}_0 + \hat{V},
+\end{align}
+defining $\hat{n}_p = \hat{c}_p^\dagger \hat{c}_p$ as the number operator for the core hole state $p$. 
+% The first term of \ref{eq:effective_hamiltonian} describes the single, fermionic core hole, the second term describes the bosonic bath, while the second term is the interaction $\hat{V}$. 
+We can partition into a non-interacting part $\hat{H}_0$ and an interaction $\hat{V}$ as
+\begin{align}
+    \hat{H}_0 &= \epsilon_{p} \hat{n}_p + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu \\
+    \hat{V} &= \sum_{\nu} W_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right).
+\end{align}
+% \subsubsection{What are the bosonic coupling matrix elements and excitation energies?}
+%  Tolle showed that in finite systems, if one applies the quasi-boson approximation, these can be obtained as RPA quantities. Concretely, if $i,j$ are occupied indices and $a,b$ are virtual indices of $\Phi_0^{N-1}$ and we define
+% \begin{align}
+%     A_{ia,jb} &= (\epsilon_a - \epsilon_i) \delta_{ij} \delta_{ab} + \langle i b || a j \rangle \\
+%     B_{ia,jb} &= \langle i a || j b \rangle
+% \end{align}
+% then we need to diagonalize the Casida equation, which reads
+% \begin{equation}
+%     \begin{pmatrix}
+%         \bm{A} & \bm{B} \\
+%         -\bm{B} & -\bm{A}
+%     \end{pmatrix}
+%     \begin{pmatrix}
+%         \bm{X} & \bm{Y} \\
+%         \bm{Y} & \bm{X}
+%     \end{pmatrix}
+%     = \begin{pmatrix}
+%         \bm{X} & \bm{Y} \\
+%         \bm{Y} & \bm{X}
+%     \end{pmatrix}
+%     \begin{pmatrix}
+%         \bm{\Omega} & \bm{0} \\
+%         \bm{0} & -\bm{\Omega}
+%     \end{pmatrix}.
+%     \label{eqn:casida_eq}
+% \end{equation}
+% \subsection{Specifying the effective Hamiltonian}
+% We can choose the electronic-bosonic Hamiltonian $\hat{H}_p^{\text{eB}}$ for the N-1 electron system with a hole in core state $p$. $\epsilon_p$ is the energy of the state $p$, $\Omega_\nu$ are the bosonic excitation energies, and $W_{p\nu}$ are the coupling matrix elements between the fermionic hole state and the bosonic excitations
+% \begin{align}
+%     % \hat{H}_{\text{eB}} &= \epsilon_{p} \hat{n}_p + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu + \sum_{\nu} W_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right) \\
+%     \hat{H}_p^{\text{eB}} &= \epsilon_{p} \hat{n}_p + \sum_{\mu\nu} \Biggl( A_{\mu\nu} \hat{b}_\mu^\dagger \hat{b}_\nu + \frac{1}{2}B_{\mu\nu} \Bigl(\hat{b}_\mu^\dagger \hat{b}_\nu^\dagger + \hat{b}_\mu \hat{b}_\nu \Bigr) \Biggr) + \sum_{\nu} V_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right) \label{eq:effective_hamiltonian} \\
+%     % & = \hat{H}_0 + \hat{V},
+%     & = \hat{H}_0 + \hat{V},
+% \end{align}
+% defining $\hat{n}_p = \hat{c}_p^\dagger \hat{c}_p$ as the number operator for the core hole state $p$. The first term of \ref{eq:effective_hamiltonian} describes the single, fermionic core hole, the second term describes the bosonic bath, while the second term is the interaction $\hat{V}$. We can partition into a non-interacting part $\hat{H}_0$ and an interaction $\hat{V}$ as
+% \begin{align}
+%     \hat{H}_0 &= \epsilon_{p} \hat{n}_p + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu \\
+%     \hat{V} &= \sum_{\nu} W_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right).
+% \end{align}
+% \subsubsection{What are the bosonic coupling matrix elements and excitation energies?}
+%  Tolle showed that in finite systems, if one applies the quasi-boson approximation, these can be obtained as RPA quantities. Concretely, if $i,j$ are occupied indices and $a,b$ are virtual indices of $\Phi_0^{N-1}$ and we define
+% \begin{align}
+%     A_{ia,jb} &= (\epsilon_a - \epsilon_i) \delta_{ij} \delta_{ab} + \langle i b || a j \rangle \\
+%     B_{ia,jb} &= \langle i a || j b \rangle
+% \end{align}
+% then we need to diagonalize the Casida equation, which reads
+% \begin{equation}
+%     \begin{pmatrix}
+%         \bm{A} & \bm{B} \\
+%         -\bm{B} & -\bm{A}
+%     \end{pmatrix}
+%     \begin{pmatrix}
+%         \bm{X} & \bm{Y} \\
+%         \bm{Y} & \bm{X}
+%     \end{pmatrix}
+%     = \begin{pmatrix}
+%         \bm{X} & \bm{Y} \\
+%         \bm{Y} & \bm{X}
+%     \end{pmatrix}
+%     \begin{pmatrix}
+%         \bm{\Omega} & \bm{0} \\
+%         \bm{0} & -\bm{\Omega}
+%     \end{pmatrix}.
+%     \label{eqn:casida_eq}
+% \end{equation}
+
+% where the excitation $\bm{X}$ and de-excitation $\bm{Y}$ eigenvectors form the biorthogonal set as
+% \begin{equation}
+%     (\bm{X}+\bm{Y})(\bm{X}-\bm{Y})^T=(\bm{X}+\bm{Y})^T(\bm{X}-\bm{Y})=\bm{I}
+%     \label{eqn:biorthogonality}
+% \end{equation}
+Plugging this into the definition of the retarded Green's function gives us
+\begin{align}
+G_{pp}^R(t) &\approx -i \theta(t) \bra{\Psi_p} e^{-i\hat{H}_{\text{eB}} t} \ket{\Psi_p} \\
+&= -i \theta(t) \bra{\Psi_p} e^{-i\left( \hat{H}_0 + \hat{V} \right) t} \ket{\Psi_p} \\
+&= -i \theta(t) \bra{\Psi_p} e^{-i\hat{H}_0 t} \mathcal{T} \exp \left( -i \int_0^t dt' e^{i\hat{H}_0 t'} \hat{V} e^{-i\hat{H}_0 t'} \right) \ket{\Psi_p} \\
+&= -i \theta(t) e^{-i\epsilon_p t} \underbrace{\bra{\Psi_p}  \mathcal{T} \exp \left( -i \int_0^t dt' V_I(t') \right) \ket{\Psi_p}}_{*}
+\end{align}
+where $V_I(t) = e^{i\hat{H}_0 t} \hat{V} e^{-i\hat{H}_0 t}$ is the interaction picture representation of the interaction $\hat{V}$. \emph{Is there a relationship between this interaction picture representation and the CC similarity transformation?} Now, we can work out * by a Taylor expansion of the time-ordered exponential:
+\begin{align}
+* &= \bra{\Psi_p} \sum_{n=0}^\infty \frac{(-i)^n}{n!} \int_0^t dt_1 \cdots \int_0^t dt_n \mathcal{T} \left[ V_I(t_1) \cdots V_I(t_n) \right] \ket{\Psi_p} \\
+&= 1 + (-i) \int_0^t dt' \bra{\Psi_p} V_I(t') \ket{\Psi_p} + \frac{(-i)^2}{2!} \int_0^t dt_1 \int_0^t dt_2 \bra{\Psi_p} \mathcal{T} \left[ V_I(t_1) V_I(t_2) \right] \ket{\Psi_p} + O(W^3) \\
+&= 1 - \frac{1}{2} \int_0^t dt_1 \int_0^t dt_2 \bra{\Psi_p} \mathcal{T} \left[ V_I(t_1) V_I(t_2) \right] \ket{\Psi_p} + O(W^4) \label{eq:time_ordered_expansion}
+\end{align}
+where in \ref{eq:time_ordered_expansion} we have used the fact that terms with an odd number of $V_I$'s will vanish because they do not conserve the number of bosons. Because $[\hat{H}_0, \hat{n}_p] = 0$, we can evaluate $V_I(t)$ as
+
+% ==========================================================
+% 1) Compute V_I(t) explicitly in second quantization
+% ==========================================================
+% Useful commutators / identities:
+%   [\hat{b}_\nu^\dagger \hat{b}_\nu, \hat{b}_\nu] = -\hat{b}_\nu
+%   [\hat{b}_\nu^\dagger \hat{b}_\nu, \hat{b}_\nu^\dagger] = +\hat{b}_\nu^\dagger
+% hence:
+%   e^{+i \Omega_\nu \hat{b}_\nu^\dagger \hat{b}_\nu t}\,\hat{b}_\nu\,e^{-i \Omega_\nu \hat{b}_\nu^\dagger \hat{b}_\nu t} = e^{-i\Omega_\nu t}\hat{b}_\nu
+%   e^{+i \Omega_\nu \hat{b}_\nu^\dagger \hat{b}_\nu t}\,\hat{b}_\nu^\dagger\,e^{-i \Omega_\nu \hat{b}_\nu^\dagger \hat{b}_\nu t} = e^{+i\Omega_\nu t}\hat{b}_\nu^\dagger
+% Also, \hat{n}_p commutes with \hat{H}_0 (and with all boson operators), so it is invariant in the interaction picture.
+
+\begin{align}
+\hat{V}_I(t)
+&= e^{i\hat{H}_0 t}\Big[\sum_\nu W_{p\nu}\,\hat{n}_p(\hat{b}_\nu^\dagger+\hat{b}_\nu)\Big]e^{-i\hat{H}_0 t}\\
+&= \sum_\nu W_{p\nu}\,\hat{n}_p\Big(
+e^{i\hat{H}_0 t}\hat{b}_\nu^\dagger e^{-i\hat{H}_0 t}
++ e^{i\hat{H}_0 t}\hat{b}_\nu e^{-i\hat{H}_0 t}
+\Big)\\
+&= \sum_\nu W_{p\nu}\,\hat{n}_p\Big(
+\hat{b}_\nu^\dagger (t) + \hat{b}_\nu(t)
+\Big)\\
+&= \sum_\nu W_{p\nu}\,\hat{n}_p\big(
+e^{+i\Omega_\nu t}\hat{b}_\nu^\dagger + e^{-i\Omega_\nu t}\hat{b}_\nu
+\big).
+\end{align}
+
+Now the two-time expectation value:
+\begin{align}
+\langle \Psi_p|\hat{V}_I(t_1)\hat{V}_I(t_2)|\Psi_p\rangle
+&= \sum_{\nu,\nu'} W_{p\nu}W_{p\nu'}
+\langle \Psi_p|\,\hat{n}_p\hat{n}_p\,
+\big(e^{+i\Omega_\nu t_1}\hat{b}_\nu^\dagger + e^{-i\Omega_\nu t_1}\hat{b}_\nu\big)\nonumber\\
+&\qquad\qquad\qquad\qquad\qquad\qquad\times
+\big(e^{+i\Omega_{\nu'} t_2}\hat{b}_{\nu'}^\dagger + e^{-i\Omega_{\nu'} t_2}\hat{b}_{\nu'}\big)
+|\Psi_p\rangle\nonumber\\
+&= \sum_{\nu,\nu'} W_{p\nu}W_{p\nu'}\;
+e^{-i\Omega_\nu t_1}e^{+i\Omega_{\nu'} t_2}
+\langle 0|\hat{b}_\nu \hat{b}_{\nu'}^\dagger|0\rangle\nonumber\\
+&= \sum_{\nu} |W_{p\nu}|^2\;e^{-i\Omega_\nu (t_1-t_2)}.
+\end{align}
+% (All other vacuum contractions vanish; and \langle 0|\hat{b}_\nu \hat{b}_{\nu'}^\dagger|0\rangle=\delta_{\nu\nu'}.)
+
+% ==========================================================
+% 4) Second-order cumulant C_2(t) and its closed form
+% ==========================================================
+% The second-order cumulant truncation sets  \chi(t) \approx e^{C_2(t)}  with
+So, recognizing 
+\begin{align}
+* &=
+1-\frac{1}{2}\int_0^t dt_1\int_0^{t} dt_2\;
+\langle \Psi_p|\mathcal{T}\left[\hat{V}_I(t_1)\hat{V}_I(t_2)\right]|\Psi_p\rangle + O(W^4)
+\\
+&=
+1-\int_0^t dt_1\int_0^{t_1} dt_2\;
+\langle \Psi_p|\hat{V}_I(t_1)\hat{V}_I(t_2)|\Psi_p\rangle + O(W^4) \\
+&=
+1-\sum_\nu |W_{p\nu}|^2
+\int_0^t dt_1\int_0^{t_1} dt_2\;e^{-i\Omega_\nu (t_1-t_2)} + O(W^4)\\
+&=
+1-\sum_\nu |W_{p\nu}|^2\left(\frac{t}{i\Omega_\nu}+\frac{1-e^{-i\Omega_\nu t}}{\Omega_\nu^2}\right) + O(W^4)
+\end{align} 
+where the integration is shown explicitly below for clarity.
+\footnote{
+% Do the integrals explicitly:
+% Inner integral with u=t_1-t_2:
+\begin{align}
+\int_0^{t_1} dt_2\,e^{-i\Omega (t_1-t_2)}
+&=
+\int_0^{t_1} du\,e^{-i\Omega u}
+=
+\frac{1-e^{-i\Omega t_1}}{i\Omega}.
+\end{align}
+% Outer integral:
+\begin{align}
+\int_0^{t} dt_1\,\frac{1-e^{-i\Omega t_1}}{i\Omega}
+&=
+\frac{t}{i\Omega} + \frac{1-e^{-i\Omega t}}{\Omega^2}.
+\end{align}}
+Plugging this back into the expression for the retarded Green's function gives us
+\begin{align}
+G_{pp}^R(t)
+&=
+-i\,\theta(t)\,e^{-i\epsilon_p t} \left[1-\sum_\nu |W_{p\nu}|^2\left(\frac{t}{i\Omega_\nu}+\frac{1-e^{-i\Omega_\nu t}}{\Omega_\nu^2}\right) + O(W^4)\right]\\
+&\approx
+-i\,\theta(t)\,e^{-i\epsilon_p t} e^{C_2(t)} 
+\end{align}
+where the second-order cumulant, which is correct up to the second order in the interaction, is given by
+\begin{equation}
+C_2(t) = -\sum_\nu |W_{p\nu}|^2\left(\frac{t}{i\Omega_\nu}+\frac{1-e^{-i\Omega_\nu t}}{\Omega_\nu^2}\right).
+\end{equation} 
+\subsection{Pursuing the alternate definition for the electronic-bosonic Hamiltonian}
+Now, we can choose the exact ground state to be $\ket{N}\equiv |N_F\rangle \otimes |0_{RPA}\rangle$, where $|N_F\rangle$ is the exact fermionic ground state and $|0_{RPA}\rangle$ is the RPA ground state. $\hat{c}_p$ and $\hat{c}_p^\dagger$ will be the annihilation and creation operators for the fermionic hole state $p$. So, we can write
+\begin{align}
+\hat{c}_p^\dagger \ket{N} &= \hat{c}_p^\dagger \Bigl( |N_F\rangle \otimes |0_{RPA}\rangle \Bigr) \\
+&\approx \hat{c}_p^\dagger \Bigl( |\Phi_0^N\rangle \otimes |0_{RPA}\rangle \Bigr)
+\label{eq:core_hole_approx_2.1}\\
+& \approx |\Phi_0^{N-1}\rangle \otimes |0_{RPA}\rangle \label{eq:core_hole_approx_2.2}\\
+% & \approx |\Phi_0^{N-1}\rangle \otimes |0_B\rangle \label{eq:core_hole_approx_2} \\
+&\equiv \ket{\Psi_p}.
+\end{align}
+where in \ref{eq:core_hole_approx_2.1} we approximated the exact fermionic ground state by the Fermi vacuum, and in \ref{eq:core_hole_approx_2.2} we approximated the RPA ground state as unaffected by the removal of the core electron.
+A more revealing choice for the electron-boson Hamiltonian $\hat{H}_p^{\text{eB}}$ of the N-1 electron system in the quasi-boson approximation with a hole in core state $p$
+%  $\epsilon_p$ is the energy of the state $p$, $\Omega_\nu$ are the bosonic excitation energies, and $W_{p\nu}$ are the coupling matrix elements between the fermionic hole state and the bosonic excitations
+\begin{align}
+    % \hat{H}_{\text{eB}} &= \epsilon_{p} \hat{n}_p + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu + \sum_{\nu} W_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right) \\
+    \hat{H}_p^{\text{eB}} &= \underbrace{\epsilon_{p}}_{\hat{H}^e} + \underbrace{\sum_{\mu\nu} \Biggl( A_{\mu\nu} \hat{b}_\mu^\dagger \hat{b}_\nu + \frac{1}{2}B_{\mu\nu} \Bigl(\hat{b}_\mu^\dagger \hat{b}_\nu^\dagger + \hat{b}_\mu \hat{b}_\nu \Bigr) \Biggr)}_{\hat{H}^B} + \underbrace{\sum_{\nu} V_{p\nu} \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right)}_{\hat{V}} \label{eq:effective_hamiltonian},
+% \sum_{\mu\nu} \Biggl( A_{\mu\nu} \hat{b}_\mu^\dagger \hat{b}_\nu + \frac{1}{2}B_{\mu\nu} \Bigl(\hat{b}_\mu^\dagger \hat{b}_\nu^\dagger + \hat{b}_\mu \hat{b}_\nu \Bigr) \Biggr) + \sum_{\nu} V_{p\nu} \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right) \label{eq:effective_hamiltonian}
+    % & = \hat{H}_0 + \hat{V},
+    % & = \hat{H}_0 + \hat{V},
+\end{align}
+where $\epsilon_p$ is the energy of the state $p$, $\bm{A}$ and $\bm{B}$ are the RPA matrices defined as
+\begin{align}
+    A_{ia,jb} &= (\epsilon_a - \epsilon_i) \delta_{ij} \delta_{ab} + \langle i b || a j \rangle \\
+    B_{ia,jb} &= \langle i a || j b \rangle,
+\end{align}
+ and $V_{p\nu}\equiv V_{pp,ia} = \langle p a || p i \rangle$ is the two-electron integral between the core hole state $p$ and the quasi-bosonic excitation $i\to a$.
+The first term of \ref{eq:effective_hamiltonian} describes the single, fermionic core hole, the second term describes the bosonic bath of plasmons, while the third term describes the interaction between the core hole and the plasmonic bath. The bosonic Hamiltonian can also be expressed as 
+% \begin{equation}
+% 	\hH_\text{B}
+% 	= - \frac{1}{2} \Tr\bA 
+% 	+ \frac{1}{2} \mqty( \bb^\dag & \bb ) \cdot \mqty( \bA & \bB \\ \bB & \bA ) \cdot \mqty( \bb \\ \bb^\dag )
+% \end{equation}
+\begin{equation}
+    \hat{H}^B = -\frac{1}{2} \Tr \bm{A} + \frac{1}{2} \begin{pmatrix} \hat{\bm{b}}^\dagger & \hat{\bm{b}} \end{pmatrix} \begin{pmatrix} \bm{A} & \bm{B} \\ \bm{B} & \bm{A} \end{pmatrix} \begin{pmatrix} \hat{\bm{b}} \\ \hat{\bm{b}}^\dagger \end{pmatrix}
+\end{equation}
+and by introducing the quasiparticle (Bogoliubov) operators
+\begin{equation}
+    \begin{pmatrix}
+\hat{\bm{\beta}} \\ \hat{\bm{\beta}}^\dagger
+    \end{pmatrix}
+= \begin{pmatrix}\bm{X} & -\bm{Y} \\ -\bm{Y} & \bm{X} \end{pmatrix}^\dagger \begin{pmatrix}\hat{\bm{b}} \\ \hat{\bm{b}}^\dagger \end{pmatrix}
+\end{equation}
+defined by a unitary transformation of the RPA eigenvectors, just the bosonic and interaction parts of the Hamiltonian change to become
+\begin{align}
+    \hat{H}^B &= \underbrace{\frac{1}{2} \Tr(\bm{\Omega} - \bm{A})}_{E_c^{\text{RPA}}} + \sum_\mu \Omega_\mu \hat{\beta}_\mu^\dagger \hat{\beta}_\mu \\
+    \hat{V} &= \sum_{\nu} M_{p\nu} \left( \hat{\beta}_\nu^\dagger + \hat{\beta}_\nu \right)
+\end{align}
+where $\bm{\Omega}$ is the diagonal matrix of RPA excitation energies and $M_{p\nu} = \sum_{ia} V_{pp,ia} (X_{ia,\nu} + Y_{ia,\nu})$ are the coupling matrix elements between the core hole state and the RPA excitations.
+% \begin{equation}
+% 	\hH_\text{B} 
+% 	= - \frac{1}{2} \Tr\bA  
+% 	+ \frac{1}{2} \mqty( \bbb^\dag & \bbb ) \cdot \mqty( \bOm & \bO \\ \bO & \bOm ) \cdot \mqty( \bbb \\ \bbb^\dag ).
+% \end{equation}
+% The components of the Hamiltonian can then be recast as
+% \begin{subequations}
+% \begin{align}
+% 	\hH_\text{B} 
+% 	& = \Ec
+% 	+ \sum_{\mu} \Om_{\mu} \bbcre{\mu} \bbani{\mu} 
+% 	\\
+% 	\hV_\text{eB}
+% 	& = \sum_{\mu\nu} M_{pq,\nu} \fcre{p} \fani{q} \qty( \bbcre{\nu} + \bbani{\nu} )
+% \end{align}
+% \end{subequations}
+% where the RPA correlation energy is
+% \begin{equation}
+% 	\Ec = \frac{1}{2} \Tr( \bOm - \bA )
+% \end{equation}
+With the manipulations complete, as before, we can further partition into a non-interacting part $\hat{H}_0$ and an interaction $\hat{W}$ as
+\begin{align}
+    \hat{H}_0 &= \epsilon_{p} + E_c^{\text{RPA}} + \sum_\mu \Omega_\mu \hat{\beta}_\mu^\dagger \hat{\beta}_\mu \\
+    \hat{W} &= \sum_{\nu} M_{p\nu} \left( \hat{\beta}_\nu^\dagger + \hat{\beta}_\nu \right).
+    % \hat{H}_0 &= \epsilon_{p} + \sum_{\mu\nu} \Biggl( A_{\mu\nu} \hat{b}_\mu^\dagger \hat{b}_\nu + \frac{1}{2}B_{\mu\nu} \Bigl(\hat{b}_\mu^\dagger \hat{b}_\nu^\dagger + \hat{b}_\mu \hat{b}_\nu \Bigr) \Biggr) \\
+    % \hat{V} &= \sum_{\nu} V_{p\nu} \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right).
+\end{align}
+We can plug this into the definition of the retarded Green's function.
+\begin{align}
+G_{pp}^{R}(t) &\approx -i \theta(t) \bra{\Psi_p} e^{-i\hat{H}_{\text{eB}} t} \ket{\Psi_p} \\
+&= -i \theta(t) \bra{\Psi_p} e^{-i\left( \hat{H}_0 + \hat{V} \right) t} \ket{\Psi_p} \\
+&= -i \theta(t) \bra{\Psi_p} e^{-i\hat{H}_0 t} \mathcal{T} \exp \left( -i \int_0^t dt' e^{i\hat{H}_0 t'} \hat{V} e^{-i\hat{H}_0 t'} \right) \ket{\Psi_p} \\
+&= -i \theta(t) e^{-i (\epsilon_p + E_c^{\text{RPA}}) t} \underbrace{\bra{\Psi_p}  \mathcal{T} \exp \left( -i \int_0^t dt' V_I(t') \right) \ket{\Psi_p}}_{*} \label{rpa_int}
+\end{align}
+where we were able to get to \ref{rpa_int} as before because by definition $\beta|0_{RPA}\rangle = 0$, but notice that now 
+. Again, we can work out * by a Taylor expansion of the time-ordered exponential:
+\begin{align}
+* &= \bra{\Psi_p} \sum_{n=0}^\infty \frac{(-i)^n}{n!} \int_0^t dt_1 \cdots \int_0^t dt_n \mathcal{T} \left[ V_I(t_1) \cdots V_I(t_n) \right] \ket{\Psi_p} \\
+&= 1 + (-i) \int_0^t dt' \bra{\Psi_p} V_I(t') \ket{\Psi_p} + \frac{(-i)^2}{2!} \int_0^t dt_1 \int_0^t dt_2 \bra{\Psi_p} \mathcal{T} \left[ V_I(t_1) V_I(t_2) \right] \ket{\Psi_p} + O(M^3) \\
+&= 1 - \frac{1}{2} \int_0^t dt_1 \int_0^t dt_2 \bra{\Psi_p} \mathcal{T} \left[ V_I(t_1) V_I(t_2) \right] \ket{\Psi_p} + O(M^4) \label{eq:time_ordered_expansion}
+\end{align}
+where in \ref{eq:time_ordered_expansion} we have used the fact that terms with an odd number of $V_I$'s will vanish because they do not conserve the number of bosons. We can evaluate $V_I(t)$ as
+% ==========================================================
+% 1) Compute V_I(t) explicitly in second quantization
+% ==========================================================
+% Useful commutators / identities:
+%   [\hat{b}_\nu^\dagger \hat{b}_\nu, \hat{b}_\nu] = -\hat{b}_\nu
+%   [\hat{b}_\nu^\dagger \hat{b}_\nu, \hat{b}_\nu^\dagger] = +\hat{b}_\nu^\dagger
+% hence:
+%   e^{+i \Omega_\nu \hat{b}_\nu^\dagger \hat{b}_\nu t}\,\hat{b}_\nu\,e^{-i \Omega_\nu \hat{b}_\nu^\dagger \hat{b}_\nu t} = e^{-i\Omega_\nu t}\hat{b}_\nu
+%   e^{+i \Omega_\nu \hat{b}_\nu^\dagger \hat{b}_\nu t}\,\hat{b}_\nu^\dagger\,e^{-i \Omega_\nu \hat{b}_\nu^\dagger \hat{b}_\nu t} = e^{+i\Omega_\nu t}\hat{b}_\nu^\dagger
+% Also, \hat{n}_p commutes with \hat{H}_0 (and with all boson operators), so it is invariant in the interaction picture.
+\begin{align}
+\hat{V}_I(t)
+&= e^{i\hat{H}_0 t}\Big[\sum_\nu M_{p\nu}\,\big(\hat{\beta}_\nu^\dagger + \hat{\beta}_\nu\big)\Big]e^{-i\hat{H}_0 t}\\
+&= \sum_\nu M_{p\nu}\Big(
+e^{i\hat{H}_0 t}\hat{\beta}_\nu^\dagger e^{-i\hat{H}_0 t}
++ e^{i\hat{H}_0 t}\hat{\beta}_\nu e^{-i\hat{H}_0 t}
+\Big)\\
+&= \sum_\nu M_{p\nu}\Big(
+\hat{\beta}_\nu^\dagger (t) + \hat{\beta}_\nu(t)
+\Big)\\
+&= \sum_\nu M_{p\nu}\big(
+e^{+i\Omega_\nu t}\hat{\beta}_\nu^\dagger
++ e^{-i\Omega_\nu t}\hat{\beta}_\nu
+\big).
+% &= \sum_\nu W_{p\nu}\,\hat{n}_p\Big(
+% e^{i\hat{H}_0 t}\hat{b}_\nu^\dagger e^{-i\hat{H}_0 t}
+% + e^{i\hat{H}_0 t}\hat{b}_\nu e^{-i\hat{H}_0 t}
+% \Big)\\
+% &= \sum_\nu W_{p\nu}\,\hat{n}_p\Big(
+% \hat{b}_\nu^\dagger (t) + \hat{b}_\nu(t)
+% \Big)\\
+% &= \sum_\nu W_{p\nu}\,\hat{n}_p\big(
+% e^{+i\Omega_\nu t}\hat{b}_\nu^\dagger + e^{-i\Omega_\nu t}\hat{b}_\nu
+% \big).
+\end{align}
+so the two-time expectation value is
+\begin{align}
+\langle \Psi_p|\hat{V}_I(t_1)\hat{V}_I(t_2)|\Psi_p\rangle
+&= \sum_{\mu\nu} M_{p\mu} M_{p\nu}
+\langle \Psi_p|\,\big(e^{+i\Omega_\mu t_1}\hat{\beta}_\mu^\dagger + e^{-i\Omega_\mu t_1}\hat{\beta}_\mu\big)\,
+\big(e^{+i\Omega_\nu t_2}\hat{\beta}_\nu^\dagger + e^{-i\Omega_\nu t_2}\hat{\beta}_\nu\big)
+|\Psi_p\rangle\\
+&= \sum_{\mu\nu} M_{p\mu} M_{p\nu}\;
+e^{-i\Omega_\mu t_1}e^{+i\Omega_\nu t_2}
+\langle 0|\hat{\beta}_\mu \hat{\beta}_\nu^\dagger|0\rangle\\
+&= \sum_{\nu} |M_{p\nu}|^2\;e^{-i\Omega_\nu (t_1-t_2)}.
+% &= \sum_{\nu,\nu'} W_{p\nu}W_{p\nu'}
+% \langle \Psi_p|\,\hat{n}_p\hat{n}_p\,
+% \big(e^{+i\Omega_\nu t_1}\hat{b}_\nu^\dagger + e^{-i\Omega_\nu t_1}\hat{b}_\nu\big)\nonumber\\
+% &\qquad\qquad\qquad\qquad\qquad\qquad\times
+% \big(e^{+i\Omega_{\nu'} t_2}\hat{b}_{\nu'}^\dagger + e^{-i\Omega_{\nu'} t_2}\hat{b}_{\nu'}\big)
+% |\Psi_p\rangle\nonumber\\
+% &= \sum_{\nu,\nu'} W_{p\nu}W_{p\nu'}\;
+% e^{-i\Omega_\nu t_1}e^{+i\Omega_{\nu'} t_2}
+% \langle 0|\hat{b}_\nu \hat{b}_{\nu'}^\dagger|0\rangle\nonumber\\
+% &= \sum_{\nu} |W_{p\nu}|^2\;e^{-i\Omega_\nu (t_1-t_2)}.
+\end{align}
+% (All other vacuum contractions vanish; and \langle 0|\hat{b}_\nu \hat{b}_{\nu'}^\dagger|0\rangle=\delta_{\nu\nu'}.)
+% ==========================================================
+% 4) Second-order cumulant C_2(t) and its closed form
+% ==========================================================
+% The second-order cumulant truncation sets  \chi(t) \approx e^{C_2(t)}  with
+So, recognizing 
+\begin{align}
+* &=
+1 - \frac{1}{2} \int_0^t dt_1 \int_0^t dt_2 \bra{\Psi_p} \mathcal{T} \left[ V_I(t_1) V_I(t_2) \right] \ket{\Psi_p} + O(M^4)
+\\&=
+1 - \int_0^t dt_1 \int_0^{t_1} dt_2 \bra{\Psi_p} V_I(t_1) V_I(t_2) \ket{\Psi_p} + O(M^4) \\
+&=
+1 - \sum_\nu |M_{p\nu}|^2 \int_0^t dt_1 \int_0^{t_1} dt_2 e^{-i\Omega_\nu (t_1 - t_2)} + O(M^4) \\
+&=
+1 - \sum_\nu |M_{p\nu}|^2 \left( \frac{t}{i\Omega_\nu} + \frac{1 - e^{-i\Omega_\nu t}}{\Omega_\nu^2} \right) + O(M^4),
+% 1-\frac{1}{2}\int_0^t dt_1\int_0^{t} dt_2\;
+% \langle \Psi_p|\mathcal{T}\left[\hat{V}_I(t_1)\hat{V}_I(t_2)\right]|\Psi_p\rangle + O(W^4)
+% \\
+% &=
+% 1-\int_0^t dt_1\int_0^{t_1} dt_2\;
+% \langle \Psi_p|\hat{V}_I(t_1)\hat{V}_I(t_2)|\Psi_p\rangle + O(W^4) \\
+% &=
+% 1-\sum_\nu |W_{p\nu}|^2
+% \int_0^t dt_1\int_0^{t_1} dt_2\;e^{-i\Omega_\nu (t_1-t_2)} + O(W^4)\\
+% &=
+% 1-\sum_\nu |W_{p\nu}|^2\left(\frac{t}{i\Omega_\nu}+\frac{1-e^{-i\Omega_\nu t}}{\Omega_\nu^2}\right) + O(W^4)
+\end{align} 
+we can plug back into the expression for the retarded Green's function, yielding
+\begin{align}
+G_{pp}^{R,GW+C}(t)
+&=
+-i \theta(t) e^{-i(\epsilon_p + E_c^{\text{RPA}}) t} \left[1 - \sum_\nu |M_{p\nu}|^2 \left( \frac{t}{i\Omega_\nu} + \frac{1 - e^{-i\Omega_\nu t}}{\Omega_\nu^2} \right) + O(M^4) \right] \\
+&\approx
+-i \theta(t) e^{-i(\epsilon_p + E_c^{\text{RPA}}) t} e^{C_2(t)}
+% -i\,\theta(t)\,e^{-i\epsilon_p t} \left[1-\sum_\nu |W_{p\nu}|^2\left(\frac{t}{i\Omega_\nu}+\frac{1-e^{-i\Omega_\nu t}}{\Omega_\nu^2}\right) + O(W^4)\right]\\
+% &\approx
+% -i\,\theta(t)\,e^{-i\epsilon_p t} e^{C_2(t)} 
+\end{align}
+where the second-order cumulant, which is correct up to the second order in the screened interaction $M$, is given by
+\begin{equation}
+C_2(t) = -\sum_\nu |M_{p\nu}|^2\left(\frac{t}{i\Omega_\nu}+\frac{1-e^{-i\Omega_\nu t}}{\Omega_\nu^2}\right).
+\end{equation} 
+This shows that one recovers the same cumulant irregardless if we chose the bosonic ground state to be the RPA ground state or the non-interacting bosonic vacuum. It also provides a rigorous justification why our $G_0$ can be from a correlated single particle reference and not just the MF one. In other words, it is defining an algebraic procedure for how to obtain an improved Green's function apart from how we think diagrammatically as
+\begin{equation}
+G^{GW} = G^{HF} + G^{HF} \Sigma^{GW} G^{GW} \quad\Rightarrow\quad G^{GW+C} = G^{GW} e^{C}.
+    % G^{HF} \xrightarrow{\text{Dyson}} G^{G_0W_0} \xrightarrow{\text{Cumulant}} G^{G_0W_0+C}
+\end{equation}
+Here we were able to get to $G^{GW+C}$ directly without any Dyson iteration.
+% \subsubsection{What are the bosonic coupling matrix elements and excitation energies?}
+% In the quasi-boson approximation, these can be obtained as RPA quantities. Concretely, if $i,j$ are occupied indices and $a,b$ are virtual indices of $\Phi_0^{N-1}$ and we define
+
+% then we need to diagonalize the Casida equation, which reads
+% \begin{equation}
+%     \begin{pmatrix}
+%         \bm{A} & \bm{B} \\
+%         -\bm{B} & -\bm{A}
+%     \end{pmatrix}
+%     \begin{pmatrix}
+%         \bm{X} & \bm{Y} \\
+%         \bm{Y} & \bm{X}
+%     \end{pmatrix}
+%     = \begin{pmatrix}
+%         \bm{X} & \bm{Y} \\
+%         \bm{Y} & \bm{X}
+%     \end{pmatrix}
+%     \begin{pmatrix}
+%         \bm{\Omega} & \bm{0} \\
+%         \bm{0} & -\bm{\Omega}
+%     \end{pmatrix}.
+%     \label{eqn:casida_eq}
+% \end{equation}
+\subsubsection{Comparison to the Landau formula for the cumulant}
+The Landau formula for the cumulant is given by
+\begin{equation}
+C(t) = \int d\omega \frac{\beta(\omega)}{\omega^2} \left( e^{-i\omega t} + i\omega t - 1 \right)
+\end{equation}
+where $\beta(\omega) = \frac{1}{\pi} |\text{Im} \Sigma(\omega + \epsilon_p)|$ is proportional to the GW self-energy.
+Comparing this to the expression we have derived for $C_2(t)$, we see that the two expressions are consistent \emph{only in the TDL} if we identify $\beta(\omega) = \pi \sum_\nu |M_{p\nu}|^2 \delta(\omega - \Omega_\nu)$, which is precisely the spectral density of the self-energy in the GW approximation. This shows that the
+% \begin{equation} \label{eq:HeB}
+% 	\hH_\text{eB} = \hH_\text{e} + \hH_\text{B} + \hV_\text{eB}
+% \end{equation}
+\begin{align}
+    \hat{H}_{\text{eB}} = \hat{H}_{\text{e}} + \hat{H}_{\text{B}} + \hat{V}_{\text{eB}}
+\end{align}
+where
+\begin{align}
+    \hat{H}_{\text{e}}
+    & \equiv \sum_{pq} f_{pq} c_p^\dagger c_q = \sum_p \epsilon_p c_p^\dagger c_p
+    \\
+    \label{eq:HB}
+    \hat{H}_{\text{B}}
+    & = \sum_{\mu\nu} A_{\mu\nu} b_\mu^\dagger b_\nu 
+    + \frac{1}{2} \sum_{\mu\nu} B_{\mu\nu} \left( b_\mu^\dagger b_\nu^\dagger + b_\mu b_\nu \right)
+    \\
+    \hat{V}_{\text{eB}} 
+    & \equiv \sum_{pq\nu} V_{pq,\nu}  c_p^\dagger c_q \left( b_\nu^\dagger + b_\nu \right) = \sum_{p\nu } W_{p\nu} c_p^\dagger c_p \left( b_\nu^\dagger + b_\nu \right)
+\end{align} 
+respectively describe the fermionic subsystem, the bosonic bath, and their mutual coupling.
+
+ In the cumulant approximation, this effective Hamiltonian can be expressed as a supermatrix in the space of fermionic and bosonic excitations.
+Tolle claimsthat any vertex corrections can be added by modifying certain quantities in the  EOM supermatrix:
+\begin{equation}
+\bm{H}^{\mathrm{EOM}} = \begin{bmatrix}
+    \bm{F} & \bm{W}^< & \bm{W}^> \\
+    \left(\bm{W}^<\right)^\dagger&  \bm{d}^< & \bm{0} \\
+    \left(\bm{W}^>\right)^\dagger & \bm{0} & \bm{d}^>
+\end{bmatrix}
+\end{equation}
+where $\bm{F}$ represents the fermionic space, $\bm{d}^<$ and $\bm{d}^>$ reprsent the bosonic deexcitation and excitation spaces, respectively, while $\bm{W}^<$ and $\bm{W}^>$ represent the coupling matrices between the fermionic and bosonic sectors.
+\subsection{Examples}
+A good place to start in an effort to understand this abstract framework is to consider what we have encountered in the past. 
+\subsubsection{GW}
+$\bm{F}$ is a generalized Fock matrix,
+\begin{equation}
+    \bm{W}^<_{pk\nu} = \sum_{ia} (pk|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right) \quad \text{and} \quad \bm{W}^>_{pc\nu} = \sum_{ia} (pc|ia) \left( X_{ia}^{\nu} + Y_{ia}^{\nu} \right),
+\end{equation}
+and 
+\begin{equation}
+    \bm{d}^<_{k\nu , l\nu'} = \left(\epsilon_k - \Omega_\nu\right) \delta_{k,l} \delta_{\nu,\nu'} \quad \text{and} \quad \bm{d}^>_{c\nu , d\nu'} = \left(\epsilon_c + \Omega_\nu\right) \delta_{c,d} \delta_{\nu,\nu'},
+\end{equation}
+where the bosonic excitation energies $\Omega_\nu$ and amplitudes $X_{ia}^\nu$ and $Y_{ia}^\nu$ are due to the RPA.
+\subsubsection{MP2}
+$\bm{F}$ is the HF Fock matrix,
+\begin{equation}
+\bm{W}^<_{pk\nu} \equiv W^<_{pkia} = \frac{1}{\sqrt{2}}\langle p a||i k\rangle \quad \text{and} \quad \bm{W}^>_{pc\nu} \equiv W^>_{pcia} = \frac{1}{\sqrt{2}}\langle p i||c a\rangle,
+\end{equation}
+and
+\begin{equation}
+\bm{d}^<_{k i a, l j b} = \left(-\epsilon_a+\epsilon_i+\epsilon_k\right) \delta_{k l} \delta_{i j} \delta_{a b} \quad \text{and} \quad \bm{d}^>_{c a i, d b j} = \left(-\epsilon_i+\epsilon_c+\epsilon_a\right) \delta_{c d} \delta_{a b} \delta_{i j}.
+\end{equation}
+It has been shown that MP2 contains diagrams (vertex corrections) that are absent in GW.
+\subsubsection{ECC}
+Tolle's argument is that ECC can also be placed in this framework, which is able to systematically treat vertex corrections, albeit at a high computational cost.
+\subsection{Why this framework doesn't apply to the cumulant approximation}
+The cumulant approximation considers a single fermionic state $p$ coupled to a bosonic bath of excitations and deexcitations. With this simplification, we can replace the fermionic space $\bm{F}$ with the single particle energy of a state $p$ as $\epsilon_p$. The coupling matrices lose one dimension, becoming $\bm{W}^<\equiv \delta_{pk} W^<_{k\nu}$ and $\bm{W}^>\equiv \delta_{pc} W^>_{c\nu}$, while the bosonic deexcitation and excitation spaces remain unchanged. The EOM supermatrix then takes the form
+\begin{equation}
+\bm{H}^{\mathrm{EOM}} = \begin{bmatrix}
+    \epsilon_p & 0 & \bm{W}^> \\
+    0&0 & \bm{0} \\
+    \left(\bm{W}^>\right)^\dagger & \bm{0} & \bm{d}^>
+\end{bmatrix}\end{equation}
+
+\subsubsection{MP2}
+We can consider a concrete example such as MP2, where $W^<_{k\nu} = \frac{1}{\sqrt{2}}\langle p a||i p\rangle$, expanded as 
+\begin{align}
+W^<_{k\nu} &= \frac{1}{\sqrt{2}}\langle p a||i p\rangle = \frac{1}{\sqrt{2}}\left( \langle p a|i p\rangle - \langle p a|p i\rangle \right) = 0.
+\end{align}
+We reached the final equality because we know that for periodic systems the two-electron integrals must vanish due to momentum conservation, since we must have $\bm{k}_p + \bm{k}_a = \bm{k}_i + \bm{k}_p \implies \bm{k}_a = \bm{k}_i$, but this is impossible because $a$ is a virtual index and $i$ is an occupied index. So, the coupling matrix $\bm{W}^<$ vanishes and likewise $\bm{W}^>$ also vanishes. This means that the EOM supermatrix in the single fermion approximation is block diagonal, written as
+\begin{equation}
+\bm{H}^{\mathrm{EOM}} = \begin{bmatrix}
+    \epsilon_p & \bm{0} & \bm{0} \\
+    \bm{0} &  \bm{d}^< & \bm{0} \\
+    \bm{0} & \bm{0} & \bm{d}^>
+\end{bmatrix}\end{equation}
+We can now apply the Lowdin partitioning technique to this matrix. We first define an excitation/deexcitation vector $\bm{R} = \begin{bmatrix}
+    R_p & \bm{R}^< & \bm{R}^>
+\end{bmatrix}^T$. We can then write the following system of equations:
+\begin{align}
+\epsilon_p R_p &= \omega R_p \\
+ \bm{d}^< \bm{R}^< &= \omega \bm{R}^< \\
+ \bm{d}^> \bm{R}^> &= \omega \bm{R}^>
+\end{align}
+This implies that we got a complete decoupling of the fermionic and bosonic sectors.
+\section{PT2+C}
+We always follow the same procedure when applying the one-shot cumulant.
+The cumulant ansatz for the interacting, retarded Green's function is given by:
+\begin{equation}
+    \bm{G}(t) = \bm{G}^0(t)e^{\bm{C}(t)}
+\end{equation}
+where $\bm{C}(t)$ is the retarded cumulant and $\bm{G}^0(t)$ is the noninteracting, retarded Green's function. By relating the Dyson equation to the Taylor series expansion of the exponential, we can write:
+\begin{align}
+\bm{G}^0(t) + \bm{G}^0(t) \bm{C}(t) + O(v^4) &= \bm{G}^0(t) + \iint \dd t_1 \dd t_2 \bm{G}^0(t-t_1) \bm{\Sigma}^c(t_1 - t_2) \bm{G}^0(t_2) + O(v^4) \\
+    \implies \bm{G}^0(t) \bm{C}(t) &= \iint \dd t_1 \dd t_2 \bm{G}^0(t-t_1) \bm{\Sigma}^c(t_1 - t_2) \bm{G}^0(t_2) \quad \text{(up to second order in $v$)}
+\end{align}
+{As indicated, when we use a second order self-energy, the cumulant should be exact to second order in the bare Coulomb interaction $v$.}
+Projecting to the spin-orbital basis and inserting the resolution of the identity, we get:
+\begin{align}
+    \sum_{r}\bra{p}\bm{G}^0(t) \ket{r}\bra{r}\bm{C}(t)\ket{q} &= \sum_{rs}\iint \dd t_1 \dd t_2 \bra{p}\bm{G}^0(t-t_1)\ket{r} \bra{r}\bm{\Sigma}^c(t_1 - t_2)\ket{s} \bra{s}\bm{G}^0(t_2)\ket{q} \\
+    \implies \sum_{r}\bm{G}_{pr}^0(t) \bm{C}_{rq}(t) &= \sum_{rs}\iint \dd t_1 \dd t_2 \bm{G}_{ps}^0(t-t_1) \bm{\Sigma}_{sr}^c(t_1 - t_2) \bm{G}_{rq}^0(t_2)\\
+    \implies \bm{G}_{pp}^{0}(t) \bm{C}_{pq}(t) &= \underbrace{\iint \dd t_1 \dd t_2 \bm{G}_{pp}^{0}(t-t_1) \bm{\Sigma}_{pq}^c(t_1 - t_2) \bm{G}_{qq}^{0}(t_2)}_{*}
+    \label{eqn:cumulant_connection}
+\end{align}
+where $\bm{G}^0(t)$ is diagonal in the spin-orbital basis, as $\bm{G}_{pp}^{0}(t) = -i\Theta(t)e^{-i\epsilon_p t}$, where $\epsilon_p$ is the single-particle energy of the $p$-th spin-orbital.
+The formula for the inverse Fourier transform is given by:
+\begin{equation}
+    f(t) = \int \frac{\dd \omega}{2\pi} e^{-i\omega t} f(\omega)
+\end{equation}
+which implies that
+\begin{align}
+    \bm{G}_{pp}^{0}(t-t_1) = \int \frac{\dd \omega}{2\pi} e^{-i\omega (t-t_1)} \bm{G}_{pp}^{0}(\omega)\\
+    \bm{\Sigma}_{pq}^c(t_1 - t_2) = \int \frac{\dd \omega'}{2\pi} e^{-i\omega' (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega')\\
+    \bm{G}_{qq}^{0}(t_2) = \int \frac{\dd \omega''}{2\pi} e^{-i\omega'' t_2} \bm{G}_{qq}^{0}(\omega'')
+\end{align}
+and plugging into the double time integral *, we get:
+\begin{align}
+    * &= \iint \dd t_1 \dd t_2 \left[\int \frac{\dd \omega}{2\pi} e^{-i\omega (t-t_1)} \bm{G}_{pp}^{0}(\omega)\right] \left[\int \frac{\dd \omega'}{2\pi} e^{-i\omega' (t_1 - t_2)} \bm{\Sigma}_{pq}^c(\omega')\right] \left[\int \frac{\dd \omega''}{2\pi} e^{-i\omega'' t_2} \bm{G}_{qq}^{0}(\omega'')\right]\\
+    &= \underbrace{\int \dd t_1 e^{-i \left(\omega' -\omega\right)t_1} \int \dd t_2 e^{-i \left(\omega'' -\omega'\right)t_2}}_{4\pi^2 \delta(\omega' -\omega)\delta(\omega'' -\omega')} \iiint \dd \omega \dd \omega' \dd \omega'' \frac{e^{-i\omega t}}{8\pi^3} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega')\bm{G}_{qq}^{0}(\omega'')\\
+    &= \int \frac{\dd \omega}{2\pi} e^{-i\omega t} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega)\bm{G}_{qq}^{0}(\omega)
+\end{align}
+With $\eta \to 0^+$, we get
+\begin{align}
+    -i \Theta(t) e^{-i\epsilon_p t} \bm{C}_{pq}(t) &= \int \frac{\dd \omega}{2\pi} e^{-i\omega t} \bm{G}_{pp}^{0}(\omega)\bm{\Sigma}_{pq}^c(\omega)\bm{G}_{qq}^{0}(\omega) \\
+\implies {C}_{pp}(t) &=  i\int \frac{\dd \omega}{2\pi} e^{-i(\omega - \epsilon_p) t} \frac{{\Sigma}_{pp}^c(\omega)}{(\omega - \epsilon_p + i\eta)^2} \quad \forall t>0\\ 
+&=  i\int  \frac{\dd \omega'}{2\pi} e^{-i\omega' t} \frac{{\Sigma}_{pp}^c(\omega' + \epsilon_p)}{(\omega' + i\eta)^2} \label{eq:Cpp_0}
+\end{align}
+A retarded second order self-energy can be written as
+\begin{align}
+\Sigma_{pq}^{(2)}(\omega) =& \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b + i\eta} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j + i\eta} \\
+\implies \Sigma_{pp}^{(2)}(\omega+\epsilon_p) =&
+\frac{1}{2} \sum_{iab}
+\frac{\left< pi \left| \right| ab \right>^2}
+{\omega-\epsilon_{pi}^{ab}} + \frac{1}{2} \sum_{ija}
+\frac{\left< pa \left| \right| ij \right>^2}
+{\omega-\epsilon_{pa}^{ij}}
+\end{align}
+where
+\begin{equation}
+    \epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i} - i\eta \quad \text{and} \quad \epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a} - i\eta
+\end{equation}
+are generated from combinations of the single particle energies of $G_0$. So we can write the diagonal cumulant\footnote{ 
+Note that in order to get from eqn.~\ref{eq:cumulant_2nd_1} to eqn.~\ref{eq:cumulant_2nd} we have used the identity $\int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon\right)} = \frac{1}{\epsilon^2} \left(e^{-i \epsilon t} +i \epsilon t -1 \right) \mathrm{sgn}(t)$, and since we are dealing with retarded quantities, we only care about $t>0$ so $\mathrm{sgn}(t) = 1$.} as
+\begin{align}
+C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}^c\left(\omega+\epsilon_p\right)}{(\omega + i \eta)^2} e^{-i \omega t} \\
+\implies C_{pp}^{(2)}(t) &= \frac{1}{2} \sum_{iab} \left< pi \left| \right| ab \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pi}^{ab}\right)} + \frac{1}{2} \sum_{ija} \left< pa \left| \right| ij \right>^2 \int \frac{d\omega}{2\pi} \frac{i e^{-i \omega t}}{\omega^2\left(\omega-\epsilon_{pa}^{ij}\right)} 
+\label{eq:cumulant_2nd_1}
+\\
+&= \frac{1}{2}\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
++\frac{1}{2}\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\epsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \epsilon_{pa}^{ij} t} +i \epsilon_{pa}^{ij} t -1 \right) 
+\label{eq:cumulant_2nd}
+\\
+&= \frac{1}{2} \sum_{i a b}\langle p i \| a b\rangle^2 f\left(\epsilon_{p i}^{a b}\right)+\frac{1}{2} \sum_{i j a}\langle p a \| i j\rangle^2 f\left(\epsilon_{p a}^{i j}\right)\label{eq:cumulant_2nd_2}\\
+&= \int d\omega\, \beta(\omega) f(\omega)
+\end{align}
+where $f(\omega) \equiv \frac{e^{-i \omega t}+i \omega t-1}{\omega^2} $ and we identify the cumulant kernel as
+\footnote{To get from eqn.~\ref{eq:beta_def} to eqn.~\ref{eq:beta_2nd}, we have used the identity $\operatorname{Im} \frac{1}{x + i \eta} = -\pi \delta(x)$ as $\eta \to 0^+$.}
+\begin{align}
+    \beta(\omega) &= -\frac{1}{\pi} \operatorname{Im} \Sigma_{pp}^{(2)}\left(\omega+\epsilon_p\right) 
+\label{eq:beta_def}\\
+\\
+&=\frac{1}{2} \sum_{i a b}\langle p i \| a b\rangle^2 \delta\left(\omega-\epsilon_{p i}^{a b}\right)+\frac{1}{2} \sum_{i j a}\langle p a \| i j\rangle^2 \delta\left(\omega-\epsilon_{p a}^{i j}\right) \label{eq:beta_2nd}
+\end{align}
+A connection can be made between the cumulant kernel $\beta(\omega)=\sum_q g_q^2 \delta(\omega-\omega_q)$ for a 2nd-order self energy  to that for electrons coupled to
+bosonic excitations at the frequencies $\omega_q\equiv \epsilon_{pq}^{rs}$ in the quasi-boson approximation (QBA)
+with coupling coefficients $g_q \equiv \langle p q \| r s\rangle$. 
+\subsubsection{Why the cumulant regularizes irregardless of an empirical parameter}
+Whenever $\epsilon_{pi}^{ab} \to 0$ (or $\epsilon_{pa}^{ij}$ by the same argument), due to L'Hopital's rule
+\begin{align}
+\lim_{\epsilon_{pi}^{ab} \to 0} \frac{e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1}{\left(\epsilon_{pi}^{ab}\right)^2} &= \lim_{\epsilon_{pi}^{ab} \to 0} \frac{-i t e^{-i \epsilon_{pi}^{ab} t} + i t}{2 \epsilon_{pi}^{ab}} = \lim_{\epsilon_{pi}^{ab} \to 0} \frac{-t^2 e^{-i \epsilon_{pi}^{ab} t}}{2} = -\frac{t^2}{2}.
+\end{align}
+This is why the cumulant spectral function should stay stable even in the case of a vanishing gap.
+\subsubsection{Frequency domain version}
+Now, if we plug in our derived expression for $C_{pp}(t)$ into the cumulant ansatz for the retarded Green's function:
+\begin{align}
+G_{pp}(t) & = G_{pp}^{HF}(t) e^{C_{pp}(t)} \\
+& = -i \Theta(t) e^{-i \epsilon_p t + C_{pp}(t)} \\
+& = -i \Theta(t) e^{-i \epsilon_p t} \exp\left\{ \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\epsilon_{p i}^{a b}\right)^2}\left(e^{-i \epsilon_{p i}^{a b} t} +i \epsilon_{p i}^{a b} t -1 \right) +\frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\epsilon_{p a}^{i j}\right)^2} \left(e^{-i \epsilon_{p a}^{i j} t} +i \epsilon_{p a}^{i j} t -1 \right) \right\} \\
+&= -i \Theta(t) \underbrace{e^{-\sum_{i a b} \zeta_{pi}^{ab} - \sum_{i j a} \zeta_{pa}^{ij}}}_{Z_p^{QP}} e^{-i\overbrace{\left(\epsilon_p - \sum_{i a b} \zeta_{pi}^{ab}\epsilon_{pi}^{ab} - \sum_{i j a} \zeta_{pa}^{ij}\epsilon_{pa}^{ij}\right)}^{\epsilon_p^{QP}} t} e^{\sum_{i a b} \zeta_{pi}^{ab} e^{-i\epsilon_{pi}^{ab} t} + \sum_{i j a} \zeta_{pa}^{ij} e^{-i\epsilon_{pa}^{ij} t}}
+% & = -i \Theta(t) \underbrace{e^{-\sum_{i\nu} \zeta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}}}_{Z_p^{QP}} e^{-i\overbrace{\left(\epsilon_p^{HF} - \sum_{i\nu} \zeta_{pi\nu}\Delta_{pi\nu} - \sum_{a\nu} \zeta_{pa\nu}\Delta_{pa\nu}\right)}^{\epsilon_p^{QP}} t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} \\ 
+% & = -i \Theta(t) Z_p^{QP} e^{-i \epsilon_p^{QP} t} e^{\sum_{i\nu} \zeta_{pi\nu} e^{-i\Delta_{pi\nu} t} + \sum_{a\nu} \zeta_{pa\nu} e^{-i\Delta_{pa\nu} t}} \\
+\end{align}
+where $\zeta_{pi}^{ab} = \frac{1}{2} \frac{\langle p i \| a b\rangle^2}{\left(\epsilon_{p i}^{a b}\right)^2}$ and $\zeta_{pa}^{ij} = \frac{1}{2} \frac{\langle p a \| i j\rangle^2}{\left(\epsilon_{p a}^{i j}\right)^2}$ are the bosonic coupling coefficients.
+ Next, we want to perform a Fourier transform.
+\begin{align}
+G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
+\label{Gpp1}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt e^{i(\omega - \epsilon_p^{QP}) t} \exp\left\{ \sum_{i a b} \zeta_{pi}^{ab} e^{-i\epsilon_{pi}^{ab} t} + \sum_{i j a} \zeta_{pa}^{ij} e^{-i\epsilon_{pa}^{ij} t} \right\}
+\label{Gpp2}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt\, e^{i(\omega - \epsilon_p^{QP}) t} \left(1 + \sum_{i a b} \zeta_{pi}^{ab} e^{-i\epsilon_{pi}^{ab} t} + \sum_{i j a} \zeta_{pa}^{ij} e^{-i\epsilon_{pa}^{ij} t} + \ldots \right) \\
+&= -i Z_p^{QP} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP}) t]}\label{Gpp3} \\
+&\quad - i Z_p^{QP} \sum_{iab} \zeta_{pi}^{ab} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \epsilon_{pi}^{ab}) t]}\\
+&\quad - i Z_p^{QP} \sum_{a\nu} \zeta_{pa}^{ij} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \epsilon_{pa}^{ij}) t]} + \ldots\\
+&= \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i a b} \frac{Z_{piab}^{sat}}{\omega - \epsilon_{piab}^{sat} + i\eta} + \sum_{i j a} \frac{Z_{pija}^{sat}}{\omega - \epsilon_{pija}^{sat} + i\eta} + \ldots
+\end{align}
+where we defined the satellite energies $\epsilon_{piab}^{sat} = \epsilon_p^{QP} + \epsilon_{pi}^{ab}$ and $\epsilon_{pija}^{sat} = \epsilon_p^{QP} + \epsilon_{pa}^{ij}$, and the corresponding spectral weights $Z_{piab}^{sat} = Z_p^{QP} \zeta_{pi}^{ab}$ and $Z_{pija}^{sat} = Z_p^{QP} \zeta_{pa}^{ij}$.
+The diagonal elements of the spectral function are obtained as (the virtual satellites spectral function, whose derivation will mirror that of the occupied satellites, are omitted for the sake of brevity):
+\begin{align}
+A_{pp}^{MP2+C}(\omega) & = -\frac{1}{\pi} \operatorname{Im} G_{pp}(\omega) \\
+& = -\frac{1}{\pi} \operatorname{Im}\left[\frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i a b} \frac{Z_{pi}^{ab}}{\omega - \epsilon_{pi}^{ab} + i\eta} + \sum_{i j a} \frac{Z_{pa}^{ij}}{\omega - \epsilon_{pa}^{ij} + i\eta} + \ldots \right] \\
+&= -\frac{1}{\pi} \operatorname{Im}\left[\frac{\operatorname{Re} Z_p^{QP} + i \operatorname{Im} Z_p^{QP}}{\omega - \operatorname{Re} \epsilon_p^{QP} + i\left(\eta - \operatorname{Im} \epsilon_p^{QP}\right)} + \sum_{i a b} \frac{\operatorname{Re} Z_{pi}^{ab} + i \operatorname{Im} Z_{pi}^{ab}}{\omega - \operatorname{Re} \epsilon_{pi}^{ab} + i\left(\eta - \operatorname{Im} \epsilon_{pi}^{ab}\right)} + \ldots \right] \\
+&= -\frac{1}{\pi} \operatorname{Im}\left[\frac{\left(\operatorname{Re} Z_p^{QP} + i \operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP} - i\left(\eta - \operatorname{Im} \epsilon_p^{QP}\right)\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+& \left. + \sum_{i a b} \frac{\left(\operatorname{Re} Z_{pi}^{ab} + i \operatorname{Im} Z_{pi}^{ab}\right)\left(\omega - \operatorname{Re} \epsilon_{pi}^{ab} - i\left(\eta - \operatorname{Im} \epsilon_{pi}^{ab}\right)\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi}^{ab}\right)^2 + \left(\operatorname{Im} \epsilon_{pi}^{ab}\right)^2} + \ldots \right] \\
+&= -\frac{1}{\pi}\left[\frac{\left(\operatorname{Re} Z_p^{QP}\right)\left(\operatorname{Im} \epsilon_p^{QP}\right) + \left(\operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+& \left. + \sum_{i a b} \frac{\left(\operatorname{Re} Z_{pi}^{ab}\right)\left(\operatorname{Im} \epsilon_{pi}^{ab}\right) + \left(\operatorname{Im} Z_{pi}^{ab}\right)\left(\omega - \operatorname{Re} \epsilon_{pi}^{ab}\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi}^{ab}\right)^2 + \left(\operatorname{Im} \epsilon_{pi}^{ab}\right)^2} + \ldots \right] 
+% A_{pp}^{GW+C}(\omega) & = -\frac{1}{\pi} \operatorname{Im} G_{pp}(\omega) \\
+% & = -\frac{1}{\pi} \operatorname{Im}\left[\frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i\nu} \frac{Z_{pi\nu}^{sat}}{\omega - \epsilon_{pi\nu}^{sat} + i\eta} + \sum_{a\nu} \frac{Z_{pa\nu}^{sat}}{\omega - \epsilon_{pa\nu}^{sat} + i\eta}\right] \\
+% & = -\frac{1}{\pi} \operatorname{Im}\left[\frac{\operatorname{Re} Z_p^{QP} + i \operatorname{Im} Z_p^{QP}}{\omega - \operatorname{Re} \epsilon_p^{QP} + i\left(\eta - \operatorname{Im} \epsilon_p^{QP}\right)} + \sum_{i\nu} \frac{\operatorname{Re} Z_{pi\nu}^{sat} + i \operatorname{Im} Z_{pi\nu}^{sat}}{\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat} + i\left(\eta - \operatorname{Im} \epsilon_{pi\nu}^{sat}\right)} + \ldots \right] \\
+% & = -\frac{1}{\pi} \operatorname{Im}\left[\frac{\left(\operatorname{Re} Z_p^{QP} + i \operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP} - i\left(\eta - \operatorname{Im} \epsilon_p^{QP}\right)\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+% & \left. + \sum_{i\nu} \frac{\left(\operatorname{Re} Z_{pi\nu}^{sat} + i \operatorname{Im} Z_{pi\nu}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat} - i\left(\eta - \operatorname{Im} \epsilon_{pi\nu}^{sat}\right)\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right)^2} + \ldots \right] \\
+% & = -\frac{1}{\pi}\left[\frac{\left(\operatorname{Re} Z_p^{QP}\right)\left(\operatorname{Im} \epsilon_p^{QP}\right) + \left(\operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+% & \left. + \sum_{i\nu} \frac{\left(\operatorname{Re} Z_{pi\nu}^{sat}\right)\left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right) + \left(\operatorname{Im} Z_{pi\nu}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right)^2} + \ldots \right]
+\end{align}
+\subsection{MP2+C}
+Here we start with $G_0 = G^{HF}$. To summarize, we are solving
+\begin{equation}
+G^{MP2+C} = G^{HF} e^{C^{MP2}}
+\end{equation}
+where $C^{MP2}$ is given by eqn.~\ref{eq:cumulant_2nd_2} with the single particle energies and two-electron integrals evaluated at the HF level.
+\subsection{SRG-MP2+C}
+Here we start with $G_0 = G^{SRG-MP2}$. This means the single particle energies are dressed, but the two-electron integrals remain the same as in HF. So, we are solving
+\begin{equation}G^{SRG-MP2+C} = G^{SRG-MP2} e^{C^{SRG-MP2}}\end{equation}
+where $C^{SRG-MP2}$ is given by eqn.~\ref{eq:cumulant_2nd_2} with the single particle energies evaluated at the SRG-MP2 level and the two-electron integrals evaluated at the HF level.
+\subsection{BWs2+C}
+TODO

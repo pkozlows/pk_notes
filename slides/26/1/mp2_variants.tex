@@ -1,43 +1,45 @@
-\section{How to do larger UEG supercell}
-\begin{frame}
-\frametitle{How to do larger UEG supercell}
-\begin{itemize}
-    \item python vs. cpp
-    \item using Choleskies with G=0 included to implement my methods
-\end{itemize}
-\end{frame}
+% \section{What to do about the spectral function discrepancy?}
+% \begin{frame}
+% \frametitle{HF IPs are derived analytically}
+% I got
+% \begin{align}
+% \epsilon_{ p}^\sigma & = \frac{|\vec{G}_p|^2}{2} -\frac{1}{\Omega} \sum_{i\in occ} \left(\frac{4 \pi}{\left|\vec{G}_p-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) - \Omega v_{\mathrm{M}}\delta_{\vec{G}_p,\vec{G}_i}\right) \\
+% & = \frac{|\vec{G}_p|^2}{2} -\frac{1}{\Omega} \sum_{i\in occ} \frac{4 \pi }{\left|\vec{G}_p-\vec{G}_i\right|^2} \left(1-\delta_{\vec{G}_p,\vec{G}_i}\right) + v_{\mathrm{M}}n^\sigma_{p}
+% \end{align}
+% This corresponds to taking what you reported but shifting it by $\xi/2$.
+% \end{frame}
 \section{PT2 variants}
-\begin{frame}
-\frametitle{Review of what I do with the PT2+C spectral functions}
-I presented two varieties of cumulants. The Landau form is
-\begin{align}
-    C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+E_p\right)}{(\omega + i \eta)^2} e^{-i \omega t}
-\label{eq:Cpp_0_updated}
-\end{align}
-and the time domain Green's function in the cumulant ansatz is
-\begin{equation}
-    G_{pp}(t) = \underbrace{-i \Theta(t) e^{-t(i E_p +\eta)}}_{\bm{G}_0} e^{C_{pp}(t)}
-\label{eq:Gpp_time_updated}
-\end{equation}
-In '$G_0$ via HF', $E_p\equiv \epsilon_p^{HF},\{\epsilon_p^{HF}\}\rightarrow\Sigma _{pp}(\omega)$, while in '$G_0$ via SRG', $E_p\equiv \epsilon_p^{SRG-MP2},\{\epsilon_p^{SRG-MP2}\}\rightarrow \Sigma _{pp}(\omega)$. I understand this through
-\begin{equation}
-    \bm{G}(\omega ) = \bm{G}_0(\omega ) + \bm{G}_0(\omega ) \bm{\Sigma}(\omega ) \bm{G}(\omega )
-\end{equation}
-so in \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, the former approach sets $\bm{G}_0\equiv \bm{G}_{HF}$ and the latter sets $\bm{G}_0\equiv \bm{G}_{SRG-MP2}$. \emph{Loos found that for small molecules, SRG-GW+C can be worse than $G_0W_0$+C.}
-\end{frame}
-\begin{frame}
-\frametitle{How SRG-MP2 comes about}
-Derivation can be done, but the final expression is most relevant:
-\begin{align}
-    F_{pq}^{(2)}(s)  &= \frac{1}{2}\sum_{ija}\frac{\Delta^{pa}_{ij} + \Delta^{qa}_{ij}}{\left(\Delta^{pa}_{ij}\right)^2+\left(\Delta^{qa}_{ij}\right)^2} \bra{pa}\ket{ij}\bra{ij}\ket{qa}
-    \nonumber \\
-    &\times\left[1-e^{-\left[\left(\Delta^{pa}_{ij}\right)^2+\left(\Delta^{qa}_{ij}\right)^2\right]s}\right] \nonumber \\
-    &+ \frac{1}{2}\sum_{abi}\frac{\Delta^{pi}_{ab} + \Delta^{qi}_{ab}}{\left(\Delta^{pi}_{ab}\right)^2+\left(\Delta^{qi}_{ab}\right)^2} \bra{pi}\ket{ab}\bra{ab}\ket{qi}
-    \nonumber \\
-    &\times\left[1-e^{-\left[\left(\Delta^{pi}_{ab}\right)^2+\left(\Delta^{qi}_{ab}\right)^2\right]s}\right]\label{eq:qsGF2SE}.
-\end{align}
-The idea is to add this to your HF Fock matrix and iterate to self-consistency. Tolle found that it is optimal to choose $s=1e3$ in his IP/EA tests, so that's what I use.
-\end{frame}
+% \begin{frame}
+% \frametitle{Review of what I do with the PT2+C spectral functions}
+% I presented two varieties of cumulants. The Landau form is
+% \begin{align}
+%     C_{pp}(t) &\equiv i \int \frac{d\omega}{2\pi} \frac{ \Sigma_{pp}\left(\omega+E_p\right)}{(\omega + i \eta)^2} e^{-i \omega t}
+% \label{eq:Cpp_0_updated}
+% \end{align}
+% and the time domain Green's function in the cumulant ansatz is
+% \begin{equation}
+%     G_{pp}(t) = \underbrace{-i \Theta(t) e^{-t(i E_p +\eta)}}_{\bm{G}_0} e^{C_{pp}(t)}
+% \label{eq:Gpp_time_updated}
+% \end{equation}
+% In '$G_0$ via HF', $E_p\equiv \epsilon_p^{HF},\{\epsilon_p^{HF}\}\rightarrow\Sigma _{pp}(\omega)$, while in '$G_0$ via SRG', $E_p\equiv \epsilon_p^{SRG-MP2},\{\epsilon_p^{SRG-MP2}\}\rightarrow \Sigma _{pp}(\omega)$. I understand this through
+% \begin{equation}
+%     \bm{G}(\omega ) = \bm{G}_0(\omega ) + \bm{G}_0(\omega ) \bm{\Sigma}(\omega ) \bm{G}(\omega )
+% \end{equation}
+% so in \ref{eq:Cpp_0_updated} and \ref{eq:Gpp_time_updated}, the former approach sets $\bm{G}_0\equiv \bm{G}_{HF}$ and the latter sets $\bm{G}_0\equiv \bm{G}_{SRG-MP2}$. \emph{Loos found that for small molecules, SRG-GW+C can be worse than $G_0W_0$+C.}
+% \end{frame}
+% \begin{frame}
+% \frametitle{How SRG-MP2 comes about}
+% Derivation can be done, but the final expression is most relevant:
+% \begin{align}
+%     F_{pq}^{(2)}(s)  &= \frac{1}{2}\sum_{ija}\frac{\Delta^{pa}_{ij} + \Delta^{qa}_{ij}}{\left(\Delta^{pa}_{ij}\right)^2+\left(\Delta^{qa}_{ij}\right)^2} \bra{pa}\ket{ij}\bra{ij}\ket{qa}
+%     \nonumber \\
+%     &\times\left[1-e^{-\left[\left(\Delta^{pa}_{ij}\right)^2+\left(\Delta^{qa}_{ij}\right)^2\right]s}\right] \nonumber \\
+%     &+ \frac{1}{2}\sum_{abi}\frac{\Delta^{pi}_{ab} + \Delta^{qi}_{ab}}{\left(\Delta^{pi}_{ab}\right)^2+\left(\Delta^{qi}_{ab}\right)^2} \bra{pi}\ket{ab}\bra{ab}\ket{qi}
+%     \nonumber \\
+%     &\times\left[1-e^{-\left[\left(\Delta^{pi}_{ab}\right)^2+\left(\Delta^{qi}_{ab}\right)^2\right]s}\right]\label{eq:qsGF2SE}.
+% \end{align}
+% The idea is to add this to your HF Fock matrix and iterate to self-consistency. Tolle found that it is optimal to choose $s=1e3$ in his IP/EA tests, so that's what I use.
+% \end{frame}
 \begin{frame}
 \frametitle{Nooijen's approach}
 MP2 tells us that we have to diagonalize:
@@ -110,6 +112,21 @@ As can be seen, \ref{eq:dso_gf} has a $W_{i d[k l]}$ remaining, which is obtaine
         \item MBPT(2)-GF
         \item CCSD-GF
         \end{itemize}
-    \item Is it useful to study UEG for intermediate supercell sizes?
+    % \item Is it useful to study UEG for intermediate supercell sizes?
     \end{itemize}
 \end{frame}
+
+\section{Relationship between CE and CC}
+\begin{frame}
+\frametitle{EB starting point}
+Start again with
+\begin{align}
+\hat{c}_p^\dagger \ket{N} &= \hat{c}_p^\dagger \Bigl( |N_F\rangle \otimes |0_{RPA}\rangle \Bigr) \overset{?}{\approx} \hat{c}_p^\dagger \Bigl( |\Phi_0^N\rangle \otimes |0_{RPA}\rangle \Bigr)
+\equiv \ket{\Psi_p}.
+\end{align}
+Tolle chose
+\begin{align}
+    \hat{H}_p^{\text{eB}} &= \underbrace{\epsilon_{p}}_{\hat{H}^e} + \underbrace{\sum_{\mu\nu} \Biggl( A_{\mu\nu} \hat{b}_\mu^\dagger \hat{b}_\nu + \frac{1}{2}B_{\mu\nu} \Bigl(\hat{b}_\mu^\dagger \hat{b}_\nu^\dagger + \hat{b}_\mu \hat{b}_\nu \Bigr) \Biggr)}_{\hat{H}^B} + \underbrace{\sum_{\nu} V_{p\nu} \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right)}_{\hat{V}} \label{eq:effective_hamiltonian} \\
+\end{align}
+\end{frame}
+
