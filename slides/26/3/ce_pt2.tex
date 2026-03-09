@@ -1,0 +1,41 @@
+\section{Naming conventions}
+\begin{frame}
+    \frametitle{How we get the cumulant}
+\begin{align}
+    \bm{G}^0(t) \bm{C}(t) &= \iint \dd t_1 \dd t_2 \bm{G}^0(t-t_1) \bm{\Sigma}^c(t_1 - t_2) \bm{G}^0(t_2) \label{eq:GC} \\
+\implies C_{pp}(t)&= i\int  \frac{\dd \omega'}{2\pi} e^{-i\omega' t} \frac{{\Sigma}_{pp}^c(\omega' + \epsilon_p)}{(\omega' + i\eta)^2} \label{eq:Cpp_0} \\
+\implies C^{(2)}_{pp}(t)&= \frac{1}{2}\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\epsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1 \right)
++2h1p \\
+\implies A_{pp}(\omega) &= -\frac{1}{\pi} \operatorname{Im} \left(-i \Theta(t) e^{-i\epsilon_p t} e^{C^{(2)}_{pp}(t)} \right)
+\label{eq:cumulant_2nd}
+\end{align}
+but Loos takes the first order cumulant, which presumably avoids numerical instability because it is just defined in the frequency domain
+\begin{align}
+    A_{pp}(\omega) = \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i a b} \frac{Z_{piab}^{sat}}{\omega - \epsilon_{piab}^{sat} + i\eta} + \sum_{i j a} \frac{Z_{pija}^{sat}}{\omega - \epsilon_{pija}^{sat} + i\eta}
+\end{align}
+\end{frame}
+\begin{frame}
+    \frametitle{Naming conventions}
+    \begin{itemize}
+        \item As eqn. \ref{eq:GC} shows, the $G_0$ that defines both components in \ref{eq:cumulant_2nd} should be the same.
+        \item HF+C(2) makes sense and is probably clearer than HF+MP2+C
+        \item HF+C(SRG-2) is not consistent, but SRG-MP2+C(SRG-2) is.
+        \item We want to do BWs2+C(BWs2).
+        \item This is why I prefer the notation $G_0@X;C(2@X)$.
+    \end{itemize}
+\end{frame}
+\section{TDL clarifications}
+\begin{frame}
+    \frametitle{What is Garnet's Fig. 2b showing?}
+    \begin{itemize}
+        \item Why do you say we don't know the TDL spectral function at TDL?
+    \end{itemize}
+\end{frame}
+\begin{frame}
+    \frametitle{Argument against the use of SRG-MP2 in extended systems}
+\begin{itemize}
+    \item Look at Kresse's argument
+    \item Should I run SRG-MP2+C for rs=2 to check if this holds for cumulants?
+\end{itemize}
+\end{frame}

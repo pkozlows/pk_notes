@@ -2356,7 +2356,7 @@ so the two-time expectation value is
 |\Psi_p\rangle\\
 &= \sum_{\mu\nu} M_{p\mu} M_{p\nu}\;
 e^{-i\Omega_\mu t_1}e^{+i\Omega_\nu t_2}
-\langle 0|\hat{\beta}_\mu \hat{\beta}_\nu^\dagger|0\rangle\\
+\langle 0_{\text{RPA}}|\hat{\beta}_\mu \hat{\beta}_\nu^\dagger|0_{\text{RPA}}\rangle\\
 &= \sum_{\nu} |M_{p\nu}|^2\;e^{-i\Omega_\nu (t_1-t_2)}.
 % &= \sum_{\nu,\nu'} W_{p\nu}W_{p\nu'}
 % \langle \Psi_p|\,\hat{n}_p\hat{n}_p\,
@@ -2532,8 +2532,93 @@ We can now apply the Lowdin partitioning technique to this matrix. We first defi
  \bm{d}^> \bm{R}^> &= \omega \bm{R}^>
 \end{align}
 This implies that we got a complete decoupling of the fermionic and bosonic sectors.
-\section{PT2+C}
+\section{PT2}
+\subsection{SRG-MP2}
+We are interested in finding the self consistent solution to
+\begin{equation}
+    \bm{F}^{QP}= \bm{F}^{(0)} + \bm{F}^{(2)}[\bm{F}^{QP}]
+\end{equation}
+where $\bm{F}^{(0)}$ is the canonical HF Fock matrix and $\bm{F}^{(2)}$ is the second order correction to the Fock matrix, which we take to be diagonal with elements given by
+% $\begin{aligned} F_{p q}^{(2)}(s) & =\frac{1}{2} \sum_{i j a} \frac{\Delta_{i j}^{p a}+\Delta_{i j}^{q a}}{\left(\Delta_{i j}^{p a}\right)^2+\left(\Delta_{i j}^{q a}\right)^2}\langle p a||i j\rangle\langle i j||q a\rangle \\ & \times\left[1-e^{-\left[\left(\Delta_{i j}^{p a}\right)^2+\left(\Delta_{i j}^{q a}\right)^2\right]^s}\right] \\ & +\frac{1}{2} \sum_{a b i} \frac{\Delta_{a b}^{p i}+\Delta_{a b}^{q i}}{\left(\Delta_{a b}^{p i}\right)^2+\left(\Delta_{a b}^{q i}\right)^2}\langle p i||a b\rangle\langle a b||q i\rangle \\ & \times\left[1-e^{-\left[\left(\Delta_{a b}^{p i}\right)^2+\left(\Delta_{a b}^{q i}\right)^2\right] s}\right] .\end{aligned}$
+\begin{align}
+F_{p p}^{(2)}(s) & =\frac{1}{2} \sum_{i j a} \frac{|\langle p a||i j\rangle|^2}{\Delta_{i j}^{p a}}\left[1-e^{-2\left(\Delta_{i j}^{p a}\right)^2 s}\right] +\frac{1}{2} \sum_{a b i} \frac{|\langle p i||a b\rangle|^2}{\Delta_{a b}^{p i}}\left[1-e^{-2\left(\Delta_{a b}^{p i}\right)^2 s}\right] \\
+&= F_{pp}^{2h1p}(s) + F_{pp}^{2p1h}(s)
+\end{align}
+where $F_{pp}^{2h1p}(s)$ and $F_{pp}^{2p1h}(s)$ are the contributions from the 2h1p and 2p1h channels, and
+ $\Delta_{i j}^{p a} = \epsilon_p + \epsilon_a - \epsilon_i - \epsilon_j$ and $\Delta_{a b}^{p i} = \epsilon_p + \epsilon_i - \epsilon_a - \epsilon_b$.
 We always follow the same procedure when applying the one-shot cumulant.
+\subsubsection{Deriving the analytic gradient}
+Since our objective function to minimize is
+\begin{equation}
+    \mathcal{L} = \frac{1}{2} \sum_p \left( \Delta \epsilon_p \right)^2
+\end{equation}
+where at iteration $n$,
+\begin{equation}
+    \Delta \epsilon_p^n = \epsilon_p^0 + F_{pp}[\left\{\epsilon_q^{n-1}\right\}] - \epsilon_p^{n-1},
+\end{equation}
+Taking the derivative of the Lagrangian with respect to $\epsilon_p$, we get
+\begin{align}
+    \frac{\partial \mathcal{L}}{\partial \epsilon_p} &= \sum_q \Delta \epsilon_q \frac{\partial \Delta \epsilon_q}{\partial \epsilon_p}\\& = \sum_q \Delta \epsilon_q \left( \frac{\partial F_{qq}}{\partial \epsilon_p} - \delta_{pq} \right) \\
+\end{align}
+Partition $\frac{\partial F_{qq}}{\partial \epsilon_p}$ into its 2h1p and 2p1h contributions:
+Working out $\frac{\partial F_{qq}^{2h1p}}{\partial \epsilon_p}$, we get
+\begin{align}
+    \frac{\partial F_{qq}^{2h1p}}{\partial \epsilon_p} & = \frac{1}{2} \sum_{i j a} |\langle q a||i j\rangle|^2 \partial_{\epsilon_p} \left[ \frac{1}{\Delta_{i j}^{q a}} \left(1-e^{-2\left(\Delta_{i j}^{q a}\right)^2 s}\right) \right] \\
+& = \frac{1}{2} \sum_{i j a} |\langle q a||i j\rangle|^2 \left[ \partial_{\epsilon_p} \left[ \frac{1}{\Delta_{i j}^{q a}} \right] \left[1-e^{-2\left(\Delta_{i j}^{q a}\right)^2 s}\right]  + \frac{1}{\Delta_{i j}^{q a}} \partial_{\epsilon_p} \left[1-e^{-2\left(\Delta_{i j}^{q a}\right)^2 s}\right] \right] 
+% \left[1-e^{-2\left(\Delta_{i j}^{q a}\right)^2 s}\right] \partial_{\epsilon_p} \left[ \frac{1}{2} \sum_{i j a} \frac{|\langle q a||i j\rangle|^2}{\Delta_{i j}^{q a}}\right]  + \frac{1}{2} \sum_{i j a} \frac{|\langle q a||i j\rangle|^2}{\Delta_{i j}^{q a}} \partial_{\epsilon_p} \left[1-e^{-2\left(\Delta_{i j}^{q a}\right)^2 s}\right] \\
+\end{align}
+and
+\begin{align}
+\partial_{\epsilon_p} \left[ \frac{1}{\Delta_{i j}^{q a}} \right] & = \frac{\partial}{\partial \Delta_{i j}^{q a}} \frac{\partial \Delta_{i j}^{q a}}{\partial \epsilon_p} \left[ \frac{1}{\Delta_{i j}^{q a}} \right] = -\frac{\partial_{\epsilon_p} [\Delta_{i j}^{q a}]}{\left(\Delta_{i j}^{q a}\right)^2}
+    % \partial_{\epsilon_p} \left[ \frac{1}{2} \sum_{i j a} \frac{|\langle q a||i j\rangle|^2}{\Delta_{i j}^{q a}}\right] & = -\frac{1}{2} \sum_{i j a} \frac{|\langle q a||i j\rangle|^2\partial_{\epsilon_p} [\Delta_{i j}^{q a}]}{\left(\Delta_{i j}^{q a}\right)^2}\\
+\end{align}
+Consider 
+\begin{align}
+    \partial_{\epsilon_p} \left[\Delta_{i j}^{q a}\right] & = \partial_{\epsilon_p} \left[ \epsilon_q + \epsilon_a - \epsilon_i - \epsilon_j \right]\\& = \delta_{pq} + \delta_{pa} - \delta_{pi} - \delta_{pj} \\
+\implies \partial_{\epsilon_p} \left[ \frac{1}{\Delta_{i j}^{q a}} \right] & = -\frac{\delta_{pq} + \delta_{pa} - \delta_{pi} - \delta_{pj}}{\left(\Delta_{i j}^{q a}\right)^2}
+\end{align}
+Next, do
+\begin{align}
+    \partial_{\epsilon_p} \left[ 1 - e^{-2\left(\Delta_{i j}^{q a}\right)^2 s} \right] & = \frac{\partial}{\partial \Delta_{i j}^{q a}} \frac{\partial \Delta_{i j}^{q a}}{\partial \epsilon_p} \left[ 1 - e^{-2\left(\Delta_{i j}^{q a}\right)^2 s} \right] \\
+&=  (\delta_{pq} + \delta_{pa} - \delta_{pi} - \delta_{pj}) \left( - \exp\left[-2\left(\Delta_{i j}^{q a}\right)^2 s\right] \cdot (-4s \Delta_{i j}^{q a}) \right) 
+\end{align}
+So, we found
+\begin{align}
+\frac{\partial F_{qq}^{2h1p}}{\partial \epsilon_p}
+&= \frac{1}{2}\sum_{ija} |\langle qa||ij\rangle|^2\,
+(\delta_{pq}+\delta_{pa}-\delta_{pi}-\delta_{pj})
+\Biggl[
+-\frac{1-e^{-2(\Delta_{ij}^{qa})^2 s}}{(\Delta_{ij}^{qa})^2}
++4s\,e^{-2(\Delta_{ij}^{qa})^2 s}
+\Biggr].
+\end{align}
+Analogously, we can work out $\frac{\partial F_{qq}^{2p1h}}{\partial \epsilon_p}$, yielding
+\begin{align}
+\frac{\partial F_{qq}^{2p1h}}{\partial \epsilon_p}
+&= \frac{1}{2}\sum_{abi} |\langle qi||ab\rangle|^2\,
+(\delta_{pq}+\delta_{pi}-\delta_{pa}-\delta_{pb})
+\Biggl[
+-\frac{1-e^{-2(\Delta_{ab}^{qi})^2 s}}{(\Delta_{ab}^{qi})^2}
++4s\,e^{-2(\Delta_{ab}^{qi})^2 s}
+\Biggr].
+\end{align}
+Thus, the formula for the gradient is given by
+\begin{align}
+\frac{\partial F_{qq}}{\partial \epsilon_p} 
+&= \frac{\partial F_{qq}^{2h1p}}{\partial \epsilon_p} + \frac{\partial F_{qq}^{2p1h}}{\partial \epsilon_p} \nonumber\\
+&= \frac{1}{2}\sum_{ija} |\langle qa||ij\rangle|^2\,
+(\delta_{pq}+\delta_{pa}-\delta_{pi}-\delta_{pj})
+\Biggl[
+-\frac{1-e^{-2(\Delta_{ij}^{qa})^2 s}}{(\Delta_{ij}^{qa})^2}
++4s\,e^{-2(\Delta_{ij}^{qa})^2 s}
+\Biggr] \nonumber\\
+&\quad + \frac{1}{2}\sum_{abi} |\langle qi||ab\rangle|^2\,
+(\delta_{pq}+\delta_{pi}-\delta_{pa}-\delta_{pb})
+\Biggl[
+-\frac{1-e^{-2(\Delta_{ab}^{qi})^2 s}}{(\Delta_{ab}^{qi})^2}
++4s\,e^{-2(\Delta_{ab}^{qi})^2 s}
+\Biggr]
+\end{align}
 The cumulant ansatz for the interacting, retarded Green's function is given by:
 \begin{equation}
     \bm{G}(t) = \bm{G}^0(t)e^{\bm{C}(t)}
@@ -2621,6 +2706,22 @@ Whenever $\epsilon_{pi}^{ab} \to 0$ (or $\epsilon_{pa}^{ij}$ by the same argumen
 \lim_{\epsilon_{pi}^{ab} \to 0} \frac{e^{-i \epsilon_{pi}^{ab} t} +i \epsilon_{pi}^{ab} t -1}{\left(\epsilon_{pi}^{ab}\right)^2} &= \lim_{\epsilon_{pi}^{ab} \to 0} \frac{-i t e^{-i \epsilon_{pi}^{ab} t} + i t}{2 \epsilon_{pi}^{ab}} = \lim_{\epsilon_{pi}^{ab} \to 0} \frac{-t^2 e^{-i \epsilon_{pi}^{ab} t}}{2} = -\frac{t^2}{2}.
 \end{align}
 This is why the cumulant spectral function should stay stable even in the case of a vanishing gap.
+\subsection{Comment on plots}
+\subsubsection{First order}
+When I say that I am computing the cumulant spectral function \emph{to first order}, it means that I directly compute the spectral function in frequency domain as
+\begin{align}
+A_{pp}(\omega) \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i a b} \frac{Z_{piab}^{sat}}{\omega - \epsilon_{piab}^{sat} + i\eta} + \sum_{i j a} \frac{Z_{pija}^{sat}}{\omega - \epsilon_{pija}^{sat} + i\eta}
+\end{align}
+where we defined the satellite energies $\epsilon_{piab}^{sat} = \epsilon_p^{QP} + \epsilon_{pi}^{ab}$ and $\epsilon_{pija}^{sat} = \epsilon_p^{QP} + \epsilon_{pa}^{ij}$, and the corresponding spectral weights $Z_{piab}^{sat} = Z_p^{QP} \zeta_{pi}^{ab}$ and $Z_{pija}^{sat} = Z_p^{QP} \zeta_{pa}^{ij}$. These have the definitions $Z_p^{QP} = e^{-\sum_{i a b} \zeta_{pi}^{ab} - \sum_{i j a} \zeta_{pa}^{ij}}$, $\epsilon_p^{QP} = \epsilon_p - \sum_{i a b} \zeta_{pi}^{ab}\epsilon_{pi}^{ab} - \sum_{i j a} \zeta_{pa}^{ij}\epsilon_{pa}^{ij}$, $\zeta_{pi}^{ab} = \frac{1}{2} \frac{\langle p i \| a b\rangle^2}{\left(\epsilon_{p i}^{a b}\right)^2}$, and $\zeta_{pa}^{ij} = \frac{1}{2} \frac{\langle p a \| i j\rangle^2}{\left(\epsilon_{p a}^{i j}\right)^2}$.
+\subsubsection{Infinite order}
+When I say that I am computing the cumulant spectral function \emph{to infinite order}, it means that I compute the spectral function as $A_{pp}(\omega) = -\frac{1}{\pi} \operatorname{Im} G_{pp}(\omega)$, where I get $G_{pp}(\omega)$ from the DFT of $G_{pp}(t) = G_{pp}^{0}(t) e^{C_{pp}(t)}$ using
+\begin{align}
+C_{pp}(t) & = \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\epsilon_{p i}^{a b}\right)^2}\left(e^{-i \epsilon_{p i}^{a b} t} +i \epsilon_{p i}^{a b} t -1 \right) +\frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\epsilon_{p a}^{i j}\right)^2} \left(e^{-i \epsilon_{p a}^{i j} t} +i \epsilon_{p a}^{i j} t -1 \right)
+\end{align}
+and $G_{pp}^{0}(t) = -i \Theta(t) e^{-i \epsilon_p t}$. $\epsilon_{pi}^{ab} = \epsilon_{a}+\epsilon_{b}-\epsilon_{p}-\epsilon_{i} - i\eta$ and $\epsilon_{pa}^{ij} = \epsilon_{i}+\epsilon_{j}-\epsilon_{p}-\epsilon_{a} - i\eta$.
+\subsubsection{Where these equations come from}
+Loos showed that first order and infinite order share the same features for GW+C; all that I have done is to replace the GW quantites by their MP2 counterparts.  All $\epsilon$'s above are the single particle energies due to SRG-MP2 since I took this as my noninteracting reference.
+
 \subsubsection{Frequency domain version}
 Now, if we plug in our derived expression for $C_{pp}(t)$ into the cumulant ansatz for the retarded Green's function:
 \begin{align}
@@ -2669,10 +2770,284 @@ Here we start with $G_0 = G^{HF}$. To summarize, we are solving
 \begin{equation}
 G^{MP2+C} = G^{HF} e^{C^{MP2}}
 \end{equation}
-where $C^{MP2}$ is given by eqn.~\ref{eq:cumulant_2nd_2} with the single particle energies and two-electron integrals evaluated at the HF level.
+where $C^{MP2}$ is given by eqn.~\ref{eq:cumulant_2nd_2} with the single particle energies and two-electron integrals evaluated at the HF level. However, we have seen that doing it this way introduces issues for higher system sizes in metals, where MP2 is known to diverge.
 \subsection{SRG-MP2+C}
 Here we start with $G_0 = G^{SRG-MP2}$. This means the single particle energies are dressed, but the two-electron integrals remain the same as in HF. So, we are solving
 \begin{equation}G^{SRG-MP2+C} = G^{SRG-MP2} e^{C^{SRG-MP2}}\end{equation}
 where $C^{SRG-MP2}$ is given by eqn.~\ref{eq:cumulant_2nd_2} with the single particle energies evaluated at the SRG-MP2 level and the two-electron integrals evaluated at the HF level.
 \subsection{BWs2+C}
-TODO
+% \section{QPMP2: Goldstone Self-Energy and Ground-State Correlation}
+
+% We first look at the QPMP2 method proposed by Coveney and Tew \cite{coveney_regularized_2023}. The core idea behind this method is their choice of using the second order self energy as a perturbation to the Fock matrix, and deriving a correlation energy expression this way. It is also important to note that they use Goldstone self energy as their second-order self energy expression.
+
+% \subsubsection*{Dyson and Quasiparticle Equation}
+
+% In the spin-orbital basis and frequency domain, the Dyson equation is
+% \[
+% \mathbf{G}^{-1}(\omega)
+% =
+% \mathbf{G}_0^{-1}(\omega)
+% -
+% \boldsymbol{\Sigma}(\omega),
+% \]
+
+% where $\mathbf{G}_0(\omega)$ is the Hartree--Fock Green's function, and $\boldsymbol{\Sigma}(\omega)$ is the dynamical self-energy.
+
+% Choosing the HF reference implies $\mathbf{G}_0^{-1}(\omega) = \omega - \hat{\mathbf{F}}$, where $\hat{\mathbf{F}}$ is the HF Fock operator.
+% Thus, $\mathbf{G}^{-1}(\omega) = \omega - \hat{\mathbf{F}} - \boldsymbol{\Sigma}(\omega)$. Poles of $\mathbf{G}(\omega)$ satisfy
+% $\det \left[\omega - \hat{\mathbf{F}} - \boldsymbol{\Sigma}(\omega)\right] = 0$.
+
+% The quasi-particle energies $\varepsilon_p$ are defined by 
+% \[
+% \left[\hat{\mathbf{F}}+\boldsymbol{\Sigma}(\varepsilon_p)\right]| \psi_p \rangle = \varepsilon_p| \psi_p \rangle.
+% \]
+
+% This is a nonlinear eigenvalue equation due to the energy dependence of $\boldsymbol{\Sigma}$.
+
+% We treat the self-energy as a perturbation to the HF Fock operator:
+% \begin{equation}\label{eq:selfE_pert}
+% \hat{\mathbf{H}}_{\mathrm{eff}}(\omega) = \hat{\mathbf{F}} + \lambda \boldsymbol{\Sigma}(\omega)    
+% \end{equation}
+% ,where $\lambda$ is a perturbation parameter. Let $\{ |\phi_p\rangle \}$ be HF orbitals satisfying $\hat{\mathbf{f}} |\phi_p\rangle = \varepsilon_p |\phi_p\rangle$. We define projection operators $\hat{\mathbf{P}}_p = |\phi_p\rangle \langle \phi_p|$, and $\hat{\mathbf{Q}}_p = \hat{\mathbf{1}} - \hat{\mathbf{P}}_p$. Resolve the quasi-particle state as
+% \[|\psi_p\rangle = \hat{\mathbf{P}}_p |\psi_p\rangle + \hat{\mathbf{Q}}_p |\psi_p\rangle.\]
+% (with intermediate normalization $\langle \phi_p | \psi_p \rangle = 1$.)
+
+% Applying $\hat{\mathbf{Q}}_p$ to the quasi-particle equation gives
+% \begin{equation}
+% \hat{\mathbf{Q}}_p
+% \left[
+% \hat{\mathbf{f}}
+% +
+% \lambda \boldsymbol{\Sigma}(\varepsilon_p)
+% \right]
+% |\psi_p\rangle
+% =
+% \varepsilon_p
+% \hat{\mathbf{Q}}_p |\psi_p\rangle.    
+% \end{equation}
+
+% Which can be further rewritten as:
+% \begin{equation}
+% \hat{\mathbf{Q}}_p |\psi_p\rangle = \lambda
+% \frac{\hat{\mathbf{Q}}_p}{\varepsilon_p - \hat{\mathbf{f}}}
+% \boldsymbol{\Sigma}(\varepsilon_p)
+% |\psi_p\rangle.    
+% \end{equation}
+
+% This is the Dyson-type equation for the quasi-particle state. Using the definition of the projection operators and intermediate normalization, we can expand perturbatively in $\lambda$ and get 
+% \[
+% \varepsilon_p = \varepsilon_p^{\mathrm{HF}} + \lambda \langle \phi_p |\boldsymbol{\Sigma}(\varepsilon_p)| \psi_p \rangle + \mathcal{O}(\lambda^2)\dots
+% \]
+
+% One can also expand the self energy $\boldsymbol{\Sigma}$ perturbatively as $\boldsymbol{\Sigma}(\omega) = \sum_{n=1}^{\infty} \mu^n \boldsymbol{\Sigma}^{(n)}(\omega)$. Combining both expansions and only retaining terms up to $\mathcal{O}(\mu^2)$, we get $\varepsilon_p^{\mathrm{QP}} = \varepsilon_p + \lambda\mu^2\Sigma_{pp}^{(2)}(\varepsilon_p^{\mathrm{QP}})$. Setting $\mu = \lambda = 1$, we recover the quasi-particle equation:
+% \begin{equation}\label{eq:QPeq}
+%     \varepsilon_p^{\mathrm{QP}} = \varepsilon_p + \Sigma_{pp}^{(2)}(\varepsilon_p^{\mathrm{QP}}).
+% \end{equation}
+% The authors link this quasi-particle equation to a Brillouin--Wigner perturbation theory, due to the dependence on $\varepsilon_p^{\mathrm{QP}}$ on both sides of the equation.
+% The MP2 partition chooses $\hat{H} = \hat{H}_0 + \hat{H}_1$, where $\mathbf{H}_0 = \mathbf{F}$ and $\mathbf{H}_1$ is the perturbation. The exact Dyson equation is $G^{-1}(\omega) = \omega - F - \Sigma(\omega)$, and we also have $G^{(0)}(\omega)=\big(\omega I - F\big)^{-1}$.
+% In contrast,
+In the below, it is assumed that we are dealing with retarded quantities. The BWs2 partition chooses
+\begin{equation}
+    \hat{H} = \hat{H}_0' + \hat{H}_1',
+\end{equation}
+with
+\begin{equation}
+\mathbf{H}_0' = \mathbf{F} + \alpha \mathbf{W},
+\qquad
+\mathbf{W} = \bm{\Sigma}^{(2),2h1p}(\omega = \tilde{\varepsilon}),
+\end{equation}
+where $\tilde{\varepsilon}$ is the BWs2 ground-state MO energy. As usual,
+\begin{equation}
+\hat{H}_1' = \hat{H} - \hat{H}_0'.
+\end{equation}
+% \[
+% \hat{H} = \hat{H}_0' + \hat{H}_1'.
+% \]
+% with
+% \[
+% \mathbf{H}_0' = \mathbf{F} + \alpha \mathbf{W},
+% \qquad
+% \mathbf{W} = \bm{\Sigma}^{(2),2h1p}(\omega = \tilde{\varepsilon}),
+% \]
+% where $\tilde{\varepsilon}$ is the BWs2 ground-state MO energy.
+% As usual,
+% \[
+% \hat{H}_1' = \hat{H} - \hat{H}_0'.
+% \]
+We define the noninteracting Green's function as
+\begin{equation}
+G^{(0)'}(\omega)
+=
+\big( \omega - (\mathbf{F} + \alpha \mathbf{W}) \big)^{-1}.
+\end{equation}
+The Dyson equation must remain unchanged under any partition, so we have
+\begin{align}
+G^{-1}(\omega)
+&= \omega - \mathbf{F} - \bm{\Sigma}(\omega) \\
+&= \omega - (\mathbf{F} + \alpha \mathbf{W})
+   - \big[ \bm{\Sigma}(\omega) - \alpha \mathbf{W} \big] \\
+&= \big( G^{(0)'}(\omega) \big)^{-1}
+   - \bm{\Sigma}_{\mathrm{eff}}(\omega).
+\end{align}
+This gives us the Dyson equation for the BWs2 partition:
+\begin{align}
+G(\omega)
+&= G^{(0)'}(\omega)
+ + G^{(0)'}(\omega)
+   \bm{\Sigma}_{\mathrm{eff}}(\omega)
+   G(\omega) \\
+&\approx
+   G^{(0)'}(\omega)
+ + G^{(0)'}(\omega)
+   \bm{\Sigma}_{\mathrm{eff}}(\omega)
+   G^{(0)'}(\omega) \\
+\implies G(t) &\approx
+   G^{(0)'}(t)
+ + \int dt' dt'' \,
+   G^{(0)'}(t - t')
+   \bm{\Sigma}_{\mathrm{eff}}(t' - t'')
+   G^{(0)'}(t'').
+\label{eq:Dyson_BWs2}
+\end{align}
+Note that \ref{eq:Dyson_BWs2} is exact up to second order in the bare Coulomb interaction since
+\begin{align}
+\bm{\Sigma}_{\mathrm{eff}}(\omega)
+&\equiv
+\bm{\Sigma}(\omega) - \alpha \mathbf{W} \\
+&\approx
+\bm{\Sigma}^{(2)}\!\left[ G^{(0)'} \right](\omega)
+- \alpha \mathbf{W}
+\end{align}
+and these quantities are exact to second order in the bare Coulomb interaction.
+Alternatively, the cumulant ansatz for the Green's function is
+\[
+G(t) = G^{(0)}(t) e^{C(t)}.
+\]
+Thus, the BWs2 cumulant ansatz for state $p$ in the diagonal approximation is
+\begin{align}
+G_{pp}^{\mathrm{BWs2+C}}(t)
+&=
+G_{pp}^{(0)'}(t)
+e^{C_{pp}^{\mathrm{BWs2}}(t)} \\
+&\approx
+G_{pp}^{(0)'}(t)
++
+G_{pp}^{(0)'}(t)
+C_{pp}^{\mathrm{BWs2}}(t).
+\label{eq:BWs2_cumulant_ansatz}
+\end{align}
+where we have retained terms in the Taylor expansion of the exponential up to first order in the cumulant.
+Equating \eqref{eq:Dyson_BWs2} and
+\eqref{eq:BWs2_cumulant_ansatz} gives
+\begin{align}
+G_{pp}^{(0)'}(t)
+C_{pp}^{\mathrm{BWs2}}(t)
+&=
+\int dt' dt'' \,
+G_{pp}^{(0)'}(t - t')
+\Sigma_{\mathrm{eff},pp}(t' - t'')
+G_{pp}^{(0)'}(t''),
+\end{align}
+which implies
+\begin{align}
+C_{pp}^{\mathrm{BWs2}}(t)
+&=
+i \int \frac{d\omega}{2\pi}
+e^{-i(\omega - \tilde{\varepsilon}_p)t}
+\frac{\Sigma_{\mathrm{eff},pp}(\omega)}
+     {(\omega - \tilde{\varepsilon}_p)^2} \\
+&=
+i \int \frac{d\omega'}{2\pi}
+e^{-i\omega' t}
+\frac{\Sigma_{\mathrm{eff},pp}(\omega' + \tilde{\varepsilon}_p)}
+     {(\omega')^2}. %\\
+% &=
+% \int d\omega\,
+% \frac{\beta_{pp}(\omega)}{\omega^2}
+% \left(
+% e^{-i \omega t}
+% + i \omega t
+% - 1
+% \right),
+\end{align}
+% where
+% \[
+% \beta_{pp}(\omega)
+% =
+% \frac{1}{\pi}
+% \operatorname{Im}
+% \Sigma_{\mathrm{eff},pp}
+% (\omega + \tilde{\varepsilon}_p)
+% \]
+% is the cumulant kernel for the BWs2+C method.
+Now, choosing $\alpha = 1$ gives
+\begin{align}
+\Sigma_{\mathrm{eff},pp}(\omega) &=
+\Sigma_{pp}^{(2)}\!\left[ G^{(0)'} \right](\omega)
+-  W_{pp} \\
+&=
+\Sigma_{pp}^{(2)}\!\left[ G^{(0)'} \right](\omega)
+- \Sigma_{pp}^{(2),2h1p}\!\left[ G^{(0)'} \right](\tilde{\varepsilon}_p)\\
+\implies \Sigma_{\mathrm{eff},pp}(\omega + \tilde{\varepsilon}_p) &=
+\Sigma_{pp}^{(2),2p1h+2p1h}\!\left[ G^{(0)'} \right](\omega + \tilde{\varepsilon}_p)
+- \Sigma_{pp}^{(2),2h1p}\!\left[ G^{(0)'} \right](\tilde{\varepsilon}_p)\\
+&= \frac{1}{2} \sum_{ija} \langle p a \| i j\rangle^2 \left( \frac{1}{\omega + \tilde{\varepsilon}_p+ \tilde{\varepsilon}_a  - \tilde{\varepsilon}_i - \tilde{\varepsilon}_j +i\eta} - \frac{1}{\tilde{\varepsilon}_p  + \tilde{\varepsilon}_a - \tilde{\varepsilon}_i - \tilde{\varepsilon}_j +i\eta} \right)\\
+&\quad + \frac{1}{2} \sum_{iab} \frac{\langle p i \| a b\rangle^2}{\omega + \tilde{\varepsilon}_p + \tilde{\varepsilon}_i - \tilde{\varepsilon}_a - \tilde{\varepsilon}_b +i\eta} \\
+&= \frac{1}{2} \sum_{ija} \langle p a \| i j\rangle^2 \frac{\omega}{(\omega - \tilde\epsilon_{pa}^{ij})(\tilde\epsilon_{pa}^{ij})} + \frac{1}{2} \sum_{iab} \frac{\langle p i \| a b\rangle^2}{\omega - \tilde\epsilon_{pi}^{ab}}
+% \implies \operatorname{Im} \Sigma_{\mathrm{eff},pp}(\omega + \tilde{\varepsilon}_p) &= -\frac{1}{2} \sum_{ija} \langle p a \| i j\rangle^2 \frac{\omega \eta}{(\omega + \tilde\Delta_{pa}^{ij})^2 + \eta^2} + \frac{1}{2} \sum_{iab} \langle p i \| a b\rangle^2 \frac{\eta}{(\omega + \tilde\Delta_{pi}^{ab})^2 + \eta^2}
+\end{align}
+where we identify $\tilde{\epsilon_{pi}^{ab}} = \tilde{\varepsilon}_a + \tilde{\varepsilon}_b - \tilde{\varepsilon}_p - \tilde{\varepsilon}_i-i\eta$ and $\tilde{\epsilon}_{pa}^{ij} = \tilde{\varepsilon}_i + \tilde{\varepsilon}_j - \tilde{\varepsilon}_p - \tilde{\varepsilon}_a - i\eta$
+as the bosonic frequencies in the quasi-boson approximation due to the BWs2 partition.
+%  Putting this together, the effective self-energy is
+% \begin{equation}
+%     \Sigma_{\mathrm{eff},pp}(\omega + \tilde{\varepsilon}_p) = 
+%     \frac{1}{2} \sum_{iab} \langle p i \| a b\rangle^2 \frac{1}{\omega - \tilde{\epsilon}_{pi}^{ab}} 
+%     + \frac{1}{2} \sum_{ija} \langle p a \| i j\rangle^2 \frac{\omega}{\tilde{\epsilon}_{pa}^{ij}(\omega - \tilde{\epsilon}_{pa}^{ij})}.
+% \end{equation}
+Using the partial fraction decomposition\footnote{
+\begin{equation}
+    \frac{1}{\omega^2(\omega - \epsilon)} = \frac{1}{\epsilon^2} \frac{1}{\omega - \epsilon} - \frac{1}{\epsilon^2} \frac{1}{\omega} - \frac{1}{\epsilon} \frac{1}{\omega^2}
+\end{equation}}
+and the time-domain integral identities\footnote{
+\begin{align}
+    i \int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{1}{\omega - \epsilon} &= e^{-i\epsilon t} \\
+    i \int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{1}{\omega} &= 1 \\
+    i \int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{1}{\omega^2} &= -it,
+\end{align}}
+we find for the 2p1h term:
+% Now, integral to be solved for the 2p1h term is:
+\begin{align}
+    I_{2p1h}(t) &= i \int \frac{d\omega}{2\pi} \frac{e^{-i\omega t}}{\omega^2} \frac{1}{\omega - \tilde{\epsilon}_{pi}^{ab}} \\
+    &= i \int \frac{d\omega}{2\pi} e^{-i\omega t} \left( \frac{1}{(\tilde{\epsilon}_{pi}^{ab})^2} \frac{1}{\omega - \tilde{\epsilon}_{pi}^{ab}} - \frac{1}{(\tilde{\epsilon}_{pi}^{ab})^2} \frac{1}{\omega} - \frac{1}{\tilde{\epsilon}_{pi}^{ab}} \frac{1}{\omega^2} \right) \\
+ &= \frac{1}{(\tilde{\epsilon}_{pi}^{ab})^2} e^{-i\tilde{\epsilon}_{pi}^{ab}t} - \frac{1}{(\tilde{\epsilon}_{pi}^{ab})^2}(1) - \frac{1}{\tilde{\epsilon}_{pi}^{ab}}(-it) \nonumber \\
+    &= \frac{e^{-i\tilde{\epsilon}_{pi}^{ab} t} + i\tilde{\epsilon}_{pi}^{ab} t - 1}{(\tilde{\epsilon}_{pi}^{ab})^2}
+\end{align}
+The 2h1p term can be integrated as:
+% The integral for the 2h1p term is:
+\begin{align}
+    I_{2h1p} &= i \int \frac{d\omega}{2\pi} \frac{e^{-i\omega t}}{\omega^2} \frac{\omega}{\tilde{\epsilon}_{pa}^{ij}(\omega - \tilde{\epsilon}_{pa}^{ij})} \\
+     &= i \int \frac{d\omega}{2\pi} \frac{e^{-i\omega t}}{\tilde\varepsilon_{pa}^{ij}} \left( \frac{1}{\omega\left(\omega - \tilde{\epsilon}_{pa}^{ij}\right)} \right) \\
+        &= i \int \frac{d\omega}{2\pi} e^{-i\omega t} \frac{1}{(\tilde{\epsilon}_{pa}^{ij})^2} \left( \frac{1}{\omega - \tilde{\epsilon}_{pa}^{ij}} - \frac{1}{\omega} \right) \\
+     &= \frac{1}{(\tilde{\epsilon}_{pa}^{ij})^2} \left( e^{-i\tilde{\epsilon}_{pa}^{ij} t} - 1 \right)
+%  \frac{1}{\omega \tilde{\epsilon}_{pa}^{ij}(\omega - \tilde{\epsilon}_{pa}^{ij})}
+\end{align}
+where in the intermediate steps, we use the partial fraction decomposition\footnote{
+\begin{equation}
+    \frac{1}{\omega(\omega-\epsilon)} = \frac{1}{\epsilon} \left( \frac{1}{\omega - \epsilon} - \frac{1}{\omega} \right)
+\end{equation}
+} and the time-domain integral identities mentioned above.
+Combining the two yields the final form:
+\begin{equation}
+    C_{pp}^{\mathrm{BWs2}}(t) = 
+    \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\tilde{\epsilon}_{p i}^{a b}\right)^2}\left(e^{-i \tilde{\epsilon}_{p i}^{a b} t} +i \tilde{\epsilon}_{p i}^{a b} t -1 \right) 
+    + \frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\tilde{\epsilon}_{p a}^{i j}\right)^2} \left(e^{-i \tilde{\epsilon}_{p a}^{i j} t} - 1 \right).
+\end{equation}
+Thus, the retarded Green's function in the BWs2+C method will read
+\begin{equation}
+G_{pp}^{\mathrm{BWs2+C}}(t) = -i \theta(t) e^{-i\tilde{\varepsilon}_p t} \exp\left\{C_{pp}^{\mathrm{BWs2}}(t)\right\}.
+\end{equation}
+This is to be compared with the usual second order cumulant, which reads
+\begin{align}
+C_{pp}^{(2)}(t) & = \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\epsilon_{p i}^{a b}\right)^2}\left(e^{-i \epsilon_{p i}^{a b} t} +i \epsilon_{p i}^{a b} t -1 \right) +\frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\epsilon_{p a}^{i j}\right)^2} \left(e^{-i \epsilon_{p a}^{i j} t} +i \epsilon_{p a}^{i j} t -1 \right)
+\end{align}
+There are two differences. First, the quasi-boson frequencies are different due to the different choice of partition. Second, the 2h1p term in the BWs2 cumulant does not have the linear term in $t$ that is present in the usual second order cumulant. This is because the BWs2 partition removed the 2h1p contribution in $\Sigma_{\mathrm{eff}}$ from the Dyson equation. \emph{It will be interesting to look at the implications of this.}
