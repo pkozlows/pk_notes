@@ -2772,9 +2772,31 @@ G^{MP2+C} = G^{HF} e^{C^{MP2}}
 \end{equation}
 where $C^{MP2}$ is given by eqn.~\ref{eq:cumulant_2nd_2} with the single particle energies and two-electron integrals evaluated at the HF level. However, we have seen that doing it this way introduces issues for higher system sizes in metals, where MP2 is known to diverge.
 \subsection{SRG-MP2+C}
-Here we start with $G_0 = G^{SRG-MP2}$. This means the single particle energies are dressed, but the two-electron integrals remain the same as in HF. So, we are solving
+Here, I tried $G_0 = G^{SRG-MP2}$. That is, I was solving
 \begin{equation}G^{SRG-MP2+C} = G^{SRG-MP2} e^{C^{SRG-MP2}}\end{equation}
-where $C^{SRG-MP2}$ is given by eqn.~\ref{eq:cumulant_2nd_2} with the single particle energies evaluated at the SRG-MP2 level and the two-electron integrals evaluated at the HF level.
+where $C^{SRG-MP2}$ was determined as
+\begin{align}
+  C_{pp}^{SRG-MP2}(t)  &= \frac{1}{2}\sum_{iab} \frac{\left< pi \left| \right| ab \right>^2}{\left(\varepsilon_{pi}^{ab}\right)^2}
+\left(e^{-i \varepsilon_{pi}^{ab} t} +i \varepsilon_{pi}^{ab} t -1 \right)
++\frac{1}{2}\sum_{ija} \frac{\left< pa \left| \right| ij \right>^2}{\left(\varepsilon_{pa}^{ij}\right)^2}
+\left(e^{-i \varepsilon_{pa}^{ij} t} +i \varepsilon_{pa}^{ij} t -1 \right) 
+\end{align}
+where $\varepsilon_{pi}^{ab} = \varepsilon_{a}+\varepsilon_{b}-\varepsilon_{p}-\varepsilon_{i} - i\eta$ and $\varepsilon_{pa}^{ij} = \varepsilon_{i}+\varepsilon_{j}-\varepsilon_{p}-\varepsilon_{a} - i\eta$ was generated from combinations of the dressed SRG-MP2 single particle energies. This formulation does \emph{not} have firm theoretical grounds. To see why, consider that we derived the second-order cumulant by defining
+\begin{align}
+G(t) &= G_0(t) + \iint dt_1 dt_2 G_0(t-t_1) \Sigma(t_1 - t_2) G(t_2) \\
+&= G_0(t) + \iint dt_1 dt_2 G_0(t-t_1) \Sigma(t_1 - t_2) G_0(t_2) + \ldots
+\end{align}
+and 
+\begin{align}
+G(t) & = G_0(t) e^{C(t)} \\
+& = G_0(t) \left(1 + C(t) + \ldots\right)
+\end{align}
+And then we equated the terms linear in $\Sigma$ and $C$ to get the expression for $C$ in terms of $\Sigma$. If we wanted to use $G_0 = G^{SRG-MP2}$, then the self energy that we would be using is the one generated from $G^{SRG-MP2}$, which is not the same as the second order self energy generated from $G^{HF}$. That is, it is no longer true that
+\begin{equation}
+G_0(t) C(t) = \iint dt_1 dt_2 G_0(t-t_1) \Sigma^{(2)}[G^{SRG-MP2}](t_1 - t_2) G_0(t_2)
+\end{equation}
+up to second order in the bare Coulomb interaction. BWs2+C is more rigorously defined, as we will see below.
+
 \subsection{BWs2+C}
 % \section{QPMP2: Goldstone Self-Energy and Ground-State Correlation}
 

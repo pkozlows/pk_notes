@@ -273,13 +273,254 @@ where $S_{L M}(\mathbf{q}) = \sum_\nu R_\nu^L(\mathbf{q}) R_\nu^M(\mathbf{q})= \
 \subsubsection{Scaling comments}
 Getting the RI coefficients into the MO basis scales as $O(N_{\text{orb}}^3N_{\text{aux}}N_{\mathbf{k}})$, the determination of the overlap matrix scales as $O(N_oN_vN_{\text{aux}}^2N_{\mathbf{k}}^2)$, and then computing the AB basis will cost $O(N_{\text{AB}}N_{\text{aux}}^2N_{\mathbf{k}})$. In order to construct the transformed electron boson Hamiltonian in the AB basis we first need to solve the symmetrized dRPA eigenvalue problem 
 
-%  $\hat{b}_\nu(\mathbf{q}) \approx \sum_{L} R_\nu^L(\mathbf{q}) \hat{b}_L(\mathbf{q})$ where $\hat{b}_L(\mathbf{q})$ are the auxiliary bosons in the $\mathbf{q}$-dependent basis. The orthogonalization and AB construction also becomes $\mathbf{q}$-dependent:
-% The orthogonalization and AB construction also becomes $\mathbf{q}$-dependent:
-% \begin{align}
-% S_{L M}(\mathbf{q}) &= \sum_\nu R_\nu^L(\mathbf{q}) R_\nu^M(\mathbf{q}) \\
-% C_\nu^Q(\mathbf{q}) &= \sum_{L M} R_\nu^L(\mathbf{q})\left[S^{-1 / 2}(\mathbf{q})\right]_{L M} P_M^Q
-% \end{align} 
-% % In a periodic setting, the Rl expansion coefficients become $\mathbf{k}$-dependent:
+\section{ECC on the electron-boson Hamiltonian}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Extended Coupled Cluster}
+\label{sec:ECC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The extended CC energy bi-functional, with $\hat{T} = \sum_q t_q \hat{\tau}_q$ and $\hat{Z} = \sum_q z_q \hat{\tau}_q^\dag$, is given by
+\begin{align}
+	E_{\text{ECC}} &= \langle\Phi_0| e^{\hat{Z}} e^{-\hat{T}} \hat{H} e^{\hat{T}} e^{-\hat{Z}} |\Phi_0\rangle \\
+	&= \langle\Phi_0| e^{\hat{Z}} \bar{H} e^{-\hat{Z}} |\Phi_0\rangle
+\end{align}
+where $\bar{H} = e^{-\hat{T}} \hat{H} e^{\hat{T}}$ is the similarity-transformed Hamiltonian. Differentiating the functional with respect to $z_q$ gives
+\begin{align}
+ 0&=	\frac{\partial E_{\text{ECC}}}{\partial z_q} \\
+&=\langle\Phi_0| \hat{\tau}_q^\dag e^{\hat{Z}} \bar{H} e^{-\hat{Z}} |\Phi_0\rangle - \langle\Phi_0| e^{\hat{Z}} \bar{H} e^{-\hat{Z}} \hat{\tau}_q^\dag |\Phi_0\rangle \\
+ &=\langle\Phi_0| \hat{\tau}_q^\dag e^{\hat{Z}} \bar{H} e^{-\hat{Z}} |\Phi_0\rangle  \\
+&=\langle\Phi_q| e^{\hat{Z}} \bar{H} |\Phi_0\rangle \\
+&=\langle\Phi_q| e^{\hat{Z}} e^{-\hat{T}} \hat{H} e^{\hat{T}} |\Phi_0\rangle.
+\end{align}
+Differentiating with respect to $t_q$ gives
+\begin{align}
+0&=	\frac{\partial E_{\text{ECC}}}{\partial t_q} \\
+&=\langle\Phi_0| e^{\hat{Z}} \frac{\partial \bar{H}}{\partial t_q} e^{-\hat{Z}} |\Phi_0\rangle \\
+&=\langle\Phi_0| e^{\hat{Z}} \left(e^{-\hat{T}} [\hat{H}, \hat{\tau}_q] e^{\hat{T}}\right) e^{-\hat{Z}} |\Phi_0\rangle \\
+&=\langle\Phi_0| e^{\hat{Z}} e^{-\hat{T}} [\hat{H}, \hat{\tau}_q] e^{\hat{T}} |\Phi_0\rangle
+\end{align}
+This framework forces the $t$- and $z$-amplitudes to be solved simultaneously. Restricting to double excitations, that is, $\hat{T} = \hat{T}_2$
+, we can rewrite the ECC energy functional as
+\begin{align}
+    E_{\text{ECC}} &\approx \langle\Phi_0| e^{\hat{Z}} e^{-\hat{T}_2} \hat{H} e^{\hat{T}_2} e^{-\hat{Z}} |\Phi_0\rangle \\
+&= \langle\Phi_0| e^{\hat{Z}} e^{-\hat{T}_2} \hat{H} e^{\hat{T}_2}  |\Phi_0\rangle \\
+    & = \langle\Phi_0| e^{\hat{Z}} \left(\hat{H} e^{\hat{T}_2}\right)_{\text{c}} |\Phi_0\rangle \label{eq:ECC_energy_expansion}
+    \\
+    & = \langle\Phi_0| e^{\hat{Z}} \left(\hat{H} + \hat{H} \hat{T}_2 + \frac{1}{2} \hat{H} \hat{T}_2^2 + \frac{1}{6} \hat{H} \hat{T}_2^3 + \frac{1}{24} \hat{H} \hat{T}_2^4 \right)_{\text{c}} |\Phi_0\rangle \label{eq:ECC_energy_expansion_full}
+    \\
+    & = \langle\Phi_0| \hat{H} 
+    + \hat{Z} \left(\hat{H} + \hat{H} \hat{T}_2 + \frac{1}{2} \hat{H} \hat{T}_2^2 \right)_{\text{c}} \label{eq:ECC_energy_expansion_full_Z}
+    \\
+    & \quad + \frac{1}{2} \hat{Z}^2 \left(\frac{1}{2} \hat{H} \hat{T}_2^2 + \frac{1}{6} \hat{H} \hat{T}_2^3\right)_{\text{c}}
+    + \frac{1}{6} \hat{Z}^3 \left(\frac{1}{24} \hat{H} \hat{T}_2^4 \right)_{\text{c}}
+     |\Phi_0\rangle \nonumber
+\end{align}
+Note that we can get to \ref{eq:ECC_energy_expansion} by performing the BCH expansion of $e^{-\hat{T}_2} \hat{H} e^{\hat{T}_2}$ and then, due to the linked cluster theorem, only keeping the connected terms survive. Then, we can get to \ref{eq:ECC_energy_expansion_full} because $\hat{H}$ contains at most two-body interactions, so the series naturally truncates at the fourth power of $\hat{T}_2$ in the energy expression. Finally, we can get to \ref{eq:ECC_energy_expansion_full_Z} by expanding $e^{\hat{Z}}$, but once again only keeping the terms that survive the vacuum expectation value.
+\subsubsection{Comparison with UCC}
+The ECC form, $e^{\hat{Z}} e^{-\hat{T}} \hat{H} e^{\hat{T}} e^{-\hat{Z}}$, can be recast as $e^{-\hat{t}} \hat{H} e^{\hat{t}}$ with $\hat{t} = \hat{T} - \hat{Z} + \frac{1}{2}\left[\hat{Z},\hat{T}\right] + \cdots$, whereas UCC has $\hat{t} = \hat{T} - \hat{T}^\dag$.
+In UCC, the anti-Hermiticity condition $\hat{t}^\dag = -\hat{t}$ ensures a unitary transformation.
+In contrast, ECC does not enforce this constraint: $\hat{Z}$ is independent of $\hat{T}$, making $\hat{t}$ generally non-Hermitian, offering greater flexibility at the cost of Hermiticity.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{ECC on the electron-boson Hamiltonian}
+\label{sec:ECC-GW}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{equation} \label{eq:HeB}
+	\hat{H}_{\text{eB}} = \hat{H}_{\text{e}} + \hat{H}_{\text{B}} + \hat{V}_{\text{eB}}
+\end{equation}
+where 
+\begin{align}
+	\hat{H}_{\text{e}} 
+	& = \sum_{pq} f_{pq} \hat{a}^\dagger_p \hat{a}_q
+	\\
+	\label{eq:HB}
+	\hat{H}_{\text{B}}
+	& = \sum_{\mu\nu} A_{\mu\nu} \hat{b}^\dagger_{\mu} \hat{b}_{\nu} 
+	+ \frac{1}{2} \sum_{\mu\nu} B_{\mu\nu} \left( \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} + \hat{b}_{\mu} \hat{b}_{\nu} \right)
+	\\
+	\hat{V}_{\text{eB}} 
+	& = \sum_{pq\nu} V_{pq,\nu}  \hat{a}^\dagger_p \hat{a}_q \left( \hat{b}^\dagger_{\nu} + \hat{b}_{\nu} \right)
+\end{align}
+We can perform the double similarity transformation on $\hat{H}_{\mathrm{eB}}$ as
+\begin{equation}
+\begin{split}
+	\bar{\bar{H}}_{\mathrm{eB}} 
+	& = e^{\hat{Z}} e^{-\hat{T}} \hat{H}_{\mathrm{eB}} e^{\hat{T}} e^{-\hat{Z}}  
+	\\
+	& = \bar{\hat{H}}_{\mathrm{eB}} + [\hat{Z}, \bar{\hat{H}}_{\mathrm{eB}}]
+	\\ 
+	& = \hat{H}_{\mathrm{e}} + \bar{\bar{\hat{H}}}_{\mathrm{B}} + \bar{\bar{V}}_{\mathrm{eB}},
+\end{split}
+\end{equation}
+where none of the similarity transformations effected $\hat{H}_{\mathrm{e}}$ because $\hat{T}$ and $\hat{Z}$ are purely (quasi)bosonic operators. 
+\subsubsection{Working out $\bar{\bar{\hat{V}}}_{\mathrm{eB}}$}
+Using the first line of the footnote\footnote{\label{foot:commutators}
+	\begin{align}
+	[\hat{b}_\nu, \hat{T}] = \sum_\lambda t_{\nu \lambda} \hat{b}^\dagger_\lambda; &\quad [\hat{b}^\dagger_\nu, \hat{T}] = 0 \\
+	[\hat{Z}, \hat{b}^\dagger_\nu] = \sum_\mu z_{\nu\mu} \hat{b}_\mu; &\quad [\hat{Z}, \hat{b}_\nu] = 0
+	\end{align}},
+the first similarity transformation gives
+\begin{equation}
+\begin{split}	
+	\bar{V}_{\mathrm{eB}} 
+	& = e^{-\hat{T}} \hat{V}_{\mathrm{eB}} e^{\hat{T}} \\
+	% & = e^{-\hat{T}} \left( \sum_{pq} \sum_{\nu} V_{pq,\nu} \hat{a}^\dagger_p \hat{a}_q \left(\hat{b}^\dagger_{\nu} + \hat{b}_{\nu}\right) \right) e^{\hat{T}} \\
+	& = \sum_{pq} \sum_{\nu} V_{pq,\nu} \hat{a}^\dagger_p \hat{a}_q e^{-\hat{T}} \left(\hat{b}^\dagger_{\nu} + \hat{b}_{\nu}\right) e^{\hat{T}} \\
+& = \sum_{pq} \sum_{\nu} V_{pq,\nu} \hat{a}^\dagger_p \hat{a}_q \left(\hat{b}^\dagger_{\nu} + \hat{b}_{\nu} + \sum_\lambda t_{\nu \lambda} \hat{b}^\dagger_\lambda\right) \\
+& = \sum_{pq\nu} V_{pq,\nu} \hat{a}^\dagger_p \hat{a}_q \left(\hat{b}^\dagger_{\nu} + \hat{b}_{\nu}\right) + \sum_{pq\nu} \sum_\lambda V_{pq,\lambda} t_{\lambda \nu} \hat{a}^\dagger_p \hat{a}_q \hat{b}^\dagger_{\nu}
+\end{split}
+\end{equation}
+Then, using the second line of \ref{foot:commutators}, 
+ the second similarity transformation gives
+\begin{align}
+	\bar{\bar{V}}_{\mathrm{eB}} 
+	% & = e^{\hat{Z}} e^{-\hat{T}} \hat{V}_{\mathrm{eB}} e^{\hat{T}} e^{-\hat{Z}}  \\
+	& = \sum_{pq\nu} V_{pq,\nu} \hat{a}^\dagger_p \hat{a}_q e^{\hat{Z}} \left(\hat{b}^\dagger_{\nu} + \hat{b}_{\nu}\right) e^{-\hat{Z}} + \sum_{pq\nu} \sum_\lambda V_{pq,\lambda} t_{\lambda \nu} \hat{a}^\dagger_p \hat{a}_q e^{\hat{Z}} \hat{b}^\dagger_{\nu} e^{-\hat{Z}} \\
+	& = \sum_{pq\nu} V_{pq,\nu} \hat{a}^\dagger_p \hat{a}_q \left(\hat{b}^\dagger_{\nu} + \hat{b}_{\nu} + \sum_\mu z_{\nu\mu} \hat{b}_\mu\right) + \sum_{pq\nu} \sum_\lambda V_{pq,\lambda} t_{\lambda \nu} \hat{a}^\dagger_p \hat{a}_q \left(\hat{b}^\dagger_{\nu} + \sum_\mu z_{\nu\mu} \hat{b}_\mu\right) \\ 
+	& = \sum_{pq\nu} V_{pq,\nu} \hat{a}^\dagger_p \hat{a}_q (\hat{b}^\dagger_{\nu} + \hat{b}_{\nu}) + \sum_{pq\nu} \left( \sum_\lambda V_{pq,\lambda} t_{\lambda \nu} \right) \hat{a}^\dagger_p \hat{a}_q \hat{b}^\dagger_{\nu} + \sum_{pq\nu} \left[ \sum_\lambda V_{pq,\lambda} z_{\lambda \nu}  + \sum_{\mu \lambda}  V_{pq,\lambda} t_{\lambda \mu} z_{\mu \nu} \right] \hat{a}^\dagger_p \hat{a}_q \hat{b}_{\nu}
+\end{align}
+\subsubsection{Working out $\bar{\bar{\hat{H}}}_{\mathrm{B}}$}
+Because $\hat{H}_{\mathrm{B}}$ is quadratic, the BCH expansion associated with the first similarity transformation truncates exactly at second order, yielding
+\begin{align}
+	\bar{\hat{H}}_{\mathrm{B}} 
+	& = \hat{H}_{\mathrm{B}} + [\hat{H}_{\mathrm{B}}, \hat{T}] + \frac{1}{2} [[\hat{H}_{\mathrm{B}}, \hat{T}], \hat{T}]
+\end{align}
+Recalling that $\hat{H}_{\mathrm{B}} = \sum_{\mu\nu} A_{\mu\nu} \hat{b}^\dagger_{\mu} \hat{b}_{\nu} + \frac{1}{2} \sum_{\mu\nu} B_{\mu\nu} \left( \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} + \hat{b}_{\mu} \hat{b}_{\nu} \right)$ and $\hat{T} = \frac{1}{2} \sum_{\mu\nu} t_{\mu\nu} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu}$,
+ we evaluate
+\begin{align}
+	[\hat{H}_{\mathrm{B}}, \hat{T}] 
+	& = \sum_{\mu\nu} A_{\mu\nu} \hat{b}^\dagger_\mu [\hat{b}_\nu, \hat{T}] + \frac{1}{2} \sum_{\mu\nu} B_{\mu\nu} [\hat{b}^\dagger_\mu \hat{b}^\dagger_\nu, \hat{T}] + \frac{1}{2} \sum_{\mu\nu} B_{\mu\nu} [\hat{b}_\mu \hat{b}_\nu, \hat{T}] \\
+	& = \sum_{\mu\nu\lambda} A_{\mu\nu} t_{\nu\lambda} \hat{b}^\dagger_\mu \hat{b}^\dagger_\lambda + 0+\frac{1}{2} \sum_{\mu\nu} B_{\mu\nu} ( \hat{b}_\mu [\hat{b}_\nu, \hat{T}] + [\hat{b}_\mu, \hat{T}] \hat{b}_\nu ) \\
+	& = \sum_{\mu\nu\lambda} A_{\mu\nu} t_{\nu\lambda} \hat{b}^\dagger_\mu \hat{b}^\dagger_\lambda +\frac{1}{2} \sum_{\mu\nu\lambda} B_{\mu\nu} t_{\nu\lambda} \hat{b}_\mu \hat{b}^\dagger_\lambda + \frac{1}{2} \sum_{\mu\nu\lambda} B_{\mu\nu} t_{\mu\lambda} \hat{b}^\dagger_\lambda \hat{b}_\nu \\
+	& = \frac{1}{2} \sum_{\mu\lambda} (\mathbf{At} + \mathbf{tA})_{\mu\lambda} \hat{b}^\dagger_\mu \hat{b}^\dagger_\lambda + \frac{1}{2} \sum_{\mu\nu} B_{\mu\nu} t_{\nu\mu} + \frac{1}{2}\sum_{\mu\nu} (\sum_\lambda t_{\nu\lambda} B_{\lambda\mu}) \hat{b}^\dagger_\mu \hat{b}_\nu +  \frac{1}{2} \sum_{\mu\nu\lambda} B_{\mu\nu} t_{\mu\lambda} \hat{b}^\dagger_\lambda \hat{b}_\nu \\
+	& = \frac{1}{2} \sum_{\mu\lambda} (\mathbf{At} + \mathbf{tA})_{\mu\lambda} \hat{b}^\dagger_\mu \hat{b}^\dagger_\lambda + \frac{1}{2} \operatorname{Tr}(\mathbf{Bt}) + \sum_{\mu\nu} (\mathbf{Bt})_{\mu\nu} \hat{b}^\dagger_\mu \hat{b}_\nu
+\end{align}
+Next, consider that only the term containing $\hat{b}^\dagger \hat{b}$ in the first commutator will have a non-vanishing commutator with $\hat{T}$, so 
+\begin{align}
+	\frac{1}{2} [[\hat{H}_{\mathrm{B}}, \hat{T}], \hat{T}] 
+	& = \frac{1}{2} \sum_{\mu\nu} (\mathbf{Bt})_{\mu\nu} [\hat{b}^\dagger_\mu \hat{b}_\nu, \hat{T}] \\
+	& = \frac{1}{2} \sum_{\mu\nu\lambda} (\mathbf{Bt})_{\mu\nu} t_{\nu\lambda} \hat{b}^\dagger_\mu \hat{b}^\dagger_\lambda
+\end{align}
+\emph{Note that any nested commutators of higher order must involve $[\hat{b}^\dagger \hat{b}^\dagger, \hat{T}]=0$, which is why the BCH expansion truncates at second order for quadratic Hamiltonians.}
+We can express the final result as
+\begin{equation} \label{eq:bH_B}
+\begin{split}
+	\bar{\hat{H}}_{\mathrm{B}} 
+	& = \frac{1}{2} \sum_{\lambda \sigma} B_{\lambda \sigma} t_{\lambda \sigma} + \sum_{\mu \nu} \bar{A}_{\mu \nu} \hat{b}^\dagger_{\mu} \hat{b}_{\nu}  + \frac{1}{2} \sum_{\mu \nu} \bar{B}_{\mu \nu} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} + \frac{1}{2} \sum_{\mu \nu} B_{\mu \nu} \hat{b}_{\mu} \hat{b}_{\nu} 
+\end{split}
+\end{equation}
+with
+\begin{subequations}
+\begin{align}
+	\bar{A}_{\mu \nu} & 
+	= A_{\mu \nu}
+	+ \sum_{\lambda}  t_{\nu \lambda} B_{\lambda \mu}
+	\\
+	\bar{B}_{\mu \nu} & 
+	= B_{\mu \nu} + \sum_{\lambda} A_{\mu \lambda} t_{\lambda \nu} 
+	+ \sum_\lambda t_{\mu \lambda} A_{\lambda \nu} 
+	+ \sum_{\lambda \sigma} t_{\mu \lambda } B_{\lambda \sigma} t_{\sigma \nu}
+\end{align}
+\end{subequations}
+ The second similarity transformation will also truncate at second order, but we will not work it out and instead just present the final result which reads
+\begin{equation} \label{eq:bbH_B}
+\begin{split}
+	\bar{\bar{\hat{H}}}_{\mathrm{B}} 
+	& = \bar{\hat{H}}_{\mathrm{B}} + [\hat{Z}, \bar{\hat{H}}_{\mathrm{B}}] + \frac{1}{2} [\hat{Z}, [\hat{Z}, \bar{\hat{H}}_{\mathrm{B}}]]
+	\\ 
+	&\boxed{ = \frac{1}{2} \sum_{\lambda \sigma} \bar{B}_{\lambda \sigma} z_{\lambda \sigma}
+	+ \sum_{\mu \nu} \bar{\bar{A}}_{\mu \nu} \hat{b}^\dagger_{\mu} \hat{b}_{\nu}  + \frac{1}{2} \sum_{\mu \nu} \bar{B}_{\mu \nu} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} 
+	+ \frac{1}{2} \sum_{\mu \nu} \bar{\bar{B}}_{\mu \nu} \hat{b}_{\mu} \hat{b}_{\nu} }
+\end{split}
+\end{equation}
+where
+\begin{subequations}
+\begin{align}
+	\bar{\bar{A}}_{\mu \nu} & 
+	= \bar{A}_{\mu \nu} 
+	+ \sum_{\lambda}  z_{\nu \lambda} \bar{B}_{\lambda \mu}
+	\\
+	\bar{\bar{B}}_{\mu \nu} & 
+	= B_{\mu \nu} + \sum_{\lambda} \bar{A}_{\mu \lambda} z_{\lambda \nu} + \sum_\lambda z_{\mu \lambda} \bar{A}_{\lambda \nu} + \sum_{\lambda \sigma} z_{\mu \lambda } \bar{B}_{\lambda \sigma} z_{\sigma \nu}
+\end{align}
+\end{subequations}
+
+Let $|0_{\mathrm{B}}\rangle$ denote the bosonic reference vacuum.
+The right amplitude equations, obtained as $\langle 0_{\mathrm{B}}| \hat{b}_{\mu} \hat{b}_{\nu} \bar{\bar{\hat{H}}}_{\mathrm{B}} |0_{\mathrm{B}}\rangle = 0$, yield the condition $\bar{B}_{\mu \nu} = 0$, which is equivalent to the (quadratic) Riccati equation in Eq.~\eqref{eq:right_ricatti}.
+The left amplitude equations, $\langle 0_{\mathrm{B}}| \bar{\bar{\hat{H}}}_{\mathrm{B}} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} |0_{\mathrm{B}}\rangle = 0$, give $\bar{\bar{B}}_{\mu \nu} = 0$, which reduces to a set of linear equations in $z_{\mu\nu}$ once $\bar{B}_{\mu \nu} = 0$:
+\begin{equation}
+	B_{\mu \nu} + \sum_{\lambda} \bar{A}_{\mu \lambda} z_{\lambda \nu} + \sum_\lambda z_{\mu \lambda} \bar{A}_{\lambda \nu} = 0
+\end{equation}
+Note that, although left- and right-amplitude equations are generally coupled, they are completely decoupled in the present case. 
+
+Once these two conditions are satisfied, the double similarity-transformed bosonic Hamiltonian simplifies to
+\begin{equation}
+		\bar{\bar{\hat{H}}}_{\mathrm{B}} = \sum_{\mu \nu} \bar{A}_{\mu \nu} \hat{b}^\dagger_{\nu} \hat{b}_{\mu} + \frac{1}{2} \sum_{\lambda \sigma} B_{\lambda \sigma} t_{\lambda \sigma} 
+\end{equation}
+where all non-number-conserving terms have been eliminated.
+
+Having established the ECC treatment of the bosonic Hamiltonian, we can now turn to the full electron-boson Hamiltonian $\hat{H}_{\mathrm{eB}}$ given in Eq.~\eqref{eq:HeB}.
+The double similarity-transformed electron-boson Hamiltonian reads
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{EOM on the ECC electron-boson Hamiltonian}
+\label{sec:EOMECC-GW}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Building on the ECC electron-boson Hamiltonian introduced in Sec.~\ref{sec:ECC-GW}, we next derive the EOM formulation for charged excitations.
+Within the present ECC-based formalism, the excitation operator $\bar{\bar{R}}^{(m)}$ for the $m$th excited state is defined as 
+\begin{equation}
+\begin{split}
+    \bar{\bar{R}}^{(m)}
+		& = e^{\hat{T}} e^{-\hat{Z}} \hat{R}^{(m)} e^{\hat{Z}} e^{-\hat{T}}\\
+		& = \sum_M R^{(m)}_M \bar{\bar{c}}_M 
+		= \sum_M R^{(m)}_M e^{\hat{T}} e^{-\hat{Z}} \hat{c}_M  e^{\hat{Z}} e^{-\hat{T}} 
+		\\ 
+        & = \sum_i r^{(m)}_i \hat{a}_i + \sum_{i\nu} r^{(m)}_{i \nu } \bar{\bar{b}}^\dagger_{\nu} \hat{a}_i
+        + \sum_a r^{(m)}_a \hat{a}_a  + \sum_{a\nu} r^{(m)}_{\nu a  } \bar{\bar{b}}_{\nu} \hat{a}_a
+		\label{eq:ExcOp}
+\end{split}
+\end{equation}
+where $\hat{c}_M$ denotes an excitation operator associated with the $M$th excitation process [see Eq.~\eqref{eq:GW_eigvec}].
+The various excitation channels are expressed in terms of double similarity-transformed bosonic creation and annihilation operators,
+\begin{subequations}
+\begin{align}
+	\bar{\bar{b}}^\dagger_{\nu} & = e^{\hat{T}} e^{-\hat{Z}} \hat{b}^\dagger_{\nu} e^{\hat{Z}} e^{-\hat{T}} 
+	\\ 
+	\bar{\bar{b}}_{\nu} & = e^{\hat{T}} e^{-\hat{Z}} \hat{b}_{\nu} e^{\hat{Z}} e^{-\hat{T}}
+\end{align}
+\end{subequations}
+as well as the corresponding left and right reference states in the combined fermionic-bosonic space,
+\begin{subequations}
+\begin{align}
+	|0_{\mathrm{e}}\bar{\bar{0}}_{\mathrm{B}}\rangle & = e^{\hat{T}} e^{-\hat{Z}} |0_{\mathrm{e}}0_{\mathrm{B}}\rangle 
+	\\
+	\langle 0_{\mathrm{e}}\bar{\bar{0}}_{\mathrm{B}}| & = \langle 0_{\mathrm{e}}0_{\mathrm{B}}| e^{\hat{Z}} e^{-\hat{T}}
+\end{align}
+\end{subequations}
+The use of these transformed creation and annihilation operators is essential to ensure that the EOM formalism satisfies the required ``killer'' conditions.
+
+The EOM eigenvalue problem becomes 
+\begin{equation}
+	\langle 0_{\mathrm{e}}\bar{\bar{0}}_{\mathrm{B}}| [\bar{\bar{c}}^\dagger_M, [\hat{H}_{\mathrm{eB}}, \bar{\bar{R}}^{(m)}]] |0_{\mathrm{e}}\bar{\bar{0}}_{\mathrm{B}}\rangle 
+	= \langle 0_{\mathrm{e}}\bar{\bar{0}}_{\mathrm{B}}| [\bar{\bar{c}}^\dagger_M, \bar{\bar{R}}^{(m)}] |0_{\mathrm{e}}\bar{\bar{0}}_{\mathrm{B}}\rangle E^{(m)}
+	\label{eq:DoubleOp}
+\end{equation}
+with $E^{(m)}$ denoting the energy of the $m$th charged excited state, and $\bar{\bar{c}}^\dagger_M$ to the $M$th excitation/deexcitation process [see Eq.~\eqref{eq:ExcOp}], respectively.
+Equation \eqref{eq:DoubleOp} can be simplified to 
+\begin{equation}
+	\langle 0_{\mathrm{e}}{0}_{\mathrm{B}}| [\hat{c}^\dagger_M, [\bar{\bar{H}}_{\mathrm{eB}}, \hat{R}^{(m)}]] |0_{\mathrm{e}}0_{\mathrm{B}}\rangle 
+	= \langle 0_{\mathrm{e}}{0}_{\mathrm{B}}| [\hat{c}^\dagger_M, \hat{R}^{(m)}] |0_{\mathrm{e}}0_{\mathrm{B}}\rangle E^{(m)}
+\end{equation}
+and the resulting EOM eigenvalue problem can be written as 
+\begin{equation} \label{eq:EOMECCeB}
+	\mathbf{H}^{\text{EOM}} \cdot \mathbf{R} = \mathbf{R} \cdot \mathbf{E}
+\end{equation}
+The equivalence with the $G_0W_0$ quasiparticle energies is established analytically in Sec.~\ref{sec:EqG0W0}, identifying the matrix elements of the effective Hamiltonian $\mathbf{H}^{\text{EOM}}$ with those of the $GW$ supermatrix $\mathbf{H}^{GW}$ defined in Eq.~\eqref{eq:supermatrix}.
+
+Details regarding the determination of analytic properties within the ECC treatment of the electron-boson Hamiltonian can be found in Ref.
 
 
 
