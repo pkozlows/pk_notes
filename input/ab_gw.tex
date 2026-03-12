@@ -285,20 +285,21 @@ The extended CC energy bi-functional, with $\hat{T} = \sum_q t_q \hat{\tau}_q$ a
 	E_{\text{ECC}} &= \langle\Phi_0| e^{\hat{Z}} e^{-\hat{T}} \hat{H} e^{\hat{T}} e^{-\hat{Z}} |\Phi_0\rangle \\
 	&= \langle\Phi_0| e^{\hat{Z}} \bar{H} e^{-\hat{Z}} |\Phi_0\rangle
 \end{align}
-where $\bar{H} = e^{-\hat{T}} \hat{H} e^{\hat{T}}$ is the similarity-transformed Hamiltonian. Differentiating the functional with respect to $z_q$ gives
+where $\bar{H} = e^{-\hat{T}} \hat{H} e^{\hat{T}}$ is the similarity-transformed Hamiltonian. Differentiating the functional with respect to $z_q$ gives the amplitude equations:
 \begin{align}
  0&=	\frac{\partial E_{\text{ECC}}}{\partial z_q} \\
 &=\langle\Phi_0| \hat{\tau}_q^\dag e^{\hat{Z}} \bar{H} e^{-\hat{Z}} |\Phi_0\rangle - \langle\Phi_0| e^{\hat{Z}} \bar{H} e^{-\hat{Z}} \hat{\tau}_q^\dag |\Phi_0\rangle \\
  &=\langle\Phi_0| \hat{\tau}_q^\dag e^{\hat{Z}} \bar{H} e^{-\hat{Z}} |\Phi_0\rangle  \\
-&=\langle\Phi_q| e^{\hat{Z}} \bar{H} |\Phi_0\rangle \\
+&=\langle\Phi_q| e^{\hat{Z}} \bar{H} |\Phi_0\rangle \label{eq:ECC_right_amp_eqn} \\
 &=\langle\Phi_q| e^{\hat{Z}} e^{-\hat{T}} \hat{H} e^{\hat{T}} |\Phi_0\rangle.
 \end{align}
-Differentiating with respect to $t_q$ gives
+Differentiating with respect to $t_q$ gives the adjoint amplitude equations:
 \begin{align}
 0&=	\frac{\partial E_{\text{ECC}}}{\partial t_q} \\
 &=\langle\Phi_0| e^{\hat{Z}} \frac{\partial \bar{H}}{\partial t_q} e^{-\hat{Z}} |\Phi_0\rangle \\
 &=\langle\Phi_0| e^{\hat{Z}} \left(e^{-\hat{T}} [\hat{H}, \hat{\tau}_q] e^{\hat{T}}\right) e^{-\hat{Z}} |\Phi_0\rangle \\
-&=\langle\Phi_0| e^{\hat{Z}} e^{-\hat{T}} [\hat{H}, \hat{\tau}_q] e^{\hat{T}} |\Phi_0\rangle
+&=\langle\Phi_0| e^{\hat{Z}} e^{-\hat{T}} [\hat{H}, \hat{\tau}_q] e^{\hat{T}} |\Phi_0\rangle \\
+&=\langle\Phi_0| e^{\hat{Z}} [\bar{H}, \hat{\tau}_q] |\Phi_0\rangle \label{eq:ECC_left_amp_eqn}
 \end{align}
 This framework forces the $t$- and $z$-amplitudes to be solved simultaneously. Restricting to double excitations, that is, $\hat{T} = \hat{T}_2$
 , we can rewrite the ECC energy functional as
@@ -445,7 +446,57 @@ where
 	= B_{\mu \nu} + \sum_{\lambda} \bar{A}_{\mu \lambda} z_{\lambda \nu} + \sum_\lambda z_{\mu \lambda} \bar{A}_{\lambda \nu} + \sum_{\lambda \sigma} z_{\mu \lambda } \bar{B}_{\lambda \sigma} z_{\sigma \nu}
 \end{align}
 \end{subequations}
+\subsubsection{Left amplitude equations}
+Now, if we return to the left amplitude equation of \ref{eq:ECC_right_amp_eqn}, we recover the Riccati equation:
+\begin{align}
+0 & = \langle0_{\mathrm{B}}| \hat{b}_{\mu} \hat{b}_{\nu} \bar{\hat{H}}_{\mathrm{B}} | 0_{\mathrm{B}} \rangle \\
+& = \frac{1}{2} \sum_{\mu\nu} \bar{B}_{\mu \nu} \langle 0_{\mathrm{B}}| \hat{b}_{\mu} \hat{b}_{\nu} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} | 0_{\mathrm{B}} \rangle \\
+ & = B_{\mu \nu} + \sum_{\lambda} A_{\mu \lambda} t_{\lambda \nu} + \sum_\lambda t_{\mu \lambda} A_{\lambda \nu} + \sum_{\lambda \sigma} t_{\mu \lambda } B_{\lambda \sigma} t_{\sigma \nu}\\
+ & = \bm{B} + \mathbf{A}\cdot\mathbf{t} + \mathbf{t}\cdot\mathbf{A} + \mathbf{t}\cdot\mathbf{B}\cdot\mathbf{t}
+\end{align}
+with the solution given by $\mathbf{t} = \mathbf{Y}\cdot\mathbf{X}^{-1}$ where $\mathbf{X}$ and $\mathbf{Y}$ are the eigenvector matrices of the dRPA problem.
+\subsubsection{Right amplitude equations}
+Now, if we consider the right amplitude equation of \ref{eq:ECC_left_amp_eqn}, we have
+\begin{align}
+0 & = \langle0_{\mathrm{B}}| \bar{\hat{H}}_{\mathrm{B}} \hat{b}_{\mu} \hat{b}_{\nu} | 0_{\mathrm{B}} \rangle \\
+& = \frac{1}{2} \sum_{\mu\nu} \bar{B}_{\mu \nu} \langle 0_{\mathrm{B}}| \hat{b}_{\mu} \hat{b}_{\nu} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} | 0_{\mathrm{B}} \rangle \\
+ & = B_{\mu \nu} + \sum_{\lambda} A_{\mu \lambda} t_{\lambda \nu} + \sum_\lambda t_{\mu \lambda} A_{\lambda \nu} + \sum_{\lambda \sigma} t_{\mu \lambda } B_{\lambda \sigma} t_{\sigma \nu}\\
+ & = \bm{B} + \mathbf{A}\cdot\mathbf{t} + \mathbf{t}\cdot\mathbf{A} + \mathbf{t}\cdot\mathbf{B}\cdot\mathbf{t}
+\end{align}
 
+
+\subsection*{2. The Left Amplitude Equations (Stationarity wrt $t_{\mu\nu}$)}
+
+Setting $\frac{\partial E_{\text{ECC}}}{\partial t_{\mu\nu}} = 0$ yields the adjoint equation:
+\begin{equation}
+    \langle 0_{\mathrm{B}}| e^{\hat{Z}} \bar{\hat{H}}_{\mathrm{B}} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} | 0_{\mathrm{B}} \rangle = 0
+\end{equation}
+Using the property $e^{-\hat{Z}} | 0_{\mathrm{B}} \rangle = | 0_{\mathrm{B}} \rangle$, we can insert $e^{-\hat{Z}} e^{\hat{Z}}$ to write this in terms of the double-transformed Hamiltonian:
+\begin{equation}
+    \langle 0_{\mathrm{B}}| \bar{\bar{\hat{H}}}_{\mathrm{B}} e^{\hat{Z}} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} e^{-\hat{Z}} | 0_{\mathrm{B}} \rangle = 0
+\end{equation}
+Projecting this onto the vacuum extracts the coefficient of the annihilation part ($\hat{b}\hat{b}$) of the double-transformed Hamiltonian $\bar{\bar{\hat{H}}}_{\mathrm{B}}$. Looking at Eq.~\eqref{eq:bbH_B}, this coefficient is $\bar{\bar{B}}_{\mu\nu}$. Therefore:
+\begin{equation}
+    \bar{\bar{B}}_{\mu\nu} = 0
+\end{equation}
+
+\subsection*{3. Simplification and Decoupling}
+
+The full expression for $\bar{\bar{B}}_{\mu\nu}$ is:
+\begin{equation}
+    \bar{\bar{B}}_{\mu \nu} = B_{\mu \nu} + \sum_{\lambda} \bar{A}_{\mu \lambda} z_{\lambda \nu} + \sum_\lambda z_{\mu \lambda} \bar{A}_{\lambda \nu} + \sum_{\lambda \sigma} z_{\mu \lambda } \bar{B}_{\lambda \sigma} z_{\sigma \nu} = 0
+\end{equation}
+In general ECC, the $t$ and $z$ equations are coupled because $\bar{B}$ appears in the $z$ equation. However, we have already solved the $t$ equations by setting $\bar{B}_{\mu\nu} = 0$. 
+
+Substituting $\bar{B}_{\mu\nu} = 0$ into the equation for $\bar{\bar{B}}_{\mu\nu}$ causes the quadratic term in $z$ to vanish:
+\begin{equation}
+    B_{\mu \nu} + \sum_{\lambda} \bar{A}_{\mu \lambda} z_{\lambda \nu} + \sum_\lambda z_{\mu \lambda} \bar{A}_{\lambda \nu} + 0 = 0
+\end{equation}
+This results in a linear equation for the $z$ amplitudes:
+\begin{equation}
+	B_{\mu \nu} + \sum_{\lambda} \bar{A}_{\mu \lambda} z_{\lambda \nu} + \sum_\lambda z_{\mu \lambda} \bar{A}_{\lambda \nu} = 0
+\end{equation}
+This proves that for the bosonic Hamiltonian, the $t$ amplitudes can be determined first via a Riccati equation, and the $z$ amplitudes follow by solving a subsequent linear system, effectively decoupling the two sets of equations.
 Let $|0_{\mathrm{B}}\rangle$ denote the bosonic reference vacuum.
 The right amplitude equations, obtained as $\langle 0_{\mathrm{B}}| \hat{b}_{\mu} \hat{b}_{\nu} \bar{\bar{\hat{H}}}_{\mathrm{B}} |0_{\mathrm{B}}\rangle = 0$, yield the condition $\bar{B}_{\mu \nu} = 0$, which is equivalent to the (quadratic) Riccati equation in Eq.~\eqref{eq:right_ricatti}.
 The left amplitude equations, $\langle 0_{\mathrm{B}}| \bar{\bar{\hat{H}}}_{\mathrm{B}} \hat{b}^\dagger_{\mu} \hat{b}^\dagger_{\nu} |0_{\mathrm{B}}\rangle = 0$, give $\bar{\bar{B}}_{\mu \nu} = 0$, which reduces to a set of linear equations in $z_{\mu\nu}$ once $\bar{B}_{\mu \nu} = 0$:

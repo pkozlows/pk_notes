@@ -2031,6 +2031,8 @@ The exact ground state $\ket{N}\equiv |N_F\rangle \otimes |0_B\rangle$, where $|
 \end{align}
 where in \ref{eq:core_hole_approx_1} we approximated the exact vacuum by the Fermi vacuum. \emph{My hypothesis is that by instead approximating the exact ground state by the CC ground state, we would be able to recover the CC Green's function for this problem of the core hole.}
 %  and in \ref{eq:core_hole_approx_2} we approximated the bosonic vacuum as unaffected by the removal of the core electron (this would be true for plasmons because the excitation of a core state would only occur at high energies). 
+\subsection{Connecting to the CCGF}
+Led us perform a double similarity transformation of the Hamiltonian.
 \subsection{Specifying the effective Hamiltonian}
 We can choose the electronic-bosonic Hamiltonian $\hat{H}_p^{\text{eB}}$ for the N-1 electron system with a hole in core state $p$. $\epsilon_p$ is the energy of the state $p$, $\Omega_\nu$ are the bosonic excitation energies, and $W_{p\nu}$ are the coupling matrix elements between the fermionic hole state and the bosonic excitations
 \begin{align}
@@ -3073,3 +3075,40 @@ This is to be compared with the usual second order cumulant, which reads
 C_{pp}^{(2)}(t) & = \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\epsilon_{p i}^{a b}\right)^2}\left(e^{-i \epsilon_{p i}^{a b} t} +i \epsilon_{p i}^{a b} t -1 \right) +\frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\epsilon_{p a}^{i j}\right)^2} \left(e^{-i \epsilon_{p a}^{i j} t} +i \epsilon_{p a}^{i j} t -1 \right)
 \end{align}
 There are two differences. First, the quasi-boson frequencies are different due to the different choice of partition. Second, the 2h1p term in the BWs2 cumulant does not have the linear term in $t$ that is present in the usual second order cumulant. This is because the BWs2 partition removed the 2h1p contribution in $\Sigma_{\mathrm{eff}}$ from the Dyson equation. \emph{It will be interesting to look at the implications of this.}
+
+
+\subsubsection{Frequency domain version}
+Now, if we plug in our derived expression for $C^{\text{BWs2}}_{pp}(t)$ into the cumulant ansatz for the retarded Green's function:
+\begin{align}
+G_{pp}(t) & = G_{pp}^{0, BWs2}(t) e^{C_{pp}^{BWs2}(t)} \\
+& = -i \Theta(t) e^{-i \tilde\epsilon_pt + C_{pp}^{BWs2}(t)} \\
+& = -i \Theta(t) e^{-i \tilde\epsilon_pt} \exp\left\{ \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\tilde{\epsilon}_{p i}^{a b}\right)^2}\left(e^{-i \tilde{\epsilon}_{p i}^{a b} t} +i \tilde{\epsilon}_{p i}^{a b} t -1 \right) + \frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\tilde{\epsilon}_{p a}^{i j}\right)^2} \left(e^{-i \tilde{\epsilon}_{p a}^{i j} t} - 1 \right) \right\} \\
+&= -i \Theta(t) \underbrace{e^{-\sum_{i a b} \zeta_{pi}^{ab} - \sum_{i j a} \zeta_{pa}^{ij}}}_{Z_p^{QP}} e^{-i\overbrace{\left(\tilde\epsilon_p + \sum_{i a b} \zeta_{pi}^{ab} \tilde{\epsilon}_{pi}^{ab}\right)}^{\epsilon_p^{QP}} t} \exp\left\{ \sum_{i a b} \zeta_{pi}^{ab} e^{-i\tilde\epsilon_{pi}^{ab} t} + \sum_{i j a} \zeta_{pa}^{ij} e^{-i\tilde\epsilon_{pa}^{ij} t} \right\}
+\end{align}
+where $\zeta_{pi}^{ab} = \frac{1}{2} \frac{\langle p i \| a b\rangle^2}{\left(\tilde{\epsilon}_{p i}^{a b}\right)^2}$ and $\zeta_{pa}^{ij} = \frac{1}{2} \frac{\langle p a \| i j\rangle^2}{\left(\tilde{\epsilon}_{p a}^{i j}\right)^2}$ are the bosonic coupling coefficients.
+ Next, we want to perform a Fourier transform.
+\begin{align}
+G_{pp}(\omega) & = \int_{-\infty}^{\infty} dt e^{i \omega t} G_{pp}(t)
+\label{Gpp1}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt e^{i(\omega - \epsilon_p^{QP}) t} \exp\left\{ \sum_{i a b} \zeta_{pi}^{ab} e^{-i\tilde\epsilon_{pi}^{ab} t} + \sum_{i j a} \zeta_{pa}^{ij} e^{-i\tilde\epsilon_{pa}^{ij} t} \right\}
+\label{Gpp2}
+\\
+& = -i Z_p^{QP} \int_0^{\infty} dt\, e^{i(\omega - \epsilon_p^{QP}) t} \left(1 + \sum_{i a b} \zeta_{pi}^{ab} e^{-i\tilde\epsilon_{pi}^{ab} t} + \sum_{i j a} \zeta_{pa}^{ij} e^{-i\tilde\epsilon_{pa}^{ij} t} + \ldots \right) \\
+&= -i Z_p^{QP} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP}) t]}\label{Gpp3} \\
+&\quad - i Z_p^{QP} \sum_{iab} \zeta_{pi}^{ab} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \tilde\epsilon_{pi}^{ab}) t]}\\
+&\quad - i Z_p^{QP} \sum_{a\nu} \zeta_{pa}^{ij} \int_0^{\infty} dt\, e^{[-\eta + i(\omega - \epsilon_p^{QP} - \tilde\epsilon_{pa}^{ij}) t]} + \ldots\\
+&= \frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i a b} \frac{Z_{piab}^{sat}}{\omega - \epsilon_{piab}^{sat} + i\eta} + \sum_{i j a} \frac{Z_{pija}^{sat}}{\omega - \epsilon_{pija}^{sat} + i\eta} + \ldots
+\end{align}
+where we defined the satellite energies $\epsilon_{piab}^{sat} = \epsilon_p^{QP} + \tilde\epsilon_{pi}^{ab}$ and $\epsilon_{pija}^{sat} = \epsilon_p^{QP} + \tilde\epsilon_{pa}^{ij}$, and the corresponding spectral weights $Z_{piab}^{sat} = Z_p^{QP} \zeta_{pi}^{ab}$ and $Z_{pija}^{sat} = Z_p^{QP} \zeta_{pa}^{ij}$.
+The diagonal elements of the spectral function are obtained as (the virtual satellites spectral function, whose derivation will mirror that of the occupied satellites, are omitted for the sake of brevity):
+\begin{align}
+A_{pp}^{MP2+C}(\omega) & = -\frac{1}{\pi} \operatorname{Im} G_{pp}(\omega) \\
+& = -\frac{1}{\pi} \operatorname{Im}\left[\frac{Z_p^{QP}}{\omega - \epsilon_p^{QP} + i\eta} + \sum_{i a b} \frac{Z_{piab}^{sat}}{\omega - \tilde\epsilon_{pi}^{ab} + i\eta} + \sum_{i j a} \frac{Z_{pija}^{sat}}{\omega - \tilde\epsilon_{pa}^{ij} + i\eta} + \ldots \right] \\
+&= -\frac{1}{\pi} \operatorname{Im}\left[\frac{\operatorname{Re} Z_p^{QP} + i \operatorname{Im} Z_p^{QP}}{\omega - \operatorname{Re} \epsilon_p^{QP} + i\left(\eta - \operatorname{Im} \epsilon_p^{QP}\right)} + \sum_{i a b} \frac{\operatorname{Re} Z_{piab}^{sat} + i \operatorname{Im} Z_{piab}^{sat}}{\omega - \operatorname{Re} \epsilon_{piab}^{sat} + i\left(\eta - \operatorname{Im} \epsilon_{piab}^{sat}\right)} + \ldots \right] \\
+&= -\frac{1}{\pi} \operatorname{Im}\left[\frac{\left(\operatorname{Re} Z_p^{QP} + i \operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP} - i\left(\eta - \operatorname{Im} \epsilon_p^{QP}\right)\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+& \left. + \sum_{i a b} \frac{\left(\operatorname{Re} Z_{piab}^{sat} + i \operatorname{Im} Z_{piab}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{piab}^{sat} - i\left(\eta - \operatorname{Im} \epsilon_{piab}^{sat}\right)\right)}{\left(\omega - \operatorname{Re} \epsilon_{piab}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{piab}^{sat}\right)^2} + \ldots \right] \\
+&= -\frac{1}{\pi}\left[\frac{\left(\operatorname{Re} Z_p^{QP}\right)\left(\operatorname{Im} \epsilon_p^{QP}\right) + \left(\operatorname{Im} Z_p^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)}{\left(\omega - \operatorname{Re} \epsilon_p^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_p^{QP}\right)^2}\right.\\
+& \left. + \sum_{i a b} \frac{\left(\operatorname{Re} Z_{piab}^{sat}\right)\left(\operatorname{Im} \epsilon_{piab}^{sat}\right) + \left(\operatorname{Im} Z_{piab}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{piab}^{sat}\right)}{\left(\omega - \operatorname{Re} \epsilon_{piab}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{piab}^{sat}\right)^2} + \ldots \right]
+% & \left. + \sum_{i\nu} \frac{\left(\operatorname{Re} Z_{pi\nu}^{sat}\right)\left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right) + \left(\operatorname{Im} Z_{pi\nu}^{sat}\right)\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)}{\left(\omega - \operatorname{Re} \epsilon_{pi\nu}^{sat}\right)^2 + \left(\operatorname{Im} \epsilon_{pi\nu}^{sat}\right)^2} + \ldots \right]
+\end{align}
