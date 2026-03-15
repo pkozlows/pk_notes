@@ -2029,10 +2029,7 @@ The exact ground state $\ket{N}\equiv |N_F\rangle \otimes |0_B\rangle$, where $|
 % & \approx |\Phi_0^{N-1}\rangle \otimes |0_B\rangle \label{eq:core_hole_approx_2} \\
 &\equiv \ket{\Psi_p}
 \end{align}
-where in \ref{eq:core_hole_approx_1} we approximated the exact vacuum by the Fermi vacuum. \emph{My hypothesis is that by instead approximating the exact ground state by the CC ground state, we would be able to recover the CC Green's function for this problem of the core hole.}
-%  and in \ref{eq:core_hole_approx_2} we approximated the bosonic vacuum as unaffected by the removal of the core electron (this would be true for plasmons because the excitation of a core state would only occur at high energies). 
-\subsection{Connecting to the CCGF}
-Led us perform a double similarity transformation of the Hamiltonian.
+where in \ref{eq:core_hole_approx_1} we approximated the exact vacuum by the Fermi vacuum.
 \subsection{Specifying the effective Hamiltonian}
 We can choose the electronic-bosonic Hamiltonian $\hat{H}_p^{\text{eB}}$ for the N-1 electron system with a hole in core state $p$. $\epsilon_p$ is the energy of the state $p$, $\Omega_\nu$ are the bosonic excitation energies, and $W_{p\nu}$ are the coupling matrix elements between the fermionic hole state and the bosonic excitations
 \begin{align}
@@ -2048,77 +2045,38 @@ We can partition into a non-interacting part $\hat{H}_0$ and an interaction $\ha
     \hat{H}_0 &= \epsilon_{p} \hat{n}_p + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu \\
     \hat{V} &= \sum_{\nu} W_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right).
 \end{align}
-% \subsubsection{What are the bosonic coupling matrix elements and excitation energies?}
-%  Tolle showed that in finite systems, if one applies the quasi-boson approximation, these can be obtained as RPA quantities. Concretely, if $i,j$ are occupied indices and $a,b$ are virtual indices of $\Phi_0^{N-1}$ and we define
-% \begin{align}
-%     A_{ia,jb} &= (\epsilon_a - \epsilon_i) \delta_{ij} \delta_{ab} + \langle i b || a j \rangle \\
-%     B_{ia,jb} &= \langle i a || j b \rangle
-% \end{align}
-% then we need to diagonalize the Casida equation, which reads
-% \begin{equation}
-%     \begin{pmatrix}
-%         \bm{A} & \bm{B} \\
-%         -\bm{B} & -\bm{A}
-%     \end{pmatrix}
-%     \begin{pmatrix}
-%         \bm{X} & \bm{Y} \\
-%         \bm{Y} & \bm{X}
-%     \end{pmatrix}
-%     = \begin{pmatrix}
-%         \bm{X} & \bm{Y} \\
-%         \bm{Y} & \bm{X}
-%     \end{pmatrix}
-%     \begin{pmatrix}
-%         \bm{\Omega} & \bm{0} \\
-%         \bm{0} & -\bm{\Omega}
-%     \end{pmatrix}.
-%     \label{eqn:casida_eq}
-% \end{equation}
-% \subsection{Specifying the effective Hamiltonian}
-% We can choose the electronic-bosonic Hamiltonian $\hat{H}_p^{\text{eB}}$ for the N-1 electron system with a hole in core state $p$. $\epsilon_p$ is the energy of the state $p$, $\Omega_\nu$ are the bosonic excitation energies, and $W_{p\nu}$ are the coupling matrix elements between the fermionic hole state and the bosonic excitations
-% \begin{align}
-%     % \hat{H}_{\text{eB}} &= \epsilon_{p} \hat{n}_p + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu + \sum_{\nu} W_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right) \\
-%     \hat{H}_p^{\text{eB}} &= \epsilon_{p} \hat{n}_p + \sum_{\mu\nu} \Biggl( A_{\mu\nu} \hat{b}_\mu^\dagger \hat{b}_\nu + \frac{1}{2}B_{\mu\nu} \Bigl(\hat{b}_\mu^\dagger \hat{b}_\nu^\dagger + \hat{b}_\mu \hat{b}_\nu \Bigr) \Biggr) + \sum_{\nu} V_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right) \label{eq:effective_hamiltonian} \\
-%     % & = \hat{H}_0 + \hat{V},
-%     & = \hat{H}_0 + \hat{V},
-% \end{align}
-% defining $\hat{n}_p = \hat{c}_p^\dagger \hat{c}_p$ as the number operator for the core hole state $p$. The first term of \ref{eq:effective_hamiltonian} describes the single, fermionic core hole, the second term describes the bosonic bath, while the second term is the interaction $\hat{V}$. We can partition into a non-interacting part $\hat{H}_0$ and an interaction $\hat{V}$ as
-% \begin{align}
-%     \hat{H}_0 &= \epsilon_{p} \hat{n}_p + \sum_{\nu} \Omega_{\nu} \hat{b}_\nu^\dagger \hat{b}_\nu \\
-%     \hat{V} &= \sum_{\nu} W_{p\nu} \hat{n}_p \left( \hat{b}_\nu^\dagger + \hat{b}_\nu \right).
-% \end{align}
-% \subsubsection{What are the bosonic coupling matrix elements and excitation energies?}
-%  Tolle showed that in finite systems, if one applies the quasi-boson approximation, these can be obtained as RPA quantities. Concretely, if $i,j$ are occupied indices and $a,b$ are virtual indices of $\Phi_0^{N-1}$ and we define
-% \begin{align}
-%     A_{ia,jb} &= (\epsilon_a - \epsilon_i) \delta_{ij} \delta_{ab} + \langle i b || a j \rangle \\
-%     B_{ia,jb} &= \langle i a || j b \rangle
-% \end{align}
-% then we need to diagonalize the Casida equation, which reads
-% \begin{equation}
-%     \begin{pmatrix}
-%         \bm{A} & \bm{B} \\
-%         -\bm{B} & -\bm{A}
-%     \end{pmatrix}
-%     \begin{pmatrix}
-%         \bm{X} & \bm{Y} \\
-%         \bm{Y} & \bm{X}
-%     \end{pmatrix}
-%     = \begin{pmatrix}
-%         \bm{X} & \bm{Y} \\
-%         \bm{Y} & \bm{X}
-%     \end{pmatrix}
-%     \begin{pmatrix}
-%         \bm{\Omega} & \bm{0} \\
-%         \bm{0} & -\bm{\Omega}
-%     \end{pmatrix}.
-%     \label{eqn:casida_eq}
-% \end{equation}
-
-% where the excitation $\bm{X}$ and de-excitation $\bm{Y}$ eigenvectors form the biorthogonal set as
-% \begin{equation}
-%     (\bm{X}+\bm{Y})(\bm{X}-\bm{Y})^T=(\bm{X}+\bm{Y})^T(\bm{X}-\bm{Y})=\bm{I}
-%     \label{eqn:biorthogonality}
-% \end{equation}
+Plugging this into the definition of the retarded Green's function gives us
+\begin{align}
+G_{pp}^R(t) &\approx -i \theta(t) \bra{\Psi_p} e^{-i\hat{H}_{\text{eB}} t} \ket{\Psi_p}
+\end{align}
+\subsection{Connecting to the CCGF}
+We can start with the definition of the cumulant retarded Green's function, which derives from the core-hole approximation, and we will call it $G_{p}^{R,CE}(t)$. Now, performing a double similarity transformation of the (electron-boson) Hamiltonian, we can also define an XCC retarded Green's function in the core-hole approximation $G_{p}^{R,XCC}(t)$:
+\begin{align}
+G_p^{R,CE}(t) &\equiv -i \theta(t) \bra{\Psi_p} \exp{-i\hat{H}_{\text{eB}} t} \ket{\Psi_p} \\
+\implies G_p^{R,XCC}(t) &\equiv -i \theta(t) \bra{\Psi_p}  \exp{-i \bar{\bar{H}}_{\text{eB}} t}  \ket{\Psi_p} \\
+&= -i \theta(t) \bra{\Psi_p}  \exp{-i e^{\hat{Z}} e^{-\hat{T}} \hat{H}_{\text{eB}} e^{\hat{T}}e^{-\hat{Z}} t}  \ket{\Psi_p} \\
+&= -i \theta(t) \Bigl(\bra{\Phi^0_{N}}\otimes\bra{0_B}\Bigr)  \hat{c}_p^\dagger e^{\hat{Z}} e^{-\hat{T}} \exp{-i \hat{H}_{\text{eB}} t} e^{\hat{T}}e^{-\hat{Z}} \hat{c}_p \Bigl(|\Phi^0_{N}\rangle \otimes |0_B\rangle\Bigr)
+\end{align}
+At this point, we can notice that all similarity trasnformations are (quasi)bosonic, so they commute with the fermionic creation and annihilation operators. Hence, we can write
+\begin{align}
+G_p^{R,XCC}(t) &= -i \theta(t) \Bigl(\bra{\Phi^0_{N}}\otimes\bra{0_B}\Bigr) e^{\hat{Z}} e^{-\hat{T}} \hat{c}_p^\dagger \exp{-i \hat{H}_{\text{eB}} t} \hat{c}_p e^{\hat{T}}e^{-\hat{Z}} \Bigl(|\Phi^0_{N}\rangle \otimes |0_B\rangle\Bigr) \\
+&= -i \theta(t) \Bigl(\bra{\Phi^0_{N}}\otimes\bra{0_B}\Bigr) e^{\hat{Z}} e^{-\hat{T}} \hat{c}_p^\dagger \exp{-i \hat{H}_{\text{eB}} t} \hat{c}_p e^{\hat{T}} \Bigl(|\Phi^0_{N}\rangle \otimes |0_B\rangle\Bigr) \\
+\end{align}
+where we used the fact that $e^{-\hat{Z}}=1-\hat{Z}+\mathcal{O}(\hat{Z}^2)$, but because a bosonic deexcitation operator annihilates the bosonic vacuum, we just keep the leading identity term in the expansion of $e^{-\hat{Z}}$. Now, we can insert the identity $\hat{1} = e^{\hat{T}} e^{-\hat{T}}$ twice to get
+\begin{align}
+G_p^{R,XCC}(t) &= -i \theta(t) \Bigl(\bra{\Phi^0_{N}}\otimes\bra{0_B}\Bigr) e^{\hat{Z}} e^{-\hat{T}} \hat{c}_p^\dagger e^{\hat{T}} e^{-\hat{T}} \exp{-i \hat{H}_{\text{eB}} t} e^{\hat{T}} e^{-\hat{T}} \hat{c}_p e^{\hat{T}} \Bigl(|\Phi^0_{N}\rangle \otimes |0_B\rangle\Bigr) \\
+&= -i \theta(t) \Bigl(\bra{\Phi^0_{N}}\otimes\bra{0_B}\Bigr) e^{\hat{Z}} \bar{\hat{c}}_p^\dagger  \exp{-i \bar{\hat{H}}_{\text{eB}} t} \bar{\hat{c}}_p \Bigl(|\Phi^0_{N}\rangle \otimes |0_B\rangle\Bigr) 
+\end{align}
+Now, the CCGF is given by
+\begin{equation}
+G^{R,CC}_{p}(t) = i \left< \Phi \left| (1+\Lambda) \bar{a^{\dagger}_p}
+e^{i \bar{H}_N t}
+\bar{a}_p \right| \Phi \right>
+\end{equation}
+\begin{align}
+\overset{CC}{\approx} & -i \theta(t) \Bigl(\bra{\Phi^0_{N}}\otimes\bra{0_B}\Bigr) c_p^\dagger \left[1+\hat{\Lambda} \right] e^{-\hat{T}} \exp{-i \hat{H}_{\text{eB}} t} e^{\hat{T}}\left[1-\hat{\Lambda} \right]  c_p \Bigl(|\Phi^0_{N}\rangle \otimes |0_B\rangle\Bigr) \\
+&= -i \theta(t) \Bigl(\bra{\Phi^0_{N}}\otimes\bra{0_B}\Bigr) c_p^\dagger \left[1+\hat{\Lambda} \right] e^{-\hat{T}} \exp{-i \hat{H}_{\text{eB}} t} e^{\hat{T}}  c_p \Bigl(|\Phi^0_{N}\rangle \otimes |0_B\rangle\Bigr)
+\end{align}
 Plugging this into the definition of the retarded Green's function gives us
 \begin{align}
 G_{pp}^R(t) &\approx -i \theta(t) \bra{\Psi_p} e^{-i\hat{H}_{\text{eB}} t} \ket{\Psi_p} \\
@@ -3083,7 +3041,7 @@ Now, if we plug in our derived expression for $C^{\text{BWs2}}_{pp}(t)$ into the
 G_{pp}(t) & = G_{pp}^{0, BWs2}(t) e^{C_{pp}^{BWs2}(t)} \\
 & = -i \Theta(t) e^{-i \tilde\epsilon_pt + C_{pp}^{BWs2}(t)} \\
 & = -i \Theta(t) e^{-i \tilde\epsilon_pt} \exp\left\{ \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\tilde{\epsilon}_{p i}^{a b}\right)^2}\left(e^{-i \tilde{\epsilon}_{p i}^{a b} t} +i \tilde{\epsilon}_{p i}^{a b} t -1 \right) + \frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\tilde{\epsilon}_{p a}^{i j}\right)^2} \left(e^{-i \tilde{\epsilon}_{p a}^{i j} t} - 1 \right) \right\} \\
-&= -i \Theta(t) \underbrace{e^{-\sum_{i a b} \zeta_{pi}^{ab} - \sum_{i j a} \zeta_{pa}^{ij}}}_{Z_p^{QP}} e^{-i\overbrace{\left(\tilde\epsilon_p + \sum_{i a b} \zeta_{pi}^{ab} \tilde{\epsilon}_{pi}^{ab}\right)}^{\epsilon_p^{QP}} t} \exp\left\{ \sum_{i a b} \zeta_{pi}^{ab} e^{-i\tilde\epsilon_{pi}^{ab} t} + \sum_{i j a} \zeta_{pa}^{ij} e^{-i\tilde\epsilon_{pa}^{ij} t} \right\}
+&= -i \Theta(t) \underbrace{e^{-\sum_{i a b} \zeta_{pi}^{ab} - \sum_{i j a} \zeta_{pa}^{ij}}}_{Z_p^{QP}} e^{-i\overbrace{\left(\tilde\epsilon_p - \sum_{i a b} \zeta_{pi}^{ab} \tilde{\epsilon}_{pi}^{ab}\right)}^{\epsilon_p^{QP}} t} \exp\left\{ \sum_{i a b} \zeta_{pi}^{ab} e^{-i\tilde\epsilon_{pi}^{ab} t} + \sum_{i j a} \zeta_{pa}^{ij} e^{-i\tilde\epsilon_{pa}^{ij} t} \right\}
 \end{align}
 where $\zeta_{pi}^{ab} = \frac{1}{2} \frac{\langle p i \| a b\rangle^2}{\left(\tilde{\epsilon}_{p i}^{a b}\right)^2}$ and $\zeta_{pa}^{ij} = \frac{1}{2} \frac{\langle p a \| i j\rangle^2}{\left(\tilde{\epsilon}_{p a}^{i j}\right)^2}$ are the bosonic coupling coefficients.
  Next, we want to perform a Fourier transform.

@@ -1,0 +1,666 @@
+Lmod has detected the following error: These module(s) or extension(s) exist
+but cannot be loaded as requested: "fftw/3.3.10-fasrc01"
+   Try: "module spider fftw/3.3.10-fasrc01" to see how to load the module(s).
+
+
+
+In file included from /n/home03/pkozlowski/qcpbc/libpbc/tests/ce_flow_test.C:1:
+In file included from /n/home03/pkozlowski/qcpbc/armadillo/include/armadillo:27:
+/n/home03/pkozlowski/qcpbc/armadillo/include/armadillo_bits/compiler_check.hpp:88:13: warning: INFO: support for C++11 is deprecated [-W#pragma-messages]
+   88 |     #pragma message ("INFO: support for C++11 is deprecated")
+      |             ^
+In file included from /n/home03/pkozlowski/qcpbc/libpbc/tests/ce_flow_test.C:1:
+In file included from /n/home03/pkozlowski/qcpbc/armadillo/include/armadillo:96:
+/n/home03/pkozlowski/qcpbc/armadillo/include/armadillo_bits/compiler_setup.hpp:426:11: warning: WARNING: compiler is in fast math mode; some functions may be unreliable. [-W#pragma-messages]
+  426 |   #pragma message ("WARNING: compiler is in fast math mode; some functions may be unreliable.")
+      |           ^
+/n/home03/pkozlowski/qcpbc/armadillo/include/armadillo_bits/compiler_setup.hpp:427:11: warning: WARNING: to suppress this warning and related warnings, [-W#pragma-messages]
+  427 |   #pragma message ("WARNING: to suppress this warning and related warnings,")
+      |           ^
+/n/home03/pkozlowski/qcpbc/armadillo/include/armadillo_bits/compiler_setup.hpp:428:11: warning: WARNING: #define ARMA_DONT_PRINT_FAST_MATH_WARNING before #include <armadillo> [-W#pragma-messages]
+  428 |   #pragma message ("WARNING: #define ARMA_DONT_PRINT_FAST_MATH_WARNING before #include <armadillo>")
+      |           ^
+In file included from /n/home03/pkozlowski/qcpbc/libpbc/tests/ce_flow_test.C:1:
+In file included from /n/home03/pkozlowski/qcpbc/armadillo/include/armadillo:418:
+/n/home03/pkozlowski/qcpbc/armadillo/include/armadillo_bits/arma_cmath.hpp:88:10: warning: explicit comparison with infinity in fast floating point mode [-Wtautological-constant-compare]
+   88 |   return std::isinf(x);
+      |          ^~~~~~~~~~~~~
+/n/home03/pkozlowski/qcpbc/armadillo/include/armadillo_bits/arma_cmath.hpp:98:10: warning: explicit comparison with infinity in fast floating point mode [-Wtautological-constant-compare]
+   98 |   return std::isinf(x);
+      |          ^~~~~~~~~~~~~
+/n/home03/pkozlowski/qcpbc/armadillo/include/armadillo_bits/arma_cmath.hpp:134:10: warning: explicit comparison with NaN in fast floating point mode [-Wtautological-constant-compare]
+  134 |   return std::isnan(x);
+      |          ^~~~~~~~~~~~~
+/n/home03/pkozlowski/qcpbc/armadillo/include/armadillo_bits/arma_cmath.hpp:144:10: warning: explicit comparison with NaN in fast floating point mode [-Wtautological-constant-compare]
+  144 |   return std::isnan(x);
+      |          ^~~~~~~~~~~~~
+8 warnings generated.
+>>> BFGS optimization with thresh = 1e-07 and maxiter = 200
+>>> BFGS iteration 1
+   1 0.0000000000e+00 0.00e+00  (in 99s)
+BFGS converged in 1 iterations.
+>>> BFGS optimization with thresh = 1.00e-07 and maxiter = 200
+>>> BFGS iteration 1
+   1 2.5265222668e-03 1.50e-02 LineSearch Step (in 138s)
+>>> BFGS iteration 2
+   2 7.0623756780e-05 3.32e-03 BFGS Step (in 131s)
+>>> BFGS iteration 3
+   3 1.1942442458e-06 4.79e-04 BFGS Step (in 134s)
+>>> BFGS iteration 4
+   4 3.4916814014e-09 6.48e-05 BFGS Step (in 130s)
+>>> BFGS iteration 5
+   5 6.8925556924e-11 3.55e-06 BFGS Step (in 136s)
+>>> BFGS iteration 6
+   6 1.0516699991e-13 4.87e-07 BFGS Step (in 130s)
+>>> BFGS iteration 7
+   7 1.0516699991e-13 2.03e-08 BFGS Step (in 134s)
+BFGS converged in 7 iterations.
+>>> BFGS optimization with thresh = 1.00e-07 and maxiter = 200
+>>> BFGS iteration 1
+   1 3.8442033081e+00 1.13e-01 LineSearch Step (in 135s)
+>>> BFGS iteration 2
+   2 1.8485778252e-01 1.86e-01 LineSearch Step (in 143s)
+>>> BFGS iteration 3
+   3 8.4890795190e-02 1.99e-02 BFGS Step (in 142s)
+>>> BFGS iteration 4
+   4 6.6194175479e-02 7.56e-03 BFGS Step (in 133s)
+>>> BFGS iteration 5
+   5 4.9301912606e-02 4.84e-03 BFGS Step (in 133s)
+>>> BFGS iteration 6
+   6 3.8269484043e-02 5.22e-03 BFGS Step (in 137s)
+>>> BFGS iteration 7
+   7 2.1397413044e-02 1.02e-02 BFGS Step (in 134s)
+>>> BFGS iteration 8
+   8 4.2792150506e-03 5.42e-03 BFGS Step (in 133s)
+>>> BFGS iteration 9
+   9 1.2063374377e-03 3.00e-03 BFGS Step (in 133s)
+>>> BFGS iteration 10
+  10 2.0295828279e-04 1.98e-03 BFGS Step (in 132s)
+>>> BFGS iteration 11
+  11 2.5726565374e-05 7.33e-04 BFGS Step (in 132s)
+>>> BFGS iteration 12
+  12 8.1904539543e-06 2.03e-04 BFGS Step (in 133s)
+>>> BFGS iteration 13
+  13 2.1684613845e-06 1.05e-04 BFGS Step (in 133s)
+>>> BFGS iteration 14
+  14 4.3259394916e-07 5.55e-05 BFGS Step (in 132s)
+>>> BFGS iteration 15
+  15 6.4570971606e-08 2.83e-05 BFGS Step (in 132s)
+>>> BFGS iteration 16
+  16 8.4691601400e-09 1.16e-05 BFGS Step (in 132s)
+>>> BFGS iteration 17
+  17 1.5289474970e-09 3.98e-06 BFGS Step (in 131s)
+>>> BFGS iteration 18
+  18 2.8276044810e-10 1.75e-06 BFGS Step (in 132s)
+>>> BFGS iteration 19
+  19 5.3924688525e-11 8.49e-07 BFGS Step (in 131s)
+>>> BFGS iteration 20
+  20 1.0940707278e-11 3.57e-07 BFGS Step (in 131s)
+>>> BFGS iteration 21
+  21 1.4532761251e-12 1.40e-07 BFGS Step (in 132s)
+>>> BFGS iteration 22
+  22 1.4532761251e-12 5.34e-08 BFGS Step (in 136s)
+BFGS converged in 22 iterations.
+>>> BFGS optimization with thresh = 1.00e-07 and maxiter = 200
+>>> BFGS iteration 1
+   1 2.5135944697e+01 3.21e-01 LineSearch Step (in 132s)
+>>> BFGS iteration 2
+   2 1.1565102461e+00 3.28e-01 LineSearch Step (in 136s)
+>>> BFGS iteration 3
+   3 1.2977161060e+00 1.09e-01 BFGS Step (in 139s)
+>>> BFGS iteration 4
+   4 7.0331646767e-01 8.81e-02 LineSearch Step (in 131s)
+>>> BFGS iteration 5
+   5 1.0321208419e+00 7.35e-02 BFGS Step (in 132s)
+>>> BFGS iteration 6
+   6 6.2014099937e-01 6.86e-02 LineSearch Step (in 132s)
+>>> BFGS iteration 7
+   7 1.8740731121e-01 7.67e-02 BFGS Step (in 131s)
+>>> BFGS iteration 8
+   8 1.3625437371e-01 2.51e-02 BFGS Step (in 130s)
+>>> BFGS iteration 9
+   9 1.3146562903e-01 3.52e-02 BFGS Step (in 131s)
+>>> BFGS iteration 10
+  10 1.4271435498e-01 3.54e-02 BFGS Step (in 132s)
+>>> BFGS iteration 11
+  11 7.9079298499e-02 3.80e-02 LineSearch Step (in 133s)
+>>> BFGS iteration 12
+  12 1.0458402305e-01 1.84e-02 BFGS Step (in 128s)
+>>> BFGS iteration 13
+  13 4.4436452150e-02 3.42e-02 LineSearch Step (in 128s)
+>>> BFGS iteration 14
+  14 1.3396881390e-01 1.31e-02 BFGS Step (in 128s)
+>>> BFGS iteration 15
+  15 3.4495534808e-02 3.59e-02 LineSearch Step (in 129s)
+>>> BFGS iteration 16
+  16 3.0927894586e-02 9.56e-03 BFGS Step (in 130s)
+>>> BFGS iteration 17
+  17 2.9371242960e-02 1.28e-02 BFGS Step (in 153s)
+>>> BFGS iteration 18
+  18 3.2877937965e-02 1.14e-02 BFGS Step (in 175s)
+>>> BFGS iteration 19
+  19 2.4473967861e-02 1.66e-02 LineSearch Step (in 144s)
+>>> BFGS iteration 20
+  20 2.8626258635e-02 7.74e-03 BFGS Step (in 165s)
+>>> BFGS iteration 21
+  21 2.2142174804e-02 1.12e-02 LineSearch Step (in 167s)
+>>> BFGS iteration 22
+  22 2.4774888097e-02 4.39e-03 BFGS Step (in 154s)
+>>> BFGS iteration 23
+  23 2.1215905984e-02 1.01e-02 LineSearch Step (in 191s)
+>>> BFGS iteration 24
+  24 2.1532838213e-02 2.23e-03 BFGS Step (in 168s)
+>>> BFGS iteration 25
+  25 2.0710390438e-02 5.66e-03 LineSearch Step (in 177s)
+>>> BFGS iteration 26
+  26 2.0240643936e-02 2.14e-03 BFGS Step (in 155s)
+>>> BFGS iteration 27
+  27 2.0325431960e-02 4.17e-03 BFGS Step (in 198s)
+>>> BFGS iteration 28
+  28 1.9639020736e-02 4.91e-03 LineSearch Step (in 180s)
+>>> BFGS iteration 29
+  29 2.0247696690e-02 2.59e-03 BFGS Step (in 182s)
+>>> BFGS iteration 30
+  30 1.9201420392e-02 4.88e-03 LineSearch Step (in 161s)
+>>> BFGS iteration 31
+  31 1.9420105878e-02 1.49e-03 BFGS Step (in 215s)
+>>> BFGS iteration 32
+  32 1.9053479399e-02 3.14e-03 LineSearch Step (in 254s)
+>>> BFGS iteration 33
+  33 1.8916949641e-02 9.25e-04 BFGS Step (in 243s)
+>>> BFGS iteration 34
+  34 1.8796063070e-02 1.44e-03 BFGS Step (in 255s)
+>>> BFGS iteration 35
+  35 1.8610092632e-02 2.12e-03 BFGS Step (in 225s)
+>>> BFGS iteration 36
+  36 1.8568919115e-02 1.93e-03 BFGS Step (in 223s)
+>>> BFGS iteration 37
+  37 1.8388443795e-02 2.41e-03 LineSearch Step (in 136s)
+>>> BFGS iteration 38
+  38 1.8385711965e-02 1.19e-03 BFGS Step (in 169s)
+>>> BFGS iteration 39
+  39 1.8278080604e-02 2.11e-03 LineSearch Step (in 170s)
+>>> BFGS iteration 40
+  40 1.8311583626e-02 1.06e-03 BFGS Step (in 170s)
+>>> BFGS iteration 41
+  41 1.8191458153e-02 2.24e-03 LineSearch Step (in 159s)
+>>> BFGS iteration 42
+  42 1.8186447308e-02 1.03e-03 BFGS Step (in 163s)
+>>> BFGS iteration 43
+  43 1.8117177010e-02 1.64e-03 LineSearch Step (in 170s)
+>>> BFGS iteration 44
+  44 1.8073212555e-02 9.10e-04 BFGS Step (in 193s)
+>>> BFGS iteration 45
+  45 1.8013839586e-02 1.22e-03 BFGS Step (in 182s)
+>>> BFGS iteration 46
+  46 1.7986524002e-02 1.18e-03 BFGS Step (in 132s)
+>>> BFGS iteration 47
+  47 1.7917622713e-02 1.31e-03 BFGS Step (in 146s)
+>>> BFGS iteration 48
+  48 1.7913295380e-02 1.04e-03 BFGS Step (in 140s)
+>>> BFGS iteration 49
+  49 1.7855124354e-02 1.30e-03 LineSearch Step (in 139s)
+>>> BFGS iteration 50
+  50 1.7850274500e-02 6.10e-04 BFGS Step (in 140s)
+>>> BFGS iteration 51
+  51 1.7812957952e-02 1.09e-03 LineSearch Step (in 140s)
+>>> BFGS iteration 52
+  52 1.7764961963e-02 4.70e-04 BFGS Step (in 149s)
+>>> BFGS iteration 53
+  53 1.7719787399e-02 6.79e-04 BFGS Step (in 152s)
+>>> BFGS iteration 54
+  54 1.7667906132e-02 9.03e-04 BFGS Step (in 150s)
+>>> BFGS iteration 55
+  55 1.7644890244e-02 9.30e-04 BFGS Step (in 150s)
+>>> BFGS iteration 56
+  56 1.7563452441e-02 1.12e-03 BFGS Step (in 139s)
+>>> BFGS iteration 57
+  57 1.7570784790e-02 9.17e-04 BFGS Step (in 138s)
+>>> BFGS iteration 58
+  58 1.7505750196e-02 1.33e-03 LineSearch Step (in 137s)
+>>> BFGS iteration 59
+  59 1.7464014429e-02 5.87e-04 BFGS Step (in 139s)
+>>> BFGS iteration 60
+  60 1.7405276556e-02 1.01e-03 BFGS Step (in 139s)
+>>> BFGS iteration 61
+  61 1.7347595056e-02 1.04e-03 BFGS Step (in 136s)
+>>> BFGS iteration 62
+  62 1.7284113215e-02 1.04e-03 BFGS Step (in 161s)
+>>> BFGS iteration 63
+  63 1.7214242754e-02 9.14e-04 BFGS Step (in 161s)
+>>> BFGS iteration 64
+  64 1.7134744710e-02 1.09e-03 BFGS Step (in 161s)
+>>> BFGS iteration 65
+  65 1.7024002838e-02 1.20e-03 BFGS Step (in 162s)
+>>> BFGS iteration 66
+  66 1.6962834715e-02 1.31e-03 BFGS Step (in 159s)
+>>> BFGS iteration 67
+  67 1.6907346474e-02 1.54e-03 BFGS Step (in 160s)
+>>> BFGS iteration 68
+  68 1.6868999100e-02 1.37e-03 BFGS Step (in 161s)
+>>> BFGS iteration 69
+  69 1.6747249475e-02 1.65e-03 LineSearch Step (in 161s)
+>>> BFGS iteration 70
+  70 1.6760089253e-02 9.25e-04 BFGS Step (in 162s)
+>>> BFGS iteration 71
+  71 1.6677623361e-02 1.39e-03 LineSearch Step (in 170s)
+>>> BFGS iteration 72
+  72 1.6650360428e-02 5.18e-04 BFGS Step (in 171s)
+>>> BFGS iteration 73
+  73 1.6604407031e-02 8.46e-04 BFGS Step (in 168s)
+>>> BFGS iteration 74
+  74 1.6571755296e-02 9.14e-04 BFGS Step (in 169s)
+>>> BFGS iteration 75
+  75 1.6507298058e-02 1.05e-03 BFGS Step (in 169s)
+>>> BFGS iteration 76
+  76 1.6453939037e-02 9.40e-04 BFGS Step (in 170s)
+>>> BFGS iteration 77
+  77 1.6422209147e-02 1.00e-03 BFGS Step (in 170s)
+>>> BFGS iteration 78
+  78 1.6335138311e-02 1.13e-03 BFGS Step (in 170s)
+>>> BFGS iteration 79
+  79 1.6295688797e-02 9.95e-04 BFGS Step (in 171s)
+>>> BFGS iteration 80
+  80 1.6207729639e-02 1.08e-03 BFGS Step (in 171s)
+>>> BFGS iteration 81
+  81 1.6252157109e-02 7.98e-04 BFGS Step (in 171s)
+>>> BFGS iteration 82
+  82 1.6150659550e-02 1.44e-03 LineSearch Step (in 170s)
+>>> BFGS iteration 83
+  83 1.6122480825e-02 5.88e-04 BFGS Step (in 170s)
+>>> BFGS iteration 84
+  84 1.6058666791e-02 1.13e-03 BFGS Step (in 170s)
+>>> BFGS iteration 85
+  85 1.6023545455e-02 9.94e-04 BFGS Step (in 170s)
+>>> BFGS iteration 86
+  86 1.6003042203e-02 1.08e-03 BFGS Step (in 169s)
+>>> BFGS iteration 87
+  87 1.5979671914e-02 1.08e-03 BFGS Step (in 172s)
+>>> BFGS iteration 88
+  88 1.5965808619e-02 1.08e-03 BFGS Step (in 141s)
+>>> BFGS iteration 89
+  89 1.5901684581e-02 1.09e-03 BFGS Step (in 137s)
+>>> BFGS iteration 90
+  90 1.5917832558e-02 7.37e-04 BFGS Step (in 138s)
+>>> BFGS iteration 91
+  91 1.5869442754e-02 1.10e-03 LineSearch Step (in 140s)
+>>> BFGS iteration 92
+  92 1.5868267392e-02 4.19e-04 BFGS Step (in 141s)
+>>> BFGS iteration 93
+  93 1.5849473988e-02 7.49e-04 LineSearch Step (in 139s)
+>>> BFGS iteration 94
+  94 1.5832013711e-02 3.15e-04 BFGS Step (in 139s)
+>>> BFGS iteration 95
+  95 1.5810647834e-02 4.67e-04 BFGS Step (in 140s)
+>>> BFGS iteration 96
+  96 1.5796358114e-02 4.79e-04 BFGS Step (in 144s)
+>>> BFGS iteration 97
+  97 1.5780780369e-02 5.28e-04 BFGS Step (in 136s)
+>>> BFGS iteration 98
+  98 1.5763254421e-02 4.87e-04 BFGS Step (in 136s)
+>>> BFGS iteration 99
+  99 1.5748351871e-02 4.24e-04 BFGS Step (in 137s)
+>>> BFGS iteration 100
+ 100 1.5731833605e-02 4.88e-04 BFGS Step (in 136s)
+>>> BFGS iteration 101
+ 101 1.5712975618e-02 5.34e-04 BFGS Step (in 137s)
+>>> BFGS iteration 102
+ 102 1.5698873632e-02 4.66e-04 BFGS Step (in 146s)
+>>> BFGS iteration 103
+ 103 1.5687095599e-02 4.09e-04 BFGS Step (in 145s)
+>>> BFGS iteration 104
+ 104 1.5676656942e-02 3.31e-04 BFGS Step (in 142s)
+>>> BFGS iteration 105
+ 105 1.5665976966e-02 3.04e-04 BFGS Step (in 134s)
+>>> BFGS iteration 106
+ 106 1.5656463745e-02 2.71e-04 BFGS Step (in 148s)
+>>> BFGS iteration 107
+ 107 1.5644467582e-02 2.93e-04 BFGS Step (in 137s)
+>>> BFGS iteration 108
+ 108 1.5636796234e-02 2.46e-04 BFGS Step (in 140s)
+>>> BFGS iteration 109
+ 109 1.5630651867e-02 2.72e-04 BFGS Step (in 136s)
+>>> BFGS iteration 110
+ 110 1.5625351885e-02 2.36e-04 BFGS Step (in 138s)
+>>> BFGS iteration 111
+ 111 1.5621713970e-02 1.75e-04 BFGS Step (in 136s)
+>>> BFGS iteration 112
+ 112 1.5617844555e-02 1.75e-04 BFGS Step (in 134s)
+>>> BFGS iteration 113
+ 113 1.5615322691e-02 1.42e-04 BFGS Step (in 198s)
+>>> BFGS iteration 114
+ 114 1.5612724066e-02 1.52e-04 BFGS Step (in 206s)
+>>> BFGS iteration 115
+ 115 1.5610858001e-02 1.14e-04 BFGS Step (in 194s)
+>>> BFGS iteration 116
+ 116 1.5608972326e-02 1.12e-04 BFGS Step (in 190s)
+>>> BFGS iteration 117
+ 117 1.5607316082e-02 9.37e-05 BFGS Step (in 189s)
+>>> BFGS iteration 118
+ 118 1.5605765852e-02 9.72e-05 BFGS Step (in 202s)
+>>> BFGS iteration 119
+ 119 1.5603840783e-02 1.07e-04 BFGS Step (in 172s)
+>>> BFGS iteration 120
+ 120 1.5601523437e-02 8.91e-05 BFGS Step (in 180s)
+>>> BFGS iteration 121
+ 121 1.5599389404e-02 1.22e-04 BFGS Step (in 134s)
+>>> BFGS iteration 122
+ 122 1.5597047851e-02 1.17e-04 BFGS Step (in 177s)
+>>> BFGS iteration 123
+ 123 1.5595410402e-02 9.89e-05 BFGS Step (in 172s)
+>>> BFGS iteration 124
+ 124 1.5594169616e-02 1.14e-04 BFGS Step (in 168s)
+>>> BFGS iteration 125
+ 125 1.5593298129e-02 9.44e-05 BFGS Step (in 193s)
+>>> BFGS iteration 126
+ 126 1.5592761735e-02 7.79e-05 BFGS Step (in 152s)
+>>> BFGS iteration 127
+ 127 1.5592032805e-02 7.23e-05 BFGS Step (in 199s)
+>>> BFGS iteration 128
+ 128 1.5591506379e-02 5.44e-05 BFGS Step (in 138s)
+>>> BFGS iteration 129
+ 129 1.5590764656e-02 6.50e-05 BFGS Step (in 196s)
+>>> BFGS iteration 130
+ 130 1.5590097205e-02 5.56e-05 BFGS Step (in 144s)
+>>> BFGS iteration 131
+ 131 1.5589440082e-02 6.68e-05 BFGS Step (in 184s)
+>>> BFGS iteration 132
+ 132 1.5588734428e-02 5.86e-05 BFGS Step (in 191s)
+>>> BFGS iteration 133
+ 133 1.5588250714e-02 5.56e-05 BFGS Step (in 153s)
+>>> BFGS iteration 134
+ 134 1.5587858771e-02 5.65e-05 BFGS Step (in 169s)
+>>> BFGS iteration 135
+ 135 1.5587706949e-02 3.62e-05 BFGS Step (in 175s)
+>>> BFGS iteration 136
+ 136 1.5587545919e-02 4.20e-05 BFGS Step (in 165s)
+>>> BFGS iteration 137
+ 137 1.5587473338e-02 3.02e-05 BFGS Step (in 196s)
+>>> BFGS iteration 138
+ 138 1.5587413640e-02 2.56e-05 BFGS Step (in 172s)
+>>> BFGS iteration 139
+ 139 1.5587375854e-02 1.87e-05 BFGS Step (in 174s)
+>>> BFGS iteration 140
+ 140 1.5587343963e-02 1.54e-05 BFGS Step (in 181s)
+>>> BFGS iteration 141
+ 141 1.5587320256e-02 1.20e-05 BFGS Step (in 136s)
+>>> BFGS iteration 142
+ 142 1.5587298072e-02 1.17e-05 BFGS Step (in 166s)
+>>> BFGS iteration 143
+ 143 1.5587276305e-02 1.10e-05 BFGS Step (in 174s)
+>>> BFGS iteration 144
+ 144 1.5587254450e-02 1.08e-05 BFGS Step (in 137s)
+>>> BFGS iteration 145
+ 145 1.5587233981e-02 1.05e-05 BFGS Step (in 158s)
+>>> BFGS iteration 146
+ 146 1.5587213667e-02 1.07e-05 BFGS Step (in 185s)
+>>> BFGS iteration 147
+ 147 1.5587200089e-02 9.03e-06 BFGS Step (in 148s)
+>>> BFGS iteration 148
+ 148 1.5587181163e-02 1.03e-05 BFGS Step (in 160s)
+>>> BFGS iteration 149
+ 149 1.5587162651e-02 7.77e-06 BFGS Step (in 183s)
+>>> BFGS iteration 150
+ 150 1.5587148750e-02 9.09e-06 BFGS Step (in 143s)
+>>> BFGS iteration 151
+ 151 1.5587137231e-02 8.49e-06 BFGS Step (in 174s)
+>>> BFGS iteration 152
+ 152 1.5587128427e-02 7.03e-06 BFGS Step (in 178s)
+>>> BFGS iteration 153
+ 153 1.5587119568e-02 7.00e-06 BFGS Step (in 167s)
+>>> BFGS iteration 154
+ 154 1.5587110809e-02 6.64e-06 BFGS Step (in 162s)
+>>> BFGS iteration 155
+ 155 1.5587100203e-02 6.87e-06 BFGS Step (in 145s)
+>>> BFGS iteration 156
+ 156 1.5587089836e-02 6.34e-06 BFGS Step (in 149s)
+>>> BFGS iteration 157
+ 157 1.5587080070e-02 7.16e-06 BFGS Step (in 150s)
+>>> BFGS iteration 158
+ 158 1.5587071328e-02 7.40e-06 BFGS Step (in 164s)
+>>> BFGS iteration 159
+ 159 1.5587063039e-02 6.75e-06 BFGS Step (in 141s)
+>>> BFGS iteration 160
+ 160 1.5587056817e-02 6.42e-06 BFGS Step (in 146s)
+>>> BFGS iteration 161
+ 161 1.5587052263e-02 5.54e-06 BFGS Step (in 188s)
+>>> BFGS iteration 162
+ 162 1.5587048892e-02 4.44e-06 BFGS Step (in 130s)
+>>> BFGS iteration 163
+ 163 1.5587046389e-02 4.07e-06 BFGS Step (in 171s)
+>>> BFGS iteration 164
+ 164 1.5587044652e-02 3.57e-06 BFGS Step (in 166s)
+>>> BFGS iteration 165
+ 165 1.5587043421e-02 3.01e-06 BFGS Step (in 200s)
+>>> BFGS iteration 166
+ 166 1.5587042597e-02 2.56e-06 BFGS Step (in 162s)
+>>> BFGS iteration 167
+ 167 1.5587041900e-02 2.25e-06 BFGS Step (in 194s)
+>>> BFGS iteration 168
+ 168 1.5587041392e-02 1.79e-06 BFGS Step (in 139s)
+>>> BFGS iteration 169
+ 169 1.5587040838e-02 1.85e-06 BFGS Step (in 148s)
+>>> BFGS iteration 170
+ 170 1.5587040221e-02 1.55e-06 BFGS Step (in 201s)
+>>> BFGS iteration 171
+ 171 1.5587039675e-02 1.47e-06 BFGS Step (in 174s)
+>>> BFGS iteration 172
+ 172 1.5587039129e-02 1.64e-06 BFGS Step (in 184s)
+>>> BFGS iteration 173
+ 173 1.5587038681e-02 1.40e-06 BFGS Step (in 173s)
+>>> BFGS iteration 174
+ 174 1.5587038307e-02 1.41e-06 BFGS Step (in 136s)
+>>> BFGS iteration 175
+ 175 1.5587037953e-02 1.33e-06 BFGS Step (in 161s)
+>>> BFGS iteration 176
+ 176 1.5587037699e-02 1.11e-06 BFGS Step (in 180s)
+>>> BFGS iteration 177
+ 177 1.5587037399e-02 1.32e-06 BFGS Step (in 161s)
+>>> BFGS iteration 178
+ 178 1.5587037200e-02 1.09e-06 BFGS Step (in 157s)
+>>> BFGS iteration 179
+ 179 1.5587036995e-02 1.28e-06 BFGS Step (in 158s)
+>>> BFGS iteration 180
+ 180 1.5587036850e-02 9.15e-07 BFGS Step (in 151s)
+>>> BFGS iteration 181
+ 181 1.5587036715e-02 8.46e-07 BFGS Step (in 195s)
+>>> BFGS iteration 182
+ 182 1.5587036582e-02 7.52e-07 BFGS Step (in 177s)
+>>> BFGS iteration 183
+ 183 1.5587036476e-02 7.72e-07 BFGS Step (in 149s)
+>>> BFGS iteration 184
+ 184 1.5587036380e-02 7.31e-07 BFGS Step (in 139s)
+>>> BFGS iteration 185
+ 185 1.5587036304e-02 5.51e-07 BFGS Step (in 183s)
+>>> BFGS iteration 186
+ 186 1.5587036246e-02 5.58e-07 BFGS Step (in 201s)
+>>> BFGS iteration 187
+ 187 1.5587036190e-02 5.50e-07 BFGS Step (in 168s)
+>>> BFGS iteration 188
+ 188 1.5587036152e-02 4.41e-07 BFGS Step (in 156s)
+>>> BFGS iteration 189
+ 189 1.5587036121e-02 4.43e-07 BFGS Step (in 166s)
+>>> BFGS iteration 190
+ 190 1.5587036094e-02 3.37e-07 BFGS Step (in 158s)
+>>> BFGS iteration 191
+ 191 1.5587036072e-02 2.64e-07 BFGS Step (in 156s)
+>>> BFGS iteration 192
+ 192 1.5587036052e-02 3.56e-07 BFGS Step (in 187s)
+>>> BFGS iteration 193
+ 193 1.5587036037e-02 2.90e-07 BFGS Step (in 142s)
+>>> BFGS iteration 194
+ 194 1.5587036024e-02 2.58e-07 BFGS Step (in 144s)
+>>> BFGS iteration 195
+ 195 1.5587036014e-02 2.37e-07 BFGS Step (in 189s)
+>>> BFGS iteration 196
+ 196 1.5587036005e-02 2.03e-07 BFGS Step (in 160s)
+>>> BFGS iteration 197
+ 197 1.5587035996e-02 1.92e-07 BFGS Step (in 175s)
+>>> BFGS iteration 198
+ 198 1.5587035990e-02 1.95e-07 BFGS Step (in 163s)
+>>> BFGS iteration 199
+ 199 1.5587035984e-02 1.71e-07 BFGS Step (in 137s)
+>>> BFGS iteration 200
+ 200 1.5587035979e-02 1.41e-07 BFGS Step (in 162s)
+>>> BFGS optimization with thresh = 1.00e-07 and maxiter = 200
+>>> BFGS iteration 1
+   1 2.3399036760e+02 9.87e-01 LineSearch Step (in 181s)
+>>> BFGS iteration 2
+   2 1.2154095567e+01 1.05e+00 LineSearch Step (in 172s)
+>>> BFGS iteration 3
+   3 1.9396708157e+00 4.48e-01 LineSearch Step (in 184s)
+>>> BFGS iteration 4
+   4 4.2539793845e+01 3.58e-01 BFGS Step (in 142s)
+>>> BFGS iteration 5
+   5 3.3981503477e+00 5.08e-01 LineSearch Step (in 144s)
+>>> BFGS iteration 6
+   6 1.5527438045e+00 2.41e-01 LineSearch Step (in 186s)
+>>> BFGS iteration 7
+   7 3.0714566910e+01 2.94e-01 BFGS Step (in 167s)
+>>> BFGS iteration 8
+   8 2.6397482797e+00 4.18e-01 LineSearch Step (in 185s)
+>>> BFGS iteration 9
+   9 1.4054263266e+00 2.01e-01 LineSearch Step (in 143s)
+>>> BFGS iteration 10
+  10 6.8345216013e+00 1.71e-01 BFGS Step (in 146s)
+>>> BFGS iteration 11
+  11 1.6943688799e+00 2.40e-01 LineSearch Step (in 173s)
+>>> BFGS iteration 12
+  12 1.2901251212e+00 1.61e-01 LineSearch Step (in 164s)
+>>> BFGS iteration 13
+  13 6.0227677286e+00 1.42e-01 BFGS Step (in 184s)
+>>> BFGS iteration 14
+  14 1.5815563236e+00 2.31e-01 LineSearch Step (in 154s)
+>>> BFGS iteration 15
+  15 1.1808092673e+00 1.74e-01 LineSearch Step (in 153s)
+>>> BFGS iteration 16
+  16 5.9017441860e+00 1.50e-01 BFGS Step (in 137s)
+>>> BFGS iteration 17
+  17 1.3665178062e+00 2.44e-01 LineSearch Step (in 160s)
+>>> BFGS iteration 18
+  18 1.0997834240e+00 1.61e-01 LineSearch Step (in 187s)
+>>> BFGS iteration 19
+  19 8.1467598290e+00 1.44e-01 BFGS Step (in 161s)
+>>> BFGS iteration 20
+  20 1.4499916117e+00 2.52e-01 LineSearch Step (in 162s)
+>>> BFGS iteration 21
+  21 1.0038393623e+00 1.84e-01 LineSearch Step (in 137s)
+>>> BFGS iteration 22
+  22 5.1391160641e+00 1.23e-01 BFGS Step (in 154s)
+>>> BFGS iteration 23
+  23 1.2680101818e+00 2.30e-01 LineSearch Step (in 168s)
+>>> BFGS iteration 24
+  24 9.3353569333e-01 1.54e-01 LineSearch Step (in 165s)
+>>> BFGS iteration 25
+  25 4.0064682132e+00 1.11e-01 BFGS Step (in 186s)
+>>> BFGS iteration 26
+  26 1.3383786279e+00 2.25e-01 LineSearch Step (in 157s)
+>>> BFGS iteration 27
+  27 8.6637036794e-01 1.53e-01 LineSearch Step (in 144s)
+>>> BFGS iteration 28
+  28 5.3008263832e+00 1.06e-01 BFGS Step (in 176s)
+>>> BFGS iteration 29
+  29 1.1915870266e+00 2.52e-01 LineSearch Step (in 162s)
+>>> BFGS iteration 30
+  30 8.1418217931e-01 1.43e-01 LineSearch Step (in 167s)
+>>> BFGS iteration 31
+  31 2.5971940355e+00 1.14e-01 BFGS Step (in 163s)
+>>> BFGS iteration 32
+  32 1.0911947246e+00 1.92e-01 LineSearch Step (in 165s)
+>>> BFGS iteration 33
+  33 7.5500471571e-01 1.82e-01 LineSearch Step (in 137s)
+>>> BFGS iteration 34
+  34 2.0298353954e+00 9.97e-02 BFGS Step (in 179s)
+>>> BFGS iteration 35
+  35 9.3710801061e-01 1.79e-01 LineSearch Step (in 203s)
+>>> BFGS iteration 36
+  36 7.0646801245e-01 1.50e-01 LineSearch Step (in 158s)
+>>> BFGS iteration 37
+  37 2.2276222042e+00 1.06e-01 BFGS Step (in 148s)
+>>> BFGS iteration 38
+  38 9.2793630494e-01 1.72e-01 LineSearch Step (in 177s)
+>>> BFGS iteration 39
+  39 6.2627802272e-01 1.40e-01 LineSearch Step (in 139s)
+>>> BFGS iteration 40
+  40 2.8609879960e+00 9.80e-02 BFGS Step (in 189s)
+>>> BFGS iteration 41
+  41 8.9237403470e-01 1.79e-01 LineSearch Step (in 156s)
+>>> BFGS iteration 42
+  42 5.8363954640e-01 1.29e-01 LineSearch Step (in 164s)
+>>> BFGS iteration 43
+  43 2.8517738509e+00 1.23e-01 BFGS Step (in 184s)
+>>> BFGS iteration 44
+  44 7.8320363289e-01 1.98e-01 LineSearch Step (in 137s)
+>>> BFGS iteration 45
+  45 5.2596474308e-01 1.36e-01 LineSearch Step (in 176s)
+>>> BFGS iteration 46
+  46 2.2315374715e+00 1.06e-01 BFGS Step (in 161s)
+>>> BFGS iteration 47
+  47 7.6733070064e-01 2.05e-01 LineSearch Step (in 170s)
+>>> BFGS iteration 48
+  48 4.5305317826e-01 1.52e-01 LineSearch Step (in 161s)
+>>> BFGS iteration 49
+  49 2.8113177626e+00 8.66e-02 BFGS Step (in 164s)
+>>> BFGS iteration 50
+  50 8.2653201627e-01 1.76e-01 LineSearch Step (in 182s)
+>>> BFGS iteration 51
+  51 4.0165813419e-01 1.48e-01 LineSearch Step (in 165s)
+>>> BFGS iteration 52
+  52 1.9011616993e+00 8.34e-02 BFGS Step (in 166s)
+>>> BFGS iteration 53
+  53 5.8179773692e-01 1.88e-01 LineSearch Step (in 173s)
+>>> BFGS iteration 54
+  54 3.4759843371e-01 1.60e-01 LineSearch Step (in 174s)
+>>> BFGS iteration 55
+  55 1.7744859298e+00 7.14e-02 BFGS Step (in 173s)
+>>> BFGS iteration 56
+  56 5.6463680509e-01 1.83e-01 LineSearch Step (in 138s)
+>>> BFGS iteration 57
+  57 3.0435011980e-01 1.60e-01 LineSearch Step (in 158s)
+>>> BFGS iteration 58
+  58 1.6326975626e+00 6.66e-02 BFGS Step (in 189s)
+>>> BFGS iteration 59
+  59 5.2205607000e-01 1.64e-01 LineSearch Step (in 162s)
+>>> BFGS iteration 60
+  60 2.6641426610e-01 1.32e-01 LineSearch Step (in 161s)
+>>> BFGS iteration 61
+  61 1.6005161927e+00 5.93e-02 BFGS Step (in 170s)
+>>> BFGS iteration 62
+  62 3.6338719530e-01 1.70e-01 LineSearch Step (in 156s)
+>>> BFGS iteration 63
+  63 2.3746265192e-01 1.64e-01 LineSearch Step (in 156s)
+>>> BFGS iteration 64
+  64 1.5163393218e+00 5.89e-02 BFGS Step (in 157s)
+>>> BFGS iteration 65
+  65 3.2988708842e-01 1.61e-01 LineSearch Step (in 145s)
+>>> BFGS iteration 66
+  66 2.0803891504e-01 1.26e-01 LineSearch Step (in 147s)
+>>> BFGS iteration 67
+  67 1.3875444813e+00 5.05e-02 BFGS Step (in 141s)
+>>> BFGS iteration 68
+  68 2.4049365363e-01 1.54e-01 LineSearch Step (in 138s)
+>>> BFGS iteration 69
+  69 1.8730980988e-01 9.44e-02 LineSearch Step (in 162s)
+>>> BFGS iteration 70
+  70 1.2542879957e+00 4.61e-02 BFGS Step (in 133s)
+>>> BFGS iteration 71
+  71 2.0356485095e-01 1.48e-01 LineSearch Step (in 153s)
+>>> BFGS iteration 72
+  72 1.7055681790e-01 9.01e-02 LineSearch Step (in 151s)
+>>> BFGS iteration 73
+  73 1.0170554068e+00 4.56e-02 BFGS Step (in 139s)
+>>> BFGS iteration 74
+  74 1.6794976115e-01 1.34e-01 LineSearch Step (in 153s)
+>>> BFGS iteration 75
+  75 9.2943234033e-01 6.35e-02 BFGS Step (in 137s)
+>>> BFGS iteration 76
+  76 1.5168696707e-01 1.38e-01 LineSearch Step (in 172s)
+>>> BFGS iteration 77
+  77 1.1666498835e+00 5.02e-02 BFGS Step (in 137s)
+>>> BFGS iteration 78
+  78 1.4207132017e-01 1.65e-01 LineSearch Step (in 152s)
+>>> BFGS iteration 79
+  79 9.6057077609e-01 5.97e-02 BFGS Step (in 158s)
+>>> BFGS iteration 80
+  80 1.3254865721e-01 1.37e-01 LineSearch Step (in 137s)
+>>> BFGS iteration 81
