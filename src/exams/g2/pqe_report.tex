@@ -52,7 +52,7 @@
 \usepackage{achemso}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Graphic inclusion and scheme and chart support
+%% Graphic inclusion and scheme and chart support3....
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{graphicx}
 \usepackage{float}
@@ -110,7 +110,7 @@
 \section{Introduction}
 The consensus is that the best way to adapt to climate change is to mitigate it by reducing greenhouse gas emissions \cite{OECD2022-vn}. To do so requires the development of next-generation green technologies, such as electrocatalysts\cite{Seh2017-jx}, photovoltaics\cite{Du2023-kd}, and batteries\cite{Titirici2024-ao}. These seemingly disparate goals can all be achieved through the discovery of materials with special properties. Spectroscopy is an indispensable tool for experimentalists in the search for such properties, as it illuminates the electronic structure of candidate materials. Computation is crucial for interpreting spectroscopic data, and thus quantum chemists devote much effort to the accurate and efficient simulation of spectra\cite{Neese2025-lp}.
 
-Spectroscopy occurs when incoming light perturbs matter, a process which proceeds through excited states of the system. The excited states of a material may be described in terms of quasiparticles, which are collective excitations of interacting electrons. The equation-of-motion coupled-cluster formalism including single and double excitations (EOM-CCSD) can accurately describe these quasiparticles \textit{(cite)}, but it carries a computational scaling of $O(N^6)$, where $N$ is the system size. This is to be compared with semi-local density functional theory's (DFT) $O(N^3)$ scaling, so it comes as no surprise that DFT is the method of choice for large systems. However, DFT is known to be inaccurate for describing excited states CITE, so there is a need for methods that are more accurate than DFT but more computationally tractable than EOM-CCSD.
+Spectroscopy occurs when incoming light perturbs matter, a process which proceeds through excited states of the system. The excited states of a material may be described in terms of quasiparticles, which are collective excitations of interacting electrons. The equation-of-motion coupled-cluster formalism including single and double excitations (EOM-CCSD) can accurately describe these quasiparticles \cite{Krylov2008-sg}, but it carries a computational scaling of $O(N^6)$, where $N$ is the system size. This is to be compared with semi-local density functional theory's (DFT) $O(N^3)$ scaling, so it comes as no surprise that DFT is the method of choice for large systems\cite{Teale2022-eu}. However, DFT is known to be inaccurate for describing excited states\cite{Cohen2012-uv}, so there is a need for methods that are more accurate than DFT but more computationally tractable than EOM-CCSD.
 
 A compelling alternative is presented by many-body perturbation theory (MBPT)\cite{Golze2019-wm}. MBPT introduces a variety of "gap-filling" methods, in the sense that these methods provide a more accurate description of excited states than DFT while remaining more computationally tractable than EOM-CCSD.
 

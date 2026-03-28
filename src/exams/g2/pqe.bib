@@ -1,131 +1,735 @@
-@ARTICLE{Scott2023-gc,
-  title     = "A ``moment-conserving'' reformulation of {GW} theory",
-  author    = "Scott, Charles J C and Backhouse, Oliver J and Booth, George H",
+@ARTICLE{Mori1965-mf,
+  title     = "Transport, Collective Motion, and Brownian Motion",
+  author    = "Mori, Hazime",
+  journal   = "Prog. Theor. Phys.",
+  publisher = "Oxford University Press (OUP)",
+  volume    =  33,
+  number    =  3,
+  pages     = "423--455",
+  month     =  mar,
+  year      =  1965
+}
+
+@ARTICLE{Szabo2012-jl,
+  title     = "Modern quantum chemistry: introduction to advanced electronic
+               structure theory",
+  author    = "Szabo, A and Ostlund, N S",
+  publisher = "Courier Corporation",
+  year      =  2012
+}
+
+@ARTICLE{Fink2016-jh,
+  title     = "Why does {MP2} work?",
+  author    = "Fink, Reinhold F",
+  journal   = "J. Chem. Phys.",
+  publisher = "AIP Publishing",
+  volume    =  145,
+  number    =  18,
+  pages     =  184101,
+  abstract  = "We show analytically and numerically that the performance of
+               second order Møller-Plesset (MP) perturbation theory (PT),
+               coupled-cluster (CC) theory, and other perturbation theory
+               approaches can be rationalized by analyzing the wavefunctions of
+               these methods. While rather large deviations for the individual
+               contributions of configurations to the electron correlation
+               energy are found for MP wavefunctions, they profit from an
+               advantageous and robust error cancellation: The absolute
+               contribution to the correlation energy is generally
+               underestimated for the critical excitations with small energy
+               denominators and all other doubly excited configurations where
+               the two excited electrons are coupled to a singlet. This is
+               balanced by an overestimation of the contribution of
+               triplet-coupled double excitations to the correlation energy. The
+               even better performance of spin-component-scaled-MP2 theory is
+               explained by a similar error compensation effect. The
+               wavefunction analysis for the lowest singlet states of H2O, CH2,
+               CO, and Cu+ shows the predicted trends for MP methods, rapid but
+               biased convergence of CC theory as well as the substantial
+               potential of linearized CC, or retaining the excitation-degree
+               (RE)-PT.",
+  month     =  nov,
+  year      =  2016,
+  language  = "en"
+}
+
+@ARTICLE{Ivander2024-fr,
+  title     = "Unified framework for open quantum dynamics with memory",
+  author    = "Ivander, Felix and Lindoy, Lachlan P and Lee, Joonho",
+  journal   = "Nature Communications",
+  publisher = "Nature Publishing Group UK",
+  volume    =  15,
+  number    =  1,
+  pages     =  8087,
+  abstract  = "The dynamics of quantum systems coupled to baths are typically
+               studied using the Nakajima-Zwanzig memory kernel
+               (\documentclass[12pt]{minimal} \usepackage{amsmath}
+               \usepackage{wasysym} \usepackage{amsfonts} \usepackage{amssymb}
+               \usepackage{amsbsy} \usepackage{mathrsfs} \usepackage{upgreek}
+               \setlength{\oddsidemargin}{-69pt}
+               \begin{document}$${{{\bf{{{{\mathcal{K}}}}}}}}$$\end{document})
+               or the influence functions (I), particularly when memory effects
+               are present. Despite their significance, formal connections
+               between the two have not been explicitly known. We establish
+               their connections by examining the system propagator for a
+               N-level system linearly coupled to Gaussian baths with various
+               types of system-bath coupling. For a certain class of problems,
+               we devised a non-perturbative, diagrammatic approach to construct
+               \documentclass[12pt]{minimal} \usepackage …",
+  month     =  sep,
+  year      =  2024
+}
+
+@ARTICLE{Chen2025-go,
+  title     = "Regularized perturbation theory for ab initio solids",
+  author    = "Chen, Meng-Fu and Zhang, Jinghong and Dinh, Hieu Q and Rettig,
+               Adam and Lee, Joonho",
+  journal   = "J. Phys. Chem. Lett.",
+  publisher = "American Chemical Society (ACS)",
+  volume    =  16,
+  number    =  44,
+  pages     = "11373--11381",
+  abstract  = "Second-order Møller-Plesset perturbation theory (MP2) for ab
+               initio simulations of solids is often limited by divergence or
+               overcorrelation issues, particularly in metallic, narrow-gap, and
+               dispersion-stabilized systems. We develop and assess three
+               regularized second-order perturbation theories: κ-MP2, σ-MP2, and
+               the size-consistent Brillouin-Wigner approach (BW-s2) across
+               metals, semiconductors, molecular crystals, and rare gas solids.
+               BW-s2 achieves high accuracy for cohesive energies, lattice
+               constants, and bulk moduli in metals, semiconductors, and
+               molecular crystals, rivaling or surpassing coupled-cluster with
+               singles and doubles at a lower cost. In rare gas solids, where
+               MP2 already underbinds, κ-MP2 does not make the results much
+               worse, while BW-s2 struggles. These results illustrate both the
+               potential and limitations of regularized perturbation theory for
+               efficient and accurate solid-state simulations. While broader
+               testing is warranted, BW-s2(α = 2) appears particularly
+               promising, with possible advantages over modern random-phase
+               approximations and coupled-cluster theory.",
+  month     =  nov,
+  year      =  2025,
+  language  = "en"
+}
+
+@ARTICLE{Carter-Fenk2023-wz,
+  title     = "Repartitioned Brillouin-Wigner perturbation theory with a
+               size-consistent second-order correlation energy",
+  author    = "Carter-Fenk, Kevin and Head-Gordon, Martin",
   journal   = "J. Chem. Phys.",
   publisher = "AIP Publishing",
   volume    =  158,
-  number    =  12,
-  pages     =  124102,
-  abstract  = "We show how to construct an effective Hamiltonian whose dimension
-               scales linearly with system size, and whose eigenvalues
-               systematically approximate the excitation energies of GW theory.
-               This is achieved by rigorously expanding the self-energy in order
-               to exactly conserve a desired number of frequency-independent
-               moments of the self-energy dynamics. Recasting GW in this way
-               admits a low-scaling O[N4] approach to build and solve this
-               Hamiltonian, with a proposal to reduce this further to O[N3].
-               This relies on exposing a novel recursive framework for the
-               density response moments of the random phase approximation, where
-               the efficient calculation of its starting point mirrors the
-               low-scaling approaches to compute RPA correlation energies. The
-               frequency integration of GW, which distinguishes so many
-               different GW variants, can be performed without approximation
-               directly in this moment representation. Furthermore, the solution
-               to the Dyson equation can be performed exactly, avoiding analytic
-               continuation, diagonal approximations, or iterative solutions to
-               the quasiparticle equation, with the full-frequency spectrum
-               obtained from the complete solution of this effective static
-               Hamiltonian. We show how this approach converges rapidly with
-               respect to the order of the conserved self-energy moments and is
-               applied across the GW100 benchmark dataset to obtain accurate GW
-               spectra in comparison to traditional implementations. We also
-               show the ability to systematically converge all-electron
-               full-frequency spectra and high-energy features beyond frontier
-               excitations, as well as avoiding discontinuities in the spectrum,
-               which afflict many other GW approaches.",
-  month     =  mar,
+  number    =  23,
+  abstract  = "Second-order Møller-Plesset perturbation theory (MP2) often
+               breaks down catastrophically in small-gap systems, leaving much
+               to be desired in its performance for myriad chemical applications
+               such as noncovalent interactions, thermochemistry, and dative
+               bonding in transition metal complexes. This divergence problem
+               has reignited interest in Brillouin-Wigner perturbation theory
+               (BWPT), which is regular at all orders but lacks size consistency
+               and extensivity, severely limiting its application to chemistry.
+               In this work, we propose an alternative partitioning of the
+               Hamiltonian that leads to a regular BWPT perturbation series
+               that, through the second order, is size-extensive,
+               size-consistent (provided its Hartree-Fock reference is also),
+               and orbital invariant. Our second-order size-consistent
+               Brillouin-Wigner (BW-s2) approach can describe the exact
+               dissociation limit of H2 in a minimal basis set, regardless of
+               the spin polarization of the reference orbitals. More broadly, we
+               find that BW-s2 offers improvements relative to MP2 for covalent
+               bond breaking, noncovalent interaction energies, and
+               metal/organic reaction energies, although rivaling
+               coupled-cluster with single and double substitutions for
+               thermochemical properties.",
+  month     =  jun,
   year      =  2023,
   language  = "en"
 }
 
-@BOOK{OECD2022-vn,
-  title     = "Climate tipping points: Insights for effective policy action",
-  author    = "{OECD}",
-  publisher = "OECD Publishing",
-  abstract  = "This report reviews evidence that overshooting 1.5°C may push the
-               earth over several tipping points, leading to irreversible and
-               severe changes in the climate system. If triggered, tipping point
-               impacts will rapidly cascade through socio-economic and
-               ecological systems, leading to severe effects on human and
-               natural systems and imposing important challenges for human
-               adaptation. Of particular concern are the likely collapse of the
-               West Antarctic and Greenland ice sheets and the abrupt melting of
-               permafrost grounds in the Arctic, which would result in
-               additional sea-level rise and greenhouse gas releases, leading to
-               more warming.Based on the most recent science and consultations
-               with renowned experts, Climate Tipping Points: Insights for
-               Effective Policy Action argues that it is no longer appropriate
-               to consider the risk of crossing tipping points as
-               low-probability. Overshooting 1.5°C may likely lead to
-               irreversible and severe impacts, which must be avoided,
-               heightening the urgency to drastically reduce emissions within
-               this decade. The report calls for a shift in how tipping points
-               are treated in climate policy today and provides recommendations
-               on how climate risk management strategies can better reflect the
-               risks of tipping points in the areas of mitigation, adaptation
-               and technological innovation.",
+@ARTICLE{Dunn1975-ew,
+  title     = "Electron–phonon interactions in an insulator",
+  author    = "Dunn, Dennis",
+  journal   = "Can. J. Phys.",
+  publisher = "Canadian Science Publishing",
+  volume    =  53,
+  number    =  4,
+  pages     = "321--337",
+  abstract  = "A new technique is presented for evaluating the electron Green
+               function Gk(t) in an insulating electron–phonon system. The
+               technique is particularly suitable for those electron–phonon
+               interactions in which the long wavelength phonons are of prime
+               importance such as the polaron and piezoelectric interactions.An
+               exact formal expression is obtained for the time and temperature
+               dependent Green function in the form[Formula: see text]where S is
+               a functional of the differential operator d/dk. The Green
+               function is then expressed as [Formula: see text], and from the
+               exact result a series expansion is derived for the action
+               function Ak(t).This series expansion has a very special property:
+               to whatever order Ak(t) is evaluated the resulting expression for
+               Gk(t) includes, in some way, every perturbation theory diagram.
+               By this we mean that as in conventional techniques (the
+               Hartree–Fock approximation, for example) an infinite subset of
+               diagrams are summed exactly and in contrast to these techniques
+               the remaining infinity of diagrams are not discarded but are
+               evaluated approximately.The technique is applied to the polaron
+               interaction.",
+  month     =  feb,
+  year      =  1975,
+  language  = "en"
+}
+
+@ARTICLE{Robinson2022-wc,
+  title     = "Cumulant methods for electron-phonon problems. {II}. The
+               self-consistent cumulant expansion",
+  author    = "Robinson, Paul J and Dunn, Ian S and Reichman, David R",
+  journal   = "Phys. Rev. B.",
+  publisher = "American Physical Society (APS)",
+  volume    =  105,
+  number    =  22,
+  pages     =  224305,
+  month     =  jun,
+  year      =  2022,
+  language  = "en"
+}
+
+@ARTICLE{Holm1997-by,
+  title     = "Self-consistent cumulant expansion for the electron gas",
+  author    = "Holm, B and Aryasetiawan, F",
+  journal   = "Phys. Rev. B Condens. Matter",
+  publisher = "American Physical Society (APS)",
+  volume    =  56,
+  number    =  20,
+  pages     = "12825--12831",
+  abstract  = "Until recently, calculations of one-electron Green functions
+               within the $\mathrm{GW}$ approximation have been performed
+               without self-consistency. Recent self-consistent $\mathrm{GW}$
+               calculations for the electron gas suggest that vertex corrections
+               are important in a self-consistent scheme. While the
+               $\mathrm{GW}$ approximation gives good description for the
+               quasiparticles, its description for the satellite structure is
+               less satisfactory. Significant improvement for the satellite
+               structure can be obtained using the cumulant expansion. To study
+               the effects of self-consistency within the cumulant expansion, we
+               have performed self-consistent calculations for the electron gas.
+               Multiple plasmon satellites are obtained as in the
+               non-self-consistent calculations and the effects of
+               self-consistency on the satellite energies turned out to be
+               small, suggesting small vertex corrections for the satellite
+               energies within a self-consistent cumulant expansion scheme. The
+               satellite intensity, on the other hand, is modified. The
+               resulting self-consistent Green function has the same
+               characteristic features of a self-consistent $\mathrm{GW}$ for
+               the quasiparticle part, but now with a significantly improved
+               plasmon satellite structure, which is more realistic.",
+  month     =  nov,
+  year      =  1997
+}
+
+@BOOK{Mahan2014-ad,
+  title     = "Many-particle physics",
+  author    = "Mahan, Gerald D",
+  publisher = "Springer",
+  address   = "New York, NY",
+  month     =  jan,
+  year      =  2014
+}
+
+@ARTICLE{Lanczos1950-ox,
+  title   = "An iteration method for the solution of the eigenvalue problem of
+             linear differential and integral operators",
+  author  = "Lanczos, C",
+  journal = "Journal of research of the National Bureau of Standards",
+  volume  =  45,
+  number  =  4,
+  pages   = "255--282",
+  year    =  1950
+}
+
+@ARTICLE{Schimka2010-re,
+  title     = "Accurate surface and adsorption energies from many-body
+               perturbation theory",
+  author    = "Schimka, L and Harl, J and Stroppa, A and Grüneis, A and Marsman,
+               M and Mittendorfer, F and Kresse, G",
+  journal   = "Nat. Mater.",
+  publisher = "Springer Science and Business Media LLC",
+  volume    =  9,
+  number    =  9,
+  pages     = "741--744",
+  abstract  = "Kohn-Sham density functional theory is the workhorse
+               computational method in materials and surface science.
+               Unfortunately, most semilocal density functionals predict
+               surfaces to be more stable than they are experimentally. Naively,
+               we would expect that consequently adsorption energies on surfaces
+               are too small as well, but the contrary is often found:
+               chemisorption energies are usually overestimated. Modifying the
+               functional improves either the adsorption energy or the surface
+               energy but always worsens the other aspect. This suggests that
+               semilocal density functionals possess a fundamental flaw that is
+               difficult to cure, and alternative methods are urgently needed.
+               Here we show that a computationally fairly efficient
+               many-electron approach, the random phase approximation to the
+               correlation energy, resolves this dilemma and yields at the same
+               time excellent lattice constants, surface energies and adsorption
+               energies for carbon monoxide and benzene on transition-metal
+               surfaces.",
+  month     =  sep,
+  year      =  2010,
+  language  = "en"
+}
+
+@ARTICLE{Cohen2012-uv,
+  title     = "Challenges for density functional theory",
+  author    = "Cohen, Aron J and Mori-Sánchez, Paula and Yang, Weitao",
+  journal   = "Chem. Rev.",
+  publisher = "American Chemical Society (ACS)",
+  volume    =  112,
+  number    =  1,
+  pages     = "289--320",
+  abstract  = "ADVERTISEMENT RETURN TO ISSUEPREVReviewNEXTChallenges for Density
+               Functional TheoryAron J. Cohen*, Paula Mori-Sánchez*, and Weitao
+               YangView Author Information Department of Chemistry, Lensfield
+               Road, University of Cambridge, Cambridge, CB2 1EW, United Kingdom
+               Departamento de Química, Universidad Autónoma de Madrid, 28049
+               Madrid, Spain Department of Chemistry, French Family Science
+               Center, Duke University, Durham, North Carolina, 27708, United
+               States*E-mail: [email protected], [email protected] and [email
+               protected]Cite this: Chem. Rev. 2012, 112, 1, 289–320Publication
+               Date (Web):December 22, 2011Publication History Received5 April
+               2011Published online22 December 2011Published inissue 11 January
+               2012https://pubs.acs.org/doi/10.1021/cr200107zhttps://doi.org/10.1021/cr200107zreview-articleACS
+               PublicationsCopyright © 2011 American Chemical SocietyRequest
+               reuse permissionsArticle Views32911Altmetric-Citations1860LEARN
+               ABOUT THESE METRICSArticle Views are the COUNTER-compliant sum of
+               full text article downloads since November 2008 (both PDF and
+               HTML) across all institutions and individuals. These metrics are
+               regularly updated to reflect usage leading up to the last few
+               days.Citations are the number of other articles citing this
+               article, calculated by Crossref and updated daily. Find more
+               information about Crossref citation counts.The Altmetric
+               Attention Score is a quantitative measure of the attention that a
+               research article has received online. Clicking on the donut icon
+               will load a page at altmetric.com with additional details about
+               the score and the social media presence for the given article.
+               Find more information on the Altmetric Attention Score and how
+               the score is calculated. Share Add toView InAdd Full Text with
+               ReferenceAdd Description ExportRISCitationCitation and
+               abstractCitation and referencesMore Options Share
+               onFacebookTwitterWechatLinked InRedditEmail Other access
+               optionsGet e-Alertsclose SUBJECTS:Density functional
+               theory,Electrical energy,Energy,Molecules,Quantum mechanics Get
+               e-Alerts",
+  month     =  jan,
+  year      =  2012,
+  language  = "en"
+}
+
+@ARTICLE{Teale2022-eu,
+  title     = "{DFT} exchange: sharing perspectives on the workhorse of quantum
+               chemistry and materials science",
+  author    = "Teale, Andrew M and Helgaker, Trygve and Savin, Andreas and
+               Adamo, Carlo and Aradi, Bálint and Arbuznikov, Alexei V and
+               Ayers, Paul W and Baerends, Evert Jan and Barone, Vincenzo and
+               Calaminici, Patrizia and Cancès, Eric and Carter, Emily A and
+               Chattaraj, Pratim Kumar and Chermette, Henry and Ciofini, Ilaria
+               and Crawford, T Daniel and De Proft, Frank and Dobson, John F and
+               Draxl, Claudia and Frauenheim, Thomas and Fromager, Emmanuel and
+               Fuentealba, Patricio and Gagliardi, Laura and Galli, Giulia and
+               Gao, Jiali and Geerlings, Paul and Gidopoulos, Nikitas and Gill,
+               Peter M W and Gori-Giorgi, Paola and Görling, Andreas and Gould,
+               Tim and Grimme, Stefan and Gritsenko, Oleg and Jensen, Hans
+               Jørgen Aagaard and Johnson, Erin R and Jones, Robert O and Kaupp,
+               Martin and Köster, Andreas M and Kronik, Leeor and Krylov, Anna I
+               and Kvaal, Simen and Laestadius, Andre and Levy, Mel and Lewin,
+               Mathieu and Liu, Shubin and Loos, Pierre-François and Maitra,
+               Neepa T and Neese, Frank and Perdew, John P and Pernal, Katarzyna
+               and Pernot, Pascal and Piecuch, Piotr and Rebolini, Elisa and
+               Reining, Lucia and Romaniello, Pina and Ruzsinszky, Adrienn and
+               Salahub, Dennis R and Scheffler, Matthias and Schwerdtfeger,
+               Peter and Staroverov, Viktor N and Sun, Jianwei and Tellgren,
+               Erik and Tozer, David J and Trickey, Samuel B and Ullrich,
+               Carsten A and Vela, Alberto and Vignale, Giovanni and Wesolowski,
+               Tomasz A and Xu, Xin and Yang, Weitao",
+  journal   = "Phys. Chem. Chem. Phys.",
+  publisher = "Royal Society of Chemistry (RSC)",
+  volume    =  24,
+  number    =  47,
+  pages     = "28700--28781",
+  abstract  = "In this paper, the history, present status, and future of
+               density-functional theory (DFT) is informally reviewed and
+               discussed by 70 workers in the field, including molecular
+               scientists, materials scientists, method developers and
+               practitioners. The format of the paper is that of a roundtable
+               discussion, in which the participants express and exchange views
+               on DFT in the form of 302 individual contributions, formulated as
+               responses to a preset list of 26 questions. Supported by a
+               bibliography of 777 entries, the paper represents a broad
+               snapshot of DFT, anno 2022.",
   month     =  dec,
   year      =  2022,
   language  = "en"
 }
 
-@ARTICLE{Seh2017-jx,
-  title     = "Combining theory and experiment in electrocatalysis: Insights
-               into materials design",
-  author    = "Seh, Zhi Wei and Kibsgaard, Jakob and Dickens, Colin F and
-               Chorkendorff, Ib and Nørskov, Jens K and Jaramillo, Thomas F",
-  journal   = "Science",
-  publisher = "American Association for the Advancement of Science (AAAS)",
-  volume    =  355,
-  number    =  6321,
-  pages     = "eaad4998",
-  abstract  = "Electrocatalysis plays a central role in clean energy conversion,
-               enabling a number of sustainable processes for future
-               technologies. This review discusses design strategies for
-               state-of-the-art heterogeneous electrocatalysts and associated
-               materials for several different electrochemical transformations
-               involving water, hydrogen, and oxygen, using theory as a means to
-               rationalize catalyst performance. By examining the common
-               principles that govern catalysis for different electrochemical
-               reactions, we describe a systematic framework that clarifies
-               trends in catalyzing these reactions, serving as a guide to new
-               catalyst development while highlighting key gaps that need to be
-               addressed. We conclude by extending this framework to emerging
-               clean energy reactions such as hydrogen peroxide production,
-               carbon dioxide reduction, and nitrogen reduction, where the
-               development of improved catalysts could allow for the sustainable
-               production of a broad range of fuels and chemicals.",
-  month     =  jan,
-  year      =  2017,
+@ARTICLE{Krylov2008-sg,
+  title     = "Equation-of-motion coupled-cluster methods for open-shell and
+               electronically excited species: the Hitchhiker's guide to Fock
+               space",
+  author    = "Krylov, Anna I",
+  journal   = "Annu. Rev. Phys. Chem.",
+  publisher = "Annual Reviews",
+  volume    =  59,
+  number    =  1,
+  pages     = "433--462",
+  abstract  = "The equation-of-motion coupled-cluster (EOM-CC) approach is a
+               versatile electronic-structure tool that allows one to describe a
+               variety of multiconfigurational wave functions within
+               single-reference formalism. This review provides a guide to
+               established EOM methods illustrated by examples that demonstrate
+               the types of target states currently accessible by EOM. It
+               focuses on applications of EOM-CC to electronically excited and
+               open-shell species. The examples emphasize EOM's advantages for
+               selected situations often perceived as multireference cases
+               [e.g., interacting states of different nature, Jahn-Teller (JT)
+               and pseudo-JT states, dense manifolds of ionized states,
+               diradicals, and triradicals]. I also discuss limitations and
+               caveats and offer practical solutions to some problematic
+               situations. The review also touches on some formal aspects of the
+               theory and important current developments.",
+  month     =  may,
+  year      =  2008,
   language  = "en"
 }
 
-@ARTICLE{Du2023-kd,
-  title     = "Moiré photonics and optoelectronics",
-  author    = "Du, Luojun and Molas, Maciej R and Huang, Zhiheng and Zhang,
-               Guangyu and Wang, Feng and Sun, Zhipei",
-  journal   = "Science",
-  publisher = "American Association for the Advancement of Science (AAAS)",
-  volume    =  379,
-  number    =  6639,
-  pages     = "eadg0014",
-  abstract  = "Moiré superlattices, the artificial quantum materials, have
-               provided a wide range of possibilities for the exploration of
-               completely new physics and device architectures. In this Review,
-               we focus on the recent progress on emerging moiré photonics and
-               optoelectronics, including but not limited to moiré excitons,
-               trions, and polaritons; resonantly hybridized excitons;
-               reconstructed collective excitations; strong mid- and
-               far-infrared photoresponses; terahertz single-photon detection;
-               and symmetry-breaking optoelectronics. We also discuss the future
-               opportunities and research directions in this field, such as
-               developing advanced techniques to probe the emergent photonics
-               and optoelectronics in an individual moiré supercell; exploring
-               new ferroelectric, magnetic, and multiferroic moiré systems; and
-               using external degrees of freedom to engineer moiré properties
-               for exciting physics and potential technological innovations.",
-  month     =  mar,
-  year      =  2023,
+@MISC{UnknownUnknown-xk,
+  title        = "7.7. {SCF} Convergence - {ORCA} 6.0 Manual",
+  howpublished = "\url{https://www.faccts.de/docs/orca/6.0/manual/contents/detailed/scfconv.html}",
+  note         = "Accessed: 2026-3-25",
+  language     = "en"
+}
+
+@ARTICLE{Pulay1980-bo,
+  title     = "Convergence acceleration of iterative sequences. the case of scf
+               iteration",
+  author    = "Pulay, Péter",
+  journal   = "Chem. Phys. Lett.",
+  publisher = "Elsevier BV",
+  volume    =  73,
+  number    =  2,
+  pages     = "393--398",
+  abstract  = "Based on a recent method of Pople et al for the solution of large
+               systems of linear equations, a procedure is given for
+               accelerating the convergence of slowly converging quasi-Newton—
+               Raphson type algorithms. This procedure is particularly
+               advantageous if the number of parameters is so large that the
+               calculation and storage of the hessian is no longer practical.
+               Application to the SCF problem is treated in detail.",
+  month     =  jul,
+  year      =  1980,
+  language  = "en"
+}
+
+@ARTICLE{van-Setten2015-sr,
+  title     = "{GW100}: Benchmarking {G0W0} for molecular systems",
+  author    = "van Setten, Michiel J and Caruso, Fabio and Sharifzadeh, Sahar
+               and Ren, Xinguo and Scheffler, Matthias and Liu, Fang and
+               Lischner, Johannes and Lin, Lin and Deslippe, Jack R and Louie,
+               Steven G and Yang, Chao and Weigend, Florian and Neaton, Jeffrey
+               B and Evers, Ferdinand and Rinke, Patrick",
+  journal   = "J. Chem. Theory Comput.",
+  publisher = "American Chemical Society (ACS)",
+  volume    =  11,
+  number    =  12,
+  pages     = "5665--5687",
+  abstract  = "We present the GW100 set. GW100 is a benchmark set of the
+               ionization potentials and electron affinities of 100 molecules
+               computed with the GW method using three independent GW codes and
+               different GW methodologies. The quasi-particle energies of the
+               highest-occupied molecular orbitals (HOMO) and lowest-unoccupied
+               molecular orbitals (LUMO) are calculated for the GW100 set at the
+               G0W0@PBE level using the software packages TURBOMOLE, FHI-aims,
+               and BerkeleyGW. The use of these three codes allows for a
+               quantitative comparison of the type of basis set (plane wave or
+               local orbital) and handling of unoccupied states, the treatment
+               of core and valence electrons (all electron or pseudopotentials),
+               the treatment of the frequency dependence of the self-energy
+               (full frequency or more approximate plasmon-pole models), and the
+               algorithm for solving the quasi-particle equation. Primary
+               results include reference values for future benchmarks, best
+               practices for convergence within a particular approach, and
+               average error bars for the most common approximations.",
+  month     =  dec,
+  year      =  2015,
+  language  = "en"
+}
+
+@ARTICLE{Lau2019-vk,
+  title        = "Quantum plasmons and intraband excitons in doped
+                  nanoparticles: Failure of the Tamm-Dancoff approximation and
+                  importance of electron-hole attraction",
+  author       = "Lau, Bryan T G and Berkelbach, Timothy C",
+  journal      = "arXiv [cond-mat.mes-hall]",
+  abstract     = "We use excited-state quantum chemistry techniques to
+                  investigate the intraband absorption of doped semiconductor
+                  nanoparticles as a function of doping density, nanoparticle
+                  radius, and material properties. The excess electrons are
+                  modeled as interacting particles confined in a sphere. We
+                  compare the predictions of various single-excitation theories,
+                  including time-dependent Hartree-Fock, the random-phase
+                  approximation, and configuration interaction with single
+                  excitations. We find that time-dependent Hartree-Fock most
+                  accurately describes the character of the excitation, as
+                  compared to equation-of-motion coupled-cluster theory with
+                  single and double excitations. The excitation evolves from
+                  confinement-dominated, to excitonic, to plasmonic with
+                  increasing number of electrons at fixed density, and the
+                  threshold number of electrons to produce a plasmon increases
+                  with density due to quantum confinement. Exchange integrals
+                  (attractive electron-hole interactions) are essential to
+                  properly describe excitons, and de-excitations (i.e.~avoidance
+                  of the Tamm-Dancoff approximation) are essential to properly
+                  describe plasmons. We propose a schematic model whose analytic
+                  solutions closely reproduce our numerical calculations. Our
+                  results are in good agreement with experimental spectra of
+                  doped ZnO nanoparticles at a doping density of $1.4\times
+                  10^{20}$ cm$^{-3}$.",
+  month        =  jul,
+  year         =  2019,
+  primaryClass = "cond-mat.mes-hall"
+}
+
+@ARTICLE{Bintrim2021-nb,
+  title     = "Full-frequency {GW} without frequency",
+  author    = "Bintrim, Sylvia J and Berkelbach, Timothy C",
+  journal   = "J. Chem. Phys.",
+  publisher = "AIP Publishing",
+  volume    =  154,
+  number    =  4,
+  pages     =  041101,
+  abstract  = "Efficient computer implementations of the GW approximation must
+               approximate a numerically challenging frequency integral; the
+               integral can be performed analytically, but doing so leads to an
+               expensive implementation whose computational cost scales as
+               O(N6), where N is the size of the system. Here, we introduce a
+               new formulation of the full-frequency GW approximation by exactly
+               recasting it as an eigenvalue problem in an expanded space. This
+               new formulation (1) avoids the use of time or frequency grids,
+               (2) naturally obviates the need for the common ``diagonal''
+               approximation, (3) enables common iterative eigensolvers that
+               reduce the canonical scaling to O(N5), and (4) enables a
+               density-fitted implementation that reduces the scaling to O(N4).
+               We numerically verify these scaling behaviors and test a variety
+               of approximations that are motivated by this new formulation. The
+               new formulation is found to be competitive with conventional
+               O(N4) methods based on analytic continuation or contour
+               deformation. In this new formulation, the relation of the GW
+               approximation to configuration interaction, coupled-cluster
+               theory, and the algebraic diagrammatic construction is made
+               especially apparent, providing a new direction for improvements
+               to the GW approximation.",
+  month     =  jan,
+  year      =  2021,
+  language  = "en"
+}
+
+@ARTICLE{Marie2023-my,
+  title        = "The $GW$ Approximation: A Quantum Chemistry Perspective",
+  author       = "Marie, Antoine and Ammar, Abdallah and Loos, Pierre-François",
+  journal      = "arXiv [physics.chem-ph]",
+  abstract     = "We provide an in-depth examination of the $GW$ approximation
+                  of Green's function many-body perturbation theory by detailing
+                  both its theoretical and practical aspects in the realm of
+                  quantum chemistry. First, the quasiparticle context is
+                  introduced before delving into the derivation of Hedin's
+                  equations. From these, we explain how to derive the well-known
+                  $GW$ approximation of the self-energy. In a second time, we
+                  meticulously explain each step involved in a $GW$ calculation
+                  and what type of physical quantities can be computed. To
+                  illustrate its versatility, we consider two contrasting
+                  systems: the water molecule, a weakly correlated system, and
+                  the carbon dimer, a strongly correlated system. Each stage of
+                  the process is thoroughly detailed and explained alongside
+                  numerical results and illustrative plots. We hope that the
+                  contribution will facilitate the dissemination and
+                  democratization of Green's function-based formalisms within
+                  the computational and theoretical quantum chemistry community.",
+  month        =  nov,
+  year         =  2023,
+  primaryClass = "physics.chem-ph"
+}
+
+@ARTICLE{Quintero-Monsebaiz2022-en,
+  title     = "Connections between many-body perturbation and coupled-cluster
+               theories",
+  author    = "Quintero-Monsebaiz, Raúl and Monino, Enzo and Marie, Antoine and
+               Loos, Pierre-François",
+  journal   = "J. Chem. Phys.",
+  publisher = "AIP Publishing",
+  volume    =  157,
+  number    =  23,
+  pages     =  231102,
+  abstract  = "Here, we build on the works of Scuseria et al. [J. Chem. Phys.
+               129, 231101 (2008)] and Berkelbach [J. Chem. Phys. 149, 041103
+               (2018)] to show connections between the Bethe-Salpeter equation
+               (BSE) formalism combined with the GW approximation from many-body
+               perturbation theory and coupled-cluster (CC) theory at the
+               ground- and excited-state levels. In particular, we show how to
+               recast the GW and Bethe-Salpeter equations as non-linear CC-like
+               equations. Similitudes between BSE@GW and the
+               similarity-transformed equation-of-motion CC method are also put
+               forward. The present work allows us to easily transfer key
+               developments and the general knowledge gathered in CC theory to
+               many-body perturbation theory. In particular, it may provide a
+               path for the computation of ground- and excited-state properties
+               (such as nuclear gradients) within the GW and BSE frameworks.",
+  month     =  dec,
+  year      =  2022,
+  language  = "en"
+}
+
+@ARTICLE{Bruneval2021-uj,
+  title     = "The {GW} miracle in many-body perturbation theory for the
+               ionization potential of molecules",
+  author    = "Bruneval, Fabien and Dattani, Nike and van Setten, Michiel J",
+  journal   = "Front. Chem.",
+  publisher = "Frontiers Media SA",
+  volume    =  9,
+  pages     =  749779,
+  abstract  = "We use the GW100 benchmark set to systematically judge the
+               quality of several perturbation theories against high-level
+               quantum chemistry methods. First of all, we revisit the reference
+               CCSD(T) ionization potentials for this popular benchmark set and
+               establish a revised set of CCSD(T) results. Then, for all of
+               these 100 molecules, we calculate the HOMO energy within second
+               and third-order perturbation theory (PT2 and PT3), and, GW as
+               post-Hartree-Fock methods. We found GW to be the most accurate of
+               these three approximations for the ionization potential, by far.
+               Going beyond GW by adding more diagrams is a tedious and
+               dangerous activity: We tried to complement GW with second-order
+               exchange (SOX), with second-order screened exchange (SOSEX), with
+               interacting electron-hole pairs (W TDHF), and with a GW
+               density-matrix (γ GW ). Only the γ GW result has a positive
+               impact. Finally using an improved hybrid functional for the
+               non-interacting Green's function, considering it as a cheap way
+               to approximate self-consistency, the accuracy of the simplest GW
+               approximation improves even more. We conclude that GW is a
+               miracle: Its subtle balance makes GW both accurate and fast.",
+  month     =  dec,
+  year      =  2021,
+  keywords  = "Green’s function (GF); coupled-cluster method; density-functional
+               theory (DFT); electronic structure ab initio calculations;
+               feynman diagram expansion; high-precision benchmarks; ionization
+               potential (IP); many-body ab initio structure",
+  language  = "en"
+}
+
+@ARTICLE{Golze2019-wm,
+  title     = "The {GW} compendium: A practical guide to theoretical
+               photoemission spectroscopy",
+  author    = "Golze, Dorothea and Dvorak, Marc and Rinke, Patrick",
+  journal   = "Front. Chem.",
+  publisher = "Frontiers Media SA",
+  volume    =  7,
+  pages     =  377,
+  abstract  = "The GW approximation in electronic structure theory has become a
+               widespread tool for predicting electronic excitations in chemical
+               compounds and materials. In the realm of theoretical
+               spectroscopy, the GW method provides access to charged
+               excitations as measured in direct or inverse photoemission
+               spectroscopy. The number of GW calculations in the past two
+               decades has exploded with increased computing power and modern
+               codes. The success of GW can be attributed to many factors:
+               favorable scaling with respect to system size, a formal
+               interpretation for charged excitation energies, the importance of
+               dynamical screening in real systems, and its practical
+               combination with other theories. In this review, we provide an
+               overview of these formal and practical considerations. We expand,
+               in detail, on the choices presented to the scientist performing
+               GW calculations for the first time. We also give an introduction
+               to the many-body theory behind GW, a review of modern
+               applications like molecules and surfaces, and a perspective on
+               methods which go beyond conventional GW calculations. This review
+               addresses chemists, physicists and material scientists with an
+               interest in theoretical spectroscopy. It is intended for
+               newcomers to GW calculations but can also serve as an alternative
+               perspective for experts and an up-to-date source of computational
+               techniques.",
+  month     =  jul,
+  year      =  2019,
+  keywords  = "GW approximation; Hedin's equations; band structure; electron
+               affinity; ionization potential; quasiparticle; self-energy;
+               theoretical spectroscopy",
+  language  = "en"
+}
+
+@ARTICLE{Neese2025-lp,
+  title     = "Quantum chemistry and large systems – a personal perspective",
+  author    = "Neese, Frank",
+  journal   = "Pure Appl. Chem.",
+  publisher = "Walter de Gruyter GmbH",
+  volume    =  97,
+  number    =  11,
+  pages     = "1547--1562",
+  abstract  = "Abstract This perspective offers a personal reflection on the
+               evolution, current status, and open challenges of quantum
+               chemistry in the context of large molecular systems. Beginning
+               with Dirac’s famous 1929 prophecy, I revisit the historical
+               trajectory of our discipline, from the development of early
+               conceptual models to the emergence of density functional theory
+               and correlated wavefunction methods. While enormous progress has
+               been made in algorithmic sophistication, enabling accurate
+               calculations on systems with thousands of atoms, I argue that
+               accurate energies alone do not solve the entirety of chemical
+               problems. Real-world applications demand more than electronic
+               structure: solvation, entropy, conformational complexity, and the
+               sheer complexity of large molecules challenge our methods and our
+               assumptions. Equally important are the conceptual and
+               philosophical tensions that continue to shape the field,
+               especially the difficult balance between prediction and
+               understanding. I advocate for a more integrative approach that
+               values models, insight, and falsifiability alongside numerical
+               precision. Finally, I briefly consider the emerging role of
+               machine learning and the implications of automation for the
+               future of theory. This article is not a review but a dialogue –
+               with the field, with its history, and with its practitioners.",
+  month     =  nov,
+  year      =  2025,
+  keywords  = "Algorithms; history; macromolecular chemistry; philosophy;
+               quantum chemistry; quantum science and technology; Schrödinger
+               equation",
+  language  = "en"
+}
+
+@ARTICLE{Li2022-qt,
+  title     = "Recent advances in {MoS2}-based materials for electrocatalysis",
+  author    = "Li, Ruizhi and Liang, Jie and Li, Tingshuai and Yue, Luchao and
+               Liu, Qian and Luo, Yonglan and Hamdy, Mohamed S and Sun, Yibai
+               and Sun, Xuping",
+  journal   = "Chem. Commun. (Camb.)",
+  publisher = "Royal Society of Chemistry (RSC)",
+  volume    =  58,
+  number    =  14,
+  pages     = "2259--2278",
+  abstract  = "The increasing energy demand and related environmental issues
+               have drawn great attention worldwide, thus necessitating the
+               development of sustainable technologies to preserve the
+               ecosystems for future generations. Electrocatalysts for
+               energy-conversion reactions such as the hydrogen evolution
+               reaction (HER), nitrogen reduction reaction (NRR), and carbon
+               dioxide reduction reaction (CO2RR) are at the heart of these
+               renewable energy technologies, but they suffer from sluggish
+               kinetics due to the multistep electron and mass transfer.
+               State-of-the-art catalysts are thus highly desired to boost the
+               conversion efficiencies, which are still inadequate. Recently, as
+               a typical transition metal dichalcogenide, molybdenum disulfide
+               (MoS2) with unique physicochemical properties has been verified
+               as a promising material for catalyzing key electrochemical
+               reactions (i.e., HER, NRR, and CO2RR), presenting excellent
+               performances. Therefore, in this review, we give insight into the
+               structure and synthetic strategies of MoS2. Recent advances in
+               MoS2-based materials for the three key electrochemical reactions
+               are briefly summarized. Open challenges and perspectives of
+               MoS2-based electrocatalysts toward HER, NRR, and CO2RR are also
+               outlined.",
+  month     =  feb,
+  year      =  2022,
   language  = "en"
 }
 
@@ -196,275 +800,222 @@
   language  = "en"
 }
 
-@ARTICLE{Li2022-qt,
-  title     = "Recent advances in {MoS2}-based materials for electrocatalysis",
-  author    = "Li, Ruizhi and Liang, Jie and Li, Tingshuai and Yue, Luchao and
-               Liu, Qian and Luo, Yonglan and Hamdy, Mohamed S and Sun, Yibai
-               and Sun, Xuping",
-  journal   = "Chem. Commun. (Camb.)",
-  publisher = "Royal Society of Chemistry (RSC)",
-  volume    =  58,
-  number    =  14,
-  pages     = "2259--2278",
-  abstract  = "The increasing energy demand and related environmental issues
-               have drawn great attention worldwide, thus necessitating the
-               development of sustainable technologies to preserve the
-               ecosystems for future generations. Electrocatalysts for
-               energy-conversion reactions such as the hydrogen evolution
-               reaction (HER), nitrogen reduction reaction (NRR), and carbon
-               dioxide reduction reaction (CO2RR) are at the heart of these
-               renewable energy technologies, but they suffer from sluggish
-               kinetics due to the multistep electron and mass transfer.
-               State-of-the-art catalysts are thus highly desired to boost the
-               conversion efficiencies, which are still inadequate. Recently, as
-               a typical transition metal dichalcogenide, molybdenum disulfide
-               (MoS2) with unique physicochemical properties has been verified
-               as a promising material for catalyzing key electrochemical
-               reactions (i.e., HER, NRR, and CO2RR), presenting excellent
-               performances. Therefore, in this review, we give insight into the
-               structure and synthetic strategies of MoS2. Recent advances in
-               MoS2-based materials for the three key electrochemical reactions
-               are briefly summarized. Open challenges and perspectives of
-               MoS2-based electrocatalysts toward HER, NRR, and CO2RR are also
-               outlined.",
-  month     =  feb,
-  year      =  2022,
+@ARTICLE{Du2023-kd,
+  title     = "Moiré photonics and optoelectronics",
+  author    = "Du, Luojun and Molas, Maciej R and Huang, Zhiheng and Zhang,
+               Guangyu and Wang, Feng and Sun, Zhipei",
+  journal   = "Science",
+  publisher = "American Association for the Advancement of Science (AAAS)",
+  volume    =  379,
+  number    =  6639,
+  pages     = "eadg0014",
+  abstract  = "Moiré superlattices, the artificial quantum materials, have
+               provided a wide range of possibilities for the exploration of
+               completely new physics and device architectures. In this Review,
+               we focus on the recent progress on emerging moiré photonics and
+               optoelectronics, including but not limited to moiré excitons,
+               trions, and polaritons; resonantly hybridized excitons;
+               reconstructed collective excitations; strong mid- and
+               far-infrared photoresponses; terahertz single-photon detection;
+               and symmetry-breaking optoelectronics. We also discuss the future
+               opportunities and research directions in this field, such as
+               developing advanced techniques to probe the emergent photonics
+               and optoelectronics in an individual moiré supercell; exploring
+               new ferroelectric, magnetic, and multiferroic moiré systems; and
+               using external degrees of freedom to engineer moiré properties
+               for exciting physics and potential technological innovations.",
+  month     =  mar,
+  year      =  2023,
   language  = "en"
 }
 
-@ARTICLE{Neese2025-lp,
-  title     = "Quantum chemistry and large systems – a personal perspective",
-  author    = "Neese, Frank",
-  journal   = "Pure Appl. Chem.",
-  publisher = "Walter de Gruyter GmbH",
-  volume    =  97,
-  number    =  11,
-  pages     = "1547--1562",
-  abstract  = "Abstract This perspective offers a personal reflection on the
-               evolution, current status, and open challenges of quantum
-               chemistry in the context of large molecular systems. Beginning
-               with Dirac’s famous 1929 prophecy, I revisit the historical
-               trajectory of our discipline, from the development of early
-               conceptual models to the emergence of density functional theory
-               and correlated wavefunction methods. While enormous progress has
-               been made in algorithmic sophistication, enabling accurate
-               calculations on systems with thousands of atoms, I argue that
-               accurate energies alone do not solve the entirety of chemical
-               problems. Real-world applications demand more than electronic
-               structure: solvation, entropy, conformational complexity, and the
-               sheer complexity of large molecules challenge our methods and our
-               assumptions. Equally important are the conceptual and
-               philosophical tensions that continue to shape the field,
-               especially the difficult balance between prediction and
-               understanding. I advocate for a more integrative approach that
-               values models, insight, and falsifiability alongside numerical
-               precision. Finally, I briefly consider the emerging role of
-               machine learning and the implications of automation for the
-               future of theory. This article is not a review but a dialogue –
-               with the field, with its history, and with its practitioners.",
-  month     =  nov,
-  year      =  2025,
-  keywords  = "Algorithms; history; macromolecular chemistry; philosophy;
-               quantum chemistry; quantum science and technology; Schrödinger
-               equation",
-  language  = "en"
-}
-
-@ARTICLE{Golze2019-wm,
-  title     = "The {GW} compendium: A practical guide to theoretical
-               photoemission spectroscopy",
-  author    = "Golze, Dorothea and Dvorak, Marc and Rinke, Patrick",
-  journal   = "Front. Chem.",
-  publisher = "Frontiers Media SA",
-  volume    =  7,
-  pages     =  377,
-  abstract  = "The GW approximation in electronic structure theory has become a
-               widespread tool for predicting electronic excitations in chemical
-               compounds and materials. In the realm of theoretical
-               spectroscopy, the GW method provides access to charged
-               excitations as measured in direct or inverse photoemission
-               spectroscopy. The number of GW calculations in the past two
-               decades has exploded with increased computing power and modern
-               codes. The success of GW can be attributed to many factors:
-               favorable scaling with respect to system size, a formal
-               interpretation for charged excitation energies, the importance of
-               dynamical screening in real systems, and its practical
-               combination with other theories. In this review, we provide an
-               overview of these formal and practical considerations. We expand,
-               in detail, on the choices presented to the scientist performing
-               GW calculations for the first time. We also give an introduction
-               to the many-body theory behind GW, a review of modern
-               applications like molecules and surfaces, and a perspective on
-               methods which go beyond conventional GW calculations. This review
-               addresses chemists, physicists and material scientists with an
-               interest in theoretical spectroscopy. It is intended for
-               newcomers to GW calculations but can also serve as an alternative
-               perspective for experts and an up-to-date source of computational
-               techniques.",
-  month     =  jul,
-  year      =  2019,
-  keywords  = "GW approximation; Hedin's equations; band structure; electron
-               affinity; ionization potential; quasiparticle; self-energy;
-               theoretical spectroscopy",
-  language  = "en"
-}
-
-@ARTICLE{Bruneval2021-uj,
-  title     = "The {GW} miracle in many-body perturbation theory for the
-               ionization potential of molecules",
-  author    = "Bruneval, Fabien and Dattani, Nike and van Setten, Michiel J",
-  journal   = "Front. Chem.",
-  publisher = "Frontiers Media SA",
-  volume    =  9,
-  pages     =  749779,
-  abstract  = "We use the GW100 benchmark set to systematically judge the
-               quality of several perturbation theories against high-level
-               quantum chemistry methods. First of all, we revisit the reference
-               CCSD(T) ionization potentials for this popular benchmark set and
-               establish a revised set of CCSD(T) results. Then, for all of
-               these 100 molecules, we calculate the HOMO energy within second
-               and third-order perturbation theory (PT2 and PT3), and, GW as
-               post-Hartree-Fock methods. We found GW to be the most accurate of
-               these three approximations for the ionization potential, by far.
-               Going beyond GW by adding more diagrams is a tedious and
-               dangerous activity: We tried to complement GW with second-order
-               exchange (SOX), with second-order screened exchange (SOSEX), with
-               interacting electron-hole pairs (W TDHF), and with a GW
-               density-matrix (γ GW ). Only the γ GW result has a positive
-               impact. Finally using an improved hybrid functional for the
-               non-interacting Green's function, considering it as a cheap way
-               to approximate self-consistency, the accuracy of the simplest GW
-               approximation improves even more. We conclude that GW is a
-               miracle: Its subtle balance makes GW both accurate and fast.",
-  month     =  dec,
-  year      =  2021,
-  keywords  = "Green’s function (GF); coupled-cluster method; density-functional
-               theory (DFT); electronic structure ab initio calculations;
-               feynman diagram expansion; high-precision benchmarks; ionization
-               potential (IP); many-body ab initio structure",
-  language  = "en"
-}
-
-@ARTICLE{Quintero-Monsebaiz2022-en,
-  title     = "Connections between many-body perturbation and coupled-cluster
-               theories",
-  author    = "Quintero-Monsebaiz, Raúl and Monino, Enzo and Marie, Antoine and
-               Loos, Pierre-François",
-  journal   = "J. Chem. Phys.",
-  publisher = "AIP Publishing",
-  volume    =  157,
-  number    =  23,
-  pages     =  231102,
-  abstract  = "Here, we build on the works of Scuseria et al. [J. Chem. Phys.
-               129, 231101 (2008)] and Berkelbach [J. Chem. Phys. 149, 041103
-               (2018)] to show connections between the Bethe-Salpeter equation
-               (BSE) formalism combined with the GW approximation from many-body
-               perturbation theory and coupled-cluster (CC) theory at the
-               ground- and excited-state levels. In particular, we show how to
-               recast the GW and Bethe-Salpeter equations as non-linear CC-like
-               equations. Similitudes between BSE@GW and the
-               similarity-transformed equation-of-motion CC method are also put
-               forward. The present work allows us to easily transfer key
-               developments and the general knowledge gathered in CC theory to
-               many-body perturbation theory. In particular, it may provide a
-               path for the computation of ground- and excited-state properties
-               (such as nuclear gradients) within the GW and BSE frameworks.",
-  month     =  dec,
-  year      =  2022,
-  language  = "en"
-}
-
-@ARTICLE{Marie2023-my,
-  title        = "The $GW$ Approximation: A Quantum Chemistry Perspective",
-  author       = "Marie, Antoine and Ammar, Abdallah and Loos, Pierre-François",
-  journal      = "arXiv [physics.chem-ph]",
-  abstract     = "We provide an in-depth examination of the $GW$ approximation
-                  of Green's function many-body perturbation theory by detailing
-                  both its theoretical and practical aspects in the realm of
-                  quantum chemistry. First, the quasiparticle context is
-                  introduced before delving into the derivation of Hedin's
-                  equations. From these, we explain how to derive the well-known
-                  $GW$ approximation of the self-energy. In a second time, we
-                  meticulously explain each step involved in a $GW$ calculation
-                  and what type of physical quantities can be computed. To
-                  illustrate its versatility, we consider two contrasting
-                  systems: the water molecule, a weakly correlated system, and
-                  the carbon dimer, a strongly correlated system. Each stage of
-                  the process is thoroughly detailed and explained alongside
-                  numerical results and illustrative plots. We hope that the
-                  contribution will facilitate the dissemination and
-                  democratization of Green's function-based formalisms within
-                  the computational and theoretical quantum chemistry community.",
-  month        =  nov,
-  year         =  2023,
-  primaryClass = "physics.chem-ph"
-}
-
-@ARTICLE{Bintrim2021-nb,
-  title     = "Full-frequency {GW} without frequency",
-  author    = "Bintrim, Sylvia J and Berkelbach, Timothy C",
-  journal   = "J. Chem. Phys.",
-  publisher = "AIP Publishing",
-  volume    =  154,
-  number    =  4,
-  pages     =  041101,
-  abstract  = "Efficient computer implementations of the GW approximation must
-               approximate a numerically challenging frequency integral; the
-               integral can be performed analytically, but doing so leads to an
-               expensive implementation whose computational cost scales as
-               O(N6), where N is the size of the system. Here, we introduce a
-               new formulation of the full-frequency GW approximation by exactly
-               recasting it as an eigenvalue problem in an expanded space. This
-               new formulation (1) avoids the use of time or frequency grids,
-               (2) naturally obviates the need for the common ``diagonal''
-               approximation, (3) enables common iterative eigensolvers that
-               reduce the canonical scaling to O(N5), and (4) enables a
-               density-fitted implementation that reduces the scaling to O(N4).
-               We numerically verify these scaling behaviors and test a variety
-               of approximations that are motivated by this new formulation. The
-               new formulation is found to be competitive with conventional
-               O(N4) methods based on analytic continuation or contour
-               deformation. In this new formulation, the relation of the GW
-               approximation to configuration interaction, coupled-cluster
-               theory, and the algebraic diagrammatic construction is made
-               especially apparent, providing a new direction for improvements
-               to the GW approximation.",
+@ARTICLE{Seh2017-jx,
+  title     = "Combining theory and experiment in electrocatalysis: Insights
+               into materials design",
+  author    = "Seh, Zhi Wei and Kibsgaard, Jakob and Dickens, Colin F and
+               Chorkendorff, Ib and Nørskov, Jens K and Jaramillo, Thomas F",
+  journal   = "Science",
+  publisher = "American Association for the Advancement of Science (AAAS)",
+  volume    =  355,
+  number    =  6321,
+  pages     = "eaad4998",
+  abstract  = "Electrocatalysis plays a central role in clean energy conversion,
+               enabling a number of sustainable processes for future
+               technologies. This review discusses design strategies for
+               state-of-the-art heterogeneous electrocatalysts and associated
+               materials for several different electrochemical transformations
+               involving water, hydrogen, and oxygen, using theory as a means to
+               rationalize catalyst performance. By examining the common
+               principles that govern catalysis for different electrochemical
+               reactions, we describe a systematic framework that clarifies
+               trends in catalyzing these reactions, serving as a guide to new
+               catalyst development while highlighting key gaps that need to be
+               addressed. We conclude by extending this framework to emerging
+               clean energy reactions such as hydrogen peroxide production,
+               carbon dioxide reduction, and nitrogen reduction, where the
+               development of improved catalysts could allow for the sustainable
+               production of a broad range of fuels and chemicals.",
   month     =  jan,
-  year      =  2021,
+  year      =  2017,
   language  = "en"
 }
 
-@ARTICLE{Lau2019-vk,
-  title        = "Quantum plasmons and intraband excitons in doped
-                  nanoparticles: Failure of the Tamm-Dancoff approximation and
-                  importance of electron-hole attraction",
-  author       = "Lau, Bryan T G and Berkelbach, Timothy C",
-  journal      = "arXiv [cond-mat.mes-hall]",
-  abstract     = "We use excited-state quantum chemistry techniques to
-                  investigate the intraband absorption of doped semiconductor
-                  nanoparticles as a function of doping density, nanoparticle
-                  radius, and material properties. The excess electrons are
-                  modeled as interacting particles confined in a sphere. We
-                  compare the predictions of various single-excitation theories,
-                  including time-dependent Hartree-Fock, the random-phase
-                  approximation, and configuration interaction with single
-                  excitations. We find that time-dependent Hartree-Fock most
-                  accurately describes the character of the excitation, as
-                  compared to equation-of-motion coupled-cluster theory with
-                  single and double excitations. The excitation evolves from
-                  confinement-dominated, to excitonic, to plasmonic with
-                  increasing number of electrons at fixed density, and the
-                  threshold number of electrons to produce a plasmon increases
-                  with density due to quantum confinement. Exchange integrals
-                  (attractive electron-hole interactions) are essential to
-                  properly describe excitons, and de-excitations (i.e.~avoidance
-                  of the Tamm-Dancoff approximation) are essential to properly
-                  describe plasmons. We propose a schematic model whose analytic
-                  solutions closely reproduce our numerical calculations. Our
-                  results are in good agreement with experimental spectra of
-                  doped ZnO nanoparticles at a doping density of $1.4\times
-                  10^{20}$ cm$^{-3}$.",
-  month        =  jul,
-  year         =  2019,
-  primaryClass = "cond-mat.mes-hall"
+@BOOK{OECD2022-vn,
+  title     = "Climate tipping points: Insights for effective policy action",
+  author    = "{OECD}",
+  publisher = "OECD Publishing",
+  abstract  = "This report reviews evidence that overshooting 1.5°C may push the
+               earth over several tipping points, leading to irreversible and
+               severe changes in the climate system. If triggered, tipping point
+               impacts will rapidly cascade through socio-economic and
+               ecological systems, leading to severe effects on human and
+               natural systems and imposing important challenges for human
+               adaptation. Of particular concern are the likely collapse of the
+               West Antarctic and Greenland ice sheets and the abrupt melting of
+               permafrost grounds in the Arctic, which would result in
+               additional sea-level rise and greenhouse gas releases, leading to
+               more warming.Based on the most recent science and consultations
+               with renowned experts, Climate Tipping Points: Insights for
+               Effective Policy Action argues that it is no longer appropriate
+               to consider the risk of crossing tipping points as
+               low-probability. Overshooting 1.5°C may likely lead to
+               irreversible and severe impacts, which must be avoided,
+               heightening the urgency to drastically reduce emissions within
+               this decade. The report calls for a shift in how tipping points
+               are treated in climate policy today and provides recommendations
+               on how climate risk management strategies can better reflect the
+               risks of tipping points in the areas of mitigation, adaptation
+               and technological innovation.",
+  month     =  dec,
+  year      =  2022,
+  language  = "en"
+}
+
+@ARTICLE{Scott2023-gc,
+  title     = "A ``moment-conserving'' reformulation of {GW} theory",
+  author    = "Scott, Charles J C and Backhouse, Oliver J and Booth, George H",
+  journal   = "J. Chem. Phys.",
+  publisher = "AIP Publishing",
+  volume    =  158,
+  number    =  12,
+  pages     =  124102,
+  abstract  = "We show how to construct an effective Hamiltonian whose dimension
+               scales linearly with system size, and whose eigenvalues
+               systematically approximate the excitation energies of GW theory.
+               This is achieved by rigorously expanding the self-energy in order
+               to exactly conserve a desired number of frequency-independent
+               moments of the self-energy dynamics. Recasting GW in this way
+               admits a low-scaling O[N4] approach to build and solve this
+               Hamiltonian, with a proposal to reduce this further to O[N3].
+               This relies on exposing a novel recursive framework for the
+               density response moments of the random phase approximation, where
+               the efficient calculation of its starting point mirrors the
+               low-scaling approaches to compute RPA correlation energies. The
+               frequency integration of GW, which distinguishes so many
+               different GW variants, can be performed without approximation
+               directly in this moment representation. Furthermore, the solution
+               to the Dyson equation can be performed exactly, avoiding analytic
+               continuation, diagonal approximations, or iterative solutions to
+               the quasiparticle equation, with the full-frequency spectrum
+               obtained from the complete solution of this effective static
+               Hamiltonian. We show how this approach converges rapidly with
+               respect to the order of the conserved self-energy moments and is
+               applied across the GW100 benchmark dataset to obtain accurate GW
+               spectra in comparison to traditional implementations. We also
+               show the ability to systematically converge all-electron
+               full-frequency spectra and high-energy features beyond frontier
+               excitations, as well as avoiding discontinuities in the spectrum,
+               which afflict many other GW approaches.",
+  month     =  mar,
+  year      =  2023,
+  language  = "en"
+}
+
+@ARTICLE{Bi2026-ld,
+  title         = "Generalized quantum master equation from memory kernel
+                   coupling theory",
+  author        = "Bi, Rui-Hao and Liu, Wei and Dou, Wenjie",
+  journal       = "arXiv [physics.chem-ph]",
+  abstract      = "The generalized quantum master equation provides a powerful
+                   framework for non-Markovian dynamics of open quantum systems.
+                   However, the accurate and efficient evaluation of the memory
+                   kernel remains a challenge. In this work, we introduce a
+                   comprehensive tensorial extension to the Memory Kernel
+                   Coupling Theory (MKCT) to overcome this bottleneck. By
+                   elevating the original scalar formalism to a tensorial
+                   framework, the extended MKCT enables the calculation of
+                   general expectation values and cross-correlation functions.
+                   We demonstrate the numerical accuracy and efficiency of this
+                   method across multiple benchmark systems: capturing transient
+                   populations and coherences in the spin-boson model, resolving
+                   the excitonic absorption spectrum of the Fenna-Matthews-Olson
+                   complex, and simulating charge mobility in one-dimensional
+                   lattice models. These successful applications establish the
+                   tensorial MKCT as a highly efficient tool for investigating
+                   complex dynamics in open quantum systems.",
+  month         =  mar,
+  year          =  2026,
+  archivePrefix = "arXiv",
+  primaryClass  = "physics.chem-ph"
+}
+
+@ARTICLE{Caruso2016-us,
+  title     = "The {GW} plus cumulant method and plasmonic polarons: application
+               to the homogeneous electron gas",
+  author    = "Caruso, Fabio and Giustino, Feliciano",
+  journal   = "Eur. Phys. J. B",
+  publisher = "Springer Science and Business Media LLC",
+  volume    =  89,
+  number    =  11,
+  pages     = "1--7",
+  abstract  = "We study the spectral function of the homogeneous electron gas
+               using many-body perturbation theory and the cumulant expansion.
+               We compute the angle-resolved spectral function based on the GW
+               approximation and the “GW plus cumulant” approach. In agreement
+               with previous studies, the GW spectral function exhibits a
+               spurious plasmaron peak at energies 1.5ω pl below the
+               quasiparticle peak, ω pl being the plasma energy. The GW plus
+               cumulant approach, on the other hand, reduces significantly the
+               intensity of the plasmon-induced spectral features and
+               renormalizes their energy relative to the quasiparticle energy to
+               ω pl. Consistently with previous work on semiconductors, our
+               results show that the HEG is characterized by the emergence of
+               plasmonic polaron bands, that is, broadened replica of the
+               quasiparticle bands, red-shifted by the plasmon energy.",
+  month     =  nov,
+  year      =  2016,
+  language  = "en"
+}
+
+@ARTICLE{McClain2016-md,
+  title     = "Spectral functions of the uniform electron gas via
+               coupled-cluster theory and comparison to {theGWand} related
+               approximations",
+  author    = "McClain, James and Lischner, Johannes and Watson, Thomas and
+               Matthews, Devin A and Ronca, Enrico and Louie, Steven G and
+               Berkelbach, Timothy C and Chan, Garnet Kin-Lic",
+  journal   = "Phys. Rev. B.",
+  publisher = "American Physical Society (APS)",
+  volume    =  93,
+  number    =  23,
+  pages     =  235139,
+  abstract  = "Coupled-cluster theory is a ``gold standard'' of molecular
+               quantum chemistry, but has only recently been extended to
+               condensed-phase systems. In this work, excited-state
+               coupled-cluster techniques are brought to bear on the spectral
+               function of the uniform electron gas. The diagrammatic content of
+               coupled-cluster theory goes beyond that of the
+               $G\phantom{\rule{0}{0ex}}W$ approximation, which has become a
+               canonical approach in first-principles condensed-matter physics.
+               Benchmark calculations demonstrate that the coupled-cluster
+               results are more accurate than those of
+               $G\phantom{\rule{0}{0ex}}W$-based approaches, insensitive to the
+               mean-field reference, and systematically improvable towards the
+               exact result. Calculations on large systems approaching the
+               thermodynamic limit reveal an accurate quasiparticle bandwidth as
+               well as plasmonic satellite structure in the core-hole spectral
+               function.",
+  month     =  jun,
+  year      =  2016,
+  language  = "en"
 }
