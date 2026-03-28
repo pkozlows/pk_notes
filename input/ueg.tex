@@ -716,3 +716,143 @@ A^{GW+C}(\bm{p}, \omega) & = -\frac{1}{\pi} \operatorname{Im} G^{GW+C}(\bm{p}, \
 & = -\frac{1}{\pi}\left[\frac{\left(\operatorname{Re} Z_{\bm{p}}^{QP}\right)\left(\operatorname{Im} \epsilon_{\bm{p}}^{QP}\right) + \left(\operatorname{Im} Z_{\bm{p}}^{QP}\right)\left(\omega - \operatorname{Re} \epsilon_{\bm{p}}^{QP}\right)}{\left(\omega - \operatorname{Re} \epsilon_{\bm{p}}^{QP}\right)^2 + \left(\operatorname{Im} \epsilon_{\bm{p}}^{QP}\right)^2}\right.\\
 & \left. + \sum_{\bm{q}\nu} \frac{\left(\operatorname{Re} Z_{\bm{p}\bm{q}\nu}^{\text{occ-sat}}\right)\left(\operatorname{Im} \epsilon_{\bm{p}\bm{q}\nu}^{\text{occ-sat}}\right) + \left(\operatorname{Im} Z_{\bm{p}\bm{q}\nu}^{\text{occ-sat}}\right)\left(\omega - \operatorname{Re} \epsilon_{\bm{p}\bm{q}\nu}^{\text{occ-sat}}\right)}{\left(\omega - \operatorname{Re} \epsilon_{\bm{p}\bm{q}\nu}^{\text{occ-sat}}\right)^2 + \left(\operatorname{Im} \epsilon_{\bm{p}\bm{q}\nu}^{\text{occ-sat}}\right)^2} + \ldots \right]
 \end{align}
+\section{LDA}
+Our presentation follows the restricted formalism where two electrons of opposite spin occupy each spatial orbital.
+\subsection{Analytic gradients}
+
+We first recall the definition of the density in terms of $P_{\mu\nu}$ and the basis functions $\phi_\mu(\mathbf r)$:
+\begin{align}
+  \rho(\mathbf r)
+  &= \frac{1}{V}\sum_{\mu\nu} P_{\mu\nu}
+      \operatorname{Re}\!\left[\phi_\mu^*(\mathbf r)\phi_\nu(\mathbf r)\right].
+\end{align}
+Defining the real overlap factor
+\begin{align}
+  S_{\mu\nu}(\mathbf r)
+  &= \operatorname{Re}\!\left[\phi_\mu^*(\mathbf r)\phi_\nu(\mathbf r)\right],
+\end{align}
+the derivative of $\rho(\mathbf r)$ with respect to a density-matrix
+element is
+\begin{align}
+  \frac{\partial \rho(\mathbf r)}{\partial P_{\alpha\beta}}
+  &= \frac{1}{V} S_{\alpha\beta}(\mathbf r)
+   = \frac{1}{V}\operatorname{Re}\!\left[\phi_\alpha^*(\mathbf r)\phi_\beta(\mathbf r)\right].
+\end{align}
+\subsubsection{Kinetic}
+The kinetic energy is given by
+\begin{align}
+  E_k
+  &= \sum_{\mu\nu} P_{\mu\nu} T_{\mu\nu}
+\end{align}
+\subsubsection{Hartree}
+The Hartree energy is given by
+\begin{align}
+  E_H
+  &= \frac{1}{2}\int d\mathbf r\; v_H(\mathbf r)\,\rho(\mathbf r) \\
+\end{align}
+\subsubsection{Exchange}
+The LDA defines the exchange energy for a single particle as $\epsilon_x(\mathbf r) = -\frac{3}{4}\left(\frac{3}{\pi}\right)^{1/3} \rho(\mathbf r)^{1/3}$. So the total exchange energy becomes 
+\begin{align}
+  E_x[\rho]
+  &= \int d\mathbf r\; \epsilon_x(\mathbf r)\,\rho(\mathbf r) \\
+% &= \int d\mathbf r\; C \rho(\mathbf r)^{4/3} \\
+  &= -\frac{3}{4}\left(\frac{3}{\pi}\right)^{1/3} \int d\mathbf r\; \rho(\mathbf r)^{4/3} \\
+  &= -\frac{3}{4}\left(\frac{3}{\pi}\right)^{1/3} \int d\mathbf r\;
+     \left(
+       \frac{1}{V}\sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+     \right)^{4/3} \\
+&\approx -\frac{3}{4}\left(\frac{3}{\pi}\right)^{1/3} \frac{1}{V^{4/3}} \sum_g w_g
+      \left(
+        \sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r_g)
+      \right)^{4/3}.
+\end{align}
+Taking the derivative with respect to $P_{\alpha\beta}$ gives
+\begin{align}
+  \frac{\partial E_x}{\partial P_{\alpha\beta}}
+&= -\frac{3}{4}\left(\frac{3}{\pi}\right)^{1/3} \int d\mathbf r\;
+     \frac{4}{3}
+     \left(
+       \frac{1}{V}\sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+     \right)^{1/3}
+     \frac{\partial}{\partial P_{\alpha\beta}}
+     \left(
+       \frac{1}{V}\sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+     \right) \\
+   &= -\left(\frac{3}{\pi}\right)^{1/3} \int d\mathbf r\;
+      \left(
+        \frac{1}{V}\sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+      \right)^{1/3}
+      \left(
+        \frac{1}{V} S_{\alpha\beta}(\mathbf r)
+      \right) \\
+   &= -\left(\frac{3}{\pi}\right)^{1/3} \frac{1}{V^{4/3}} \int d\mathbf r\;
+      \left(
+        \sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+      \right)^{1/3}
+      S_{\alpha\beta}(\mathbf r) \\
+&\approx -\left(\frac{3}{\pi}\right)^{1/3} \frac{1}{V^{4/3}} \sum_g w_g
+      \left(
+        \sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r_g)
+      \right)^{1/3}
+      S_{\alpha\beta}(\mathbf r_g).
+%   &= -\frac{9}{4\pi} \int d\mathbf r\;
+%      \frac{4}{3}
+%      \left(
+%        \frac{1}{V}\sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+%      \right)^{1/3}
+%      \frac{\partial}{\partial P_{\alpha\beta}}
+%      \left(
+%        \frac{1}{V}\sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+%      \right) \\
+%   &= -\frac{3}{\pi} \int d\mathbf r\;
+%      \left(
+%        \frac{1}{V}\sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+%      \right)^{1/3}
+%      \left(
+%        \frac{1}{V} S_{\alpha\beta}(\mathbf r)
+%      \right) \\
+%   &= {-\frac{3}{\pi V^{4/3}} \int d\mathbf r\;
+%      \left(
+%        \sum_{\mu\nu}P_{\mu\nu}S_{\mu\nu}(\mathbf r)
+%      \right)^{1/3}
+%      S_{\alpha\beta}(\mathbf r)}.
+\end{align}
+
+\subsubsection{Correlation}
+Perdew defines the correlation energy as
+\begin{align}
+  E_c[\rho]
+  &= \int d\mathbf r\; \epsilon _c(\mathbf r)\,\rho(\mathbf r),
+\end{align}
+with
+\begin{align}
+  \epsilon_c(\mathbf r)
+  &= \frac{\gamma}{1 + \beta_1 \sqrt{r_s(\mathbf r)} + \beta_2 r_s(\mathbf r)},\\
+  r_s(\mathbf r)
+  &= \left(\frac{3}{4\pi\rho(\mathbf r)}\right)^{1/3}.
+\end{align}
+Then
+\begin{align}
+  \frac{\delta E_c}{\delta\rho(\mathbf r)}
+  &= \epsilon_c(\mathbf r) + \rho(\mathbf r)\frac{d\epsilon_c}{d\rho}\Big|_{\rho(\mathbf r)} \\
+  &= v_c(\mathbf r)
+\end{align}
+with $  v_c(\mathbf r) = \epsilon_c(\mathbf r)
+     \left(
+       1 + \frac{7}{6}\beta_1 \sqrt{r_s(\mathbf r)}
+         + \frac{4}{3}\beta_2 r_s(\mathbf r)
+     \right)$. To obtain the gradient with respect to the density-matrix element
+$P_{\alpha\beta}$, we need:
+\begin{align}
+  \frac{\partial E_c}{\partial P_{\alpha\beta}}
+  &= \frac{\partial E_c}{\partial \rho(\mathbf r)} \frac{\partial \rho(\mathbf r)}{\partial P_{\alpha\beta}} \\
+  &= \int d\mathbf r\; v_c(\mathbf r) \frac{\partial \rho(\mathbf r)}{\partial P_{\alpha\beta}} \\
+  &= \int d\mathbf r\; v_c(\mathbf r) \frac{1}{V} S_{\alpha\beta}(\mathbf r) \\
+&\approx \frac{1}{V} \sum_g w_g v_c(\mathbf r_g) S_{\alpha\beta}(\mathbf r_g).
+\end{align}
+\subsection{Fock matrix}
+\subsubsection{Density operator}
+I construct a real space cubic grid for the evaluation of my quantities on, which defines a set of grid points $\{\mathbf r_g\}$ with associated weights $\{w_g\}$. The density is then given by
+\begin{align}
+{\rho}(\mathbf r) = \sum_{\mu\nu} P_{\mu\nu} \phi_\mu^*(\mathbf r) \phi_\nu(\mathbf r) = \frac{1}{V} \sum_{\mu\nu} P_{\mu\nu} 
+\end{align}

@@ -1,0 +1,276 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is a "template" model document for submission to the
+%% American Chemical Society (ACS).
+%%
+%% The guidance here contains information about how you may wish to
+%% modify it to match the requirements of various ACS journals. The
+%% ACS do *not* typeset accepted articles using LaTeX, so there is
+%% no specific class required.
+%%
+%% This template deliberately does *not* seek to reproduce
+%% the layout of the typeset journal: this is explicitly not
+%% required by the ACS for LaTeX submissions.
+%%
+%% Please report any issues with the template at
+%% https://github.com/josephwright/acs-template/issues
+%%
+%% Released under the Creative Commons 0 license
+%% https://creativecommons.org/public-domain/cc0/
+%% 
+%% Copyight (c) 2025 Joseph Wright
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[letterpaper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font setup - delete if you are using LuaLaTeX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[T1]{fontenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Adjust the margins and allow for line spacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{geometry}
+\geometry{margin = 1in}
+\usepackage{setspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Reference support
+%%
+%% The recommended method for producing the reference section is
+%% to use biblatex. If you wish to use a classical BibTeX
+%% approach, this is easiest to achieve using the achemso package.
+%% In that case, you should remove the biblatex lines.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% You can adjust the printing of DOI, article title, etc. using
+% package options, e.g. "doi = true"; see the biblatex manual for
+% details of adjusting the number of authors printed, e.g.
+% "maxnames = 15" to print no more than 15 authors.
+% \usepackage[style = chem-acs]{biblatex}
+% \addbibresource{pqe.bib}
+% If you are using classical BibTeX, remove the above lines and 
+% uncomment:
+\usepackage{achemso}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Graphic inclusion and scheme and chart support
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}
+\usepackage{float}
+\newfloat{scheme}{htbp}{los}
+\floatname{scheme}{Scheme}
+\floatname{chart}{Chart}
+\newfloat{graph}{htbp}{loh}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Common support packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{chemformula} % Formulas using \ch{}
+% or
+\usepackage[version = 4]{mhchem} % Formulas using \ce{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Many journals require that sections are unnumbered: this 
+%% is activated here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{secnumdepth}{-1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author and title data:
+%% the authblk package is currently the simplest way to provide this
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{authblk}
+\author[1]{Andrew N. Other}
+\author[1]{Fred T. Secondauthor}
+\author[1]{I. Ken Groupleader*}
+\affil[1]{Department of Chemistry, Unknown University, Unknown Town}
+\author[2]{Susanne K. Laborator}
+\affil[2]{Lead Discovery, BigPharma, Big Town, USA}
+\author[1]{Kay T. Finally}
+
+\title{A ``template'' model document for submission to the
+  American Chemical Society (ACS)}
+% Use the \date command for email address(s) of corresponding authors
+\date{*Email: i.k.groupleader@unknown.uu}
+
+\begin{document}
+
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start the main part of the manuscript here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+The consensus is that the best way to adapt to climate change is to mitigate it by reducing greenhouse gas emissions \cite{OECD2022-vn}. To do so requires the development of next-generation green technologies, such as electrocatalysts\cite{Seh2017-jx}, photovoltaics\cite{Du2023-kd}, and batteries\cite{Titirici2024-ao}. These seemingly disparate goals can all be achieved through the discovery of materials with special properties. Spectroscopy is an indispensable tool for experimentalists in the search for such properties, as it illuminates the electronic structure of candidate materials. Computation is crucial for interpreting spectroscopic data, and thus quantum chemists devote much effort to the accurate and efficient simulation of spectra\cite{Neese2025-lp}.
+
+Spectroscopy occurs when incoming light perturbs matter, a process which proceeds through excited states of the system. The excited states of a material may be described in terms of quasiparticles, which are collective excitations of interacting electrons. The equation-of-motion coupled-cluster formalism including single and double excitations (EOM-CCSD) can accurately describe these quasiparticles \textit{(cite)}, but it carries a computational scaling of $O(N^6)$, where $N$ is the system size. This is to be compared with semi-local density functional theory's (DFT) $O(N^3)$ scaling, so it comes as no surprise that DFT is the method of choice for large systems. However, DFT is known to be inaccurate for describing excited states CITE, so there is a need for methods that are more accurate than DFT but more computationally tractable than EOM-CCSD.
+
+A compelling alternative is presented by many-body perturbation theory (MBPT)\cite{Golze2019-wm}. MBPT introduces a variety of "gap-filling" methods, in the sense that these methods provide a more accurate description of excited states than DFT while remaining more computationally tractable than EOM-CCSD.
+
+
+\section{Excited states via MBPT}
+The native language of MBPT is that of Green's functions, which are used to describe the propagation of quasiparticles. The exact propagator is given by the interacting Green's function, $G$. The reference propagator is given by the noninteracting Green's function, $G_0$. The exact self-energy $\Sigma$ captures the difference between the two. However, solving for the exact quantities is computationally intractable, so approximations are necessary.
+
+\subsection{Quasiparticle Energies from GW}
+GW is a widely used approximation to the self-energy, which gets its name from postulating that $\Sigma$ is the product of the Green's function $G$ and the screened Coulomb interaction $W$ in the time domain, i.e. $\Sigma^{GW}(t) = i G(t) W(t)$. The GW method has been shown to give quasiparticle energies rivaling EOM-CCSD \textit{(cite)}. Formally, GW carries a computational scaling of $O(N^6)$, but in practice analytic continuation (AC) is used to reduce the scaling to $O(N^4)$. However, GW with AC does a poor job describing quasiparticle energies of core states, which may be important for accurately describing the system.
+
+Via a Löwdin partitioning technique, Loos et al. showed*\cite{Quintero-Monsebaiz2022-en}* that one can attain the exact quasiparticle energies within the GW approximation by either solving a nonlinear quasiparticle equation, as is traditionally done, or by determining the eigenvalues of an effective Hamiltonian, which we denote $\mathbf{H}^{\mathrm{GW}}$. However, an explicit construction of $\mathbf{H}^{\mathrm{GW}}$ carries the same $O(N^6)$ cost as solving the exact GW quasiparticle equation.
+
+\subsubsection{Moment-conserving GW (MCGW)}
+Booth et al. \cite{Scott2023-gc} claimed to have resolved this issue in 2023, by reformulating $\mathbf{H}^{\mathrm{GW}}$ in terms of the spectral moments of the self-energy. Considering self-energy moments to infinite order would be equivalent to constructing the full $\mathbf{H}^{\mathrm{GW}}$, but it is argued that truncating the moment expansion to some finite order yields a good approximation. A procedure inspired by the Lanczos algorithm is devised to iteratively diagonalize $\mathbf{H}^{\mathrm{GW}}$, with the Ritz values expected to rapidly converge to the ED solution as the number of moments increases. If one uses the resolution-of-the-identity (RI) approximation to the electron repulsion integrals, no step in this procedure scales higher than $O(N^4)$.
+
+However, in my implementation, I found that the Ritz values do not always converge to the exact quasiparticle energies of ED. The Lanczos algorithm is a well-established numerical method\textit{cite} whose Ritz values are guaranteed to converge to the exact diagonalization (ED) under proper conditions, given enough iterations to proceed. However, one of these conditions requires that orthogonality is maintained in the Krylov subspace, typically done via periodic reorthogonalization.
+
+Figure~\ref{fig:mcgw_failure} shows, for a number of small molecules, that MCGW initially follows the expected Lanczos convergence behavior towards ED, but then diverges. Analysis reveals that MCGW does not have access to its own Krylov subspace and therefore cannot perform reorthogonalization, leading to numerical instability. Therefore, it is misleading to associate MCGW with Lanczos. A reliable quantum chemistry method should remain faithful to its theoretical foundation without ambiguity from numerical artifacts, ensuring that errors remain below other dominant sources such as basis set incompleteness and grid effects \textit{cite}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{../figs/mcgw_convergence_multi.png}
+  \caption{Convergence behaviour of MCGW for the quasiparticle energies of a variety of small molecules in the cc-pVDZ basis. $\Delta$ is the maximum difference between the ED solution and the Ritz value at a given Lanczos iteration in the pseudo-active space. This pseudo-active space is defined by the combination of all $N_{occ}$ orbitals plus the first $N_{occ}$ virtual orbitals. The location of the desired numerical accuracy of a quantum chemistry method is at the bottom of the plot, or $1\times 10^{-6}$ Hartrees.}
+  \label{fig:mcgw_failure}
+\end{figure}
+
+\subsection{Spectral function of the uniform electron gas (UEG)}
+ The UEG is the perfecti chromatic metallic system, and thus serves as a testbed for many-body methods that have the potential to describe metals. In particular, its exact spectral functions in the thermodynamic limit are not known. Greens fn methods are well suited to computing the spectral function, as the spiritual function is proportional to the imaginary part of the retarded Greens function, i.e. $A(\omega) = -\frac{1}{\pi} \text{Im} G ^R(\omega)$. $G^R$ may be obtained by solving the decent equation as:
+\begin{align}
+    & G^R(\omega) = G_0^R(\omega) + G_0^R(\omega) \Sigma^R(\omega) G^R(\omega),
+\label{eq:gw_de}
+\end{align}
+Because computing that exact self energy is intractable, MBPT methods solve equation~\ref{eq:gw_de} by doingdo a perturbative expansion in the interaction strength. Thus, GW correspond to inserting $\Sigma ^{GW}$ into equation~\ref{eq:gw_de}. However, it has been shown that in this scheme, GW fails to capture satellite features in  the UEG spectral function of core states. In conrast, the cumulant expansion is able to reproduce called features. It postulates the retarded greens function as $G^R(t) = G_0^R(t) e^{C^R(t)}$
+, where the retarded cumulant $C^R(t)$ is given by
+\begin{align}
+  C^R(t) = \int d\omega \frac{\text{Im} \Sigma^R(\omega)}{\pi \omega^2} (e^{-i\omega t} + i \omega t -1)
+\label{eq:cumulant}
+\end{align}
+with quasi-boson frequencies $\omega$.
+  This form can be derived by solving the large polaron problem, where a core hole is coupled to a bath of bosons.CITE Diet romantically speaking, while the perturbative expansion has the effect of treating the first few self energy diagrams exactly with the remaining infinity neglected, the cumulant expansion treats no diagram exactly but rather treats the entire infinity of diagrams approximately CITE.
+\subsubsection{$G_0@HF;C(GW)$}
+Given the wild use of the GW method, it should come as no surprise that the initial applications of the cube lent expansion  used  $\Sigma ^{GW}$ to build the cumulant. Although this meted does produce a centile spectrum, as desired, it places these celta let features at the incorrect locations with respected to the EOM-CCSD reference.CITE Thus, we wanted to explore cumulant methods that do not rely on the $\Sigma ^{GW}$.
+\subsubsection{$G_0@HF;C(PT2)$}
+second order perturbation theory (PT2) admits the second order self energy, 
+\begin{align}
+  \Sigma_{pq}^{(2)}(\omega) =& \frac{1}{2} \sum_{iab} \frac{\langle pi || ab \rangle \langle ab || qi \rangle}{\omega + \epsilon_i - \epsilon_a - \epsilon_b + i\eta} + \frac{1}{2} \sum_{ija} \frac{\langle pa || ij \rangle \langle ij || qa \rangle}{\omega + \epsilon_a - \epsilon_i - \epsilon_j + i\eta}.
+\end{align}
+ which can be used to build the PT2 cumulant
+\begin{align}
+  C_{pp}^{(2)}(t) & = \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\epsilon_{p i}^{a b}\right)^2}\left(e^{-i \epsilon_{p i}^{a b} t} +i \epsilon_{p i}^{a b} t -1 \right) +\frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\epsilon_{p a}^{i j}\right)^2} \left(e^{-i \epsilon_{p a}^{i j} t} +i \epsilon_{p a}^{i j} t -1 \right),
+\end{align}
+, offering an alternative to $GW+C$. an analysis of this form shows that pt2 postulates the quasi-boson frequencies as a linear combination of the HF energies. However, because the UEG is a metallic system, these become nonsensical numbers in the tdl, where pt2 is known to diverge CITE. Therefore, $G_0@HF;C(PT2)$ scheme is not viable.
+\subsubsection{$G_0@BWs2;C(BWs2)$}
+However, these issues can potentially be mitigated if one can wrinkle their rise the second order self energy. With this purpose HHead Gordon has recently developed CITE a consistent Brillouin-Wigner second order perturbation theory (BWs2) method, which scales as $O(N^5)$. In PT2, one splits the hamiltonian into a zeroth order part, $\hat{H}^{(0)}$, and a perturbation, $\hat{V}$, as $\hat{H} = \hat{H}^{(0)} + \hat{V}$. Denoting general indices as $p, q,\ldots$, occupied indices as $i, j, \ldots$, and virtual indices as $a, b, \ldots$, the Moller-Plesset partitioning takes 
+$\hat{H}^{(0)}=f_{pq} \hat{a}_p^{\dagger} \hat{a}_q$, where $f_{pq}$ is the Fock matrix. In contrast, the size consistent Brillouin-Wigner paritioning takes $\hat{H}^{(0)}=f_{pq} \hat{a}_p^{\dagger} \hat{a}_q+\frac{\alpha_1}{8}\left(t_{i k}^{a b(1)}\langle j k \| a b\rangle+t_{j k}^{a b(1)}\langle i k \| a b\rangle-\frac{2}{n_e} t_{k l}^{a b(1)}\langle k l \| a b\rangle \delta_{i j}\right) \hat{a}_i^{\dagger} \hat{a}_j +\frac{\alpha _2}{8}\left(t_{i j}^{a c(1)}\langle i j \| b c\rangle+t_{i j}^{b c}{ }^{(1)}\langle i j \| a c\rangle\right) \hat{a}_a^{\dagger} \hat{a}_b$, where $t^{(1)}$ are the doubles amplitudes of the perturbation theory to first order, and $\alpha_1$ and $\alpha _2$ are empirical parameters.
+
+It has been shown to accurately compute ground state properties of metals CITE but the theory is not yet well studied for excited states. Recently, Tew put the south energy arising from Brillouin-Wigner second order perturbation theory on firm theoretical grounds, by showing that this response to a Goldstone self energy, instead of the Dyson one used by GW. CITE This implies that BWs2 obeys a Dyson a question like \ref{eq:gw_de}, but with the noninteracting Green's function not due to the HF one, but rather using the dressed BWs2 input. This led me to derive the form for a BWs2-based cumulant, which is given by
+\begin{equation}
+    C_{pp}^{\mathrm{BWs2}}(t) = 
+    \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\tilde{\epsilon}_{p i}^{a b}\right)^2}\left(e^{-i \tilde{\epsilon}_{p i}^{a b} t} +i \tilde{\epsilon}_{p i}^{a b} t -1 \right) 
+    + \frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\tilde{\epsilon}_{p a}^{i j}\right)^2} \left(e^{-i \tilde{\epsilon}_{p a}^{i j} t} - 1 \right),
+\end{equation}
+where $\tilde{\epsilon}_{p i}^{a b} = \tilde{\varepsilon}_p - \tilde{\varepsilon}_i + \tilde{\varepsilon}_a - \tilde{\varepsilon}_b$ and $\tilde{\epsilon}_{p a}^{i j} = \tilde{\varepsilon}_p + \tilde{\varepsilon}_a - \tilde{\varepsilon}_i - \tilde{\varepsilon}_j$, with $\tilde{\varepsilon}$ being the BWs2 dressed single particle energies due to the ground state calculation.
+Thus, the retarded Green's function in the BWs2+C method will read
+Prelinary results, shown in figure~\ref{fig:bws2_pqe}, look promising, suggesting the BWs2+C, which is a method that scales as $O(N^5)$, can improve upon GW+C, which scales as $O(N^4)$, without incurring the $O(N^6)$ cost of EOM-CCSD reference. The study of larger UEG supercells is underway, which may demonstrate that BWs2+C can provide a viable alternative to GW+C, when EOM-CCSD is out of reach.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{../figs/bws2_pqe2_v2.png}
+  \label{fig:bws2_pqe}
+\end{figure}
+
+
+\section{Future directions}
+\subsection{A Self consistent cumulant expansion}
+Self consistency has been incorporated into theories which solve equation~\ref{eq:gw_de} by doing a perturbative expansion in the interaction strength, but this has had mixed results. This is likely due to the strict dare traumatic quality of the theories; by adding self consistency, you are double counting some contributions.  We wonder if adding self consistency to the Cumberland expansion of equation~\ref{eq:cumulant}, where diagrams shouldn't be as important because you are not treating anne of them exactly, could improve results. There have been a few studies of the so consistent cumulate, but they have all been done analytically CITE. We propose to pursue a numerically self-consistent cumulant; this can all be seen by considering a question like equation~\ref{eq:cumulant}. A solution of this equation will give $C^R(t)$, which may then be used to give $G^R(\omega)$
+. However, we know the definition
+\begin{equation}
+  \Sigma ^R(\omega ) = G_0^R(\omega)^{-1} - G^R(\omega)^{-1},
+\end{equation}
+so we get an updated $\Sigma ^R(\omega)$, which again can be used to update $C^R(t)$, and so on until convergence. 
+\subsection{The memory kernel as an alternative to the self-energy}
+The theory of open quantum systems admits the Nakajima-Zwanzig equation, which states that
+The Generalized Quantum Master Equation (GQME) is given by
+\begin{equation}
+\dot{\mathcal{C}}(t) = \mathcal{C}(t) {\Omega_1} - \int_{0}^{t} d \tau\, \mathcal{C}(t - \tau) \mathcal{K}_1(\tau) + D(t)
+\label{eq:GQME}
+\end{equation}
+where the correlation function is defined as 
+\begin{equation}
+    \mathcal{C}(t) = (\hat{{\mu}} \mid \hat{{\mu}}(t)),
+\label{eq:C}
+\end{equation}
+the higher-order moments are
+\begin{equation}
+\Omega_{n} \equiv\left((i \mathcal{L})^{n} \hat{{\mu}}, \hat{{\mu}}\right) /(\hat{{\mu}}, \hat{{\mu}})
+\end{equation}
+with the auxiliary kernels
+\begin{equation}
+K_{n}(t) \equiv\left((i \mathcal{L})^{n} \hat{f}(t), \hat{{\mu}}\right) /(\hat{{\mu}}, \hat{{\mu}})
+\end{equation}
+$\hat{f}(t)$ in the above equation is referred to as the random force operator
+\begin{equation}
+\hat{f}(t) \equiv e^{i t {\mathcal { L }} \mathcal{L}} \mathcal{Q} i \mathcal{L} \hat{{\mu}}
+\end{equation}
+with $\mathcal{Q}={\mathcal { I }}-\mathcal{P}$ being the complementary projection operator.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start the main part of the manuscript here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\subsection{Spectral function of the uniform electron gas (UEG)} The UEG is the paradigmatic metallic system \textit{cite}, serving as a testbed for many-body methods hoping to describe metals. Its exact spectral function in the thermodynamic limit is not known. Green's function methods are well suited for computing the spectral function $A(\omega)$, since it is  proportional to the imaginary part of the retarded Green's function: \begin{align} A(\omega) = -\frac{1}{\pi} \mathrm{Im}, G^R(\omega). \end{align}
+
+Now, the retarded Green's function satisfies the Dyson equation: \begin{align} G^R(\omega) = G_0^R(\omega) + G_0^R(\omega) \Sigma^R(\omega) G^R(\omega). \end{align}
+
+Because obtaining the exact self-energy is intractable, MBPT methods approximate $\Sigma$ through a perturbative expansion, with the interaction strength as the perturbation parameter. The GW approximation corresponds to choosing the parameter as the screened Coulomb interaction $W$ and truncating at first order in the perturbation series. This is equivalent to inserting $\Sigma^{GW}$ into this equation. However, solving the Dyson equation through truncation at first order fails to capture satellite features in core-level spectral functions of the UEG \textit{cite}.
+
+In contrast, the cumulant expansion can reproduce these features. It expresses the Green's function as \begin{align} G^R(t) = G_0^R(t) e^{C^R(t)}, \end{align} where the cumulant is given by \begin{align} C^R(t) = \int d\omega \frac{\mathrm{Im}, \Sigma^R(\omega)}{\pi \omega^2} \left(e^{-i\omega t} + i \omega t -1\right). \end{align}
+
+\subsubsection{$G_0@HF;C(GW)$} Initial cumulant approaches used $\Sigma^{GW}$ to construct the cumulant \textit{(cite)}. While this produces satellite features, their positions are often inaccurate relative to EOM-CCSD references \textit{(cite)}.
+
+\subsubsection{$G_0@HF;C(PT2)$} Second-order perturbation theory (PT2) provides a second-order self-energy which can be used to build a cumulant. However, in metallic systems like the UEG, PT2 diverges in the thermodynamic limit, rendering this approach void.
+
+\subsubsection{$G_0@BWs2;C(BWs2)$}
+These issues may be mitigated by regularizing the second-order self-energy. Head-Gordon and co-workers recently developed a size-consistent Brillouin–Wigner second-order perturbation theory (BWs2) method, which scales as $O(N^5)$.
+
+Recent work has shown that the BWs2 self-energy corresponds to a Goldstone self-energy, implying that it satisfies a Dyson-like equation with a dressed reference Green's function. This enables the construction of a BWs2-based cumulant:
+\begin{equation}
+C_{pp}^{\mathrm{BWs2}}(t) =
+\frac{1}{2} \sum_{i a b}\frac{\langle p i | a b\rangle^2 }{\left(\tilde{\epsilon}*{p i}^{a b}\right)^2}\left(e^{-i \tilde{\epsilon}*{p i}^{a b} t} +i \tilde{\epsilon}*{p i}^{a b} t -1 \right)
++ \frac{1}{2}\sum*{i j a} \frac{\langle p a | i j\rangle^2}{\left(\tilde{\epsilon}*{p a}^{i j}\right)^2} \left(e^{-i \tilde{\epsilon}*{p a}^{i j} t} - 1 \right),
+\end{equation}
+
+where the energies are defined using BWs2-dressed orbital energies.
+
+Preliminary results suggest that BWs2+C, scaling as $O(N^5)$, can improve upon GW+C without incurring the $O(N^6)$ cost of EOM-CCSD.
+
+\section{Future directions}
+\subsection{A self-consistent cumulant expansion}
+Self-consistency has been incorporated into Dyson-based approaches with mixed success. These approaches solve the Dyson equation perturbatively, so adding self consistency may lead to the double counting of terms in the expansion. We propose exploring self-consistency within the cumulant framework, where diagrammatic consistency may be less restrictive.
+
+\subsection{Memory kernel as an alternative to the self-energy}
+The Nakajima–Zwanzig formalism leads to the generalized quantum master equation (GQME):
+\begin{equation}
+\dot{\mathcal{C}}(t) = \mathcal{C}(t) {\Omega_1} - \int_{0}^{t} d \tau, \mathcal{C}(t - \tau) \mathcal{K}_1(\tau) + D(t).
+\end{equation}
+
+This provides an alternative framework in which the memory kernel replaces the self-energy, potentially offering new routes for modeling excited-state dynamics.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% If you are using classical BibTeX rather than biblatex,
+%% remove the \printbibliography and uncomment the \bibliograpy one
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\bibliography{pqe}
+
+
+\end{document}
