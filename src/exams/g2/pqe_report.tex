@@ -137,12 +137,12 @@ Figure~\ref{fig:mcgw_failure} shows, for a number of small molecules, that MCGW 
   \label{fig:mcgw_failure}
 \end{figure}
 
-\subsection{Spectral function of the uniform electron gas (UEG)} The UEG is the paradigmatic metallic system \cite{Mahan2014-ad}, serving as a testbed for many-body methods hoping to describe metals. Its exact spectral function in the thermodynamic limit is not known. Green's function methods are well suited for computing the spectral function $A(\omega)$, since the spectral function
+\subsection{Spectral function of the uniform electron gas (UEG)} The UEG is the paradigmatic metallic system \cite{Mahan2014-ad}, serving as a testbed for many-body methods hoping to describe metals. Its exact spectral function in the thermodynamic limit (TDL) is not known. Green's function methods are well suited for computing the spectral function $A(\omega)$, since the spectral function
  is proportional to the imaginary part of the retarded Green's function: \begin{align} A(\omega) = -\frac{1}{\pi} \mathrm{Im}, G^R(\omega). \end{align}
 Now, the retarded Green's function satisfies the Dyson equation: \begin{align} G^R(\omega) = G_0^R(\omega) + G_0^R(\omega) \Sigma^R(\omega) G^R(\omega). \label{eq:dyson} \end{align}
 Because obtaining the exact self-energy is intractable, MBPT methods approximate $\Sigma$ through a perturbative expansion, with the interaction strength as the perturbation parameter. The GW approximation corresponds to choosing the parameter as the screened Coulomb interaction $W$ and truncating at first order in the perturbation series. This is equivalent to inserting $\Sigma^{GW}$ into this equation. However, solving the Dyson equation through truncation at first order fails to capture satellite features in core-level spectral functions of the UEG \cite{Holm1997-by, Caruso2016-us,McClain2016-md}.
 
-In contrast, the cumulant expansion is able to reproduce satellite features. It expresses the diagonal retarded Green's function for a quasiparticle $p$ as \begin{align} G^R_{pp}(t) = G_{0,pp}^R(t) e^{C_{pp}^R(t)}, \end{align} where the retarded cumulant, with quasi-boson frequencies $\omega$, is given by \begin{align} C_{pp}^R(t) = -\frac{1}{\pi}\int d\omega \frac{\mathrm{Im} \Sigma_{pp}^R(\omega)}{\omega^2} \left(e^{-i\omega t} + i \omega t -1\right). \end{align}
+In contrast, the cumulant expansion is able to reproduce satellite features. It expresses the diagonal retarded Green's function for a quasiparticle $p$ as \begin{align} G^R_{pp}(t) = G_{0,pp}^R(t) e^{C_{pp}^R(t)}, \label{eq:cumulant_G}\end{align} where the retarded cumulant, with quasi-boson frequencies $\omega$, is given by \begin{align} C_{pp}^R(t) = -\frac{1}{\pi}\int d\omega \frac{\mathrm{Im} \Sigma_{pp}^R(\omega)}{\omega^2} \left(e^{-i\omega t} + i \omega t -1\right). \label{eq:cumulant}\end{align}
 This form can be derived by solving the large polaron problem, where a core hole is coupled to a bath of bosons\cite{Dunn1975-ew}.
 \subsubsection{GW+C} Initial cumulant approaches used $\Sigma^{GW}$ to construct the cumulant \cite{Holm1997-by}. This has been attractive because the GW self-energy may be built at a cost of $O(N^4)$, and the cumulant can be constructed from $\Sigma^{GW}$ without incurring any additional cost.
  While this approach produces satellite features, their positions occur at incorrect locations relative to EOM-CCSD references \cite{McClain2016-md}.
@@ -182,58 +182,33 @@ Preliminary results, shown in figure~\ref{fig:bws2_pqe}, suggest that the fifth 
   \includegraphics[width=\textwidth]{../figs/bws2_pqe2_v2.png}
   \label{fig:bws2_pqe}
 \end{figure}
-
-
 \section{Future directions}
-\subsection{A Self consistent cumulant expansion}
-Self consistency has been incorporated into theories which solve equation~\ref{eq:gw_de} by doing a perturbative expansion in the interaction strength, but this has had mixed results. This is likely due to the strict dare traumatic quality of the theories; by adding self consistency, you are double counting some contributions.  We wonder if adding self consistency to the Cumberland expansion of equation~\ref{eq:cumulant}, where diagrams shouldn't be as important because you are not treating anne of them exactly, could improve results. There have been a few studies of the so consistent cumulate, but they have all been done analytically CITE. We propose to pursue a numerically self-consistent cumulant; this can all be seen by considering a question like equation~\ref{eq:cumulant}. A solution of this equation will give $C^R(t)$, which may then be used to give $G^R(\omega)$
-. However, we know the definition
+\subsection{A self-consistent cumulant expansion}
+Self-consistency has been incorporated into Dyson-based approaches with mixed success. These approaches solve the Dyson equation perturbatively, so adding self consistency may lead to the double counting of terms in the expansion. Pursuing self-consistency within the cumulant framework may be theoretically advantageous, where diagrammatic consistency may be less restrictive.  There have been a few studies of the self-consistent cumulant, but they have all been done analytically in the TDL\cite{Holm1997-by,Robinson2022-wc,Dunn1975-ew}. We propose to pursue a numerically self-consistent cumulant. This can be understood by defining a frequency grid to solve for $C^R(t)$ via equation~\ref{eq:cumulant}, which may then be used to obtain $G^R(\omega)$ via equation~\ref{eq:cumulant_G}. Then, the Dyson equation can be rearranged to solve for $\Sigma^R(\omega)$ as
 \begin{equation}
   \Sigma ^R(\omega ) = G_0^R(\omega)^{-1} - G^R(\omega)^{-1},
 \end{equation}
-so we get an updated $\Sigma ^R(\omega)$, which again can be used to update $C^R(t)$, and so on until convergence. 
-\subsection{The memory kernel as an alternative to the self-energy}
-The theory of open quantum systems admits the Nakajima-Zwanzig equation, which states that
-The Generalized Quantum Master Equation (GQME) is given by
+which yields an updated $\Sigma ^R(\omega)$ that may be used to update $C^R(t)$, and so on until convergence.
+
+\subsection{Memory kernel as an alternative to the self-energy}
+The generalized quantum master equation (GQME) describes the time evolution of a correlation function $\mathcal{C}(t)$ as
 \begin{equation}
-\dot{\mathcal{C}}(t) = \mathcal{C}(t) {\Omega_1} - \int_{0}^{t} d \tau\, \mathcal{C}(t - \tau) \mathcal{K}_1(\tau) + D(t)
-\label{eq:GQME}
+\dot{\mathcal{C}}(t) = \mathcal{C}(t) {\Omega_1} - \int_{0}^{t} d \tau\, \mathcal{C}(t - \tau) \mathcal{K}_1(\tau) + D(t),
+\label{eq:gqme}
 \end{equation}
-where the correlation function is defined as 
+with the moment $\Omega_1$, the memory kernel $\mathcal{K}_1(t)$, and an inhomogeneous term $D(t)$, which may be set to zero for equilibrium correlation functions\cite{Mori1965-mf}. This is to be compared with the equation of motion of the retarded Green's function, which is given by
 \begin{equation}
-    \mathcal{C}(t) = (\hat{{\mu}} \mid \hat{{\mu}}(t)),
-\label{eq:C}
+i\partial_t G^R(t) =  \epsilon_0 G^R(t)  + \int_0^t d\tau\, \Sigma^R(t - \tau)\, G^R(\tau),
+% (i\partial_t - \epsilon_0) G^R(t) - \int_0^t d\tau\, \Sigma^R(t - \tau)\, G^R(\tau) = 0 \label{eq:eom_retarded}
 \end{equation}
-the higher-order moments are
-\begin{equation}
-\Omega_{n} \equiv\left((i \mathcal{L})^{n} \hat{{\mu}}, \hat{{\mu}}\right) /(\hat{{\mu}}, \hat{{\mu}})
-\end{equation}
-with the auxiliary kernels
-\begin{equation}
-K_{n}(t) \equiv\left((i \mathcal{L})^{n} \hat{f}(t), \hat{{\mu}}\right) /(\hat{{\mu}}, \hat{{\mu}})
-\end{equation}
-$\hat{f}(t)$ in the above equation is referred to as the random force operator
-\begin{equation}
-\hat{f}(t) \equiv e^{i t {\mathcal { L }} \mathcal{L}} \mathcal{Q} i \mathcal{L} \hat{{\mu}}
-\end{equation}
-with $\mathcal{Q}={\mathcal { I }}-\mathcal{P}$ being the complementary projection operator.
+where $\epsilon_0$ is the noninteracting quasiparticle energy. This implies that $\mathcal{K}_1(t)$ and $\Sigma^R(t)$ may both be used to obtain a perturbative solution to equation~\ref{eq:dyson}. The difference is in the choice of perturbative parameter; in the former, a perturbative expansion is carried out in the time variable, while in the latter one expands in the interaction strength. The memory kernel is expected to decay quickly with time\cite{Ivander2024-fr,Du2023-kd}, while the self-energy may not decay quickly with the interaction strength\cite{Mahan2014-ad}. A symptom of the latter phenomenon is an inability of perturbative expansions in the interaction strength to adequately describe strongly correlated systems, where the interaction is large. It happens to be the case that strong correlated materials have been shown to exhibit special properties. Thus, the development of memory kernel based methods has the potential to accelerated materials discovery for climate change mitigation.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Future directions}
-\subsection{A self-consistent cumulant expansion}
-Self-consistency has been incorporated into Dyson-based approaches with mixed success. These approaches solve the Dyson equation perturbatively, so adding self consistency may lead to the double counting of terms in the expansion. We propose exploring self-consistency within the cumulant framework, where diagrammatic consistency may be less restrictive.
 
-\subsection{Memory kernel as an alternative to the self-energy}
-The Nakajima–Zwanzig formalism leads to the generalized quantum master equation (GQME):
-\begin{equation}
-\dot{\mathcal{C}}(t) = \mathcal{C}(t) {\Omega_1} - \int_{0}^{t} d \tau, \mathcal{C}(t - \tau) \mathcal{K}_1(\tau) + D(t).
-\end{equation}
-
-This provides an alternative framework in which the memory kernel replaces the self-energy, potentially offering new routes for modeling excited-state dynamics.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
