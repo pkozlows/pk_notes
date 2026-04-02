@@ -165,7 +165,7 @@ BWs2 has been shown to accurately compute ground state properties of metals\cite
 \begin{align}
   \Sigma_{i i}^{\mathrm{iQPMP2}}(\omega) = \frac{1}{2} \sum_{a b j} \frac{|\langle i j \| a b\rangle|^2}{\omega+\epsilon_j^{QP}-\epsilon_a-\epsilon_b},
 \end{align}
-where $\epsilon_j^{QP}$ is the quasiparticle energy of orbital $j$ obtained from PT2, and then takes the trace of $\Sigma^{\mathrm{iQPMP2}}$, a correlation energy is obtained that bears striking similarities to the BWs2 derived by Head-Gordon et al. This led a labmate to derive an effective BWs2 self-energy that satisfies the Dyson equation, but with $G_0$ due to the "dressed" BWs2 input rather than HF. Given that this effective BWs2 self-energy was used to produce accurate ground state metallic properties, I was motivated to derive a form for the BWs2 cumulant to test on the UEG. The BWs2 cumulant is defined as
+where $\epsilon_j^{QP}$ is the quasiparticle energy of orbital $j$ obtained from PT2, and then takes the trace of $\Sigma^{\mathrm{iQPMP2}}$, a correlation energy is obtained that bears striking similarities to the BWs2 one, as derived by Head-Gordon et al. This led a labmate to derive an effective BWs2 self-energy that satisfies the Dyson equation, but with $G_0$ due to the "dressed" BWs2 input rather than HF. Given that this effective BWs2 self-energy was used to produce accurate ground state metallic properties, I was motivated to derive a form for the BWs2 cumulant to test on the UEG. The BWs2 cumulant is defined as
 \begin{equation}
   C_{pp}^{\mathrm{BWs2}}(t) = 
   \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\tilde{\varepsilon}_{p i}^{a b}\right)^2}\left(e^{-i \tilde{\varepsilon}_{p i}^{a b} t} +i \tilde{\varepsilon}_{p i}^{a b} t -1 \right) 
@@ -176,8 +176,8 @@ Preliminary results, shown in figure~\ref{fig:bws2_pqe}, suggest that the $O(N^5
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.75\textwidth]{../figs/bws2_pqe2_v2.png}
-  \label{fig:bws2_pqe}
   \caption{Spectral functions of the UEG at the $\Gamma $ point for $r_s = 4$, which corresponds to the density of metallic sodium. Curves are shown for BWs2+C (where we set $\alpha_1 = 2$ and $\alpha_2 = 0$), GW+C ($G_0$ from DFT-LDA), and with EOM-CCSD, with the latter two reproduced from \citet{McClain2016-md}. The UEG supercell contains 114 electrons in 485 orbitals.}
+  \label{fig:bws2_pqe}
 \end{figure}
 \section{Future directions}
 \subsection{A self-consistent cumulant expansion}
