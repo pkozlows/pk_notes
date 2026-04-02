@@ -270,6 +270,32 @@ for the molecular case. Today I want us to dissect how this equation came about,
 
 \subsection{Analytic continuation}
 \label{sec:analytic_continuation}
+We can describe the final equations to implement. The correlation self energy can be computed on the imaginary frequency axis as:
+\begin{equation}
+    \Sigma_{n n^{\prime}}^c(\mathbf{k}, i \omega)= -\frac{1}{\pi N_{\mathbf{k}}} \sum_{m \mathbf{q}} \int_0^{\infty} d \omega^{\prime} \frac{i \omega+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}}{\left(i \omega+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}\right)^2+\omega^{\prime 2}} \sum_{P Q} v_P^{n m}\left[\left[\mathbf{I}-\mathbf{\Pi}\left(\mathbf{q}, i \omega^{\prime}\right)\right]_{P Q}^{-1}-\delta_{P Q}\right] v_Q^{m n^{\prime}}
+\end{equation}
+with the polarizability given by
+\begin{equation}
+\boldsymbol{\Pi}_{P Q}\left(\mathbf{q}, i \omega^{\prime}\right)=\frac{2}{N_{\mathbf{k}}} \sum_{\mathbf{k}} \sum_i^{\text {occ }} \sum_a^{\text {vir }} v_P^{i a} \frac{\epsilon_{i \mathbf{k}}-\epsilon_{a \mathbf{k}-\mathbf{q}}}{\omega^{\prime 2}+\left(\epsilon_{i \mathbf{k}}-\epsilon_{a \mathbf{k}-\mathbf{q}}\right)^2} v_Q^{a i}.
+\end{equation}
+The integration in Eq. 27 must be performed on a numerical grid. Following Ref., ${ }^{43}$ we employ a
+9
+
+modified Gauss-Legendre grid that transforms a standard Gauss-Legendre grid in the range [ $-1,1$ ] to $[0, \infty]$ :
+$$
+\tilde{x}_i=\frac{1+x_i}{2\left(1-x_i\right)}, \quad \tilde{w}_i=\frac{w_i}{\left(1-x_i\right)^2} .
+$$
+$\left\{x_i, w_i\right\}$ are the original Gauss-Legendre abscissas and weights of the grid points in the range $[-1,1]$, and $\left\{\tilde{x}_i, \tilde{w}_i\right\}$ are the transformed abscissas and weights of the grid points used for integrating Eq. 27. In this work, $N_G=100$ grid points were used for all reported results unless specified.
+
+The real-frequency self-energy is then obtained through an analytic continuation scheme by fitting to an analytic function defined on the full complex plane. We fit the self-energy matrix elements to $N$-point Padé approximants using Thiele's reciprocal difference method (see Appendix of Ref. ${ }^{62}$ for the detailed algorithm):
+$$
+\Sigma_{n r^{\prime}}(\mathbf{k}, \mathbf{z})=\frac{a_0+a_1 \cdot \mathbf{z}+\ldots+a_{(N-1) / 2} \cdot z^{(N-1) / 2}}{1+b_1 \cdot \mathbf{z}+\ldots+b_{N / 2} \cdot z^{N / 2}}
+$$
+where $z$ is any complex frequency, $\left\{a_i, b_i\right\}$ are Padé coefficients that need to be fitted. In this work, we use $N=18$ Padé approximants, which requires $18 \mathbf{\Sigma}_{m n^{\prime}}(\mathbf{k}, \mathbf{z}=i \omega)$ data points as input to the fit. We choose these 18 imaginary frequency points to be the positions of the modified GaussLegendre grid points. Once the Padé polynomials are fitted, the real-frequency self-energy is easily calculated:
+$$
+\mathbf{\Sigma}_{n n^{\prime}}(\mathbf{k}, \omega)=\frac{a_0+a_1 \cdot \omega+\ldots+a_{(N-1) / 2} \cdot \omega^{(N-1) / 2}}{1+b_1 \cdot \omega+\ldots+b_{N / 2} \cdot \omega^{N / 2}}
+$$
+% $\begin{aligned} \mathbf{\Sigma}_{n n^{\prime}}^c(\mathbf{k}, i \omega)= & -\frac{1}{\pi N_{\mathbf{k}}} \sum_{m \mathbf{q}} \int_0^{\infty} d \omega^{\prime} \frac{i \omega+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}}{\left(i \omega+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}\right)^2+\omega^{\prime 2}} \\ & \times \sum_{P Q} v_P^{n m}\left[\left[\mathbf{I}-\mathbf{\Pi}\left(\mathbf{q}, i \omega^{\prime}\right)\right]_{P Q}^{-1}-\delta_{P Q}\right] v_Q^{m n^{\prime}}\end{aligned}$
 We start with the original form for the self-energy along the real axis:
 \begin{equation}
 \Sigma\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega\right)=\frac{i}{2 \pi} \int_{-\infty}^{\infty} d \omega^{\prime} e^{i \omega^{\prime} \eta} G_{0}\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega+\omega^{\prime}\right) W_{0}\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega^{\prime}\right)
