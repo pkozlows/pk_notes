@@ -401,6 +401,12 @@ where $C(\mathbf{k})$ refers to the MO coefficients in the AO basis. $\Pi\left(\
 \begin{equation*}
 \boldsymbol{\Pi}_{P Q}\left(\mathbf{q}, i \omega^{\prime}\right)=\frac{2}{N_{\mathbf{k}}} \sum_{\mathbf{k}} \sum_{i}^{\mathrm{occ}} \sum_{a}^{\text {vir }} v_{P}^{i a} \frac{\epsilon_{i \mathbf{k}}-\epsilon_{a \mathbf{k}-\mathbf{q}}}{\omega^{\prime 2}+\left(\epsilon_{i \mathbf{k}}-\epsilon_{a \mathbf{k}-\mathbf{q}}\right)^{2}} v_{Q}^{a i} 
 \end{equation*}
+\subsubsection{Final expression}
+We can arrive at
+\begin{align}
+\Sigma_{n n^{\prime}}^c(\mathbf{k}, i \omega)= & -\frac{1}{\pi N_{\mathbf{k}}} \sum_{m \mathbf{q}} \int_0^{\infty} d \omega^{\prime} \frac{i \omega+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}}{\left(i \omega+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}\right)^2+\omega^{\prime 2}} \\ & \times \sum_{P Q} v_P^{n m}\left[\left[\mathbf{I}-\mathbf{\Pi}\left(\mathbf{q}, i \omega^{\prime}\right)\right]_{P Q}^{-1}-\delta_{P Q}\right] v_Q^{m n^{\prime}}
+\end{align}
+% $\begin{aligned} \Sigma_{n n^{\prime}}^c(\mathbf{k}, i \omega)= & -\frac{1}{\pi N_{\mathbf{k}}} \sum_{m \mathbf{q}} \int_0^{\infty} d \omega^{\prime} \frac{i \omega+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}}{\left(i \omega+\epsilon_F-\epsilon_{m \mathbf{k}-\mathbf{q}}\right)^2+\omega^{\prime 2}} \\ & \times \sum_{P Q} v_P^{n m}\left[\left[\mathbf{I}-\mathbf{\Pi}\left(\mathbf{q}, i \omega^{\prime}\right)\right]_{P Q}^{-1}-\delta_{P Q}\right] v_Q^{m n^{\prime}}\end{aligned}$
 \section{UHF formalism}
 The first thing to do is to solve the Casida equation for the polarizability in the direct formulation of the RPA:
 \begin{equation}\label{eq:kptsCasida}

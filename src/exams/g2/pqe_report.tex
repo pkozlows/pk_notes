@@ -126,7 +126,9 @@ However, in my implementation, I found that the Ritz values do not always conver
   \label{fig:mcgw_failure}
 \end{figure}
 \newpage
-\subsection{Spectral function of the uniform electron gas (UEG)} The UEG is the paradigmatic metallic system \cite{Mahan2014-ad}, serving as a testbed for many-body methods hoping to describe metals. Its properties in the thermodynamic limit (TDL) are not known. Although the TDL value is of interest to the quantum chemist, in practice, solid-state calculations are performed using a finite k-point sampling. Therefore, the discussion below assumes finite supercells of the UEG. Green's function methods are well suited for computing the spectral function $A(\omega)$, since the spectral function
+\subsection{Spectral function of the uniform electron gas (UEG)} The UEG is the paradigmatic metallic system \cite{Mahan2014-ad}, serving as a testbed for many-body methods hoping to describe metals. Its exact properties in the thermodynamic limit (TDL) are not known. Although the TDL value is of interest to the quantum chemist, in practice, solid-state calculations are performed using a finite k-point sampling. Furthermore, even though existing many-body methods, such as quantum Monte Carlo, accurately describe the dense UEG, their performance in the low-density regime is lacking. Therefore, the discussion below assumes finite supercells of the UEG at low density. 
+
+Green's function methods are well suited for computing the spectral function $A(\omega)$, since the spectral function
  is proportional to the imaginary part of the retarded, or causal, Green's function: \begin{align} A(\omega) = -\frac{1}{\pi} \mathrm{Im} G^R(\omega). \end{align}
 Now, the retarded Green's function satisfies the Dyson equation: \begin{align} G^R(\omega) &= G_0^R(\omega) + G_0^R(\omega) \Sigma^R(\omega) G^R(\omega) \label{eq:dyson}\\
 \implies \Sigma ^R(\omega ) &= G_0^R(\omega)^{-1} - G^R(\omega)^{-1} \label{eq:rearranged_dyson} \end{align}
@@ -148,7 +150,7 @@ This would seem to offer an alternative to GW+C, but in metallic systems like th
 
 % \subsubsection{$G_0@\text{BWs2};C(\text{BWs2})$}
 \subsubsection{BWs2+C}
-These issues may be mitigated by regularizing PT2. With this purpose in mind, \citet{Carter-Fenk2023-wz} developed a size-consistent Brillouin–Wigner second-order perturbation theory (BWs2) method, which scales as $O(N^5)$. \emph{From the wavefunction perspective}, in PT2 one splits the Hamiltonian into a zeroth order part, $\hat{H}^{(0)}$, and a perturbation, $\hat{V}$, as
+These issues may be mitigated by regularizing PT2, which has the effect of screening the bare Coulomb interaction \cite{Carter-Fenk2023-wz}. With this purpose in mind, \citet{Carter-Fenk2023-wz} developed a size-consistent Brillouin–Wigner second-order perturbation theory (BWs2) method, which scales as $O(N^5)$. \emph{From the wavefunction perspective}, in PT2 one splits the Hamiltonian into a zeroth order part, $\hat{H}^{(0)}$, and a perturbation, $\hat{V}$, as
 \begin{equation}
   \hat{H} = \hat{H}^{(0)} + \hat{V}.
 \end{equation}
@@ -182,7 +184,7 @@ Preliminary results, shown in figure~\ref{fig:bws2_pqe}, suggest that the $O(N^5
 \section{Future directions}
 \subsection{A self-consistent cumulant expansion}
 Self-consistency has been incorporated into perturbative approaches for solving the Dyson equation, such as GW,
-with mixed success. In these schemes, low-order diagrams are treated exactly, but higher order diagrams are neglected. Therefore, adding self consistency may lead to the double counting of terms in the expansion. Alternatively, self-consistency may be pursued within the cumulant framework. Here, no diagrams is treated exactly, but rather the entire infinity of diagrams is treated approximately. There have been a few studies of the self-consistent cumulant, but they have all been carried out analytically in the TDL\cite{Holm1997-by,Robinson2022-wc,Dunn1975-ew}. We propose to pursue a numerically self-consistent cumulant. This means defining a frequency grid to solve for $C^R(t)$ via equation~\ref{eq:cumulant}, which may then be used to obtain $G^R(\omega)$ via equation~\ref{eq:cumulant_G}. Then, $\Sigma^R(\omega)$ may be solved for via equation~\ref{eq:rearranged_dyson} to update $C^R(t)$, iterating until convergence.
+with mixed success. In these schemes, low-order diagrams are treated exactly, but higher order diagrams are neglected. Therefore, adding self consistency may lead to the double counting of terms in the expansion. Alternatively, self-consistency may be pursued within the cumulant framework. Here, although few diagrams are treated exactly, the remaining infinity are treated approximately. There have been a few studies of the self-consistent cumulant, but they have all been carried out analytically in the TDL\cite{Holm1997-by,Robinson2022-wc,Dunn1975-ew}. We propose to pursue a numerically self-consistent cumulant. This means defining a frequency grid to solve for $C^R(t)$ via equation~\ref{eq:cumulant}, which may then be used to obtain $G^R(\omega)$ via equation~\ref{eq:cumulant_G}. Then, $\Sigma^R(\omega)$ may be solved for via equation~\ref{eq:rearranged_dyson} to update $C^R(t)$, iterating until convergence.
 
 \subsection{Memory kernel as an alternative to the self-energy}
 The generalized quantum master equation (GQME) describes the time evolution of a correlation function $\mathcal{C}(t)$ as
