@@ -1,4 +1,73 @@
-..@ARTICLE{Mori1965-mf,
+@ARTICLE{Lee2021-hh,
+  title     = "Spectral functions from auxiliary-field quantum Monte Carlo
+               without analytic continuation: The extended Koopmans' theorem
+               approach",
+  author    = "Lee, Joonho and Malone, Fionn D and Morales, Miguel A and
+               Reichman, David R",
+  journal   = "J. Chem. Theory Comput.",
+  publisher = "American Chemical Society (ACS)",
+  volume    =  17,
+  number    =  6,
+  pages     = "3372--3387",
+  abstract  = "We explore the extended Koopmans' theorem (EKT) within the
+               phaseless auxiliary-field quantum Monte Carlo (AFQMC) method. The
+               EKT allows for the direct calculation of electron addition and
+               removal spectral functions using reduced density matrices of the
+               N-particle system and avoids the need for analytic continuation.
+               The lowest level of EKT with AFQMC, called EKT1-AFQMC, is
+               benchmarked using atoms, small molecules, 14-electron and
+               54-electron uniform electron gas supercells, and a minimal unit
+               cell model of diamond at the Γ-point. Via comparison with
+               numerically exact results (when possible) and coupled-cluster
+               methods, we find that EKT1-AFQMC can reproduce the qualitative
+               features of spectral functions for Koopmans-like charge
+               excitations with errors in peak locations of less than 0.25 eV in
+               a finite basis. We also note the numerical difficulties that
+               arise in the EKT1-AFQMC eigenvalue problem, especially when
+               back-propagated quantities are very noisy. We show how a
+               systematic higher-order EKT approach can correct errors in
+               EKT1-based theories with respect to the satellite region of the
+               spectral function. Our work will be of use for the study of
+               low-energy charge excitations and spectral functions in
+               correlated molecules and solids where AFQMC can be reliably
+               performed for both energy and back propagation.",
+  month     =  jun,
+  year      =  2021,
+  language  = "en"
+}
+
+@ARTICLE{Ren2011-ma,
+  title     = "Beyond the random-phase approximation for the electron
+               correlation energy: the importance of single excitations",
+  author    = "Ren, Xinguo and Tkatchenko, Alexandre and Rinke, Patrick and
+               Scheffler, Matthias",
+  journal   = "Phys. Rev. Lett.",
+  publisher = "American Physical Society (APS)",
+  volume    =  106,
+  number    =  15,
+  pages     =  153003,
+  abstract  = "The random-phase approximation (RPA) for the electron correlation
+               energy, combined with the exact-exchange (EX) energy, represents
+               the state-of-the-art exchange-correlation functional within
+               density-functional theory. However, the standard RPA
+               practice--evaluating both the EX and the RPA correlation energies
+               using Kohn-Sham (KS) orbitals from local or semilocal
+               exchange-correlation functionals--leads to a systematic
+               underbinding of molecules and solids. Here we demonstrate that
+               this behavior can be corrected by adding a ``single excitation''
+               contribution, so far not included in the standard RPA scheme. A
+               similar improvement can also be achieved by replacing the
+               non-self-consistent EX total energy by the corresponding
+               self-consistent Hartree-Fock total energy, while retaining the
+               RPA correlation energy evaluated using KS orbitals. Both schemes
+               achieve chemical accuracy for a standard benchmark set of
+               noncovalent intermolecular interactions.",
+  month     =  apr,
+  year      =  2011,
+  language  = "en"
+}
+
+@ARTICLE{Mori1965-mf,
   title     = "Transport, Collective Motion, and Brownian Motion",
   author    = "Mori, Hazime",
   journal   = "Prog. Theor. Phys.",
@@ -109,80 +178,6 @@
   month     =  nov,
   year      =  2025,
   language  = "en"
-}
-@ARTICLE{Dittmer2025-rw,
-  title     = "The approximate second order coupled-cluster method based on a
-               size-consistent Brillouin-Wigner partitioning",
-  author    = "Dittmer, Linus Bjarne and Tkachenko, Nikolay V and Head-Gordon,
-               Martin",
-  journal   = "J. Chem. Phys.",
-  publisher = "AIP Publishing",
-  volume    =  163,
-  number    =  12,
-  pages     =  124113,
-  abstract  = "We present a variant of the approximate second order
-               coupled-cluster method (CC2) with a two-parameter size-consistent
-               Brillouin–Wigner (BW-s) partitioning instead of a Møller–Plesset
-               (MP) partitioning for the unperturbed Hamiltonian, which we refer
-               to as BWs-CC2. The computational complexity of this model scales
-               identically to CC2 with molecular size. Conventional CC2 and its
-               regularized BWs-CC2 variants, as well as conventional MP2 and two
-               of its regularized BW-s2 variants, were assessed on a 535 element
-               database spanning thermochemistry, non-covalent interactions,
-               barrier heights, and isomerization energies. To ensure a
-               well-defined model chemistry, the assessment was performed using
-               internally stable spin-polarized Hartree–Fock (HF) orbitals in
-               the finite aug-cc-pVQZ basis without counterpoise corrections. As
-               a result of using stable orbitals, contrary to conventional
-               wisdom, we find that CC2 substantially outperforms MP2 on
-               molecules with significantly spin contaminated reference orbitals
-               without a significant increase in error on systems with a
-               spin-pure reference, showing the value of its single
-               substitutions. While no single choice of regularization
-               parameters can be optimal for all datasets, we find that BWs-CC2
-               generally outperforms both CC2 and BW-s2 with a single judicious
-               parameter choice. Additional tests on dipole moments and bond
-               lengths of diatomics provide further support for the utility of
-               this choice. The main outliers and poorest performing cases are
-               associated with large amounts of spin-contamination in the HF
-               reference, which is indicative of systems with either strong
-               correlation or extensive artificial symmetry breaking. Overall,
-               these findings argue that the perception of the quality of the
-               CC2 ground state should be reevaluated and that it can be further
-               improved upon by the soundly based BWs-CC2 variant with the
-               recommended parameter choice.",
-  month     =  sep,
-  year      =  2025,
-  language  = "en"
-}
-@ARTICLE{Coveney2023-tr,
-  title    = "A regularized second-order correlation method from Green's
-              function theory",
-  author   = "Coveney, Christopher J N and Tew, David P",
-  journal  = "J. Chem. Theory Comput.",
-  volume   =  19,
-  number   =  13,
-  pages    = "3915--3928",
-  abstract = "We present a scalable single-particle framework to treat
-              electronic correlation in molecules and materials motivated by
-              Green's function theory. We derive a size-extensive
-              Brillouin-Wigner perturbation theory from the single-particle
-              Green's function by introducing the Goldstone self-energy. This
-              new ground state correlation energy, referred to as Quasi-Particle
-              MP2 theory (QPMP2), avoids the characteristic divergences present
-              in both second-order Møller-Plesset perturbation theory and
-              Coupled Cluster Singles and Doubles within the strongly correlated
-              regime. We show that the exact ground state energy and properties
-              of the Hubbard dimer are reproduced by QPMP2 and demonstrate the
-              advantages of the approach for larger Hubbard models where the
-              metal-to-insulator transition is qualitatively reproduced,
-              contrasting with the complete failure of traditional methods. We
-              apply this formalism to characteristic strongly correlated
-              molecular systems and show that QPMP2 provides an efficient,
-              size-consistent regularization of MP2.",
-  month    =  jul,
-  year     =  2023,
-  language = "en"
 }
 
 @ARTICLE{Carter-Fenk2023-wz,
@@ -1033,6 +1028,82 @@
   primaryClass  = "physics.chem-ph"
 }
 
+@ARTICLE{Dittmer2025-rw,
+  title     = "The approximate second order coupled-cluster method based on a
+               size-consistent Brillouin-Wigner partitioning",
+  author    = "Dittmer, Linus Bjarne and Tkachenko, Nikolay V and Head-Gordon,
+               Martin",
+  journal   = "J. Chem. Phys.",
+  publisher = "AIP Publishing",
+  volume    =  163,
+  number    =  12,
+  pages     =  124113,
+  abstract  = "We present a variant of the approximate second order
+               coupled-cluster method (CC2) with a two-parameter size-consistent
+               Brillouin–Wigner (BW-s) partitioning instead of a Møller–Plesset
+               (MP) partitioning for the unperturbed Hamiltonian, which we refer
+               to as BWs-CC2. The computational complexity of this model scales
+               identically to CC2 with molecular size. Conventional CC2 and its
+               regularized BWs-CC2 variants, as well as conventional MP2 and two
+               of its regularized BW-s2 variants, were assessed on a 535 element
+               database spanning thermochemistry, non-covalent interactions,
+               barrier heights, and isomerization energies. To ensure a
+               well-defined model chemistry, the assessment was performed using
+               internally stable spin-polarized Hartree–Fock (HF) orbitals in
+               the finite aug-cc-pVQZ basis without counterpoise corrections. As
+               a result of using stable orbitals, contrary to conventional
+               wisdom, we find that CC2 substantially outperforms MP2 on
+               molecules with significantly spin contaminated reference orbitals
+               without a significant increase in error on systems with a
+               spin-pure reference, showing the value of its single
+               substitutions. While no single choice of regularization
+               parameters can be optimal for all datasets, we find that BWs-CC2
+               generally outperforms both CC2 and BW-s2 with a single judicious
+               parameter choice. Additional tests on dipole moments and bond
+               lengths of diatomics provide further support for the utility of
+               this choice. The main outliers and poorest performing cases are
+               associated with large amounts of spin-contamination in the HF
+               reference, which is indicative of systems with either strong
+               correlation or extensive artificial symmetry breaking. Overall,
+               these findings argue that the perception of the quality of the
+               CC2 ground state should be reevaluated and that it can be further
+               improved upon by the soundly based BWs-CC2 variant with the
+               recommended parameter choice.",
+  month     =  sep,
+  year      =  2025,
+  language  = "en"
+}
+
+@ARTICLE{Coveney2023-tr,
+  title    = "A regularized second-order correlation method from Green's
+              function theory",
+  author   = "Coveney, Christopher J N and Tew, David P",
+  journal  = "J. Chem. Theory Comput.",
+  volume   =  19,
+  number   =  13,
+  pages    = "3915--3928",
+  abstract = "We present a scalable single-particle framework to treat
+              electronic correlation in molecules and materials motivated by
+              Green's function theory. We derive a size-extensive
+              Brillouin-Wigner perturbation theory from the single-particle
+              Green's function by introducing the Goldstone self-energy. This
+              new ground state correlation energy, referred to as Quasi-Particle
+              MP2 theory (QPMP2), avoids the characteristic divergences present
+              in both second-order Møller-Plesset perturbation theory and
+              Coupled Cluster Singles and Doubles within the strongly correlated
+              regime. We show that the exact ground state energy and properties
+              of the Hubbard dimer are reproduced by QPMP2 and demonstrate the
+              advantages of the approach for larger Hubbard models where the
+              metal-to-insulator transition is qualitatively reproduced,
+              contrasting with the complete failure of traditional methods. We
+              apply this formalism to characteristic strongly correlated
+              molecular systems and show that QPMP2 provides an efficient,
+              size-consistent regularization of MP2.",
+  month    =  jul,
+  year     =  2023,
+  language = "en"
+}
+
 @ARTICLE{Caruso2016-us,
   title     = "The {GW} plus cumulant method and plasmonic polarons: application
                to the homogeneous electron gas",
@@ -1058,6 +1129,28 @@
                quasiparticle bands, red-shifted by the plasmon energy.",
   month     =  nov,
   year      =  2016,
+  language  = "en"
+}
+@ARTICLE{Langreth1970-iq,
+  title     = "Singularities in the {X}-ray spectra of metals",
+  author    = "Langreth, David C",
+  journal   = "Phys. Rev.",
+  publisher = "American Physical Society (APS)",
+  volume    =  1,
+  number    =  2,
+  pages     = "471--477",
+  abstract  = "Recently, Nozi\`eres et al. have shown that Mahan's model x-ray
+               problem (coupling between the deep hole and electron-hole
+               excitations) could be solved exactly for the singular exponents.
+               Here, it is shown that Lundqvist's model x-ray probelm (coupling
+               between the deep hole and plasmons) may also be solved exactly.
+               Furthermore, an exact solution for the singular exponents may be
+               obtained for the more general problem where both effects exist
+               simultaneously. Finally, a perturbation method is developed to
+               treat both effects on an equal footing for a real interacting
+               electron gas.",
+  month     =  jan,
+  year      =  1970,
   language  = "en"
 }
 
