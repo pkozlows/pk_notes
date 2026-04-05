@@ -1,68 +1,192 @@
-\documentclass{beamer}
-\usetheme{Madrid}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{physics}
-\usepackage{tikz}
-\usepackage{simpler-wick}
-\usepackage{cancel}
-\usepackage{geometry}
-\usepackage{algorithm}
-\usepackage{algorithmic}
-\usepackage[numbers]{natbib}
-\bibliographystyle{plainnat}  % or another style like 'apsrev4-2'
-\usepackage{hyperref}
-\usepackage{bm}
-\usepackage{xcolor}
-\usepackage{listings}
-\title{Theoretical Spectroscopy via Many-Body Perturbation Theory}
-\author{Patryk Kozlowski}
+\documentclass[aspectratio=169]{beamer}
 
-\hypersetup{
-    colorlinks=true,    % false: boxed links; true: colored links
-    linkcolor=blue,     % color of internal links
-    urlcolor=cyan       % color of external links
-}
-\setbeamertemplate{section in toc}[sections numbered]
+\usetheme{Madrid} % or your favorite theme
+\usecolortheme{default}
+\setbeamertemplate{footline}{} % Removes the footline
+\setbeamertemplate{navigation symbols}{}
 
-% Automatically create section title slides
-\AtBeginSection[]{
-  \begin{frame}
-  \frametitle{Outline}
-  \tableofcontents[currentsection]
-  \end{frame}
-}
-
-% Alternative: Simple section title slide
-% \AtBeginSection[]{
-%   \begin{frame}
-%   \centering
-%   \LARGE \insertsectionhead
-%   \end{frame}
-% }
+\title[]{Theoretical Spectroscopy via Many-Body Perturbation Theory}
 
 \begin{document}
 
+%==================================================
 \begin{frame}
-    \titlepage
+  \titlepage
 \end{frame}
-\begin{frame}
-  \frametitle{Outline}
+
+%==================================================
+\begin{frame}{Outline}
   \tableofcontents
 \end{frame}
-\section{Applications/Motivation}
-\begin{frame}
-Moire materials
+
+%==================================================
+% Add section slides before each section
+\AtBeginSection[]{
+  \begin{frame}{Outline}
+    \tableofcontents[currentsection,hideothersubsections]
+  \end{frame}
+}
+
+%==================================================
+\section{Introduction}
+
+\begin{frame}{Motivation}
+  \begin{itemize}
+    \item Many next-generation materials rely on metallic phases
+    % put example figures here
+\pause
+    \item Spectroscopy helps discover these materials
+    \pause
+      \begin{itemize}
+        \item Theoretical spectroscopy facilitates the interpretation of experiments
+      \end{itemize}
+  \end{itemize}
 \end{frame}
-\section{Why UEG and core state?}
-\section{The ground truth}
-\begin{frame}
-EOM-CCSD reproduces DMRG for 14e/19o. 
+
+\begin{frame}{Spectral functions of the Uniform Electron Gas (UEG)}
+  \begin{enumerate}
+    \item UEG as a testbed for many body methods intended for metals
+    \pause
+      \begin{itemize}
+        \item Finite supercells
+        \pause
+        \item Low density regime
+        \pause
+        \item $A(\omega) \propto \mathrm{Im} G^R(\omega)$
+      \end{itemize}
+\pause
+\item I explore three approaches for obtaining $G^R(\omega)$
+
+  \end{enumerate}
+\pause
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.22\textwidth}|p{0.32\textwidth}|p{0.32\textwidth}}
+\textbf{Approach} & \textbf{Pros} & \textbf{Cons} \\
+\hline
+EOM-CC & 
+Captures satellite features & 
+Expensive\\
+\hline
+\pause
+Perturbative expansion of Dyson equation & 
+Computationally efficient & 
+Does not capture satellite features \\
+\hline
+\pause
+Cumulant expansion & 
+Computationally efficient and captures satellite features & 
+May incorrectly predict the location of satellite features \\
+\end{tabular}
+\end{table}
 \end{frame}
-\section{Why UEG core state at 114e/485o?}
-\section{Wavefunction approaches give}
-\section{Cumulant Expansion}
-\section{Results}
-\subsection{EOM-CCSD}
+% The uniform electron gas is the paradigmatic metallic system and therefore it serves as a testbed for many body methods intended for metals. In practice, solid state simulations are done with a finite k-point sampling and therefore the UEG is also simulated with a finite supercell. There exist many methods which are able to describe the UEG at high density, but the low-density regime is more challenging. MBPT 
+% In this work, we focus on a low-density UEG supercell with 114 electrons in 485 orbitals at the $\Gamma$ point.
+\begin{frame}{Cumulant expansion}
+For a quasiparticle indexed by $p$,
+\begin{align} G^R_{pp}(t) = G_{0,pp}^R(t) e^{C_{pp}^R(t)}, \label{eq:cumulant_G}\end{align} where \begin{align} C_{pp}^R(t) = -\frac{1}{\pi}\int d\omega \frac{\mathrm{Im} \Sigma_{pp}^R(\omega)}{\omega^2} \left(e^{-i\omega t} + i \omega t -1\right). \label{eq:cumulant}\end{align}
+\pause
+I will explore three different approximations for $\Sigma(\omega)$ : GW, PT2, and BWs2.
+\end{frame}
+
+%==================================================
+\section{Methods}
+
+\begin{frame}{GW+C}
+\begin{equation}
+  \Sigma ^{GW}(\omega ) = G^{HF}(\omega)^{-1} - G(\omega)^{-1}
+\end{equation}
+where $\Sigma^{GW}$ is determined via perturbative expansion in the screened Coulomb interaction $W$.
+\pause
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{../figs/bws2_pqe_1.png}
+\end{figure}
+\end{frame}
+\begin{frame}{PT2+C}
+\begin{equation}
+  \Sigma ^{(2)}(\omega ) = G^{HF}(\omega)^{-1} - G(\omega)^{-1}
+\end{equation}
+where $\Sigma^{(2)}$ is determined via perturbative expansion in the bare Coulomb interaction $V$.
+\pause
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{../figs/bws2_pqe_2.png}
+\end{figure}
+\end{frame}
+\begin{frame}{BWs2+C}
+\begin{equation}
+  \Sigma ^{BWs2}(\omega ) = G^{BWs2}(\omega)^{-1} - G(\omega)^{-1}
+\end{equation}
+where $\Sigma^{BWs2}$ is determined via perturbative expansion in $V$, which is now screened.
+\pause
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{../figs/bws2_pqe_3.png}
+\end{figure}
+\end{frame}
+
+
+%==================================================
+\section{Future directions}
+
+\begin{frame}{Self-consistent cumulant}
+\begin{enumerate}
+\item Solve for the cumulant via
+\begin{align} C_{pp}^R(t) = -\frac{1}{\pi}\int d\omega \frac{\mathrm{Im} \Sigma_{pp}^R(\omega)}{\omega^2} \left(e^{-i\omega t} + i \omega t -1\right). \label{eq:cumulant}\end{align}
+\pause
+\item Solve for the Green's function via
+\begin{align} G^R_{pp}(t) = G_{0,pp}^R(t) e^{C_{pp}^R(t)}. \label{eq:cumulant_G}\end{align}
+\pause
+\item Solve for the self-energy via
+\begin{align}
+\Sigma ^R(\omega ) &= G_0^R(\omega)^{-1} - G^R(\omega)^{-1} \label{eq:rearranged_dyson}
+\end{align}
+and plug into equation~\ref{eq:cumulant}.
+\pause
+\item Iterate until self-consistency
+\end{enumerate}
+\end{frame}
+\begin{frame}{Memory kernel formulation}
+The GQME describes the time evolution of a correlation function $\mathcal{C}(t)$ as
+\begin{equation}
+\dot{\mathcal{C}}(t) = \mathcal{C}(t) {\Omega_1} - \int_{0}^{t} d \tau\, \mathcal{C}(t - \tau) \mathcal{K}_1(\tau) + D(t),
+\label{eq:gqme}
+\end{equation}
+\pause
+The equation of motion for the Green's function is
+\begin{equation}
+i\partial_t G^R(t) =  \epsilon_0 G^R(t)  + \int_0^t d\tau\, \Sigma^R(t - \tau)\, G^R(\tau),
+% (i\partial_t - \epsilon_0) G^R(t) - \int_0^t d\tau\, \Sigma^R(t - \tau)\, G^R(\tau) = 0 \label{eq:eom_retarded}
+\end{equation}
+\pause
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.20\textwidth}|p{0.22\textwidth}|p{0.18\textwidth}|p{0.22\textwidth}}
+\textbf{Quantity} & \textbf{Expansion Parameter} & \textbf{Decay} & \textbf{Correlation Strength} \\
+\hline
+ $\mathcal{K}_1(t)$ & 
+$t$ & 
+Fast & 
+Strong
+\\
+\hline
+\pause
+$\Sigma^R(t)$ & 
+$V$ & 
+Slow & 
+Weak to moderate \\
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \Large Questions?
+\end{frame}
+
 \end{document}
