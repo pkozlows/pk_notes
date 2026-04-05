@@ -170,6 +170,31 @@ plt.ylim(0, 0.30)
 # plt.grid()
 plt.tight_layout()
 plt.savefig("bws2_pqe_3.png", dpi=300)
+# alpha1=2, alpha2=0; obtuse legend
+plt.figure(figsize=(10,6))
+plt.plot(ccsd_x, ccsd_y, color="black", linestyle="-", label="EOM-CCSD")
+plt.plot(lda_gw_c_x, lda_gw_c_y, color="black", linestyle=":", label="GW+C")
+for alpha1, alpha2 in a1eq2_alpha_pairs:
+    if alpha1 != 2 or alpha2 != 0:
+        continue
+    # method_label = rf'BWs2; $\alpha_2$={alpha2}'
+    idx = np.where((a1eq2_alpha_pairs[:, 0] == alpha1) & (a1eq2_alpha_pairs[:, 1] == alpha2))[0]
+    if len(idx) > 0:
+        a_fft = a1eq2_a_fft[idx[0], :]
+        norm_a = np.trapz(a_fft, a1eq2_omegas_fft)
+        plt.plot(a1eq2_omegas_fft*HARTREE_TO_EV, a_fft/HARTREE_TO_EV, color=alpha2_colors[alpha2], linestyle="-", label='BWs2+C')#+f" (norm={norm_a:.2f})")
+        # plt.axvline(a1eq2_a_sp_energies[idx[0], p_idx]*HARTREE_TO_EV, color=alpha2_colors[alpha2], linestyle="-")
+
+# plt.axvline(mp2_sps[p_idx]*HARTREE_TO_EV, color="blue", linestyle="--", label="MP2")
+plt.xlabel(x_label)
+plt.ylabel(y_label)
+# plt.title(rf"BWs2+C(BWs2) for fixed $\alpha_1=2$ with rs={r}, {k_label}, npw=485, $\eta=0.8$ eV")
+plt.legend(loc="upper left")
+plt.xlim(-20, -2.5)
+plt.ylim(0, 0.30)
+# plt.grid()
+plt.tight_layout()
+plt.savefig("bws2_pqe_3_report.png", dpi=300)
 
 # alpha1=1-3, scan across alpha2=-1-1; verbose legend
 plt.figure(figsize=(10, 6))
