@@ -130,18 +130,19 @@ However, in my implementation, I found that the Ritz values do not always conver
 
 Green's function methods are well suited for computing the spectral function $A(\omega)$, since the spectral function
  is proportional to the imaginary part of the retarded, or causal, Green's function: \begin{align} A(\omega) = -\frac{1}{\pi} \mathrm{Im} G^R(\omega). \end{align}
-Now, the retarded Green's function satisfies the Dyson equation: \begin{align} G^R(\omega) &= G_0^R(\omega) + G_0^R(\omega) \Sigma^R(\omega) G^R(\omega) \label{eq:dyson}\\
-\implies \Sigma ^R(\omega ) &= G_0^R(\omega)^{-1} - G^R(\omega)^{-1} \label{eq:rearranged_dyson} \end{align}
-Because obtaining the exact self-energy is intractable, MBPT methods approximate $\Sigma$ through a perturbative expansion in the interaction strength. However, solving the Dyson equation perturbatively with truncation at first order fails to capture satellite features in core-level spectral functions of the UEG \cite{Holm1997-by, Caruso2016-us,McClain2016-md}.
+The ensuing discussion will assume retarded quantities. The self-energy $\Sigma $ relates $G$ and $G_0$ via:
+ \begin{align} G(\omega) &= G_0(\omega) + G_0(\omega) \Sigma(\omega) G(\omega) \label{eq:dyson}\\
+\implies \Sigma (\omega ) &= G_0(\omega)^{-1} - G(\omega)^{-1} \label{eq:rearranged_dyson} \end{align}
+Because obtaining the exact self-energy is intractable, MBPT methods obtain an approximate $\Sigma$ through a perturbative expansion of equation~\ref{eq:dyson} in the interaction strength. However, solving equation~\ref{eq:dyson} perturbatively with truncation at first order fails to capture satellite features in core-level spectral functions of the UEG \cite{Holm1997-by, Caruso2016-us,McClain2016-md}.
 
-In contrast, the cumulant expansion is able to reproduce satellite features\cite{Langreth1970-iq}. It expresses the diagonal retarded Green's function for a quasiparticle $p$ as \begin{align} G^R_{pp}(t) = G_{0,pp}^R(t) e^{C_{pp}^R(t)}, \label{eq:cumulant_G}\end{align} where the retarded cumulant, with quasi-boson frequencies $\omega$, is given by \begin{align} C_{pp}^R(t) = -\frac{1}{\pi}\int d\omega \frac{\mathrm{Im} \Sigma_{pp}^R(\omega)}{\omega^2} \left(e^{-i\omega t} + i \omega t -1\right). \label{eq:cumulant}\end{align}
+In contrast, the cumulant expansion is able to reproduce satellite features\cite{Langreth1970-iq}. The cumulant ansatz for the diagonal Green's function for a quasiparticle $p$ is \begin{align} G_{pp}(t) = G_{0,pp}(t) e^{C_{pp}(t)}, \label{eq:cumulant_G}\end{align} where the cumulant, with quasi-boson frequencies $\omega$, is given by \begin{align} C_{pp}(t) = -\frac{1}{\pi}\int d\omega \frac{\mathrm{Im} \Sigma_{pp}(\omega)}{\omega^2} \left(e^{-i\omega t} + i \omega t -1\right). \label{eq:cumulant}\end{align}
 % This form can be derived by solving the large polaron problem, where a core hole is coupled to a bath of bosons\cite{Dunn1975-ew}. Even as the UEG only contains interacting fermions, collective excitation of these fermions are plasmons, which are bosonic in nature. The quasiparticle arising from the interaction of the fermions with these plasmons may be thought of as an electronic polaron.
-%  Therefore, the cumulant expansion is expected to be a good approximation for the spectral function of the UEG, as it captures the physics of plasmon satellites. 
-However, the accuracy of the cumulant expansion depends on the choice of $\Sigma^R$ in equation~\ref{eq:cumulant}. Note that that discussion below assumes retarded quantities.
+%  Therefore, the cumulant expansion is expected to be a good approximation for the spectral function of the UEG, as it captures the physics of plasmon satellites.
+However, the accuracy of the cumulant expansion depends on the choice of $\Sigma$ in equation~\ref{eq:cumulant}.
 \subsubsection{GW+C} Initial cumulant approaches used $\Sigma^{GW}$ to construct the cumulant \cite{Holm1997-by}. This has been attractive because the GW self-energy may be built at a cost of $O(N^4)$, and the cumulant may be constructed from $\Sigma^{GW}$ without increasing the scaling.
  While this approach produces satellite features, their positions occur at incorrect locations relative to the EOM-CCSD reference \cite{McClain2016-md}. 
 \subsubsection{PT2+C}
-Second-order perturbation theory (PT2) admits the second-order self-energy, whose construction costs $O(N^5)$. \emph{From the Green's function perspective}, PT2 does a perturbative expansion of equation~\ref{eq:dyson} with truncation at first order in the bare Coulomb interaction. Using $p, q\ldots$,  $i, j \ldots$, and $a, b \ldots$, to denote general, occupied, and virtual indices, respectively, the PT2 cumulant reads:
+Second-order perturbation theory (PT2) admits the second-order self-energy $\Sigma^{(2)}$, whose construction costs $O(N^5)$. \emph{From the Green's function perspective}, $\Sigma^{(2)}$ is obtained from a perturbative expansion of equation~\ref{eq:dyson} with truncation at first order in the bare Coulomb interaction. Using $p, q\ldots$,  $i, j \ldots$, and $a, b \ldots$, to denote general, occupied, and virtual indices, respectively, the PT2 cumulant reads:
 \begin{align}
   C_{pp}^{(2)}(t) & = \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\varepsilon_{p i}^{a b}\right)^2}\left(e^{-i \varepsilon_{p i}^{a b} t} +i \varepsilon_{p i}^{a b} t -1 \right) +\frac{1}{2}\sum_{i j a} \frac{\langle p a \| i j\rangle^2}{\left(\varepsilon_{p a}^{i j}\right)^2} \left(e^{-i \varepsilon_{p a}^{i j} t} +i \varepsilon_{p a}^{i j} t -1 \right).
 \end{align}
@@ -167,7 +168,8 @@ BWs2 has been shown to accurately compute ground state properties of metals\cite
 \begin{align}
   \Sigma_{i i}^{\mathrm{iQPMP2}}(\omega) = \frac{1}{2} \sum_{a b j} \frac{|\langle i j \| a b\rangle|^2}{\omega+\epsilon_j^{QP}-\epsilon_a-\epsilon_b},
 \end{align}
-where $\epsilon_j^{QP}$ is the quasiparticle energy of orbital $j$ obtained from PT2, and then takes the trace of this $\Sigma^{\mathrm{iQPMP2}}$, a correlation energy is obtained that bears striking similarities to the BWs2 one, as originally derived by \citet{Carter-Fenk2023-wz}. This led a labmate to derive an effective BWs2 self-energy that satisfies the Dyson equation, but with $G_0$ due to the "dressed" BWs2 input rather than HF. Given that this effective BWs2 self-energy was used to produce accurate ground state metallic properties, I was motivated to derive a form for the BWs2 cumulant with it. I derived the BWs2 cumulant as
+where $\epsilon_j^{QP}$ is the quasiparticle energy of orbital $j$ obtained from PT2, and then takes the trace of this $\Sigma^{\mathrm{iQPMP2}}$, a correlation energy is obtained that bears striking similarities to the BWs2 one, as originally derived by \citet{Carter-Fenk2023-wz}. This led a labmate to derive an effective BWs2 self-energy that satisfies equation~\ref{eq:dyson}
+, but with $G_0$ due to the "dressed" BWs2 input rather than HF. Given that this effective BWs2 self-energy was used to produce accurate ground state metallic properties, I was motivated to derive a form for the BWs2 cumulant with it. I derived the BWs2 cumulant as
 \begin{equation}
   C_{pp}^{\mathrm{BWs2}}(t) = 
   \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\tilde{\varepsilon}_{p i}^{a b}\right)^2}\left(e^{-i \tilde{\varepsilon}_{p i}^{a b} t} +i \tilde{\varepsilon}_{p i}^{a b} t -1 \right) 
@@ -184,7 +186,13 @@ Preliminary results, shown in figure~\ref{fig:bws2_pqe}, suggest that the $O(N^5
 \section{Future directions}
 \subsection{A self-consistent cumulant expansion}
 Self-consistency has been incorporated into perturbative approaches for solving the Dyson equation, such as GW,
-with mixed success. In these schemes, low-order diagrams are treated exactly, but higher order diagrams are neglected. Therefore, adding self consistency may lead to the double counting of terms in the expansion. Alternatively, self-consistency may be pursued within the cumulant framework. Here, again low-order diagrams are treated exactly, but higher order ones are treated approximately. There have been a few studies of the self-consistent cumulant, but they have all been carried out analytically in the TDL\cite{Holm1997-by,Robinson2022-wc,Dunn1975-ew}. We propose to pursue a numerically self-consistent cumulant. This means defining a frequency grid to solve for $C^R(t)$ via equation~\ref{eq:cumulant}, which may then be used to obtain $G^R(\omega)$ via equation~\ref{eq:cumulant_G}. Then, $\Sigma^R(\omega)$ may be solved for via equation~\ref{eq:rearranged_dyson} to update $C^R(t)$ again, iterating until convergence.
+with mixed success. In these schemes, low-order diagrams are treated exactly, but higher order diagrams are neglected. Therefore, adding self consistency may lead to the double counting of terms in the expansion. Alternatively, self-consistency may be pursued within the cumulant framework. Here, again low-order diagrams are treated exactly, but higher order ones are treated approximately. There have been a few studies of the self-consistent cumulant, but they have all been carried out analytically in the TDL\cite{Holm1997-by,Robinson2022-wc,Dunn1975-ew}. We propose to pursue a numerically self-consistent cumulant. 
+% And alternative way to obtain $G$ from $G_0$ is via the improper self-energy $\Sigma^I$ as
+% \begin{align}
+%   G(\omega) &= G_0(\omega) + G_0(\omega) \Sigma^I(\omega) G_0(\omega). \label{eq:improper_dyson}
+% \end{align}
+% This again implies a form for the cumulant as in equation~\ref{eq:cumulant}, but with $\Sigma^I$ instead of $\Sigma$. Improper quantities are scarcely dealt with, but in this situation it may be advantageous because 
+ This means defining a frequency grid to solve for $C^R(t)$ via equation~\ref{eq:cumulant}, which may then be used to obtain $G^R(\omega)$ via equation~\ref{eq:cumulant_G}. Then, $\Sigma^R(\omega)$ may be solved for via equation~\ref{eq:rearranged_dyson} to update $C^R(t)$ again, iterating until convergence.
 
 \subsection{Memory kernel as an alternative to the self-energy}
 The generalized quantum master equation (GQME) describes the time evolution of a correlation function $\mathcal{C}(t)$ as
