@@ -122,11 +122,11 @@ However, in my implementation, I found that the Ritz values do not always conver
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.75\textwidth]{../figs/mcgw_convergence_multi.png}
-  \caption{Convergence of MCGW towards the GW quasiparticle energies of a variety of small molecules in the cc-pVDZ basis. $\Delta$ is the maximum difference between the ED@GW solution and the Ritz value of a given iteration in the pseudo-active space. This pseudo-active space is defined by the combination of all $N_{occ}$ orbitals plus the first $N_{occ}$ virtual orbitals. The desired numerical accuracy of a quantum chemistry method is $1\times 10^{-6}$ Ha\cite{Pulay1980-bo}. The Xes serve as a visual guide, indicating the point at which the loss of orthogonality becomes sufficiently large for the Ritz values of MCGW to diverge from the path of Lanczos towards convergence.}
+  \caption{Convergence of MCGW towards the GW quasiparticle energies of a variety of small molecules in the cc-pVDZ basis. $\Delta$ is the maximum difference between the ED@GW solution and the Ritz value of a given iteration in the pseudo-active space. This pseudo-active space is defined by the combination of all $N_{occ}$ orbitals plus the first $N_{occ}$ virtual orbitals. The desired numerical accuracy of a quantum chemistry method is $1\times 10^{-6}$ Ha\cite{Pulay1980-bo}. The Xes serve as a visual guide, indicating the point at which the loss of orthogonality becomes sufficiently large for the Ritz values of MCGW to diverge from the path of Lanczos towards convergence with ED@GW.}
   \label{fig:mcgw_failure}
 \end{figure}
 \newpage
-\subsection{Spectral function of the uniform electron gas (UEG)} The UEG is the paradigmatic metallic system \cite{Mahan2014-ad}, serving as a testbed for many-body methods hoping to describe metals. Its exact properties in the thermodynamic limit (TDL) are not known. Although the TDL value is of interest to the quantum chemist, in practice, solid-state calculations are performed using a finite k-point sampling. Furthermore, even though existing many-body methods, such as quantum Monte Carlo\cite{Lee2021-hh}, accurately describe the dense UEG, their performance in the low-density regime is lacking. Therefore, the discussion below assumes finite supercells of the UEG at low density. 
+\subsection{Spectral function of the uniform electron gas (UEG)} The UEG is the paradigmatic metallic system \cite{Mahan2014-ad}, serving as a testbed for many-body methods hoping to describe metals. Its exact properties in the thermodynamic limit (TDL) are not known. Although the TDL value is of interest, in practice, solid-state calculations are performed using a finite k-point sampling. Furthermore, even though existing scalable many-body methods, such as auxiliary-field quantum Monte Carlo, accurately describe the UEG at high to intermediate density, their performance in the low-density regime is lacking\cite{Lee2021-hh}. Therefore, the discussion below assumes finite supercells of the UEG at low density. 
 
 Green's function methods are well suited for computing the spectral function $A(\omega)$, since the spectral function
  is proportional to the imaginary part of the retarded, or causal, Green's function: \begin{align} A(\omega) = -\frac{1}{\pi} \mathrm{Im} G^R(\omega). \end{align}
@@ -137,7 +137,7 @@ Because obtaining the exact self-energy is intractable, MBPT methods approximate
 In contrast, the cumulant expansion is able to reproduce satellite features\cite{Langreth1970-iq}. It expresses the diagonal retarded Green's function for a quasiparticle $p$ as \begin{align} G^R_{pp}(t) = G_{0,pp}^R(t) e^{C_{pp}^R(t)}, \label{eq:cumulant_G}\end{align} where the retarded cumulant, with quasi-boson frequencies $\omega$, is given by \begin{align} C_{pp}^R(t) = -\frac{1}{\pi}\int d\omega \frac{\mathrm{Im} \Sigma_{pp}^R(\omega)}{\omega^2} \left(e^{-i\omega t} + i \omega t -1\right). \label{eq:cumulant}\end{align}
 % This form can be derived by solving the large polaron problem, where a core hole is coupled to a bath of bosons\cite{Dunn1975-ew}. Even as the UEG only contains interacting fermions, collective excitation of these fermions are plasmons, which are bosonic in nature. The quasiparticle arising from the interaction of the fermions with these plasmons may be thought of as an electronic polaron.
 %  Therefore, the cumulant expansion is expected to be a good approximation for the spectral function of the UEG, as it captures the physics of plasmon satellites. 
-However, the accuracy of cumulant expansion depends on the choice of $\Sigma^R$ in equation~\ref{eq:cumulant}. 
+However, the accuracy of the cumulant expansion depends on the choice of $\Sigma^R$ in equation~\ref{eq:cumulant}. Note that that discussion below assumes retarded quantities.
 \subsubsection{GW+C} Initial cumulant approaches used $\Sigma^{GW}$ to construct the cumulant \cite{Holm1997-by}. This has been attractive because the GW self-energy may be built at a cost of $O(N^4)$, and the cumulant may be constructed from $\Sigma^{GW}$ without increasing the scaling.
  While this approach produces satellite features, their positions occur at incorrect locations relative to the EOM-CCSD reference \cite{McClain2016-md}. 
 \subsubsection{PT2+C}
@@ -150,7 +150,7 @@ This would seem to offer an alternative to GW+C, but in metallic systems like th
 
 % \subsubsection{$G_0@\text{BWs2};C(\text{BWs2})$}
 \subsubsection{BWs2+C}
-These issues may be mitigated by regularizing PT2, which has the effect of screening the bare Coulomb interaction \cite{Carter-Fenk2023-wz}. With this purpose in mind, \citet{Carter-Fenk2023-wz} developed a size-consistent Brillouin–Wigner second-order perturbation theory (BWs2) method, which scales as $O(N^5)$. \emph{From the wavefunction perspective}, in PT2 one splits the Hamiltonian into a zeroth order part, $\hat{H}^{(0)}$, and a perturbation, $\hat{V}$, as
+These issues may be mitigated by regularizing PT2, which screens the bare Coulomb interaction \cite{Carter-Fenk2023-wz}. With this purpose in mind, \citet{Carter-Fenk2023-wz} developed a size-consistent Brillouin–Wigner second-order perturbation theory (BWs2) method, which scales as $O(N^5)$. \emph{From the wavefunction perspective}, in PT2 one splits the Hamiltonian into a zeroth order part, $\hat{H}^{(0)}$, and a perturbation, $\hat{V}$, as
 \begin{equation}
   \hat{H} = \hat{H}^{(0)} + \hat{V}.
 \end{equation}
@@ -158,7 +158,7 @@ The Moller-Plesset partitioning takes
 \begin{equation}
   \hat{H}^{(0)}=f_{pq} \hat{a}_p^{\dagger} \hat{a}_q,
 \end{equation}
-where $f_{pq}$ is the Fock matrix. In contrast, the size-consistent Brillouin-Wigner paritioning takes\cite{Dittmer2025-rw}
+where $f_{pq}$ is the Fock matrix. In contrast, the size-consistent Brillouin-Wigner partitioning takes\cite{Dittmer2025-rw}
 \begin{equation}
   \hat{H}^{(0)}=f_{pq} \hat{a}_p^{\dagger} \hat{a}_q+\frac{\alpha_1}{8}\left(t_{i k}^{a b(1)}\langle j k \| a b\rangle+t_{j k}^{a b(1)}\langle i k \| a b\rangle-\frac{2}{N} t_{k l}^{a b(1)}\langle k l \| a b\rangle \delta_{i j}\right) \hat{a}_i^{\dagger} \hat{a}_j +\frac{\alpha _2}{8}\left(t_{i j}^{a c(1)}\langle i j \| b c\rangle+t_{i j}^{b c}{ }^{(1)}\langle i j \| a c\rangle\right) \hat{a}_a^{\dagger} \hat{a}_b,
 \end{equation}
@@ -167,7 +167,7 @@ BWs2 has been shown to accurately compute ground state properties of metals\cite
 \begin{align}
   \Sigma_{i i}^{\mathrm{iQPMP2}}(\omega) = \frac{1}{2} \sum_{a b j} \frac{|\langle i j \| a b\rangle|^2}{\omega+\epsilon_j^{QP}-\epsilon_a-\epsilon_b},
 \end{align}
-where $\epsilon_j^{QP}$ is the quasiparticle energy of orbital $j$ obtained from PT2, and then takes the trace of $\Sigma^{\mathrm{iQPMP2}}$, a correlation energy is obtained that bears striking similarities to the BWs2 one, as originally derived by \citet{Carter-Fenk2023-wz}. This led a labmate to derive an effective BWs2 self-energy that satisfies the Dyson equation, but with $G_0$ due to the "dressed" BWs2 input rather than HF. Given that this effective BWs2 self-energy was used to produce accurate ground state metallic properties, I was motivated to derive a form for the BWs2 cumulant with it. The BWs2 cumulant is defined as
+where $\epsilon_j^{QP}$ is the quasiparticle energy of orbital $j$ obtained from PT2, and then takes the trace of this $\Sigma^{\mathrm{iQPMP2}}$, a correlation energy is obtained that bears striking similarities to the BWs2 one, as originally derived by \citet{Carter-Fenk2023-wz}. This led a labmate to derive an effective BWs2 self-energy that satisfies the Dyson equation, but with $G_0$ due to the "dressed" BWs2 input rather than HF. Given that this effective BWs2 self-energy was used to produce accurate ground state metallic properties, I was motivated to derive a form for the BWs2 cumulant with it. I derived the BWs2 cumulant as
 \begin{equation}
   C_{pp}^{\mathrm{BWs2}}(t) = 
   \frac{1}{2} \sum_{i a b}\frac{\langle p i \| a b\rangle^2 }{\left(\tilde{\varepsilon}_{p i}^{a b}\right)^2}\left(e^{-i \tilde{\varepsilon}_{p i}^{a b} t} +i \tilde{\varepsilon}_{p i}^{a b} t -1 \right) 
@@ -178,13 +178,13 @@ Preliminary results, shown in figure~\ref{fig:bws2_pqe}, suggest that the $O(N^5
 \begin{figure}[h!]
   \centering
   \includegraphics[width=0.75\textwidth]{../figs/bws2_pqe_3_report.png}
-  \caption{Spectral functions of the UEG at the $\Gamma $ point for $r_s = 4$. Curves are shown for BWs2+C (where we set $\alpha_1 = 2$ and $\alpha_2 = 0$), GW+C ($G_0$ from DFT-LDA), and EOM-CCSD, with the latter two reproduced from \citet{McClain2016-md}. This UEG supercell contains 114 electrons in 485 orbitals. A broadening parameter of $\eta = 0.8$ eV was used.}
+  \caption{Spectral functions of the UEG at the $\Gamma $ point for $r_s = 4$. Curves are shown for BWs2+C (where we set $\alpha_1 = 2$ and $\alpha_2 = 0$), GW+C ($G_0$ from DFT-LDA), and EOM-CCSD, with the latter two reproduced from \citet{McClain2016-md}. This UEG supercell contains 114 electrons in 485 orbitals. A spectral broadening of $ 0.8$ eV was used.}
   \label{fig:bws2_pqe}
 \end{figure}
 \section{Future directions}
 \subsection{A self-consistent cumulant expansion}
 Self-consistency has been incorporated into perturbative approaches for solving the Dyson equation, such as GW,
-with mixed success. In these schemes, low-order diagrams are treated exactly, but higher order diagrams are neglected. Therefore, adding self consistency may lead to the double counting of terms in the expansion. Alternatively, self-consistency may be pursued within the cumulant framework. Here, again low-order diagrams are treated exactly, but the remaining infinity are treated approximately. There have been a few studies of the self-consistent cumulant, but they have all been carried out analytically in the TDL\cite{Holm1997-by,Robinson2022-wc,Dunn1975-ew}. We propose to pursue a numerically self-consistent cumulant. This means defining a frequency grid to solve for $C^R(t)$ via equation~\ref{eq:cumulant}, which may then be used to obtain $G^R(\omega)$ via equation~\ref{eq:cumulant_G}. Then, $\Sigma^R(\omega)$ may be solved for via equation~\ref{eq:rearranged_dyson} to update $C^R(t)$ again, iterating until convergence.
+with mixed success. In these schemes, low-order diagrams are treated exactly, but higher order diagrams are neglected. Therefore, adding self consistency may lead to the double counting of terms in the expansion. Alternatively, self-consistency may be pursued within the cumulant framework. Here, again low-order diagrams are treated exactly, but higher order ones are treated approximately. There have been a few studies of the self-consistent cumulant, but they have all been carried out analytically in the TDL\cite{Holm1997-by,Robinson2022-wc,Dunn1975-ew}. We propose to pursue a numerically self-consistent cumulant. This means defining a frequency grid to solve for $C^R(t)$ via equation~\ref{eq:cumulant}, which may then be used to obtain $G^R(\omega)$ via equation~\ref{eq:cumulant_G}. Then, $\Sigma^R(\omega)$ may be solved for via equation~\ref{eq:rearranged_dyson} to update $C^R(t)$ again, iterating until convergence.
 
 \subsection{Memory kernel as an alternative to the self-energy}
 The generalized quantum master equation (GQME) describes the time evolution of a correlation function $\mathcal{C}(t)$ as
