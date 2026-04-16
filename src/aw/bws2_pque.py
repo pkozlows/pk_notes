@@ -17,6 +17,7 @@ r = 4
 p_idx = 0
 nocc = 57
 k_label = r"$k=(0,0,0)$" if p_idx == 0 else r"$k=(2\pi/L,0,0)$"
+title = rf"Spectral functions for {k_label} at $r_s={r}$ with 114 electrons in 485 orbitals"
 def inspect_hdf5(filename):
     """Utility to print the structure of an HDF5 file for debugging."""
     with h5py.File(filename, "r") as f:
@@ -90,7 +91,7 @@ y_label = r'$A(\omega)$ (1/eV)'
 aspect_ratio = (14, 5)
 plt.figure(figsize=aspect_ratio)
 plt.plot(ccsd_x, ccsd_y, color="black", linestyle="-", label="EOM-CCSD")
-plt.plot(lda_gw_c_x, lda_gw_c_y, color="black", linestyle=":", label="GW+C")
+# plt.plot(lda_gw_c_x, lda_gw_c_y, color="black", linestyle=":", label="GW+C")
 hfpc_path = "/Users/patrykkozlowski/harvard/qcpbc/libpbc/gw_tests/pk_notes/src/aw/cu_fl0_rs4_npw485.h5"
 inspect_hdf5(hfpc_path)
 '''
@@ -109,16 +110,16 @@ with h5py.File(hfpc_path, "r") as f:
 # plt.axvline(mp2_sps[p_idx]*HARTREE_TO_EV, color="blue", linestyle="--", label="MP2")
 plt.xlabel(x_label)
 plt.ylabel(y_label)
-# plt.title(rf"Spectral functions for {k_label} at rs={r}")
+plt.title(title)
 plt.legend(loc="upper left")
 plt.xlim(-20, -2.5)
 plt.ylim(0, 0.25)
 # plt.grid()
 plt.tight_layout()
-plt.savefig("bws2_pqe_1.png", dpi=300)
+plt.savefig("v2_bws2_pqe_0.png", dpi=300)
 plt.figure(figsize=aspect_ratio)
 plt.plot(ccsd_x, ccsd_y, color="black", linestyle="-", label="EOM-CCSD")
-plt.plot(lda_gw_c_x, lda_gw_c_y, color="black", linestyle=":", label="GW+C")
+plt.plot(lda_gw_c_x, lda_gw_c_y, color="blue", linestyle="-", label="GW+C")
 hfpc_path = "/Users/patrykkozlowski/harvard/qcpbc/libpbc/gw_tests/pk_notes/src/aw/cu_fl0_rs4_npw485.h5"
 inspect_hdf5(hfpc_path)
 '''
@@ -133,22 +134,50 @@ with h5py.File(hfpc_path, "r") as f:
     spec_fn_g0_p0 = np.array(np.squeeze(f["spec_fn_g0_p0"][:]))
     spec_fn_cumulant_analytic_p0 = np.array(np.squeeze(f["spec_fn_cumulant_analytic_p0"][:]))
 # plt.plot(omegas_p0*HARTREE_TO_EV, spec_fn_g0_p0/HARTREE_TO_EV, color="red", linestyle="-", label="HF+PT2")
-plt.plot(omegas_p0*HARTREE_TO_EV, spec_fn_cumulant_analytic_p0/HARTREE_TO_EV, color="blue", linestyle="-", label="HF+C(2)")
+# plt.plot(omegas_p0*HARTREE_TO_EV, spec_fn_cumulant_analytic_p0/HARTREE_TO_EV, color="blue", linestyle="-", label="HF+C(PT2)")
 # plt.axvline(mp2_sps[p_idx]*HARTREE_TO_EV, color="blue", linestyle="--", label="MP2")
 plt.xlabel(x_label)
 plt.ylabel(y_label)
-# plt.title(rf"Spectral functions for {k_label} at rs={r}")
+plt.title(title)
 plt.legend(loc="upper left")
 plt.xlim(-20, -2.5)
 plt.ylim(0, 0.25)
 # plt.grid()
 plt.tight_layout()
-plt.savefig("bws2_pqe_2.png", dpi=300)
+plt.savefig("v2_bws2_pqe_1.png", dpi=300)
+plt.figure(figsize=aspect_ratio)
+plt.plot(ccsd_x, ccsd_y, color="black", linestyle="-", label="EOM-CCSD")
+plt.plot(lda_gw_c_x, lda_gw_c_y, color="blue", linestyle="-", label="GW+C")
+hfpc_path = "/Users/patrykkozlowski/harvard/qcpbc/libpbc/gw_tests/pk_notes/src/aw/cu_fl0_rs4_npw485.h5"
+inspect_hdf5(hfpc_path)
+'''
+] $ h5ls cu_fl0_rs4_npw485.h5 
+cumulant_analytic_p0     Dataset {1, 1837}
+omegas_p0                Dataset {1, 3673}
+spec_fn_cumulant_analytic_p0 Dataset {1, 3673}
+spec_fn_g0_p0            Dataset {1, 3673}
+'''
+with h5py.File(hfpc_path, "r") as f:
+    omegas_p0 = np.array(np.squeeze(f["omegas_p0"][:]))
+    spec_fn_g0_p0 = np.array(np.squeeze(f["spec_fn_g0_p0"][:]))
+    spec_fn_cumulant_analytic_p0 = np.array(np.squeeze(f["spec_fn_cumulant_analytic_p0"][:]))
+# plt.plot(omegas_p0*HARTREE_TO_EV, spec_fn_g0_p0/HARTREE_TO_EV, color="red", linestyle="-", label="HF+PT2")
+plt.plot(omegas_p0*HARTREE_TO_EV, spec_fn_cumulant_analytic_p0/HARTREE_TO_EV, color="red", linestyle="-", label="RSPT2+C")
+# plt.axvline(mp2_sps[p_idx]*HARTREE_TO_EV, color="blue", linestyle="--", label="MP2")
+plt.xlabel(x_label)
+plt.ylabel(y_label)
+plt.title(title)
+plt.legend(loc="upper left")
+plt.xlim(-20, -2.5)
+plt.ylim(0, 0.25)
+# plt.grid()
+plt.tight_layout()
+plt.savefig("v2_bws2_pqe_2.png", dpi=300)
 
 # alpha1=2, alpha2=0; obtuse legend
 plt.figure(figsize=aspect_ratio)
 plt.plot(ccsd_x, ccsd_y, color="black", linestyle="-", label="EOM-CCSD")
-plt.plot(lda_gw_c_x, lda_gw_c_y, color="black", linestyle=":", label="GW+C")
+plt.plot(lda_gw_c_x, lda_gw_c_y, color="blue", linestyle="-", label="GW+C")
 for alpha1, alpha2 in a1eq2_alpha_pairs:
     if alpha1 != 2 or alpha2 != 0:
         continue
@@ -157,7 +186,7 @@ for alpha1, alpha2 in a1eq2_alpha_pairs:
     if len(idx) > 0:
         a_fft = a1eq2_a_fft[idx[0], :]
         norm_a = np.trapz(a_fft, a1eq2_omegas_fft)
-        plt.plot(a1eq2_omegas_fft*HARTREE_TO_EV, a_fft/HARTREE_TO_EV, color=alpha2_colors[alpha2], linestyle="-", label='BWs2+C')#+f" (norm={norm_a:.2f})")
+        plt.plot(a1eq2_omegas_fft*HARTREE_TO_EV, a_fft/HARTREE_TO_EV, color='green', linestyle="-", label='BWs2+C')#+f" (norm={norm_a:.2f})")
         # plt.axvline(a1eq2_a_sp_energies[idx[0], p_idx]*HARTREE_TO_EV, color=alpha2_colors[alpha2], linestyle="-")
 
 # plt.axvline(mp2_sps[p_idx]*HARTREE_TO_EV, color="blue", linestyle="--", label="MP2")
@@ -169,7 +198,7 @@ plt.xlim(-20, -2.5)
 plt.ylim(0, 0.30)
 # plt.grid()
 plt.tight_layout()
-plt.savefig("bws2_pqe_3.png", dpi=300)
+plt.savefig("v2_bws2_pqe_3.png", dpi=300)
 # alpha1=2, alpha2=0; obtuse legend
 plt.figure(figsize=(10,6))
 plt.plot(ccsd_x, ccsd_y, color="black", linestyle="-", label="EOM-CCSD")
