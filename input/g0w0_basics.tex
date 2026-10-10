@@ -419,15 +419,27 @@ For the exchange self-energy, we only apply the following corr ection to the dia
 \begin{equation}
     \bm{\Sigma}^x_{n n}(\mathbf{k}, i \omega)=-\frac{2}{\pi}\left(\frac{6 \pi^2}{\Omega_{\mathrm{cell}} N_{\mathbf{k}}}\right)^{1 / 3}
 \end{equation}
-
-
-% Here, $P$ refers to the Gaussian auxiliary basis and $v_P^{n n^{\prime}}$ is the GDF integral defined as $v_{P 0}^{n k, n^{\prime} \mathbf{k}}$. The $\mathbf{G}=\mathbf{0}$ Coulomb divergence correction to the exchange self-energy is derived similarly:
-% $$
-% \begin{equation*}
-% \Sigma_{i i}^x(\mathbf{k}, i \omega)=-\frac{2}{\pi}\left(\frac{6 \pi^2}{\Omega_{\mathrm{cell}} N_{\mathbf{k}}}\right)^{1 / 3}, \tag{46}
-% \end{equation*}
-% $$
-% which is a constant that only applies to the diagonal occupied elements of the exchange self-energy.
+where
+\begin{gather}
+    \epsilon_{\mathbf{0 0}}^{-1}=1 /\left(h_{\mathbf{0 0}}-\sum_{P Q} w_{P \mathbf{0}}^{\dagger} B_{P Q}^{-1} w_{Q \mathbf{0}}\right) \\
+\epsilon_{P \mathbf{0}}^{-1}=-\sum_{Q} B_{P Q}^{-1} w_{Q \mathbf{0}} \cdot \epsilon_{\mathbf{0 0}}^{-1}
+\end{gather}
+with 
+\begin{align}
+     h_{00}(\mathbf{q}=\mathbf{0}, i \omega)=1-\lim _{\mathbf{q} \rightarrow \mathbf{0}} \frac{4 \pi}{|\mathbf{q}|^2} \chi_{00}(\mathbf{q} \rightarrow \mathbf{0}, i \omega),  \\
+ w_{P 0}(\mathbf{q}=\mathbf{0}, i \omega)=\lim _{\mathbf{q} \rightarrow \mathbf{0}} \frac{\sqrt{4 \pi}}{|\mathbf{q}|} \chi_{P 0}(\mathbf{q} \rightarrow \mathbf{0}, i \omega).
+\end{align}
+and $B_{PQ}=[\mathbf{I}-\boldsymbol{\Pi}(\mathbf{q}=\mathbf{0}, i \omega)]_{PQ}$ is the auxiliary density response function in the long-wavelength limit.
+$\chi_{00}(\mathbf{q} \rightarrow \mathbf{0}, i \omega)$ and $\chi_{P \mathbf{0}}(\mathbf{q} \rightarrow \mathbf{0}, i \omega)$ are the head and wings of the polarizability in the long-wavelength limit given by
+\begin{align}
+\chi_{00}(\mathbf{q} \rightarrow \mathbf{0}, i \omega)= & \frac{2}{N_{\mathbf{k}} \Omega_{\mathrm{cell}}} \sum_{\mathbf{k}} \sum_i^{\mathrm{occ}} \sum_a^{\mathrm{vir}} \rho_{a \mathbf{k}-\mathbf{q}}^{i \mathbf{k}}(\mathbf{0}) \frac{\epsilon_{i \mathbf{k}}-\epsilon_{a \mathbf{k}}}{\omega^2+\left(\epsilon_{i \mathbf{k}}-\epsilon_{a \mathbf{k}}\right)^2} \rho_{a \mathbf{k}-\mathbf{q}}^{i \mathbf{k} *}(\mathbf{0}), \\
+\chi_{P \mathbf{0}}(\mathbf{q} \rightarrow \mathbf{0}, i \omega)= & \frac{2}{N_{\mathbf{k}} \Omega_{\mathrm{cell}}^{1 / 2}} \sum_{\mathbf{k}} \sum_i^{\mathrm{occ}} \sum_a^{\mathrm{vir}} v_P^{i a} \frac{\epsilon_{i \ mathbf{k}}-\epsilon_{a \ mathbf{k}}}{\omega^2+\left(\epsilon_{i \ mathbf{k}}-\epsilon_{a \ mathbf{k}}\right)^2} \rho_{a \ mathbf{k}-\ mathbf{q}}^{i \ mathbf{k} *}(\mathbf{0}) .
+\end{align}
+and 
+\begin{equation}
+    \left.\rho_{a \mathbf{k}-\mathbf{q}}^{i \mathbf{k}}(\mathbf{0})\right|_{\mathbf{q} \rightarrow \mathbf{0}}=\frac{-i \mathbf{q} \cdot\left(\psi_{i \mathbf{k}}|\nabla| \psi_{a \mathbf{k}}\right)}{\epsilon_{a \mathbf{k}}-\epsilon_{i \mathbf{k}}}.
+\end{equation}
+We evaluate the limit using $\mathbf{q}=(0.001,0,0)$.
 % The head and wings of the dielectric function in the $\mathbf{q}=\mathbf{0}$ limit are computed as
 % $$
 % \begin{align*}
@@ -462,7 +474,7 @@ For the exchange self-energy, we only apply the following corr ection to the dia
 % where $\boldsymbol{B}_{P Q}=[\mathbf{I}-\mathbf{\Pi}]_{P Q}$ is the body of the dielectric function computed in the Gaussian auxiliary basis (see Eq. 24). By inverting Eq. 52, one obtains $\epsilon_{\mathbf{0 0}}^{-1}(\mathbf{q}=\mathbf{0}, i \omega)$ and $\epsilon_{P \mathbf{0}}^{-1}(\mathbf{q}=\mathbf{0}, i \omega)$ as
 % $$
 % \begin{gather*}
-% \epsilon_{\mathbf{0 0}}^{-1}=1 /\left(h_{\mathbf{0 0}}-\sum_{P Q} w_{P \mathbf{0}}^{\dagger} B_{P Q}^{-1} w_{Q \mathbf{0}}\right)  \tag{53}\\
+% .  \tag{53}\\
 % \epsilon_{P \mathbf{0}}^{-1}=-\epsilon_{\mathbf{0 0}}^{-1} \sum_Q B_{P Q}^{-1} w_{Q \mathbf{0}} \tag{54}
 % \end{gather*}
 % $$
@@ -718,7 +730,10 @@ Finally, we get
 \section{Summary of GW-RPA implementations}
 Note that mainly we will be talking about $G_0W_0$ implementations, but it will be commented on as to the whether self-consistency is possible. We will also discuss scaling and whether it can be applied to extended systems.
 \subsection{Complex integration approaches}
-Treatment of extended systems is possible for the below. Self-consistency is also possible in all cases, as there is no restriction for what the reference state can be. For a discussion of all of the below approaches, see \cite{golze_gw_2019}.
+Treatment of extended systems is possible for the below. Self-consistency is also possible in all cases, as there is no restriction for what the reference state can be. For a discussion of all of the below approaches, see \cite{golze_gw_2019}. They all share the desire of performing the frequency integration in the expression for the self-energy, which is given by
+\begin{equation}
+\Sigma_\sigma\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega\right)= \frac{i}{2 \pi} \int d \omega^{\prime} e^{i \omega^{\prime} \eta} G_0^\sigma\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega+\omega^{\prime}\right) W_0\left(\mathbf{r}, \mathbf{r}^{\prime}, \omega^{\prime}\right)
+\end{equation}
 \subsubsection{Fully analytic}
  Here we will perform the frequency integration over the real axis. If we choose the upper or lower contour, we encounter many poles of $G$ and $W$, so we must apply Cauchy's residue theorem repeatedly. Therefore this method must explicitly calculate the reducible polarizability for all frequencies, or in other words, if the RPA approximation is employed, diagonalize the RPA matrix, which scales as $O(N^6)$. Because of this prohibitive cost, the method is never used.
 \subsubsection{Analytic continuation (AC)}
@@ -733,6 +748,2430 @@ The real frequency integration is decomposed into an integral over the deformed 
 As is also the case for AC, if only $G_0 W_0$ QP energies are required, one only needs to compute the diagonal self-energy matrix elements. In the decomposition of the real frequency integral in CD, the imaginary integration has a similar computational cost to the $G_0 W_0$-AC scheme. But in the contour integral, we encounter many poles if we want core states, which are far away from the Fermi level, and so we must compute many residues. So for deep core excitations, the scaling becomes $O\left(N_{\bm{k}}^3 N_{\mathrm{O}}^2 N_{\mathrm{V}} N_{\mathrm{aux}}^2\right)$. For more detail, see \cite{Zhu2020-nt}.
 \end{tcolorbox}
 In analogy to AC, we must apply the finite size correction to the dielectric function for reasonable convergence towards the TDL.
+\subsection{Contour deformation (CD)}
+\subsubsection{Spectral function}
+We know
+\begin{align}
+A(\mathbf{k}, \omega)&=\frac{1}{\pi} |\operatorname{Im} G^T(\mathbf{k}, \tilde{\omega})|\\
+&=\frac{1}{\pi} \frac{|\operatorname{Im} \Sigma^T(\mathbf{k}, \tilde{\omega})|}{\left(\omega-\epsilon_{\mathbf{k}}-\operatorname{Re} \Sigma^T(\mathbf{k}, \tilde{\omega})\right)^2+\left(\operatorname{Im} \Sigma^T(\mathbf{k}, \tilde{\omega})\right)^2}
+\end{align}
+where $\tilde{\omega} = \omega - i \eta\operatorname{sgn}\left(\epsilon_F - \omega\right)$, but also in the retarded case we have 
+\begin{align}
+A(\mathbf{k}, \bar{\omega})&=\frac{1}{\pi} |\operatorname{Im} G^R(\mathbf{k}, \bar{\omega})|\\
+&=\frac{1}{\pi} 
+\frac{|\operatorname{Im} \Sigma^R(\mathbf{k}, \bar{\omega})|}
+{\left(\bar{\omega}-\epsilon_{\mathbf{k}}-\operatorname{Re} \Sigma^R(\mathbf{k}, \bar{\omega})\right)^2
++\left(\operatorname{Im} \Sigma^R(\mathbf{k}, \bar{\omega})\right)^2}
+\end{align}
+where $\bar{\omega} = \omega + i \eta$. These two schemes have been shown to be equivalent in the TDL, but in finite systems, it is correct to choose the retarded path.
+\subsubsection{Retarded self-energy}
+We begin from the contour-deformation expression for the GW correlation self-energy,
+\begin{align}
+\Sigma^c\left(\mathbf{r},\mathbf{r}',\bar{\omega}\right)
+=&\;
+\frac{i}{2\pi}
+\oint d\omega'\,
+G\left(\mathbf{r},\mathbf{r}',\bar{\omega}+\omega'\right)
+W^c\left(\mathbf{r},\mathbf{r}',\omega'\right)
+\nonumber \\
+&-
+\frac{1}{2\pi}
+\int_{-\infty}^{\infty}
+d\omega'\,
+G\left(\mathbf{r},\mathbf{r}',\bar{\omega}+i\omega'\right)
+W^c\left(\mathbf{r},\mathbf{r}',i\omega'\right) \\
+&=
+\Sigma^C\left(\mathbf{r},\mathbf{r}',\bar{\omega}\right)
++
+\Sigma^I\left(\mathbf{r},\mathbf{r}',\bar{\omega}\right)
+\end{align}
+\subsubsection{Imaginary part}
+Numerical issues may arise from the latter piece, where we are evaluating the integral on the imaginary axis,so we first consider that. Projection onto the MO basis gives 
+\begin{align}
+    \Sigma^I(\mathbf{k}_m,\bar{\omega}) &=
+-\frac{1}{2\pi}
+\int_{-\infty}^{\infty}
+d\omega'\,
+\int d\mathbf{r} d\mathbf{r}'\,
+\phi_{\mathbf{k}_m}^*(\mathbf{r})
+G\left(\mathbf{r},\mathbf{r}',\bar{\omega}+i\omega'\right)
+W^c\left(\mathbf{r},\mathbf{r}',i\omega'\right)
+\phi_{\mathbf{k}_m}(\mathbf{r}')
+% &= -\frac{1}{2\pi}
+% \sum_{\mathbf{k}_n}
+% \int_{-\infty}^{\infty}
+% d\omega'\,
+% \int d\mathbf{r} d\mathbf{r}'\,
+% \phi_{\mathbf{k}_m}^*(\mathbf{r})
+% G_0\left(\mathbf{r},\mathbf{r}',\omega+i\omega'\right)\phi_{\mathbf{k}_n}(\mathbf{r''})\phi_{\mathbf{k}_n}^*(\mathbf{r''})
+% W_0^c\left(\mathbf{r},\mathbf{r}',i\omega'\right)
+% \phi_{\mathbf{k}_m}(\mathbf{r}')\\
+% &= -\frac{1}{2\pi}
+% \sum_{\mathbf{k}_n}
+% \int_{-\infty}^{\infty}
+% d\omega'\,
+% \int d\mathbf{r} d\mathbf{r}' d\mathbf{r}''
+% \bra{\mathbf{k}_m}
+% G_0\left(\mathbf{r},\mathbf{r}',\omega+i\omega'\right)\ket{\mathbf{k}_n}\bra{\mathbf{k}_n}
+% W_0^c\left(\mathbf{r},\mathbf{r}',i\omega'\right)
+% \ket{\mathbf{k}_m}
+\end{align}
+The reference Green's function is taken to be diagonal in the MO basis, so we have
+\begin{equation}
+    G\left(\mathbf{r},\mathbf{r}',\bar{\omega}+i\omega'\right) = \sum_{\bm{k}_n} \phi_{\mathbf{k}_n}(\mathbf{r}) G\left(\mathbf{k}_n,\bar{\omega}+i\omega'\right) \phi_{\mathbf{k}_n}^*(\mathbf{r}')
+\end{equation}
+and substituting this into the expression for \(\Sigma^I\) gives\footnote{Is this related to your derivation of BWs2 with screening earlier this year? Would that theory be equivalent if we used BWs2 as our reference Green's function? How would we evaluate $W^c$? Would we still do dRPA, or more like SOSEX? }
+\begin{align}
+\Sigma^I(\mathbf{k}_m,\bar{\omega})&=
+-\frac{1}{2\pi}
+\sum_{\mathbf{k}_n}
+\int_{-\infty}^{\infty}
+d\omega'\,
+G\left(\mathbf{k}_n,\bar{\omega}+i\omega'\right)
+\int d\mathbf{r} d\mathbf{r}'\,
+\phi_{\mathbf{k}_m}^*(\mathbf{r})
+\phi_{\mathbf{k}_n}(\mathbf{r})
+W^c\left(\mathbf{r},\mathbf{r}',i\omega'\right)
+\phi_{\mathbf{k}_n}^*(\mathbf{r}')
+\phi_{\mathbf{k}_m}(\mathbf{r}') \\
+&= -\frac{1}{2\pi}
+\sum_{\mathbf{k}_n}
+\int_{-\infty}^{\infty}
+d\omega'\,
+G\left(\mathbf{k}_n,\bar{\omega}+i\omega'\right)
+W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right).
+\end{align}
+Now, we know that the retarded, reference Green's function is given by 
+\begin{align}
+    G\left(\mathbf{k}_n,\bar{\omega}+i\omega'\right)
+&= \frac{1}{a_n+i\omega'},
+\end{align}
+where, at zero temperature, $a_n = \omega - \epsilon_{\mathbf{k}_n} + i\eta$. And elements of the screened interaction are given by
+\begin{align}
+    W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right) = \sum_{PQ} v_P^{\mathbf{k}_m \mathbf{k}_n} \left[ \left[ \mathbf{I} - \boldsymbol{\Pi}(i\omega') \right]^{-1}_{PQ} - \delta_{PQ} \right] v_Q^{\mathbf{k}_n\mathbf{k}_m} 
+\end{align}
+where, in the restricted formulation, the polarizability on the imaginary axis is
+\begin{align}
+\boldsymbol{\Pi}_{PQ}\left(i\omega'\right)
+&=
+2
+\sum_{\mathbf{k}_i}^{\mathrm{occ}}
+\sum_{\mathbf{k}_a}^{\mathrm{vir}}
+v_P^{\mathbf{k}_i\mathbf{k}_a}
+\frac{
+\epsilon_{\mathbf{k}_i}
+-
+\epsilon_{\mathbf{k}_a}
+}{
+\omega'^2
++
+\left(
+\epsilon_{\mathbf{k}_i}
+-
+\epsilon_{\mathbf{k}_a}
+\right)^2
+}
+v_Q^{\mathbf{k}_a\mathbf{k}_i}.
+\end{align}
+Since \(\boldsymbol{\Pi}(i\omega')\) depends only on \(\omega'^2\), $\boldsymbol{\Pi}\left(i\omega'\right)=\boldsymbol{\Pi}\left(-i\omega'\right) \implies W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right) = W^c\left(\mathbf{k}_m,\mathbf{k}_n;-i\omega'\right)$.
+Using this evenness of $W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right)$, we can fold the integral as:
+\begin{align}
+\Sigma^I\left(\mathbf{k}_m,\bar{\omega}\right)
+&=
+-\frac{1}{2\pi} \sum_{\mathbf{k}_n}\int_{-\infty}^{\infty} d\omega'\,\frac{W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right)}{a_n+i\omega'}
+ \\
+&=
+-\frac{1}{2\pi} \sum_{\mathbf{k}_n}
+\int_0^\infty
+d\omega'\,
+W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right)
+\left[
+\frac{1}{a_n+i\omega'}
++
+\frac{1}{a_n-i\omega'}
+\right]\\
+&=
+-\frac{1}{2\pi}
+\sum_{\mathbf{k}_n}
+\int_0^\infty
+d\omega'\,
+\frac{2a_n}{a_n^2+\omega'^2}
+W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right)\\
+&=
+-\frac{1}{\pi}
+\sum_{\mathbf{k}_n}
+\int_0^\infty
+d\omega'\,
+\frac{a_n}{a_n^2+\omega'^2}
+W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right) \label{eq:fold}\\
+&\approx
+-\frac{1}{\pi} \sum_{\mathbf{k}_n}
+\sum_{j=1}^{N_\omega}
+w_j \frac{a_n}{a_n^2+\omega_j^2}
+W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega_j\right).
+\end{align}
+When $\omega \approx \epsilon_{\mathbf{k}_n}$, we have \(a_n \approx i \eta\). But then the denominator becomes 
+\begin{equation}
+    a_n^2 + \omega_j^2 \approx -\eta^2 + \omega_j^2
+\end{equation}
+So we encounter a singularity if \(\omega_j \approx \eta\). The scatter plot shows this numerically.
+\subsubsection{Regularization}
+ To remedy this, one can regularize the denominator by performing a subtraction. By writing 
+\begin{equation}
+    W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega_j\right) = \left[ W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega_j\right) - W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right) \right] + W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right)
+\end{equation}
+then starting from \eqref{eq:fold}, we have\footnote{We use the identity $\int_0^{\infty} d \omega^{\prime} \frac{a}{a^2+\omega^{\prime 2}}=\frac{\pi}{2} \frac{a}{\sqrt{a^2}}$}
+\begin{align}
+    \Sigma^I\left(\mathbf{k}_m,\bar{\omega}\right)
+&=
+-\frac{1}{\pi}
+\sum_{\mathbf{k}_n}
+\int_0^\infty
+d\omega'\,
+\frac{a_n}{a_n^2+\omega'^2}
+\left[W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right) - W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right)\right] \\
+&\quad -\frac{1}{\pi}
+\sum_{\mathbf{k}_n}
+W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right)
+\int_0^\infty
+d\omega'\,\frac{a_n}{a_n^2+\omega'^2}\\
+&=
+-\frac{1}{\pi}
+\sum_{\mathbf{k}_n}
+\int_0^\infty
+d\omega'\,
+\frac{a_n}{a_n^2+\omega'^2}
+\left[W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega'\right) - W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right)\right] \\
+&\quad -\frac{1}{2}
+\sum_{\mathbf{k}_n}
+W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right)
+\frac{a_n}{\sqrt{a_n^2}}\\
+&\approx
+-\frac{1}{\pi}
+\sum_{\mathbf{k}_n}
+\sum_{j=1}^{N_\omega}
+w_j \frac{a_n}{a_n^2+\omega_j^2}
+\left[W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega_j\right) - W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right)\right] \\
+&\quad -\frac{1}{2}
+\sum_{\mathbf{k}_n}
+W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right)
+\frac{a_n}{\sqrt{a_n^2}}
+\end{align}
+Now the integral is smoother because $W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\omega_j\right) - W^c\left(\mathbf{k}_m,\mathbf{k}_n;i\eta\right)\rightarrow 0$ as $\omega_j \rightarrow \eta$.
+\subsubsection{Contour Integral}
+This part is exact. 
+
+\subsubsection{Derivative of the contour-deformation self-energy with respect to frequency}
+First, we can determine the derivative with respect to the frequency. 
+\begin{equation}
+    \frac{d\Sigma_m^{\mathrm{CD}}(\omega)}{d\omega}
+    =
+    \frac{d\Sigma_m^{C}(\omega)}{d\omega}
+    +
+    \frac{d\Sigma_m^{I}(\omega)}{d\omega}.
+\end{equation}
+
+\paragraph{Contour-residue contribution.}
+
+The residue contribution to the correlation self-energy is
+\begin{equation}
+    \Sigma_m^C(\omega)
+    =
+    \sum_n f_n(\omega)
+    \sum_{PQ}
+    v_P^{mn}
+    \left\{
+    \left[
+    \mathbf I-\boldsymbol{\Pi}(z_n)
+    \right]^{-1}
+    -
+    \mathbf I
+    \right\}_{PQ}
+    v_Q^{nm},
+\end{equation}
+where
+\begin{equation}
+    z_n = \epsilon_n-\omega,
+\end{equation}
+and the residue weight is
+\begin{equation}
+    f_n(\omega)
+    =
+    \begin{cases}
+    +1, & \omega>\epsilon_F,\quad \epsilon_F<\epsilon_n<\omega,\\
+    -1, & \omega<\epsilon_F,\quad \omega<\epsilon_n<\epsilon_F,\\
+    0, & \text{otherwise}.
+    \end{cases}
+\end{equation}
+Away from threshold points \(\omega=\epsilon_n\), the residue weight is
+piecewise constant, so
+\begin{equation}
+    \frac{d f_n}{d\omega}=0.
+\end{equation}
+
+Define
+\begin{equation}
+    \mathbf M(z)
+    =
+    \mathbf I-\boldsymbol{\Pi}(z),
+\end{equation}
+so that
+\begin{equation}
+    \mathbf W_c(z)
+    =
+    \mathbf M(z)^{-1}-\mathbf I.
+\end{equation}
+Then
+\begin{equation}
+    \Sigma_m^C(\omega)
+    =
+    \sum_n f_n
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf W_c(z_n)
+    \right]_{PQ}
+    v_Q^{nm}.
+\end{equation}
+
+The derivative of an inverse matrix is
+\begin{equation}
+    \frac{d\mathbf M^{-1}}{dz}
+    =
+    -\mathbf M^{-1}
+    \frac{d\mathbf M}{dz}
+    \mathbf M^{-1}.
+\end{equation}
+Since
+\begin{equation}
+    \mathbf M(z)
+    =
+    \mathbf I-\boldsymbol{\Pi}(z),
+\end{equation}
+we have
+\begin{equation}
+    \frac{d\mathbf M}{dz}
+    =
+    -\frac{d\boldsymbol{\Pi}}{dz}.
+\end{equation}
+Therefore
+\begin{equation}
+    \frac{d\mathbf M^{-1}}{dz}
+    =
+    \mathbf M^{-1}
+    \frac{d\boldsymbol{\Pi}}{dz}
+    \mathbf M^{-1}.
+\end{equation}
+
+Because
+\begin{equation}
+    z_n=\epsilon_n-\omega,
+\end{equation}
+we also have
+\begin{equation}
+    \frac{d z_n}{d\omega}=-1.
+\end{equation}
+Thus
+\begin{align}
+    \frac{d\mathbf W_c(z_n)}{d\omega}
+    &=
+    \frac{d}{d\omega}
+    \left[
+    \mathbf M(z_n)^{-1}
+    -
+    \mathbf I
+    \right] \\
+    &=
+    \frac{d\mathbf M(z_n)^{-1}}{dz_n}
+    \frac{d z_n}{d\omega} \\
+    &=
+    -
+    \mathbf M(z_n)^{-1}
+    \boldsymbol{\Pi}'(z_n)
+    \mathbf M(z_n)^{-1},
+\end{align}
+where
+\begin{equation}
+    \boldsymbol{\Pi}'(z)
+    =
+    \frac{d\boldsymbol{\Pi}(z)}{dz}.
+\end{equation}
+
+The contour-residue derivative is therefore
+\begin{equation}
+    \boxed{
+    \frac{d\Sigma_m^C(\omega)}{d\omega}
+    =
+    -
+    \sum_n f_n
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf M(z_n)^{-1}
+    \boldsymbol{\Pi}'(z_n)
+    \mathbf M(z_n)^{-1}
+    \right]_{PQ}
+    v_Q^{nm}
+    }.
+\end{equation}
+
+\paragraph{Derivative of the polarizability.}
+
+For a general complex frequency \(z\), the independent-particle
+polarizability is
+\begin{equation}
+    \Pi_{PQ}(z)
+    =
+    \sum_i^{\mathrm{occ}}
+    \sum_a^{\mathrm{vir}}
+    v_P^{ia}
+    \left[
+    \frac{1}{z-\Delta_{ia}}
+    -
+    \frac{1}{z+\Delta_{ia}}
+    \right]
+    v_Q^{ai},
+\end{equation}
+where
+\begin{equation}
+    \Delta_{ia}=\epsilon_a-\epsilon_i.
+\end{equation}
+Taking the derivative with respect to \(z\) gives
+\begin{align}
+    \Pi'_{PQ}(z)
+    &=
+    \frac{d\Pi_{PQ}(z)}{dz} \\
+    &=
+    \sum_i^{\mathrm{occ}}
+    \sum_a^{\mathrm{vir}}
+    v_P^{ia}
+    \left[
+    -\frac{1}{(z-\Delta_{ia})^2}
+    +
+    \frac{1}{(z+\Delta_{ia})^2}
+    \right]
+    v_Q^{ai}.
+\end{align}
+Equivalently,
+\begin{equation}
+    \boxed{
+    \Pi'_{PQ}(z)
+    =
+    \sum_i^{\mathrm{occ}}
+    \sum_a^{\mathrm{vir}}
+    v_P^{ia}
+    \left[
+    \frac{1}{(z+\Delta_{ia})^2}
+    -
+    \frac{1}{(z-\Delta_{ia})^2}
+    \right]
+    v_Q^{ai}
+    }.
+\end{equation}
+
+\paragraph{Imaginary-axis contribution.}
+
+The imaginary-axis contribution can be written as
+\begin{equation}
+    \Sigma_m^I(\omega)
+    =
+    -\frac{1}{\pi}
+    \sum_n
+    \int_0^\infty d\Omega\,
+    K_n(\omega,\Omega)
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf W_c(i\Omega)
+    \right]_{PQ}
+    v_Q^{nm},
+\end{equation}
+where
+\begin{equation}
+    \mathbf W_c(i\Omega)
+    =
+    \left[
+    \mathbf I-\boldsymbol{\Pi}(i\Omega)
+    \right]^{-1}
+    -
+    \mathbf I.
+\end{equation}
+The scalar Green's-function kernel is
+\begin{equation}
+    K_n(\omega,\Omega)
+    =
+    \frac{x_n(\omega)}
+    {x_n(\omega)^2+\Omega^2}.
+\end{equation}
+If \(\omega\) is measured relative to the Fermi energy, then
+\begin{equation}
+    x_n(\omega)
+    =
+    \omega+\epsilon_F-\epsilon_n.
+\end{equation}
+If instead \(\omega\) is an absolute frequency, then
+\begin{equation}
+    x_n(\omega)
+    =
+    \omega-\epsilon_n.
+\end{equation}
+
+Since \(\mathbf W_c(i\Omega)\) depends only on the integration frequency
+\(\Omega\), not on the external frequency \(\omega\), the derivative of
+\(\Sigma_m^I\) comes only from the derivative of \(K_n\).  We have
+\begin{align}
+    \frac{dK_n}{d\omega}
+    &=
+    \frac{d}{d\omega}
+    \left[
+    \frac{x_n}{x_n^2+\Omega^2}
+    \right] \\
+    &=
+    \frac{dx_n}{d\omega}
+    \frac{
+    \Omega^2-x_n^2
+    }
+    {
+    \left(x_n^2+\Omega^2\right)^2
+    }.
+\end{align}
+For the usual choices above,
+\begin{equation}
+    \frac{dx_n}{d\omega}=1,
+\end{equation}
+so
+\begin{equation}
+    \boxed{
+    \frac{dK_n}{d\omega}
+    =
+    \frac{
+    \Omega^2-x_n(\omega)^2
+    }
+    {
+    \left[
+    x_n(\omega)^2+\Omega^2
+    \right]^2
+    }
+    }.
+\end{equation}
+
+Therefore,
+\begin{equation}
+    \boxed{
+    \frac{d\Sigma_m^I(\omega)}{d\omega}
+    =
+    -\frac{1}{\pi}
+    \sum_n
+    \int_0^\infty d\Omega\,
+    \frac{
+    \Omega^2-x_n(\omega)^2
+    }
+    {
+    \left[
+    x_n(\omega)^2+\Omega^2
+    \right]^2
+    }
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf W_c(i\Omega)
+    \right]_{PQ}
+    v_Q^{nm}
+    }.
+\end{equation}
+
+\paragraph{Total derivative.}
+
+Combining the contour-residue and imaginary-axis pieces gives
+\begin{align}
+    \boxed{
+    \frac{d\Sigma_m^{\mathrm{CD}}(\omega)}{d\omega}
+    =
+    -
+    \sum_n f_n
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf M(z_n)^{-1}
+    \boldsymbol{\Pi}'(z_n)
+    \mathbf M(z_n)^{-1}
+    \right]_{PQ}
+    v_Q^{nm}
+    }
+    \nonumber \\
+    \boxed{
+    \hspace{2cm}
+    -
+    \frac{1}{\pi}
+    \sum_n
+    \int_0^\infty d\Omega\,
+    \frac{
+    \Omega^2-x_n(\omega)^2
+    }
+    {
+    \left[
+    x_n(\omega)^2+\Omega^2
+    \right]^2
+    }
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf W_c(i\Omega)
+    \right]_{PQ}
+    v_Q^{nm}
+    }.
+\end{align}
+
+Here
+\begin{equation}
+    \mathbf M(z)
+    =
+    \mathbf I-\boldsymbol{\Pi}(z),
+\end{equation}
+\begin{equation}
+    \mathbf W_c(i\Omega)
+    =
+    \left[
+    \mathbf I-\boldsymbol{\Pi}(i\Omega)
+    \right]^{-1}
+    -
+    \mathbf I,
+\end{equation}
+and
+\begin{equation}
+    z_n=\epsilon_n-\omega.
+\end{equation}
+
+
+% I am solving this using the algorithm
+
+% \begin{algorithm}[H]
+% \caption{Residue self-energy $\Sigma_R(\omega)$ for external state $\bm{k}_m$}
+
+% \KwIn{
+% External state $\bm{k}_m$;
+% trial frequency $\omega$;
+% Fermi level $\epsilon_F$;
+% orbital energies $\{\epsilon_m\}$;
+% transition energies $\{\Delta\epsilon_{ia}\}$;
+% coupling matrix $L$;
+% state-specific couplings $L_{mp}$;
+% connectivity list $\mathcal{C}_p$;
+% broadening $\eta$
+% }
+
+% \KwOut{
+% Residue self-energy $\Sigma_R^{(p)}(\omega)$
+% }
+
+% Initialize:
+% \[
+% \Sigma_R^{(p)}(\omega) \gets 0.
+% \]
+
+% \ForEach{connected internal state $m \in \mathcal{C}_p$}{
+
+%     Determine whether this state contributes a residue pole.
+
+%     \uIf{$\omega > \epsilon_F$ and $\epsilon_F < \epsilon_m < \omega$}{
+%         \[
+%         f_m \gets +1,
+%         \qquad
+%         s_\eta \gets -1.
+%         \]
+%     }
+%     \uElseIf{$\omega < \epsilon_F$ and $\omega < \epsilon_m < \epsilon_F$}{
+%         \[
+%         f_m \gets -1,
+%         \qquad
+%         s_\eta \gets +1.
+%         \]
+%     }
+%     \Else{
+%         Continue to next $m$.
+%     }
+
+%     Define complex residue frequency:
+%     \[
+%     z_m
+%     =
+%     \epsilon_m - \omega
+%     +
+%     i \eta s_\eta.
+%     \]
+
+%     Build the particle-hole kernel:
+%     \[
+%     f_{ia}(z_m)
+%     =
+%     \frac{1}{z_m - \Delta\epsilon_{ia}}
+%     -
+%     \frac{1}{z_m + \Delta\epsilon_{ia}}.
+%     \]
+
+%     Build the residue polarizability-like matrix:
+%     \[
+%     \Pi_R(z_m)
+%     =
+%     2
+%     L^\mathrm{T}
+%     \operatorname{diag}\!\left(f(z_m)\right)
+%     L.
+%     \]
+
+%     Form the screened interaction correction:
+%     \[
+%     K_R(z_m)
+%     =
+%     \left[I - \Pi_R(z_m)\right]^{-1}
+%     -
+%     I.
+%     \]
+
+%     Contract with the external-state coupling:
+%     \[
+%     W_{mp}^{R}(z_m)
+%     =
+%     L_{mp}^{\mathrm{T}}
+%     K_R(z_m)
+%     L_{mp}.
+%     \]
+
+%     \If{$\omega < \epsilon_F$}{
+%         Apply Hermiticity convention:
+%         \[
+%         W_{mp}^{R}(z_m)
+%         \gets
+%         \left(W_{mp}^{R}(z_m)\right)^*.
+%         \]
+%     }
+
+%     Accumulate:
+%     \[
+%     \Sigma_R^{(p)}(\omega)
+%     \gets
+%     \Sigma_R^{(p)}(\omega)
+%     +
+%     f_m W_{mp}^{R}(z_m).
+%     \]
+% }
+
+% \Return $\Sigma_R^{(p)}(\omega)$.
+
+% \end{algorithm}
+% or
+% \begin{align}
+%   \Sigma^C(\mathbf{k}_m, \tilde{\omega}) &= \sum \operatorname{Res}\left\{G_0\left(\mathbf{k}_m, \tilde{\omega}+\omega^{\prime}\right), \omega_{\bm{k}_m}^{\prime}\right\}W_0\left(\mathbf{k}_m, \omega^{\prime}\right) \\
+% &= \frac{1}{\Omega} \sum_{\bm{k}_n} f_{\bm{k}_n} e^{i \bm{k}_n \cdot (\mathbf{r} - \mathbf{r}')} W_0\left(\mathbf{k}_m, \omega_{\bm{k}_n}^{\prime}\right)
+% \end{align}
+% \begin{align*}
+% \Sigma_{n r^{\prime}}^C(\mathbf{k}, \omega) & =\frac{1}{N_{\mathbf{k}}} \sum_{m q} f_{m k-q}\left(n k, m k-q\left|W\left(\omega_{m k-q}^{\prime}\right)\right| m k-q, n^{\prime} k\right)  \tag{34}\\
+% & =\frac{1}{N_{\mathbf{k}}} \sum_{m q} f_{m k-q} \sum_{P Q} v_P^{n m^{\prime \prime}}\left[\mathbf{I}-\mathbf{I}\left(q, \omega_{m k-q}^{\prime}\right)\right]_{P Q}^{-1} v_Q^{v^{\prime \prime}},
+% \end{align*}
+% $$
+% and the contribution of residues $f_{\text {rk- } 4}$ is given by
+% $$
+% f_{m k-4}= \begin{cases}1 & \text { if } \varepsilon_F<\varepsilon_{m k-4}<\omega ;  \tag{35}\\ -1 & \text { if } \varepsilon_F>\varepsilon_{m k-4}>\omega ; \\ 0 & \text { else. }\end{cases}
+% % $$
+% \subsubsection{Algorithm}
+% \begin{algorithm}[H]
+% \caption{One-shot $G_0W_0$ quasiparticle energies with contour deformation}
+
+% \KwIn{
+% Mean-field orbital energies $\{\epsilon_p\}$;
+% number of occupied orbitals $n_{\mathrm{occ}}$;
+% number of virtual orbitals $n_{\mathrm{vir}}$;
+% three-center / plane-wave coupling matrix $L$;
+% Gauss--Legendre imaginary-axis grid $\{i\omega_g, w_g\}_{g=1}^{N_\omega}$;
+% connectivity lists $\mathcal{C}_p = \{m : q = p-m \text{ is allowed}\}$;
+% broadening $\eta$
+% }
+
+% \KwOut{
+% Quasiparticle energies $\{E_p^{\mathrm{QP}}\}$
+% }
+
+% Compute Fermi level:
+% \[
+% \epsilon_F = \frac{1}{2}
+% \left(
+% \epsilon_{n_{\mathrm{occ}}-1}
+% +
+% \epsilon_{n_{\mathrm{occ}}}
+% \right).
+% \]
+
+% Precompute transition energies:
+% \[
+% \Delta\epsilon_{ia}
+% =
+% \epsilon_a - \epsilon_i,
+% \qquad
+% i \in \mathrm{occ}, \quad a \in \mathrm{vir}.
+% \]
+
+% Build the imaginary-axis screened-interaction data:
+% \[
+% W_{mn}(i\omega_g)
+% \quad \text{for all } g,m,n.
+% \]
+
+% \BlankLine
+
+% \ForEach{orbital $p = 1,\dots,n_{\mathrm{basis}}$ \tcp*[f]{OpenMP parallel loop}}{
+
+%     Build or fetch the coupling vector/matrix $L_{mp}$ for this external state $p$.
+
+%     Set initial quasiparticle guess:
+%     \[
+%     \omega^{(0)} = \epsilon_p.
+%     \]
+
+%     Compute the static Fock-like contribution:
+%     \[
+%     f_p = \epsilon_p + V_{\mathrm{eff},pp}.
+%     \]
+
+%     \For{$k = 0,\dots,k_{\max}$}{
+
+%         Evaluate the real part of the self-energy:
+%         \[
+%         \Sigma(\omega^{(k)})
+%         =
+%         \Sigma_I(\omega^{(k)})
+%         +
+%         \Sigma_R(\omega^{(k)}).
+%         \]
+
+%         Form quasiparticle residual:
+%         \[
+%         F(\omega^{(k)})
+%         =
+%         \omega^{(k)}
+%         -
+%         f_p
+%         -
+%         \operatorname{Re}\Sigma(\omega^{(k)}).
+%         \]
+
+%         Estimate derivative by finite difference:
+%         \[
+%         F'(\omega^{(k)})
+%         \approx
+%         1
+%         -
+%         \frac{
+%         \operatorname{Re}\Sigma(\omega^{(k)}+h)
+%         -
+%         \operatorname{Re}\Sigma(\omega^{(k)}-h)
+%         }{2h}.
+%         \]
+
+%         Newton update:
+%         \[
+%         \Delta\omega
+%         =
+%         -
+%         \frac{F(\omega^{(k)})}{F'(\omega^{(k)})}.
+%         \]
+
+%         \[
+%         \omega^{(k+1)}
+%         =
+%         \omega^{(k)}
+%         +
+%         \Delta\omega.
+%         \]
+
+%         \If{$|\Delta\omega| < \tau$}{
+%             \textbf{break}
+%         }
+%     }
+
+%     Store:
+%     \[
+%     E_p^{\mathrm{QP}} = \omega^{(k+1)}.
+%     \]
+% }
+
+% \Return $\{E_p^{\mathrm{QP}}\}$.
+
+% \end{algorithm}
+% with 
+\subsubsection{Derivative of the contour-deformation self-energy with respect to single-particle energies}
+
+We now consider derivatives of the contour-deformation self-energy with respect
+to a single-particle energy \(\epsilon_p\).  To distinguish the different
+sources of energy dependence, we write the energies entering the Green's
+function as \(\epsilon^G\), and the energies entering the screened interaction
+as \(\epsilon^W\).  The external frequency \(\omega\) is held fixed in this
+derivative.
+
+The contour-deformation self-energy is written as
+\begin{equation}
+    \Sigma_m^{\mathrm{CD}}(\omega)
+    =
+    \Sigma_m^C(\omega)
+    +
+    \Sigma_m^I(\omega),
+\end{equation}
+where
+\begin{equation}
+    \Sigma_m^C(\omega)
+    =
+    \sum_n f_n
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf W_c(z_n)
+    \right]_{PQ}
+    v_Q^{nm},
+\end{equation}
+with
+\begin{equation}
+    z_n=\epsilon_n^G-\omega,
+\end{equation}
+and
+\begin{equation}
+    \mathbf W_c(z)
+    =
+    \left[
+    \mathbf I-\boldsymbol{\Pi}(z)
+    \right]^{-1}
+    -
+    \mathbf I.
+\end{equation}
+The imaginary-axis contribution is
+\begin{equation}
+    \Sigma_m^I(\omega)
+    =
+    -\frac{1}{\pi}
+    \sum_n
+    \int_0^\infty d\Omega\,
+    K_n(\omega,\Omega)
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf W_c(i\Omega)
+    \right]_{PQ}
+    v_Q^{nm}.
+\end{equation}
+The scalar Green's-function kernel is
+\begin{equation}
+    K_n(\omega,\Omega)
+    =
+    \frac{x_n}{x_n^2+\Omega^2}.
+\end{equation}
+If \(\omega\) is measured relative to the Fermi energy, then
+\begin{equation}
+    x_n=\omega+\epsilon_F-\epsilon_n^G.
+\end{equation}
+If \(\omega\) is an absolute frequency, then
+\begin{equation}
+    x_n=\omega-\epsilon_n^G.
+\end{equation}
+
+We define
+\begin{equation}
+    \mathbf M(z)
+    =
+    \mathbf I-\boldsymbol{\Pi}(z),
+\end{equation}
+so that
+\begin{equation}
+    \mathbf W_c(z)
+    =
+    \mathbf M(z)^{-1}-\mathbf I.
+\end{equation}
+The derivative of the screened interaction with respect to a parameter
+\(\alpha\) that enters the polarizability is
+\begin{equation}
+    \frac{\partial \mathbf W_c(z)}{\partial \alpha}
+    =
+    \mathbf M(z)^{-1}
+    \frac{\partial \boldsymbol{\Pi}(z)}{\partial \alpha}
+    \mathbf M(z)^{-1}.
+\end{equation}
+If the parameter enters through the frequency argument \(z\), then
+\begin{equation}
+    \frac{\partial \mathbf W_c(z)}{\partial z}
+    =
+    \mathbf M(z)^{-1}
+    \boldsymbol{\Pi}'(z)
+    \mathbf M(z)^{-1},
+\end{equation}
+where
+\begin{equation}
+    \boldsymbol{\Pi}'(z)
+    =
+    \frac{d\boldsymbol{\Pi}(z)}{dz}.
+\end{equation}
+
+The independent-particle polarizability is
+\begin{equation}
+    \Pi_{PQ}(z)
+    =
+    \sum_i^{\mathrm{occ}}
+    \sum_a^{\mathrm{vir}}
+    v_P^{ia}
+    \left[
+    \frac{1}{z-\Delta_{ia}}
+    -
+    \frac{1}{z+\Delta_{ia}}
+    \right]
+    v_Q^{ai},
+\end{equation}
+where
+\begin{equation}
+    \Delta_{ia}
+    =
+    \epsilon_a^W-\epsilon_i^W.
+\end{equation}
+Its derivative with respect to its frequency argument is
+\begin{equation}
+    \Pi'_{PQ}(z)
+    =
+    \sum_i^{\mathrm{occ}}
+    \sum_a^{\mathrm{vir}}
+    v_P^{ia}
+    \left[
+    \frac{1}{(z+\Delta_{ia})^2}
+    -
+    \frac{1}{(z-\Delta_{ia})^2}
+    \right]
+    v_Q^{ai}.
+\end{equation}
+
+We neglect derivatives of the residue weights \(f_n\), assuming that the
+frequency is away from the threshold points where \(\omega=\epsilon_n\) or
+\(\epsilon_n=\epsilon_F\).  Thus \(f_n\) is treated as piecewise constant.
+
+\paragraph{Case 1: updating energies entering \(G\), with \(W\) fixed.}
+
+In this case, the differentiated energy is \(\epsilon_p^G\).  The screened
+interaction \(W_c\) is not changed through its internal polarizability, because
+the energies entering \(W\) are held fixed.  However, the contour argument
+\begin{equation}
+    z_n=\epsilon_n^G-\omega
+\end{equation}
+does depend on \(\epsilon_p^G\).  Therefore
+\begin{equation}
+    \frac{\partial z_n}{\partial \epsilon_p^G}
+    =
+    \delta_{np}.
+\end{equation}
+The contour derivative is
+\begin{align}
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p^G}
+    &=
+    \sum_n f_n
+    \sum_{PQ}
+    v_P^{mn}
+    \frac{\partial}
+    {\partial \epsilon_p^G}
+    \left[
+    \mathbf W_c(z_n)
+    \right]_{PQ}
+    v_Q^{nm} \\
+    &=
+    \sum_n f_n
+    \delta_{np}
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \frac{\partial \mathbf W_c(z_n)}{\partial z_n}
+    \right]_{PQ}
+    v_Q^{nm}.
+\end{align}
+Hence
+\begin{equation}
+    \boxed{
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p^G}
+    =
+    f_p
+    \sum_{PQ}
+    v_P^{mp}
+    \left[
+    \mathbf M(z_p)^{-1}
+    \boldsymbol{\Pi}'(z_p)
+    \mathbf M(z_p)^{-1}
+    \right]_{PQ}
+    v_Q^{pm}
+    }.
+\end{equation}
+
+For the imaginary-axis contribution, \(W_c(i\Omega)\) is fixed, and only the
+kernel \(K_n\) depends on \(\epsilon_p^G\).  Since
+\begin{equation}
+    K_n(\omega,\Omega)
+    =
+    \frac{x_n}{x_n^2+\Omega^2},
+\end{equation}
+we have
+\begin{equation}
+    \frac{\partial K_n}{\partial x_n}
+    =
+    \frac{\Omega^2-x_n^2}
+    {\left(x_n^2+\Omega^2\right)^2}.
+\end{equation}
+For the relative-frequency convention,
+\begin{equation}
+    x_n=\omega+\epsilon_F-\epsilon_n^G,
+\end{equation}
+and, holding \(\epsilon_F\) fixed,
+\begin{equation}
+    \frac{\partial x_n}{\partial \epsilon_p^G}
+    =
+    -\delta_{np}.
+\end{equation}
+Therefore
+\begin{equation}
+    \frac{\partial K_n}{\partial \epsilon_p^G}
+    =
+    -\delta_{np}
+    \frac{\Omega^2-x_n^2}
+    {\left(x_n^2+\Omega^2\right)^2}.
+\end{equation}
+The imaginary-axis derivative is then
+\begin{align}
+    \frac{\partial \Sigma_m^I(\omega)}
+    {\partial \epsilon_p^G}
+    &=
+    -\frac{1}{\pi}
+    \sum_n
+    \int_0^\infty d\Omega\,
+    \frac{\partial K_n}{\partial \epsilon_p^G}
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf W_c(i\Omega)
+    \right]_{PQ}
+    v_Q^{nm} \\
+    &=
+    \boxed{
+    \frac{1}{\pi}
+    \int_0^\infty d\Omega\,
+    \frac{\Omega^2-x_p^2}
+    {\left(x_p^2+\Omega^2\right)^2}
+    \sum_{PQ}
+    v_P^{mp}
+    \left[
+    \mathbf W_c(i\Omega)
+    \right]_{PQ}
+    v_Q^{pm}
+    }.
+\end{align}
+Thus, for \(G\)-only energy updates,
+\begin{equation}
+    \boxed{
+    \frac{\partial \Sigma_m^{\mathrm{CD}}(\omega)}
+    {\partial \epsilon_p^G}
+    =
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p^G}
+    +
+    \frac{\partial \Sigma_m^I(\omega)}
+    {\partial \epsilon_p^G}
+    }.
+\end{equation}
+
+\paragraph{Case 2: updating energies entering \(W\), with \(G\) fixed.}
+
+In this case, the differentiated energy is \(\epsilon_p^W\).  The
+Green's-function quantities \(z_n\), \(x_n\), \(K_n\), and \(f_n\) are fixed.
+The only dependence on \(\epsilon_p^W\) enters through the polarizability
+\(\boldsymbol{\Pi}\), and therefore through \(W_c\).
+
+The excitation energy is
+\begin{equation}
+    \Delta_{ia}
+    =
+    \epsilon_a^W-\epsilon_i^W,
+\end{equation}
+so
+\begin{equation}
+    \frac{\partial \Delta_{ia}}
+    {\partial \epsilon_p^W}
+    =
+    \delta_{ap}-\delta_{ip}.
+\end{equation}
+Define
+\begin{equation}
+    A_{ia}(z)
+    =
+    \frac{1}{z-\Delta_{ia}}
+    -
+    \frac{1}{z+\Delta_{ia}}.
+\end{equation}
+Then
+\begin{align}
+    \frac{\partial A_{ia}(z)}
+    {\partial \Delta_{ia}}
+    &=
+    \frac{\partial}{\partial \Delta_{ia}}
+    \left[
+    \frac{1}{z-\Delta_{ia}}
+    -
+    \frac{1}{z+\Delta_{ia}}
+    \right] \\
+    &=
+    \frac{1}{(z-\Delta_{ia})^2}
+    +
+    \frac{1}{(z+\Delta_{ia})^2}.
+\end{align}
+Therefore
+\begin{equation}
+    \boxed{
+    \frac{\partial \Pi_{PQ}(z)}
+    {\partial \epsilon_p^W}
+    =
+    \sum_i^{\mathrm{occ}}
+    \sum_a^{\mathrm{vir}}
+    v_P^{ia}
+    \left(\delta_{ap}-\delta_{ip}\right)
+    \left[
+    \frac{1}{(z-\Delta_{ia})^2}
+    +
+    \frac{1}{(z+\Delta_{ia})^2}
+    \right]
+    v_Q^{ai}
+    }.
+\end{equation}
+
+Using
+\begin{equation}
+    \frac{\partial \mathbf W_c(z)}
+    {\partial \epsilon_p^W}
+    =
+    \mathbf M(z)^{-1}
+    \frac{\partial \boldsymbol{\Pi}(z)}
+    {\partial \epsilon_p^W}
+    \mathbf M(z)^{-1},
+\end{equation}
+the contour derivative is
+\begin{equation}
+    \boxed{
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p^W}
+    =
+    \sum_n f_n
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf M(z_n)^{-1}
+    \frac{\partial \boldsymbol{\Pi}(z_n)}
+    {\partial \epsilon_p^W}
+    \mathbf M(z_n)^{-1}
+    \right]_{PQ}
+    v_Q^{nm}
+    }.
+\end{equation}
+
+The imaginary-axis derivative is
+\begin{equation}
+    \boxed{
+    \frac{\partial \Sigma_m^I(\omega)}
+    {\partial \epsilon_p^W}
+    =
+    -\frac{1}{\pi}
+    \sum_n
+    \int_0^\infty d\Omega\,
+    K_n(\omega,\Omega)
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf M(i\Omega)^{-1}
+    \frac{\partial \boldsymbol{\Pi}(i\Omega)}
+    {\partial \epsilon_p^W}
+    \mathbf M(i\Omega)^{-1}
+    \right]_{PQ}
+    v_Q^{nm}
+    }.
+\end{equation}
+Thus, for \(W\)-only energy updates,
+\begin{equation}
+    \boxed{
+    \frac{\partial \Sigma_m^{\mathrm{CD}}(\omega)}
+    {\partial \epsilon_p^W}
+    =
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p^W}
+    +
+    \frac{\partial \Sigma_m^I(\omega)}
+    {\partial \epsilon_p^W}
+    }.
+\end{equation}
+
+\paragraph{Case 3: updating energies entering both \(G\) and \(W\).}
+
+In this case, the same energy \(\epsilon_p\) enters both the Green's function
+and the screened interaction.  Therefore the derivative is the sum of the
+\(G\)-side derivative and the \(W\)-side derivative:
+\begin{equation}
+    \boxed{
+    \frac{\partial \Sigma_m^{\mathrm{CD}}(\omega)}
+    {\partial \epsilon_p}
+    =
+    \left.
+    \frac{\partial \Sigma_m^{\mathrm{CD}}(\omega)}
+    {\partial \epsilon_p^G}
+    \right|_{W}
+    +
+    \left.
+    \frac{\partial \Sigma_m^{\mathrm{CD}}(\omega)}
+    {\partial \epsilon_p^W}
+    \right|_{G}
+    }.
+\end{equation}
+
+The contour derivative is
+\begin{align}
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p}
+    &=
+    \left.
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p^G}
+    \right|_{W}
+    +
+    \left.
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p^W}
+    \right|_{G} \\
+    &=
+    \boxed{
+    f_p
+    \sum_{PQ}
+    v_P^{mp}
+    \left[
+    \mathbf M(z_p)^{-1}
+    \boldsymbol{\Pi}'(z_p)
+    \mathbf M(z_p)^{-1}
+    \right]_{PQ}
+    v_Q^{pm}
+    } \nonumber \\
+    &\quad
+    \boxed{
+    +
+    \sum_n f_n
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf M(z_n)^{-1}
+    \frac{\partial \boldsymbol{\Pi}(z_n)}
+    {\partial \epsilon_p}
+    \mathbf M(z_n)^{-1}
+    \right]_{PQ}
+    v_Q^{nm}
+    }.
+\end{align}
+
+The imaginary-axis derivative is
+\begin{align}
+    \frac{\partial \Sigma_m^I(\omega)}
+    {\partial \epsilon_p}
+    &=
+    \left.
+    \frac{\partial \Sigma_m^I(\omega)}
+    {\partial \epsilon_p^G}
+    \right|_{W}
+    +
+    \left.
+    \frac{\partial \Sigma_m^I(\omega)}
+    {\partial \epsilon_p^W}
+    \right|_{G} \\
+    &=
+    \boxed{
+    \frac{1}{\pi}
+    \int_0^\infty d\Omega\,
+    \frac{\Omega^2-x_p^2}
+    {\left(x_p^2+\Omega^2\right)^2}
+    \sum_{PQ}
+    v_P^{mp}
+    \left[
+    \mathbf W_c(i\Omega)
+    \right]_{PQ}
+    v_Q^{pm}
+    } \nonumber \\
+    &\quad
+    \boxed{
+    -
+    \frac{1}{\pi}
+    \sum_n
+    \int_0^\infty d\Omega\,
+    K_n(\omega,\Omega)
+    \sum_{PQ}
+    v_P^{mn}
+    \left[
+    \mathbf M(i\Omega)^{-1}
+    \frac{\partial \boldsymbol{\Pi}(i\Omega)}
+    {\partial \epsilon_p}
+    \mathbf M(i\Omega)^{-1}
+    \right]_{PQ}
+    v_Q^{nm}
+    }.
+\end{align}
+
+Here
+\begin{equation}
+    \frac{\partial \Pi_{PQ}(z)}
+    {\partial \epsilon_p}
+    =
+    \sum_i^{\mathrm{occ}}
+    \sum_a^{\mathrm{vir}}
+    v_P^{ia}
+    \left(\delta_{ap}-\delta_{ip}\right)
+    \left[
+    \frac{1}{(z-\Delta_{ia})^2}
+    +
+    \frac{1}{(z+\Delta_{ia})^2}
+    \right]
+    v_Q^{ai}.
+\end{equation}
+
+Therefore the full derivative for simultaneous \(G\)- and \(W\)-energy updates is
+\begin{equation}
+    \boxed{
+    \frac{\partial \Sigma_m^{\mathrm{CD}}(\omega)}
+    {\partial \epsilon_p}
+    =
+    \frac{\partial \Sigma_m^C(\omega)}
+    {\partial \epsilon_p}
+    +
+    \frac{\partial \Sigma_m^I(\omega)}
+    {\partial \epsilon_p}
+    }.
+\end{equation}
+
+\paragraph{Remarks on nonsmooth terms.}
+
+The expressions above neglect derivatives of the residue weights \(f_n\).  This
+is appropriate away from threshold points.  Formally, the derivative of the
+piecewise residue window produces delta-function contributions when
+\(\epsilon_n=\omega\) or \(\epsilon_n=\epsilon_F\).  In numerical
+self-consistency iterations, these terms are usually omitted and the residue
+window is updated discretely between evaluations.
+
+If the Fermi energy is updated together with the single-particle energies, then
+the kernel derivative must be modified.  For the relative-frequency convention,
+\begin{equation}
+    x_n=\omega+\epsilon_F-\epsilon_n,
+\end{equation}
+and therefore
+\begin{equation}
+    \frac{\partial x_n}{\partial \epsilon_p}
+    =
+    \frac{\partial \epsilon_F}{\partial \epsilon_p}
+    -
+    \delta_{np}.
+\end{equation}
+The formulas above assume
+\begin{equation}
+    \frac{\partial \epsilon_F}{\partial \epsilon_p}=0
+\end{equation}
+during the derivative evaluation.
+\subsubsection{Check against Python}
+I have added a number of features to my Python implementation, and now I want these to be reflected in my C++ code. The best way to do this will be to run my python code for 14e/19o, and then check that the C++ code produces the same results up to numerical precision.
+\begin{enumerate}
+    \item Check that the contour deformation quasi-particle energy is equivalent to the python one using $nw_{cd}=400$.
+    \item Implement a BFGS optimization procedure to do self-consistency for GW0, G0W, and GW. This will involve implementing the analytic gradients (cite python functions). I was thinking of doing the self-consistency scheme with BFGS as I did with SRG-MP2. I already have an efficient C++ function for computing the contour deformation self-energy, so maybe this function can be modified a bit to also get the analytic gradients needed to drive the BFGS procedure. It is imperative that with these modifications we don't introduce any significant slowdowns in the self-energy evaluation, i.e. we still shouldn't store the full Choleskies and we should continue to GEMM things efficiently. Although the logic is quite different, model this after what I did with the $srg_mp2_with_gradient$ fn in qcpbc/libpbc/libpbc/ueg/$fock_pw_utils.C$, Where I computed the self-energy and analytic gradientin one fell swoop to be used in tandem in a BFGS optimization procedure as in qcpbc/libpbc/libpbc/ueg/bfgs4selfcons.C.
+    \item Compute the spectral functions for all of the GW variants like in 
+\begin{lstlisting}[language=Python]
+    gw_spec_cd = gw_spec_fn_fast(omegas, moes, mochol, nocc, 0, p_idx, eta_sigma=eta, eta_plot=eta, cd=True, e_eff=e_eff, nw=nw_cd)
+    print(f"\nComputed CD spectral function for {method_name}+GW; now computing other CD flavors...")
+    gw0_spec_cd  = gw_spec_fn_fast(omegas, qpes_gw0_nt, mochol, nocc, 0, p_idx, eta_sigma=eta, eta_plot=eta, cd=True, e_eff=e_eff, moes_W=moes, nw=nw_cd)
+    print(f"\nComputed CD spectral function for {method_name}+GW0; now computing G0W CD flavor...")
+    g0w_spec_cd  = gw_spec_fn_fast(omegas, moes,        mochol, nocc, 0, p_idx, eta_sigma=eta, eta_plot=eta, cd=True, e_eff=e_eff, moes_W=qpes_g0w_nt, nw=nw_cd)
+    print(f"\nComputed CD spectral function for {method_name}+G0W; now computing scGW CD flavor...")
+    scgw_spec_cd = gw_spec_fn_fast(omegas, qpes_gw_nt,  mochol, nocc, 0, p_idx, eta_sigma=eta, eta_plot=eta, cd=True, e_eff=e_eff, moes_W=qpes_gw_nt, nw=nw_cd)
+    print(f"\nComputed CD spectral functions for {method_name} reference; now computing cumulant spectral functions...")
+\end{lstlisting}
+of $qcpbc/libpbc/gw_tests/gw-ac/tests/compare_methods.pyL363$.
+\item Compute the Cumulant Spectral Functions as
+\begin{lstlisting}[language=Python]
+      # get g0w0+c, gw0+c, g0w+c, and gw+c spectral fns 
+    ef_g0 = 0.5 * (moes[nocc - 1] + moes[nocc])
+    omegaspeqp_g0w0 = ce_omegas + qp_cd
+    betaspep_g0w0 = (1.0 / np.pi) * np.abs(sigma_cd(omegaspeqp_g0w0, ef_g0, moes, moes, mochol, nocc, p_idx, eta, nw=nw_cd, ueg=ueg).imag)
+    ct, spec_fn_g0w0pc = compute_cumulant_spectral_function_numeric(betaspep_g0w0, ce_omegas, times, e_eff, eta,cumulant=True, time_ordered=False)
+    print(f"  Done G0W0+C; now G0W+C...")
+
+    omegaspeqp_g0w = ce_omegas + qpes_g0w_nt[p_idx]
+    betaspep_g0w = (1.0 / np.pi) * np.abs(sigma_cd(omegaspeqp_g0w, ef_g0, moes, qpes_g0w_nt, mochol, nocc, p_idx, eta, nw=nw_cd, ueg=ueg).imag)
+    ct, spec_fn_g0wpc = compute_cumulant_spectral_function_numeric(betaspep_g0w, ce_omegas, times, e_eff, eta,cumulant=True, time_ordered=False)
+    print(f"  Done G0W+C; now GW0+C...")
+
+    ef_gw0 = 0.5 * (qpes_gw0_nt[nocc - 1] + qpes_gw0_nt[nocc])
+    omegaspeqp_gw0 = ce_omegas + qpes_gw0_nt[p_idx]
+    betaspep_gw0 = (1.0 / np.pi) * np.abs(sigma_cd(omegaspeqp_gw0, ef_gw0, qpes_gw0_nt, moes, mochol, nocc, p_idx, eta, nw=nw_cd, ueg=ueg).imag)
+    ct, spec_fn_gw0pc = compute_cumulant_spectral_function_numeric(betaspep_gw0, ce_omegas, times, e_eff, eta,cumulant=True, time_ordered=False)
+    print(f"  Done GW0+C; now scGW+C...")
+
+    ef_gw = 0.5 * (qpes_gw_nt[nocc - 1] + qpes_gw_nt[nocc])
+    omegaspeqp_gw = ce_omegas + qpes_gw_nt[p_idx]
+    betaspep_gw = (1.0 / np.pi) * np.abs(sigma_cd(omegaspeqp_gw, ef_gw, qpes_gw_nt, qpes_gw_nt, mochol, nocc, p_idx, eta, nw=nw_cd, ueg=ueg).imag)
+    ct, spec_fn_gwpc = compute_cumulant_spectral_function_numeric(betaspep_gw, ce_omegas, times, e_eff, eta,cumulant=True, time_ordered=False)
+    # print(f"  Done scGW+C; now plotting...")
+\end{lstlisting}of $qcpbc/libpbc/gw_tests/gw-ac/tests/compare_methods.pyL495$. \textbf{Note: We also want to experiment with what we get when we change the omegaspep used to build betaspep. Because right now we just have omegaspeqp = ceomegas + qpe, But I also want to try omegaspeqp = ceomegas + mfsp.}
+\end{enumerate}
+\subsection{Plasmon pole models (PPMs)}
+For the homogeneous electron gas, we are trying to solve for
+\begin{align}
+    \Sigma(\boldsymbol{q}, \omega) = \frac{i}{2\pi} \int d\omega' e^{i\eta \omega'} G_0(\boldsymbol{q}, \omega + \omega') W_0(\boldsymbol{q}, \omega').
+\end{align}
+First, we can figure out how to solve for $W_0(\boldsymbol{q}, \omega)$.
+\begin{equation}
+    W_0(\mathbf{q}, \omega) =  \varepsilon^{-1}(\mathbf{q}, \omega) \times v(\mathbf{q})
+\end{equation}
+The purpose of the PPM is to avoid solving for the full frequency dependence of the inverse dielectric function. Instead, it postulates that
+\begin{equation}
+\operatorname{Re} \varepsilon^{-1}(\mathbf{q}, \omega) \approx 1+\frac{\Omega^2(\mathbf{q})}{\omega^2-\tilde{\omega}^2(\mathbf{q})}
+\end{equation}
+and
+\begin{equation}
+    \operatorname{Im} \varepsilon^{-1}(\mathbf{q},\omega ) =A(\mathbf{q})\left\{\delta\left[\omega-\widetilde{\omega}(\mathbf{q})\right]-\delta\left[\omega+\widetilde{\omega}(\mathbf{q})\right]\right\}.
+\end{equation}
+    % \operatorname{Re} \varepsilon^{-1}_{\mathbf{G} \mathbf{G}'}(\omega) \approx 1+\frac{\Omega_{\mathbf{G} \mathbf{G}'}^2}{\omega^2-\tilde{\omega}_{\mathbf{G} \mathbf{G}'}^2}.
+For the uniform electron gas we will always have 
+\begin{align}
+\Omega^2(\mathbf q)
+&=
+\omega_p^2
+\frac{\mathbf G\cdot \mathbf G'}{|\mathbf G|^2}
+\frac{\rho(\mathbf G-\mathbf G')}{\rho(\mathbf 0)}
+\\[0.5em]
+&=
+\begin{cases}
+\displaystyle
+4\pi \frac{N}{V},
+& \text{TDL}, \\[1em]
+\displaystyle
+\frac{v(\mathbf q)}{\Omega}
+\sum_{\substack{
+i\in\mathrm{occ}\\
+a\in\mathrm{vir}\\
+\mathbf k_a=\mathbf k_i+\mathbf q
+}}
+\left(\epsilon_a-\epsilon_i\right),
+& \text{finite cell}.
+\end{cases}
+\end{align}
+Now we can proceed to define the quantities In specific  PPMs. 
+\subsubsection{Hybertsen and Louie parametrization from 1986}
+Their model obeys the Kramers-Kronig relation, and the f-sum rule. The former states
+\begin{equation}
+\operatorname{Re} \varepsilon^{-1}(\mathbf{q}, \omega) = 1 + \frac{1}{\pi} \mathcal{P} \int_{-\infty}^{\infty} \frac{\operatorname{Im} \varepsilon^{-1}(\mathbf{q}, \omega')}{\omega' - \omega}
+\end{equation}
+where $\mathcal{P}$ denotes the Cauchy principal value. The f-sum rule states
+\begin{equation}
+\int_{-\infty}^{\infty} \omega \operatorname{Im} \varepsilon^{-1}(\mathbf{q}, \omega) d\omega = -\pi \Omega^2(\mathbf{q}).
+\end{equation}
+This implies that
+\begin{align}
+\tilde{\omega}^2(\mathbf{q}) &= \frac{\Omega^2(\mathbf{q})}{1 - \varepsilon^{-1}(\mathbf{q},\omega=0)}\\
+    % \tilde{\omega}_{\mathbf{G} \mathbf{G}'}^2 &= \frac{\Omega_{\mathbf{G} \mathbf{G}'}^2}{\delta_{\mathbf{G} \mathbf{G}'} - \epsilon_{\mathbf{G} \mathbf{G}'}^{-1}(\omega=0)},
+\end{align}
+where the RPA form for the dielectric function used is
+\begin{align}
+\varepsilon(\mathbf{q}, \omega=0)&=1-v(\mathbf{q}) P(\mathbf{q}, \omega=0)\\
+&\approx 1-v(\mathbf{q}) P_0(\mathbf{q}, \omega=0).
+\end{align}
+The static, non-interacting polarizability is given by
+\begin{align}
+P_0(\mathbf{q}, \omega=0)&=\sum_{\mathbf{k}, \mathbf{k}^{\prime} }\langle \mathbf{k}| e^{-i(\mathbf{q}) \cdot \mathbf{r}}|\mathbf{k}^{\prime} \rangle \langle \mathbf{k}^{\prime} |e^{i\left(\mathbf{q}\right) \cdot \mathbf{r}^{\prime}}|\mathbf{k}\rangle \frac{f_{\mathbf{k}+\mathbf{q}}-f_{\mathbf{k}}}{\epsilon_{\mathbf{k}+\mathbf{q}}-\epsilon_{\mathbf{k}}}\\
+%n| e^{-i(\mathbf{q}) \cdot \mathbf{r}}|n^{\prime}\rangle\langle n^{\prime}| e^{i\left(\mathbf{q}\right) \cdot \mathbf{r}^{\prime}}|n\rangle \frac{f\left(\varepsilon_{n^{\prime}}\right)-f\left(\varepsilon_{n}\right)}{\varepsilon_{n^{\prime}}-\varepsilon_{n}} \\
+&\overset{\text{UEG}}{=} \frac{1}{V} \sum_{\mathrm{k}} \frac{f_{\mathrm{k}+\mathbf{q}}-f_{\mathrm{k}}}{\epsilon_{\mathrm{k}+\mathbf{q}}-\epsilon_{\mathrm{k}}},
+\end{align}
+% P_{\mathbf{G G}^{\prime}}^0( \omega=0)&=\sum_{n, n^{\prime} }\langle n| e^{-i(\mathbf{G}) \cdot \mathbf{r}}\left|n^{\prime}\right\rangle\left\langle n^{\prime}\right| e^{i\left(\mathbf{G}^{\prime}\right) \cdot \mathbf{r}^{\prime}}|n\rangle \frac{f\left(\varepsilon_{n^{\prime}}\right)-f\left(\varepsilon_{n}\right)}{\varepsilon_{n^{\prime}}-\varepsilon_{n}} \\
+% &\overset{\text{UEG}}{=} \delta_{\mathrm{GG}^{\prime}} \frac{1}{V} \sum_{\mathrm{k}} \frac{f_{\mathrm{k}+\mathrm{G}}-f_{\mathrm{k}}}{\varepsilon_{\mathrm{k}+\mathrm{G}}-\varepsilon_{\mathrm{k}}}
+where we have a sum over the momentum transfers $\mathbf{k}$, and $f$ is the Fermi-Dirac distribution, which is 1 for occupied states and 0 for unoccupied states at zero temperature. The single particle energies can be due to any mean field calculation. Finally,
+\begin{align}
+A(\mathbf{q}) &= -\frac{\pi}{2} \frac{\Omega^2(\mathbf{q})}{\tilde{\omega}(\mathbf{q})}.
+    % A_{\mathbf{G} \mathbf{G}'} &= -\frac{\pi}{2} \frac{\Omega_{\mathbf{G} \mathbf{G}'}}{\tilde{\omega}_{\mathbf{G} \mathbf{G}'}}.
+\end{align}
+\subsubsection{Godby and Needs parametrization from 1995}
+In the GN approach, the Chosen Constraints are such  that $\varepsilon_{\boldsymbol{G} \boldsymbol{G}^{\prime}}(\boldsymbol{q}, \omega)$ is correctly reproduced at two different frequencies: the static limit ( $\omega=0$ ) and an additional imaginary point located at the Sommerfeld plasma frequency $i \omega_p$, where $\omega_p=\sqrt{4 \pi \rho}$ with $\rho$ the number of electrons per volume, As previously derived above . After some algebra, the following set of equations defining the plasmon-pole coefficients can be derived:
+$$
+\left\{\begin{array}{l}
+A_{\boldsymbol{G} \boldsymbol{G}^{\prime}}(\boldsymbol{q})=\varepsilon_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^{-1}(\boldsymbol{q}, \omega=0)-\delta_{\boldsymbol{G} \boldsymbol{G}^{\prime}} \\
+\tilde{\omega}_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^2=\omega_p^2\left[\frac{A_{\boldsymbol{G} \boldsymbol{G}^{\prime}}(\boldsymbol{q})}{\varepsilon_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^{-1}(\boldsymbol{q}, \omega=0)-\varepsilon_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^{-1}\left(\boldsymbol{q}, i \omega_p\right)}-1\right] \\
+\Omega_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^2(\boldsymbol{q})=-A_{\boldsymbol{G} \boldsymbol{G}^{\prime}}(\boldsymbol{q}) \tilde{\omega}_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^2(\boldsymbol{q})
+\end{array}\right.
+$$
+
+\subsubsection{Finite size corrections to the inverse dielectric function }
+
+The dielectric function on the real axis is defined as
+\begin{equation}
+    \epsilon_{\mathrm{GG}^{\prime}}(\mathbf{q}, \omega)
+    = \delta_{\mathrm{GG}^{\prime}}
+      - \frac{\sqrt{4\pi}}{\lvert\mathbf{q}+\mathbf{G}\rvert}\,
+        \chi_{\mathrm{GG}^{\prime}}(\mathbf{q}, \omega)\,
+        \frac{\sqrt{4\pi}}{\lvert\mathbf{q}+\mathbf{G}^{\prime}\rvert},
+    \tag{41R}
+\end{equation}
+where $\chi_{\mathrm{GG}^{\prime}}(\mathbf{q}, \omega)$ is Retarded polarizability, Kevin as
+\begin{align}
+\chi_{\mathrm{GG}^{\prime}}(\mathbf{q}, \omega)
+  &= \frac{2}{N_{\mathrm{k}}\,\Omega_{\mathrm{cell}}}
+     \sum_{\mathbf{k}}
+     \sum_i^{\mathrm{occ}}
+     \sum_a^{\mathrm{vir}}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}}(\mathbf{G})
+     \nonumber \\
+  &\quad \times
+     \frac{\epsilon_{i\mathbf{k}}-\epsilon_{a,\,\mathbf{k}-\mathbf{q}}}
+          {(\omega + i\eta)^2
+           - \bigl(\epsilon_{i\mathbf{k}}
+                   - \epsilon_{a,\,\mathbf{k}-\mathbf{q}}\bigr)^2}\,
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k} *}
+       \bigl(\mathbf{G}^{\prime}\bigr).
+  \tag{42R'}
+\end{align} The head and wings of the dielectric function in the
+$\mathbf{q}=\mathbf{0}$ limit are computed as
+\begin{align}
+%   h_{00}(\mathbf{q}=0, i \omega)
+%     &= 1 - \lim_{\mathbf{q} \rightarrow 0}
+%           \frac{4 \pi}{\lvert\mathbf{q}\rvert^2}\,
+%           \chi_{00}(\mathbf{q} \rightarrow 0, i \omega),
+%           \tag{47} \\
+%   w_{P0}(\mathbf{q}=0, i \omega)
+%     &= \lim_{\mathbf{q} \rightarrow 0}
+%        \frac{\sqrt{4 \pi}}{\lvert\mathbf{q}\rvert}\,
+%        \chi_{P0}(\mathbf{q} \rightarrow 0, i \omega).
+%        \tag{48}
+    h_{00}(\mathbf{q}=0, \omega)
+    &= 1 - \lim_{\mathbf{q} \rightarrow 0}
+          \frac{4 \pi}{\lvert\mathbf{q}\rvert^2}\,
+          \chi_{00}(\mathbf{q} \rightarrow 0, \omega), \tag{47} \\
+  w_{P0}(\mathbf{q}=0, \omega)
+    &= \lim_{\mathbf{q} \rightarrow 0}
+       \frac{\sqrt{4 \pi}}{\lvert\mathbf{q}\rvert}\,
+       \chi_{P0}(\mathbf{q} \rightarrow 0, \omega).
+       \tag{48}
+\end{align}
+where the polarizability is
+\begin{align}
+\chi_{00}(\mathbf{q} \rightarrow 0, \omega)
+  &= \frac{2}{N_{\mathrm{k}}\,\Omega_{\text{cell}}}
+     \sum_{\mathbf{k}}
+     \sum_i^{\text{occ}}
+     \sum_a^{\text{vir}}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}}(0)
+     \tag{49} \\
+  &\quad \times
+     \frac{\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}}
+          {\left(\omega+i\eta\right)^2+\bigl(\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}\bigr)^2}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}*}(0), \\
+\chi_{P0}(\mathbf{q} \rightarrow 0, \omega)
+  &= \frac{2}{N_{\mathrm{k}}\,\Omega_{\text{cell}}^{1/2}}
+     \sum_{\mathbf{k}}
+     \sum_i^{\text{occ}}
+     \sum_a^{\text{vir}}
+     v_P^{ia}
+     \tag{50} \\
+  &\quad \times
+     \frac{\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}}
+          {\left(\omega+i\eta\right)^2+\bigl(\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}\bigr)^2}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}*}(0).
+\end{align}
+We can  evaluate the limit using
+$\mathbf{q}=(0.001,0,0)$, neglecting anisotropy for now. 
+The pair density matrix in the long-wavelength limit is computed using
+$\mathbf{k}\cdot\mathbf{p}$ perturbation theory:
+\begin{equation}
+\left.\rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}}(0)\right|_{\mathbf{q} \rightarrow 0}
+  = \frac{-i\,\mathbf{q}\cdot
+          \bigl(\psi_{i\mathbf{k}}\lvert\nabla\rvert\psi_{a\mathbf{k}}\bigr)}
+         {\epsilon_{a\mathbf{k}}-\epsilon_{i\mathbf{k}}}.
+\tag{51}
+\end{equation}
+Note that the head and wing corrections to the inverse dielectric function are not simple inverses of $h_{00}$ and $w_{P0}$.
+Instead, they are matrix elements of the inverse of the full dielectric
+matrix
+\begin{equation}
+\epsilon_{\mathrm{full}}(\mathbf{q}=0, i \omega)
+  = \begin{bmatrix}
+      h_{00}        & w_{P0}^{\dagger} \\
+      w_{P0}        & B_{PQ}
+    \end{bmatrix},
+\tag{52}
+\end{equation}
+where $B_{PQ} = [\mathbf{I}-\mathbf{\Pi}]_{PQ}$ is the body of the
+dielectric function In the basis of choice.
+\subsubsection{Head corrections for the UEG}
+In the case of the UEG in the long-wavelength limit, the $ \mathbf{k}\cdot\mathbf{p} $ perturbation theory can be used to compute the head corrections to the polarizability, but extra considerations have to be taken. The idea is to do:
+\begin{align}
+\rho_{m \mathrm{k}-\mathrm{q}}^{n \mathrm{k}}(\mathrm{G})&=\left(n \mathrm{k}\left|e^{i(\mathrm{q}+\mathrm{G}) \mathrm{r}}\right| m \mathrm{k}-\mathrm{q}\right) \\
+    \implies \left.\rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}}(0)\right|_{\mathbf{q} \rightarrow 0}
+  &= \frac{-i\,\mathbf{q}\cdot
+          \bigl(\psi_{i\mathbf{k}}\lvert\nabla\rvert\psi_{a\mathbf{k}}\bigr)}
+         {\epsilon_{a\mathbf{k}}-\epsilon_{i\mathbf{k}}}\\
+\implies     \left.\rho_{\mathbf{k_F}-\mathbf{q}}^{\mathbf{k_F}}(0)\right|_{\mathbf{q} \rightarrow 0}
+  &\approx \frac{1}{\Omega_{\text{cell}}}\frac{-i\,\mathbf{q}\cdot
+          \bigl(e^{-i\mathbf{k_F}\cdot\mathbf{r}}\lvert\nabla_{\bm{r}}\rvert e^{i\left(\mathbf{k_F}-\bm{q}\right)\cdot\mathbf{r}}\bigr)}
+         {\epsilon_{\mathbf{k_F}-\mathbf{q}}-\epsilon_{\mathbf{k_F}}}\\
+&\approx \frac{2}{\Omega_{\text{cell}}}\frac{-i\,\mathbf{q}\cdot i\left(\mathbf{k_F}-\mathbf{q}\right)
+          \bigl(e^{-i\mathbf{k_F}\cdot\mathbf{r}}| e^{i\mathbf{k_F}\cdot\mathbf{r}}\bigr)}
+         {|\bm{\mathbf{k_F}-\mathbf{q}}|^2-|\mathbf{k_F}|^2}\\
+&\approx \frac{1}{\Omega_{\text{cell}}}\frac{\,\mathbf{q}\cdot \left(\mathbf{k_F}-\mathbf{q}\right)
+          }
+         {\mathbf{k_F}\cdot \mathbf{q}+\mathbf{q}\cdot \mathbf{q}}\\
+&\approx -\frac{1}{\Omega_{\text{cell}}}.
+\end{align}
+so then
+\begin{align}
+\chi_{00}(\mathbf{q} \rightarrow 0, \omega)
+  &= \frac{2}{N_{\mathrm{k}}\,\Omega_{\text{cell}}}
+     \sum_{\mathbf{k}}
+     \sum_i^{\text{occ}}
+     \sum_a^{\text{vir}}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}}(0)
+     \frac{\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}}
+          {\left(\omega+i\eta\right)^2+\bigl(\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}\bigr)^2}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}*}(0)\\
+&\approx -\frac{4}{\Omega_{\text{cell}}} \frac{1}{\Omega_{\text{cell}}^2}\frac{\bm{k_F}\cdot \mathbf{q}+\mathbf{q}\cdot \mathbf{q}}{\left(\omega+i\eta\right)^2+\frac{1}{4}\left(\bm{k_F}\cdot \mathbf{q}+\mathbf{q}\cdot \mathbf{q}\right)^2}\\
+\end{align}
+ Because Tianyu's code seems to be working so well for this, we can just Reuse what I did previously to compute  $B_{PQ}$.
+By inverting This matrix , one obtains
+$\epsilon_{00}^{-1}(\mathbf{q}=\mathbf{0}, \omega)$
+and $\epsilon_{P0}^{-1}(\mathbf{q}=\mathbf{0}, \omega)$ as
+\begin{gather}
+\epsilon_{00}^{-1}
+  = \frac{1}{h_{00}
+            - \displaystyle\sum_{PQ}
+              w_{P0}^{\dagger}\,B_{PQ}^{-1}\,w_{Q0}},
+  \tag{53} \\
+\epsilon_{P0}^{-1}
+  = -\,\epsilon_{00}^{-1}
+      \sum_Q B_{PQ}^{-1} w_{Q0}.
+  \tag{54}
+\end{gather}
+The conclusion is that we can reuse the code we used previously to compute the finite source corrections to the inverse dielectric function. 
+\subsubsection{Getting the head of the polarizability}
+The Adler-Wiser formula for the polarisability is
+\begin{align}
+    P_{\mathbf{G G}^{\prime}}(\mathbf{k}, \mathrm{i} \omega)= & -\frac{4}{(2 \pi)^3} \sum_{v, c} \int \mathrm{~d}^3 q \frac{\epsilon_{\mathbf{c q}+\mathbf{k}}-\epsilon_{v \mathbf{q}}}{\left(\epsilon_{c \mathbf{q}+\mathbf{k}}-\epsilon_{v \mathbf{q}}\right)^2+\omega^2} \\
+& \times\left\langle\varphi_{v \mathbf{q}}\right| e^{-\mathrm{i}(\mathbf{k}+\mathbf{G}) \cdot \mathbf{r}}\left|\varphi_{c \mathbf{q}+\mathbf{k}}\right\rangle\left\langle\varphi_{c \mathbf{q}+\mathbf{k}}\right| e^{\mathrm{i}\left(\mathbf{k}+\mathbf{G}^{\prime}\right) \cdot \mathbf{r}}\left|\varphi_{v \mathbf{q}}\right\rangle,
+\end{align}
+where the sum over $v$ and $c$ runs over occupied and unoccupied states, respectively. For $\mathrm{G}^{\prime}=0$ and $\mathrm{k} \rightarrow 0$ this leads to a wings correction of
+\begin{align}
+    P_{\mathbf{G} \mathbf{0}}(\mathbf{k}, \mathrm{i} \omega) \rightarrow & -\frac{4 \mathrm{i}}{(2 \pi)^3} \sum_{v, c} \int \mathrm{~d}^3 q \frac{\epsilon_{c \mathbf{q}}-\epsilon_{v \mathbf{q}}}{\left(\epsilon_{c \mathbf{q}}-\epsilon_{v \mathbf{q}}\right)^2+\omega^2}  \\
+& \times\left\langle\varphi_{v \mathbf{q}}\right| e^{-\mathrm{i} \mathbf{G} \cdot \mathbf{r}}\left|\varphi_{c \mathbf{q}}\right\rangle\left(\mathbf{k} \cdot\left\langle\varphi_{c \mathbf{q}}\right| \mathbf{r}\left|\varphi_{v \mathbf{q}}\right\rangle\right)
+\end{align}
+while for $\mathbf{G}=\mathbf{G}^{\prime}=\mathbf{0}$ and $\mathbf{k} \rightarrow \mathbf{0}$, we get the head correction as
+\begin{align}
+    P_{\mathbf{0 0}}(\mathrm{k}, \mathrm{i} \omega) \rightarrow & -\frac{4}{(2 \pi)^3} \sum_{v, c} \int \mathrm{~d}^3 q \frac{\epsilon_{c \mathbf{q}}-\epsilon_{v \mathbf{q}}}{\left(\epsilon_{c \mathbf{q}}-\epsilon_{v \mathbf{q}}\right)^2+\omega^2} \\
+& \times\left(\mathrm{k} \cdot\left\langle\varphi_{v \mathbf{q}}\right| \mathrm{r}\left|\varphi_{c \mathbf{q}}\right\rangle\right)\left(\mathrm{k} \cdot\left\langle\varphi_{c \mathbf{q}}\right| \mathrm{r}\left|\varphi_{v \mathbf{q}}\right\rangle\right)
+\end{align}
+The matrix elements of $\mathbf{r}$ can be calculated via the commutator of $\mathbf{r}$ with the Kohn-Sham Hamiltonian $h^{\mathrm{KS}}$ as
+\begin{align}
+    \left\langle\varphi_{c q}\right| \mathbf{r}\left|\varphi_{v q}\right\rangle&=\frac{\left\langle\varphi_{c q}\right|\left[h^{\mathrm{KS}}, \mathbf{r}\right]\left|\varphi_{v q}\right\rangle}{\epsilon_{c q}-\epsilon_{v q}} \\
+&\overset{\text{UEG}}{=}-\frac{\left\langle\varphi_{c q}\right| \nabla\left|\varphi_{v q}\right\rangle}{\epsilon_{c q}-\epsilon_{v q}}\\
+&=0.
+\end{align}
+By a similar reason, the wings correction will vanish as well for the UEG.
+\subsubsection{Finite size corrections to the correlation self-energy}
+In a plane-wave expansion, the correlation self-energy can be written as 
+\begin{align}
+    \mathbf{\Sigma}_{n n^{\prime}}^c(\mathbf{k}, i \omega)=-\frac{1}{2 \pi N_{\mathbf{k}} \Omega_{\text {cell }}} & \sum_{m q} \sum_{\mathbf{G C}^{\prime}} \int_{-\infty}^{\infty} d \omega^{\prime} W_{\mathbf{G G}^{\prime}}\left(\mathbf{q}, i \omega^{\prime}\right) \\
+& \times \frac{\rho_{m \mathrm{k}-\mathbf{q}}^{n \mathbf{k}}(\mathbf{G}) \rho_{m \mathrm{k}-\mathbf{q}}^{n^{\prime} \mathbf{k *}}\left(\mathbf{G}^{\prime}\right)}{i\left(\omega+\omega^{\prime}\right)+\epsilon_F-\epsilon_{m \mathrm{k-q}}},
+\end{align}
+% $$
+% \begin{aligned}
+% \mathbf{\Sigma}_{n n^{\prime}}^c(\mathbf{k}, i \omega)=-\frac{1}{2 \pi N_{\mathbf{k}} \Omega_{\text {cell }}} & \sum_{m q} \sum_{\mathbf{G C}^{\prime}} \int_{-\infty}^{\infty} d \omega^{\prime} W_{\mathbf{G G}^{\prime}}\left(\mathbf{q}, i \omega^{\prime}\right) \\
+% & \times \frac{\rho_{m \mathrm{k}-\mathbf{q}}^{v \mathbf{k}}(\mathbf{G}) \rho_{m \mathrm{k}-\mathbf{q}}^{n^{\prime} \mathbf{k *}}\left(\mathbf{G}^{\prime}\right)}{i\left(\omega+\omega^{\prime}\right)+\epsilon_F-\epsilon_{m \mathrm{k-q}}},
+% \end{aligned}
+% $$
+where $\Omega_{\text {cell }}$ is the unit cell volume. The pair density $n m$ is now expanded in plane waves with the matrix elements
+\begin{equation}
+    \rho_{m k-q}^{n k}(\mathbf{G})=\left(n \mathbf{k}\left|e^{i(\mathbf{q}+\mathbf{G}) \mathbf{r}}\right| m \mathbf{k}-\mathbf{q}\right).
+\end{equation}
+Tianyu then \emph{derives} the head correction to the correlation self-energy to be purely diagonal, given as
+\begin{align}
+    \bm{\Sigma}_{n n}^{\mathrm{head}}(\mathbf{k}, i \omega)=- & \frac{1}{\pi^2}\left(\frac{6 \pi^2}{\Omega_{\mathrm{cell}} N_{\mathbf{k}}}\right)^{1 / 3} \int_{-\infty}^{\infty} d \omega^{\prime} \frac{\epsilon_{00}^{-1}(\mathbf{q}=\mathbf{0}, i \omega)-1}{i\left(\omega+\omega^{\prime}\right)+\epsilon_F-\epsilon_{n \mathbf{k}}} . 
+\end{align}
+Then the wings contribution to the correlation self-energy is given as
+\begin{align}
+\bm{\Sigma}_{n n^{\prime}}^{\text {wings }}(\mathbf{k}, i \omega)= & -\frac{1}{\pi} \sqrt{\frac{\Omega_{\mathrm{cell}}}{4 \pi^3}}\left(\frac{6 \pi^2}{\Omega_{\mathrm{cell}} N_{\mathbf{k}}}\right)^{2 / 3} \sum_P \int_{-\infty}^{\infty} d \omega^{\prime} \frac{\operatorname{Re}\left[v_P^{n n^{\prime}} \epsilon_{P 0}^{-1}(\mathbf{q}=\mathbf{0}, i \omega)\right]}{i\left(\omega+\omega^{\prime}\right)+\epsilon_F-\epsilon_{n^{\prime} \mathbf{k}}} .
+\end{align}
+In order to obtain the head contribution to the inverse dielectric matrix that we need, we must first invert the full dielectric matrix, which is given by
+\begin{equation}
+\epsilon_{\mathrm{full}}(\mathbf{q}=0, i \omega)
+  = \begin{bmatrix}
+      h_{00}        & w_{P0}^{\dagger} \\
+      w_{P0}        & B_{PQ}
+    \end{bmatrix},
+\end{equation}
+where $B_{PQ} = [\mathbf{I}-\mathbf{\Pi}]_{PQ}$ is the body of the
+dielectric function (this can also be obtained from the Casida diagonalization, as we have done previously).
+The head and wings of the dielectric function in the
+$\mathbf{q}=\mathbf{0}$ limit are computed as
+\begin{align}
+%   h_{00}(\mathbf{q}=0, i \omega)
+%     &= 1 - \lim_{\mathbf{q} \rightarrow 0}
+%           \frac{4 \pi}{\lvert\mathbf{q}\rvert^2}\,
+%           \chi_{00}(\mathbf{q} \rightarrow 0, i \omega),
+%           \tag{47} \\
+%   w_{P0}(\mathbf{q}=0, i \omega)
+%     &= \lim_{\mathbf{q} \rightarrow 0}
+%        \frac{\sqrt{4 \pi}}{\lvert\mathbf{q}\rvert}\,
+%        \chi_{P0}(\mathbf{q} \rightarrow 0, i \omega).
+%        \tag{48}
+    h_{00}(\mathbf{q}=0, \omega)
+    &= 1 - \lim_{\mathbf{q} \rightarrow 0}
+          \frac{4 \pi}{\lvert\mathbf{q}\rvert^2}\,
+          \chi_{00}(\mathbf{q} \rightarrow 0, \omega), \tag{47} \\
+  w_{P0}(\mathbf{q}=0, \omega)
+    &= \lim_{\mathbf{q} \rightarrow 0}
+       \frac{\sqrt{4 \pi}}{\lvert\mathbf{q}\rvert}\,
+       \chi_{P0}(\mathbf{q} \rightarrow 0, \omega).
+       \tag{48}
+\end{align}
+where the polarizability is
+\begin{align}
+\chi_{00}(\mathbf{q} \rightarrow 0, \omega)
+  &= \frac{2}{N_{\mathrm{k}}\,\Omega_{\text{cell}}}
+     \sum_{\mathbf{k}}
+     \sum_i^{\text{occ}}
+     \sum_a^{\text{vir}}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}}(0)
+     \tag{49} \\
+  &\quad \times
+     \frac{\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}}
+          {\left(\omega+i\eta\right)^2+\bigl(\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}\bigr)^2}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}*}(0), \\
+\chi_{P0}(\mathbf{q} \rightarrow 0, \omega)
+  &= \frac{2}{N_{\mathrm{k}}\,\Omega_{\text{cell}}^{1/2}}
+     \sum_{\mathbf{k}}
+     \sum_i^{\text{occ}}
+     \sum_a^{\text{vir}}
+     v_P^{ia}
+     \tag{50} \\
+  &\quad \times
+     \frac{\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}}
+          {\left(\omega+i\eta\right)^2+\bigl(\epsilon_{i\mathbf{k}}-\epsilon_{a\mathbf{k}}\bigr)^2}
+     \rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}*}(0).
+\end{align}
+He chooses to evaluate the limit using
+$\mathbf{q}=(0.001,0,0)$, \emph{which neglects anisotropy}.
+In the long-wavelength limit, he computes the pair density matrix using
+$\mathbf{k}\cdot\mathbf{p}$ perturbation theory:
+\begin{align}
+\left.\rho_{a,\,\mathbf{k}-\mathbf{q}}^{i\mathbf{k}}(0)\right|_{\mathbf{q} \rightarrow 0}
+  &= \frac{-i\,\mathbf{q}\cdot
+          \bigl(\psi_{i\mathbf{k}}\lvert\nabla\rvert\psi_{a\mathbf{k}}\bigr)}
+         {\epsilon_{a\mathbf{k}}-\epsilon_{i\mathbf{k}}} \\
+&\overset{\text{UEG}}{=} \frac{1}{\Omega_{\text{cell}}}\frac{-i\,\mathbf{q}\cdot
+          \bigl(e^{-i\mathbf{G}_i \cdot\mathbf{r}}\lvert\nabla_{\bm{r}}\rvert e^{i\left(\mathbf{G}_a\right)\cdot\mathbf{r}}\bigr)}
+         {\epsilon_{\mathbf{G}_a}-\epsilon_{\mathbf{G}_i}} \\
+&\overset{\text{UEG}}{=} \frac{2}{\Omega_{\text{cell}}}\frac{-i\,\mathbf{q}\cdot i\left(\mathbf{G}_a\right)
+          \delta_{\mathbf{G}_a, \mathbf{G}_i}}
+         {|\mathbf{G}_a|^2-|\mathbf{G}_i|^2} \\
+&=0.
+\end{align}
+So, following this logic tells that the head and wing corrections should vanish for the homogeneous electron gas. 
+\subsubsection{Final form for the self-energy}
+We have seen that, given some choice of basis, the retarded GW self-energy can be written as 
+\begin{equation}
+    \Sigma_{pp}^{\text{corr}}(\omega) = \sum_{\mu }^{\text{RPA}}\left(\sum_{i}^{\text{occupied}} \frac{M_{pi}^{\mu }M_{ip}^{\mu }}{\omega -(\epsilon _{i}-\Omega  _{\mu })+i\eta}+ \sum_{a}^{\text{virtual}} \frac{M_{pa}^{\mu }M_{ap}^{\mu }}{\omega -(\epsilon _{a}+\Omega  _{\mu })+i\eta}\right)
+\end{equation}
+We can rewrite this In the Plain Wake Bases as  
+\begin{equation}
+\Sigma^c(\mathbf{k}, \omega)=\sum_{\mathbf{q}} \sum_\mu^{\mathrm{RPA}}\left(f_{\mathbf{k}-\mathbf{q}} \frac{\left|M_{\mathbf{k}, \mathbf{k}-\mathbf{q}}^\mu(\mathbf{q})\right|^2}{\omega-\varepsilon_{\mathbf{k}-\mathbf{q}}+\Omega_\mu(\mathbf{q})+i \eta}+\left[1-f_{\mathbf{k}-\mathbf{q}}\right] \frac{\left|M_{\mathbf{k}, \mathbf{k}-\mathbf{q}}^\mu(\mathbf{q})\right|^2}{\omega-\varepsilon_{\mathbf{k}-\mathbf{q}}-\Omega_\mu(\mathbf{q})+i \eta}\right),
+\end{equation}
+PPMs choose To approximate this expression as 
+\begin{equation}
+\Sigma^c(\mathbf{k}, \omega)=\sum_{\mathbf{q}} v(q) A(q)\left[\frac{f_{\mathbf{k}-\mathbf{q}}}{\omega-\varepsilon_{\mathbf{k}-\mathbf{q}}+\tilde{\omega}(q)+i \eta}+\frac{1-f_{\mathbf{k}-\mathbf{q}}}{\omega-\varepsilon_{\mathbf{k}-\mathbf{q}}-\tilde{\omega}(q)+i \eta}\right].
+\end{equation}
+This expression can be derived from PPMs postulation that The inverse dielectric function can be determined as 
+\begin{equation}
+\operatorname{Re} \varepsilon^{-1}(\mathbf{q}, \omega) \approx 1+\frac{\Omega^2(\mathbf{q})}{\omega^2-\tilde{\omega}^2(\mathbf{q})}
+\end{equation}
+and
+\begin{equation}
+    \operatorname{Im} \varepsilon^{-1}(\mathbf{q},\omega ) =A(\mathbf{q})\left\{\delta\left[\omega-\widetilde{\omega}(\mathbf{q})\right]-\delta\left[\omega+\widetilde{\omega}(\mathbf{q})\right]\right\}.
+\end{equation}
+These quantities can be defined up to some parameterization. Two popular ones have been introduced by Hybertsen and Louie in 1986, and Godby and Needs in 1995. HL postulate
+\begin{align}
+   \left\{\begin{array}{l}\Omega_{G G^{\prime}}^2(q)=\omega_p^2 \frac{(q+G) \cdot\left(q+G^{\prime}\right)}{|q+G|^2} \frac{n\left(G-G^{\prime}\right)}{n(0)}\overset{UEG}{=}\omega _p^2 = 4\pi n \\ \tilde{\omega}_{G G^{\prime}}^2(q)=\frac{\Omega_{G G^{\prime}}^2(q)}{\delta_{G G^{\prime}}-\varepsilon_{G G^{\prime}}^{-1}(q, \omega=0)} \overset{UEG}{=} \frac{4\pi n}{1-\varepsilon^{-1}(q, \omega=0)}
+\\ A_{G G^{\prime}}(q)=-\frac{\pi}{2} \frac{\Omega_{G G^{\prime}}(q)}{\tilde{\omega}_{G G^{\prime}}(q)} .\end{array}\right. 
+\end{align}
+while GN postulate
+\begin{align}
+    \left\{\begin{array}{l}
+A_{\boldsymbol{G} \boldsymbol{G}^{\prime}}(\boldsymbol{q})=\varepsilon_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^{-1}(\boldsymbol{q}, \omega=0)-\delta_{\boldsymbol{G} \boldsymbol{G}^{\prime}} \\
+\tilde{\omega}_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^2=\omega_p^2\left[\frac{A_{\boldsymbol{G} \boldsymbol{G}^{\prime}}(\boldsymbol{q})}{\varepsilon_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^{-1}(\boldsymbol{q}, \omega=0)-\varepsilon_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^{-1}\left(\boldsymbol{q}, i \omega_p\right)}-1\right] \\
+\Omega_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^2(\boldsymbol{q})=-A_{\boldsymbol{G} \boldsymbol{G}^{\prime}}(\boldsymbol{q}) \tilde{\omega}_{\boldsymbol{G} \boldsymbol{G}^{\prime}}^2(\boldsymbol{q})
+\end{array}\right.
+\end{align}
+Note that in the uniform electron gas, we actually have G = G'. Clearly, these parametrizations depend on a description of the inverse dielectric function at $\mathbf{q}$. It has been shown that when using a Gaussian basis The dielectric function is not just a scalar quantity, but actually a matrix. In particular, we have 
+\begin{align}
+    \bm{\epsilon}(\mathbf{q}, \omega) = \begin{pmatrix}
+        h_{00} & w_{P 0}^{\dagger}\\
+w_{P 0} & B_{P Q}
+    \end{pmatrix}
+\end{align}
+where $B_{P Q}=[\mathrm{I}-\mathrm{\Pi}]_{P Q}$ is the body of the dielectric function with head and wing correction $h_{00}$ and $w_{P 0}$. For homogeneous systems, we can take the wing corrections to be zero, and thus
+\begin{align}
+    \bm{\epsilon}^{-1}(\mathbf{q}, \omega) = \begin{pmatrix}
+        1/h_{00} & 0\\
+0 & 1/B_{P Q}
+    \end{pmatrix}
+\end{align}
+The dimension of the above matrix  is $N_{\text{aux}} +1$, where $N_{\text{aux}}$ is the number of auxiliary basis functions, when $\mathbf{G} = 0$ is excluded. It happens to be the case that in the finite plane wave basis, the uniform electron gas Admits $N_{\text{aux}}$ or $N_{\text{aux}} +1$ Momentum transfer vectors, depending on whether the Divergent component is included or not. Recall that diagonalizing the Casada equation gave us one dominant plus one excitation at each momentum transfer vector.
+\subsubsection{Debarking steps}
+\begin{enumerate}
+    \item \textcolor{green}{%
+        $\chi_{\mathrm{RPA}}(\mathbf{q}, \omega)$ should be identical regardless of whether we build it As a sum over poles 
+        via the Casida equation or via
+        $\chi_{\mathrm{RPA}} = \dfrac{\chi_0}{1 - v \chi_0}$, where $\chi_0$ is the non-interacting
+        polarizability. This has been done analytically and now numerically .}
+    \item The PPM forms for $\boldsymbol{\epsilon}^{-1}(\mathbf{q}, \omega)$ should be a good match with
+          $1 - v \chi_{\mathrm{RPA}}(\mathbf{q}, \omega)$.
+    \item Garnet's spectral functions should be reproduced. \textcolor{yellow}{Should we be able to do this with and without finite size corrections? }
+\end{enumerate}
+ Therefore, at a given momentum transfer vector, we should be able to directly compare the PPM form for the inverse dielectric function with the one obtained from diagonalizing the Casida equation. Also, we can do a comparison of the self energies. 
+Carrying on with this derivation leads to
+\begin{equation}
+\Sigma^c(\mathbf{k}, \omega)=\sum_{\mathbf{q}} v(q) A(q)\left[\frac{1-f_{\mathbf{k}-\mathbf{q}}}{\omega-\varepsilon_{\mathbf{k}-\mathbf{q}}-\tilde{\omega}(q)+i \eta}+\frac{f_{\mathbf{k}-\mathbf{q}}}{\omega-\varepsilon_{\mathbf{k}-\mathbf{q}}+\tilde{\omega}(q)+i \eta}\right].
+\end{equation}
+To get to the exact form for the GW soft energy of this form, consider that we can write a Casida-equation for each momentum transfer $\mathbf{q}$, which is given by
+\begin{equation}
+\begin{pmatrix}
+\bm{A}(\mathbf{q}) & \bm{B}(\mathbf{q}) \\
+-\bm{B}(\mathbf{q}) & -\bm{A}(\mathbf{q})
+\end{pmatrix}
+\begin{pmatrix}
+\bm{X}(\mathbf{q})\\
+\bm{Y}(\mathbf{q})
+\end{pmatrix}
+= \bm{\Omega}(\mathbf{q})
+\begin{pmatrix}
+\bm{X}(\mathbf{q})\\
+\bm{Y}(\mathbf{q})
+\end{pmatrix}
+\end{equation}
+where The matrix elements are defined as $A_{ia,jb}(\mathbf{q}) = \delta_{ij} \delta_{ab} (\varepsilon_a - \varepsilon_i) + 2 (ia|bj)$ and $B_{ia,jb}(\mathbf{q}) = 2 (ia|jb)$ With the requirement that there be a momentum transfer of $\mathbf{q}$ to get from the occupied plane with State $i$ to the unoccupied plane with state $a$. At the end of this step, we are left with RPA Excitation Energies $\Omega_\nu(\mathbf{q})$ and RPA eigenvectors $X_{ia}^\nu(\mathbf{q})$ and $Y_{ia}^\nu(\mathbf{q})$ For the complete set $\{{\mathbf{q}, \nu}\}$. At this point, we can arrive at the usual GW form, which is given by
+\begin{equation}
+\Sigma^c(\mathbf{k}, \omega)=\sum_{\mathbf{q}} \sum_\mu^{\mathrm{RPA}}\left(f_{\mathbf{k}-\mathbf{q}} \frac{\left|M_{\mathbf{k}, \mathbf{k}-\mathbf{q}}^\mu(\mathbf{q})\right|^2}{\omega-\varepsilon_{\mathbf{k}-\mathbf{q}}+\Omega_\mu(\mathbf{q})-i \eta}+\left[1-f_{\mathbf{k}-\mathbf{q}}\right] \frac{\left|M_{\mathbf{k}, \mathbf{k}-\mathbf{q}}^\mu(\mathbf{q})\right|^2}{\omega-\varepsilon_{\mathbf{k}-\mathbf{q}}-\Omega_\mu(\mathbf{q})+i \eta}\right),
+\end{equation}
+Where the transition densities are the $M_{\mathbf{k}, \mathbf{k}-\mathbf{q}}^\mu(\mathbf{q})$. There is an exact correspondence between the wave vector $\mathbf{k}$ and an MO index.
+% \caption{Euclidean Algorithm}\label{alg:euclid}
+% \begin{algorithmic}[1] % [1] enables line numbering
+% \Procedure{Euclid}{$a,b$}
+%     \State $r \gets a \bmod b$
+%     \While{$r \neq 0$}
+%         \State $a \gets b$
+%         \State $b \gets r$
+%         \State $r \gets a \bmod b$
+%     \EndWhile
+%     \State \textbf{return} $b$
+% \EndProcedure
+% \end{algorithmic}
+% \end{algorithm}
+\subsection{Showing that the dimension of the dielectric matrix is the number of momentum transfer vectors }
+% Defining Hermitian operators $\hat{A}(\mathrm{Q})$ and $\hat{B}(\mathrm{Q})$ as
+% $$
+% \begin{align*}
+% \hat{A}(\mathbf{Q}) & \equiv \sqrt{\frac{2 \pi}{\Omega Q^2}}\left[\hat{\rho}(\mathbf{Q})+\hat{\rho}^{\dagger}(\mathbf{Q})\right]  \tag{13a}\\
+% \hat{B}(\mathbf{Q}) & \equiv i \sqrt{\frac{2 \pi}{\Omega Q^2}}\left[\hat{\rho}(\mathbf{Q})-\hat{\rho}^{\dagger}(\mathbf{Q})\right] \tag{13b}
+% \end{align*}
+% $$
+% the two-body contribution becomes a simple sum of quadratic operators,
+% $$
+% \begin{align*}
+% \hat{H}^{(2)} & =\frac{1}{4} \sum_{\mathbf{Q} \neq 0}\left[\hat{A}^2(\mathbf{Q})+\hat{B}^2(\mathbf{Q})\right] \\
+% & =\frac{1}{2} \sum_{\mathbf{Q}>0}\left[\hat{A}^2(\mathbf{Q})+\hat{B}^2(\mathbf{Q})\right], \tag{14}
+% \end{align*}
+% $$
+% where we have used the $\mathbf{Q} \rightarrow-\mathbf{Q}$ symmetry to obtain the last expression.
+The two-body contribution to the ab initio Hamiltonian, which is due to the electron-electron interactions, can be written in the standard Ewald summation as 
+\begin{equation}
+\hat{H}^{(2)}=\frac{1}{2 \Omega} \sum_{\mathbf{Q} \neq 0} \frac{4 \pi}{Q^2} \hat{\rho}^{\dagger}(\mathbf{Q}) \hat{\rho}(\mathbf{Q})
+\label{eq:two_body_hamiltonian}
+% \hat{H}^{(2)}  =\frac{1}{2} \sum_{\mathbf{Q}>0}\left[\hat{A}^2(\mathbf{Q})+\hat{B}^2(\mathbf{Q})\right]
+\end{equation}
+where 
+$\hat{\rho}(\mathbf{Q})$ is the one-body density operator given by
+\begin{equation}
+\hat{\rho}(\mathbf{Q}) = \sum_{G , \lambda} c_{\mathrm{G}+\mathrm{Q}, \lambda}^{\dagger} c_{\mathrm{G}, \lambda}, \theta\left({E_{\text {cut }}-|\mathbf{G}+\mathbf{Q}|^2 / 2}\right), \lambda \in \alpha ,\beta .
+% \overline{\rho(Q)} \equiv \sum_{G . \lambda} c_{\mathrm{G}+\mathrm{Q}, \lambda}^{\dagger} c_{\mathrm{G}, \lambda}, \theta\left(\overline{E_{\text {cut }}-|\mathbf{G}+\mathbf{Q}|^2 / 2}\right)
+\end{equation}
+This is why we determine the momentum transfer vectors $\mathbf{Q}$ in a finite basis under the requirement that $(\bm{G}+\mathbf{Q})$ lies within the planewave basis (with an energy less than $E_{\text{cut}}$), where $\bm{G}$ is already a member of the planewave basis. From the form of equation \ref{eq:two_body_hamiltonian}, we can see that a full Coloumb kernel gets shared between two density operators. This is the same idea of the resolution of the identity approach, where the full Coulomb kernel is decomposed into two objects as $v_{pqrs} = \sum_T M_{pq}^T M_{rs}^T$. Therefore, we identify that the number of momentum transfer vectors $\mathbf{Q}$ is the same as the number of auxiliary basis functions in the finite planewave basis. Thus, in the following, we will the momentum transfer vectors $\bm{Q}$ and the auxiliary basis functions $P,T$ interchangeably.
+\subsubsection{What this means for the dimension of the dielectric matrix}
+It is illustrative to consider a concrete example. On the imaginary axis, the GW self-energy is computed at the GPT, in the absence of finite size corrections, as
+\begin{equation}
+\Sigma_n^{\mathrm{c}}(i \omega)= -\frac{1}{2 \pi} \sum_m \int_{-\infty}^{\infty} d \omega^{\prime} \frac{1}{i\left(\omega-\omega^{\prime}\right)+\varepsilon_{\mathrm{F}}-\varepsilon_m} \sum_{P T} A_P^{n m}\left[\left[1-\Pi\left(i \omega^{\prime}\right)\right]_{P T}^{-1}-\delta_{P T}\right] A_T^{m n},
+\end{equation}
+% \begin{aligned}
+% &B_P^{i a}=\sum_{T R}(i a T) S_{T R}^{-1} L_{R P},\\
+% &\text { where } \mathbf{L} \text { is the Cholesky decomposition of } \mathbf{V} \text { from Eq. (13), }\\
+% &\mathbf{V}=\mathbf{L L}^{\dagger}
+% \end{aligned}
+% $\Pi_{P T}(i \omega)=2 \sum_{i a} B_P^{i a} \frac{\varepsilon_i-\varepsilon_a}{\omega^2+\left(\varepsilon_i-\varepsilon_a\right)^2} B_T^{i a}$.
+so we can identify the dielectric matrix as $\bm{\tilde{B}}(i\omega)\equiv\bm{\epsilon}(i \omega)=\bm{1}-\bm{\Pi}(i \omega)$ where $\Pi_{P T}(i \omega)=2 \sum_{i a} B_P^{i a} \frac{\varepsilon_i-\varepsilon_a}{\omega^2+\left(\varepsilon_i-\varepsilon_a\right)^2} B_T^{i a}$ with $B_P^{i a}=\sum_{T R}(i a T) S_{T R}^{-1} L_{R P}$, where $\mathbf{L}$ is the Cholesky decomposition of the Coulomb interaction matrix in the RI basis. Now, the finite size corrected dielectric function can be written as
+\begin{align}
+\bm{\epsilon}(\omega)
+  &= \begin{bmatrix}
+      h_{00}(\omega)        & w_{P0}^{\dagger}(\omega) \\
+      w_{P0}(\omega)        & {\tilde{B}}_{PT}(\omega)
+    \end{bmatrix} \\
+&\overset{\text{UEG}}{=}
+    \begin{bmatrix}
+      h_{00}(\omega)        & 0 \\
+      0        & {\tilde{B}}_{PP}(\omega) 
+    \end{bmatrix} \\
+\implies \bm{\epsilon}^{-1}(\omega)
+  &\overset{\text{UEG}}{=} \begin{bmatrix}
+      1/h_{00}(\omega)        & 0 \\
+      0        & 1/{\tilde{B}}_{PP}(\omega) 
+    \end{bmatrix}
+\end{align}
+with head, wing, and body elements $h_{00}(\omega)$, $w_{P0}(\omega)$, and ${\tilde{B}}_{PT}(\omega)$.
+\begin{tcolorbox}
+ I have verified numerically that for the UEG the wing corrections are zero. Furthermore, I have verified numerically that for the UEG the body element is diagonal, and so it is appropriate to take the direct inverse. 
+\end{tcolorbox}
+In the absence of finite size corrections, this reduces to 
+\begin{align}
+    \bm{\epsilon}^{-1}(\omega) = \begin{bmatrix}
+        1/{\tilde{B}}_{PP}(\omega)
+    \end{bmatrix}
+\label{eq:dielectric_matrix_no_finite_size_corrections}
+\end{align}
+\begin{tcolorbox}
+I have verified numerically that ${\epsilon}^{-1}(P,\omega)$ from eqn. \eqref{eq:dielectric_matrix_no_finite_size_corrections} is equivalent to
+\begin{equation}
+    {\epsilon}^{-1}(\bm{Q},\omega) = {1} + v(\bm{Q}) \chi_{RPA}(\bm{Q},\omega ),
+\end{equation}
+where the RPA polarizability is $\chi_{RPA}(\bm{Q},\omega ) = \dfrac{\chi_0(\omega )}{1 - v(\bm{Q}) \chi_0(\omega )}$, with $\chi_0(\omega )$ as the non-interacting polarizability.
+\end{tcolorbox}
+Therefore, I have verified that in the UEG the momentum transfer vectors $\bm{Q}$ are in one-to-one correspondence with the auxiliary basis functions $P$.
+\subsection{Evaluating a dynamical COHSEX self-energy for GW with PPMs}
+We know that $\mathrm{Re} \Sigma=\Sigma_{\mathrm{SEX}}+\Sigma_{\mathrm{COH}}$. Assuming that $\bm{G}$ and $\bm{G_n}$ represent valid plane wave indices with the indices $\bm{Q_1},\bm{Q_2}$ running over all possible momentum transfers, we can write
+\begin{align}
+\Sigma_{G G}^{\mathrm{SEX}}(\omega ) & =-\frac{1}{\Omega} \sum_{G_n}^{\mathrm{occ}} \sum_{Q_1 Q_2} \psi_{G_n} (G-Q_1) \psi_{G_n}^* (G-Q_2) \left(1+\frac{\Omega_{Q_1 Q_2}^2}{\left(\omega-\varepsilon_{G_n}\right)^2-\tilde{\omega}_{Q_1 Q_2}^2}\right) v\left(Q_2\right) \\
+&= -\frac{1}{\Omega} \sum_{G_n}^{\mathrm{occ}} \sum_{Q_1Q_2} \delta_{G_n, G-Q_1} \delta_{G_n, G-Q_2} \left(1+\frac{\Omega_{Q_1 Q_2}^2}{\left(\omega-\varepsilon_{G_n}\right)^2-\tilde{\omega}_{Q_1 Q_2}^2}\right) v\left(Q_2\right) \\
+&= -\frac{1}{\Omega} \sum_{G_n}^{\mathrm{occ}} \left(1+\frac{\Omega_{G-G_n, G-G_n}^2}{\left(\omega-\varepsilon_{G_n}\right)^2-\tilde{\omega}_{G-G_n, G-G_n}^2}\right) v\left(G-G_n\right)
+\end{align}
+since the delta functions require that $G-Q_1=G_n=G-Q_2\implies Q_1=Q_2=G-G_n$. Next,
+\begin{align}
+\Sigma_{G G}^{\mathrm{COH}}(\omega ) & =\frac{1}{\Omega} \sum_{G_n} \sum_{Q_1 Q_2} \psi_{G_n} (G-Q_1) \psi_{G_n}^* (G-Q_2) \frac{1}{2} \frac{\Omega_{Q_1 Q_2}^2}{\tilde{\omega}_{Q_1 Q_2}\left[\omega-\varepsilon_{G_n}-\tilde{\omega}_{Q_1 Q_2}\right]} v\left(Q_2\right) \\
+&= \frac{1}{2\Omega} \sum_{G_n}  \frac{\Omega_{G-G_n, G-G_n}^2}{\tilde{\omega}_{G-G_n, G-G_n}\left[\omega-\varepsilon_{G_n}-\tilde{\omega}_{G-G_n, G-G_n}\right]} v\left(G-G_n\right)
+\end{align}
+% \Sigma_{G G}^{\mathrm{COH}}(\omega ) & =\frac{1}{\Omega} \sum_{n_1} \sum_{q, G_1, G_2} \psi_{n_1, k-q}\left(G-G_1\right) \psi_{n_1, k-q}^*\left(G-G_2\right) \frac{1}{2} \frac{\Omega_{G_1 G_2}^2(q)}{\tilde{\omega}_{G_1 G_2}(q)\left[\omega-\varepsilon_{n_1, k-q}-\tilde{\omega}_{G_1 G_2}(q)\right]} v\left(q+G_2\right)
+So the procedure will be to generate a set of $\Omega_{Q_1 Q_1}$ and $\tilde{\omega}_{Q_1 Q_1}$ for each momentum transfer vector $Q_1$ via the PPM and then to insert these into the above expressions for the self-energy.
+\subsection{Spectral functions with PPMs}
+All of my cumulant spectral functions are solving for the retarded Green's function as
+\begin{equation}
+G(\mathbf{k}, t)=-i \theta(t) e^{-i \varepsilon_{\bm{k}}^{\text{eff}} t} e^{C(\mathbf{k}, t)},
+\end{equation}
+where $\varepsilon_{\bm{k}}^{\text{eff}}=\varepsilon_{\bm{k}}^{\text{LDA}}+\Sigma^x(\mathbf{k})-V_{xc}(\mathbf{k})$. $\Sigma^x(\mathbf{k})$ is the HF exchange potential and $V_{xc}(\mathbf{k})$ is the LDA exchange-correlation potential, both evaluated in the LDA MO basis. Note that the maximum off-diagonal component of these potentials is 1e-7 Ha, so it is appropriate to just consider the diagonal component for each MO. The cumulant function $C(\mathbf{k}, t)$ is given by
+\begin{equation}
+C(\mathbf{k}, t)= \frac{1}{\pi} \int_{-\infty}^{\infty} d \omega \frac{|\operatorname{Im} \Sigma_R^c(\mathbf{k}, \omega + \varepsilon_{\bm{k}}^{\text{GW}})|}{\omega^2}\left(e^{-i \omega t}+i \omega t-1\right),
+\end{equation}
+were the manual broadening of $\eta$ has been applied in the computation of $\operatorname{Im} \Sigma_R^c(\mathbf{k}, \omega)$.
+When I say iterative in my plot, I mean that I am solving for $\varepsilon_{\bm{k}}^{\text{GW}}$ self-consistently via the equation
+\begin{equation}
+\varepsilon_{\bm{k}}^{\text{GW}} = \varepsilon_{\bm{k}}^{\text{eff}} + \operatorname{Re} \Sigma^c(\mathbf{k}, \varepsilon_{\bm{k}}^{\text{GW}}).
+\end{equation}
+When I say linearized, this means that I am doing
+\begin{equation}
+\varepsilon_{\bm{k}}^{\text{GW}} = \varepsilon_{\bm{k}}^{\text{LDA}} + Z \times \left[\Sigma^x(\mathbf{k}) - V_{xc}(\mathbf{k}) + \operatorname{Re} \Sigma^c(\mathbf{k}, \varepsilon_{\bm{k}}^{\text{LDA}})\right],
+\end{equation}
+where
+\begin{equation}
+Z = \left[1 - \left.\frac{\partial \operatorname{Re} \Sigma_R^c(\mathbf{k}, \omega)}{\partial \omega}\right|_{\omega = \varepsilon_{\bm{k}}^{\text{LDA}}}\right]^{-1}.
+\end{equation}
+Also, I have verified that the HL-PPM result frequency integration scheme gives the same answer as the exact and AC schemes, for both LDA+GW and LDA+GW+C. This is possible for this system because the inverse dielectric can be well approximated by a single pole model, as exemplified by the match between the HL-PPM and exact (due to solving the Casida equation) answers for some low-energy momentum transfer vector.
+%  Now, the implementable expressions are
+% $\begin{aligned} & \Sigma_{G G^{\prime}}^{\mathrm{SEx}}(\mathbf{k} ; E)=-\frac{1}{\Omega} \sum_{n_1}^{\mathrm{occ}} \sum_{q, G_1, G_2} \psi_{n_1, k-q}\left(G-G_1\right) \psi_{n_1, k-q}^*\left(G^{\prime}-G_2\right)\left(1+\frac{\Omega_{G_1 G_2}^2(q)}{\left(E-\varepsilon_{n_1, k-q}\right)^2-\bar{\omega}_{G_1 G_2}(q)}\right) v\left(q+G_2\right), \\ & \Sigma_{G G^{\prime}}^{\mathrm{COH}}(k ; E)=\frac{1}{\Omega} \sum_{n_1} \sum_{q, G_1, G_2} \psi_{n_1, k-q}\left(G-G_1\right) \psi_{n_1, k-q}^*\left(G^{\prime}-G_2\right) \frac{1}{2} \frac{\Omega_{G_1 G_2}^2(q)}{\bar{\omega}_{G_1 G_2}(q)\left[E-\varepsilon_{n_1, k-q}-\bar{\omega}_{G_1 G_2}(q)\right]} v\left(q+G_2\right)\end{aligned}$
+\section{Attempting to reproduce the cumulant spectral function from Garnet's paper}
+I am trying to reproduce The reference LDA+GW+C curve from Figure 1A in McClain's paper. I have manually extracted the data, and its features are 
+\begin{verbatim}
+For LDA+GW+C (ref):  QP: omega = -5.612 eV, A = 0.5149 eV^{-1}
+For LDA+GW+C (ref):  sat 1: omega = -7.849 eV, A = 0.3140 eV^{-1}
+For LDA+GW+C (ref):  sat 2: omega = -10.184 eV, A = 0.1303 eV^{-1}
+For LDA+GW+C (ref):  sat 3: omega = -12.421 eV, A = 0.0345 eV^{-1}
+\end{verbatim}
+I have attempted to implement LDA + GW + C in the retarded cumulant formulation, but I get 
+\begin{verbatim}
+Peaks for LDA+GW+C retarded [delta_omega=0.001, omega_int=1, tol=3e-06, skip=0]:
+Peak 0: omega = -5.637 eV, A = 0.2119 eV^{-1}, LHWHM = 0.6731, RHWHM = 0.4438, FWHM = 1.1169, asym = -0.205
+Peak 1: omega = -7.870 eV, A = 0.2069 eV^{-1}, LHWHM = 0.9651, RHWHM = 0.8672, FWHM = 1.8324, asym = -0.053
+Peak 2: omega = -10.035 eV, A = 0.1166 eV^{-1}, LHWHM = 1.1919, RHWHM = 5.0931, FWHM = 6.2849, asym = +0.621
+\end{verbatim}
+with
+\begin{verbatim}
+    def analyze_spectral_peaks(omegas, spectral, min_height_frac=0.1, min_distance_ev=0.3):
+    """Per-peak geometry: center, height, left/right HWHM, and asymmetry index.
+
+    Asymmetry index = (RHWHM - LHWHM) / (RHWHM + LHWHM).
+      > 0 : peak is wider on the high-frequency side (right-skewed)
+      < 0 : peak is wider on the low-frequency side (left-skewed)
+      = 0 : symmetric
+
+    Returns a list of dicts, one per peak, sorted high → low frequency.
+    Each dict has keys:
+      omega_ev, height_ev, lhwhm_ev, rhwhm_ev, asym, fwhm_ev
+    """
+    from scipy.signal import find_peaks
+
+    omegas = np.asarray(omegas, dtype=float)
+    spectral = np.asarray(spectral, dtype=float)
+    spec_ev = spectral / H2EV
+    d_omega_ev = np.abs(omegas[1] - omegas[0]) * H2EV
+    min_distance_pts = max(1, int(min_distance_ev / d_omega_ev))
+
+    global_max = spec_ev.max()
+    if global_max <= 0:
+        return []
+
+    indices, _ = find_peaks(
+        spec_ev,
+        height=min_height_frac * global_max,
+        distance=min_distance_pts,
+    )
+    order = np.argsort(omegas[indices])[::-1]
+    indices = indices[order]
+
+    results = []
+    for idx in indices:
+        height = spec_ev[idx]
+        half = height / 2.0
+
+        # left HWHM: walk left until we drop below half-max
+        li = idx
+        while li > 0 and spec_ev[li] > half:
+            li -= 1
+        if spec_ev[li + 1] - spec_ev[li] != 0:
+            frac = (half - spec_ev[li]) / (spec_ev[li + 1] - spec_ev[li])
+            left_omega = omegas[li] + frac * (omegas[li + 1] - omegas[li])
+        else:
+            left_omega = omegas[li]
+
+        # right HWHM: walk right
+        ri = idx
+        while ri < len(spec_ev) - 1 and spec_ev[ri] > half:
+            ri += 1
+        if spec_ev[ri] - spec_ev[ri - 1] != 0:
+            frac = (half - spec_ev[ri - 1]) / (spec_ev[ri] - spec_ev[ri - 1])
+            right_omega = omegas[ri - 1] + frac * (omegas[ri] - omegas[ri - 1])
+        else:
+            right_omega = omegas[ri]
+
+        lhwhm = (omegas[idx] - left_omega) * H2EV
+        rhwhm = (right_omega - omegas[idx]) * H2EV
+        fwhm = lhwhm + rhwhm
+        asym = (rhwhm - lhwhm) / fwhm if fwhm > 0 else 0.0
+
+        results.append(dict(
+            omega_ev=omegas[idx] * H2EV,
+            height_ev=height,
+            lhwhm_ev=lhwhm,
+            rhwhm_ev=rhwhm,
+            fwhm_ev=fwhm,
+            asym=asym,
+        ))
+    return results
+\end{verbatim}
+So, although the peak positions may seem reasonable, the peak heights are way off. For a few days now, I have been trying to hack at this retarded cumulant formulation, trying to change some parameters, but no success so far. A closer read of McClain's paper suggests that they might be using the time-ordered cumulant formulation to compute the photo emission spectrum for this core state. 
+% Peaks for LDA+GW+C retarded [Δω=0.001, ω_int=1, tol=3e-06, skip=0]:
+% Peak 0: ω=-5.637 eV, A=0.2119 eV⁻¹, LHWHM=0.6731, RHWHM=0.4438, FWHM=1.1169, asym=-0.205
+% Peak 1: ω=-7.870 eV, A=0.2069 eV⁻¹, LHWHM=0.9651, RHWHM=0.8672, FWHM=1.8324, asym=-0.053
+% Peak 2: ω=-10.035 eV, A=0.1166 eV⁻¹, LHWHM=1.1919, RHWHM=5.0931, FWHM=6.2849, asym=+0.621
+In particular, they write that they obtain the Green's function via 
+\begin{equation}
+    G_k(t) = G_{0, k}(t) \exp \left[-i \Sigma_k^{\mathrm{x}} t+C_k(t)\right]
+\end{equation}
+ where $G_0$ is the Green's function from mean-field theory and $\Sigma_{\boldsymbol{k}}^{\mathrm{X}}$ is the bare exchange self-energy. Because we Are trying to obtain the spectral function for the deep core state at $k=[0,0,0]$ inf fig. 1a we only want to obtain the Green's function for occupied states, my interpretation is that they mean
+\begin{equation}
+\begin{cases}
+G_{0, k}^{\text{TO}}(t) = i\Theta(-t) e^{-i \varepsilon^0_k t} \\
+% G_{0, k}^R(t) = -i\Theta(t) e^{-i \varepsilon^0_k t}
+\end{cases}
+\end{equation}
+where $\varepsilon^0_k=\varepsilon_k^{\text{LDA}}-V_{xc}(\mathbf{k})=\frac{k^2}{2}$. Note that in my code I set the pole to be $\varepsilon^{\text{eff}}_k=\varepsilon_k^{\text{LDA}}+\Sigma^x_k - V_{xc}(\mathbf{k})$ as
+\begin{verbatim}
+      Vx_mo = C_lda.T @ lda_vx_ao_corr @ C_lda
+    Vc_mo = C_lda.T @ lda_vc_ao_corr @ C_lda
+
+    dm_lda_alpha = C_lda[:, :NOCC] @ C_lda[:, :NOCC].T
+    K_chol = d['cholK'].transpose(1,2,0)
+    K_hf_ao = -np.einsum('prX,qsX,rs->pq', K_chol, K_chol, dm_lda_alpha, optimize=True)
+    K_hf_mo = C_lda.T @ K_hf_ao @ C_lda
+    # check if K_hf_mo and Vx_mo are Hermitian
+
+    lda_sps_eff = lda_sps + np.diag(K_hf_mo - Vx_mo - Vc_mo)
+\end{verbatim}
+ Note that I Match the  GW spectral functions Of the reference  via
+\begin{equation}
+    A(\mathbf{k}, \omega) = \frac{1}{\pi}|\operatorname{Im}G^R(\mathbf{k}, \omega)| =
+\frac{1}{\pi} |\frac{ \operatorname{Im} \Sigma^c_R(\mathbf{k}, \omega)+\eta_P}{\left[\omega - \left(\varepsilon_{\mathbf{k}}^0+\Sigma_k^{\mathrm{x}}+ \operatorname{Re} \Sigma^c_R(\mathbf{k}, \omega)\right)\right]^2 + \left[\operatorname{Im} \Sigma^c_R(\mathbf{k}, \omega)+\eta_P\right]^2}|,
+\end{equation}
+where I used $\eta_s=\eta_P=0.2 \text{ eV }$ in the computation of $\operatorname{Im} \Sigma^c_R(\mathbf{k}, \omega)[\eta_s]$. This has suggested that my implementation of the retarded correlation self-energy may be done right. 
+% I take the bare exchange energy in LDA as
+% \begin{equation}
+%     \Sigma^{\mathrm{X}}_{pq} = \sum_{\mu\nu}C_{\mu p}^\dag \bm{K}_{\mu \nu} C_{\nu q}
+% \end{equation}
+% where $C_{\mu p}$ are the LDA MO coefficients and $\bm{K}_{\mu \nu}$ is the exact exchange matrix in the AO basis. 
+Next, they write that
+\begin{equation}
+    C_k(t) = \pi^{-1} \int d \omega\left|\operatorname{Im} \Sigma_k\left(\omega+E_k^{G W}\right)\right|\frac{e^{-i \omega t}+i \omega t-1}{\omega^2}
+\end{equation}
+Up until now, I have believed that they are working in the retarded formalism, but perhaps not. In the time-ordered formalism, the Green's function for a hole state is
+\begin{equation}
+    G^h_k(t) = i\Theta(-t) e^{-i \varepsilon^0_k t} \exp \left[-i \Sigma_k^{\mathrm{x}} t+C_k^h(t)\right]
+\end{equation}
+with
+\begin{equation}
+    C_k^h(t)=\frac{1}{\pi} \int_{-\infty}^0 d \omega \frac{\left|\operatorname{Im} \Sigma_k^R\left(E_k^{G W}+\omega\right)\right|}{\omega^2}\left(e^{-i \omega t}+i \omega t-1\right).
+\end{equation}
+Then, we can use the numerical FFT to get $G^h_k(\omega)$ and then $A^h_k(\omega) = \frac{1}{\pi} |\operatorname{Im} G^h_k(\omega)|$. In that case, the code I have used is 
+\begin{verbatim}
+        cumulant_results = []  # list of (label, c_omegas, spec_fn_gwc)
+    start=-15/H2EV; stop=15/H2EV; num=10000
+    ce_omegas = np.linspace(start, stop, num)
+    ce_omegas_to = np.linspace(start, 0, num, endpoint=False)  # only negative frequencies for time-ordered
+    # print the 10 ce_omegas with smallest absolute value
+    print("10 cumulant omegas with smallest absolute value in ce_omegas:", ce_omegas[np.argsort(np.abs(ce_omegas))][:10])
+    print("10 cumulant omegas with smallest absolute value in ce_omegas_to:", ce_omegas_to[np.argsort(np.abs(ce_omegas_to))][:10])
+    omegaspep_iter = ce_omegas + qp_exact
+    betaspep_iter = 1/np.pi * np.abs(dyn_cohsex_batch(
+        omegaspep_iter, p_idx, per_q_data_hl, moes, nocc, eta, ueg).imag)
+    betaspep_iter_to = 1/np.pi * np.abs(dyn_cohsex_batch(
+        ce_omegas_to, p_idx, per_q_data_hl, moes, nocc, eta, ueg, time_ordered=False).imag)
+    omegaspep_lin = ce_omegas + qp_hl_lin
+    omegaspep_lin_to = ce_omegas_to + qp_hl_lin
+    betaspep_lin = 1/np.pi * np.abs(dyn_cohsex_batch(
+        omegaspep_lin, p_idx, per_q_data_hl, moes, nocc, eta, ueg).imag)
+    betaspep_lin_to = 1/np.pi * np.abs(dyn_cohsex_batch(
+        omegaspep_lin_to, p_idx, per_q_data_hl, moes, nocc, eta, ueg).imag)
+    # plot betaspep_iter and betaspep_lin to check they look reasonable
+    plt.figure(figsize=(8,4))
+    plt.plot(ce_omegas * H2EV, betaspep_lin, label='betaspep_lin', alpha=0.7)
+    plt.plot(ce_omegas_to * H2EV, betaspep_lin_to, label='betaspep_lin_to', linestyle='--', alpha=0.7)
+    plt.legend()
+    plt.xlim(-20,20)
+    plt.xlabel('Frequency (eV)')
+
+    plt.savefig(os.path.join(GARNET, f"beta_sweep_pidx{p_idx}.png"))
+    for cp in cumulant_sweep:
+        tol_c = cp['tol']
+        if 'dt' in cp and 'N_t' in cp:
+            dt_c, N_c = cp['dt'], cp['N_t']
+            lbl_params = f"dt={dt_c:.4f}, N_t={N_c}"
+        else:
+            dw, wi = cp['Delta_omega'], cp['omega_interest']
+            dt_c = np.pi / wi
+            N_c = int(np.floor(2 * np.pi / dw / dt_c))
+
+        c_times = np.arange(N_c) * dt_c
+        c_neg_times = -c_times[::-1]
+        t_fft_in = np.concatenate([c_times, -c_times[1:][::-1]])
+        plot_omegas = np.fft.fftshift(np.fft.fftfreq(2 * N_c - 1, d=dt_c) * 2.0 * np.pi)
+
+        n_skipped = int(np.sum(np.abs(ce_omegas) < tol_c))
+        print(f"[cumulant] {lbl_params}, tol={tol_c} → N={N_c}, dt={dt_c:.6f}, max_t={c_times[-1]:.2f}, skipped={n_skipped}")
+
+        # gt, spec_fn_gwc_c = compute_cumulant_spectral_function_numeric(
+        #     betaspep_iter, ce_omegas, c_times, e_eff, eta, green=True, tol=tol_c)
+        gt_lin, spec_fn_gwc_lin = compute_cumulant_spectral_function_numeric(
+            betaspep_lin, ce_omegas, c_times, e_eff, eta, green=True, tol=tol_c)
+        # plt plot gt and gt_lin to check they look reasonable
+        plt.figure(figsize=(8,4))
+        # plt.plot(c_times, gt, label='gt_iter', alpha=0.7)
+        plt.plot(t_fft_in, gt_lin, label='gt_lin', linestyle='--', alpha=0.7)
+        plt.legend()
+        plt.xlabel('Time (Hartree^-1))
+        plt.ylabel('Green\'s function')
+        plt.title(f"G(t) for p_idx={p_idx}")
+        plt.savefig(os.path.join(GARNET, f"gt_sweep_pidx{p_idx}_tol{tol_c:.0e}.png"))
+        # gt_to, spec_fn_gwc_to = compute_cumulant_spectral_function_numeric(
+        #     betaspep_iter_to, ce_omegas_to, c_neg_times, e_eff, eta, green=True, tol=tol_c, time_ordered=True)
+        pole=e_eff
+        gt_lin_to, spec_fn_gwc_lin_to = compute_cumulant_spectral_function_numeric(
+            betaspep_lin_to, ce_omegas_to, c_neg_times, pole, eta, green=True, tol=tol_c, time_ordered=True)
+\end{verbatim}
+using
+\begin{verbatim}
+    def dyn_cohsex_batch(omegas, p_idx, per_q_data, moes, nocc, eta, ueg, time_ordered=False):
+    """Vectorised dyn_cohsex over an array of frequencies; numba-accelerated inner loop."""
+    omegas = np.asarray(omegas, dtype=np.float64)
+    vqvecs = ueg.vqvecJ
+    vol    = ueg.vol
+
+    eps_list, Omega_sq_list, wt_list, v_list, is_occ_list = [], [], [], [], []
+    for idx_gn, gn in enumerate(ueg.basis):
+        idx_gmgn = np.where((ueg.qvecs == ueg.basis[p_idx] - gn).all(axis=1))[0][0]
+        if idx_gmgn == 0:
+            continue
+        wt = per_q_data[1][idx_gmgn]
+        if wt == 0.0:
+            continue
+        eps_list.append(float(moes[idx_gn]))
+        Omega_sq_list.append(float(per_q_data[0][idx_gmgn]))
+        wt_list.append(float(wt))
+        v_list.append(float(vqvecs[idx_gmgn]) / vol)
+        is_occ_list.append(idx_gn < nocc)
+
+    eps_arr     = np.array(eps_list,     dtype=np.float64)
+    Omega_sq_arr = np.array(Omega_sq_list, dtype=np.float64)
+    wt_arr      = np.array(wt_list,      dtype=np.float64)
+    v_arr       = np.array(v_list,       dtype=np.float64)
+    is_occ_arr  = np.array(is_occ_list,  dtype=np.bool_)
+
+    if time_ordered:
+        return _dyn_cohsex_batch_kernel_to(omegas, eta, eps_arr, Omega_sq_arr, wt_arr, v_arr, is_occ_arr)
+    return _dyn_cohsex_batch_kernel(omegas, eta, eps_arr, Omega_sq_arr, wt_arr, v_arr, is_occ_arr)
+\end{verbatim}
+and
+\begin{verbatim}
+    def compute_cumulant_spectral_function_numeric(betaspep, freq_grid, times, pole, eta, cumulant=False, exchange=None, green=False, time_ordered=False, tol=3e-3, mf=False):
+    # Make contiguous for Numba speed
+    betaspep = np.array(betaspep, dtype=np.float64)
+    freq_grid = np.array(freq_grid, dtype=np.float64)
+    times = np.array(times, dtype=np.float64)
+
+    dt = times[1] - times[0]
+    hartree_to_ev = 27.2114
+    assert np.allclose(eta, 2e-1/hartree_to_ev), f"Expected eta to be {2e-1/hartree_to_ev} Ha, but got {eta} Ha"
+    c_t = _compute_c_t_numba(betaspep, freq_grid, times, tol)
+    if not time_ordered:
+        assert np.all(times >= 0), "For retarded Green's function, all times should be >= 0"
+        g_t = -1j * np.exp(-times * (1j * pole)) * np.exp(c_t) * np.exp(-eta * times)
+        print(f"g_t[0] = {g_t[0]}, g_t[-1] = {g_t[-1]}")
+        g_fft_in = np.concatenate(
+            (g_t, -1.0 * np.flip(np.conjugate(g_t[1:]), axis=-1)),
+            axis=-1
+        )
+        print(f"g_fft_in[0] = {g_fft_in[0]}, g_fft_in[-1] = {g_fft_in[-1]}")
+        g_w = np.fft.ifft(g_fft_in, n=len(g_fft_in), norm='forward') * dt / 2.0
+        g_w = np.fft.fftshift(g_w)
+        spec_fn = -(1.0 / np.pi) * np.imag(g_w)
+    else:
+        # $G_{i i}^{\mathrm{T}}(t)=\mathrm{i} \Theta(-t) e^{-\mathrm{i} \epsilon_i t} e^{C_{i i}^{\mathrm{T}}(t)}$
+        assert np.all(times <= 0), "For time-ordered Green's function, all times should be <= 0"
+        N_t = len(times)
+        if exchange is not None:
+            g_t = 1j * np.exp(-times * (1j * pole)) * np.exp(c_t + times * 1j * exchange) * np.exp(-eta * np.abs(times))
+        elif mf:
+            g_t = 1j * np.exp(-times * (1j * pole)) * np.exp(-eta * np.abs(times))
+        else:
+            g_t = 1j * np.exp(-times * (1j * pole)) * np.exp(c_t)# * np.exp(-eta * np.abs(times))
+        # Print the first and last elements of g_t for debugging
+        print(f"g_t[0] = {g_t[0]}, g_t[-1] = {g_t[-1]}")
+        g_fft_in = np.concatenate(
+            (-1.0 * np.flip(np.conjugate(g_t[:-1]), axis=-1), g_t),
+            axis=-1
+        )
+        print(f"g_fft_in[0] = {g_fft_in[0]}, g_fft_in[-1] = {g_fft_in[-1]}")
+        g_w = np.fft.fftshift(np.fft.ifft(g_fft_in, norm='forward')) * dt
+        spec_fn = (1.0 / np.pi) * np.abs(np.imag(g_w))
+        
+    if cumulant:
+        return c_t,spec_fn
+    elif green:
+        return g_fft_in, spec_fn
+    else:
+        return spec_fn
+\end{verbatim}
+with 
+\begin{verbatim}
+    @njit(parallel=True, fastmath=True)
+def _compute_c_t_numba(betaspep, freq_grid, times, tol, time_ordered=False):
+    nfreq = freq_grid.shape[0]
+    nt = times.shape[0]
+    c_t = np.empty(nt, dtype=np.complex128)
+
+    dw = freq_grid[1] - freq_grid[0]
+
+    for it in range(nt):
+        t = times[it]
+        re = 0.0
+        im = 0.0
+
+        for i in prange(nfreq):
+            w = freq_grid[i]
+            b = betaspep[i]
+
+            if abs(w * t) < tol:
+            # if abs(w) < tol:
+                landau_re = -0.5 * t * t + (w * w * t**4) / 24.0
+                landau_im = (w * t**3) / 6.0
+            else:
+                x = w * t
+                inv_w2 = 1.0 / (w * w)
+
+                # exp(-i x) + i x - 1
+                # = cos(x) - 1 + i(x - sin(x))
+                landau_re = (np.cos(x) - 1.0) * inv_w2
+                landau_im = (x - np.sin(x)) * inv_w2
+
+            re += dw * b * landau_re
+            im += dw * b * landau_im
+
+        c_t[it] = re + 1j * im
+
+    return c_t
+\end{verbatim}
+As I said before, note that I am pretty confident in my implementation of the GW self-energy using the Plasma-Pole approximation because I have checked that it is equivalent to the self-energy for my system. And the match I get with the reference for GW in fig1a is
+\begin{verbatim}
+Peaks for LDA+GW (ref):
+QP: omega = -5.601 eV, A = 0.7323 eV^-1, LHWHM=0.1873, RHWHM=0.1803, FWHM=0.3676, asym=-0.019
+sat 1: omega = -10.779 eV, A = 0.9076 eV^-1, LHWHM=0.1950, RHWHM=0.2102, FWHM=0.4052, asym=+0.038
+\end{verbatim}
+% Peaks for LDA+GW (ref):
+%   QP: ω = -5.601 eV, A = 0.7323 eV⁻¹, LHWHM=0.1873, RHWHM=0.1803, FWHM=0.3676, asym=-0.019
+%   sat 1: ω = -10.779 eV, A = 0.9076 eV⁻¹, LHWHM=0.1950, RHWHM=0.2102, FWHM=0.4052, asym=+0.038
+vs
+\begin{verbatim}
+    Peaks for LDA+GW (PPM-HL, eta_sigma=eta_plot=eta):
+Peak 0: omega=-5.585 eV, A=0.6937 eV^-1, LHWHM=0.2367, RHWHM=0.1782, FWHM=0.4149, asym=-0.141
+Peak 1: omega=-10.762 eV, A=0.8651 eV^-1, LHWHM=0.2134, RHWHM=0.1914, FWHM=0.4048, asym=-0.054
+\end{verbatim}
+I want you to tinker with my cumulant formulation until you get my LDA+GW+C to match the reference as closely as the match for LDA+GW. I guess first you want to verify that I am indeed telling the truth when I say that the attached paper is used in the time-ordered ce formulation. And then I want you to design and then run a robust test tweet in order to identify a LDA+GW+C formulation that will reproduce the reference with A similar accuracy to what we got for LDA+GW . I understand that the retarded cumulant formulation might be better, but I just want to reproduce the reference curve, so if we determine that it is a time-ordered formulation, I want us to experiment with that. Note that I am working in a system which uses a finite plane-wave basis. I only say that because it seems that you have mostly been trained on information which just considers the UEG in its thermodynamic limit. However, for this cumulant spectral function formulation, I don't really see how the difference between the finite basis and the TDL could play a major role. If I have been able to reproduce the LDA+GW curve.
+% Peaks for LDA+GW (PPM-HL, η_sigma=η_plot=η):
+% Peak 0: ω=-5.585 eV, A=0.6937 eV⁻¹, LHWHM=0.2367, RHWHM=0.1782, FWHM=0.4149, asym=-0.141
+% Peak 1: ω=-10.762 eV, A=0.8651 eV⁻¹, LHWHM=0.2134, RHWHM=0.1914, FWHM=0.4048, asym=-0.054
+%     For LDA+GW (ref):  QP: ω = -5.601 eV, A = 0.7323 eV⁻¹
+% For LDA+GW (ref):  sat 1: ω = -10.779 eV, A = 0.9076 eV⁻¹
+% energies $[20,33,53,75-80]$. In a Gaussian basis, the correlation self-energy can be computed as [20,23,77]
+% $$
+% \begin{align*}
+% \Sigma_n^{\mathrm{c}}(i \omega)= & -\frac{1}{2 \pi} \sum_m \int_{-\infty}^{\infty} d \omega^{\prime} \frac{1}{i\left(\omega-\omega^{\prime}\right)+\varepsilon_{\mathrm{F}}-\varepsilon_m} \\
+% & \times \sum_{P Q} B_P^{n m}\left[\left[1-\Pi\left(i \omega^{\prime}\right)\right]_{P Q}^{-1}-\delta_{P Q}\right] B_Q^{m n}, \tag{22}
+% \end{align*}
+% $$
+% where
+% $$
+% \begin{equation*}
+% \Pi_{P Q}(i \omega)=2 \sum_{i a} B_P^{i a} \frac{\varepsilon_i-\varepsilon_a}{\omega^2+\left(\varepsilon_i-\varepsilon_a\right)^2} B_Q^{i a} . \tag{23}
+% \end{equation*}
+% $$
+
+% Inserting Eq. (18) into Eq. (22) and using the definition in Eq. (20) yields
+% $$
+% \begin{align*}
+% \Sigma_n^{\mathrm{c}}(i \omega)= & -\frac{1}{2 \pi} \sum_m \int_{-\infty}^{\infty} d \omega^{\prime} \frac{1}{i\left(\omega-\omega^{\prime}\right)+\varepsilon_{\mathrm{F}}-\varepsilon_m} \\
+% & \times \sum_{P Q} A_P^{n m} W_{P Q}^{\mathrm{c}}\left(i \omega^{\prime}\right) A_Q^{m n} \tag{24}
+% \end{align*}
+% $$
+% where the correlation part of the screened Coulomb potential $\mathbf{W}^{\mathbf{c}}(i \omega)$ is expanded in the Gaussian RI basis,
+% $$
+% \begin{equation*}
+% W_{P Q}^{\mathrm{c}}(i \omega)=\sum_{R T} L_{P R}\left[\epsilon_{R T}^{-1}(i \omega)-\delta_{R T}\right] L_{T Q}^{\dagger} \text {, } \tag{25}
+% \end{equation*}
+% $$
+% and the symmetric dielectric matrix $\boldsymbol{\epsilon}(i \omega)$ in the RI basis is given by $\boldsymbol{\epsilon}(i \omega)=\mathbf{1}-\Pi(i \omega)$ with elements
+% $$
+% \begin{equation*}
+% \epsilon_{P Q}(i \omega)=\delta_{P Q}-\sum_{i a} \sum_{R T} L_{P R}^{\dagger} A_R^{i a} \frac{2\left(\varepsilon_i-\varepsilon_a\right)}{\omega^2+\left(\varepsilon_i-\varepsilon_a\right)^2} A_T^{i a} L_{T Q}, \tag{26}
+% \end{equation*}
+% $$
+
 \subsection{Supermatrix approaches}
 These all make use of Löwdin's partitioning technique to form an upfolded supermatrix, whose eigenpairs are the QP energies and Dyson orbitals. It is given by
 \begin{equation}

@@ -1,0 +1,443 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,physics,microtype,geometry,hyperref}
+\usepackage{tcolorbox}
+\geometry{margin=1.1in}
+\newcommand{\bG}{\mathbf{G}}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\bk}{\mathbf{k}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\wt}{\tilde{\omega}}
+\newcommand{\Om}{\Omega}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Sig}{\Sigma}
+\newcommand{\ii}{\mathrm{i}}
+
+\begin{document}
+
+\title{Plasmon-Pole Models: Asymptotic Exactness in the Long-Wavelength Limit
+       and its Breakdown in a Finite Plane-Wave Basis}
+\author{}
+\date{}
+\maketitle
+
+%-----------------------------------------------------------------------
+\section{Setup: G\textsubscript{0}W\textsubscript{0} self-energy}
+%-----------------------------------------------------------------------
+
+We work with a uniform electron gas (UEG) at the Gamma point with $N_e$ electrons ($N_\text{occ}=N_e/2$
+occupied orbitals) in a plane-wave basis of size $M$, due to truncation at energy $E_\text{cut}$. The correlation part of the G$_0$W$_0$ self-energy evaluated on the real
+frequency axis is
+\begin{equation}
+  \Sig^c(\bk,\omega)
+  = \frac{\ii}{2\pi}\sum_{\bq}\int_{-\infty}^{\infty}d\omega'\,
+    G_0(\bk-\bq,\,\omega-\omega')\,W_c(\bq,\omega'),
+  \label{eq:gw-def}
+\end{equation}
+where $G_0(\bk,\omega)=f_\bk/(\omega-\eps_\bk-\ii\eta)+(1-f_\bk)/(\omega-\eps_\bk+\ii\eta)$
+and $W_c=W-v$ is the correlation part of the screened Coulomb interaction.
+
+Closing the $\omega'$-contour and using the Lehmann representation
+of $W_c$ gives
+\begin{equation}
+  \Sig^c(\bk,\omega)
+  = \sum_{\bq}\sum_\mu
+    \left[
+      \frac{(1-f_{\bk-\bq})\,|\mathcal{Z}^{\bq}_\mu|^2}
+           {\omega - \eps_{\bk-\bq} - \Om_\mu^{\bq} + \ii\eta}
+     +\frac{f_{\bk-\bq}\,|\mathcal{Z}^{\bq}_\mu|^2}
+           {\omega - \eps_{\bk-\bq} + \Om_\mu^{\bq} - \ii\eta}
+    \right],
+  \label{eq:gw-exact}
+\end{equation}
+where $\Om_\mu^{\bq}>0$ are the RPA charged excitation energies for momentum
+transfer $\bq$ and $|\mathcal{Z}^{\bq}_\mu|^2$ are the corresponding
+transition densities.
+In a finite basis with $N_\text{occ}$ occupied and $N_\text{vir}$ virtual
+orbitals, the index $\mu$ runs over at most $N_\text{occ}\times N_\text{vir}$
+poles per $\bq$.
+
+%-----------------------------------------------------------------------
+\section{Spectral density and its moments}
+%-----------------------------------------------------------------------
+
+Using the relation between the transition densities and the bare oscillator strengths as $\left|\mathcal{Z}_\mu^{\bq}\right|^2=v(\mathbf{q})\left|B_\mu^{\bq}\right|^2$, define the \emph{spectral density of the inverse dielectric function}
+\begin{equation}
+  B(\bq,\nu) \equiv -\frac{1}{\pi}
+    \operatorname{Im}\!\left[\eps^{-1}(\bq,\nu)-1\right]
+  = \sum_\mu |\mathcal{B}_\mu^{\bq}|^2\,\delta(\nu-\Om_\mu^{\bq}),
+  \qquad \nu>0,
+  \label{eq:B-def}
+\end{equation}
+implying the Kramers--Kronig form
+\begin{equation}
+  \eps^{-1}(\bq,\omega)-1
+  = \int_0^\infty d\nu\,\frac{2\nu\,B(\bq,\nu)}{\omega^2-\nu^2+\ii\eta}.
+  \label{eq:KK}
+\end{equation}
+Define the \emph{spectral moments}
+\begin{equation}
+  M_n(\bq) \equiv \int_0^\infty d\nu\,\nu^n\,B(\bq,\nu)
+  = \sum_\mu |\mathcal{B}_\mu^{\bq}|^2\,(\Om_\mu^{\bq})^n .
+\end{equation}
+The two moments that are cheaply accessible without diagonalising the
+full RPA matrix are the static limit $M_{-1}$
+\begin{align}
+    -2M_{-1}(\bq)  &= -2\int_0^\infty d\nu\,
+     \nu^{-1}B(\bq,\nu) \\
+    &= \int_0^\infty d\nu\,\frac{2\nu\,B(\bq,\nu)}{-\nu^2+\ii\eta} \\
+    &= \eps^{-1}(\bq,0)-1, \label{eq:M-1}
+\end{align}
+and the f-sum rule $M_1$ (which is a statement that the first spectral moment is related to the finite-basis plasmon frequency)
+\begin{align}
+  M_1(\bq)
+  &= \int_0^\infty d\nu\,\nu\,B(\bq,\nu) = \sum_\mu |\mathcal{B}_\mu^{\bq}|^2\Omega_\mu^{\bq} = \frac{1}{2}\omega_p^2(\bq).
+  \label{eq:M1}
+\end{align}
+\subsection{Finite-basis plasmon frequency in a finite basis vs. the complete-basis limit}
+The noninteracting density response at momentum transfer $\bq$ is
+\begin{align}
+  \chi_0(\bq,\omega)
+  &=
+  \frac{1}{V}
+  \sum_{\substack{i\in\mathrm{occ}\\a\in\mathrm{vir}}}
+  \left|
+  \langle a|e^{\ii\bq\cdot\hat r}|i\rangle
+  \right|^2
+  \left[
+  \frac{1}{\omega-(\eps_a-\eps_i)+\ii\eta}
+  -
+  \frac{1}{\omega+(\eps_a-\eps_i)-\ii\eta}
+  \right]
+  \\[4pt]
+  &=
+  \frac{1}{V}
+  \sum_{\substack{i\in\mathrm{occ}\\a\in\mathrm{vir}}}
+  \left|
+  \langle a|e^{\ii\bq\cdot\hat r}|i\rangle
+  \right|^2
+  \frac{2(\eps_a-\eps_i)}
+  {\omega^2-(\eps_a-\eps_i)^2+\ii\eta}
+  \label{eq:chi0-spectral} \\
+&\approx   \frac{2}{V\omega^2}
+  \sum_{\substack{i\in\mathrm{occ}\\a\in\mathrm{vir}}}
+  \left|
+  \langle a|e^{\ii\bq\cdot\hat r}|i\rangle
+  \right|^2
+  (\eps_a-\eps_i) \qquad |\omega|\gg \eps_a-\eps_i.
+  \label{eq:chi0-high-frequency}
+\end{align}
+Using
+\begin{align}
+  \eps^{-1}(\bq,\omega)-1
+&\equiv \frac{v(\bq)\chi_0(\bq,\omega)}{1-v(\bq)\chi_0(\bq,\omega)} = v(\bq)\chi_0(\bq,\omega) + \mathcal{O}\!\left((v\chi_0)^2\right) \\
+  &\approx
+  v(\bq)\chi_0(\bq,\omega)
+  \qquad |\omega|\rightarrow\infty\\
+  &=
+  \frac{2v(\bq)}{V\omega^2}
+  \sum_{\substack{i\in\mathrm{occ}\\a\in\mathrm{vir}}}
+  \left|
+  \langle a|e^{\ii\bq\cdot\hat r}|i\rangle
+  \right|^2
+  (\eps_a-\eps_i).
+  \label{eq:epsinv-high-frequency}
+\end{align}
+
+On the other hand, the spectral representation gives
+\begin{align}
+  \eps^{-1}(\bq,\omega)-1
+  &=
+  \int_0^\infty d\nu\,
+  \frac{2\nu B(\bq,\nu)}
+  {\omega^2-\nu^2+\ii\eta}
+  \\[4pt]
+  &\approx
+  \frac{2}{\omega^2}
+  \int_0^\infty d\nu\,\nu B(\bq,\nu)
+    \qquad |\omega|\rightarrow\infty\\
+  &=
+  \frac{2M_1(\bq)}{\omega^2}.
+  \label{eq:epsinv-high-frequency-spectral}
+\end{align}
+
+Equating the coefficients of $1/\omega^2$ in
+Eqs.~\eqref{eq:epsinv-high-frequency} and
+\eqref{eq:epsinv-high-frequency-spectral} gives
+\begin{align}
+  M_1(\bq)
+  &=
+  \frac{v(\bq)}{V}
+  \sum_{\substack{i\in\mathrm{occ}\\a\in\mathrm{vir}}}
+  \left|
+  \langle a|e^{\ii\bq\cdot\hat r}|i\rangle
+  \right|^2
+  (\eps_a-\eps_i)
+  =
+  \frac{1}{2}\omega_p^2(\bq), \label{eq:M1-derivation-finite}
+\end{align}
+Now we will specify to the uniform electron gas. In the finite basis, we have
+\begin{align}
+  \omega_p^2(\bq)
+  &=
+  \frac{2v(\bq)}{V}
+  \sum_{\substack{i\in\mathrm{occ}\\a\in\mathrm{vir}}}
+  \left|
+  \delta_{\bG_a,\bG_i+\bq}
+  \right|^2
+  (\eps_a-\eps_i),
+  \\[6pt]
+  &=
+  \frac{2v(\bq)}{V}
+  \sum_{\substack{i\in\mathrm{occ}\\
+                  \bG_i+\bq\in\mathrm{vir}}}
+  \left(
+  \eps_{\bG_i+\bq}-\eps_{\bG_i}
+  \right).
+\end{align}
+whereas in the CBS limit, the sum over virtual states becomes complete and we instead get
+\begin{align}
+  \sum_{a\in\mathrm{vir}}
+  \left|
+  \langle a|e^{\ii\bq\cdot\hat r}|i\rangle
+  \right|^2
+  (\eps_a-\eps_i)
+  &=
+  \frac{q^2}{2}\\
+  \label{eq:complete-basis-single-particle-fsum}
+\implies 
+  \sum_{i\in\mathrm{occ}}\frac{q^2}{2}
+  &=
+  \frac{N_e q^2}{2}.
+\end{align}
+Substituting this CBS value into Eq.~\eqref{eq:M1-derivation-finite} gives
+the Sommerfeld bulk plasma frequency,
+\begin{align}
+  \omega_p^2
+  &=
+  \frac{2}{V}
+  \frac{4\pi}{q^2}
+  \frac{N_e q^2}{2}
+  \\[4pt]
+  &=
+  4\pi \frac{N_e}{V}
+  \\[4pt]
+  &=
+  4\pi n.
+  \label{eq:bulk-plasma-frequency}
+\end{align}
+{So $\omega_p$ takes on a different value in a finite basis versus the CBS.}
+%-----------------------------------------------------------------------
+\section{The Hybertsen--Louie plasmon-pole model}
+%-----------------------------------------------------------------------
+
+The HL PPM replaces the full spectral density of eq.~\eqref{eq:B-def} with a single delta peak,
+\begin{equation}
+  B^\text{PPM}(\bq,\nu) = \tilde{A}(\bq)\,\delta(\nu-\wt(\bq)),
+  \label{eq:B-ppm}
+\end{equation}
+parametrised by two unknowns $\{\tilde{A},\wt\}$ per $\bq$, fixed by
+matching the two accessible moments~\eqref{eq:M-1}--\eqref{eq:M1}:
+\begin{equation}
+  M_{-1}^\text{PPM} = \frac{\tilde{A}}{\wt}
+    = M_{-1} \quad\Longrightarrow\quad
+    \tilde{A} = M_{-1}\,\wt,
+  \label{eq:HL-1}
+\end{equation}
+\begin{equation}
+  M_1^\text{PPM} = \tilde{A}\,\wt
+    = M_1 \quad\Longrightarrow\quad
+    \tilde{A}\,\wt = \tfrac{1}{2}\omega_p^2.
+  \label{eq:HL-2}
+\end{equation}
+Dividing~\eqref{eq:HL-2} by~\eqref{eq:HL-1} gives the \emph{HL pole frequency}
+\begin{equation}
+  \boxed{
+  \wt^2(\bq) = \frac{M_1(\bq)}{M_{-1}(\bq)}
+             = \frac{\omega_p^2(\bq)/2}
+                    {-\bigl(\eps^{-1}(\bq,0)-1\bigr)/2}.
+  }
+  \label{eq:HL-pole}
+\end{equation}
+Substituting back into Eq.~\eqref{eq:gw-exact}, the PPM self-energy
+becomes
+\begin{equation}
+  \Sig_c^\text{PPM}(\bk,\omega)
+  = \sum_{\bq}
+    \left[
+      \frac{(1-f_{\bk-\bq})\,\tilde{A}(\bq)}
+           {\omega - \eps_{\bk-\bq} - \wt(\bq) + \ii\eta}
+     +\frac{f_{\bk-\bq}\,\tilde{A}(\bq)}
+           {\omega - \eps_{\bk-\bq} + \wt(\bq) - \ii\eta}
+    \right].
+  \label{eq:gw-ppm}
+\end{equation}
+
+%-----------------------------------------------------------------------
+\section{Exactness condition}
+%-----------------------------------------------------------------------
+
+Comparing Eq.~\eqref{eq:gw-exact} with Eq.~\eqref{eq:gw-ppm} for the 2h1p sector, we see that the PPM
+is exact if and only if, for every $\bq$ and every $\omega$,
+\begin{equation}
+\sum_\mu \frac{v(\bq)|\mathcal{B}_\mu^\bq|^2}
+                 {\omega - \eps_{\bk-\bq} - \Om_\mu^\bq}=\;
+  \frac{M_{-1}(\bq)\,\wt(\bq)}
+       {\omega - \eps_{\bk-\bq} - \wt(\bq)}.
+  \label{eq:exactness}
+\end{equation}
+and we know
+% Define
+% $w_\mu \equiv |\mathcal{Z}_\mu^\bq|^2$ and $\nu_\mu \equiv \Om_\mu^\bq$,
+\begin{align}
+  W \equiv M_0(\bq) = \sum_\mu |\mathcal{B}_\mu^\bq|^2
+\end{align}
+Now, defining $x \equiv \omega - \eps_{\bk-\bq}$, $w_\mu \equiv |\mathcal{B}_\mu^\bq|^2$ and $\nu_\mu \equiv \Om_\mu^\bq$, we can rewrite the left side by splitting each resolvent:
+\begin{equation}
+  \sum_\mu \frac{w_\mu}{x - \nu_\mu}
+  = \frac{W}{x - \wt}
+    + \sum_\mu w_\mu\,
+      \frac{\wt - \nu_\mu}
+           {(x-\nu_\mu)(x-\wt)}.
+  \label{eq:split}
+\end{equation}
+Expanding $(x-\nu_\mu)^{-1}$ about $(x-\wt)^{-1}$ in powers of
+$\delta\nu_\mu \equiv \nu_\mu - \wt$ yields
+\begin{equation}
+  \sum_\mu \frac{w_\mu}{x - \nu_\mu}
+  = \frac{W}{x-\wt}
+    \Biggl[
+      1 + \frac{\bigl\langle(\delta\nu)^2\bigr\rangle_w}{(x-\wt)^2}
+        + \frac{\bigl\langle(\delta\nu)^3\bigr\rangle_w}{(x-\wt)^3}
+        + \cdots
+    \Biggr],
+  \label{eq:expansion}
+\end{equation}
+where $\langle f \rangle_w \equiv \sum_\mu w_\mu f(\nu_\mu) / W$ and
+we used the fact that $\langle\delta\nu\rangle_w = 0$ by construction of
+$\wt$ as the $w$-weighted mean.
+
+For Eq.~\eqref{eq:exactness} to hold, every correction in
+Eq.~\eqref{eq:expansion} must vanish.  Provided $|x-\wt|$ is not too
+small, the dominant correction involves the \emph{spectral variance}
+$\operatorname{Var}_w[\Om^\bq] \equiv \langle(\delta\nu)^2\rangle_w$,
+giving the leading PPM error
+\begin{equation}
+  \Sig_c(\bk,\omega) - \Sig_c^\text{PPM}(\bk,\omega)
+  \;\approx\;
+  \sum_{\bq}(1-f_{\bk-\bq})\,
+    \frac{W(\bq)\,\operatorname{Var}_w[\Om^\bq]}
+         {(\omega - \eps_{\bk-\bq} - \wt(\bq))^3}
+  + \cdots
+  \label{eq:error}
+\end{equation}
+
+\medskip
+\noindent\textbf{Necessary and sufficient condition for PPM exactness.}
+\emph{The HL PPM reproduces the exact GW self-energy if and only if}
+\begin{equation}
+  \operatorname{Var}_w[\Om^\bq] = 0
+  \quad\text{for every }\bq,
+  \label{eq:exact-cond}
+\end{equation}
+i.e.\ the RPA spectral function $B(\bq,\cdot)$ is a single delta peak
+concentrated at one excitation energy.
+
+%-----------------------------------------------------------------------
+\section{Why the PPM is exact in the thermodynamic limit}
+%-----------------------------------------------------------------------
+
+In the TDL ($N_e\to\infty$, $V\to\infty$, $n=N_e/V$ fixed) the RPA
+spectral function of the UEG separates into \emph{one} sharp collective (plasmon)
+mode and an incoherent particle-hole (p-h) continuum:
+\begin{equation}
+  B^\text{TDL}(\bq,\nu) = Z_p(\bq)\,\delta\!\bigl(\nu-\omega_p(\bq)\bigr)
+  + B_\text{ph}(\bq,\nu)\,\Theta\!\bigl(\nu-\nu_\text{ph}^\text{min}(\bq)\bigr),
+\end{equation}
+where $\omega_p(\bq)=\sqrt{4\pi n q^2/m}$ is the long-wavelength plasmon
+and $\nu_\text{ph}^\text{min}(\bq)=q^2/2+qk_F$ is the lower edge of the
+p-h continuum ($k_F$ the Fermi momentum).
+
+For $q\ll q_c$ (the Landau cutoff), the plasmon lies \emph{below} the
+continuum and exhausts nearly all the f-sum weight:
+\begin{equation}
+  M_1^\text{TDL}(\bq)
+  = Z_p\,\omega_p
+    + \int_{\nu_\text{ph}^\text{min}}^\infty\!\! d\nu\,\nu\,B_\text{ph}(\bq,\nu)
+  \;\xrightarrow{q\to 0}\; Z_p\,\omega_p.
+\end{equation}
+As the p-h continuum weight $\int B_\text{ph} \to 0$, the spectral
+density converges to a single delta function, so
+\begin{equation}
+  \operatorname{Var}_w^\text{TDL}[\Om^\bq]
+  \;\propto\;
+  \frac{\int B_\text{ph}\,(\nu-\omega_p)^2\,d\nu}
+       {\int B_\text{ph}\,d\nu + Z_p}
+  \;\to\; 0
+  \quad\text{as }q\to 0,\; N_k\to\infty.
+  \label{eq:var-tdl}
+\end{equation}
+The correction~\eqref{eq:error} therefore vanishes and the PPM becomes
+exact in the TDL for small-$q$ momentum transfers.
+
+%-----------------------------------------------------------------------
+\section{Finite-basis breakdown}
+%-----------------------------------------------------------------------
+
+On a finite $k$-point mesh the RPA spectrum at each $\bq$ is discrete
+with at most $N_\text{occ}\times N_\text{vir}$ poles $\{\Om_\mu^\bq\}$.
+Since:
+\begin{equation}
+  \operatorname{Var}_w[\Om^\bq]
+  = \frac{M_0 M_2 - M_1^2}{M_0^2}
+  \;\geq\; 0,
+  \label{eq:var-finite}
+\end{equation}
+with equality only when all poles are identical.
+By Jensen's inequality for the convex function $\phi(x)=x^2$:
+\begin{equation}
+  \operatorname{Var}_w[\Om^\bq] = 0
+  \iff \Om_\mu^\bq = \text{const for all }\mu.
+\end{equation}
+In a finite PW basis this is never satisfied: the particle-hole
+transition energies $\eps_a-\eps_i$ span a range of order the bandwidth,
+so different pairs $(i,a)$ at momentum transfer $\bq$ produce
+inequivalent poles, giving $\operatorname{Var}_w > 0$.
+
+A second, independent source of error is \emph{basis incompleteness}.
+The finite-basis f-sum moment \eqref{eq:wp-finite} omits transitions to
+states above $E_\text{cut}$:
+\begin{equation}
+  M_1^\text{finite}(\bq)
+  = \sum_{\substack{i\in\text{occ}\\a\in\text{vir}}}
+    |\langle a|e^{\ii\bq\cdot\hat r}|i\rangle|^2(\eps_a-\eps_i)
+  \;<\; M_1^\text{TDL}(\bq),
+  \label{eq:fsum-incomplete}
+\end{equation}
+which shifts $\wt(\bq)$ downward (Eq.~\eqref{eq:HL-pole}) and introduces
+a systematic bias in the pole frequency, independent of the multi-pole
+variance effect.
+
+Combining both contributions, the total PPM error is
+\begin{equation}
+  \Sig_c - \Sig_c^\text{PPM}
+  \;=\;
+  \underbrace{
+    \sum_\bq
+    \frac{(1-f_{p-q})\,W(\bq)\,\operatorname{Var}_w[\Om^\bq]}
+         {(\omega-\eps_{p-q}-\wt)^3}
+  }_{\text{multi-pole residual}}
+  \;+\;
+  \underbrace{
+    \mathcal{O}\!\left(
+      \frac{M_1^\text{TDL}-M_1^\text{finite}}
+           {(\omega-\eps_{p-q})^2}
+    \right)
+  }_{\text{basis-incompleteness shift}}
+  + \cdots
+  \label{eq:total-error}
+\end{equation}
+Both terms vanish as $N_k,E_\text{cut}\to\infty$, but are strictly
+nonzero for any finite discretisation, consistent with the
+$\sim 10^{-7}$~eV discrepancies observed numerically.
+
+\end{document}

@@ -72,10 +72,15 @@ with h5py.File(a1eq2_path, "r") as f:
     a1eq2_omegas_fft = np.squeeze(f["omegas_fft"])
 #fig1a refs
 ref_data_1a = np.genfromtxt('fig1a.csv', delimiter=',', skip_header=2, filling_values=np.nan)
+hf_gw_x_1a = ref_data_1a[:, 0]
+hf_gw_y_1a = ref_data_1a[:, 1]
 lda_gw_c_x_1a = ref_data_1a[:, 2]
 lda_gw_c_y_1a = ref_data_1a[:, 3]
 ccsd_x_1a = ref_data_1a[:, 4]
 ccsd_y_1a = ref_data_1a[:, 5]
+ref_data_extra = np.genfromtxt('digitized_curves.csv', delimiter=',', skip_header=0, filling_values=np.nan)
+lda_gw_x_extra = ref_data_extra[:, 0]
+lda_gw_y_extra = ref_data_extra[:, 1]
 # exact_data= 'lanczos_gpt.csv'
 exact_data = np.genfromtxt('lanczos_gpt.csv', delimiter=',', skip_header=0, filling_values=np.nan)
 '''
@@ -117,6 +122,9 @@ fig, (ax1, ax2) = plt.subplots(
 
 # Left panel: 14e in 19 orbs, η = 0.2 eV
 ax1.plot(lanczos_x, lanczos_y, color="gray", linestyle="-", label="Lanczos")
+ax1.plot(hf_gw_x_1a, hf_gw_y_1a, color="red", linestyle="-", label="HF+GW")
+# ax1.plot(hf_gw_x_extra, hf_gw_y_extra, color="blue", linestyle="--", label="HF+GW (Extra)")
+ax1.plot(lda_gw_x_extra, lda_gw_y_extra, color="cyan", linestyle="--", label="LDA+GW")
 ax1.plot(ccsd_x_1a,     ccsd_y_1a,     color="black", linestyle="-", label="EOM-CCSD")
 ax1.plot(lda_gw_c_x_1a, lda_gw_c_y_1a, color="blue",  linestyle="-", label="GW+C")
 ax1.set_ylabel(y_label)
@@ -138,7 +146,8 @@ ax2.text(0.5, 0.98, "$r_s = 4$, 114e/485o, $\eta = 0.8$ eV",
          ha="center", va="top")
 
 # custom xticks
-xticksa = [-5, -7, -9, -11, -13]
+# xticksa = [-5, -7, -9, -11, -13]
+xticksa = np.arange(-13, -4, 1)
 xticksb = [-3, -7, -11, -15, -19]
 ax1.set_xticks(xticksa)
 ax2.set_xticks(xticksb)

@@ -3,13 +3,16 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{physics}
-\usepackage{breqn}
+% \usepackage{breqn}
 \usepackage{tikz}
 \usepackage{simpler-wick}
 \usepackage{cancel}
 \usepackage{geometry}
 \usepackage{algorithm}
-\usepackage{algorithmic}
+\usepackage{algpseudocode}
+\usepackage{float}
+% \usepackage{algorithmic}
+% \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 \usepackage[numbers]{natbib}
 \bibliographystyle{plainnat}  % or another style like 'apsrev4-2'
 \usepackage{hyperref}
@@ -18,7 +21,12 @@
 \usepackage{listings}
 \usepackage[open,openlevel=0]{bookmark}
 \usepackage{tcolorbox}
+\usepackage{array}
+\usepackage{booktabs}
 
+\newcommand{\etaG}{\eta_{\mathrm{G}}}
+\newcommand{\etaS}{\eta_{\Sigma}}
+\newcommand{\etaL}{\eta_{\mathrm{loop}}}
 
 
 \usepackage{listings} % Required for insertion of code
@@ -49,6 +57,8 @@
     showtabs=false,                  
     tabsize=2
 }
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
 
 % Activate the style
 \lstset{style=mystyle}
@@ -90,6 +100,8 @@
 \input{../input/scmp2.tex}
 \chapter{UEG}
 \input{../input/ueg.tex}
+\chapter{QBA}
+\input{../input/dcc.tex}
 % \chapter{FEAST GW}
 % \input{../input/feast.tex}
 % \chapter{BSE Notes}

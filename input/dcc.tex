@@ -1,0 +1,2997 @@
+\section{Forming the electronic polaron ground state}
+Start by considering the Hamiltonian of the electronic polaron, due to the sudden creation of a core hole:
+\begin{equation}
+H_{\rm ch}
+=
+E_{\rm ch}
++
+\sum_\nu
+\Omega_\nu Q_\nu^\dagger Q_\nu
++
+\sum_\nu
+\left(
+M_\nu Q_\nu^\dagger
++
+M_\nu^* Q_\nu
+\right).
+\end{equation}
+$E_{ch}$ is the mean-field single-particle energy of the fermionic core-hole, \(\Omega_\nu\) is the frequency of the boson with index \(\nu\), while \(M_\nu\) is the fermion-boson coupling.
+%  \emph{Can these be taken from the BWs2 reference, or just RPA? What about SOSEX?}
+We postulate that the ground state of this Hamiltonian is the coherent state $|\Theta_{\rm ch}\rangle$, which must satisfy $Q_\nu |\Theta_{\rm ch}\rangle = \beta_\nu |\Theta_{\rm ch}\rangle$, where \(\beta_\nu\) is the coherent displacement amplitude for mode \(\nu\).
+\subsection{Determining the ground state energy of \(H_{\rm ch}\)}
+\label{sec:polaron_ground_state_energy}
+Using the coherent state property, we can write 
+\begin{equation}
+    E_{ch}[\beta] \equiv \bra{\Theta_{ch}} H_{\rm ch} \ket{\Theta_{ch}} = E_{\rm ch} + \sum_\nu \Omega_\nu |\beta_\nu|^2 + \sum_\nu (M_\nu \beta_\nu^* + M_\nu^* \beta_\nu).
+\end{equation}
+Minimizing the energy with respect to \(\beta_\nu^*\) gives
+\begin{align}
+    \frac{\partial E_{ch}[\beta]}{\partial \beta_\nu^*} &= \Omega_\nu \beta_\nu + M_\nu = 0\\ \implies \beta_\nu &= -\frac{M_\nu}{\Omega_\nu}.
+\end{align}
+
+\subsection{Coherent state in the quasiboson (QB) approximation}
+We define the coherent state in the QB approximation as
+\begin{equation}
+    |\Theta_{ch}\rangle = D(\beta)\left|0_{\mathrm{RPA}}\right\rangle,
+\end{equation} 
+where \(\left|0_{\mathrm{RPA}}\right\rangle\) is the RPA ground state. The displacement operator is defined as
+\begin{equation}
+    D(\beta)=\exp \left[\sum_\mu\left(\beta_\mu Q_\mu^{\dagger}-\beta_\mu^* Q_\mu\right)\right] .
+\end{equation}
+% $$
+% |\Theta\rangle=D(\beta)\left|0_{\mathrm{RPA}}\right\rangle,
+% $$
+% with
+% $$
+% D(\beta)=\exp \left[\sum_\mu\left(\beta_\mu Q_\mu^{\dagger}-\beta_\mu^* Q_\mu\right)\right] .
+% $$
+\subsubsection{Proof of coherence}
+Let
+\begin{equation}
+A=\sum_\mu\left(\beta_\mu Q_\mu^{\dagger}-\beta_\mu^* Q_\mu\right) \implies
+D(\beta)=e^A .
+\end{equation}
+Then,
+\begin{equation}
+\left[Q_\nu, A\right]=\sum_\mu\left(\beta_\mu\left[Q_\nu, Q_\mu^{\dagger}\right]-\beta_\mu^*\left[Q_\nu, Q_\mu\right]\right) .
+\end{equation}
+Using the QB commutation relations
+\footnote{
+The QB approximation assumes $\left[Q_\mu, Q_\nu^{\dagger}\right] \overset{\text{QBA}}{=} \delta_{\mu \nu}$, $\left[Q_\mu, Q_\nu\right] \overset{\text{QBA}}{=}  0$, and $\left[Q_\mu^{\dagger}, Q_\nu^{\dagger}\right] \overset{\text{QBA}}{=} 0$.
+% \begin{enumerate}
+%     \item The QB commutation relations are approximately satisfied:
+% \begin{equation}
+%     \left[Q_\mu, Q_\nu^{\dagger}\right] \approx \delta_{\mu \nu}, \quad\left[Q_\mu, Q_\nu\right] \approx 0, \quad\left[Q_\mu^{\dagger}, Q_\nu^{\dagger}\right] \approx 0,
+% \end{equation}
+%     \item The QB operators $Q_\nu$ annihilate the RPA vacuum: 
+% \begin{equation}
+% Q_\nu\left|0_{\mathrm{RPA}}\right\rangle=0 .
+% \end{equation}
+% \end{enumerate}
+}, we get
+\begin{align}
+\left[Q_\nu, A\right] &\overset{\text{QBA}}{=} \sum_\mu \beta_\mu \delta_{\nu \mu}=\beta_\nu \\
+\implies
+\left[\left[Q_\nu, A\right], A\right] &\overset{\text{QBA}}{=}\left[\beta_\nu, A\right]=0 .
+\end{align}
+Therefore, in the BCH expansion
+\begin{align}
+e^{-A} Q_\nu e^A&=Q_\nu+\left[Q_\nu, A\right] \overset{\text{QBA}}{=} Q_\nu+\beta_\nu \\ \implies
+Q_\nu e^A &\overset{\text{QBA}}{=} e^A\left(Q_\nu+\beta_\nu\right) \\
+\implies Q_\nu|\Theta_{ch}\rangle&=Q_\nu e^A\left|0_{\mathrm{RPA}}\right\rangle\\
+ &\overset{\text{QBA}}{=} e^A\left(Q_\nu+\beta_\nu\right)\left|0_{\mathrm{RPA}}\right\rangle  \label{eq:coherent_state_proof}\\
+ &\overset{\text{QBA}}{=} e^A \beta_\nu \left|0_{\mathrm{RPA}}\right\rangle \\
+&= \beta_\nu |\Theta_{ch}\rangle
+\end{align}
+where in equation \eqref{eq:coherent_state_proof} we have used the fact that the QB operators $Q_\nu$ annihilate the RPA vacuum. This proves that $|\Theta_{ch}\rangle$ is a coherent state for all bosonic modes $\nu$ with displacement amplitudes \(\beta_\nu\) within the QB approximation. 
+
+\section{Green's function of the electronic polaron}
+The initial state is the RPA ground state, which was QB vacuum \emph{before} the creation of the polaron. After this event, the time evolution is governed by $H_{\rm ch}$.
+\subsubsection{Redefinition of the Hamiltonian}
+Defining the shifted QB operators
+\begin{equation}
+\widetilde Q_\nu
+=
+Q_\nu
+- \beta_\nu
+\qquad
+\widetilde Q_\nu^\dagger
+=
+Q_\nu^\dagger
++
+\beta_\nu^*,
+\end{equation}
+we can rewrite the Hamiltonian as
+\begin{equation}
+H_{\rm ch}
+=
+E_{\rm pol}
++
+\sum_\nu
+\Omega_\nu
+\widetilde Q_\nu^\dagger \widetilde Q_\nu ,
+\end{equation}
+where
+\begin{equation}
+E_{\rm pol}
+=
+E_{\rm ch}
+-
+\sum_\nu
+\Omega_\nu |\beta_\nu|^2
+\end{equation}
+\subsubsection{RPA vacuum is a coherent state of shifted QB operators}
+\label{subsec:RPA_vacuum_coherent_state}
+The RPA vacuum satisfies
+\begin{align}
+    Q_v\left|0_{\mathrm{RPA}}\right\rangle&=0\\
+\left(\widetilde{Q}_\nu+\beta_\nu\right)\left|0_{\mathrm{RPA}}\right\rangle&=0 \\
+\implies
+\widetilde{Q}_\nu\left|0_{\mathrm{RPA}}\right\rangle&=-\beta_\nu\left|0_{\mathrm{RPA}}\right\rangle .
+\end{align}
+So $\left|0_{\mathrm{RPA}}\right\rangle$ is a coherent state of the shifted bosons $\widetilde{Q}_\nu$, with coherent amplitude $-\beta_\nu$.
+\subsection{Deriving the Retarded Green's Function }
+We can start from the formal definition.  
+\begin{align}
+G^{QB,R}_{\rm ch}(t)
+&=
+-i \theta(t)
+\left\langle 0_{\rm RPA} \right|
+e^{-i H_{\rm ch} t}
+\left|0_{\rm RPA}\right\rangle
+\\
+&=-i \theta(t) e^{-i E_{\mathrm{pol}} t}\left\langle 0_{\mathrm{RPA}}\right| e^{-i \sum_\nu \Omega_\nu \tilde{Q}_\nu \tilde{Q}_\nu t}\left|0_{\mathrm{RPA}}\right\rangle \label{eq:G_ch_t} \\
+&=
+-i \theta(t)
+e^{-i E_{\rm pol} t}
+\exp
+\left[
+\sum_{\nu}
+|\beta_{\nu}|^2
+\left(
+e^{-i \Omega_{\nu} t}
+-
+1
+\right)
+\right]
+\\
+&=
+-i \theta(t)
+e^{-i E_{\rm pol} t}
+\underbrace{
+\exp
+\left[
+-\sum_{\nu} |\beta_{\nu}|^2
+\right]
+}_{Z_{\rm pol}}
+\prod_{\nu}
+\exp
+\left[
+|\beta_{\nu}|^2 e^{-i\Omega_{\nu} t}
+\right]
+\\
+&=
+-i \theta(t)
+Z_{\rm pol}
+e^{-i E_{\rm pol} t}
+\prod_{\nu}
+\sum_{n_{\nu}=0}^{\infty}
+\frac{
+|\beta_{\nu}|^{2n_{\nu}}
+}{
+n_{\nu}!
+}
+e^{-i n_{\nu} \Omega_{\nu} t}
+\\
+&=
+-i \theta(t)
+Z_{\rm pol}
+\sum_{\mathbf n}
+\left[
+\prod_{\nu}
+\frac{
+|\beta_{\nu}|^{2n_{\nu}}
+}{
+n_{\nu}!
+}
+\right]
+\exp
+\left[
+-i
+\left(
+E_{\rm pol}
++
+\sum_{\nu} n_{\nu}\Omega_{\nu}
+\right)t
+\right].
+\end{align}
+Note that in equation \eqref{eq:G_ch_t}, we have used the coherent state identity
+\begin{equation}
+    \left\langle 0_{\mathrm{RPA}}\right| e^{-i \sum_\nu \Omega_\nu \tilde{Q}_\nu^t \tilde{Q}_\nu t}\left|0_{\mathrm{RPA}}\right\rangle=\prod_\nu \exp \left[\left|\beta_\nu\right|^2\left(e^{-i \Omega_\nu t}-1\right)\right] .
+\end{equation}
+$n_{\nu}$ denotes the occupation number of bosonic mode \(\nu\), and $\sum_{\mathbf n} \equiv \prod_{\nu} \sum_{n_{\nu}=0}^{\infty}$ is the sum over all possible combinations of occupation numbers for all bosonic modes. Fourier transforming according to
+\begin{equation}
+G^{QB,R}_{\rm ch}(\omega)
+=
+\int_{-\infty}^{\infty}
+dt
+e^{i\omega t}
+G^{QB,R}_{\rm ch}(t),
+\end{equation}
+gives the spectral function as
+\begin{align}
+A_{\rm ch}(\omega)
+&=
+-\frac{1}{\pi}
+\operatorname{Im}
+G_{\rm ch}^{QB,R}(\omega)\\
+&=
+e^{-\sum_\nu |\beta_\nu|^2}
+\sum_{{n_\nu}}
+\left[
+\prod_\nu
+\frac{
+|\beta_\nu|^{2n_\nu}
+}{
+n_\nu!
+}
+\right]
+\frac{1}{\pi}
+\frac{
+\eta
+}{
+\left(
+\omega
+-
+E_{\rm pol}
+-
+\sum_\nu n_\nu \Omega_\nu
+\right)^2
++
+\eta^2
+} .
+\label{eq}
+\end{align}
+where $\beta_\nu = -M_\nu / \Omega_\nu$ is the coherent displacement amplitude of mode $\nu$, $E_{\rm pol} = E_{\rm ch} - \sum_\nu \Omega_\nu |\beta_\nu|^2$ is the polaron energy And we can take $E_{\rm ch} = \epsilon^{\text{MF}}_{\bm{k}}$ for $\bm{k}=[0,0,0]$, and $\eta$ is a small broadening parameter. In our convention, we should take 
+\begin{enumerate}
+    \item $\eta$ = 0.2 eV for 14e19o and 14e57o
+    \item $\eta$ = 0.4 eV for 38e123o
+    \item $\eta$ = 0.6 eV for 54e305o
+    \item $\eta$ = 0.8 eV for 114e485o
+\end{enumerate}
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Physical intuition]
+Thus, the spectral function consists of a coherent polaron peak at
+\begin{equation}
+\omega = E_{\rm pol},
+\end{equation}
+with weight
+\begin{equation}
+Z_{\rm pol}
+=
+e^{-\sum_\nu |\beta_\nu|^2},
+\end{equation}
+and a series of bosonic shake-up satellites at energies
+\begin{equation}
+\omega
+=
+E_{\rm pol}
++
+\sum_\nu n_\nu \Omega_\nu .
+\end{equation}
+
+\end{tcolorbox}
+% For a single bosonic mode, the result simplifies to
+% \begin{equation}
+% G_{\rm ch}(\omega)
+% =
+% e^{-|\beta|^2}
+% \sum_{n=0}^{\infty}
+% \frac{
+% |\beta|^{2n}
+% }{
+% n!
+% }
+% \frac{
+% 1
+% }{
+% \omega
+% -
+% E_{\rm pol}
+% -
+% n\Omega
+% +
+% i\eta
+% },
+% \end{equation}
+% with
+% \begin{equation}
+% E_{\rm pol}
+% =
+% E_{\rm ch}
+% -
+% \frac{|M|^2}{\Omega}.
+% \end{equation}
+% % This form makes explicit that the satellite intensities follow a Poisson distribution governed by the average boson number (|\beta|^2).
+
+\section{UEG}
+\subsection{Connection to GW+C}
+The independent boson Hamiltonian may be generalized to an effective Hamiltonian for a hole created in orbital $p$,
+\begin{equation}
+H_p^{\rm eff}
+=
+\epsilon_p^{\rm HF}
++
+\sum_{m\nu}
+\Delta_{pm\nu}
+B_{pm\nu}^{\dagger}
+B_{pm\nu}
++
+\sum_{m\nu}
+\left(
+\mathcal{M}_{pm\nu}
+B_{pm\nu}^{\dagger}
++
+\mathcal{M}_{pm\nu}^{*}
+B_{pm\nu}
+\right),
+\label{eq:Heff}
+\end{equation}
+where the index $m$ runs over all occupied ($i$) and virtual ($a$) states. The effective excitation energies are $\Delta_{pi\nu}
+=
+\epsilon_i^{\rm HF}
+-
+\epsilon_p^{\rm HF}
+-
+\Omega_\nu -i\eta$ and
+$
+\Delta_{pa\nu}
+=
+\epsilon_a^{\rm HF}
+-
+\epsilon_p^{\rm HF}
++
+\Omega_\nu -i\eta
+$ with effective couplings $\mathcal{M}_{pm\nu}$ for QB mode $\nu$ (these are transition densities in RPA and ERIs in BWs2). The effective Hamiltonian is diagonalized by introducing displaced bosonic operators
+\begin{equation}
+\widetilde B_{pm\nu}
+=
+B_{pm\nu}
+-
+\beta_{pm\nu},
+\qquad
+\widetilde B_{pm\nu}^{\dagger}
+=
+B_{pm\nu}^{\dagger}
+-
+\beta_{pm\nu}^{*},
+\end{equation}
+where, analogous to section \ref{sec:polaron_ground_state_energy}, the coherent displacements are determined as
+\begin{equation}
+\beta_{pm\nu}
+=
+-
+\frac{\mathcal{M}_{pm\nu}}
+{\Delta_{pm\nu}}.
+\end{equation}
+This allows us to rewrite the Hamiltonian as
+\begin{equation}
+H_p^{\rm eff}
+=
+E_p^{\rm QP}
++
+\sum_{m\nu}
+\Delta_{pm\nu}
+\widetilde B_{pm\nu}^{\dagger}
+\widetilde B_{pm\nu},
+\end{equation}
+with
+\begin{align}
+E_p^{\rm QP}
+&=
+\epsilon_p^{\rm HF}
+-
+\sum_{m\nu}
+\frac{|\mathcal{M}_{pm\nu}|^2}
+{\Delta_{pm\nu}}
+\\
+&=
+\epsilon_p^{\rm HF}
++ \Sigma_p^{\rm GW}(\epsilon_p^{\rm HF}).
+\end{align}
+As in section \ref{subsec:RPA_vacuum_coherent_state}, we find that the RPA vacuum is a coherent state of the shifted operators,
+\begin{align}
+\left(
+\widetilde B_{pm\nu}
++
+\beta_{pm\nu}
+\right)
+|0_{\rm RPA}\rangle
+&=
+0,
+\\
+\widetilde B_{pm\nu}
+|0_{\rm RPA}\rangle
+&=
+-
+\beta_{pm\nu}
+|0_{\rm RPA}\rangle.
+\end{align}
+The retarded Green's function therefore becomes
+\begin{align}
+G_p^{GW,R}(t)
+&=
+-i\theta(t)
+\langle
+0_{\rm RPA}
+|
+e^{-iH_p^{\rm eff}t}
+|
+0_{\rm RPA}
+\rangle
+\\
+&=
+-i\theta(t)
+e^{-iE_p^{\rm QP}t}
+\left\langle
+0_{\rm RPA}
+\left|
+e^{-i\sum_{m\nu}
+\Delta_{pm\nu}
+\widetilde B_{pm\nu}^{\dagger}
+\widetilde B_{pm\nu}t}
+\right|
+0_{\rm RPA}
+\right\rangle
+\\
+&=
+-i\theta(t)
+e^{-iE_p^{\rm QP}t}
+\exp
+\left[
+\sum_{m\nu}
+|\beta_{pm\nu}|^2
+\left(
+e^{-i\Delta_{pm\nu}t}
+-
+1
+\right)
+\right]\\
+&=
+-i\theta(t)
+Z_p
+e^{-iE_p^{\rm QP}t}
+\prod_{m\nu}
+\exp
+\left[
+|\beta_{pm\nu}|^2
+e^{-i\Delta_{pm\nu}t}
+\right]
+\\
+&=
+-i\theta(t)
+Z_p
+\sum_{\mathbf n}
+\left[
+\prod_{m\nu}
+\frac{
+|\beta_{pm\nu}|^{2n_{pm\nu}}
+}{
+n_{pm\nu}!
+}
+\right]
+\exp
+\left[
+-i
+\left(
+E_p^{\rm QP}
++
+\sum_{m\nu}
+n_{pm\nu}
+\Delta_{pm\nu}
+\right)
+t
+\right],
+\end{align}
+where $
+Z_p
+=
+\exp
+\left[
+-
+\sum_{m\nu}
+|\beta_{pm\nu}|^2
+\right].
+$ So, we establish a connection between the G0W0+C Green's function and that of the electronic polaron in the QB approximation.
+
+\section{CC for the electronic polaron}
+We write the quasiboson Hamiltonian in second quantization as
+\begin{align}
+\hat{H}
+&=
+\hat{H}_{\rm el}
++
+\hat{H}_{\rm pl}
++
+\hat{H}_{\rm ep}
+\\
+&=
+\sum_{\bm{k}\in\mathcal{O}}
+\epsilon_{\bm{k}}^{\rm HF}
+a_{\bm{k}}^{\dagger}a_{\bm{k}}
++
+\sum_{\nu_{\bm{q}}\in\mathcal{M}}
+\omega_{\nu_{\bm{q}}}^{\rm pl}
+b_{\nu_{\bm{q}}}^{\dagger}
+b_{\nu_{\bm{q}}}
+\nonumber\\
+&\quad
++
+\sum_{\bm{k},\bm{k}+\bm{q}\in\mathcal{O}}
+\sum_{\nu_{\bm{q}}\in\mathcal{M}}
+g_{\nu}^{\rm pl}(\bm{k},\bm{q})
+a_{\bm{k}+\bm{q}}^{\dagger}
+a_{\bm{k}}
+\left(
+b_{\nu_{-\bm{q}}}^{\dagger}
++
+b_{\nu_{\bm{q}}}
+\right).
+\label{eq:H}
+\end{align}
+Here, $\hat{H}_{\rm el}$, $\hat{H}_{\rm pl}$, and
+$\hat{H}_{\rm ep}$ are the electronic, plasmonic, and
+electron--plasmon Hamiltonians, respectively.
+The set $\mathcal{O}$ contains all occupied bands, whose single-particle energies are due to $\mathrm{HF}$. $\mathcal{M}$ denotes
+the set of modes from the plasmonic bath $\mathrm{pl}$, as obtained through the given quasiboson approximation. 
+Here we investigate dRPA@LDA quasibosons.
+\subsection{Interpretation}
+Physically, this Hamiltonian describes a single fermion (hole) coupled to a bath of bosons (plasmons) on a lattice (occupied bands of the UEG supercell). Note that the hole creation operator $h_{\bm{k}}^{\dagger}$ is equivalent to the electron annihilation operator $a_{\bm{k}}$ and vice versa.
+%
+\subsubsection{Electronic Hamiltonian}
+ $\hat{H}_{\rm el}$ assigns the appropriate HF single-particle energy for the fermion to be at any lattice site.
+\subsubsection{Plasmonic Hamiltonian}
+ $\hat{H}_{\rm pl}$ assigns the appropriate RPA excitation energy for the presence of a plasmon. Even though our system now has a hole, these are plasmons computed for the neutral system. This is in accordance with linear response theory, which postulates that the plasmons of the ionized system can be well approximated by those of the neutral system. \textbf{Treating plasma oscillations within the harmonic approximation allows us to truncate $\hat{H}_{\rm pl}$ at the quadratic level.}
+\subsubsection{Electron-Plasmon Hamiltonian}
+Finally, $\hat{H}_{\rm ep}$ describes the process of the fermion hopping to a new lattice site, while simultaneously creating or destroying a plasmon in the bath, conserving momentum in the process. \textbf{Expanding the UEG electronic Hamiltonian only up to first order in the plasmonic density fluctuation coordinate is what allows us to truncate $\hat{H}_{\rm ep}$ at the linear coupling.}
+\subsubsection{Mean-field reference}
+Defining $h_{\bm{k}}^{\dagger} \equiv a_{\bm{k}}$, we choose the
+zeroth-order $(N-1)$-electron reference as
+\begin{equation}
+    |\Phi_0\rangle
+    =
+    h_{0}^{\dagger}|0\rangle_F
+    \otimes
+    |0\rangle_{\rm pl},
+\end{equation}
+where $|0\rangle_F$ is the Fermi-sea of the reference and
+$|0\rangle_{\rm pl}$ is the bosonic vacuum. 
+%
+The reference is a single hole at $\bm{k}=0$ in the Fermi sea, with no bosons excited.
+Since the electron is removed at $\bm{k}=0$, this state belongs to
+the total-momentum sector $\bm{K}=0$. We therefore construct the
+cluster operators so that every retained term conserves total
+momentum individually, rather than restoring the symmetry by an
+explicit momentum projector.
+%
+\subsubsection{Method labels}
+To first order, we have \begin{align}
+    \hat{T}^{(1)}
+    &=
+    \hat{T}_{\rm ep}^{(1)}\\
+&=    \sum_{\substack{\bm{k}\in\mathcal{O}\\ \bm{k}\neq 0}}
+    \sum_{\nu}
+    t_{\bm{k}\nu}
+    h_{\bm{k}}^{\dagger}
+    h_0
+    b_{\nu_{\bm{k}}}^{\dagger}
+\end{align}
+To second order, we have 
+\begin{align}
+    \hat{T}^{(2)}
+    &=
+    \hat{T}_{\rm ep}^{(1)}
+    +
+    \hat{T}_{\rm pl}^{(2)}
+    +
+    \hat{T}_{\rm ep}^{(2)}\\
+&=\sum_{\substack{\bm{k}\in\mathcal{O}\\ \bm{k}\neq 0}}
+    \sum_{\nu}
+    t_{\bm{k}\nu}
+    h_{\bm{k}}^{\dagger}
+    h_0
+    b_{\nu_{\bm{k}}}^{\dagger}
++     \frac{1}{2}
+    \sum_{\bm{q}}
+    \sum_{\nu\mu}
+    t_{\nu\bm{q},\mu-\bm{q}}
+    b_{\nu_{\bm{q}}}^{\dagger}
+    b_{\mu_{-\bm{q}}}^{\dagger}+     \frac{1}{2}
+    \sum_{\substack{\bm{k}\in\mathcal{O}\\ \bm{k}\neq0}}
+    \sum_{\nu\bm{q}_1,\mu\bm{q}_2}
+    \delta_{\bm{k},\bm{q}_1+\bm{q}_2}
+    t_{\bm{k};\nu\bm{q}_1,\mu\bm{q}_2}
+    h_{\bm{k}}^{\dagger}
+    h_0
+    b_{\nu_{\bm{q}_1}}^{\dagger}
+    b_{\mu_{\bm{q}_2}}^{\dagger}
+    \label{eq:T2}
+\end{align}
+We rank where we are in the CC hierarchy in accordance with Hamlin's paper as CC-X-SY, where X is the highest pure plasmon excitation order retained and Y lists the retained coupled hole--plasmon excitations.
+\subsubsection{Coupled-cluster state ansatz}
+We define
+\begin{equation}
+    |\Psi_{\rm CC}\rangle
+    =
+    e^{\hat{T}}|\Phi_0\rangle.
+\end{equation}
+At first order,
+\begin{equation}
+    \hat{T}^{(1)}
+    =
+    \hat{T}_{\rm el}^{(1)}
+    +
+    \hat{T}_{\rm pl}^{(1)}
+    +
+    \hat{T}_{\rm ep}^{(1)}.
+\end{equation}
+A pure hole excitation,
+\begin{equation}
+    h_{\bm{k}}^{\dagger}h_0,
+\end{equation}
+changes the total momentum by $-\bm{k}$. Hence no nontrivial pure
+hole excitation can remain in the $\bm{K}=0$ sector, and therefore
+\begin{equation}
+    {
+    \hat{T}_{\rm el}^{(1)}=0.
+    }
+\end{equation}
+%
+Similarly, a pure one-boson excitation
+\begin{equation}
+    b_{\nu_{\bm{q}}}^{\dagger}
+\end{equation}
+carries momentum $\bm{q}$. Thus a nonzero one-boson amplitude would
+require $\bm{q}=0$. Since a $\bm{q}=0$ density mode is not generated by the QBA in the neutral UEG, we take
+\begin{equation}
+    {
+    \hat{T}_{\rm pl}^{(1)}=0.
+    }
+\end{equation}
+%
+The only non-trivial first-order cluster operator therefore consists of a hole
+recoil accompanied by a boson carrying the compensating momentum,
+\begin{equation}
+    {
+    \hat{T}_{\rm ep}^{(1)}
+    =
+    \sum_{\substack{\bm{k}\in\mathcal{O}\\ \bm{k}\neq 0}}
+    \sum_{\nu}
+    t_{\bm{k}\nu}
+    h_{\bm{k}}^{\dagger}
+    h_0
+    b_{\nu_{\bm{k}}}^{\dagger},
+    }
+\end{equation}
+where $\mathcal{O}$ denotes the set of occupied bands in the
+$N$-electron reference. \\
+At second order, there is no pure electronic doubles operator because the effective
+fermionic Hilbert space contains only one particle. The allowed pure bosonic sector contains pairs of
+bosons with opposite total momentum,
+\begin{equation}
+    {
+    \hat{T}_{\rm pl}^{(2)}
+    =
+    \frac{1}{2}
+    \sum_{\bm{q}}
+    \sum_{\nu\mu}
+    t_{\nu\bm{q},\mu-\bm{q}}
+    b_{\nu_{\bm{q}}}^{\dagger}
+    b_{\mu_{-\bm{q}}}^{\dagger}.
+    }
+\end{equation}
+The coupled hole--two-boson sector is
+\begin{equation}
+    {
+    \hat{T}_{\rm ep}^{(2)}
+    =
+    \frac{1}{2}
+    \sum_{\substack{\bm{k}\in\mathcal{O}\\ \bm{k}\neq0}}
+    \sum_{\nu\bm{q}_1,\mu\bm{q}_2}
+    \delta_{\bm{k},\bm{q}_1+\bm{q}_2}
+    t_{\bm{k};\nu\bm{q}_1,\mu\bm{q}_2}
+    h_{\bm{k}}^{\dagger}
+    h_0
+    b_{\nu_{\bm{q}_1}}^{\dagger}
+    b_{\mu_{\bm{q}_2}}^{\dagger}.
+    }
+\end{equation}
+So, to second order,
+we may write
+\begin{equation}
+    \hat{T}
+    =
+    \hat{T}_{\rm ep}^{(1)}
+    +
+    \hat{T}_{\rm pl}^{(2)}
+    +
+    \hat{T}_{\rm ep}^{(2)}.
+    \label{eq:T2}
+\end{equation}
+%
+Since every fermionic excitation contains the factor
+$h_{\bm{k}}^{\dagger}h_0$, products of two such fermionic excitations
+vanish when acting on the one-hole reference. Consequently,
+\begin{equation}
+    e^{\hat{T}}|\Phi_0\rangle
+    =
+    \left(
+    1
+    +
+    \hat{T}_{\rm ep}^{(1)}
+    +
+    \hat{T}_{\rm ep}^{(2)}
+    \right)
+    e^{\hat{T}_{\rm pl}^{(2)}}
+    |\Phi_0\rangle.
+    \label{eq:trunc}
+\end{equation}
+\subsubsection{Variational energy evaluation}
+The variational coupled-cluster energy is evaluated as
+\begin{equation}
+    E_{\rm CC}(\bm{t})
+    =
+    \frac{
+    \langle\Phi_0|
+    e^{\hat{T}^{\dagger}}
+    \hat{H}
+    e^{\hat{T}}
+    |\Phi_0\rangle
+    }{
+    \langle\Phi_0|
+    e^{\hat{T}^{\dagger}}
+    e^{\hat{T}}
+    |\Phi_0\rangle
+    }.
+\end{equation}
+The ground-state amplitudes are obtained variationally from
+\begin{equation}
+    {
+    \frac{\partial E_{\rm CC}}{\partial t_{\mu}^{*}}=0,
+    }
+\end{equation}
+for all independent cluster amplitudes $t_{\mu}$.
+%
+Defining
+\begin{equation}
+    |\bm{k}\nu\rangle
+    =
+    h_{\bm{k}}^{\dagger}
+    h_0
+    b_{\nu_{\bm{k}}}^{\dagger}
+    |\Phi_0\rangle,
+\end{equation}
+the first-order state, for example, is then
+\begin{equation}
+    |\Psi_{\rm CC}^{(1)}\rangle
+    =
+    |\Phi_0\rangle
+    +
+    \sum_{\bm{k}\nu}
+    t_{\bm{k}\nu}
+    |\bm{k}\nu\rangle.
+\end{equation}
+\subsubsection{Tangent-space response}
+Once the ground-state amplitudes have been
+determined, approximate excited states in the $(N-1)$-electron sector
+are constructed from tangent vectors to the variational manifold,
+\begin{equation}
+    |\Psi_{\mu}\rangle
+    =
+    \hat{\mathcal{R}}_{\mu}
+    |\Psi_{\rm CC}(\bm{t}_{\rm gs})\rangle.
+\end{equation}
+The zeroth-order response operator is
+\begin{equation}
+    \hat{\mathcal{R}}_0=1,
+\end{equation}
+so that the optimized coupled-cluster state itself is included in the
+response manifold.
+For the $\bm{K}=0$ sector, the first-order response manifold is
+\begin{equation}
+    {
+    \mathcal{R}_{K=0}^{(1)}
+    =
+    \left\{
+    1,\,
+    h_{\bm{k}}^{\dagger}
+    h_0
+    b_{\nu_{\bm{k}}}^{\dagger}
+    \right\}.
+    }
+\end{equation}
+%
+At second order, the response manifold is enlarged to
+\begin{align}
+    \mathcal{R}_{K=0}^{(2)}
+    =
+    \mathcal{R}_{K=0}^{(1)}
+    \cup
+    \Bigg\{
+    &
+    b_{\nu_{\bm{q}}}^{\dagger}
+    b_{\mu_{-\bm{q}}}^{\dagger},
+    \delta_{\bm{k},\bm{q}_1+\bm{q}_2}
+    h_{\bm{k}}^{\dagger}
+    h_0
+    b_{\nu_{\bm{q}_1}}^{\dagger}
+    b_{\mu_{\bm{q}_2}}^{\dagger}
+    \Bigg\}.
+\end{align}
+%
+The Hamiltonian and overlap matrices in this nonorthogonal tangent
+basis are
+\begin{equation}
+    \widetilde{H}_{\mu\nu}
+    =
+    \langle\Psi_{\mu}|
+    \hat{H}
+    |\Psi_{\nu}\rangle,
+\end{equation}
+and
+\begin{equation}
+    S_{\mu\nu}
+    =
+    \langle\Psi_{\mu}|\Psi_{\nu}\rangle.
+\end{equation}
+The approximate excited-state energies and eigenvectors are obtained
+from the generalized eigenvalue problem
+\begin{equation}
+    {
+    \widetilde{\bm{H}}\bm{C}
+    =
+    \bm{S}\bm{C}\bm{E}.
+    }
+\end{equation}
+The generalized eigenvectors may be normalized according to
+\begin{equation}
+    \bm{C}^{\dagger}\bm{S}\bm{C}
+    =
+    \bm{1}.
+\end{equation}
+The approximate $(N-1)$-electron eigenstates are then
+\begin{equation}
+    |\widetilde{\Psi}_m^{N-1}\rangle
+    =
+    \sum_{\mu}
+    C_{\mu m}
+    |\Psi_{\mu}\rangle.
+\end{equation}
+\subsubsection{Retarded hole Green's function}
+The electron-removal part of the retarded Green's function is written
+in Lehmann form as
+\begin{align}
+    G_{\bm{k}}^{-}(\omega)
+    &=
+    \sum_m
+    \frac{
+    \left|
+    \langle
+    \widetilde{\Psi}_m^{N-1}
+    |
+   \Phi_0
+    \rangle
+    \right|^2
+    }{
+    \omega
+    -
+    \left(
+    E_0^N-E_m^{N-1}
+    \right)
+    +
+    i\eta
+    }.
+    \label{eq:lehmann}
+\end{align}
+Finally, the electron-removal spectral function is
+\begin{equation}
+    {
+    A_0^{-}(\omega)
+    =
+    -\frac{1}{\pi}
+    \Im G_0^{-}(\omega).
+    }
+\end{equation}
+\section{SCCE for the electronic polaron}
+Recall that our quasiboson Hamiltonian is
+\begin{align}
+\hat{H}
+&=
+\hat{H}_{\rm el}
++
+\hat{H}_{\rm pl}
++
+\hat{H}_{\rm ep}
+\\
+&=
+\sum_{\bm{k}\in\mathcal{O}}
+\epsilon_{\bm{k}}^{\rm G0}
+h_{\bm{k}}^{\dagger}h_{\bm{k}}
++
+\sum_{\nu_{\bm{q}}\in\mathcal{M}}
+\omega_{\nu_{\bm{q}}}^{\rm pl}
+b_{\nu_{\bm{q}}}^{\dagger}
+b_{\nu_{\bm{q}}}
+\nonumber\\
+&\quad
++
+\sum_{\bm{k},\bm{k}+\bm{q}\in\mathcal{O}}
+\sum_{\nu_{\bm{q}}\in\mathcal{M}}
+g_{\nu}^{\rm pl}(\bm{k},\bm{q})
+h_{\bm{k}+\bm{q}}^{\dagger}
+h_{\bm{k}}
+\left(
+b_{\nu_{-\bm{q}}}^{\dagger}
++
+b_{\nu_{\bm{q}}}
+\right).
+\label{eq:H}
+\end{align}
+with $h_{\bm{k}}$ ($h_{\bm{k}}^{\dagger}$) the hole annihilation (creation) operators and $b_{\nu_{\bm{q}}}$ ($b_{\nu_{\bm{q}}}^{\dagger}$) the bosonified particle-hole  annihilation (creation) operators. The latter are interpreted as plasmons in the QBA. Therefore, the Hilbert space for this Hamiltonian considers all processes involving the interaction of one hole with $n$ plasmons. In other words, we can accommodate 1h, 2h1p, 3h2p, ... processes, which notably excludes 2p1h processes.
+% \subsection{When we see favorable results in G0W0+C}
+% It is instructive to start with a brief review of the theory. One writes the cumulant as  
+% \begin{equation}
+%     C_k^{R,G_0W_0}(t) = \frac{1}{\pi}\int d\omega \frac{|\operatorname{Im} \Sigma_k^{R,G_0W_0}(\omega+{\epsilon_k})|}{\omega^2} \left( e^{-i\omega t} + i\omega t - 1 \right),
+% \end{equation}
+% with
+% \begin{equation}
+%     \Sigma_k^{R,G_0W_0}(\omega )=\sum_{\substack{\nu_{\bm q}\in\mathcal M\\
+% \bm{k}-\bm{q}\in\mathcal O}}
+% \frac{
+% \left|g_\nu^{\mathrm{pl}}(\bm{k},\bm{q})\right|^2
+% }{
+% \omega-\epsilon_{\bm{k}-\bm{q}}^{\mathrm{MF}}
+% +\omega_{\nu_{\bm q}}^{\mathrm{pl}}
+% +i\eta
+% }
+% +
+% \sum_{\substack{\nu_{\bm q}\in\mathcal M\\
+% \bm{k}-\bm{q}\in\mathcal V}}
+% \frac{
+% \left|g_\nu^{\mathrm{pl}}(\bm{k},\bm{q})\right|^2
+% }{
+% \omega-\epsilon_{\bm{k}-\bm{q}}^{\mathrm{MF}}
+% -\omega_{\nu_{\bm q}}^{\mathrm{pl}}
+% +i\eta}
+% \end{equation}
+% and then
+% \begin{equation}
+%     G^R_k(t) = G_{k,0}^R(t) e^{C_k^R(t)},
+% \end{equation}
+% where $G_{k,0}^R(t) = -i \Theta(t) e^{-i(k^2/2 + \Sigma_k^x) t}$ and the Casida equation for each momentum transfer $\mathbf{q}$ as
+% \begin{equation}
+% \begin{pmatrix}
+% \bm{A}(\mathbf{q}) & \bm{B}(\mathbf{q}) \\
+% -\bm{B}(\mathbf{q}) & -\bm{A}(\mathbf{q})
+% \end{pmatrix}
+% \begin{pmatrix}
+% \bm{X}(\mathbf{q})\\
+% \bm{Y}(\mathbf{q})
+% \end{pmatrix}
+% = \bm{\Omega}(\mathbf{q})
+% \begin{pmatrix}
+% \bm{X}(\mathbf{q})\\
+% \bm{Y}(\mathbf{q})
+% \end{pmatrix}
+% \end{equation}
+% where the matrix elements are defined as $A_{ia,jb}(\mathbf{q}) = \delta_{ij} \delta_{ab} (\varepsilon_a^{\rm MF} - \varepsilon_i^{\rm MF}) + 2 (ia|bj)$ and $B_{ia,jb}(\mathbf{q}) = 2 (ia|jb)$ with the requirement that there be a momentum transfer of $\mathbf{q}$ to get from the occupied band $i$ to the unoccupied band $a$. The empirically successful way to do GW+C on the UEG sets $\rm MF=\rm LDA$ and note that this means that the plasmonic path is due to dRPA@LDA. Is there a way to modify our quasiboson Hamiltonian such that it accepts the LDA reference, or do we have to bake the exchange self-energy into the single-particle energies? In other words, is it possible to make the single-particle energies be due to LDA and then add the exchange correction at the end or does this theory preclude us from doing that? If the answer is no, then I should really be using dRPA@HF instead of dRPA@LDA? But I am confused as to what the correct way to do dRPA@HF because if I set $\rm MF=\rm HF$ I get poor results. I suspect this has something to do with the fact that I am incorporating a Madelung correction into my dRPA calculation through the HF single particle energies, but should dRPA see a Madelung correction? I am using the shifted Ewald scheme, so I guess this setting of $\rm MF=\rm HF$ in dRPA would technically be correct, but I am not sure why this seems to give poor results.
+\subsubsection{$G_0W_0$ self-energy for the QB Hamiltonian}
+ In accordance Garnet's data, I can take pl=dRPA@LDA for the determination of my quasibosonic quantities and $\epsilon_k^{G0}=\left[\underbrace{\epsilon_k^{\mathrm{LDA}}+\Sigma_k^x-V_{x c, k}^{\mathrm{LDA}}}_{\epsilon_k^{\rm HF}}\right]$. We can start from
+\begin{align}
+\Sigma_{\bm{k}}^{G_0W_0,R}(t) &= -i \theta(t) \sum_{\nu_q\in \mathcal{M}}\left|g_\nu^{p 1}(\bm{k},\bm{q})\right|^2 e^{-i \epsilon_{\bm{k}-\bm{q}}^{\rm LDA} t} e^{+i \omega_{\nu_{\bm{q}}}^{\rm pl} t} \\
+&= i  \sum_{\nu_q\in\mathcal M} \left|g^\nu_{\bm{k},\bm{q}}\right|^2D_{\nu_{\bm{q}}}^{(-)}(t) G_{\bm{k}-\bm{q}}^0(t)
+\end{align}
+where the 2p1h contribution vanished because the quasiboson Hamiltonian restricts the fermionic degree of freedom to $\mathcal{O}$. We have identified the bare fermionic and bosonic Green's functions, describing hole and plasmon propagation, respectively, as
+\begin{equation}
+    G_{\bm{k}}^{0}(t)
+    =
+    -i\theta(t)e^{-i\epsilon_{\bm{k}}^{\rm LDA}t}, \quad D_{\nu_{\bm{q}}}^{(-)}(t)=-i \theta(t) e^{+i \omega_{\nu_{\bm{q}}}^{\rm pl} t}.
+\end{equation}
+Now we can pick up from the EOM of the Dyson equation for the causal Green's function. For $0<\tau<t$, the bare propagator satisfies
+\begin{equation}
+G_{\bm{k}-\bm{q}}^{0}(t-\tau)
+=
+-i
+\left[G_{\bm{k}-\bm{q}}^{0}(\tau)\right]^{-1}
+G_{\bm{k}-\bm{q}}^{0}(t).
+\end{equation}
+So,
+\begin{align}
+\int_0^t d\tau\,
+\Sigma_{\bm{k}}^{R}(t-\tau)G_{\bm{k}}(\tau)
+&=
+i\sum_{\nu q}
+\left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2
+\int_0^t d\tau\,
+\mathcal D_{\nu_{\bm q}}^{(-)}(t-\tau)
+G_{\bm{k}-\bm{q}}^{0}(t-\tau)
+G_{\bm{k}}(\tau)
+\\
+&=
+\sum_{\nu q}
+\left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2
+\int_0^t d\tau\,
+\mathcal D_{\nu_{\bm q}}^{(-)}(t-\tau)
+\frac{G_{\bm{k}-\bm{q}}^{0}(t)}
+     {G_{\bm{k}-\bm{q}}^{0}(\tau)}
+G_{\bm{k}}(\tau)\\
+\implies \frac{dG_{\bm{k}}(t)}{dt}
+&=
+-i\epsilon_{\bm{k}}^{\rm G0}G_{\bm{k}}(t)
+-i
+\sum_{\nu_{\bm q}}
+\left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2
+\int_0^t d\tau\,
+\mathcal D_{\nu_{\bm q}}^{(-)}(t-\tau)
+\frac{
+G_{\bm{k}}(\tau)G_{\bm{k}-\bm{q}}(t)
+}{
+G_{\bm{k}-\bm{q}}(\tau)
+}
+\end{align}
+where, following PJ's paper, we affected a partial resummation by replacing the bare fermionic propagators with the dressed ones as
+\begin{equation}
+\frac{G_{\bm{k}-\bm{q}}^{0}(t)}
+     {G_{\bm{k}-\bm{q}}^{0}(\tau)}
+\;\longrightarrow\;
+\frac{G_{\bm{k}-\bm{q}}(t)}
+     {G_{\bm{k}-\bm{q}}(\tau)}.
+\end{equation}
+Then, introducing $y_{\bm{k}}(t)\equiv e^{C_{\bm{k}}(t)}$, we also have
+\begin{align}
+G_{\bm{k}}(t)&=-i\exp(-i\epsilon_{\bm{k}}^{\rm LDA}t)y_{\bm{k}}(t)\\ \implies
+\frac{dG_{\bm{k}}(t)}{dt}&=
+-i\epsilon_{\bm{k}}^{\rm LDA}G_{\bm{k}}(t)
+-i e^{-i\epsilon_{\bm{k}}^{\rm LDA}t}
+\frac{dy_{\bm{k}}(t)}{dt}.
+\end{align}
+Setting these two expressions for the time derivative of the Green's function equal to each other gives (with $\Delta_{\bm{k}}^x\equiv \epsilon_{\bm{k}}^{\rm G0}-\epsilon_{\bm{k}}^{\rm LDA}=\Sigma_{\bm{k}}^x-V_{x c, k}^{\mathrm{LDA}}$)
+\begin{align}
+-i e^{-i\epsilon_{\bm{k}}^{\rm LDA}t}
+\frac{dy_{\bm{k}}(t)}{dt}
+&=
+-i\Delta_{\bm{k}}^x G_{\bm{k}}(t)
+-i
+\sum_{\nu_{\bm q}}
+\left|g_\nu^{\rm pl}(\bm{k},\bm q)\right|^2
+\int_0^t d\tau\,
+\mathcal D_{\nu_{\bm q}}^{(-)}(t-\tau)
+\frac{
+G_{\bm{k}}(\tau)G_{\bm{k}-\bm q}(t)
+}{
+G_{\bm{k}-\bm q}(\tau)
+}.
+\end{align}
+Because $\frac{
+G_{\bm{k}}(\tau)G_{\bm{k}-\bm q}(t)
+}{
+G_{\bm{k}-\bm q}(\tau)
+}
+=
+-i e^{-i\epsilon_{\bm{k}}^{\rm LDA}\tau}
+e^{-i\epsilon_{\bm{k}-\bm q}^{\rm LDA}(t-\tau)}
+\frac{
+y_{\bm{k}}(\tau)y_{\bm{k}-\bm q}(t)
+}{
+y_{\bm{k}-\bm q}(\tau)
+}$, we can divide through by
+\(
+-i e^{-i\epsilon_{\bm{k}}^{\rm LDA}t}
+\)
+to get
+\begin{align}
+\frac{dy_{\bm{k}}(t)}{dt}
+&=
+-i\Delta_{\bm{k}}^x y_{\bm{k}}(t)
+-i
+\sum_{\nu_{\bm q}}
+\left|g_\nu^{\rm pl}(\bm{k},\bm q)\right|^2
+\int_0^t d\tau\,
+\mathcal D_{\nu_{\bm q}}^{(-)}(t-\tau)
+e^{i(\epsilon_{\bm{k}}^{\rm LDA}
+-\epsilon_{\bm{k}-\bm q}^{\rm LDA})(t-\tau)}
+\frac{
+y_{\bm{k}}(\tau)y_{\bm{k}-\bm q}(t)
+}{
+y_{\bm{k}-\bm q}(\tau)
+}\\
+\implies \frac{dC_{\bm{k}}(t)}{dt}
+&=
+-i\Delta_{\bm{k}}^x
+-
+\sum_{\nu_{\bm q}}
+\left|g_\nu^{\rm pl}(\bm{k},\bm q)\right|^2
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}\bm q}^{\nu}(t-\tau)}
+\frac{
+y_{\bm{k}}(\tau)y_{\bm{k}-\bm q}(t)
+}{
+y_{\bm{k}}(t)y_{\bm{k}-\bm q}(\tau)
+}
+\\
+&=
+-i\Delta_{\bm{k}}^x
+-
+\sum_{\nu_{\bm q}}
+\left|g_\nu^{\rm pl}(\bm{k},\bm q)\right|^2
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}\bm q}^{\nu}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)+C_{\bm{k}}(\tau)
++C_{\bm{k}-\bm q}(t)-C_{\bm{k}-\bm q}(\tau)
+}.
+\end{align}
+where we used that
+\begin{equation}
+\Delta_{\bm{k}\bm q}^{\nu}
+\equiv
+\epsilon_{\bm{k}}^{\rm LDA}
+-\epsilon_{\bm{k}-\bm q}^{\rm LDA}
++\omega_{\nu_{\bm q}}^{\rm pl}
+\qquad
+y_{\bm{k}}(0)=1.
+\end{equation}
+\subsection{Different choices for the quasiboson Hamiltonian}
+The equation being solved is 
+\begin{align}
+\frac{dC_{\bm{k}}(t)}{dt}
+&=
+-i\Delta_{\bm{k}}^x
+-
+\sum_{\nu_{\bm q}}
+\left|g_\nu^{\rm pl}(\bm{k},\bm q)\right|^2
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}\bm q}^{\nu}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)+C_{\bm{k}}(\tau)
++C_{\bm{k}-\bm q}(t)-C_{\bm{k}-\bm q}(\tau)
+}.
+\end{align}
+It is true that to recover the corresponding $G_0W_0$+C scheme, all that is needed is to set all $C_{\bm{k}}(t)=0$ in the memory kernel on the right-hand side?
+\subsubsection{LDA band, dRPA@LDA plasmons}
+Here we are taking $\Delta_{\bm{k}\bm q}^{\nu}
+\equiv
+\epsilon_{\bm{k}}^{\rm LDA}
+-\epsilon_{\bm{k}-\bm q}^{\rm LDA}
++\omega_{\nu_{\bm q}}^{\rm pl}$ and $\Delta_{\bm{k}}^x\equiv \Sigma_{\bm{k}}^x-V_{x c, k}^{\mathrm{LDA}}$. As the plasmonic bath is due to dRPA@LDA, our Casida matrix build, for a given momentum transfer $\mathbf{q}$, defines $A_{ia,jb}(\mathbf{q}) = \delta_{ij} \delta_{ab} (\varepsilon_a^{\rm LDA} - \varepsilon_i^{\rm LDA}) + 2 (ia|bj)$ and $B_{ia,jb}(\mathbf{q}) = 2 (ia|jb)$.
+\subsubsection{HF band, dRPA@HF plasmons}
+Here we are taking $\Delta_{\bm{k}\bm q}^{\nu}
+\equiv
+\epsilon_{\bm{k}}^{\rm HF}
+-\epsilon_{\bm{k}-\bm q}^{\rm HF}
++\omega_{\nu_{\bm q}}^{\rm pl}$ and $\Delta_{\bm{k}}^x\equiv 0$. As the plasmonic bath is due to dRPA@HF, our Casida matrix build, for a given momentum transfer $\mathbf{q}$, defines $A_{ia,jb}(\mathbf{q}) = \delta_{ij} \delta_{ab} (\varepsilon_a^{\rm HF} - \varepsilon_i^{\rm HF}) + 2 (ia|bj)$ and $B_{ia,jb}(\mathbf{q}) = 2 (ia|jb)$. Is it the case that $\varepsilon_k^{\rm HF}\equiv k^2/2 -\sum_{\bm{q}\neq\bm{0}} n_{\bm{k}+\bm{q}} v(\bm{q})$, while $\epsilon_k^{\rm HF} = k^2/2 - n_{k}v_m-\sum_{\bm{q}\neq\bm{0}} n_{\bm{k}+\bm{q}}v(\bm{q})$, where $n_{\bm{k}}$ is the occupation number of the state $\bm{k}$ at zero temperature, $v(\bm{q})$ is the Fourier transform of the Coulomb potential, and $v_m$ is the Madelung constant? 
+\subsubsection{HF band, dRPA@LDA plasmons}
+Here we are taking $\Delta_{\bm{k}\bm q}^{\nu}
+\equiv
+\epsilon_{\bm{k}}^{\rm HF}
+-\epsilon_{\bm{k}-\bm q}^{\rm HF}
++\omega_{\nu_{\bm q}}^{\rm pl}$ and $\Delta_{\bm{k}}^x\equiv 0$. As the plasmonic bath is due to dRPA@LDA, our Casida matrix build, for a given momentum transfer $\mathbf{q}$, defines $A_{ia,jb}(\mathbf{q}) = \delta_{ij} \delta_{ab} (\varepsilon_a^{\rm LDA} - \varepsilon_i^{\rm LDA}) + 2 (ia|bj)$ and $B_{ia,jb}(\mathbf{q}) = 2 (ia|jb)$. Is it the case that $\epsilon_k^{\rm HF}\equiv k^2/2 -n_{k}v_m-\sum_{\bm{q}\neq\bm{0}} n_{\bm{k}+\bm{q}} v(\bm{q})$?
+\subsubsection{$G_0W_0$ self-energy for electronic structure Hamiltonian}
+Here we instead use 
+\begin{align}
+\Sigma_{\bm{k},c}^{G_0W_0,R}(t)
+=
+-i\theta(t)
+\bigg[
+&
+\sum_{\substack{\nu_{\bm q}\in\mathcal M\\
+\bm{k}-\bm q\in\mathcal O}}
+\left|g_{\nu}^{\rm pl}(\bm{k},\bm q)\right|^2
+e^{-i\left(
+\epsilon_{\bm{k}-\bm q}^{\rm LDA}
+-
+\omega_{\nu_{\bm q}}^{\rm pl}
+\right)t}+
+\sum_{\substack{\nu_{\bm q}\in\mathcal M\\
+\bm{k}-\bm q\in\mathcal V}}
+\left|g_{\nu}^{\rm pl}(\bm{k},\bm q)\right|^2
+e^{-i\left(
+\epsilon_{\bm{k}-\bm q}^{\rm LDA}
++
+\omega_{\nu_{\bm q}}^{\rm pl}
+\right)t}
+\bigg]\\
+={}&
+i
+\sum_{\substack{\nu_{\bm q}\in\mathcal M\\
+\bm{k}-\bm q\in\mathcal O}}
+\left|g_{\nu}^{\rm pl}(\bm{k},\bm q)\right|^2
+\mathcal D_{\nu_{\bm q}}^{(-)}(t)
+G_{\bm{k}-\bm q}^{0}(t)+
+i
+\sum_{\substack{\nu_{\bm q}\in\mathcal M\\
+\bm{k}-\bm q\in\mathcal V}}
+\left|g_{\nu}^{\rm pl}(\bm{k},\bm q)\right|^2
+\mathcal D_{\nu_{\bm q}}^{(+)}(t)
+G_{\bm{k}-\bm q}^{0}(t).
+\end{align}
+Following the same procedure as before leads to 
+\begin{align}
+\frac{dC_{\bm{k}}(t)}{dt}
+=&
+-i\Delta_{\bm{k}}^x
+\nonumber\\
+&-
+\sum_{\substack{\nu_{\bm q}\in\mathcal M\\
+\bm{k}-\bm q\in\mathcal O}}
+\left|g_{\nu}^{\rm pl}(\bm{k},\bm q)\right|^2
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}\bm q}^{\nu,-}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)
++C_{\bm{k}}(\tau)
++C_{\bm{k}-\bm q}(t)
+-C_{\bm{k}-\bm q}(\tau)
+}
+\nonumber\\
+&-
+\sum_{\substack{\nu_{\bm q}\in\mathcal M\\
+\bm{k}-\bm q\in\mathcal V}}
+\left|g_{\nu}^{\rm pl}(\bm{k},\bm q)\right|^2
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}\bm q}^{\nu,+}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)
++C_{\bm{k}}(\tau)
++C_{\bm{k}-\bm q}(t)
+-C_{\bm{k}-\bm q}(\tau)
+}.
+\end{align}
+with 
+\begin{equation}
+\Delta_{\bm{k}\bm q}^{\nu,-}
+\equiv
+\epsilon_{\bm{k}}^{\rm LDA}
+-\epsilon_{\bm{k}-\bm q}^{\rm LDA}
++\omega_{\nu_{\bm q}}^{\rm pl}
+\qquad
+\Delta_{\bm{k}\bm q}^{\nu,+}
+\equiv
+\epsilon_{\bm{k}}^{\rm LDA}
+-\epsilon_{\bm{k}-\bm q}^{\rm LDA}
+-\omega_{\nu_{\bm q}}^{\rm pl}.
+\end{equation}
+% The initial condition is
+
+% \begin{equation}
+% C_{\bm{k}}(0)=0.
+% \end{equation}
+% \subsubsection{Form for the $G_0W_0$ self-energy}
+
+% The bare fermionic Green's function in the occupied sector is
+% \begin{equation}
+%     G_{0,\bm{k}}^{R}(t)
+%     =
+%     -i\theta(t)e^{-i\epsilon_{\bm{k}}^{\rm HF}t}.
+% \end{equation}
+
+% The correlation part of the dRPA screened interaction may be
+% represented as a sum over quasiboson modes. Since the quasiboson
+% Hamiltonian retains only occupied fermionic states, only the
+% $2h1p$ branch of the $G_0W_0$ correlation self-energy is accessible.
+% We therefore define the negative-frequency bosonic component
+% \begin{equation}
+%     D_{0,\nu_{\bm q}}^{(-)}(t)
+%     =
+%     -i\theta(t)
+%     e^{+i\omega_{\nu_{\bm q}}^{\rm pl}t}.
+% \end{equation}
+
+% The corresponding $2h1p$ correlation self-energy is
+% \begin{align}
+% \Sigma_{\bm{k},c}^{G_0W_0,R,2h1p}(t)
+% &=
+% i\sum_{\nu_{\bm q}\in\mathcal M}
+% \left|g_{\nu}^{\rm pl}(\bm{k},\bm{q})\right|^2
+% G_{0,\bm{k}-\bm q}^{R}(t)
+% D_{0,\nu_{\bm q}}^{(-)}(t)
+% \\
+% &=
+% -i\theta(t)
+% \sum_{\nu_{\bm q}\in\mathcal M}
+% \left|g_{\nu}^{\rm pl}(\bm{k},\bm{q})\right|^2
+% e^{-i\left(
+% \epsilon_{\bm{k}-\bm q}^{\rm HF}
+% -\omega_{\nu_{\bm q}}^{\rm pl}
+% \right)t}.
+% \end{align}
+
+% Fourier transformation gives
+% \begin{equation}
+% \boxed{
+% \Sigma_{\bm{k},c}^{G_0W_0,R,2h1p}(\omega)
+% =
+% \sum_{\nu_{\bm q}\in\mathcal M}
+% \frac{
+% \left|g_{\nu}^{\rm pl}(\bm{k},\bm{q})\right|^2
+% }{
+% \omega-\epsilon_{\bm{k}-\bm q}^{\rm HF}
+% +\omega_{\nu_{\bm q}}^{\rm pl}
+% +i\eta_{\Sigma}
+% }.
+% }
+% \end{equation}
+\subsubsection{BWs2 self-energy for the electronic structure Hamiltonian}
+The BWs2 partition chooses
+\begin{equation}
+    \hat{H} = \hat{H}_0' + \hat{H}_1',
+\end{equation}
+with
+\begin{equation}
+\mathbf{H}_0' = \mathbf{F} + \alpha \mathbf{W},
+\qquad
+\mathbf{W} = \bm{\Sigma}^{(2),2p1h}(\omega = \tilde{\varepsilon}),
+\end{equation}
+where $\tilde{\varepsilon}$ is the BWs2 ground-state MO energy. We know that this novel partitioning renormalizes the single-particle energies below the Fermi surface, but leaves the ones above unchanged from their Hartree-Fock value, i.e. $\tilde{\varepsilon}_a = \epsilon_a^{\rm HF}$. Thus, defining the noninteracting Green's function as $
+G^{(0)'}(\omega)
+=
+\big( \omega - (\mathbf{F} + \alpha \mathbf{W}) \big)^{-1},
+$
+we can write
+\begin{align}
+G^{-1}(\omega)
+% &= \omega - \mathbf{F} - \bm{\Sigma}(\omega) \\
+% &= \omega - (\mathbf{F} + \alpha \mathbf{W})
+%    - \big[ \bm{\Sigma}(\omega) - \alpha \mathbf{W} \big] \\
+&= \big( G^{(0)'}(\omega) \big)^{-1}
+   - \bm{\Sigma}_{\mathrm{eff}}(\omega).
+\end{align}
+
+% This gives us the Dyson equation for the BWs2 partition:
+% \begin{align}
+% G(\omega)
+% &= G^{(0)'}(\omega)
+%  + G^{(0)'}(\omega)
+%    \bm{\Sigma}_{\mathrm{eff}}(\omega)
+%    G(\omega) \\
+% &\approx
+%    G^{(0)'}(\omega)
+%  + G^{(0)'}(\omega)
+%    \bm{\Sigma}_{\mathrm{eff}}(\omega)
+%    G^{(0)'}(\omega) \\
+% \implies G(t) &\approx
+%    G^{(0)'}(t)
+%  + \int dt' dt'' \,
+%    G^{(0)'}(t - t')
+%    \bm{\Sigma}_{\mathrm{eff}}(t' - t'')
+%    G^{(0)'}(t'').
+% \label{eq:Dyson_BWs2}
+% \end{align}
+% Note that \ref{eq:Dyson_BWs2} is exact up to second order in the bare Coulomb interaction since
+where
+\begin{align}
+\bm{\Sigma}^{\mathrm{eff}}(\omega)
+&\approx
+\bm{\Sigma}^{(2)}\!\left[G^{(0)'}\right](\omega)
+-\alpha\mathbf W,
+\\
+\implies
+\Sigma_{pp}^{\mathrm{eff}}(t)
+&=
+-i\theta(t)
+\left[
+\sum_{ijb}
+\mathcal K_{pjib}\,
+e^{-i(\tilde\varepsilon_i-\tilde\Omega_{jb})t}
++
+\sum_{iab}
+\mathcal K_{pbai}\,
+e^{-i(\epsilon_a^{\rm HF}+\tilde\Omega_{ib})t}
+\right]
+\nonumber\\
+&\quad
+-\delta(t)\alpha
+\sum_{iab}
+\frac{
+\mathcal K_{pbai}
+}{
+\tilde\varepsilon_p
+-\epsilon_a^{\rm HF}
+-\tilde\Omega_{ib}
+}.
+\end{align}
+where
+$$
+\mathcal K_{pqrs}
+=
+(pr|qs)
+\left[
+2(pr|qs)-(pq|rs)
+\right],
+$$
+and
+$$
+\tilde\Omega_{kc}
+=
+\epsilon_c^{\rm HF}
+-\tilde\varepsilon_k.
+$$
+Accordingly, the bare fermionic and bosonic propagators are
+\begin{equation}
+G_p^{(0)'}(t)
+=
+-i\theta(t)e^{-i\tilde{\varepsilon}_p t}.
+\end{equation}
+and
+\begin{equation}
+\mathcal{D}_{jb}^{(-)}(t)
+=
+-i\theta(t)
+e^{+i\tilde{\Omega}_{jb}t},
+\qquad
+\mathcal{D}_{ib}^{(+)}(t)
+=
+-i\theta(t)
+e^{-i\tilde{\Omega}_{ib}t},
+\end{equation}
+respectively, leading to
+\begin{align}
+\Sigma_{pp}^{\mathrm{eff}}(t)
+&=
+i
+\sum_{ijb}
+\mathcal{K}_{pjib}
+\mathcal{D}_{jb}^{(-)}(t)
+G_i^{(0)'}(t)
++
+i
+\sum_{iab}
+\mathcal{K}_{pbai}
+\mathcal{D}_{ib}^{(+)}(t)
+G_a^{(0)'}(t)\nonumber\\
+&\quad - \delta(t)\alpha
+\underbrace{\sum_{iab}
+\frac{\mathcal K_{pbai}
+}{\tilde\varepsilon_p
+-\epsilon_a^{\rm HF}
+-\tilde\Omega_{ib}}}_{W_{pp}}.
+\end{align}
+
+The equation of motion therefore becomes
+\begin{align}
+\frac{dG_p(t)}{dt}
+&=
+-i\tilde{\varepsilon}_p G_p(t)
++
+i\alpha W_{pp}G_p(t)
+-i
+\int_0^t d\tau\,
+\Sigma_{pp}^{(2),R}(t-\tau)
+G_p(\tau)\\
+&=
+-i\tilde{\varepsilon}_p G_p(t)
++
+i\alpha W_{pp}G_p(t)
+\nonumber\\
+&\quad
+-i
+\sum_{ijb}
+\mathcal{K}_{pjib}
+\int_0^t d\tau\,
+\mathcal{D}_{jb}^{(-)}(t-\tau)
+\frac{
+G_i^{(0)'}(t)
+}{
+G_i^{(0)'}(\tau)
+}
+G_p(\tau)
+\nonumber\\
+&\quad
+-i
+\sum_{iab}
+\mathcal{K}_{pbai}
+\int_0^t d\tau\,
+\mathcal{D}_{ib}^{(+)}(t-\tau)
+\frac{
+G_a^{(0)'}(t)
+}{
+G_a^{(0)'}(\tau)
+}
+G_p(\tau)\\
+&=
+-i\tilde{\varepsilon}_p G_p(t)
++
+i\alpha W_{pp}G_p(t)
+\nonumber\\
+&\quad
+-i
+\sum_{ijb}
+\mathcal{K}_{pjib}
+\int_0^t d\tau\,
+\mathcal{D}_{jb}^{(-)}(t-\tau)
+\frac{
+G_p(\tau)G_i(t)
+}{
+G_i(\tau)
+}
+\nonumber\\
+&\quad
+-i
+\sum_{iab}
+\mathcal{K}_{pbai}
+\int_0^t d\tau\,
+\mathcal{D}_{ib}^{(+)}(t-\tau)
+\frac{
+G_p(\tau)G_a(t)
+}{
+G_a(\tau)
+},
+\end{align}
+where the last step has affected the partial resummation. Introducing again $y_p(t)\equiv e^{C_p(t)}$, we have
+\begin{align}
+G_p(t)
+&=
+-i
+e^{-i\tilde{\varepsilon}_p t}
+y_p(t)\\
+\implies\frac{dG_p(t)}{dt}
+&=
+-i\tilde{\varepsilon}_p G_p(t)
+-i
+e^{-i\tilde{\varepsilon}_p t}
+\frac{dy_p(t)}{dt}.
+\end{align}
+Setting the two expressions for the time derivative equal gives
+\begin{align}
+-i
+e^{-i\tilde{\varepsilon}_p t}
+\frac{dy_p(t)}{dt}
+&=
+i\alpha W_{pp}G_p(t)
+-i \sum_{ijb}
+\mathcal{K}_{pjib}
+\int_0^t d\tau\,
+\mathcal{D}_{jb}^{(-)}(t-\tau)
+\frac{G_p(\tau)G_i(t)
+}{G_i(\tau)
+}
+-i \sum_{iab}
+\mathcal{K}_{pbai}
+\int_0^t d\tau\,
+\mathcal{D}_{ib}^{(+)}(t-\tau)
+\frac{G_p(\tau)G_a(t)
+}{G_a(\tau)
+}\\
+\implies \frac{dy_p(t)}{dt}
+&=
+i\alpha W_{pp}y_p(t)
+-
+\sum_{ijb}
+\mathcal{K}_{pjib}
+\int_0^t d\tau\,
+e^{i\Delta_{pi,jb}^{(-)}(t-\tau)}
+\frac{y_p(\tau)y_i(t)
+}{y_i(\tau)}
+-
+\sum_{iab}
+\mathcal{K}_{pbai}
+\int_0^t d\tau\,
+e^{i\Delta_{pa,ib}^{(+)}(t-\tau)}
+\frac{y_p(\tau)y_a(t)
+}{y_a(\tau)}.
+\end{align}
+Here we have defined
+\begin{equation}
+\Delta_{pi,jb}^{(-)}
+\equiv
+\tilde{\varepsilon}_p
+-
+\tilde{\varepsilon}_i
++
+\tilde{\Omega}_{jb}, \quad
+\Delta_{pa,ib}^{(+)}
+\equiv
+\tilde{\varepsilon}_p
+-
+\tilde{\varepsilon}_a
+-
+\tilde{\Omega}_{ib}.
+\end{equation}
+Finally, using $y_p(t)=e^{C_p(t)}$, we obtain
+\begin{align}
+\frac{dC_p(t)}{dt}
+&=
+i\alpha W_{pp}
+\nonumber\\
+&\quad
+-
+\sum_{ijb}
+\mathcal{K}_{pjib}
+\int_0^t d\tau\,
+e^{i\Delta_{pi,jb}^{(-)}(t-\tau)}
+e^{
+-C_p(t)
++C_p(\tau)
++C_i(t)
+-C_i(\tau)
+}
+\nonumber\\
+&\quad
+-
+\sum_{iab}
+\mathcal{K}_{pbai}
+\int_0^t d\tau\,
+e^{i\Delta_{pa,ib}^{(+)}(t-\tau)}
+e^{
+-C_p(t)
++C_p(\tau)
++C_a(t)
+-C_a(\tau)
+}.
+\end{align}
+\subsection{Bosonic cumulants}
+$i,j,\bm{k},\ldots$ denote occupied indices, whereas $a,b,\ldots$ denote virtual indices. We can write the SCCE ODE as 
+\begin{align}
+\frac{dC_{\bm{k}}(t)}{dt}
+&=
+-i \mathcal{C}_{\bm{k}}
+\nonumber\\
+&\quad
+-
+\sum_{i\nu}
+\mathcal{L}_{\bm{k}i\nu}
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}i,\nu}^{(-)}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)
++C_{\bm{k}}(\tau)
++C_i(t)
+-C_i(\tau)
+}
+\end{align}
+where we then determine the Green's function as $G_{\bm{k}}(t)=-i e^{-i\epsilon_{\bm{k}}^{\rm ref}t+C_{\bm{k}}(t)-\eta t}$. 
+% \emph{We should assert that $\operatorname{Im}[\Sigma_{\bm{k}}(\infty)]=0$ because this is supposed to be the static piece of the self-energy}. 
+% \subsubsection{How to recover the one-shot variants}
+% To do so, we instead solve the ODE
+% \begin{align}
+% \frac{dC_{\bm{k}}(t)}{dt}
+% &=
+% -i \mathcal{C}_{\bm{k}}
+% -
+% \sum_{i\nu}
+% \mathcal{L}_{\bm{k}i\nu}
+% \int_0^t d\tau\,
+% e^{i\Delta_{\bm{k}i,\nu}^{(-)}(t-\tau)}
+% - \chi
+% \sum_{a\nu}
+% \mathcal{L}_{\bm{k}a\nu}
+% \int_0^t d\tau\,
+% e^{i\Delta_{\bm{k}a,\nu}^{(+)}(t-\tau)}
+% \nonumber\\
+% &=
+% -i \mathcal{C}_{\bm{k}}
+% -
+% \sum_{i\nu}
+% \mathcal{L}_{\bm{k}i\nu}
+% \frac{e^{i\Delta_{\bm{k}i,\nu}^{(-)}t}-1}{i\Delta_{\bm{k}i,\nu}^{(-)}}
+% - \chi
+% \sum_{a\nu}
+% \mathcal{L}_{\bm{k}a\nu}
+% \frac{e^{i\Delta_{\bm{k}a,\nu}^{(+)}t}-1}{i\Delta_{\bm{k}a,\nu}^{(+)}}
+% \nonumber\\
+% \Longrightarrow\quad
+% C_{\bm{k}}(t)
+% &=
+% -i \mathcal{C}_{\bm{k}} t
+% +
+% \sum_{i\nu}
+% \frac{\mathcal{L}_{\bm{k}i\nu}}{\big(\Delta_{\bm{k}i,\nu}^{(-)}\big)^{2}}
+% \Big(
+% e^{i\Delta_{\bm{k}i,\nu}^{(-)}t}
+% -i\Delta_{\bm{k}i,\nu}^{(-)}t
+% -1
+% \Big)
+% \nonumber\\
+% &\quad
+% + \chi
+% \sum_{a\nu}
+% \frac{\mathcal{L}_{\bm{k}a\nu}}{\big(\Delta_{\bm{k}a,\nu}^{(+)}\big)^{2}}
+% \Big(
+% e^{i\Delta_{\bm{k}a,\nu}^{(+)}t}
+% -i\Delta_{\bm{k}a,\nu}^{(+)}t
+% -1
+% \Big).
+% \end{align}
+
+\subsubsection{LDA reference}
+ If we are starting from the LDA reference, then $\mathcal{C}_{\bm{k}}=0$ and $\epsilon_{\bm{k}}^{\rm ref}=|\bm{k}|^2/2 + \Sigma_{\bm{k}}^x$. Also, we have
+\begin{align}
+\Delta_{\bm{k}i,\nu}^{(-)}
+&=
+\epsilon_{\bm{k}}^{\rm LDA}
+-\epsilon_i^{\rm LDA}
++
+\omega_{\nu}^{\rm pl}
+% , \quad
+% \Delta_{\bm{k}a,\nu}^{(+)}
+% =
+% \epsilon_{\bm{k}}^{\rm LDA}
+% -\epsilon_a^{\rm LDA}
+% -
+% \omega_{\nu}^{\rm pl}
+\end{align}
+and
+\begin{align}
+\mathcal{L}_{\bm{k}i\nu}
+&=
+\left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2, \quad \bm{k}-\bm{q}\in\mathcal{O}
+% ,\\
+% \mathcal{L}_{\bm{k}a\nu}
+% &=
+% \left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2, \quad \bm{k}-\bm{q}\in\mathcal{V}
+\end{align}
+where we use the LDA single-particle energies $\epsilon_{\bm{k}}^{\rm LDA}$ along with the dRPA@LDA excitation energies $\omega_{\nu}^{\rm pl}$ and transition densities $g_\nu^{\rm pl}(\bm{k},\bm{q})$.
+\subsubsection{BW reference}
+ If we are starting from the BW reference, $\nu\equiv jb$. Then, $\mathcal{C}_{\bm{k}}=-\alpha W_{\bm{k}\bm{k}}$ and $\epsilon_{\bm{k}}^{\rm ref}=\tilde{\varepsilon}_{\bm{k}}$. Also,
+we have
+\begin{align}
+\Delta_{\bm{k}i,\nu}^{(-)}
+&=
+\tilde{\varepsilon}_{\bm{k}}
+-\tilde{\varepsilon}_i
++
+\tilde{\Omega}_{\nu}
+% , \quad
+% \Delta_{\bm{k}a,\nu}^{(+)}
+% =
+% \tilde{\varepsilon}_{\bm{k}}
+% -\epsilon_a^{\rm HF}
+% -
+% \tilde{\Omega}_{\nu}
+\end{align}
+and
+\begin{align}
+\mathcal{L}_{\bm{k}i\nu}
+&=
+\mathcal{K}_{\bm{k}jib}
+% , \quad
+% \mathcal{L}_{\bm{k}a\nu}=
+% \mathcal{K}_{\bm{k}baj},
+\end{align}
+where we use the BWs2 single-particle energies $\tilde{\varepsilon}_{\bm{k}}$ along with the BWs2 particle-hole excitation energies $\tilde{\Omega}_{\nu}\equiv \tilde{\Omega}_{jb}=\epsilon_b^{\rm HF}-\tilde{\varepsilon}_j$ and second-order Coulomb interaction kernels defined by $\mathcal K_{pqrs}=
+(pr|qs)
+\left[
+2(pr|qs)-(pq|rs)
+\right]$.
+\subsection{Fermionic cumulants}
+In this theory, the particle and hole equations are coupled VIDEs because the derivative at time $t$ depends on the full history. Therefore, they should be solved together by propagating
+\begin{equation}
+\frac{d\mathbf{C}(t)}{dt}
+=
+\mathbf{F}[\mathbf{C}](t)
+\end{equation}
+with
+\begin{equation}
+\mathbf{C}(t)
+=
+\left(
+\{C_{\bm{a}}^{+}(t)\}_{\bm{a}\in\mathcal{V}},
+\{C_{\bm{i}}^{-}(t)\}_{\bm{i}\in\mathcal{O}}
+\right).
+\end{equation}
+ We determine the Green's functions for particles and holes as $G_{\bm{a}}(t)=-i e^{-i\epsilon_{\bm{a}}^{\rm ref}t+C_{\bm{a}}^{+}(t)-\eta t}$ and $G_{\bm{i}}(t)=-i e^{-i\epsilon_{\bm{i}}^{\rm ref}t+C_{\bm{i}}^{-}(t)-\eta t}$, respectively.
+For particles, we have
+\begin{align}
+\frac{dC_{\bm{a}}^{+}(t)}{dt}
+&=
+-i\mathcal{C}_{\bm{a}}
+-
+\sum_{c\nu}
+\mathcal{K}_{\bm{a}c\nu}
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{a}c\nu}^{(+)}(t-\tau)}
+e^{\Phi_{\bm{a}c\nu}(t,\tau)}.
+\end{align}
+For holes, we have
+\begin{align}
+\frac{dC_{\bm{i}}^{-}(t)}{dt}
+&= - \mathcal{C}_{\bm{i}}
+-
+\sum_{k\nu}
+\mathcal{K}_{\bm{i}k\nu}
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{i}k\nu}^{(-)}(t-\tau)}
+e^{\Psi_{\bm{i}k\nu}(t,\tau)}.
+\end{align}
+\subsubsection{LDA reference}
+% where
+% \begin{align}
+% \Phi_{p;iab}(t,\tau)
+% &=
+% -C_p^{+}(t)
+% +C_p^{+}(\tau)
+% +C_a^{+}(t)
+% -C_a^{+}(\tau)
+% \nonumber\\
+% &\quad
+% +C_b^{+}(t)
+% -C_b^{+}(\tau)
+% +C_i^{-}(t)
+% -C_i^{-}(\tau).
+% \end{align}
+ Here, $\mathcal{C}_{\bm{p}}=0$ and $\epsilon_{\bm{p}}^{\rm ref}=|\bm{p}|^2/2 + \Sigma_{\bm{p}}^x$. Also, we have
+\begin{align}
+\Delta_{\bm{p}k,\nu}^{(-)}
+&=
+\epsilon_{\bm{p}}^{\rm LDA}
+-\epsilon_k^{\rm LDA}
++
+\omega_{\nu}^{\rm pl}
+, \quad
+\Delta_{\bm{p}c,\nu}^{(+)}
+=
+\epsilon_{\bm{p}}^{\rm LDA}
+-\epsilon_c^{\rm LDA}
+-
+\omega_{\nu}^{\rm pl}
+\end{align}
+and (where $\bm{q}$ is the momentum imparted by plasmon mode $\nu$)
+\begin{align}
+\mathcal{K}_{\bm{p}k\nu}
+&=
+\left|g_\nu^{\rm pl}(\bm{p},\bm{q})\right|^2, \quad \bm{p}-\bm{q}\in\mathcal{O}
+,\quad 
+\mathcal{K}_{\bm{p}c\nu}
+=
+\left|g_\nu^{\rm pl}(\bm{p},\bm{q})\right|^2, \quad \bm{p}-\bm{q}\in\mathcal{V}
+\end{align}
+% \mathcal{L}_{\bm{k}i\nu}
+% &=
+% \left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2, \quad \bm{k}-\bm{q}\in\mathcal{O}
+% ,\\
+% \mathcal{L}_{\bm{k}a\nu}
+% &=
+% \left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2, \quad \bm{k}-\bm{q}\in\mathcal{V}
+% \end{align}
+We used the LDA single-particle energies $\epsilon_{\bm{k}}^{\rm LDA}$ along with the dRPA@LDA excitation energies $\omega_{\nu}^{\rm pl}$ and transition densities $g_\nu^{\rm pl}(\bm{k},\bm{q})$.
+Here we take 
+\begin{align}
+\Psi_{\bm{p}q\nu}(t,\tau)
+&=
+% -C_i^{-}(t)
+% +C_i^{-}(\tau)
+% +C_j^{-}(t)
+% -C_j^{-}(\tau)
+% \nonumber\\
+% &\quad
++C_p^{-}(t)
+-C_p^{-}(\tau)
++C_q^{-}(t)
+-C_q^{-}(\tau),
+\end{align}
+given that we freeze the plasmon modes at the dRPA@LDA level. This means that if we choose the dRPA@LDA reference, we are forced to do bosonic cumulants. And so we only have one VIDE to solve, if we want the electron-removal spectral function of the state at the bottom of the band.
+\subsubsection{BW reference}
+Here, $\tilde{\varepsilon}_{{k}}$ denote the BWs2 single-particle energies, which are dressed for occupied states and unaffected for virtual ones. We can try $\nu\equiv jb$ if we want to do fully fermionic cumulants. Then, $\mathcal{C}_{\bm{p}}=-\alpha W_{\bm{p}\bm{p}}$, where $W_{\bm{p}\bm{p}}=\Theta(|\bm{k}_F| - |\bm{p}|)\Sigma^{2p1h}_{\bm{p}\bm{p}}(\tilde{\varepsilon}_{\bm{p}})$ and $\epsilon_{\bm{p}}^{\rm ref}=\tilde{\varepsilon}_{\bm{p}}$. Also,
+we have
+\begin{align}
+\Delta_{\bm{p}k\nu}^{(-)}
+&=
+\tilde{\varepsilon}_{\bm{p}}
+-\tilde{\varepsilon}_k
++{\varepsilon_b^{\rm HF}} - \tilde{\varepsilon}_j, \quad \Delta_{\bm{p}c\nu}^{(+)}
+=
+\tilde{\varepsilon}_{\bm{p}}
+-\epsilon_c^{\rm HF}
+-{\varepsilon_b^{\rm HF}} + \tilde{\varepsilon}_j
+% , \quad
+% \Delta_{\bm{k}a,\nu}^{(+)}
+% =
+% \tilde{\varepsilon}_{\bm{k}}
+% -\epsilon_a^{\rm HF}
+% -
+% \tilde{\Omega}_{\nu}
+\end{align}
+and second-order Coulomb interaction kernels defined by $\mathcal K_{pqrs}=
+(pr|qs)
+\left[
+2(pr|qs)-(pq|rs)
+\right]$. We can take 
+\begin{align}
+\Psi_{\bm{p}k\nu}(t,\tau)
+&=
+-C_p^{-}(t)
++C_p^{-}(\tau)
++C_k^{-}(t)
+-C_k^{-}(\tau) - C_b^{+}(t) + C_b^{+}(\tau) + C_j^{-}(t) - C_j^{-}(\tau) \\
+\Psi_{\bm{p}c\nu}(t,\tau)
+&=
+-C_p^{+}(t)
++C_p^{+}(\tau)
++C_c^{+}(t)
+-C_c^{+}(\tau) + C_b^{+}(t) - C_b^{+}(\tau) - C_j^{-}(t) + C_j^{-}(\tau)
+\end{align}
+% and
+% \begin{align}
+% \mathcal{L}_{\bm{p}k\nu}
+% &=
+% \mathcal{K}_{\bm{p}kib}
+% % , \quad
+% % \mathcal{L}_{\bm{k}a\nu}=
+% % \mathcal{K}_{\bm{k}baj},
+% \end{align}
+% where we use the BWs2 single-particle energies $\tilde{\varepsilon}_{\bm{k}}$.
+%  along with the BWs2 particle-hole excitation energies $\tilde{\Omega}_{\nu}\equiv \tilde{\Omega}_{jb}=\epsilon_b^{\rm HF}-\tilde{\varepsilon}_j$ 
+We discretize time according to
+\begin{equation}
+t_n=n\Delta t,
+\qquad
+n=0,\ldots,N_t,
+\end{equation}
+with initial conditions
+\begin{equation}
+C_a^{+}(0)=0,
+\qquad
+C_i^{-}(0)=0.
+\end{equation}
+At a given time $t_n$, the histories
+\begin{equation}
+C^{\pm}(t_0),
+C^{\pm}(t_1),
+\ldots,
+C^{\pm}(t_{n-1})
+\end{equation}
+are already known. The particle and hole cumulants at the current time $t_n$ are then determined simultaneously.
+
+A simple predictor for the current-time cumulants is
+\begin{equation}
+\mathbf{C}_n^{(0)}
+=
+\mathbf{C}_{n-1}
++
+\Delta t\,
+\dot{\mathbf{C}}_{n-1}.
+\end{equation}
+Using this trial value together with the stored history, we evaluate the memory integrals. For example, using a trapezoidal quadrature,
+\begin{equation}
+\int_0^{t_n}d\tau\,
+K(t_n,\tau)
+\approx
+\Delta t
+\left[
+\frac{1}{2}K(t_n,t_0)
++
+\sum_{m=1}^{n-1}
+K(t_n,t_m)
++
+\frac{1}{2}K(t_n,t_n)
+\right].
+\end{equation}
+
+The current-time cumulants are then corrected using, for example, a trapezoidal time step,
+\begin{equation}
+\mathbf{C}_n^{(m+1)}
+=
+\mathbf{C}_{n-1}
++
+\frac{\Delta t}{2}
+\left[
+\dot{\mathbf{C}}_{n-1}
++
+\dot{\mathbf{C}}_n^{(m)}
+\right].
+\end{equation}
+Because $\dot{\mathbf{C}}_n$ depends on the unknown particle and hole cumulants at $t_n$, this update is iterated self-consistently,
+\begin{equation}
+\mathbf{C}_n^{(0)}
+\longrightarrow
+\mathbf{F}[\mathbf{C}_n^{(0)}]
+\longrightarrow
+\mathbf{C}_n^{(1)}
+\longrightarrow
+\mathbf{F}[\mathbf{C}_n^{(1)}]
+\longrightarrow
+\cdots
+\end{equation}
+until
+\begin{equation}
+\max_p
+\left|
+C_p^{(m+1)}(t_n)
+-
+C_p^{(m)}(t_n)
+\right|
+<
+\varepsilon.
+\end{equation}
+Once convergence is reached, the values at $t_n$ are accepted and the propagation proceeds to $t_{n+1}$.
+
+Thus, the numerical procedure is
+\begin{equation}
+\boxed{
+\text{predict}
+\longrightarrow
+\text{evaluate memory kernels}
+\longrightarrow
+\text{update particle and hole cumulants}
+\longrightarrow
+\text{iterate to convergence}
+\longrightarrow
+\text{advance in time}
+}
+\end{equation}
+and the particle and hole sectors are propagated as a single coupled object rather than sequentially.
+
+The coupling between the two sectors follows from the fermionic intermediate-state structure: a $2p1h$ configuration contains an internal hole line, whereas a $2h1p$ configuration contains an internal particle line. Hence,
+\begin{equation}
+\{C_a^{+}(t)\}
+\longleftrightarrow
+\{C_i^{-}(t)\},
+\end{equation}
+and both sets of cumulants must be updated simultaneously at every time step.
+BW lends itself to fermionic cumulants.
+As before, $i,j,\ldots$ denote occupied indices, $a,b,\ldots$ denote virtual indices, and $\bm{k}$ is the external state, which may now lie in either $\mathcal{O}$ or $\mathcal{V}$. For \emph{every} orbital $p\in\mathcal{O}\cup\mathcal{V}$ we keep the same forward-time representation used in the bosonic case,
+\begin{align}
+G_p(t)=-i\,e^{-i\epsilon_p^{\rm ref}t+C_p(t)-\eta t},\qquad t>0,
+\label{eq:Gferm}
+\end{align}
+so that a single family of cumulants $\{C_p(t)\}$ is propagated. \emph{What is the reason we have chosen to stay in the forward time representation? Why are we not computing the lesser concentration for hole states and the greater concentration for particle states? It seems that we are computing the retarded Green's function for all states, regardless of where they are relative to the Fermi level. }The only change relative to the bosonic construction is the intermediate state: instead of one hole $i$ plus one \emph{undressed} quasiboson $\nu$, the fermionic theory propagates the explicit $2h1p$ configurations $(ij;b)$ and $2p1h$ configurations $(ab;j)$, and every line in these configurations is dressed self-consistently.
+
+\subsubsection{Forward-time Dyson equation and bare kernel}
+Following Robinson \emph{et al.}, we start from the forward-time ($t>0$) Dyson equation for the diagonal element,
+\begin{align}
+i\frac{dG_{\bm{k}}(t)}{dt}
+=
+\big(\epsilon_{\bm{k}}^{\rm ref}+\mathcal{C}_{\bm{k}}\big)G_{\bm{k}}(t)
++\int_0^t d\tau\,\Sigma_{\bm{k}}(t-\tau)\,G_{\bm{k}}(\tau),
+\label{eq:dyson}
+\end{align}
+where $\mathcal{C}_{\bm{k}}$ is the static remainder of the self-energy and $\Sigma_{\bm{k}}(s)$ is its dynamical second-order part. With both self-energy branches retained (both poles on the same side, i.e.\ the forward/retarded convention), the time-domain kernel is
+\begin{align}
+\Sigma_{\bm{k}}(s)
+&=
+-i\,\chi_{\bm{k}}^{(-)}\sum_{ijb}\mathcal{L}^{(-)}_{\bm{k}ijb}\,
+e^{-i(\epsilon_i+\epsilon_j-\epsilon_b)s}
+-i\,\chi_{\bm{k}}^{(+)}\sum_{abj}\mathcal{L}^{(+)}_{\bm{k}abj}\,
+e^{-i(\epsilon_a+\epsilon_b-\epsilon_j)s},
+\qquad s>0,
+\label{eq:Sigma2}
+\end{align}
+with kernels
+\begin{align}
+\mathcal{L}^{(-)}_{\bm{k}ijb}=\mathcal{K}_{\bm{k}jib},
+\qquad
+\mathcal{L}^{(+)}_{\bm{k}abj}=\mathcal{K}_{\bm{k}baj},
+\qquad
+\mathcal{K}_{pqrs}=(pr|qs)\big[2(pr|qs)-(pq|rs)\big],
+\label{eq:Lkernels}
+\end{align}
+which are precisely the second-order Coulomb kernels already used for the BW reference. The switches
+\begin{align}
+\chi^{(-)}_{\bm{k}}=\begin{cases}1,&\bm{k}\in\mathcal{O}\\ \chi,&\bm{k}\in\mathcal{V}\end{cases},
+\qquad
+\chi^{(+)}_{\bm{k}}=\begin{cases}\chi,&\bm{k}\in\mathcal{O}\\ 1,&\bm{k}\in\mathcal{V}\end{cases},
+\end{align}
+play the same role as $\chi$ in the bosonic one-shot equations: $\chi=1$ dresses the full second-order self-energy of every orbital, whereas $\chi=0$ keeps only the branch natural to the sector of $\bm{k}$ ($2h1p$ for holes, $2p1h$ for particles).
+
+Inserting Eq.~\eqref{eq:Gferm} into Eq.~\eqref{eq:dyson} and dividing by $-i e^{-i\epsilon^{\rm ref}_{\bm{k}}t}$ gives the exact-in-form equation for $y_{\bm{k}}(t)\equiv e^{C_{\bm{k}}(t)}$,
+\begin{align}
+\frac{dy_{\bm{k}}(t)}{dt}
+&=
+-i\mathcal{C}_{\bm{k}}\,y_{\bm{k}}(t)
+-\chi^{(-)}_{\bm{k}}\sum_{ijb}\mathcal{L}^{(-)}_{\bm{k}ijb}
+\int_0^t d\tau\,e^{i\Delta^{(-)}_{\bm{k}ij,b}(t-\tau)}\,y_{\bm{k}}(\tau)
+\nonumber\\
+&\quad
+-\chi^{(+)}_{\bm{k}}\sum_{abj}\mathcal{L}^{(+)}_{\bm{k}abj}
+\int_0^t d\tau\,e^{i\Delta^{(+)}_{\bm{k}ab,j}(t-\tau)}\,y_{\bm{k}}(\tau),
+\label{eq:ybare}
+\end{align}
+with the intermediate-state denominators
+\begin{align}
+\Delta^{(-)}_{\bm{k}ij,b}
+=\epsilon^{\rm ref}_{\bm{k}}-\epsilon_i-\epsilon_j+\epsilon_b,
+\qquad
+\Delta^{(+)}_{\bm{k}ab,j}
+=\epsilon^{\rm ref}_{\bm{k}}-\epsilon_a-\epsilon_b+\epsilon_j.
+\label{eq:Deltas}
+\end{align}
+Note that $\Delta^{(-)}_{\bm{k}ij,b}=\epsilon^{\rm ref}_{\bm{k}}-\epsilon_i+(\epsilon_b-\epsilon_j)$ coincides with the bosonic $\Delta^{(-)}_{\bm{k}i,\nu}$ for $\nu\equiv jb$ and $\Omega_\nu=\epsilon_b-\epsilon_j$; likewise $\Delta^{(+)}_{\bm{k}ab,j}=\Delta^{(+)}_{\bm{k}a,\nu}$.
+
+\subsubsection{Self-consistent dressing of the intermediate lines}
+The Dunn--Robinson step is to factorize the bare phase of each intermediate line and then replace bare propagators by dressed ones. Write the $2h1p$ phase as a product of single-line phases,
+\begin{align}
+e^{-i(\epsilon_i+\epsilon_j-\epsilon_b)(t-\tau)}
+=
+\underbrace{e^{-i\epsilon_i(t-\tau)}}_{\text{forward}}\;
+\underbrace{e^{-i\epsilon_j(t-\tau)}}_{\text{forward}}\;
+\underbrace{e^{+i\epsilon_b(t-\tau)}}_{\text{backward}},
+\end{align}
+and similarly for $2p1h$, where $a,b$ are forward and $j$ is backward. Introduce $\mathcal{G}_p(s)\equiv e^{-i\epsilon_p s+C_p(s)}$ with bare limit $\mathcal{G}^{(0)}_p(s)=e^{-i\epsilon_p s}$.
+
+\paragraph{Forward lines.}
+Exactly as in Robinson's Eq.~(13), $\mathcal{G}^{(0)}_p(t-\tau)=\mathcal{G}^{(0)}_p(t)/\mathcal{G}^{(0)}_p(\tau)$, and the replacement $\mathcal{G}^{(0)}\to\mathcal{G}$ gives
+\begin{align}
+e^{-i\epsilon_p(t-\tau)}
+\;\longrightarrow\;
+\frac{\mathcal{G}_p(t)}{\mathcal{G}_p(\tau)}
+=
+e^{-i\epsilon_p(t-\tau)}\,e^{+\Delta C_p(t,\tau)},
+\qquad
+\Delta C_p(t,\tau)\equiv C_p(t)-C_p(\tau).
+\end{align}
+This is the rule that produced $+C_i(t)-C_i(\tau)$ in the bosonic equation.
+
+\paragraph{Backward lines.}
+A backward line is the same propagator evaluated at negative time argument, $e^{+i\epsilon_p(t-\tau)}=\mathcal{G}^{(0)}_p(\tau-t)$. Since the exact single-particle propagator obeys $G_p(-s)=-G_p(s)^*$, the cumulant satisfies $C_p(-s)=C_p(s)^*$, so the dressed backward line is the complex conjugate of the dressed forward line,
+\begin{align}
+e^{+i\epsilon_p(t-\tau)}
+\;\longrightarrow\;
+\left[\frac{\mathcal{G}_p(t)}{\mathcal{G}_p(\tau)}\right]^{*}
+=
+e^{+i\epsilon_p(t-\tau)}\,e^{+\Delta C_p(t,\tau)^{*}}.
+\end{align}
+The conjugate is essential: it makes the backward line decay whenever $\operatorname{Re}C_p<0$, i.e.\ the $2h1p$ and $2p1h$ intermediate states are damped by the lifetimes of all three of their constituents. (Using $e^{-\Delta C_p}$ instead would make the backward line grow.)
+
+\paragraph{External line.}
+As in the bosonic case, the factor $y_{\bm{k}}(\tau)/y_{\bm{k}}(t)$ in Eq.~\eqref{eq:ybare} contributes $e^{-\Delta C_{\bm{k}}(t,\tau)}$ once we pass from $y_{\bm{k}}$ to $C_{\bm{k}}$.
+
+\subsubsection{Fermionic SCCE ODE}
+Collecting the three rules, the fermionic SCCE ODE for an arbitrary orbital $\bm{k}$ reads
+\begin{align}
+\frac{dC_{\bm{k}}(t)}{dt}
+&=
+-i\,\mathcal{C}_{\bm{k}}
+\nonumber\\
+&\quad
+-\chi^{(-)}_{\bm{k}}
+\sum_{ijb}
+\mathcal{L}^{(-)}_{\bm{k}ijb}
+\int_0^t d\tau\,
+e^{i\Delta^{(-)}_{\bm{k}ij,b}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)+C_{\bm{k}}(\tau)
++C_i(t)-C_i(\tau)
++C_j(t)-C_j(\tau)
++C_b^*(t)-C_b^*(\tau)
+}
+\nonumber\\
+&\quad
+-\chi^{(+)}_{\bm{k}}
+\sum_{abj}
+\mathcal{L}^{(+)}_{\bm{k}abj}
+\int_0^t d\tau\,
+e^{i\Delta^{(+)}_{\bm{k}ab,j}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)+C_{\bm{k}}(\tau)
++C_a(t)-C_a(\tau)
++C_b(t)-C_b(\tau)
++C_j^*(t)-C_j^*(\tau)
+},
+\label{eq:fermSCCE}
+\end{align}
+with $C_p(0)=0$ for all $p$, and the Green's function is then $G_{\bm{k}}(t)=-ie^{-i\epsilon^{\rm ref}_{\bm{k}}t+C_{\bm{k}}(t)-\eta t}$ exactly as before. For numerical work the $y$-form analogous to Robinson's Eq.~(C1) is
+\begin{align}
+\frac{dy_{\bm{k}}(t)}{dt}
+&=
+-i\mathcal{C}_{\bm{k}}\,y_{\bm{k}}(t)
+-\chi^{(-)}_{\bm{k}}\sum_{ijb}\mathcal{L}^{(-)}_{\bm{k}ijb}
+\int_0^t d\tau\,e^{i\Delta^{(-)}_{\bm{k}ij,b}(t-\tau)}\,
+y_{\bm{k}}(\tau)\,
+\frac{y_i(t)\,y_j(t)\,y_b^*(t)}{y_i(\tau)\,y_j(\tau)\,y_b^*(\tau)}
+\nonumber\\
+&\quad
+-\chi^{(+)}_{\bm{k}}\sum_{abj}\mathcal{L}^{(+)}_{\bm{k}abj}
+\int_0^t d\tau\,e^{i\Delta^{(+)}_{\bm{k}ab,j}(t-\tau)}\,
+y_{\bm{k}}(\tau)\,
+\frac{y_a(t)\,y_b(t)\,y_j^*(t)}{y_a(\tau)\,y_b(\tau)\,y_j^*(\tau)},
+\label{eq:yferm}
+\end{align}
+which is a first-order Volterra integro-differential system and can be integrated with the same Adams--Bashforth/Adams--Moulton predictor--corrector scheme used by Robinson \emph{et al.}
+
+\paragraph{Remarks.}
+\begin{enumerate}
+\item \emph{Relation to the bosonic SCCE.} Setting $\Delta C_j=\Delta C_b^*=0$ in the $2h1p$ term (i.e.\ leaving the quasiboson $\nu=jb$ undressed) and $\chi^{(+)}_{\bm k}\to\chi$ reproduces the bosonic ODE of the previous subsection term by term. The fermionic theory therefore changes only the exponent; the kernels $\mathcal{L}$, the denominators $\Delta$, and the static data $\mathcal{C}_{\bm{k}},\epsilon^{\rm ref}_{\bm{k}}$ are unchanged.
+\item \emph{One-shot limit.} Dropping all $\Delta C$ factors in Eq.~\eqref{eq:fermSCCE} gives the commented one-shot equation for $C_{\bm{k}}(t)$ with $\nu\equiv jb$, so the first self-consistency iteration started from $C\equiv0$ reproduces the ordinary second-order cumulant, in analogy with Robinson's Appendix~B.
+\item \emph{Coupled propagation.} The $2h1p$ exponent contains a virtual cumulant $C_b$ and the $2p1h$ exponent contains an occupied cumulant $C_j$, independently of $\chi$. Hence occupied and virtual cumulants cannot be propagated one after the other; $\{C_i\}_{i\in\mathcal{O}}$ and $\{C_a\}_{a\in\mathcal{V}}$ form a single state vector $\dot{C}=F[t;C(t),C(\tau\le t)]$ and are advanced together. The system remains causal: at time $t$ only $C_p(\tau)$ with $0\le\tau\le t$ is required.
+\item \emph{Static piece.} As in the bosonic case, the choice $\epsilon^{\rm ref}_{\bm{k}}$ and $\mathcal{C}_{\bm{k}}$ is fixed by the partition of the Hamiltonian, not by the cumulant formalism. One should still require $\operatorname{Im}\mathcal{C}_{\bm{k}}=0$.
+\end{enumerate}
+
+\subsubsection{LDA reference}
+If we start from the LDA reference, then $\mathcal{C}_{\bm{k}}=0$ and $\epsilon^{\rm ref}_{\bm{k}}=|\bm{k}|^2/2+\Sigma^x_{\bm{k}}$ as before. The quasiboson $\nu$ (a dRPA@LDA excitation) is now resolved into bare particle-hole pairs $(j,b)$ interacting through the bare Coulomb interaction, and the LDA single-particle energies are used for all internal lines \emph{But then, is it true that we are not incorporating any screening effects such that the scheme wouldn't really work for metallic systems? Can we keep the sum between EJ and EB as an RPA excitation energy in this theory so that we are working with the screened interaction instead? Does this just mean we are using a dRPA@LDA reference instead of an LDA one?}:,
+\begin{align}
+\Delta^{(-)}_{\bm{k}ij,b}
+&=
+\epsilon^{\rm LDA}_{\bm{k}}
+-\epsilon^{\rm LDA}_{i}
+-\epsilon^{\rm LDA}_{j}
++\epsilon^{\rm LDA}_{b},
+\qquad
+\Delta^{(+)}_{\bm{k}ab,j}
+=
+\epsilon^{\rm LDA}_{\bm{k}}
+-\epsilon^{\rm LDA}_{a}
+-\epsilon^{\rm LDA}_{b}
++\epsilon^{\rm LDA}_{j}.
+\end{align}
+For plane waves the two-electron integrals are momentum-conserving,
+\begin{align}
+(\bm{p}\bm{r}|\bm{q}\bm{s})
+=
+\frac{1}{\Omega}\,v(\bm{p}-\bm{r})\,\delta_{\bm{p}+\bm{q},\bm{r}+\bm{s}},
+\qquad
+v(\bm{q})=\frac{4\pi}{|\bm{q}|^2},
+\end{align}
+so that the kernels of Eq.~\eqref{eq:Lkernels} become
+\begin{align}
+\mathcal{L}^{(-)}_{\bm{k}ijb}
+&=
+\mathcal{K}_{\bm{k}jib}
+=
+\frac{1}{\Omega^2}\,
+v(\bm{k}-\bm{i})\big[2v(\bm{k}-\bm{i})-v(\bm{k}-\bm{j})\big]\,
+\delta_{\bm{b},\,\bm{k}+\bm{j}-\bm{i}},
+\qquad \bm{b}\in\mathcal{V},
+\\
+\mathcal{L}^{(+)}_{\bm{k}abj}
+&=
+\mathcal{K}_{\bm{k}baj}
+=
+\frac{1}{\Omega^2}\,
+v(\bm{k}-\bm{a})\big[2v(\bm{k}-\bm{a})-v(\bm{k}-\bm{b})\big]\,
+\delta_{\bm{j},\,\bm{a}+\bm{b}-\bm{k}},
+\qquad \bm{j}\in\mathcal{O}.
+\end{align}
+The momentum-conservation $\delta$ removes one of the three internal sums, e.g.\ the $2h1p$ term is a double sum over $\bm{i},\bm{j}\in\mathcal{O}$ with $\bm{b}=\bm{k}+\bm{j}-\bm{i}$ restricted to lie outside the Fermi sphere. Compared with the bosonic LDA construction, $\omega^{\rm pl}_\nu\to\epsilon^{\rm LDA}_b-\epsilon^{\rm LDA}_j$ and $|g^{\rm pl}_\nu(\bm{k},\bm{q})|^2\to\mathcal{K}$ with $\bm{q}=\bm{k}-\bm{i}$; the screening that was built into the plasmon pole must now be generated dynamically by the self-consistent dressing of the $j$ and $b$ lines.
+% Caveat: the bare second-order direct term of the electron gas is infrared-sensitive
+% at small q, so the small-|k-i| region of the L^{(-)} sum should be monitored in practice.
+
+\subsubsection{BW reference}
+If we start from the BW reference, then $\mathcal{C}_{\bm{k}}=-\alpha W_{\bm{k}\bm{k}}$ and $\epsilon^{\rm ref}_{\bm{k}}=\tilde{\varepsilon}_{\bm{k}}$, exactly as in the bosonic case. \emph{But we know that in BWS2 theory, $W_{\bm{k}\bm{k}}=\Theta(\bm{k}_F-\bm{k})\Sigma^{(2), \rm 2p1h}(\omega=\tilde{\epsilon}_k)$ where $\bm{k}_F$ is the Fermi wavevector and $\tilde{\epsilon}_k=\Theta(\bm{k}-\bm{k}_F)\tilde{\epsilon}_k + \Theta(\bm{k}_F-\bm{k})\epsilon^{\rm HF}_k$ is the dressed single-particle energy. So does this carry over to this theory?} Since the BWs2 reference dresses occupied orbitals only, internal hole lines carry $\tilde{\varepsilon}$ and internal particle lines carry $\epsilon^{\rm HF}$,
+\begin{align}
+\Delta^{(-)}_{\bm{k}ij,b}
+&=
+\tilde{\varepsilon}_{\bm{k}}
+-\tilde{\varepsilon}_{i}
+-\tilde{\varepsilon}_{j}
++\epsilon^{\rm HF}_{b}
+=
+\tilde{\varepsilon}_{\bm{k}}-\tilde{\varepsilon}_{i}+\tilde{\Omega}_{jb},
+\qquad
+\Delta^{(+)}_{\bm{k}ab,j}
+=
+\epsilon^{\rm ref}_{\bm{k}}
+-\epsilon^{\rm HF}_{a}
+-\epsilon^{\rm HF}_{b}
++\tilde{\varepsilon}_{j}
+=
+\epsilon^{\rm ref}_{\bm{k}}-\epsilon^{\rm HF}_a-\tilde{\Omega}_{jb},
+\end{align}
+with $\tilde{\Omega}_{jb}=\epsilon^{\rm HF}_b-\tilde{\varepsilon}_j$ as before, and
+\begin{align}
+\mathcal{L}^{(-)}_{\bm{k}ijb}=\mathcal{K}_{\bm{k}jib},
+\qquad
+\mathcal{L}^{(+)}_{\bm{k}abj}=\mathcal{K}_{\bm{k}baj},
+\end{align}
+which are identical to the bosonic $\mathcal{L}_{\bm{k}i\nu}$ and $\mathcal{L}_{\bm{k}a\nu}$ with $\nu\equiv jb$. Thus the BW bosonic SCCE was already the $2h1p$ diagram with the hole $i$ dressed and the pair $(j,b)$ left bare; the fermionic BW SCCE keeps the same kernels and denominators and only adds $+\Delta C_j+\Delta C_b^*$ to the exponent (and, for $\chi^{(+)}_{\bm k}\neq0$, the $2p1h$ term with $+\Delta C_a+\Delta C_b+\Delta C_j^*$).
+
+For a virtual external orbital $\bm{k}\in\mathcal{V}$ the BWs2 construction does not supply $\tilde{\varepsilon}_{\bm{k}}$ or $W_{\bm{k}\bm{k}}$. The consistent choices are either (i) $\epsilon^{\rm ref}_{\bm{k}}=\epsilon^{\rm HF}_{\bm{k}}$, $\mathcal{C}_{\bm{k}}=0$, matching the treatment of internal particle lines above, or (ii) a particle-sector BW analogue built from the $2p1h$ self-energy, $W^{+}_{\bm{k}\bm{k}}\sim\Sigma^{(2),2p1h}_{\bm{k}\bm{k}}(\omega=\tilde{\varepsilon}^{+}_{\bm{k}})$, in which case $\epsilon^{\rm ref}_{\bm{k}}=\tilde{\varepsilon}^{+}_{\bm{k}}$ and $\mathcal{C}_{\bm{k}}=-\alpha W^{+}_{\bm{k}\bm{k}}$ should also be used for the internal particle lines. Whichever option is chosen, the same reference energies must be used in Eq.~\eqref{eq:Deltas} and in Eq.~\eqref{eq:Gferm}. \emph{I think we should take choice (i) then.}
+
+
+\subsection{A unified VIDE}
+$i,j,\ldots$ denote occupied indices, whereas $a,b,\ldots$ denote virtual indices. We can write the SCCE ODE as 
+\begin{align}
+\frac{dC_{\bm{k}}(t)}{dt}
+&=
+-i \mathcal{C}_{\bm{k}}
+\nonumber\\
+&\quad
+-
+\sum_{i\nu}
+\mathcal{L}_{\bm{k}i\nu}
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}i,\nu}^{(-)}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)
++C_{\bm{k}}(\tau)
++C_i(t)
+-C_i(\tau)
+}
+\nonumber\\
+&\quad
+- \chi
+\sum_{a\nu}
+\mathcal{L}_{\bm{k}a\nu}
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}a,\nu}^{(+)}(t-\tau)}
+e^{
+-C_{\bm{k}}(t)
++C_{\bm{k}}(\tau)
++C_a(t)
+-C_a(\tau)
+},
+\end{align}
+where we then determine the Green's function as $G_{\bm{k}}(t)=-i e^{-i\epsilon_{\bm{k}}^{\rm ref}t+C_{\bm{k}}(t)-\eta t}$. 
+% \emph{We should assert that $\operatorname{Im}[\Sigma_{\bm{k}}(\infty)]=0$ because this is supposed to be the static piece of the self-energy}. 
+{We take $\chi=0$ if we are solving the quasiboson Hamiltonian (because we can only allow for $n$h$n+1$p configurations, which should not include any 2h1p contributions) and $\chi=1$ if we are solving the electronic structure one.}
+\subsubsection{How to recover the one-shot variants}
+To do so, we instead solve the ODE
+\begin{align}
+\frac{dC_{\bm{k}}(t)}{dt}
+&=
+-i \mathcal{C}_{\bm{k}}
+-
+\sum_{i\nu}
+\mathcal{L}_{\bm{k}i\nu}
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}i,\nu}^{(-)}(t-\tau)}
+- \chi
+\sum_{a\nu}
+\mathcal{L}_{\bm{k}a\nu}
+\int_0^t d\tau\,
+e^{i\Delta_{\bm{k}a,\nu}^{(+)}(t-\tau)}
+\nonumber\\
+&=
+-i \mathcal{C}_{\bm{k}}
+-
+\sum_{i\nu}
+\mathcal{L}_{\bm{k}i\nu}
+\frac{e^{i\Delta_{\bm{k}i,\nu}^{(-)}t}-1}{i\Delta_{\bm{k}i,\nu}^{(-)}}
+- \chi
+\sum_{a\nu}
+\mathcal{L}_{\bm{k}a\nu}
+\frac{e^{i\Delta_{\bm{k}a,\nu}^{(+)}t}-1}{i\Delta_{\bm{k}a,\nu}^{(+)}}
+\nonumber\\
+\Longrightarrow\quad
+C_{\bm{k}}(t)
+&=
+-i \mathcal{C}_{\bm{k}} t
++
+\sum_{i\nu}
+\frac{\mathcal{L}_{\bm{k}i\nu}}{\big(\Delta_{\bm{k}i,\nu}^{(-)}\big)^{2}}
+\Big(
+e^{i\Delta_{\bm{k}i,\nu}^{(-)}t}
+-i\Delta_{\bm{k}i,\nu}^{(-)}t
+-1
+\Big)
+\nonumber\\
+&\quad
++ \chi
+\sum_{a\nu}
+\frac{\mathcal{L}_{\bm{k}a\nu}}{\big(\Delta_{\bm{k}a,\nu}^{(+)}\big)^{2}}
+\Big(
+e^{i\Delta_{\bm{k}a,\nu}^{(+)}t}
+-i\Delta_{\bm{k}a,\nu}^{(+)}t
+-1
+\Big).
+\end{align}
+
+\subsubsection{LDA reference}
+ If we are starting from the LDA reference, then $\mathcal{C}_{\bm{k}}=0$ and $\epsilon_{\bm{k}}^{\rm ref}=|\bm{k}|^2/2 + \Sigma_{\bm{k}}^x$. Also, we have
+\begin{align}
+\Delta_{\bm{k}i,\nu}^{(-)}
+&=
+\epsilon_{\bm{k}}^{\rm LDA}
+-\epsilon_i^{\rm LDA}
++
+\omega_{\nu}^{\rm pl}, \quad
+\Delta_{\bm{k}a,\nu}^{(+)}
+=
+\epsilon_{\bm{k}}^{\rm LDA}
+-\epsilon_a^{\rm LDA}
+-
+\omega_{\nu}^{\rm pl}
+\end{align}
+and
+\begin{align}
+\mathcal{L}_{\bm{k}i\nu}
+&=
+\left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2, \quad \bm{k}-\bm{q}\in\mathcal{O},\\
+\mathcal{L}_{\bm{k}a\nu}
+&=
+\left|g_\nu^{\rm pl}(\bm{k},\bm{q})\right|^2, \quad \bm{k}-\bm{q}\in\mathcal{V}
+\end{align}
+where we use the LDA single-particle energies $\epsilon_{\bm{k}}^{\rm LDA}$ along with the dRPA@LDA excitation energies $\omega_{\nu}^{\rm pl}$ and transition densities $g_\nu^{\rm pl}(\bm{k},\bm{q})$.
+\subsubsection{BW reference}
+ If we are starting from the BW reference, $\nu\equiv jb$. Then, $\mathcal{C}_{\bm{k}}=-\alpha W_{\bm{k}\bm{k}}$ and $\epsilon_{\bm{k}}^{\rm ref}=\tilde{\varepsilon}_{\bm{k}}$. Also,
+we have
+\begin{align}
+\Delta_{\bm{k}i,\nu}^{(-)}
+&=
+\tilde{\varepsilon}_{\bm{k}}
+-\tilde{\varepsilon}_i
++
+\tilde{\Omega}_{\nu}, \quad
+\Delta_{\bm{k}a,\nu}^{(+)}
+=
+\tilde{\varepsilon}_{\bm{k}}
+-\epsilon_a^{\rm HF}
+-
+\tilde{\Omega}_{\nu}
+\end{align}
+and
+\begin{align}
+\mathcal{L}_{\bm{k}i\nu}
+&=
+\mathcal{K}_{\bm{k}jib}, \quad
+\mathcal{L}_{\bm{k}a\nu}=
+\mathcal{K}_{\bm{k}baj},
+\end{align}
+where we use the BWs2 single-particle energies $\tilde{\varepsilon}_{\bm{k}}$ along with the BWs2 particle-hole excitation energies $\tilde{\Omega}_{\nu}\equiv \tilde{\Omega}_{jb}=\epsilon_b^{\rm HF}-\tilde{\varepsilon}_j$ and second-order Coulomb interaction kernels defined by $\mathcal K_{pqrs}=
+(pr|qs)
+\left[
+2(pr|qs)-(pq|rs)
+\right]$.
+
+
+% \subsubsection{A BW quasiboson Hamiltonian}
+% We can instead define
+% \begin{align}
+% \hat{H}
+% &=
+% \sum_{{i}\in\mathcal{O}}
+% \tilde{\epsilon_{{i}}}
+% a_{{i}}^{\dagger}a_{{i}}
+% +
+% \sum_{{{k}\in\mathcal{O}{a}}\in\mathcal{V}}
+% \omega_{{k}{a}}
+% b_{{{k}a}}^{\dagger}
+% b_{{{k}{a}}}
+% \nonumber\\
+% &\quad
+% +
+% \sum_{{i},{j}\in\mathcal{O}}
+% \sum_{{{k}\in\mathcal{O}{a}}\in\mathcal{V}}
+% g_{ij}^{ka}
+% a_{j}^{\dagger}
+% a_{i}
+% \left(
+% b_{ka}^{\dagger}
+% +
+% b_{ka}
+% \right)
+% \end{align}
+% The set $\mathcal{O}$ contains all occupied bands, whose single-particle energies are $\tilde{\epsilon_{i}}=\epsilon_{i}^{\rm HF}+\alpha\Sigma^{2p1h}(\tilde{\epsilon}_i)$. The set $\mathcal{V}$ denotes the set of virtual bands. Their combination is 
+% the set of particle-hole pairs constituting the BWs2 quasibosonic bath. Specifically, the frequencies of this bath are 
+% \begin{align}
+%     \omega_{{ka}}&=\epsilon_{a}^{\rm HF}-\tilde{\epsilon_k}
+% \end{align}
+% and the couplings are
+% \begin{align}
+%     g_{ij}^{ka}&=(ka||ij),
+% \end{align}
+% Where, because we are in the periodic system, the requirement is that the momentum transferred between the first and second indices of the first center equals the momentum transferred between the first and second indices of the second center. This may happen if $k$ is close to the Fermi surface and, therefore, may require a small momentum transfer (call it $\bm{q}$) to get to the virtual state  $a$. One can then imagine that if $j$ is near the bottom of the band, then it can be excited to another state within the Fermi surface $i$ with the same momentum transfer $\bm{q}$, and this is how the coupling is nonzero.
+% \subsubsection{BW partitioning of the EOM for the Green's function}
+% \subsection{G0W0 on the quasiboson Hamiltonian}
+% In  and we can write
+% \begin{align}
+% \Sigma_{\bm{k}}^{\rm G_0W_0}(\omega)
+% &\equiv \Sigma_{\bm{k}}^x + \Sigma_{\bm{k}}^{2h1p+2p1h,c}(\omega) \\
+% &= \Sigma_{\bm{k}}^x + \Sigma_{\bm{k}}^{2h1p,c}(\omega) \\
+% &= \Sigma_{\bm{k}}^x + \sum_{\mathbf{k}\nu}\frac{\left|g_{\mathrm{k} \nu}\right|^2}{\omega-\left(\epsilon_{\mathrm{k}}^{\mathrm{HF}}-\omega_{\nu \mathrm{k}}^{\mathrm{p} 1}\right)+i \eta_{\Sigma}}
+% \end{align}
+% with the spectral function given by
+% \begin{align}
+% A_{\bm{k}}^{\rm G_0W_0}(\omega)
+% &= -\frac{1}{\pi} \frac{\operatorname{Im} \Sigma_{\bm{k}}^{2h1p,c}(\omega)+\eta_G}{\left(\omega-\epsilon_{\bm{k}}^{0}-\operatorname{Re} \Sigma_{\bm{k}}^{2h1p,c}(\omega)-\Sigma_{\bm{k}}^x\right)^2+\left(\operatorname{Im} \Sigma_{\bm{k}}^{2h1p,c}(\omega)+\eta_G\right)^2}.
+% \end{align}
+% \emph{This is equivalent to CC-0-S0 on the quasiboson Hamiltonian and computing the spectral function on the first-order response manifold.} 
+
+\section{}
+\subsection{Holm--Aryasetiawan self-consistent cumulant derivation}
+
+We begin from the cumulant representation of the Green's function,
+\begin{equation}
+    G_{\bm{k}}(t)
+    =
+    G_{\bm{k}}^{(0)}(t)e^{C_{\bm{k}}(t)}.
+\end{equation}
+Equating the cumulant expansion to the Dyson one to second order in the interaction yields 
+\begin{equation}
+    C_{\bm{k}}(t)
+    =
+    \frac{1}{G_{\bm{k}}^{(0)}(t)}
+    \int_{-\infty}^{\infty}
+    \frac{d\omega}{2\pi}\,
+    e^{-i\omega t}
+    \Sigma_{\bm{k}}(\omega)
+    \left[
+        G_{\bm{k}}^{(0)}(\omega)
+    \right]^2.
+\end{equation}
+Employing inverse Fourier transforms, we obtain
+\begin{align}
+    C_{\bm{k}}(t)
+    &=
+    \frac{1}{G_{\bm{k}}^{(0)}(t)}
+    \int_{-\infty}^{\infty}
+    \frac{d\omega}{2\pi}
+    \int_{-\infty}^{\infty}dt_1
+    \int_{-\infty}^{\infty}dt_2
+    \int_{-\infty}^{\infty}dt_3
+    \nonumber\\
+    &\qquad\times
+    e^{i\omega(t_1+t_2+t_3-t)}
+    \Sigma_{\bm{k}}(t_1)
+    G_{\bm{k}}^{(0)}(t_2)
+    G_{\bm{k}}^{(0)}(t_3).
+\end{align}
+The frequency integral produces a Dirac delta function,
+\begin{align}
+    \int_{-\infty}^{\infty}
+    \frac{d\omega}{2\pi}
+    e^{i\omega(t_1+t_2+t_3-t)}
+    &=
+    \delta(t_1+t_2+t_3-t)\\
+\implies 
+    C_{\bm{k}}(t)
+    &=
+    \frac{1}{G_{\bm{k}}^{(0)}(t)}
+    \int_{-\infty}^{\infty}dt_1
+    \int_{-\infty}^{\infty}dt_2\,
+    \Sigma_{\bm{k}}(t_1)
+    G_{\bm{k}}^{(0)}(t_2)
+    G_{\bm{k}}^{(0)}(t-t_1-t_2)\\
+&=     -i
+    \int_0^t dt_1
+    \int_0^{t-t_1}dt_2\,
+    \Sigma_{\bm{k}}^{R}(t_1)
+    e^{i\varepsilon_{\bm{k}}t_1}\\
+&=     -i
+    \int_0^t dt_2
+    \int_0^{t_2}dt_1\,
+    \Sigma_{\bm{k}}^{R}(t_1)
+    e^{i\varepsilon_{\bm{k}}t_1}\\
+&=     -
+    \int_0^t dt_2
+    \int_0^{t_2}dt_1\,
+    \frac{
+        \Sigma_{\bm{k}}^{R}(t_1)
+    }{
+        G_{\bm{k}}^{(0),R}(t_1)
+    }\\
+\implies 
+    \dot C_{\bm{k}}(t)
+    &=
+    -
+    \int_0^t d\tau\,
+    \frac{
+        \Sigma_{\bm{k}}^{R}(\tau)
+    }{
+        G_{\bm{k}}^{(0),R}(\tau)
+    }\\
+\implies 
+    \frac{dG_{\bm{k}}^{R}(t)}{dt}
+    &=
+    \left[
+        -i\varepsilon_{\bm{k}}
+        +
+        \dot C_{\bm{k}}(t)
+    \right]
+    G_{\bm{k}}^{R}(t), \quad t>0\\
+    &=
+    -i\varepsilon_{\bm{k}}G_{\bm{k}}^{R}(t)
+    -
+    \int_0^t d\tau\,
+    \Sigma_{\bm{k}}^{R}(\tau)
+    \frac{
+        G_{\bm{k}}^{R}(t)
+    }{
+        G_{\bm{k}}^{(0),R}(\tau)
+    }\\
+\implies
+    0
+    &=
+    i\frac{\partial G_{\bm{k}}^{R}(t)}{\partial t}
+    -
+    \varepsilon_{\bm{k}}G_{\bm{k}}^{R}(t)
+    +
+    \sum_{\bm q}
+    \int_0^t d\tau\,
+    W_{\bm q}^{(0),R}(\tau)
+    G_{\bm{k}+\bm q}^{R}(\tau)
+    \frac{
+        G_{\bm{k}}^{R}(t)
+    }{
+        G_{\bm{k}}^{(0),R}(\tau)
+    },
+\end{align}
+where we made the insertion 
+\begin{equation}
+    \Sigma_{\bm{k}}^{R}(\tau)
+    =
+    i\sum_{\bm q}
+    G_{\bm{k}+\bm q}^{R}(\tau)
+    W_{\bm q}^{(0),R}(\tau).
+\end{equation}
+\subsection{$G_0W_0$ is CC-0-S0-(1,1) on the quasiboson Hamiltonian}
+
+For CC-0-S0, the cluster operator vanishes,
+such that the reference is
+\begin{equation}
+    |\Phi_{\bm p}\rangle
+    =
+    h_{\bm p}^{\dagger}|0\rangle_F
+    \otimes |0\rangle_{\rm pl}.
+\end{equation}
+The first-order response manifold is
+\begin{equation}
+    \mathcal R_{\bm p}^{(1)}
+    =
+    \left\{
+    1,\,
+    h_{\bm p-\bm q}^{\dagger}
+    h_{\bm p}
+    b_{\nu_{\bm q}}^{\dagger}
+    \right\}.
+\end{equation}
+The quasiboson Hamiltonian projected onto this space has the block form
+\begin{equation}
+    \bm H^{(1)}
+    =
+    \begin{pmatrix}
+        \epsilon_{\bm p}^{\rm HF} & \bm g^{\dagger} \\
+        \bm g & \bm H_{1{\rm b}}
+    \end{pmatrix},
+\end{equation}
+where
+\begin{equation}
+    \left[\bm H_{1{\rm b}}\right]_{\bm q\nu,\bm q'\nu'}
+    =
+    \delta_{\bm q\bm q'}\delta_{\nu\nu'}
+    \left(
+    \epsilon_{\bm p-\bm q}^{\rm HF}
+    -
+    \omega_{\nu_{\bm q}}^{\rm pl}
+    \right),
+\end{equation}
+and
+\begin{equation}
+    g_{\bm q\nu}
+    =
+    \langle
+    \bm p-\bm q;\nu_{\bm q}
+    |
+    \hat H_{\rm ep}
+    |
+    \Phi_{\bm p}
+    \rangle,
+\end{equation}
+where we have defined $
+    |\bm p-\bm q;\nu_{\bm q}\rangle
+    =
+    h_{\bm p-\bm q}^{\dagger}
+    h_{\bm p}
+    b_{\nu_{\bm q}}^{\dagger}
+    |\Phi_{\bm p}\rangle
+$.
+If we define the broadenings as $\eta_G$ and $\eta_{\Sigma}$, respectively, then the retarded Green's function for the hole at momentum $\bm p$ is
+\begin{align}
+    G_{\bm p}^{R}(\omega)
+    &=
+    \langle\Phi_{\bm p}|
+    \left(
+    \omega-\bm H^{(1)}+i\eta_G
+    \right)^{-1}
+    |\Phi_{\bm p}\rangle \\
+    &=
+    \frac{1}{
+    \omega-\epsilon_{\bm p}^{\rm HF}
+    -
+    \bm g^{\dagger}
+    \left(
+    \omega-\bm H_{1{\rm b}}+i\eta_{\Sigma}
+    \right)^{-1}
+    \bm g
+    +i\eta_G
+    }\\
+    &=
+    \frac{1}{
+    \omega-\epsilon_{\bm p}^{\rm HF}
+    -
+    \displaystyle
+    \sum_{\bm q\nu}
+    \frac{|g_{\bm q\nu}|^2}{
+    \omega-
+    \left(
+    \epsilon_{\bm p-\bm q}^{\rm HF}
+    -
+    \omega_{\nu_{\bm q}}^{\rm pl}
+    \right)
+    +i\eta_{\Sigma}}
+    +i\eta_G
+    }\\
+    &=
+    \frac{1}{
+    \omega-\epsilon_{\bm p}^{\rm HF}
+    -\Sigma_{\bm p}^{2h1p,c}(\omega)
+    +i\eta_G}\\
+    &=
+    \frac{1}{
+    \omega-\epsilon_{\bm p}^{0}
+    -\Sigma_{\bm p}^{x}
+    -\Sigma_{\bm p}^{2h1p,c}(\omega)
+    +i\eta_G}.
+\end{align}
+To go from the first to the second step we used the Schur complement relation. Then we identified $
+    \Sigma_{\bm p}^{2h1p,c}(\omega)
+    =
+    \sum_{\bm q\nu}
+    \frac{|g_{\bm q\nu}|^2}{
+    \omega-
+    \left(
+    \epsilon_{\bm p-\bm q}^{\rm HF}
+    -
+    \omega_{\nu_{\bm q}}^{\rm pl}
+    \right)
+    +i\eta_{\Sigma}},
+$
+and
+$
+    \epsilon_{\bm p}^{\rm HF}
+    =
+    \epsilon_{\bm p}^{0}
+    +
+    \Sigma_{\bm p}^{x},
+$.
+\emph{This may look unconventional, but recall that our quasiboson Hamiltonian only allows for a single hole with (bosonized) particle-hole excitations. Thus, we can maximally get a 2h1p configuration, so the 2p1h contribution must vanish from the self-energy.}
+% this may equivalently be written as
+% which is the $G_0W_0$ Dyson Green's function restricted to the
+% electron-removal sector.
+% Thus, $G_0W_0$ on the quasiboson Hamiltonian is algebraically equivalent
+% to CC-0-S0 evaluated in the first-order response manifold: elimination
+% of the hole--one-boson configurations generates exactly the
+% $2h1p$ correlation self-energy. 
+\subsection{Getting to the CCGF}
+Once again, we start with the same Hamiltonian:
+\begin{equation}
+H_{\rm ch}
+=
+E_{\rm ch}
++
+\sum_\nu
+\Omega_\nu Q_\nu^\dagger Q_\nu
++
+\sum_\nu
+\left(
+M_\nu Q_\nu^\dagger
++
+M_\nu^* Q_\nu
+\right),
+\end{equation}
+But now, if we swap out the QB operators by actual particle-hole excitations, we get 
+\begin{equation}
+H_{\mathrm{ch}}=E_{\mathrm{ref}}^{\mathrm{ch}}+\sum_{p q} f_{p q}^{\mathrm{ch}}\left\{a_p^{\dagger} a_q\right\}+\frac{1}{4} \sum_{p q r s} v_{p q r s}^{\mathrm{ch}}\left\{a_p^{\dagger} a_q^{\dagger} a_s a_r\right\}
+\end{equation}
+% But instead of assuming that the ground state is a coherent state in the QBA, we employ the coupled-cluster ansatz:
+% \begin{equation}
+%     \ket{\Psi_{ch}} = e^{\hat{T}} \ket{\Psi_{\rm HF}}.
+% \end{equation}
+Then the retarded Green's function can be written as 
+\begin{align}
+G_{c, h}^R(t)=-i \theta(t)\left\langle\Phi_0\right|(1+\Lambda) \overline{a_c^{\dagger}} e^{-i H_N t} \bar{a}_c\left|\Phi_0\right\rangle
+\end{align}
+\section{Getting the correlation energy from a two-particle density matrix }
+Define
+\begin{equation}
+    \hat{\rho}_{p q}(t)=a_p^{\dagger}(t) a_q(t)\implies \left\langle\hat{\rho}_{p q}\right\rangle=\gamma_{q p}
+\end{equation}
+and
+\begin{equation}
+    \delta \hat{\rho}_{p q}(t)=\hat{\rho}_{p q}(t)-\left\langle\hat{\rho}_{p q}\right\rangle.
+\end{equation}
+Then,
+\begin{align}
+    L_{p q, r s}^T(t)&=-i\left\langle T\left[\delta \hat{\rho}_{p q}(t) \delta \hat{\rho}_{r s}(0)\right]\right\rangle \\
+&=-i \theta(t)\left\langle\delta \hat{\rho}_{p q}(t) \delta \hat{\rho}_{r s}(0)\right\rangle-i \theta(-t)\left\langle\delta \hat{\rho}_{r s}(0) \delta \hat{\rho}_{p q}(t)\right\rangle \\
+\implies
+L_{p q, r s}^T\left(0^{+}\right)&=-i\left\langle\delta \hat{\rho}_{p q} \delta \hat{\rho}_{r s}\right\rangle \\
+\implies
+i L_{p q, r s}^T\left(0^{+}\right)&=\left\langle\hat{\rho}_{p q} \hat{\rho}_{r s}\right\rangle-\left\langle\hat{\rho}_{p q}\right\rangle\left\langle\hat{\rho}_{r s}\right\rangle \\
+&=\left\langle a_p^{\dagger} a_q a_r^{\dagger} a_s\right\rangle-\gamma_{q p} \gamma_{s r} \\
+&=\delta_{q r} \gamma_{s p}-\Gamma_{p r, s q}-\gamma_{q p} \gamma_{s r}\\
+\implies \Gamma_{p r, s q}&=\delta_{q r} \gamma_{s p}-\gamma_{q p} \gamma_{s r}-i L_{p q, r s}^T\left(0^{+}\right)
+\end{align}
+where we simplified using the following manipulations.
+\footnote{
+Anticommuting $a_q$ through $a_r^{\dagger}$ gives $a_p^{\dagger} a_q a_r^{\dagger} a_s=\delta_{q r} a_p^{\dagger} a_s-a_p^{\dagger} a_r^{\dagger} a_q a_s$.
+% Now anticommuting $a_q$ through $a_r^{\dagger}$,
+% $$
+% a_q a_r^{\dagger}=\delta_{q r}-a_r^{\dagger} a_q,
+% $$
+% gives
+% $$
+% a_p^{\dagger} a_q a_r^{\dagger} a_s=\delta_{q r} a_p^{\dagger} a_s-a_p^{\dagger} a_r^{\dagger} a_q a_s .
+% $$
+If
+$$
+\Gamma_{p r, s q} \equiv\left\langle a_p^{\dagger} a_r^{\dagger} a_q a_s\right\rangle,
+$$
+then
+$$
+\left\langle a_p^{\dagger} a_q a_r^{\dagger} a_s\right\rangle=\delta_{q r} \gamma_{s p}-\Gamma_{p r, s q} .
+$$}
+The idea is to get the 1-RDMs via the linearized GW density matrix. Meanwhile, 
+\begin{align}
+    L^T(\omega)&=\sum_I\left[\frac{R^I R^{I \dagger}}{\omega-\Omega_I+i \eta}-\frac{R^{I \dagger} R^I}{\omega+\Omega_I-i \eta}\right]\\
+\implies L^T(t\rightarrow0^+)&=\sum_I R^I R^{I \dagger}.
+\end{align}
+But we already know that
+\begin{equation}
+\Gamma=A(\gamma \otimes \gamma)+\lambda
+\end{equation}
+so $\lambda = \sum_I R^I R^{I \dagger}$.
+\newpage
+\section{Screening through BW or RPA}
+The way that I think about these different choices is through the Casida eigenproblem
+\begin{equation}
+    \begin{pmatrix}
+        \bm{A} & \bm{B} \\
+        -\bm{B} & -\bm{A}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{X} & \bm{Y} \\
+        \bm{Y} & \bm{X}
+    \end{pmatrix}
+=
+    \begin{pmatrix}
+        \bm{X} & \bm{Y} \\
+        \bm{Y} & \bm{X}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \bm{\Omega} & \bm{0} \\
+        \bm{0} & -\bm{\Omega}
+    \end{pmatrix}.
+    \label{eqn:casida_eq}
+\end{equation}
+% where the excitation $\bm{X}$ and de-excitation $\bm{Y}$ eigenvectors form the biorthogonal set as
+% \begin{equation}
+%     (\bm{X}+\bm{Y})(\bm{X}-\bm{Y})^T=(\bm{X}+\bm{Y})^T(\bm{X}-\bm{Y})=\bm{I}
+%     \label{eqn:biorthogonality}
+% \end{equation}
+The $\bm{A}$ and $\bm{B}$ matrices are defined as
+\begin{align}
+    A_{i a, j b} &= \underbrace{\left(F_{aa}-F_{ii}-\alpha W_{ii}\right)}_{{\epsilon_a^{\text{HF}}} - \tilde{\epsilon_i}} \delta_{i j} \delta_{a b}+\beta\mathcal{K}_{i a, b j} \\
+    B_{i a, j b} &= \beta \mathcal{K}_{i a, j b}
+\end{align}
+where $\bm{F}$ and $\bm{W}$ are the canonical HF Fock and W matrices from BWs2 ground state theory, respectively. In particular, we have
+\begin{equation}
+    W_{ii} = \Sigma^{(2),2p1h}_{ii}(\tilde{\epsilon_i})=\frac{1}{2}\sum_{jab}\frac{\left<ij||ab\right>\left<ab||ij\right>}{\tilde{\epsilon_i}+\tilde{\epsilon_j}-\epsilon_a^{\text{HF}}-\epsilon_b^{\text{HF}}}
+\end{equation}
+where
+\begin{equation}
+    \tilde{\epsilon_i}= \epsilon_i^{\text{HF}} + \alpha  \Sigma^{(2),2p1h}_{ii}(\tilde{\epsilon_i})
+\end{equation}
+is the nonlinear equation for the dressed BW orbital energies that we solve for self-consistently. This is consistent with the intuition that in BW, the occupied orbitals get dressed, while the virtual orbitals are unchanged. 
+ The matrix elements $\mathcal{K}_{pq, rs}=(pq||rs)$ or $(pq|rs)$, where we make the latter choice under the direct approximation. The excitation energies are defined by $\Omega_I$ and the transition densities are $M_{pq\nu}=\sum_{i a}\left(X_{i a}^{\nu}+Y_{i a}^{\nu}\right)\mathcal{K}_{pq, ia}$. It is instructive to look at the self-energies that result from the choice of screening parameters \(\alpha\) and \(\beta\).
+\subsection{GW}
+To get the GW correlation self-energy, we make the direct approximation (to avoid double counting exchange contributions) and choose the parameter set $\alpha=0$ and $\beta=1$. This yields the GW self-energy as
+\begin{equation}
+\Sigma^{GW}_{pq}(\omega) = \sum_{i \nu} \frac{M_{pi\nu} M_{qi\nu}^*}{\omega - {\epsilon}_i^{\text{HF}} + \Omega_\nu} + \sum_{a \nu} \frac{M_{pa\nu} M_{qa\nu}^*}{\omega - {\epsilon_a^{\text{HF}}} - \Omega_\nu }.
+\end{equation}
+\subsection{BWs2}
+To get the BWs2 self-energy, $\alpha\in\mathbb{Z}_+$ and $\beta=0$. The BWs2 self-energy, which is the second-order expression on a BW reference, is similarly given by
+\begin{equation}
+\Sigma^{BWs2}_{pq}(\omega) = \frac{1}{2}\sum_{i\nu} \frac{M_{pi\nu} M_{qi\nu}^*}{\omega - \tilde{\epsilon_i} + \Omega_\nu} + \frac{1}{2}\sum_{a\nu} \frac{M_{pa\nu} M_{qa\nu}^*}{\omega - \epsilon_a^{\text{HF}} - \Omega_\nu}.
+\end{equation}
+This expression may seem foreign, but consider that for $\alpha\in\mathbb{Z}_+$ and $\beta=0$, the Casida equation is already diagonal, so the transition densities are simply $M_{pq\nu}=(pq||ia)$. 
+\subsection{Connection between RPAx and BW through Lowdin downfolding}
+Since our purpose is to make contact with Lowdin downfolding, we partition into target and rest spaces, denoted $P$ and $Q$, respectively. We can write the RPAx eigenvalue equation as
+\begin{equation}
+    \mathcal{H}
+    \bm{Z}_{\nu}
+    =
+    \Omega_{\nu}
+    \bm{Z}_{\nu},
+    \label{eq:rpa_full_eigenproblem}
+\end{equation}
+where
+\begin{align}
+    \mathcal{H}&\equiv     \begin{pmatrix}
+        \mathcal{H}_{PP} & \mathcal{H}_{PQ} \\
+        \mathcal{H}_{QP} & \mathcal{H}_{QQ}
+    \end{pmatrix}=
+    \begin{pmatrix}
+        \bm{A} & \bm{B} \\
+        -\bm{B} & -\bm{A}
+    \end{pmatrix}=
+    \begin{pmatrix}
+        \bm{D} + \bm{K}^A & \bm{K}^B \\
+        -\bm{K}^B & -\bm{D} - \bm{K}^A
+    \end{pmatrix} \\
+\bm{Z}_{\nu}&\equiv
+    \begin{pmatrix}
+        \bm{Z}_{P,\nu} \\
+        \bm{Z}_{Q,\nu}
+    \end{pmatrix}=
+    \begin{pmatrix}
+        \begin{pmatrix} \bm{X}^P_{\nu} \\
+        \bm{Y}^P_{\nu}
+\end{pmatrix} \\
+        \begin{pmatrix} \bm{X}^Q_{\nu} \\
+        \bm{Y}^Q_{\nu}
+\end{pmatrix}
+    \end{pmatrix}.
+\end{align}
+where $D_{ia,jb} = (\epsilon_a^{\rm HF} - \epsilon_i^{\rm HF}) \delta_{ij}\delta_{ab}$, $K^A_{ia,jb} = \mathcal{K}_{ia,bj}$, and $K^B_{ia,jb} = \mathcal{K}_{ia,jb}$. 
+\subsubsection{Downfolding}
+Equation~\eqref{eq:rpa_full_eigenproblem} therefore gives the coupled equations
+\begin{align}
+    \mathcal{H}_{PP}\bm{Z}_{P,\nu}
+    +
+    \mathcal{H}_{PQ}\bm{Z}_{Q,\nu}
+    &=
+    \Omega_{\nu}\bm{Z}_{P,\nu},
+    \label{eq:rpa_P_eq}
+    \\
+    \mathcal{H}_{QP}\bm{Z}_{P,\nu}
+    +
+    \mathcal{H}_{QQ}\bm{Z}_{Q,\nu}
+    &=
+    \Omega_{\nu}\bm{Z}_{Q,\nu}.
+    \label{eq:rpa_Q_eq}
+\end{align}
+Solving Eq.~\eqref{eq:rpa_Q_eq} for the component in the rest space $Q$ gives
+\begin{equation}
+    \bm{Z}_{Q,\nu}
+    =
+    \left(
+        \Omega_{\nu}\bm{I}
+        -
+        \mathcal{H}_{QQ}
+    \right)^{-1}
+    \mathcal{H}_{QP}
+    \bm{Z}_{P,\nu}.
+    \label{eq:rpa_Q_solution}
+\end{equation}
+Substituting this expression into Eq.~\eqref{eq:rpa_P_eq} yields an
+eigenvalue problem defined entirely in the target space $P$,
+\begin{equation}
+    \left[
+        \mathcal{H}_{PP}
+        +
+        \mathcal{H}_{PQ}
+        \left(
+            \Omega_{\nu}\bm{I}
+            -
+            \mathcal{H}_{QQ}
+        \right)^{-1}
+        \mathcal{H}_{QP}
+    \right]
+    \bm{Z}_{P,\nu}
+    =
+    \Omega_{\nu}
+    \bm{Z}_{P,\nu}.
+    \label{eq:rpa_downfolded}
+\end{equation}
+Defining an energy-dependent effective self-energy
+\begin{align}
+    \bm{\Sigma}^{\mathrm{eff}}_{P}(\omega)
+    &=
+    \mathcal{H}_{PQ}
+    \left(
+        \omega\bm{I}
+        -
+        \mathcal{H}_{QQ}
+    \right)^{-1}
+    \mathcal{H}_{QP}\\
+&= -\sum_{iajb}
+\frac{(ia||jb)^2}{\omega -\left[(\epsilon_a^{\rm HF} - \epsilon_i^{\rm HF}) + (ia||bj)\right]}
+\end{align}
+The downfolded RPAx problem can then be written as
+\begin{align}
+    \left[
+        \mathcal{H}_{PP}
+        +
+        \bm{\Sigma}^{\mathrm{eff}}_{P}(\Omega_{\nu})
+    \right]
+    \bm{Z}_{P,\nu}
+    &=
+    \Omega_{\nu}
+    \bm{Z}_{P,\nu}\\
+\left[(\epsilon_a^{\rm HF} - \epsilon_i^{\rm HF}) \delta_{ij}\delta_{ab} + (ia||bj) - \sum_{iajb}
+\frac{(ia||jb)^2}{\Omega_\nu -\left[(\epsilon_a^{\rm HF} - \epsilon_i^{\rm HF}) + (ia||bj)\right]}\right]\bm{Z}_{P,\nu}
+    &=
+    \Omega_{\nu}
+    \bm{Z}_{P,\nu}
+    \label{eq:rpa_bw_form}
+\end{align}
+which is emblematic of the BW theory. This is an eigenvalue problem like $(x+\frac{c}{w-x})v=wv$, where the correction term depends on the eigenvalue itself. If we think of the effective self-energy as a correction to a non-interacting Hamiltonian $\mathcal{H}_{PP}$, then RPAx (or equivalently dRPA) can be seen as a BW theory, given that the frequencies $\Omega_\nu$ that are being solved for in the eigenproblem appear in the correction to $\mathcal{H}_{PP}$ itself.
